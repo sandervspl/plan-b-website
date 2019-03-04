@@ -1,0 +1,90 @@
+import React from 'react';
+import { withRouter, WithRouterProps } from 'next/router';
+import { RouteParams } from 'next-routes';
+import Router from 'router';
+import _ from 'lodash';
+
+import { getPageFromRoute } from 'services';
+
+class NavLink extends React.PureComponent<Props> {
+  state = {
+    active: false,
+  }
+
+  static getDerivedStateFromProps(props: Props) {
+    const { router, to } = props;
+
+    // @ts-ignore Get route object from next-routes
+    const routerRoute = Router.routes.find((r: string) => r.name === to);
+
+    // Check if pathname from current route and page from routes are equal
+    if (routerRoute && router.pathname === routerRoute.page) {
+      if (props.params) {
+        // If current pathname and route page are the same, and we have params, then the params also have to be the same
+        // We compare every params passed to NavLink and the queries from router to decide if this is the current route
+        if (props.params && Object.keys(props.params).length > 0) {
+          if (Object.keys(props.params).every((p) => router.query[p] === props.params[p])) {
+            return {
+              active: true,
+            };
+          }
+        }
+      } else {
+        // We don't have to check params if it's not relevant for this route > it's active
+        return {
+          active: true,
+        };
+      }
+    }
+
+    return {
+      active: false,
+    };
+  }
+
+  setActiveClassName = (className) => {
+    if (!this.state.active) return className;
+
+    return `${className} active`.trim();
+  }
+
+  render() {
+    const { children, to, router, ariaLabel, ...props } = this.props;
+
+    const child = React.Children.only(
+      // eslint-disable-next-line jsx-a11y/anchor-is-valid
+      <a aria-label={_.capitalize(ariaLabel)}>{children}</a>
+    );
+
+    // We route with route name, but prefetch with page name
+    const prefetchPage = getPageFromRoute(to);
+    let prefetchProps = {};
+
+    if (prefetchPage) {
+      prefetchProps = {
+        onMouseOver: () => router.prefetch(prefetchPage),
+      };
+    }
+
+    return (
+      <Router.Link route={to} {...props}>
+        {React.cloneElement(
+          child,
+          {
+            className: this.setActiveClassName(child.props.className),
+            ...prefetchProps,
+          },
+        )}
+      </Router.Link>
+    );
+  }
+};
+
+type Props = WithRouterProps & {
+  children: React.ReactNode;
+  to: string;
+  ariaLabel?: string;
+  params?: RouteParams;
+}
+
+export default withRouter(NavLink);

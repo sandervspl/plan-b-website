@@ -1,0 +1,53 @@
+import * as i from 'types';
+import { action, ActionType, getType } from 'typesafe-actions';
+
+const LOAD = 'test/LOAD';
+const SUCCESS = 'test/SUCCESS';
+const FAILED = 'test/FAILED';
+
+const initialState: i.PageState = {
+  data: {},
+  error: false,
+  loading: false,
+};
+
+export default (state = initialState, action: ActionType<typeof actions>) => {
+  switch (action.type) {
+    case LOAD:
+      return {
+        ...state,
+        error: false,
+        loading: true,
+      };
+    case SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+        error: false,
+        loading: false,
+      };
+    case FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+    default:
+      return state;
+  }
+};
+
+export const actions = {
+  load: () => action(LOAD),
+  success: (page: i.PageData) => action(SUCCESS, page),
+  failed: () => action(FAILED),
+};
+
+export const fetchPage: i.FetchPageAction = (id) => (dispatch, getState, api) => {
+  dispatch(actions.load());
+
+  // setTimeout(() => {
+  //   dispatch(actions.success({ success: true }));
+  // }, 2000);
+  api.get({ path: `pages/${id}` });
+};

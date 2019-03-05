@@ -9,7 +9,7 @@ export default {
     switch (config.env.toLowerCase()) {
       case 'production':
       default:
-        return 'localhost/planb/wp-json/wp/v2/';
+        return 'http://localhost/planb/wp-json/wp/v2/';
     };
   })(),
 
@@ -25,7 +25,7 @@ export default {
    * If this is turned off it won't use x-access-token in localStorage
    * @see generateOptions.js
    */
-  defaultWithAuth: true,
+  defaultWithAuth: false,
 
   /**
    * Trigger general error message for api failures

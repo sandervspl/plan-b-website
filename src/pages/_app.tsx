@@ -1,7 +1,7 @@
+import * as i from 'types';
 import React from 'react';
 import App, { Container } from 'next/app';
 import { ThemeProvider } from 'styled-components';
-import { Store } from 'redux';
 import { Provider } from 'react-redux';
 
 // import registerServiceWorker from 'services/registerServiceWorker';
@@ -32,7 +32,7 @@ class MyApp extends App<MyAppProps> {
 }
 
 type MyAppProps = {
-  reduxStore: Store;
+  reduxStore: i.Store;
 }
 
 export default withReduxStore(MyApp);

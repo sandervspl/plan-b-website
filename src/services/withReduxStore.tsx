@@ -14,9 +14,9 @@ interface NextContext {
   store: Store;
 }
 
-type AppComponentType = IAppComponentType & {
-  reduxStore: Store;
-}
+// type AppComponentType = IAppComponentType & {
+//   reduxStore: Store;
+// }
 
 type AppComponentProps = IAppComponentProps & {
   initialReduxState: any;
@@ -34,10 +34,11 @@ function getOrCreateStore(initialState?: any): Store {
   if (!window[__NEXT_REDUX_STORE__]) {
     window[__NEXT_REDUX_STORE__] = initializeStore(initialState);
   }
+
   return window[__NEXT_REDUX_STORE__];
 }
 
-export const withReduxStore = (App: AppComponentType) => (
+export const withReduxStore = (App: any) => (
   class AppWithRedux extends React.Component {
     reduxStore: Store;
 
@@ -63,7 +64,7 @@ export const withReduxStore = (App: AppComponentType) => (
 
     constructor(props: AppComponentProps) {
       super(props);
-      // eslint-disable-next-line react/prop-types
+
       this.reduxStore = getOrCreateStore(props.initialReduxState);
     }
 

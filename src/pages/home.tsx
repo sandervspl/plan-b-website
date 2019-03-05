@@ -1,24 +1,31 @@
 
 import * as i from 'types';
 import * as React from 'react';
-import { NextComponentClass } from 'next';
 import { connect } from 'react-redux';
 import { fetchPage } from 'ducks/page';
-import { Test } from 'modules';
 import { PAGE_ID } from 'ducks/page/pages';
 
-class Home extends React.Component<NextComponentClass> {
+class Home extends React.Component<Props> {
   static async getInitialProps({ store }: { store: i.Store }) {
-    store.dispatch(fetchPage(PAGE_ID.HOME));
+    await store.dispatch(fetchPage(PAGE_ID.HOME));
 
     return {};
   }
 
   render() {
+    const { page } = this.props;
+
     return (
-      <Test />
+      <>
+        <h1>{page.data.title.rendered}</h1>
+        <div dangerouslySetInnerHTML={{ __html: page.data.content.rendered }} />
+      </>
     );
   }
+}
+
+type Props = {
+  page: i.PageState;
 }
 
 const mapStateToProps: i.MapStateToProps = (state) => ({

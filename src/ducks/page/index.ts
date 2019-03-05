@@ -1,5 +1,5 @@
 import * as i from 'types';
-import { action, ActionType, getType } from 'typesafe-actions';
+import { action, ActionType } from 'typesafe-actions';
 
 const LOAD = 'test/LOAD';
 const SUCCESS = 'test/SUCCESS';
@@ -43,11 +43,14 @@ export const actions = {
   failed: () => action(FAILED),
 };
 
-export const fetchPage: i.FetchPageAction = (id) => (dispatch, getState, api) => {
+export const fetchPage: i.FetchPageAction = (id) => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
-  // setTimeout(() => {
-  //   dispatch(actions.success({ success: true }));
-  // }, 2000);
-  api.get({ path: `pages/${id}` });
+  return api.get({ path: `pages/${id}` })
+    .then((res) => {
+      dispatch(actions.success(res));
+    })
+    .catch((err) => {
+      dispatch(actions.failed());
+    });
 };

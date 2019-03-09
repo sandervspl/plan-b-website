@@ -17,8 +17,7 @@ class Home extends React.Component<Props> {
 
     return (
       <>
-        <h1>{page.data.title.rendered}</h1>
-        <div dangerouslySetInnerHTML={{ __html: page.data.content.rendered }} />
+        <h1>{page.data.header_title}</h1>
       </>
     );
   }

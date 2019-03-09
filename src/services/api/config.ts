@@ -9,7 +9,7 @@ export default {
     switch (config.env.toLowerCase()) {
       case 'production':
       default:
-        return 'http://localhost/planb/wp-json/wp/v2/';
+        return 'http://localhost:1337/';
     };
   })(),
 

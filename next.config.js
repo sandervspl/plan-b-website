@@ -2,6 +2,7 @@
 const { PHASE_PRODUCTION_SERVER } = require('next/constants');
 const withTypescript = require('@zeit/next-typescript');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const withFonts = require('next-fonts');
 
 const config = (phase) => {
   const dirPaths = {
@@ -11,7 +12,7 @@ const config = (phase) => {
     },
   };
 
-  let cfg = dirPaths;
+  let cfg = withFonts(dirPaths);
 
   /*
     BASE CONFIG

@@ -17,7 +17,7 @@ class Home extends React.Component<Props> {
 
     return (
       <>
-        <h1>{page.data.header_title}</h1>
+        <h1>{page.data.title}</h1>
       </>
     );
   }

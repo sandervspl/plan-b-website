@@ -7,7 +7,8 @@ const theme = {
   },
 
   font: {
-    futura: 'Futura-Medium, Futura',
+    primary: 'Heebo, "sans-serif"',
+    secondary: 'Playfair, serif',
   },
 };
 

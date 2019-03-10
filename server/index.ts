@@ -19,7 +19,7 @@ app.prepare().then(() => {
     .use((req, res) => {
       handle(req, res);
     })
-    .listen(3000, (err) => {
+    .listen(config.port, (err) => {
       if (err) throw err;
 
       console.info(`[${config.env}] Server running on http://localhost:${config.port}`);

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'styles/utils';
-import { Header } from 'common';
+import { Header, Paragraph } from 'common';
 
 export const PostContainer = styled.article`
   padding: 20px;
@@ -12,15 +12,18 @@ export const PostContainer = styled.article`
   ${media.tablet`
     padding: 50px;
   `}
-
+  
   ${Header} {
-    line-height: 70px;
+    line-height: 50px;
+
+    ${media.tablet`
+      line-height: 70px;
+    `}
   }
 `;
 
-export const DateText = styled.p`
-  font-family: ${(props) => props.theme.font.primary};
-  font-weight: 300;
+export const DateText = styled(Paragraph)`
+  margin-bottom: 20px;
   font-size: 15px;
   color: ${(props) => props.theme.color.primary.medium};
 `;

@@ -48,7 +48,7 @@ type VideoOverlayProps = {
   ready: boolean;
 };
 
-export const GlitchFxContainer = styled.canvas`
+export const FilmGrainContainer = styled.canvas`
   position: absolute;
   top: 0;
   left: 0;

@@ -1,80 +1,95 @@
-import React, { useEffect, useRef } from 'react';
-import { VideoContainer, VideoInner, VideoOverlay, GlitchFxContainer } from './styled';
+/* eslint-disable @typescript-eslint/camelcase */
+import * as i from 'types';
+import React, { useEffect, useRef, useState } from 'react';
+import { connect } from 'react-redux';
+import { isServer } from 'services';
+import { VideoContainer, VideoInner, VideoOverlay, FilmGrainContainer } from './styled';
+import FilmGrainFx from './FilmGrain';
 
-
-const HeroVideo: React.FC<Props> = ({ ready }) => {
+const HeroVideo: React.FC<Props> = ({ page }) => {
+  const [ready, setReady] = useState(false);
+  const [player, setPlayer] = useState<YT.Player>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
 
-  // Settings
-  const patternScaleX = 1;
-  const patternScaleY = 1;
-  const patternSize = 64;
-  const patternRefreshInterval = 4;
-  const patternAlpha = 25; // Integer between 0 and 255
-
-  const patternPixelDataLength = patternSize * patternSize * 4;
-  let ctx = null;
-  let viewWidth = 0;
-  let viewHeight = 0;
-  let patternCanvas = null;
-  let patternCtx = null;
-  let patternData = null;
-  let frame = 0;
-
-
+  // Init film grain effect
   useEffect(() => {
-    initCanvas();
-    initGrain();
-    requestAnimationFrame(loop);
+    new FilmGrainFx(canvas.current);
   });
 
-  // create a canvas which will render the grain
-  const initCanvas = () => {
-    viewWidth = canvas.current.width = canvas.current.clientWidth;
-    viewHeight = canvas.current.height = canvas.current.clientHeight;
-    ctx = canvas.current.getContext('2d');
+  // Init Youtube player
+  useEffect(() => {
+    // This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
 
-    ctx.scale(patternScaleX, patternScaleY);
-  };
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  });
 
-  // create a canvas which will be used as a pattern
-  const initGrain = () => {
-    patternCanvas = document.createElement('canvas');
-    patternCanvas.width = patternSize;
-    patternCanvas.height = patternSize;
-    patternCtx = patternCanvas.getContext('2d');
-    patternData = patternCtx.createImageData(patternSize, patternSize);
-  };
+  // Set Youtube player variables and callbacks
+  useEffect(() => {
+    if (isServer()) return;
 
-  const update = () => {
-    let value: number;
+    // This function creates an <iframe> (and YouTube player)
+    // after the API code downloads.
+    window.onYouTubeIframeAPIReady = initYoutubeVideo;
 
-    for (let i = 0; i < patternPixelDataLength; i += 4) {
-      value = (Math.random() * 255) | 0;
-
-      patternData.data[i    ] = value;
-      patternData.data[i + 1] = value;
-      patternData.data[i + 2] = value;
-      patternData.data[i + 3] = patternAlpha;
+    // If API is already ready it will not fire onYouTubeIframeAPIReady again
+    if (typeof YT !== 'undefined') {
+      initYoutubeVideo();
     }
 
-    patternCtx.putImageData(patternData, 0, 0);
+    // Youtube pauses the video on unfocus
+    // Resume video after focus is regained
+    window.onfocus = () => {
+      if (player) {
+        player.playVideo();
+      }
+    };
+  });
+
+  const onPlayerReady = (event: YT.PlayerEvent) => {
+    event.target.playVideo();
+    event.target.mute();
   };
 
-  const draw = () => {
-    ctx.clearRect(0, 0, viewWidth, viewHeight);
-
-    ctx.fillStyle = ctx.createPattern(patternCanvas, 'repeat');
-    ctx.fillRect(0, 0, viewWidth, viewHeight);
-  };
-
-  const loop = () => {
-    if (++frame % patternRefreshInterval === 0) {
-      update();
-      draw();
+  const onPlayerStateChange = (event: YT.OnStateChangeEvent) => {
+    if (event.data == YT.PlayerState.PLAYING) {
+      setTimeout(() => setReady(true), 2900);
     }
 
-    requestAnimationFrame(loop);
+    // Loop video
+    if (event.data === YT.PlayerState.ENDED) {
+      event.target.playVideo();
+    }
+  };
+
+  const initYoutubeVideo = () => {
+    if (player !== null) return;
+
+    const tempPlayer = new YT.Player('player', {
+      videoId: page.hero_video,
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange,
+      },
+      playerVars: {
+        controls: 0,
+        cc_load_policy: 3,
+        fs: 0,
+        disablekb: 1,
+        iv_load_policy: 3,
+        modestbranding: 1,
+        enablejsapi: 1,
+        rel: 0,
+        loop: 1,
+        showinfo: 0,
+        playsinline: 1,
+        autoplay: 1,
+      },
+    });
+
+    setPlayer(tempPlayer);
   };
 
   return (
@@ -83,13 +98,17 @@ const HeroVideo: React.FC<Props> = ({ ready }) => {
         <div id="player" />
       </VideoInner>
       <VideoOverlay ready={ready} />
-      <GlitchFxContainer ref={canvas} />
+      <FilmGrainContainer ref={canvas} />
     </VideoContainer>
   );
 };
 
 export type Props = {
-  ready: boolean;
+  page: i.PageData;
 };
 
-export default HeroVideo;
+const mapStateToProps: i.MapStateToProps = (state) => ({
+  page: state.page.data,
+});
+
+export default connect(mapStateToProps)(HeroVideo);

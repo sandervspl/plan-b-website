@@ -6,7 +6,7 @@ const SUCCESS = 'test/SUCCESS';
 const FAILED = 'test/FAILED';
 
 const initialState: i.PageState = {
-  data: {},
+  data: null,
   error: false,
   loading: false,
 };
@@ -43,10 +43,10 @@ export const actions = {
   failed: () => action(FAILED),
 };
 
-export const fetchPage: i.FetchPageAction = (id) => async (dispatch, getState, api) => {
+export const fetchPage: i.FetchPageAction = (endpoint) => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
-  return api.get({ path: `pages/${id}` })
+  return api.get({ path: `${endpoint}` })
     .then((res) => {
       dispatch(actions.success(res));
     })

@@ -1,3 +1,3 @@
-export enum PAGE_ID {
-  HOME = 1,
+export enum PAGE_ENDPOINT {
+  HOME = 'homepages/6',
 }

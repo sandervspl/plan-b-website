@@ -1,5 +1,5 @@
 import * as i from 'types';
-import { PAGE_ID } from './pages';
+import { PAGE_ENDPOINT } from './pages';
 
 export type PageState = {
   data: PageData;
@@ -9,14 +9,15 @@ export type PageState = {
 
 export type PageData = {
   id: number;
-  title: string;
-  header_title: string;
+  hero_title: string;
+  hero_server: string;
+  hero_video: string;
+  posts: Post[];
   created_at: Date;
   updated_at: Date;
-  posts: Post[];
 };
 
-export type FetchPageAction = (id: PAGE_ID) => i.ThunkAction;
+export type FetchPageAction = (endpoint: PAGE_ENDPOINT) => i.ThunkAction;
 
 export interface Post {
   id: number;

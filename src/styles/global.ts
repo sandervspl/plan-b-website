@@ -16,7 +16,20 @@ export default createGlobalStyle`
     font-weight: normal;
   }
 
+  * {
+    box-sizing: border-box;
+  }
+
+  body, html {
+    width: 100%;
+    height: 100%;
+    background-color: ${theme.color.secondary};
+  }
+
   h1, h2, h3 {
     font-family: ${theme.font.primary};
+    color: ${theme.color.primary};
+    margin: 0;
+    padding: 0;
   }
 `;

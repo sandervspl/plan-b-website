@@ -9,7 +9,7 @@ export default {
     switch (config.env.toLowerCase()) {
       case 'production':
       default:
-        return 'http://localhost:1337/';
+        return 'http://api.planbguild.eu/';
     };
   })(),
 

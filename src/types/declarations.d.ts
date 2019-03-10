@@ -6,6 +6,7 @@ declare const __ACC__: boolean;
 // extend window object
 interface Window {
   __REDUX_DEVTOOLS_EXTENSION__: Function;
+  onYouTubeIframeAPIReady: Function;
 }
 
 // extend NodeJS modules

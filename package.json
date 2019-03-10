@@ -38,6 +38,7 @@
     "@types/redux": "^3.6.0",
     "@types/redux-thunk": "^2.1.0",
     "@types/styled-components": "^4.1.10",
+    "@types/youtube": "0.0.35",
     "@typescript-eslint/eslint-plugin": "^1.4.1",
     "@typescript-eslint/parser": "^1.4.1",
     "@zeit/next-typescript": "^1.1.1",

@@ -1,13 +1,13 @@
-
 import * as i from 'types';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { fetchPage } from 'ducks/page';
-import { PAGE_ID } from 'ducks/page/pages';
+import { PAGE_ENDPOINT } from 'ducks/page/pages';
+import { Hero } from 'modules/Home';
 
 class Home extends React.Component<Props> {
   static async getInitialProps({ store }: { store: i.Store }) {
-    await store.dispatch(fetchPage(PAGE_ID.HOME));
+    await store.dispatch(fetchPage(PAGE_ENDPOINT.HOME));
 
     return {};
   }
@@ -17,7 +17,7 @@ class Home extends React.Component<Props> {
 
     return (
       <>
-        <h1>{page.data.title}</h1>
+        <Hero />
       </>
     );
   }

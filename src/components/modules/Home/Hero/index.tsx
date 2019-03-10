@@ -1,15 +1,17 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import * as i from 'types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
-import { HeroContainer, Content, VideoOverlay, VideoContainer, VideoInner } from './styled';
 import { Header, Subheader } from 'common';
 import { isServer } from 'services';
+import { HeroContainer, Content } from './styled';
+import HeroVideo from '../HeroVideo';
 
 const Hero: React.FC<Props> = ({ page }) => {
   const [ready, setReady] = useState(false);
   const [player, setPlayer] = useState<YT.Player>(null);
 
+  // Init Youtube player
   useEffect(() => {
     // This code loads the IFrame Player API code asynchronously.
     var tag = document.createElement('script');
@@ -17,7 +19,10 @@ const Hero: React.FC<Props> = ({ page }) => {
     tag.src = 'https://www.youtube.com/iframe_api';
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  });
 
+  // Set Youtube player variables and callbacks
+  useEffect(() => {
     if (isServer()) return;
 
     // This function creates an <iframe> (and YouTube player)
@@ -63,17 +68,17 @@ const Hero: React.FC<Props> = ({ page }) => {
       if (event.data == YT.PlayerState.PLAYING) {
         setTimeout(() => setReady(true), 2900);
       }
+
+      // Loop video
+      if (event.data === YT.PlayerState.ENDED) {
+        event.target.playVideo();
+      }
     }
   });
 
   return (
     <HeroContainer>
-      <VideoContainer>
-        <VideoInner>
-          <div id="player" />
-        </VideoInner>
-        <VideoOverlay ready={ready} />
-      </VideoContainer>
+      <HeroVideo ready={ready} />
       <Content>
         <Header>{page.hero_title}</Header>
         <Subheader>{page.hero_server}</Subheader>

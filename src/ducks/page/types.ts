@@ -19,10 +19,11 @@ export type PageData = {
 
 export type FetchPageAction = (endpoint: PAGE_ENDPOINT) => i.ThunkAction;
 
-export interface Post {
+export type Post = {
   id: number;
   title: string;
   content: string;
   created_at: Date;
   updated_at: Date;
-}
+  status: 'draft' | 'publish';
+};

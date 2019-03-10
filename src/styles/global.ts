@@ -6,7 +6,7 @@ import PlayfairRegularFont from 'fonts/playfair-display/PlayfairDisplay-Regular.
 import theme from './theme';
 
 export default createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Heebo:400,500,700');
+  @import url('https://fonts.googleapis.com/css?family=Heebo:300,400,700');
   
   ${styledNormalize};
 
@@ -23,7 +23,7 @@ export default createGlobalStyle`
   body, html {
     width: 100%;
     height: 100%;
-    background-color: ${theme.color.secondary};
+    background-color: ${theme.color.secondary.dark};
   }
 
   h1, h2, h3 {

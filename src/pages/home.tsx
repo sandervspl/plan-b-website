@@ -1,9 +1,8 @@
 import * as i from 'types';
 import * as React from 'react';
-import { connect } from 'react-redux';
 import { fetchPage } from 'ducks/page';
 import { PAGE_ENDPOINT } from 'ducks/page/pages';
-import { Hero } from 'modules/Home';
+import { Hero, Content } from 'modules/Home';
 
 class Home extends React.Component<Props> {
   static async getInitialProps({ store }: { store: i.Store }) {
@@ -13,12 +12,11 @@ class Home extends React.Component<Props> {
   }
 
   render() {
-    const { page } = this.props;
-
     return (
-      <>
+      <main>
         <Hero />
-      </>
+        <Content />
+      </main>
     );
   }
 }
@@ -27,8 +25,4 @@ type Props = {
   page: i.PageState;
 }
 
-const mapStateToProps: i.MapStateToProps = (state) => ({
-  page: state.page,
-});
-
-export default connect(mapStateToProps)(Home);
+export default Home;

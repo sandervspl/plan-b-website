@@ -1,2 +1,3 @@
-export { Header } from './Header';
-export { Subheader } from './Subheader';
+export * from './Header';
+export * from './Subheader';
+export * from './Paragraph';

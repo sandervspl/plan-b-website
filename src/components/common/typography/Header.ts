@@ -5,6 +5,7 @@ export const Header = styled.h1.attrs<Props>((props) => ({
   as: props.as,
 }))`
   font-size: 65px;
+  font-weight: 700;
 `;
 
 type Props = {

@@ -19,13 +19,21 @@ export default (state = initialState, action: ActionType<typeof actions>) => {
         error: false,
         loading: true,
       };
-    case SUCCESS:
+    case SUCCESS: {
+      const data = action.payload;
+
+      // Filter only published posts
+      if (data.posts) {
+        data.posts = data.posts.filter((post) => post.status === 'publish');
+      }
+
       return {
         ...state,
-        data: action.payload,
+        data,
         error: false,
         loading: false,
       };
+    }
     case FAILED:
       return {
         ...state,

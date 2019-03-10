@@ -13,10 +13,13 @@ export const ContentContainer = styled.div`
   ${media.tablet`
     margin: 0 auto;
     max-width: 940px;
-    transform: translateY(-50px);
 
     ${Header} {
       font-size: 65px;
     }
   `}
+
+  @media (min-width: 940px) {
+    transform: translateY(-50px);
+  }
 `;

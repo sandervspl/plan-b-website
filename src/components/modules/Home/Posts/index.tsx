@@ -1,12 +1,20 @@
 import * as i from 'types';
 import React from 'react';
 import { connect } from 'react-redux';
-import Post from '../Post';
+import { getDate } from 'services';
+import { Header, Paragraph } from 'common';
+import { DateText, PostBlock } from './styled';
 
 const Posts: React.FC<Props> = ({ page }) => (
   <div>
     {page.posts.map((post) => (
-      <Post key={post.id} data={post} />
+      <PostBlock key={post.id}>
+        <Header>{post.title}</Header>
+        <DateText>
+          {getDate(post.created_at, {}).replace(/\//g, '.')}
+        </DateText>
+        <Paragraph>{post.content}</Paragraph>
+      </PostBlock>
     ))}
   </div>
 );

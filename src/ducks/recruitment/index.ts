@@ -1,11 +1,12 @@
 import * as i from 'types';
 import { action, ActionType } from 'typesafe-actions';
+import { API_ENDPOINT } from 'services/api/endpoints';
 
-const LOAD = 'page/LOAD';
-const SUCCESS = 'page/SUCCESS';
-const FAILED = 'page/FAILED';
+const LOAD = 'recruitment/LOAD';
+const SUCCESS = 'recruitment/SUCCESS';
+const FAILED = 'recruitment/FAILED';
 
-const initialState: i.PageState = {
+const initialState: i.RecruitmentState = {
   data: null,
   error: false,
   loading: false,
@@ -19,21 +20,13 @@ export default (state = initialState, action: ActionType<typeof actions>) => {
         error: false,
         loading: true,
       };
-    case SUCCESS: {
-      const data = action.payload;
-
-      // Filter only published posts
-      if (data.posts) {
-        data.posts = data.posts.filter((post) => post.status === 'publish');
-      }
-
+    case SUCCESS:
       return {
         ...state,
-        data,
+        data: action.payload,
         error: false,
         loading: false,
       };
-    }
     case FAILED:
       return {
         ...state,
@@ -47,14 +40,14 @@ export default (state = initialState, action: ActionType<typeof actions>) => {
 
 export const actions = {
   load: () => action(LOAD),
-  success: (page: i.PageData) => action(SUCCESS, page),
+  success: (page: i.RecruitmentData) => action(SUCCESS, page),
   failed: () => action(FAILED),
 };
 
-export const fetchPage: i.FetchPageAction = (endpoint) => async (dispatch, getState, api) => {
+export const fetchRecruitment = (): i.ThunkAction => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
-  return api.get({ path: `${endpoint}` })
+  return api.get({ path: `${API_ENDPOINT.RECRUITMENT}` })
     .then((res) => {
       dispatch(actions.success(res));
     })

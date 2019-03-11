@@ -46,3 +46,5 @@ export type ApiHelper = {
   put: FetchCall;
   patch: FetchCall;
 }
+
+export type ContentId = number;

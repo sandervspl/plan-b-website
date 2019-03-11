@@ -1,12 +1,16 @@
 import * as i from 'types';
 import * as React from 'react';
 import { fetchPage } from 'ducks/page';
-import { PAGE_ENDPOINT } from 'ducks/page/pages';
+import { API_ENDPOINT } from 'services/api/endpoints';
 import { Hero, Content } from 'modules/Home';
+import { fetchRecruitment } from 'ducks/recruitment';
 
 class Home extends React.Component<Props> {
   static async getInitialProps({ store }: { store: i.Store }) {
-    await store.dispatch(fetchPage(PAGE_ENDPOINT.HOME));
+    await Promise.all([
+      store.dispatch(fetchPage(API_ENDPOINT.HOME)),
+      store.dispatch(fetchRecruitment()),
+    ]);
 
     return {};
   }

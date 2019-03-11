@@ -1,5 +1,5 @@
 import * as i from 'types';
-import { PAGE_ENDPOINT } from './pages';
+import { API_ENDPOINT } from 'services/api/endpoints';
 
 export type PageState = {
   data: PageData;
@@ -17,7 +17,7 @@ export type PageData = {
   updated_at: Date;
 };
 
-export type FetchPageAction = (endpoint: PAGE_ENDPOINT) => i.ThunkAction;
+export type FetchPageAction = (endpoint: API_ENDPOINT) => i.ThunkAction;
 
 export type Post = {
   id: number;

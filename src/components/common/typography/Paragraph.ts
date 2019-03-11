@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { BaseText } from './BaseText';
 
-export const Paragraph = styled.p`
+export const Paragraph = styled(BaseText).attrs({ as: 'p' })`
   margin: 0;
   font-family: ${(props) => props.theme.font.primary};
   font-weight: 300;

@@ -1,6 +1,6 @@
 import config from 'config';
 
-export default {
+const apiConfig = {
   /**
    * API base url
    * @see generateOptions.js
@@ -38,3 +38,5 @@ export default {
     console.error('API failed', message);
   },
 };
+
+export default apiConfig;

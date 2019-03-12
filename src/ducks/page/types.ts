@@ -1,29 +1,19 @@
 import * as i from 'types';
 import { API_ENDPOINT } from 'services/api/endpoints';
 
-export type PageState = {
-  data: PageData;
-  error: boolean;
-  loading: boolean;
-};
+export type PageState = i.BaseState<PageData>;
 
-export type PageData = {
-  id: number;
+export type PageData = i.BaseResponseBody & {
   hero_title: string;
   hero_server: string;
   hero_video: string;
   posts: Post[];
-  created_at: Date;
-  updated_at: Date;
 };
 
 export type FetchPageAction = (endpoint: API_ENDPOINT) => i.ThunkAction;
 
-export type Post = {
-  id: number;
+export type Post = i.BaseResponseBody & {
   title: string;
   content: string;
-  created_at: Date;
-  updated_at: Date;
   status: 'draft' | 'publish';
 };

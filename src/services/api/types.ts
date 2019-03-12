@@ -48,3 +48,9 @@ export type ApiHelper = {
 }
 
 export type ContentId = number;
+
+export type BaseResponseBody = {
+  id: number;
+  created_at: Date;
+  updated_at: Date;
+}

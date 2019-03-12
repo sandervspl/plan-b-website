@@ -1,7 +1,7 @@
 export * from './general';
 export * from './redux';
 
-export { ApiHelper, ContentId } from 'services/api/types';
+export { ApiHelper, ContentId, BaseResponseBody } from 'services/api/types';
 
 export * from 'styles/types';
 

@@ -42,7 +42,7 @@ const HeroVideo: React.FC<Props> = ({ page }) => {
     // Youtube pauses the video on unfocus
     // Resume video after focus is regained
     window.onfocus = () => {
-      if (player) {
+      if (player && player.playVideo) {
         player.playVideo();
       }
     };

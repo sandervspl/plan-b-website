@@ -7,6 +7,7 @@ export const Subheader = styled.h2.attrs<Props>((props) => ({
   font-size: 20px;
   color: ${(props) => props.theme.color.primary.medium};
   font-weight: 400;
+  font-family: ${(props) => props.theme.font.primary};
 `;
 
 type Props = {

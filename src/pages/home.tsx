@@ -1,9 +1,10 @@
 import * as i from 'types';
 import * as React from 'react';
-import { fetchPage } from 'ducks/page';
 import { API_ENDPOINT } from 'services/api/endpoints';
-import { Hero, Content } from 'modules/Home';
+import { fetchPage } from 'ducks/page';
 import { fetchRecruitment } from 'ducks/recruitment';
+import { Hero, Content } from 'modules/Home';
+import Page from 'modules/Page';
 
 class Home extends React.Component<Props> {
   static async getInitialProps({ store }: { store: i.Store }) {
@@ -17,10 +18,10 @@ class Home extends React.Component<Props> {
 
   render() {
     return (
-      <main>
+      <Page>
         <Hero />
         <Content />
-      </main>
+      </Page>
     );
   }
 }

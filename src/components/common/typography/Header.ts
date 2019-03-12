@@ -10,6 +10,7 @@ export const Header = styled(BaseText).attrs<Props>((props) => ({
   font-weight: 700;
   line-height: 60px;
   text-transform: uppercase;
+  font-family: ${(props) => props.theme.font.primary};
   
   ${media.tablet`
     line-height: 70px;

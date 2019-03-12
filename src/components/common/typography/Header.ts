@@ -30,4 +30,4 @@ type Props = {
 
 Header.defaultProps = {
   as: 'h1',
-} as any;
+};

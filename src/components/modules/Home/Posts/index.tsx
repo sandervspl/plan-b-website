@@ -3,10 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getDate } from 'services';
 import { Header, Paragraph } from 'common';
-import { DateText, PostBlock } from './styled';
+import { DateText, PostBlock, PostsContainer } from './styled';
 
 const Posts: React.FC<Props> = ({ page }) => (
-  <div>
+  <PostsContainer>
     {page.posts.map((post) => (
       <PostBlock key={post.id}>
         <Header>{post.title}</Header>
@@ -16,7 +16,7 @@ const Posts: React.FC<Props> = ({ page }) => (
         <Paragraph>{post.content}</Paragraph>
       </PostBlock>
     ))}
-  </div>
+  </PostsContainer>
 );
 
 export type Props = {

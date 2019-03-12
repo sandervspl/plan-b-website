@@ -1,13 +1,17 @@
 import React from 'react';
-import { ContentContainer } from './styled';
+import { Navigation } from 'modules/Home';
 import Posts from '../Posts';
-import RecruitmentWidget from '../RecruitmentWidget';
+import MiscPosts from 'modules/Home/MiscPosts';
+import { ContentContainer, HomeContentContainer } from './styled';
 
 const HomeContent: React.FC = () => (
-  <ContentContainer>
-    <Posts />
-    <RecruitmentWidget />
-  </ContentContainer>
+  <HomeContentContainer>
+    <Navigation />
+    <ContentContainer>
+      <Posts />
+      <MiscPosts />
+    </ContentContainer>
+  </HomeContentContainer>
 );
 
 export default HomeContent;

@@ -9,6 +9,12 @@ export const DateText = styled(Paragraph)`
   color: ${(props) => props.theme.color.primary.medium};
 `;
 
+export const PostsContainer = styled.div`
+  ${media.tablet`
+    max-width: 65%;
+  `}
+`;
+
 export const PostBlock = styled(ContentBlockContainer)`
   ${Header} {
     line-height: 50px;

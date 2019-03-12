@@ -7,6 +7,7 @@ export const RecruitmentBlock = styled(ContentBlockContainer)`
   background: ${(props) => props.theme.color.primary.medium};
 
   ${media.tablet`
+    align-self: flex-start;
     padding: 50px 30px;
   `}
 

@@ -8,8 +8,7 @@ export const ContentContainer = styled.div`
   background-color: ${(props) => props.theme.color.secondary};
 
   ${media.tablet`
-    display: grid;
-    grid-template-columns: 65% 35%;
+    flex-direction: row;
     margin: 0 auto;
     max-width: 940px;
   `}

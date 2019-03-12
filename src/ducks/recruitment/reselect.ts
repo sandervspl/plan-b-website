@@ -6,7 +6,7 @@ export const getRecruitmentClassSpecs = createSelector<i.ReduxState, i.Recruitme
   (state) => state.recruitment,
   (state) => {
     // Remove data that is not player classes
-    const data = _.omit(state.data, 'created_at', 'homepage', 'id', 'title', 'updated_at');
+    const data = _.omit(state.data, 'created_at', 'homepage', 'id', 'title', 'updated_at', 'active');
     const classKeys = Object.keys(data);
 
     classKeys.forEach((key) => {

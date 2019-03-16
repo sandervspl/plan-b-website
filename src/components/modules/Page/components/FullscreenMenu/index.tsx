@@ -22,10 +22,9 @@ const FullscreenMenu: React.FC<Props> = (props) => {
       <FullscreenMenuContainer ref={overlayRef} {...props} />
       <MenuItems {...props}>
         {navigationMenu.items.map((item, i) => (
-          <LinkContainer>
+          <LinkContainer key={i}>
             <Background className={`link-bg link-bg-${i}`} />
             <MenuLink
-              key={i}
               to={item.page}
               num={i}
               {...props}

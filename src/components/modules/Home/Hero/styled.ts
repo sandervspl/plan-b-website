@@ -15,7 +15,16 @@ export const HeroContainer = styled.header`
   ${media.tablet`
     display: flex;
     align-items: center;
-    height: 75vh;
+    height: 85vh;
+  `}
+
+  ${media.desktop`
+    clip-path: polygon(
+      0 0, /* left top */
+      100% 0, /* right top */ 
+      100% 100%, /* right bottom */
+      0 85% /* left bottom */
+    );
   `}
 `;
 
@@ -25,6 +34,7 @@ export const Content = styled.div`
   justify-content: center;
   z-index: 1;
   width: 100%;
+  transform: translateY(-50px);
 
   ${media.tablet`
     width: auto;

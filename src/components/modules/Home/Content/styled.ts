@@ -11,7 +11,7 @@ export const HomeContentContainer = styled.div`
   `}
 
   @media (min-width: 940px) {
-    transform: translateY(-100px);
+    transform: translateY(-150px);
   }
 `;
 

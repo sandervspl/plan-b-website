@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable @typescript-eslint/camelcase, no-undef */
 import * as i from 'types';
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
@@ -54,7 +54,7 @@ const HeroVideo: React.FC<Props> = ({ page }) => {
   };
 
   const onPlayerStateChange = (event: YT.OnStateChangeEvent) => {
-    if (event.data == YT.PlayerState.PLAYING) {
+    if (event.data === YT.PlayerState.PLAYING) {
       setTimeout(() => setReady(true), 2900);
     }
 

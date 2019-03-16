@@ -15,5 +15,5 @@ export type FetchPageAction = (endpoint: API_ENDPOINT) => i.ThunkAction;
 export type Post = i.BaseResponseBody & {
   title: string;
   content: string;
-  status: 'draft' | 'publish';
+  published: boolean;
 };

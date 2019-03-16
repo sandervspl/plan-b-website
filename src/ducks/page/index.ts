@@ -24,7 +24,7 @@ export default (state = initialState, action: ActionType<typeof actions>) => {
 
       // Filter only published posts
       if (data.posts) {
-        data.posts = data.posts.filter((post) => post.status === 'publish');
+        data.posts = data.posts.filter((post) => post.published);
       }
 
       return {

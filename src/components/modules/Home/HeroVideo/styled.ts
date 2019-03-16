@@ -15,7 +15,10 @@ export const VideoInner = styled.div`
   pointer-events: none;
 
   @media (min-aspect-ratio: 16/9) {
-    height: 300%; top: -100%;
+    /* height: 300%; top: -100%; */
+    height: 310%;
+    top: -104%;
+    width: 110%;
   }
 
   @media (max-aspect-ratio: 16/9) {
@@ -39,7 +42,7 @@ export const VideoOverlay = styled.div<VideoOverlayProps>`
   width: 100%;
   height: 100%;
   background-color: ${(props) => props.theme.color.secondary.dark};
-  opacity: ${(props) => props.ready ? .75 : 1};
+  opacity: ${(props) => props.ready ? .55 : 1};
   transition: opacity .3s ease-out;
   will-change: opacity;
 `;

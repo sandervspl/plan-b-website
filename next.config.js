@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { PHASE_PRODUCTION_SERVER } = require('next/constants');
-const withTypescript = require('@zeit/next-typescript');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const withFonts = require('next-fonts');
 
 const config = (phase) => {
   const dirPaths = {
@@ -12,14 +9,17 @@ const config = (phase) => {
     },
   };
 
-  let cfg = withFonts(dirPaths);
+  let cfg = dirPaths;
 
   /*
     BASE CONFIG
   */
   if (phase !== PHASE_PRODUCTION_SERVER) {
-    // Only add Webpack config for compile phases
+    // Only add dev packages config for compile phases
     const webpack = require('webpack');
+    const withTypescript = require('@zeit/next-typescript');
+    const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+    const withFonts = require('next-fonts');
 
     cfg = {
       ...cfg,
@@ -96,9 +96,11 @@ const config = (phase) => {
         return config;
       },
     };
+
+    cfg = withTypescript(withFonts(cfg));
   }
 
-  return withTypescript(cfg);
+  return cfg;
 };
 
 module.exports = config;

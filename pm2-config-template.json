@@ -1,0 +1,13 @@
+
+{
+  "apps": [{
+    "name": "PROJECT",
+    "script": "/var/www/PROJECT/dist/server/index.js",
+    "cwd": "/var/www/PROJECT",
+    "instances": INSTANCES,
+    "env_production": {
+      "NODE_ENV": "production",
+      "APP_ENV": "production"
+    }
+  }]
+}

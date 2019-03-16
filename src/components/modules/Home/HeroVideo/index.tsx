@@ -28,7 +28,7 @@ const HeroVideo: React.FC<Props> = ({ page }) => {
 
   // Set Youtube player variables and callbacks
   useEffect(() => {
-    if (isServer()) return;
+    if (isServer) return;
 
     // This function creates an <iframe> (and YouTube player)
     // after the API code downloads.

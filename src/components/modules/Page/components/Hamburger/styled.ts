@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const HamburgerContainer = styled.div`
+export const HamburgerContainer = styled.div<Props>`
   &:hover {
     cursor: pointer;
   }

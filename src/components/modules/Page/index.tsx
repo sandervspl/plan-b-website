@@ -1,15 +1,11 @@
 import React from 'react';
 import MobileNav from './components/MobileNav';
 
-const Page: React.FC<Props> = ({ children }) => (
+const Page: React.FC = ({ children }) => (
   <main>
     <MobileNav />
     {children}
   </main>
 );
-
-export type Props = {
-
-};
 
 export default Page;

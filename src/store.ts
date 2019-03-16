@@ -10,7 +10,7 @@ export default (initialState = {}) => {
 
   if (
     !__PROD__
-    && !isServer()
+    && !isServer
     && typeof window.__REDUX_DEVTOOLS_EXTENSION__ === 'function'
   ) {
     middleware = compose(middleware, window.__REDUX_DEVTOOLS_EXTENSION__());

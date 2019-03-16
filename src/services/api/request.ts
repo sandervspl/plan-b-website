@@ -8,7 +8,7 @@ import { Request } from './types';
 export const request: Request = ({
   path, options, file, errorConfig = {},
 }) => new Promise((resolve, reject) => {
-  // if (!isServer() && !localStorage.getItem('x-access-token')) return redirectToLogin();
+  // if (!isServer && !localStorage.getItem('x-access-token')) return redirectToLogin();
 
   fetch(path, options)
     .then((response) => {

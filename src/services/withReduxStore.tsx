@@ -26,7 +26,7 @@ const __NEXT_REDUX_STORE__ = '__NEXT_REDUX_STORE__';
 
 function getOrCreateStore(initialState?: any): Store {
   // Always make a new store if server, otherwise state is shared between requests
-  if (isServer()) {
+  if (isServer) {
     return initializeStore(initialState);
   }
 

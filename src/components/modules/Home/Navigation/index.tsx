@@ -1,16 +1,16 @@
 import React from 'react';
-import { NavContainer } from './styled';
 import { NavLink } from 'common';
+import { navigationMenu } from 'services';
+import { NavContainer } from './styled';
 
-const Navigation: React.FC<Props> = (props) => (
+const Navigation: React.FC = () => (
   <NavContainer>
-    <NavLink to="apply">join.the.guild</NavLink>
-    <NavLink to="about">about.us</NavLink>
+    {navigationMenu.items.map((item, i) => (
+      <NavLink key={i} to={item.page}>
+        {item.label}
+      </NavLink>
+    ))}
   </NavContainer>
 );
-
-export type Props = {
-
-};
 
 export default Navigation;

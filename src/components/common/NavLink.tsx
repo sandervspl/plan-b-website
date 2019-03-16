@@ -53,7 +53,7 @@ class NavLink extends React.PureComponent<Props> {
 
     const child = React.Children.only(
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
-      <a aria-label={_.capitalize(ariaLabel)}>{children}</a>
+      <a aria-label={_.capitalize(ariaLabel)} className={props.className}>{children}</a>
     );
 
     // We route with route name, but prefetch with page name
@@ -81,10 +81,11 @@ class NavLink extends React.PureComponent<Props> {
 };
 
 type Props = WithRouterProps & {
-  children: React.ReactNode;
-  to: string;
   ariaLabel?: string;
+  children: React.ReactNode;
+  className?: string;
   params?: RouteParams;
+  to: string;
 }
 
 export default withRouter(NavLink);

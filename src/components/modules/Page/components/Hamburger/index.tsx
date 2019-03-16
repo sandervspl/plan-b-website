@@ -11,7 +11,6 @@ const Hamburger: React.FC<props> = (props) => (
 
 export type props = {
   active: boolean;
-  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
 export default Hamburger;

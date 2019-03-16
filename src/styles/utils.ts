@@ -1,9 +1,9 @@
-import { CSSObject } from '../../node_modules/@types/styled-components';
+import { ThemedCssFunction } from '../../node_modules/@types/styled-components';
 import { css } from 'styled-components';
+import theme from './theme';
 
-// @TODO fix return type to include theme
 type MediaUtils = {
-  [x in keyof typeof sizes]: (...args: any) => CSSObject;
+  [x in keyof typeof sizes]: ThemedCssFunction<typeof theme>;
 }
 
 export const sizes = {

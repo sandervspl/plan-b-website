@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Header, Subheader } from 'common';
-import { media } from 'styles/utils';
+import { media } from 'styles';
 
 export const HeroContainer = styled.header`
   display: flex;

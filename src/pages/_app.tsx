@@ -3,12 +3,13 @@ import React from 'react';
 import App, { Container } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
-
+import { PageTransition } from 'next-page-transitions';
 // import registerServiceWorker from 'services/registerServiceWorker';
 import { withReduxStore } from 'services';
-import { theme, GlobalStyle } from 'src/styles';
+import { theme, GlobalStyle } from 'styles';
+import { TRANSITION_TIME_MS } from 'styles/pageTransition';
 
-class MyApp extends App<MyAppProps> {
+class MyApp extends App<MyAppProps, MyAppState> {
   componentDidMount() {
     // registerServiceWorker();
   }
@@ -22,7 +23,9 @@ class MyApp extends App<MyAppProps> {
         <ThemeProvider theme={theme}>
           <Container>
             <Provider store={reduxStore}>
-              <Component {...pageProps} />
+              <PageTransition timeout={TRANSITION_TIME_MS} classNames="page">
+                <Component {...pageProps} key={this.props.router.route} />
+              </PageTransition>
             </Provider>
           </Container>
         </ThemeProvider>
@@ -33,6 +36,10 @@ class MyApp extends App<MyAppProps> {
 
 type MyAppProps = {
   reduxStore: i.Store;
+}
+
+type MyAppState = {
+  curRoute: string;
 }
 
 export default withReduxStore(MyApp);

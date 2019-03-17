@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Header, Subheader } from 'common';
 import { media } from 'styles';
 
-export const HeroContainer = styled.header`
+export const HeroContent = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,15 +16,6 @@ export const HeroContainer = styled.header`
     display: flex;
     align-items: center;
     height: 85vh;
-  `}
-
-  ${media.desktop`
-    clip-path: polygon(
-      0 0, /* left top */
-      100% 0, /* right top */ 
-      100% 100%, /* right bottom */
-      0 85% /* left bottom */
-    );
   `}
 `;
 

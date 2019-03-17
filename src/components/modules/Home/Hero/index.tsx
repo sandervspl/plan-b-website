@@ -3,17 +3,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Header, Subheader } from 'common';
 import { HeroVideo } from 'modules/Home';
-import { HeroContainer, Content } from './styled';
+import { HeroContent, Content } from './styled';
 
 const Hero: React.FC<Props> = ({ page }) => {
   return (
-    <HeroContainer>
-      <HeroVideo />
-      <Content>
-        <Header>{page.hero_title}</Header>
-        <Subheader>{page.hero_server}</Subheader>
-      </Content>
-    </HeroContainer>
+    <>
+      <HeroContent>
+        <HeroVideo />
+        <Content>
+          <Header>{page.hero_title}</Header>
+          <Subheader>{page.hero_server}</Subheader>
+        </Content>
+      </HeroContent>
+    </>
   );
 };
 

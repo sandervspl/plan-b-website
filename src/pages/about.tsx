@@ -3,7 +3,7 @@ import Page from 'modules/Page';
 
 const Apply: React.FC = () => (
   <Page hero={{ big: false }}>
-    Application form page SOONtm
+    About page SOONtm
   </Page>
 );
 

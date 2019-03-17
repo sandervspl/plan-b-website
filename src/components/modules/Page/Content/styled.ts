@@ -1,19 +1,36 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { media } from 'styles';
+import { TRANSITION_TIME_MS } from 'styles/pageTransition';
 
-export const HomeContentContainer = styled.div`
+export const PageContentContainer = styled.div`
   width: 100%;
-  transform: translateY(-45px);
+  transform: translate(0, -45vh);
+  will-change: transform;
+  transition: transform ${TRANSITION_TIME_MS}ms ${(props) => props.theme.easing.easeOutCirc};
 
-  ${media.tablet`
-    margin: 0 auto;
-    max-width: 940px;
+  ${media.tablet<PageContentContainerProps>`
+    transform: translate(0, -45px);
+
+    ${(props) => !props.positionLower && css`
+      transform: translate(0, -65vh);
+    `}
   `}
 
   @media (min-width: 940px) {
-    transform: translateY(-150px);
+    ${(props) => props.positionLower && css`
+      transform: translate(0, -150px);
+    `}
   }
+
+  ${media.desktop`
+    margin: 0 auto;
+    max-width: 940px;
+  `}
 `;
+
+type PageContentContainerProps = {
+  positionLower: boolean;
+}
 
 export const ContentContainer = styled.div`
   display: flex;

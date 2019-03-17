@@ -3,4 +3,4 @@ dist/
 
 .vscode
 .gitattributes
-**/**.DS_Store
+.DS_Store

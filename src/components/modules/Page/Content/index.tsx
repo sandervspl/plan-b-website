@@ -1,14 +1,18 @@
 import React from 'react';
 import { Navigation } from 'modules/Home';
-import { ContentContainer, HomeContentContainer } from './styled';
+import { ContentContainer, PageContentContainer } from './styled';
 
-const HomeContent: React.FC = ({ children }) => (
-  <HomeContentContainer>
+const PageContent: React.FC<Props> = ({ children, positionLower }) => (
+  <PageContentContainer positionLower={positionLower}>
     <Navigation />
     <ContentContainer>
       {children}
     </ContentContainer>
-  </HomeContentContainer>
+  </PageContentContainer>
 );
 
-export default HomeContent;
+type Props = {
+  positionLower: boolean;
+}
+
+export default PageContent;

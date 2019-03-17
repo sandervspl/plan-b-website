@@ -22,7 +22,8 @@ class Home extends React.Component<Props> {
         hero={{
           big: true,
           content: <Hero />,
-        }}>
+        }}
+      >
         <Posts />
         <MiscPosts />
       </Page>

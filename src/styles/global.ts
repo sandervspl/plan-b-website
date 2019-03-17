@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import PlayfairRegularFont from 'fonts/playfair-display/PlayfairDisplay-Regular.otf';
 import styledNormalize from './normalize';
-
 import theme from './theme';
 
 export default createGlobalStyle`

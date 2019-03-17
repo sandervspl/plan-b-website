@@ -20,6 +20,12 @@ export const getRecruitmentClassSpecs = createSelector<i.ReduxState, i.Recruitme
       });
     });
 
-    return data;
+    // Order classes alphabetically
+    const orderedData = {};
+    Object.keys(data).sort().forEach((key) => {
+      orderedData[key] = data[key];
+    });
+
+    return orderedData;
   },
 );

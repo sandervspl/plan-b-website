@@ -1,7 +1,7 @@
 
 {
   "apps": [{
-    "name": "PROJECT",
+    "name": "dev.planbguild.eu",
     "script": "/var/www/PROJECT/dist/server/index.js",
     "cwd": "/var/www/PROJECT",
     "instances": INSTANCES,

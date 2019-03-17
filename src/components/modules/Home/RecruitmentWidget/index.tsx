@@ -1,10 +1,10 @@
 import * as i from 'types';
 import React from 'react';
-import { Header, Paragraph } from 'common';
 import { connect } from 'react-redux';
+import { Header, Paragraph } from 'common';
 import apiConfig from 'services/api/config';
 import { getRecruitmentClassSpecs } from 'ducks/recruitment/reselect';
-import TransitionPost from '../TransitionPost';
+import { TransitionPost } from 'modules/Home';
 import { RecruitmentBlock, RecruitmentContent, ClassRow, ClassIcon, ClassGrid } from './styled';
 
 const RecruitmentWidget: React.FC<Props> = ({ recruitment, playerClasses }) => (

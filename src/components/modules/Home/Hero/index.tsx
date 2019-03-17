@@ -2,8 +2,8 @@ import * as i from 'types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Header, Subheader } from 'common';
+import { HeroVideo } from 'modules/Home';
 import { HeroContainer, Content } from './styled';
-import HeroVideo from '../HeroVideo';
 
 const Hero: React.FC<Props> = ({ page }) => {
   return (

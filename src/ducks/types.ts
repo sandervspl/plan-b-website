@@ -6,7 +6,7 @@ export type ReduxState = {
 }
 
 export type BaseState<T> = {
-  data: T;
+  data: T | null;
   error: boolean;
   loading: boolean;
 }

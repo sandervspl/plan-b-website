@@ -7,6 +7,7 @@ export const PageContentContainer = styled.div`
   transform: translate(0, -45vh);
   will-change: transform;
   transition: transform ${TRANSITION_TIME_MS}ms ${(props) => props.theme.easing.easeOutCirc};
+  overflow-x: hidden;
 
   ${media.tablet<PageContentContainerProps>`
     transform: translate(0, -45px);

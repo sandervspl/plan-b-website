@@ -5,7 +5,7 @@ const LOAD = 'page/LOAD';
 const SUCCESS = 'page/SUCCESS';
 const FAILED = 'page/FAILED';
 
-const initialState: i.PageState = {
+const initialState: i.PageState<i.HomePageData | i.AboutPageData> = {
   data: null,
   error: false,
   loading: false,
@@ -47,7 +47,7 @@ export default (state = initialState, action: ActionType<typeof actions>) => {
 
 export const actions = {
   load: () => action(LOAD),
-  success: (page: i.PageData) => action(SUCCESS, page),
+  success: (page: i.HomePageData) => action(SUCCESS, page),
   failed: () => action(FAILED),
 };
 

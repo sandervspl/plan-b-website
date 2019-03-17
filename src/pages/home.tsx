@@ -6,10 +6,12 @@ import { fetchRecruitment } from 'ducks/recruitment';
 import { Posts, MiscPosts, Hero } from 'modules/Home';
 import Page from 'modules/Page';
 
-class Home extends React.Component<Props> {
+class Home extends React.Component {
   static async getInitialProps({ store }: { store: i.Store }) {
     await Promise.all([
+      // @ts-ignore I don't understand the error
       store.dispatch(fetchPage(API_ENDPOINT.HOME)),
+      // @ts-ignore I don't understand the error
       store.dispatch(fetchRecruitment()),
     ]);
 
@@ -29,10 +31,6 @@ class Home extends React.Component<Props> {
       </Page>
     );
   }
-}
-
-type Props = {
-  page: i.PageState;
 }
 
 export default Home;

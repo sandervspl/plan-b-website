@@ -2,12 +2,12 @@
   "compileOnSave": false,
   "compilerOptions": {
     "sourceMap": true,
-    "noImplicitAny": false,
     "pretty": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "removeComments": true,
+    "strict": true,
     "moduleResolution": "node",
     "target": "esnext",
     "module": "commonjs",

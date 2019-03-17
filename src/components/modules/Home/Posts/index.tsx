@@ -6,18 +6,18 @@ import { PostsContainer } from './styled';
 
 const Posts: React.FC<Props> = ({ page }) => (
   <PostsContainer>
-    {page.posts.map((post) => (
+    {page.data && page.data.posts && page.data.posts.map((post) => (
       <Post key={post.id} data={post} />
     ))}
   </PostsContainer>
 );
 
 export type Props = {
-  page: i.PageData;
+  page: i.PageState<i.HomePageData>;
 };
 
 const mapStateToProps: i.MapStateToProps = (state) => ({
-  page: state.page.data,
+  page: state.page,
 });
 
 export default connect(mapStateToProps)(Posts);

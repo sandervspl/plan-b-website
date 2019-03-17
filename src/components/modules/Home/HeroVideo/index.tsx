@@ -8,22 +8,27 @@ import FilmGrainFx from './FilmGrain';
 
 const HeroVideo: React.FC<Props> = ({ page }) => {
   const [ready, setReady] = useState(false);
-  const [player, setPlayer] = useState<YT.Player>(null);
+  const [player, setPlayer] = useState<YT.Player>();
   const canvas = useRef<HTMLCanvasElement>(null);
 
   // Init film grain effect
   useEffect(() => {
-    new FilmGrainFx(canvas.current);
+    if (canvas.current) {
+      new FilmGrainFx(canvas.current);
+    }
   });
 
   // Init Youtube player
   useEffect(() => {
     // This code loads the IFrame Player API code asynchronously.
-    var tag = document.createElement('script');
+    const tag = document.createElement('script');
 
     tag.src = 'https://www.youtube.com/iframe_api';
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+
+    if (firstScriptTag.parentNode) {
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
   });
 
   // Set Youtube player variables and callbacks
@@ -104,7 +109,7 @@ const HeroVideo: React.FC<Props> = ({ page }) => {
 };
 
 export type Props = {
-  page: i.PageData;
+  page: i.HomePageData;
 };
 
 const mapStateToProps: i.MapStateToProps = (state) => ({

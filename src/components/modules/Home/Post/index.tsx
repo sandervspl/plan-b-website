@@ -1,8 +1,7 @@
 import * as i from 'types';
 import React from 'react';
 import { getDate } from 'services';
-import { Header, Paragraph } from 'common';
-import { TransitionPost } from 'modules/Home';
+import { Header, Paragraph, TransitionPost } from 'common';
 import { PostBlock, DateText, PostContent } from './styled';
 
 const Post: React.FC<Props> = ({ data }) => (

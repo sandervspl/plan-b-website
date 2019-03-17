@@ -1,14 +1,12 @@
 import React from 'react';
-import { Navigation, MiscPosts } from 'modules/Home';
-import Posts from '../Posts';
+import { Navigation } from 'modules/Home';
 import { ContentContainer, HomeContentContainer } from './styled';
 
-const HomeContent: React.FC = () => (
+const HomeContent: React.FC = ({ children }) => (
   <HomeContentContainer>
     <Navigation />
     <ContentContainer>
-      <Posts />
-      <MiscPosts />
+      {children}
     </ContentContainer>
   </HomeContentContainer>
 );

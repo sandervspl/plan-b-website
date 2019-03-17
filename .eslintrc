@@ -56,6 +56,7 @@
       "component": true,
       "html": true
     }],
+    "react/jsx-space-before-closing": ["error", "always"],
     "import/no-unresolved": false,
     "import/named": false,
     "import/order": ["error", {

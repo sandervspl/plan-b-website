@@ -3,7 +3,7 @@ import * as React from 'react';
 import { API_ENDPOINT } from 'services/api/endpoints';
 import { fetchPage } from 'ducks/page';
 import { fetchRecruitment } from 'ducks/recruitment';
-import { Hero, Content } from 'modules/Home';
+import { Posts, MiscPosts, Hero } from 'modules/Home';
 import Page from 'modules/Page';
 
 class Home extends React.Component<Props> {
@@ -18,9 +18,13 @@ class Home extends React.Component<Props> {
 
   render() {
     return (
-      <Page>
-        <Hero />
-        <Content />
+      <Page
+        hero={{
+          big: true,
+          content: <Hero />,
+        }}>
+        <Posts />
+        <MiscPosts />
       </Page>
     );
   }

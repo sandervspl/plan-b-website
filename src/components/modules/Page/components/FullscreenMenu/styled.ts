@@ -1,9 +1,9 @@
+import * as i from 'types';
 import styled, { css } from 'styled-components';
 import { NavLink } from 'common';
 
-type MenuProps = {
+type MenuProps = i.VisibilityProps & {
   active: boolean;
-  visible: boolean;
 }
 
 type MenuItemProps = {
@@ -22,7 +22,7 @@ export const FullscreenMenuContainer = styled.div<FullscreenMenuContainerProps>`
   background: ${(props) => props.theme.color.secondary.dark};
   transform: translate(100%, 100%) rotate(-40deg);
   transform-origin: bottom;
-  transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: transform 1s ${(props) => props.theme.easing.easeOutQuint};
   will-change: transform;
 
   ${(props) => props.active && css`
@@ -87,7 +87,7 @@ export const MenuLink = styled(NavLink)<MenuLinkProps>`
 
   ${(props) => props.active && css<MenuLinkProps>`
     opacity: 1;
-    transition: 600ms ${({ num }) => 600 + num * 100}ms opacity cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: 600ms ${({ num }) => 600 + num * 100}ms opacity ${(props) => props.theme.easing.easeOutCirc};
   `}
 `;
 

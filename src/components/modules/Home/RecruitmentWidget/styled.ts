@@ -1,3 +1,4 @@
+import * as i from 'types';
 import styled, { css } from 'styled-components';
 import { media } from 'styles';
 import { Header, Paragraph } from 'common';
@@ -5,6 +6,7 @@ import { ContentBlockContainer } from '../ContentBlock/styled';
 
 export const RecruitmentBlock = styled(ContentBlockContainer)`
   background: ${(props) => props.theme.color.primary.medium};
+  overflow-x: hidden;
 
   ${media.tablet`
     align-self: flex-start;
@@ -23,6 +25,18 @@ export const RecruitmentBlock = styled(ContentBlockContainer)`
     `}
   }
 `;
+
+export const RecruitmentContent = styled.div<RecruitmentContentProps>`
+  will-change: transform;
+  transform: translate(100px);
+  transition: transform 1s 300ms ${(props) => props.theme.easing.easeOutCirc};
+
+  ${(props) => props.visible && css`
+    transform: translate(0);
+  `}
+`;
+
+type RecruitmentContentProps = i.VisibilityProps;
 
 export const ClassRow = styled.div`
   display: flex;

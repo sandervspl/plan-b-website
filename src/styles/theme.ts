@@ -19,6 +19,13 @@ const theme = {
     primary: 'Heebo, sans-serif',
     secondary: 'Playfair, serif',
   },
+
+  easing: {
+    easeOutQuint: 'cubic-bezier(0.23, 1, 0.32, 1)',
+    easeOutCirc: 'cubic-bezier(0.075, 0.82, 0.165, 1)',
+    easeOutQuart: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
+    easeInOutCirc: 'cubic-bezier(0.785, 0.135, 0.15, 0.86)',
+  },
 };
 
 export default theme;

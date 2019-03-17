@@ -1,3 +1,4 @@
+import * as i from 'types';
 import React, { useEffect, useRef } from 'react';
 import { navigationMenu } from 'services';
 import useBgAnim from './useBgAnim';
@@ -38,9 +39,8 @@ const FullscreenMenu: React.FC<Props> = (props) => {
   );
 };
 
-type Props = {
+type Props = i.VisibilityProps & {
   active: boolean;
-  visible: boolean;
 }
 
 export default FullscreenMenu;

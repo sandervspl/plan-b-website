@@ -1,5 +1,5 @@
 import React from 'react';
-import MobileNav from './components/MobileNav';
+import MobileNav from './MobileNav';
 
 const Page: React.FC = ({ children }) => (
   <main>

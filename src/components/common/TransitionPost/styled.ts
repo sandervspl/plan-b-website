@@ -1,5 +1,5 @@
 import * as i from 'types';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 export const TransitionOverlay = styled.div<TransitionOverlayProps>`
   position: absolute;
@@ -8,6 +8,7 @@ export const TransitionOverlay = styled.div<TransitionOverlayProps>`
   left: 0;
   width: 100%;
   height: 100%;
+  opacity: 1;
   background: ${(props) => props.theme.color.secondary.dark};
   will-change: transform;
   transform-origin: ${(props) => props.direction};
@@ -27,6 +28,15 @@ type TransitionOverlayProps = i.VisibilityProps & {
   direction?: 'left' | 'right';
 };
 
+const AppearAnim = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`;
+
 export const TransitionPostContainer = styled.div`
   position: relative;
+  animation-name: ${AppearAnim};
+  animation-duration: 1000ms;
+  animation-timing-function: ${(props) => props.theme.easing.easeOutCirc};
+  animation-fill-mode: forwards;
 `;

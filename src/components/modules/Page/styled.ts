@@ -5,7 +5,7 @@ import { VideoContainer } from 'modules/Home/HeroVideo/styled';
 import { PostsContainer } from 'modules/Home/Posts/styled';
 import { MiscPostsContainer } from 'modules/Home/styled';
 import { HeroContainer } from './HeroContainer';
-import { PageContentContainer } from './Content/styled';
+import { PageContentContainer, ContentContainer } from './Content/styled';
 import { LogoLinkContainer } from './LogoLink/styled';
 
 const AppearAnim = keyframes`
@@ -40,7 +40,6 @@ export const AwayFromHomeTransitionStyle = createGlobalStyle`
     }
 
     .page-enter,
-    .page-enter-active,
     .page-exit-active,
     .page-enter-done {
       ${LogoLinkContainer} {
@@ -61,20 +60,16 @@ export const ToHomeTransitionStyle = createGlobalStyle`
       animation-timing-function: ${(props) => props.theme.easing.easeOutCirc};
     }
 
-    .page-exit,
-    .page-exit-active {
+    .page-exit {
       ${LogoLinkContainer} {
         display: block;
-      }
-    }
-
-    .page-exit {
-      ${LogoLinkContainer} {
         transform: translateY(-80px);
       }
-    }
 
-    .page-exit {
+      ${ContentContainer} > * {
+        animation-name: none;
+      }
+
       ${HeroContainer} {
         transform: translate(0, 0);
       }
@@ -87,6 +82,12 @@ export const ToHomeTransitionStyle = createGlobalStyle`
         @media (min-width: 940px) {
           transform: translate(0, -150px);
         }
+      }
+    }
+
+    .page-exit-active {
+      ${ContentContainer} > * {
+        opacity: 0;
       }
     }
   `}

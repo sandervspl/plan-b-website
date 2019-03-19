@@ -38,6 +38,12 @@ export const ContentContainer = styled.div`
   flex-direction: column-reverse;
   background-color: ${(props) => props.theme.color.secondary};
 
+  > * {
+    opacity: 1;
+    will-change: opacity;
+    transition: opacity 600ms ease-out;
+  }
+
   ${media.tablet`
     flex-direction: row;
   `}

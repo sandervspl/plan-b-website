@@ -9,7 +9,7 @@ export const LogoLinkContainer = styled.div`
   max-width: 940px;
   transform: translateY(0);
   will-change: transform;
-  transition: transform 600ms 400ms ${(props) => props.theme.easing.easeOutQuint};
+  transition: transform 500ms 500ms ${(props) => props.theme.easing.easeOutQuint};
 
   a {
     position: absolute;

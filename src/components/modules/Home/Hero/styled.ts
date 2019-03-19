@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Header, Subheader } from 'common';
 import { media } from 'styles';
 
@@ -19,13 +19,28 @@ export const HeroContent = styled.header`
   `}
 `;
 
+const AppearAnim = keyframes`
+  from {
+    transform: translate(-75px, -50px);
+    opacity: .1;
+  }
+  to {
+    transform: translate(0, -50px);
+    opacity: 1;
+  }
+`;
+
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   z-index: 1;
   width: 100%;
-  transform: translateY(-50px);
+  transform: translate(0, -50px);
+  animation-name: ${AppearAnim};
+  animation-duration: 1000ms;
+  animation-timing-function: ${(props) => props.theme.easing.easeInOutCirc};
+  animation-fill-mode: forwards;
 
   ${media.tablet`
     width: auto;

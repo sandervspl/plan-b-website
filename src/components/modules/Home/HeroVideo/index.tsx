@@ -20,9 +20,15 @@ const HeroVideo: React.FC<Props> = ({ page }) => {
 
   // Init Youtube player
   useEffect(() => {
+    const apiId = 'youtube-api';
+
+    // Already loaded
+    if (document.querySelector(`#${apiId}`)) return;
+
     // This code loads the IFrame Player API code asynchronously.
     const tag = document.createElement('script');
 
+    tag.id = apiId;
     tag.src = 'https://www.youtube.com/iframe_api';
     const firstScriptTag = document.getElementsByTagName('script')[0];
 

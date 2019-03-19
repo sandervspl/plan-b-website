@@ -1,6 +1,10 @@
 class NavigationMenu {
   private _items = [
     {
+      label: 'News',
+      page: 'home',
+    },
+    {
       label: 'Join the guild',
       page: 'apply',
     },

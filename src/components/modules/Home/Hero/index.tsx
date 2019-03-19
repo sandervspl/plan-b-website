@@ -11,10 +11,10 @@ const Hero: React.FC<Props> = ({ page }) => {
       <HeroContent>
         <HeroVideo />
         <Content>
-          {page.data && (
+          {page.home && (
             <>
-              <Header>{page.data.hero_title}</Header>
-              <Subheader>{page.data.hero_server}</Subheader>
+              <Header>{page.home.hero_title}</Header>
+              <Subheader>{page.home.hero_server}</Subheader>
             </>
           )}
         </Content>
@@ -24,7 +24,7 @@ const Hero: React.FC<Props> = ({ page }) => {
 };
 
 export type Props = {
-  page: i.PageState<i.HomePageData>;
+  page: i.PageState;
 };
 
 const mapStateToProps: i.MapStateToProps = (state) => ({

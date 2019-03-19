@@ -9,6 +9,7 @@
     "removeComments": true,
     "strict": true,
     "noImplicitAny": false,
+    "noEmit": true,
     "moduleResolution": "node",
     "target": "esnext",
     "module": "commonjs",

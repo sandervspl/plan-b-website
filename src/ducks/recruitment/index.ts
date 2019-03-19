@@ -7,7 +7,7 @@ const SUCCESS = 'recruitment/SUCCESS';
 const FAILED = 'recruitment/FAILED';
 
 const initialState: i.RecruitmentState = {
-  data: null,
+  data: undefined,
   error: false,
   loading: false,
 };

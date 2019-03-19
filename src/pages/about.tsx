@@ -15,15 +15,15 @@ class About extends React.Component<Props> {
   }
 
   render() {
-    const { data } = this.props.page;
+    const { about } = this.props.page;
 
     return (
       <Page>
         <TransitionPost>
           {(visible) => (
             <SingleContentContainer visible={visible}>
-              <Header>{data && data.title}</Header>
-              <Paragraph>{data && data.content}</Paragraph>
+              <Header>{about && about.title}</Header>
+              <Paragraph>{about && about.content}</Paragraph>
             </SingleContentContainer>
           )}
         </TransitionPost>
@@ -33,7 +33,7 @@ class About extends React.Component<Props> {
 }
 
 type Props = {
-  page: i.PageState<i.AboutPageData>;
+  page: i.PageState;
 }
 
 const mapStateToProps: i.MapStateToProps = (state) => ({

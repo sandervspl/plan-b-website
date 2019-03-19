@@ -1,16 +1,33 @@
 import * as i from 'types';
 import { API_ENDPOINT } from 'services/api/endpoints';
 
-export type PageState<T> = i.BaseState<T>;
+export type PageKeys = keyof ApiDataPayloads | 'data';
 
-export type HomePageData = i.BaseResponseBody & {
+export type PageState = i.BaseState & {
+  home?: i.HomePageData;
+  about?: i.AboutPageData;
+};
+
+type HomePageBody = {
   hero_title?: string;
   hero_server?: string;
   hero_video?: string;
-  posts?: Post[];
-};
+  posts?: i.Post[];
+}
+export type HomePageData = i.BaseResponseBody & HomePageBody;
 
-export type FetchPageAction = (endpoint: API_ENDPOINT) => i.ThunkAction;
+type AboutPageBody = {
+  title?: string;
+  content?: string;
+};
+export type AboutPageData = i.BaseResponseBody & AboutPageBody;
+
+export type PagesBody = HomePageBody | AboutPageBody;
+
+export type ApiDataPayloads = {
+  home?: i.HomePageData;
+  about?: i.AboutPageData;
+};
 
 export type Post = i.BaseResponseBody & {
   title?: string;
@@ -18,7 +35,5 @@ export type Post = i.BaseResponseBody & {
   published: boolean;
 };
 
-export type AboutPageData = i.BaseResponseBody & {
-  title?: string;
-  content?: string;
-}
+export type FetchPageAction = (endpoint: API_ENDPOINT) => i.ThunkAction;
+export type GeneratePayload = (endpoint: API_ENDPOINT, payload: i.PagesBody) => i.ApiDataPayloads;

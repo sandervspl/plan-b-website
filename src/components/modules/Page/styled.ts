@@ -6,6 +6,7 @@ import { PostsContainer } from 'modules/Home/Posts/styled';
 import { MiscPostsContainer } from 'modules/Home/styled';
 import { HeroContainer } from './HeroContainer';
 import { PageContentContainer } from './Content/styled';
+import { LogoLinkContainer } from './LogoLink/styled';
 
 const AppearAnim = keyframes`
   from {
@@ -18,6 +19,11 @@ const AppearAnim = keyframes`
 export const AwayFromHomeTransitionStyle = createGlobalStyle`
   ${media.tablet`
     .page-exit {
+      ${LogoLinkContainer} {
+        display: block;
+        transform: translateY(-80px);
+      }
+
       ${HeroContainer} {
         transform: translate(0, -45vh);
       }
@@ -32,6 +38,16 @@ export const AwayFromHomeTransitionStyle = createGlobalStyle`
         transform: translate(0, -65vh);
       }
     }
+
+    .page-enter,
+    .page-enter-active,
+    .page-exit-active,
+    .page-enter-done {
+      ${LogoLinkContainer} {
+        display: block;
+        transform: translateY(0);
+      }
+    }
   `}
 `;
 
@@ -43,6 +59,19 @@ export const ToHomeTransitionStyle = createGlobalStyle`
       animation-duration: ${TRANSITION_TIME_MS};
       animation-fill-mode: forwards;
       animation-timing-function: ${(props) => props.theme.easing.easeOutCirc};
+    }
+
+    .page-exit,
+    .page-exit-active {
+      ${LogoLinkContainer} {
+        display: block;
+      }
+    }
+
+    .page-exit {
+      ${LogoLinkContainer} {
+        transform: translateY(-80px);
+      }
     }
 
     .page-exit {

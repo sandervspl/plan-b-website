@@ -3,6 +3,7 @@ import { withRouter, SingletonRouter } from 'next/router';
 import MobileNav from './MobileNav';
 import Content from './Content';
 import { HeroContainer } from './HeroContainer';
+import LogoLink from './LogoLink';
 import { AwayFromHomeTransitionStyle, ToHomeTransitionStyle } from './styled';
 
 const Page: React.FC<Props> = ({ children, hero, className, router }) => {
@@ -11,6 +12,7 @@ const Page: React.FC<Props> = ({ children, hero, className, router }) => {
       {router.route !== '/home' && <AwayFromHomeTransitionStyle />}
       {router.route === '/home' && <ToHomeTransitionStyle />}
       <MobileNav />
+      <LogoLink />
       <HeroContainer big={hero!.big}>
         {hero!.content}
       </HeroContainer>

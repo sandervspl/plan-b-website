@@ -70,10 +70,10 @@ const HeroVideo: React.FC<Props> = ({ page }) => {
   };
 
   const initYoutubeVideo = () => {
-    if (player !== null) return;
+    if (player != null || !page.home) return;
 
     const tempPlayer = new YT.Player('player', {
-      videoId: page.hero_video,
+      videoId: page.home.hero_video,
       events: {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange,
@@ -109,11 +109,11 @@ const HeroVideo: React.FC<Props> = ({ page }) => {
 };
 
 export type Props = {
-  page: i.HomePageData;
+  page: i.PageState;
 };
 
 const mapStateToProps: i.MapStateToProps = (state) => ({
-  page: state.page.data,
+  page: state.page,
 });
 
 export default connect(mapStateToProps)(HeroVideo);

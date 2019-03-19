@@ -1,11 +1,7 @@
 /* eslint-disable no-underscore-dangle, @typescript-eslint/no-explicit-any */
 import React from 'react';
 import initializeStore from 'store';
-import {
-  NextAppContext,
-  AppComponentType as IAppComponentType,
-  AppComponentProps as IAppComponentProps,
-} from 'next/app';
+import { NextAppContext, AppComponentProps as IAppComponentProps } from 'next/app';
 import { Store } from 'redux';
 import { isServer } from './isServer';
 
@@ -13,10 +9,6 @@ import { isServer } from './isServer';
 interface NextContext {
   store: Store;
 }
-
-// type AppComponentType = IAppComponentType & {
-//   reduxStore: Store;
-// }
 
 type AppComponentProps = IAppComponentProps & {
   initialReduxState: any;

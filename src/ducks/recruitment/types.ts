@@ -13,3 +13,9 @@ export type RecruitmentClassData = i.BaseResponseBody & {
   recruitment: i.ContentId;
   [x: string]: any; // boolean
 }
+
+export type PlayerClasses = {
+  [x: string]: {
+    [x: string]: boolean;
+  };
+}

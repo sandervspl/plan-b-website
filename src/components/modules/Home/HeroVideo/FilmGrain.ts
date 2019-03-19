@@ -7,10 +7,10 @@ class FilmGrainFx {
   readonly patternAlpha = 25; // Integer between 0 and 255
 
   readonly patternPixelDataLength = this.patternSize * this.patternSize * 4;
-  ctx: CanvasRenderingContext2D;
-  patternCanvas: HTMLCanvasElement;
-  patternCtx: CanvasRenderingContext2D;
-  patternData: ImageData;
+  ctx!: CanvasRenderingContext2D;
+  patternCanvas!: HTMLCanvasElement;
+  patternCtx!: CanvasRenderingContext2D;
+  patternData!: ImageData;
   viewWidth = 0;
   viewHeight = 0;
   frame = 0;
@@ -25,9 +25,12 @@ class FilmGrainFx {
   initCanvas = () => {
     this.viewWidth = this.canvas.width = this.canvas.clientWidth;
     this.viewHeight = this.canvas.height = this.canvas.clientHeight;
-    this.ctx = this.canvas.getContext('2d');
+    const ctx = this.canvas.getContext('2d');
 
-    this.ctx.scale(this.patternScaleX, this.patternScaleY);
+    if (ctx) {
+      this.ctx = ctx;
+      this.ctx.scale(this.patternScaleX, this.patternScaleY);
+    }
   };
 
   // create a canvas which will be used as a pattern
@@ -35,8 +38,12 @@ class FilmGrainFx {
     this.patternCanvas = document.createElement('canvas');
     this.patternCanvas.width = this.patternSize;
     this.patternCanvas.height = this.patternSize;
-    this.patternCtx = this.patternCanvas.getContext('2d');
-    this.patternData = this.patternCtx.createImageData(this.patternSize, this.patternSize);
+    const ctx = this.patternCanvas.getContext('2d');
+
+    if (ctx) {
+      this.patternCtx = ctx;
+      this.patternData = this.patternCtx.createImageData(this.patternSize, this.patternSize);
+    }
   };
 
   update = () => {
@@ -57,7 +64,12 @@ class FilmGrainFx {
   draw = () => {
     this.ctx.clearRect(0, 0, this.viewWidth, this.viewHeight);
 
-    this.ctx.fillStyle = this.ctx.createPattern(this.patternCanvas, 'repeat');
+    const pattern = this.ctx.createPattern(this.patternCanvas, 'repeat');
+
+    if (pattern) {
+      this.ctx.fillStyle = pattern;
+    }
+
     this.ctx.fillRect(0, 0, this.viewWidth, this.viewHeight);
   };
 

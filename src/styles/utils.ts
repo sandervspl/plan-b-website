@@ -1,10 +1,6 @@
-import { ThemedCssFunction } from '../../node_modules/@types/styled-components';
 import { css } from 'styled-components';
+import { ThemedCssFunction } from '../../node_modules/@types/styled-components';
 import theme from './theme';
-
-type MediaUtils = {
-  [x in keyof typeof sizes]: ThemedCssFunction<typeof theme>;
-}
 
 export const sizes = {
   veryLarge: 1375,
@@ -15,6 +11,10 @@ export const sizes = {
   mobile: 480,
   small: 380,
 };
+
+type MediaUtils = {
+  [x in keyof typeof sizes]: ThemedCssFunction<typeof theme>;
+}
 
 export const pixelsToEm = (pixels: number) => pixels / 16;
 

@@ -19,6 +19,13 @@
         "version": "detect"
     }
   },
+  "globals": {
+    "__DEV__": false,
+    "__TEST__": false,
+    "__ACC__": false,
+    "__PROD__": false,
+    "YT": false
+  },
   "rules": {
     "array-bracket-spacing": ["error", "never"],
     "arrow-parens": 2,
@@ -76,6 +83,7 @@
     "@typescript-eslint/explicit-member-accessibility": [true, "no-public"],
     "@typescript-eslint/no-use-before-define": false,
     "@typescript-eslint/no-object-literal-type-assertion": false,
-    "@typescript-eslint/no-parameter-properties": false
+    "@typescript-eslint/no-parameter-properties": false,
+    "@typescript-eslint/no-non-null-assertion": false
   }
 }

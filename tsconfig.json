@@ -8,6 +8,7 @@
     "skipLibCheck": true,
     "removeComments": true,
     "strict": true,
+    "noImplicitAny": false,
     "moduleResolution": "node",
     "target": "esnext",
     "module": "commonjs",

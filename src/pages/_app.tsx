@@ -9,7 +9,7 @@ import { withReduxStore } from 'services';
 import { theme, GlobalStyle } from 'styles';
 import { TRANSITION_TIME_MS } from 'styles/pageTransition';
 
-class MyApp extends App<MyAppProps, MyAppState> {
+class MyApp extends App<MyAppProps> {
   componentDidMount() {
     // registerServiceWorker();
   }
@@ -36,10 +36,6 @@ class MyApp extends App<MyAppProps, MyAppState> {
 
 type MyAppProps = {
   reduxStore: i.Store;
-}
-
-type MyAppState = {
-  curRoute: string;
 }
 
 export default withReduxStore(MyApp);

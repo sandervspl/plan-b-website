@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/camelcase, no-undef */
+/* eslint-disable @typescript-eslint/camelcase */
 import * as i from 'types';
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';

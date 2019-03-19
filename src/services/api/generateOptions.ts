@@ -7,6 +7,7 @@ export const generateOptions: GenerateOptions = ({
 }) => ({
   path: `${config.apiUrl}${path}${query ? `?${qs.stringify(query, { encode: false })}` : ''}`,
   options: {
+    // @ts-ignore TODO fix type
     headers: {
       'Content-Type': 'application/json',
       ...(withAuth ? { 'x-access-token': localStorage.getItem('x-access-token') } : {}),

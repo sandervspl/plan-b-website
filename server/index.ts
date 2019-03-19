@@ -1,8 +1,8 @@
 import next from 'next';
 import express from 'express';
-import path from 'path';
-import router from './router';
 import config from '../config/index';
+import router from './router';
+import path from 'path';
 
 const app = next({
   dev: config.env !== 'production',

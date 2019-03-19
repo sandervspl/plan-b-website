@@ -7,7 +7,7 @@ const TransitionPost: React.FC<Props> = ({ children, direction }) => {
   const postRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (mounted) return;
+    if (mounted || !postRef || !postRef.current) return;
 
     if ('IntersectionObserver' in window) {
       const lazyImageObserver = new IntersectionObserver((entries) => {
@@ -16,7 +16,7 @@ const TransitionPost: React.FC<Props> = ({ children, direction }) => {
             setVisible(true);
 
             // Stop observing element
-            lazyImageObserver.unobserve(postRef.current);
+            lazyImageObserver.unobserve(postRef.current!);
           };
         });
       });

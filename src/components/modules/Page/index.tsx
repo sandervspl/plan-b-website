@@ -11,10 +11,10 @@ const Page: React.FC<Props> = ({ children, hero, className, router }) => {
       {router.route !== '/home' && <AwayFromHomeTransitionStyle />}
       {router.route === '/home' && <ToHomeTransitionStyle />}
       <MobileNav />
-      <HeroContainer big={hero.big}>
-        {hero.content}
+      <HeroContainer big={hero!.big}>
+        {hero!.content}
       </HeroContainer>
-      <Content positionLower={hero.big}>
+      <Content positionLower={hero!.big!}>
         {children}
       </Content>
     </main>

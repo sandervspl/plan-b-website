@@ -2,7 +2,7 @@ import * as i from 'types';
 import styled, { css } from 'styled-components';
 import { media } from 'styles';
 import { Header, Paragraph } from 'common';
-import { ContentBlockContainer } from '../ContentBlock/styled';
+import { ContentBlockContainer } from 'modules/Home/styled';
 
 export const RecruitmentBlock = styled(ContentBlockContainer)`
   background: ${(props) => props.theme.color.primary.medium};

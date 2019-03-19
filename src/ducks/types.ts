@@ -1,7 +1,7 @@
 import * as i from 'types';
 
 export type ReduxState = {
-  page: i.PageState;
+  page: i.PageState<i.HomePageData | i.AboutPageData>;
   recruitment: i.RecruitmentState;
 }
 

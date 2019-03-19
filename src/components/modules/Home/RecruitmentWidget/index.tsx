@@ -50,7 +50,7 @@ const RecruitmentWidget: React.FC<Props> = ({ recruitment, playerClasses }) => (
 
 export type Props = {
   recruitment: i.RecruitmentData;
-  playerClasses: { [x: string]: { [x: string ]: boolean } };
+  playerClasses: i.PlayerClasses;
 };
 
 const mapStateToProps: i.MapStateToProps = (state) => ({

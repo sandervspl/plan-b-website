@@ -1,9 +1,9 @@
 import { createGlobalStyle, keyframes } from 'styled-components';
 import { media } from 'styles/utils';
-import { VideoContainer } from 'modules/Home/HeroVideo/styled';
 import { TRANSITION_TIME_MS } from 'styles/pageTransition';
+import { VideoContainer } from 'modules/Home/HeroVideo/styled';
 import { PostsContainer } from 'modules/Home/Posts/styled';
-import { MiscPostsContainer } from 'modules/Home/MiscPosts/styled';
+import { MiscPostsContainer } from 'modules/Home/styled';
 import { HeroContainer } from './HeroContainer';
 import { PageContentContainer } from './Content/styled';
 

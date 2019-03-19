@@ -24,7 +24,7 @@ const Hero: React.FC<Props> = ({ page }) => {
 };
 
 export type Props = {
-  page: i.PageState;
+  page: i.PageState<i.HomePageData>;
 };
 
 const mapStateToProps: i.MapStateToProps = (state) => ({

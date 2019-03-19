@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigation } from 'modules/Home';
+import Navigation from 'modules/Page/Navigation';
 import { ContentContainer, PageContentContainer } from './styled';
 
 const PageContent: React.FC<Props> = ({ children, positionLower }) => (

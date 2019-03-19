@@ -15,10 +15,10 @@ export const HeroContainer = styled.div<HeroContainerProps>`
 
   ${media.desktop`
     clip-path: polygon(
-      0 0, /* left top */
-      100% 0, /* right top */ 
+      0 0,       /* left top */
+      100% 0,    /* right top */ 
       100% 100%, /* right bottom */
-      0 85% /* left bottom */
+      0 85%      /* left bottom */
     );
   `}
 `;

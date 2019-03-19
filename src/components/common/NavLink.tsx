@@ -7,6 +7,8 @@ import _ from 'lodash';
 import { getPageFromRoute } from 'services';
 
 class NavLink extends React.PureComponent<Props> {
+  ref = React.createRef<HTMLButtonElement>();
+
   state = {
     active: false,
   }
@@ -18,12 +20,12 @@ class NavLink extends React.PureComponent<Props> {
     const routerRoute = Router.routes.find((r: string) => r.name === to);
 
     // Check if pathname from current route and page from routes are equal
-    if (routerRoute && router.pathname === routerRoute.page) {
+    if (routerRoute && router!.pathname === routerRoute.page) {
       if (props.params) {
         // If current pathname and route page are the same, and we have params, then the params also have to be the same
         // We compare every params passed to NavLink and the queries from router to decide if this is the current route
         if (props.params && Object.keys(props.params).length > 0) {
-          if (Object.keys(props.params).every((p) => router.query[p] === props.params[p])) {
+          if (Object.keys(props.params).every((p) => router!.query![p] === props.params![p])) {
             return {
               active: true,
             };
@@ -42,7 +44,7 @@ class NavLink extends React.PureComponent<Props> {
     };
   }
 
-  setActiveClassName = (className) => {
+  setActiveClassName = (className: string) => {
     if (!this.state.active) return className;
 
     return `${className} active`.trim();
@@ -62,7 +64,7 @@ class NavLink extends React.PureComponent<Props> {
 
     if (prefetchPage) {
       prefetchProps = {
-        onMouseOver: () => router.prefetch(prefetchPage),
+        onMouseOver: () => router!.prefetch(prefetchPage),
       };
     }
 

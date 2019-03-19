@@ -31,7 +31,7 @@ export type ThunkAction<ReturnType = void> = IThunkAction<ReturnType, i.ReduxSta
 /*
   Thunk Dispatch action with pre-filled generics
 */
-export type ThunkDispatch = IThunkDispatch<i.ReduxState, {}, i.Action>;
+export type ThunkDispatch = IThunkDispatch<i.ReduxState, any, i.Action>;
 
 /*
   MapStateToProps type with pre-filled state

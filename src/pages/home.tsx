@@ -10,9 +10,7 @@ import { MiscPostsContainer } from 'modules/Home/styled';
 class Home extends React.Component {
   static async getInitialProps({ store }: { store: i.Store }) {
     await Promise.all([
-      // @ts-ignore I don't understand the error
       store.dispatch(fetchPage(API_ENDPOINT.HOME)),
-      // @ts-ignore I don't understand the error
       store.dispatch(fetchRecruitment()),
     ]);
 

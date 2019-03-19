@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 
 class About extends React.Component<Props> {
   static async getInitialProps({ store }: { store: i.Store }) {
-    // @ts-ignore I don't understand the error
     await store.dispatch(fetchPage(API_ENDPOINT.ABOUT));
 
     return {};

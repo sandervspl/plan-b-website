@@ -68,8 +68,10 @@ class NavLink extends React.PureComponent<Props> {
       };
     }
 
+    const LinkProps = _.pick(props, 'params');
+
     return (
-      <Router.Link route={to} {...props}>
+      <Router.Link route={to} {...LinkProps}>
         {React.cloneElement(
           child,
           {

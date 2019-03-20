@@ -1,21 +1,29 @@
 import * as i from 'types';
 
-export type RecruitmentState = i.BaseState<RecruitmentData>;
+export type RecruitmentState = i.BaseState<i.RecruitmentData>;
 
-export type RecruitmentData = i.BaseResponseBody & {
-  title: string;
-  warrior: RecruitmentClassData;
-  shaman: RecruitmentClassData;
+export type RecruitmentData = i.BaseResponseBody & RecruitmentClasses & {
+  active: boolean;
+  title?: string;
   homepage?: i.ContentId;
 };
 
-export type RecruitmentClassData = i.BaseResponseBody & {
-  recruitment: i.ContentId;
-  [x: string]: any; // boolean
+export type PlayerClasses = 'druid' | 'hunter' | 'mage' | 'priest' | 'rogue' | 'shaman' | 'warlock' | 'warrior';
+
+type RecruitmentClasses = {
+  [key in PlayerClasses]?: i.RecruitmentClassData;
 }
 
-export type PlayerClasses = {
-  [x: string]: {
+type RecruitmentClassSpec = {
+  [key: string]: boolean;
+}
+
+export type RecruitmentClassData = i.BaseResponseBody & RecruitmentClassSpec & {
+  recruitment: i.ContentId;
+}
+
+export type PlayerClassesSpecs = {
+  [key in PlayerClasses]?: {
     [x: string]: boolean;
   };
 }

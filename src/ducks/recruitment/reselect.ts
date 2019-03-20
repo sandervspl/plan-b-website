@@ -2,11 +2,14 @@ import * as i from 'types';
 import { createSelector } from 'reselect';
 import _ from 'lodash';
 
-export const getRecruitmentClassSpecs = createSelector<i.ReduxState, i.RecruitmentState, any>(
+export const getRecruitmentClassSpecs = createSelector<i.ReduxState, i.RecruitmentState, i.PlayerClassesSpecs>(
   (state) => state.recruitment,
   (state) => {
     // Remove data that is not player classes
-    const data = _.omit(state.data, 'created_at', 'homepage', 'id', 'title', 'updated_at', 'active');
+    const data: Pick<i.RecruitmentData, i.PlayerClasses> = _.omit(
+      state.data,
+      'created_at', 'homepage', 'id', 'title', 'updated_at', 'active',
+    );
     const classKeys = Object.keys(data);
 
     classKeys.forEach((key) => {

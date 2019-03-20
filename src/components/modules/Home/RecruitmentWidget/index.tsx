@@ -1,47 +1,22 @@
 import * as i from 'types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, Paragraph, TransitionPost } from 'common';
-import apiConfig from 'services/api/config';
+import { Header, TransitionPost } from 'common';
 import { getRecruitmentClassSpecs } from 'ducks/recruitment/reselect';
-import { RecruitmentBlock, RecruitmentContent, ClassRow, ClassIcon, ClassGrid } from './styled';
+import RecruitmentClassGrid from '../RecruitmentClassGrid';
+import { RecruitmentBlock, RecruitmentContent } from './styled';
 
 const RecruitmentWidget: React.FC<Props> = ({ recruitment, playerClasses }) => (
   <TransitionPost direction="right">
     {(visible) => (
       <RecruitmentBlock>
         <RecruitmentContent visible={visible}>
-          <Header dark>{recruitment.title}</Header>
-          <ClassGrid>
-            {Object.keys(playerClasses).map((plrClass, i) => {
-              // Sort on alphabetical order like the talent panel
-              const specs = Object.keys(playerClasses[plrClass]).sort((a, b) => a.localeCompare(b));
-
-              return (
-                <ClassRow key={i}>
-                  <Paragraph dark>{plrClass}</Paragraph>
-
-                  <div>
-                    {specs.map((spec, i) => {
-                      // Replace underscores with spaces
-                      const infoText = `${spec.replace(/_/g, ' ')} ${plrClass}`;
-                      const isRecruiting = playerClasses[plrClass][spec];
-
-                      return (
-                        <ClassIcon
-                          key={i}
-                          src={`${apiConfig.apiUrl}uploads/classes/${plrClass}/${spec}.jpg`}
-                          alt={infoText}
-                          title={infoText}
-                          active={isRecruiting}
-                        />
-                      );
-                    })}
-                  </div>
-                </ClassRow>
-              );
-            })}
-          </ClassGrid>
+          {recruitment && (
+              <>
+                <Header dark>{recruitment.title}</Header>
+                <RecruitmentClassGrid playerClasses={playerClasses} />
+              </>
+          )}
         </RecruitmentContent>
       </RecruitmentBlock>
     )}
@@ -50,7 +25,7 @@ const RecruitmentWidget: React.FC<Props> = ({ recruitment, playerClasses }) => (
 
 export type Props = {
   recruitment: i.RecruitmentData;
-  playerClasses: i.PlayerClasses;
+  playerClasses: i.PlayerClassesSpecs;
 };
 
 const mapStateToProps: i.MapStateToProps = (state) => ({

@@ -36,6 +36,23 @@ export const AwayFromHomeTransitionStyle = createGlobalStyle`
     }
   }
 
+  .page-exit {
+    ${BaseHeroContainer} {
+      transition: opacity ${TRANSITION_TIME_MS_SHORT}ms 400ms linear;
+    }
+
+    ${ContentContainer} > * {
+      animation-name: none;
+    }
+  }
+
+  .page-exit-active {
+    ${BaseHeroContainer},
+    ${ContentContainer} > * {
+      opacity: 0;
+    }
+  }
+
   ${media.tablet`
     .page-exit {
       ${Content} {

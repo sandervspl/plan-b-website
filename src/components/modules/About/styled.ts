@@ -65,6 +65,6 @@ export const AboutContent = styled.div`
 
   img {
     width: 100%;
-    margin: 50px 0 20px;
+    margin: 20px 0;
   }
 `;

@@ -8,6 +8,7 @@ import { Content } from 'modules/Home/Hero/styled';
 import { HeroContainer } from './HeroContainer';
 import { PageContentContainer, ContentContainer } from './Content/styled';
 import { LogoLinkContainer } from './LogoLink/styled';
+import { BaseHeroContainer } from './BaseHero/styled';
 
 const AppearAnim = keyframes`
   from {
@@ -20,6 +21,19 @@ const AppearAnim = keyframes`
 export const AwayFromHomeTransitionStyle = createGlobalStyle`
   ${LogoLinkContainer} {
     display: block;
+  }
+
+  .page-enter {
+    ${BaseHeroContainer} {
+      opacity: 0;
+      transition: opacity ${TRANSITION_TIME_MS_SHORT}ms linear;
+    }
+  }
+
+  .page-enter-active {
+    ${BaseHeroContainer} {
+      opacity: 1;
+    }
   }
 
   ${media.tablet`
@@ -41,6 +55,7 @@ export const AwayFromHomeTransitionStyle = createGlobalStyle`
       ${VideoContainer},
       ${PostsContainer},
       ${MiscPostsContainer} {
+        animation-name: none;
         opacity: 0;
       }
 
@@ -70,6 +85,16 @@ export const ToHomeTransitionStyle = createGlobalStyle`
   .page-exit {
     ${LogoLinkContainer} {
       display: block;
+    }
+
+    ${BaseHeroContainer} {
+      transition: opacity ${TRANSITION_TIME_MS_SHORT}ms 400ms linear;
+    }
+  }
+
+  .page-exit-active {
+    ${BaseHeroContainer} {
+      opacity: 0;
     }
   }
 

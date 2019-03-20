@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TRANSITION_TIME_MS } from 'styles/pageTransition';
+import { TRANSITION_TIME_MS_SHORT } from 'styles/pageTransition';
 
 export const VideoContainer = styled.div`
   background: ${(props) => props.theme.color.secondary.dark};
@@ -10,7 +10,7 @@ export const VideoContainer = styled.div`
   left: 0;
   opacity: 1;
   will-change: opacity;
-  transition: opacity ${TRANSITION_TIME_MS}ms ease-out;
+  transition: opacity ${TRANSITION_TIME_MS_SHORT}ms ease-out;
 `;
 
 export const VideoInner = styled.div`

@@ -4,6 +4,8 @@ export const BaseHeroContainer = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  opacity: 1;
+  will-change: opacity;
 `;
 
 export const HeroOverlay = styled.div`

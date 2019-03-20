@@ -60,7 +60,7 @@ const generatePayload: i.GeneratePayload = (endpoint, payload) => {
     case API_ENDPOINT.HOME: key = 'home'; break;
     case API_ENDPOINT.ABOUT: key = 'about'; break;
     case API_ENDPOINT.APPLICATION: key = 'application'; break;
-    default: key = 'data';
+    default: throw new Error(`No key found for endpoint: ${endpoint}`);
   }
 
   return { [key]: payload };

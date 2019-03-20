@@ -16,7 +16,14 @@ const AppearAnim = keyframes`
   }
 `;
 
+/*
+  page-exit = GOING TO HOME
+*/
 export const AwayFromHomeTransitionStyle = createGlobalStyle`
+  ${LogoLinkContainer} {
+    display: block;
+  }
+
   ${media.tablet`
     .page-exit {
       ${LogoLinkContainer} {
@@ -50,7 +57,16 @@ export const AwayFromHomeTransitionStyle = createGlobalStyle`
   `}
 `;
 
+/*
+  page-exit = AWAY FROM HOME
+*/
 export const ToHomeTransitionStyle = createGlobalStyle`
+  .page-exit {
+    ${LogoLinkContainer} {
+      display: block;
+    }
+  }
+
   ${media.tablet`
     ${VideoContainer} {
       transition: opacity ${TRANSITION_TIME_MS}ms ease-out;
@@ -62,7 +78,6 @@ export const ToHomeTransitionStyle = createGlobalStyle`
 
     .page-exit {
       ${LogoLinkContainer} {
-        display: block;
         transform: translateY(-80px);
       }
 

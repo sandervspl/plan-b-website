@@ -10,7 +10,11 @@ export const HeroContainer = styled.div<HeroContainerProps>`
               opacity 300ms ease-out;
 
   ${(props) => !props.big && css`
-    transform: translateY(-35vh);
+    transform: translate(0, -35vh);
+
+    ${media.tablet`
+      transform: translate(0, -35vh);
+    `}
   `}
 
   ${media.desktop`

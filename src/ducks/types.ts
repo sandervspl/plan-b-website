@@ -13,3 +13,18 @@ export type BaseState<T = null> = {
   error: boolean;
   loading: boolean;
 }
+
+export type Image = {
+  id: number;
+  name: string;
+  hash: string;
+  sha256: string;
+  ext: string;
+  mime: string;
+  size: string;
+  url: string;
+  provider: string;
+  public_id?: any;
+  created_at: Date;
+  updated_at: Date;
+}

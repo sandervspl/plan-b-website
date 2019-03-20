@@ -25,7 +25,7 @@ export const AwayFromHomeTransitionStyle = createGlobalStyle`
       }
 
       ${HeroContainer} {
-        transform: translate(0, -45vh);
+        transform: translate(0, -35vh);
       }
 
       ${VideoContainer},
@@ -35,7 +35,7 @@ export const AwayFromHomeTransitionStyle = createGlobalStyle`
       }
 
       ${PageContentContainer} {
-        transform: translate(0, -65vh);
+        transform: translate(0, -55vh);
       }
     }
 

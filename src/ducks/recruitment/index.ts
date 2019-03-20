@@ -1,6 +1,6 @@
 import * as i from 'types';
 import { action, ActionType } from 'typesafe-actions';
-import { API_ENDPOINT } from 'services/api/endpoints';
+import { API_ENDPOINT } from 'services';
 
 const LOAD = 'recruitment/LOAD';
 const SUCCESS = 'recruitment/SUCCESS';

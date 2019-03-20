@@ -1,5 +1,5 @@
 import * as i from 'types';
-import { API_ENDPOINT } from 'services/api/endpoints';
+import { API_ENDPOINT } from 'services';
 
 export type PageKeys = keyof ApiDataPayloads | 'data';
 
@@ -19,6 +19,7 @@ export type HomePageData = i.BaseResponseBody & HomePageBody;
 type AboutPageBody = {
   title?: string;
   content?: string;
+  hero_image?: i.Image;
 };
 export type AboutPageData = i.BaseResponseBody & AboutPageBody;
 

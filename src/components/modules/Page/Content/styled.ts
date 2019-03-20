@@ -4,7 +4,7 @@ import { TRANSITION_TIME_MS, TRANSITION_TIME_MS_SHORT } from 'styles/pageTransit
 
 export const PageContentContainer = styled.div`
   width: 100%;
-  transform: translate(0, -45vh);
+  transform: translate(0, -35vh);
   will-change: transform;
   transition: transform ${TRANSITION_TIME_MS}ms ${(props) => props.theme.easing.easeOutCirc};
   overflow-x: hidden;
@@ -13,7 +13,7 @@ export const PageContentContainer = styled.div`
     transform: translate(0, -45px);
 
     ${(props) => !props.positionLower && css`
-      transform: translate(0, -65vh);
+      transform: translate(0, -55vh);
     `}
   `}
 

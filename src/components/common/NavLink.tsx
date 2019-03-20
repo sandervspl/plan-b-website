@@ -7,7 +7,7 @@ import _ from 'lodash';
 import { getPageFromRoute } from 'services';
 
 class NavLink extends React.PureComponent<Props> {
-  ref = React.createRef<HTMLButtonElement>();
+  static defaultProps: Partial<Props>;
 
   state = {
     active: false,
@@ -91,5 +91,9 @@ type Props = WithRouterProps & {
   params?: RouteParams;
   to: string;
 }
+
+NavLink.defaultProps = {
+  className: '',
+};
 
 export default withRouter(NavLink);

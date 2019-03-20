@@ -70,6 +70,7 @@ export const Background = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
+  z-index: 1;
   background: ${(props) => props.theme.color.primary};
   transform-origin: left;
   will-change: transform;
@@ -77,18 +78,23 @@ export const Background = styled.div`
 
 export const MenuLink = styled(NavLink)<MenuLinkProps>`
   display: block;
-  color: ${(props) => props.theme.color.primary};
+  color: ${(props) => props.theme.color.tertiary};
   font-family: ${(props) => props.theme.font.primary};
   text-decoration: none;
-  font-size: 40px;
+  font-size: 33px;
   font-weight: 600;
   opacity: 0;
   will-change: opacity;
+  text-transform: uppercase;
 
   ${(props) => props.active && css<MenuLinkProps>`
     opacity: 1;
     transition: 600ms ${({ num }) => 600 + num * 100}ms opacity ${(props) => props.theme.easing.easeOutCirc};
   `}
+
+  &.active {
+    color: ${(props) => props.theme.color.primary};
+  }
 `;
 
 type MenuLinkProps = MenuProps & MenuItemProps;

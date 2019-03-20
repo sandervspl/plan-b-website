@@ -19,6 +19,10 @@ export const NavContainer = styled.nav`
       &:hover {
         color: ${(props) => props.theme.color.primary.light};
       }
+
+      &.active {
+        color: ${(props) => props.theme.color.primary};
+      }
     }
   `}
 `;

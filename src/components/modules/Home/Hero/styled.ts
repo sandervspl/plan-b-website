@@ -22,7 +22,7 @@ export const HeroContent = styled.header`
 const AppearAnim = keyframes`
   from {
     transform: translate(-75px, -50px);
-    opacity: .1;
+    opacity: 0;
   }
   to {
     transform: translate(0, -50px);
@@ -36,6 +36,7 @@ export const Content = styled.div`
   justify-content: center;
   z-index: 1;
   width: 100%;
+  opacity: 1;
   transform: translate(0, -50px);
   animation-name: ${AppearAnim};
   animation-duration: 1000ms;

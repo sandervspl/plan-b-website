@@ -1,9 +1,10 @@
 import { createGlobalStyle, keyframes } from 'styled-components';
 import { media } from 'styles/utils';
-import { TRANSITION_TIME_MS } from 'styles/pageTransition';
+import { TRANSITION_TIME_MS, TRANSITION_TIME_MS_SHORT } from 'styles/pageTransition';
 import { VideoContainer } from 'modules/Home/HeroVideo/styled';
 import { PostsContainer } from 'modules/Home/Posts/styled';
 import { MiscPostsContainer } from 'modules/Home/styled';
+import { Content } from 'modules/Home/Hero/styled';
 import { HeroContainer } from './HeroContainer';
 import { PageContentContainer, ContentContainer } from './Content/styled';
 import { LogoLinkContainer } from './LogoLink/styled';
@@ -16,9 +17,6 @@ const AppearAnim = keyframes`
   }
 `;
 
-/*
-  page-exit = GOING TO HOME
-*/
 export const AwayFromHomeTransitionStyle = createGlobalStyle`
   ${LogoLinkContainer} {
     display: block;
@@ -26,6 +24,11 @@ export const AwayFromHomeTransitionStyle = createGlobalStyle`
 
   ${media.tablet`
     .page-exit {
+      ${Content} {
+        animation-name: none;
+        transition: opacity ${TRANSITION_TIME_MS_SHORT}ms linear;
+      }
+
       ${LogoLinkContainer} {
         display: block;
         transform: translateY(-80px);
@@ -46,6 +49,12 @@ export const AwayFromHomeTransitionStyle = createGlobalStyle`
       }
     }
 
+    .page-exit-active {
+      ${Content} {
+        opacity: 0;
+      }
+    }
+
     .page-enter,
     .page-exit-active,
     .page-enter-done {
@@ -57,9 +66,6 @@ export const AwayFromHomeTransitionStyle = createGlobalStyle`
   `}
 `;
 
-/*
-  page-exit = AWAY FROM HOME
-*/
 export const ToHomeTransitionStyle = createGlobalStyle`
   .page-exit {
     ${LogoLinkContainer} {

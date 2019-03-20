@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'styles';
+import { ContentBlockContainer } from '../styled';
 
 export const PostsContainer = styled.div`
   opacity: 1;
@@ -9,4 +10,10 @@ export const PostsContainer = styled.div`
   ${media.tablet`
     max-width: 65%;
   `}
+
+  > *:nth-child(even) {
+    ${ContentBlockContainer} {
+      background-color: ${(props) => props.theme.color.secondary.medium};
+    }
+  }
 `;

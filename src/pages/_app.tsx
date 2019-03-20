@@ -4,9 +4,10 @@ import App, { Container, DefaultAppIProps, AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
 import { PageTransition } from 'next-page-transitions';
+import _ from 'lodash/fp';
 // import registerServiceWorker from 'services/registerServiceWorker';
-import { withReduxStore } from 'services';
-import { theme, GlobalStyle } from 'styles';
+import { withReduxStore, isServer } from 'services';
+import { theme, GlobalStyle, sizes } from 'styles';
 import { TRANSITION_TIME_MS, TRANSITION_TIME_MS_SHORT } from 'styles/pageTransition';
 
 class MyApp extends App<Props, State> {
@@ -22,14 +23,15 @@ class MyApp extends App<Props, State> {
   }
 
   componentDidMount() {
-    // registerServiceWorker();
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
   }
 
   componentDidUpdate() {
     const { curRoute } = this.state;
     const { route } = this.props.router;
 
-    if (route !== curRoute) {
+    if (!this.isMobile() && route !== curRoute) {
       const transitionTime = route === '/home' || curRoute === '/home'
         ? TRANSITION_TIME_MS
         : TRANSITION_TIME_MS_SHORT;
@@ -40,6 +42,29 @@ class MyApp extends App<Props, State> {
       });
     }
   }
+
+  isMobile = () => window.innerWidth <= sizes.tablet;
+
+  handleResize = _.debounce(1000)(() => {
+    if (isServer) return;
+
+    const { curRoute } = this.state;
+    let newTransitionTime = this.state.transitionTime;
+
+    if (this.isMobile()) {
+      newTransitionTime = 0;
+    } else {
+      newTransitionTime = curRoute === '/home'
+        ? TRANSITION_TIME_MS
+        : TRANSITION_TIME_MS_SHORT;
+    }
+
+    if (newTransitionTime !== this.state.transitionTime) {
+      this.setState({
+        transitionTime: newTransitionTime,
+      });
+    }
+  });
 
   render() {
     const { transitionTime } = this.state;

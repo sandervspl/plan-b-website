@@ -7,9 +7,6 @@ const SUCCESS = 'page/SUCCESS';
 const FAILED = 'page/FAILED';
 
 const initialState: i.PageState = {
-  data: undefined,
-  home: undefined,
-  about: undefined,
   error: false,
   loading: false,
 };
@@ -62,6 +59,7 @@ const generatePayload: i.GeneratePayload = (endpoint, payload) => {
   switch (endpoint) {
     case API_ENDPOINT.HOME: key = 'home'; break;
     case API_ENDPOINT.ABOUT: key = 'about'; break;
+    case API_ENDPOINT.APPLICATION: key = 'application'; break;
     default: key = 'data';
   }
 

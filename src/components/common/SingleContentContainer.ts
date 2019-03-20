@@ -5,6 +5,8 @@ import { Header } from './typography';
 
 export const SingleContentContainer = styled.div<SingleContentContainerProps>`
   padding: 30px;
+  margin: 0 auto;
+  max-width: 740px;
   will-change: transform;
   transform: translate(-100px);
   transition: transform 1s 300ms ${(props) => props.theme.easing.easeOutCirc};
@@ -15,7 +17,11 @@ export const SingleContentContainer = styled.div<SingleContentContainerProps>`
   `}
 
   ${Header} {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+
+    ${media.tablet`
+      margin-bottom: 50px;
+    `}
   }
 
   ${media.tablet`

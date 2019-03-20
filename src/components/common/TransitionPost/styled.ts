@@ -35,6 +35,7 @@ const AppearAnim = keyframes`
 
 export const TransitionPostContainer = styled.div`
   position: relative;
+  width: 100%;
   animation-name: ${AppearAnim};
   animation-duration: 1000ms;
   animation-timing-function: ${(props) => props.theme.easing.easeOutCirc};

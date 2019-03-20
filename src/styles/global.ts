@@ -24,7 +24,7 @@ export default createGlobalStyle`
     background-color: ${theme.color.secondary.dark};
   }
 
-  h1, h2, h3 {
+  h1, h2, h3, h4, h5, h6 {
     font-family: ${theme.font.primary};
     color: ${theme.color.primary};
     margin: 0;

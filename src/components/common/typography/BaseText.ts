@@ -1,9 +1,13 @@
 import styled, { css } from 'styled-components';
 
-export const BaseText = styled.span<BaseTextProps>`
+export const BaseTextStyle = css<BaseTextProps>`
   ${(props) => props.dark && css`
     color: ${(props) => props.theme.color.secondary}!important;
   `}
+`;
+
+export const BaseText = styled.span`
+  ${BaseTextStyle};
 `;
 
 type BaseTextProps = {

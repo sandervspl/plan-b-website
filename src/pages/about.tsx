@@ -1,10 +1,12 @@
 import * as i from 'types';
 import * as React from 'react';
+import { connect } from 'react-redux';
+import ReactMarkdown from 'react-markdown';
 import Page from 'modules/Page';
 import { API_ENDPOINT } from 'services/api/endpoints';
 import { fetchPage } from 'ducks/page';
 import { Header, Paragraph, SingleContentContainer, TransitionPost } from 'common';
-import { connect } from 'react-redux';
+import { AboutContent } from 'modules/About/styled';
 
 class About extends React.Component<Props> {
   static async getInitialProps({ store }: { store: i.Store }) {
@@ -22,7 +24,14 @@ class About extends React.Component<Props> {
           {(visible) => (
             <SingleContentContainer visible={visible}>
               <Header>{about && about.title}</Header>
-              <Paragraph>{about && about.content}</Paragraph>
+              {about && about.content && (
+                <AboutContent>
+                  <ReactMarkdown
+                    className="result"
+                    source={about.content}
+                  />
+                </AboutContent>
+              )}
             </SingleContentContainer>
           )}
         </TransitionPost>

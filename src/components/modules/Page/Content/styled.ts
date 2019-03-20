@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { media } from 'styles';
-import { TRANSITION_TIME_MS } from 'styles/pageTransition';
+import { TRANSITION_TIME_MS, TRANSITION_TIME_MS_SHORT } from 'styles/pageTransition';
 
 export const PageContentContainer = styled.div`
   width: 100%;
@@ -41,7 +41,7 @@ export const ContentContainer = styled.div`
   > * {
     opacity: 1;
     will-change: opacity;
-    transition: opacity 600ms ease-out;
+    transition: opacity ${TRANSITION_TIME_MS_SHORT}ms ease-out;
   }
 
   ${media.tablet`

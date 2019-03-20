@@ -1,5 +1,6 @@
 import * as i from 'types';
 import styled, { css } from 'styled-components';
+import { TRANSITION_TIME_MS_SHORT } from 'styles/pageTransition';
 import { NavLink } from 'common';
 
 type MenuProps = i.VisibilityProps & {
@@ -89,7 +90,7 @@ export const MenuLink = styled(NavLink)<MenuLinkProps>`
 
   ${(props) => props.active && css<MenuLinkProps>`
     opacity: 1;
-    transition: 600ms ${({ num }) => 600 + num * 100}ms opacity ${(props) => props.theme.easing.easeOutCirc};
+    transition: ${TRANSITION_TIME_MS_SHORT}ms ${({ num }) => TRANSITION_TIME_MS_SHORT + num * 100}ms opacity ${(props) => props.theme.easing.easeOutCirc};
   `}
 
   &.active {

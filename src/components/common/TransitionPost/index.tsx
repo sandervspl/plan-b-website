@@ -2,12 +2,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { TransitionPostContainer, TransitionOverlay } from './styled';
 
 const TransitionPost: React.FC<Props> = ({ children, direction }) => {
-  const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
   const postRef = useRef<HTMLDivElement>(null);
 
+  // Fires only on mount
   useEffect(() => {
-    if (mounted || !postRef || !postRef.current) return;
+    if (!postRef || !postRef.current) return;
 
     if ('IntersectionObserver' in window) {
       const lazyImageObserver = new IntersectionObserver((entries) => {
@@ -27,9 +27,7 @@ const TransitionPost: React.FC<Props> = ({ children, direction }) => {
       // No animation
       setVisible(true);
     }
-
-    setMounted(true);
-  });
+  }, []);
 
   return (
     <TransitionPostContainer ref={postRef}>

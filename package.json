@@ -16,6 +16,7 @@
   "dependencies": {
     "animejs": "3.0.1",
     "express": "^4.16.4",
+    "final-form": "4.12.0",
     "intl": "1.2.5",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "4.17.11",
@@ -24,7 +25,9 @@
     "next-routes": "^1.4.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-final-form": "4.1.0",
     "react-markdown": "4.0.6",
+    "react-pose": "4.0.8",
     "react-redux": "^6.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",

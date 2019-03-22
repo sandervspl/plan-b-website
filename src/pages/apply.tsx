@@ -1,10 +1,9 @@
 import * as i from 'types';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import Page from 'modules/Page';
-import { API_ENDPOINT, getSourceUrl } from 'services';
+import { API_ENDPOINT } from 'services';
 import { fetchPage } from 'ducks/page';
-import { Header, SingleContentContainer, TransitionPost } from 'common';
+import { Header, SingleContentContainer, TransitionPost, Fullscreenpage } from 'common';
 
 class ApplicationPage extends React.Component<Props> {
   static async getInitialProps({ store }: { store: i.Store }) {
@@ -17,11 +16,7 @@ class ApplicationPage extends React.Component<Props> {
     const { application } = this.props.page;
 
     return (
-      <Page
-        hero={{
-          content: application!.hero_image ? getSourceUrl(application!.hero_image.url) : null,
-        }}
-      >
+      <Fullscreenpage>
         <TransitionPost>
           {(visible) => (
             <SingleContentContainer visible={visible}>
@@ -30,7 +25,7 @@ class ApplicationPage extends React.Component<Props> {
             </SingleContentContainer>
           )}
         </TransitionPost>
-      </Page>
+      </Fullscreenpage>
     );
   }
 }

@@ -7,31 +7,27 @@ import Page from 'modules/Page';
 import { Posts, Hero, RecruitmentWidget } from 'modules/Home';
 import { MiscPostsContainer } from 'modules/Home/styled';
 
-class Home extends React.Component {
-  static async getInitialProps({ store }: { store: i.Store }) {
-    await Promise.all([
-      store.dispatch(fetchPage(API_ENDPOINT.HOME)),
-      store.dispatch(fetchRecruitment()),
-    ]);
+const Home: i.NextPageComponent = () => (
+  <Page
+    hero={{
+      big: true,
+      content: <Hero />,
+    }}
+  >
+    <Posts />
+    <MiscPostsContainer>
+      <RecruitmentWidget />
+    </MiscPostsContainer >
+  </Page>
+);
 
-    return {};
-  }
+Home.getInitialProps = async ({ store }) => {
+  await Promise.all([
+    store.dispatch(fetchPage(API_ENDPOINT.HOME)),
+    store.dispatch(fetchRecruitment()),
+  ]);
 
-  render() {
-    return (
-      <Page
-        hero={{
-          big: true,
-          content: <Hero />,
-        }}
-      >
-        <Posts />
-        <MiscPostsContainer>
-          <RecruitmentWidget />
-        </MiscPostsContainer >
-      </Page>
-    );
-  }
-}
+  return {};
+};
 
 export default Home;

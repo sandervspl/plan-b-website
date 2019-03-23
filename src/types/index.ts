@@ -1,6 +1,7 @@
 /* eslint-disable import/export */
 export * from './general';
 export * from './redux';
+export * from './next';
 
 export { ApiHelper, ContentId, BaseResponseBody } from 'services/api/types';
 

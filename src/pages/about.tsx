@@ -8,41 +8,35 @@ import { fetchPage } from 'ducks/page';
 import { Header, SingleContentContainer, TransitionPost } from 'common';
 import { AboutContent } from 'modules/About/styled';
 
-class About extends React.Component<Props> {
-  static async getInitialProps({ store }: { store: i.Store }) {
-    await store.dispatch(fetchPage(API_ENDPOINT.ABOUT));
-
-    return {};
-  }
-
-  render() {
-    const { about } = this.props.page;
-
-    return (
-      <Page
-        hero={{
-          content: about!.hero_image ? getSourceUrl(about!.hero_image.url) : null,
-        }}
-      >
-        <TransitionPost>
-          {(visible) => (
-            <SingleContentContainer visible={visible}>
-              <Header>{about && about.title}</Header>
-              {about && about.content && (
-                <AboutContent>
-                  <ReactMarkdown
-                    className="result"
-                    source={about.content}
-                  />
-                </AboutContent>
-              )}
-            </SingleContentContainer>
+const About: i.NextPageComponent<Props> = ({ page }) => (
+  <Page
+    hero={{
+      content: page.about!.hero_image ? getSourceUrl(page.about!.hero_image.url) : null,
+    }}
+  >
+    <TransitionPost>
+      {(visible) => (
+        <SingleContentContainer visible={visible}>
+          <Header>{page.about && page.about.title}</Header>
+          {page.about && page.about.content && (
+            <AboutContent>
+              <ReactMarkdown
+                className="result"
+                source={page.about.content}
+              />
+            </AboutContent>
           )}
-        </TransitionPost>
-      </Page>
-    );
-  }
-}
+        </SingleContentContainer>
+      )}
+    </TransitionPost>
+  </Page>
+);
+
+About.getInitialProps = async ({ store }) => {
+  await store.dispatch(fetchPage(API_ENDPOINT.ABOUT));
+
+  return {};
+};
 
 type Props = {
   page: i.PageState;

@@ -5,11 +5,6 @@ import { NextAppContext, AppComponentProps as IAppComponentProps } from 'next/ap
 import { Store } from 'redux';
 import { isServer } from './isServer';
 
-// Extend types with Redux props
-interface NextContext {
-  store: Store;
-}
-
 type AppComponentProps = IAppComponentProps & {
   initialReduxState: any;
 }
@@ -40,8 +35,8 @@ export const withReduxStore = (App: any) => (
       // This allows you to set a custom default initialState
       const reduxStore = getOrCreateStore();
 
-      // Provide the store to getInitialProps of pages
-      (appContext.ctx as unknown as NextContext).store = reduxStore;
+      // @ts-ignore Provide the store to getInitialProps of pages
+      appContext.ctx.store = reduxStore;
 
       let appProps = {};
       if (typeof App.getInitialProps === 'function') {

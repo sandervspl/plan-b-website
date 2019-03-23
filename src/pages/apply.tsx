@@ -5,6 +5,7 @@ import { API_ENDPOINT } from 'services';
 import { fetchPage } from 'ducks/page';
 import { Header, SingleContentContainer, TransitionPost, Fullscreenpage } from 'common';
 
+
 class ApplicationPage extends React.Component<Props> {
   static async getInitialProps({ store }: { store: i.Store }) {
     await store.dispatch(fetchPage(API_ENDPOINT.APPLICATION));

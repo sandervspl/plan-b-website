@@ -21,6 +21,7 @@ export type Options = {
   withAuth?: boolean;
   file?: any;
   error?: any;
+  url: string;
 }
 
 export type FetchOptions = i.Omit<Options, 'method'>;
@@ -45,6 +46,10 @@ export type ApiHelper = {
   post: FetchCall;
   put: FetchCall;
   patch: FetchCall;
+  url: {
+    api: string;
+    cms: string;
+  };
 }
 
 export type ContentId = number;

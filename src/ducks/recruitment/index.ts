@@ -47,11 +47,14 @@ export const actions = {
 export const fetchRecruitment = (): i.ThunkAction => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
-  return api.get({ path: `${API_ENDPOINT.RECRUITMENT}` })
+  return api.get({
+    url: api.url.cms,
+    path: `${API_ENDPOINT.RECRUITMENT}`,
+  })
     .then((res) => {
       dispatch(actions.success(res));
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch(actions.failed());
     });
 };

@@ -3,9 +3,9 @@ import config from './config';
 import { GenerateOptions } from './types';
 
 export const generateOptions: GenerateOptions = ({
-  method, path, query, body, withAuth = config.defaultWithAuth, file = false, error,
+  method, path, query, body, withAuth = config.defaultWithAuth, file = false, url, error,
 }) => ({
-  path: `${config.apiUrl}${path}${query ? `?${qs.stringify(query, { encode: false })}` : ''}`,
+  path: `${url}${path}${query ? `?${qs.stringify(query, { encode: false })}` : ''}`,
   options: {
     // @ts-ignore TODO fix type
     headers: {

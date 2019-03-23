@@ -1,17 +1,23 @@
 import config from 'config';
 
 const apiConfig = {
-  /**
-   * API base url
-   * @see generateOptions.js
-   */
-  apiUrl: (() => {
-    switch (config.env.toLowerCase()) {
-      case 'production':
-      default:
-        return 'http://api.planbguild.eu/';
-    };
-  })(),
+  url: {
+    cms: (() => {
+      switch (config.env.toLowerCase()) {
+        case 'production':
+        default:
+          return 'http://cms.planbguild.eu/';
+      };
+    })(),
+
+    api: (() => {
+      switch (config.env.toLowerCase()) {
+        case 'production':
+        default:
+          return 'http://api.planbguild.eu/';
+      };
+    })(),
+  },
 
   /**
    * Login path of the app

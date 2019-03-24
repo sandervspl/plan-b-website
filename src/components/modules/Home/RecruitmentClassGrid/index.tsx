@@ -23,7 +23,7 @@ const RecruitmentClassGrid: React.FC<Props> = ({ playerClasses }) => (
               return (
                 <ClassIcon
                   key={i}
-                  src={`${apiConfig.url.cms}uploads/classes/${plrClass}/${spec}.jpg`}
+                  src={`${apiConfig.url.cms}/uploads/classes/${plrClass}/${spec}.jpg`}
                   alt={infoText}
                   title={infoText}
                   active={isRecruiting}

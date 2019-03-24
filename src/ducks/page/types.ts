@@ -20,7 +20,10 @@ export type AboutPageData = i.BaseResponseBody & {
 }
 
 export type ApplicationPageData = i.BaseResponseBody & {
-  hero_image?: i.Image;
+  intro_title: string;
+  intro_text: string;
+  intro_image?: i.Image;
+  recruitmentquestions: i.RecruitmentQuestion[];
 }
 
 
@@ -39,6 +42,24 @@ export type Post = i.BaseResponseBody & {
   title?: string;
   content?: string;
   published: boolean;
+}
+
+export type RecruitmentQuestion = {
+  id: number;
+  question: string;
+  answer_type: 'text' | 'long_text' | 'armory_select';
+  created_at: Date;
+  updated_at: Date;
+  list_of_answers?: string;
+  recruitmentpage: number;
+}
+
+export type RecruitmentQuestionDetail = RecruitmentQuestion & {
+  recruitmentpage: i.BaseResponseBody & {
+    intro_text: string;
+    intro_title: string;
+  };
+  background_image?: i.Image;
 }
 
 

@@ -6,7 +6,7 @@ const apiConfig = {
       switch (config.env.toLowerCase()) {
         case 'production':
         default:
-          return 'http://cms.planbguild.eu/';
+          return 'http://cms.planbguild.eu';
       };
     })(),
 
@@ -14,7 +14,7 @@ const apiConfig = {
       switch (config.env.toLowerCase()) {
         case 'production':
         default:
-          return 'http://api.planbguild.eu/';
+          return 'http://api.planbguild.eu';
       };
     })(),
   },

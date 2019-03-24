@@ -17,7 +17,7 @@ export const NavContainer = styled.nav`
       transition: color .1s linear;
 
       &:hover {
-        color: ${(props) => props.theme.color.primary.light};
+        color: ${(props) => props.theme.color.primary.medium};
       }
 
       &.active {

@@ -1,7 +1,6 @@
 const theme = {
   color: {
     primary: Object.assign('#BFCE9E', {
-      light: '#bfce9e',
       medium: '#7a8e72',
       dark: '#495347',
     }),

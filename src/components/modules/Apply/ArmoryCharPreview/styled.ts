@@ -12,16 +12,37 @@ export const ArmoryCharPreviewContainer = styled.div`
 export const ArmoryCharacter = styled.div`
   display: grid;
   grid-template-columns: 20% 1fr;
+  position: relative;
   padding: 20px;
   width: 100%;
   background: ${(props) => props.theme.color.secondary};
   clip-path: polygon(0% 0%, 100% 0%, 95% 0%, 0% 300%);
   cursor: pointer;
-  will-change: background;
-  transition: background 100ms linear;
+  will-change: transform, background;
+  transition: background 100ms linear,
+              transform 300ms ${(props) => props.theme.easing.easeInOutCirc};
+  
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: ${(props) => props.theme.color.primary};
+    transform-origin: left;
+    transform: scaleX(0);
+    will-change: transform;
+    transition: transform 300ms ${(props) => props.theme.easing.easeInOutCirc};
+  }
 
   &:hover {
     background: ${(props) => props.theme.color.secondary.hover};
+    transform: scale(1.01);
+
+    &:after {
+      transform: scaleX(.65);
+    }
   }
 `;
 

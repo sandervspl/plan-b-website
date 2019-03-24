@@ -56,7 +56,7 @@ const ArmorySelect: React.FC<props> = ({
         />
       </Label>
 
-      {(character.data || character.loading) && (
+      {(character.data || character.loading || character.error) && (
         <React.Suspense fallback={null}>
           <ArmoryCharPreview onNextClick={onNextClick} character={character} />
         </React.Suspense>

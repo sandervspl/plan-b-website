@@ -1,16 +1,21 @@
 import * as i from 'types';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
-import { fetchCharacter } from 'ducks/recruitment';
+import { fetchCharacter } from 'ducks/character';
 import { TRANSITION_TIME_MS } from 'styles/pageTransition';
 import { useDebounce } from 'services/hooks';
 import { TextField, Label } from '../styled';
 
-const ArmorySelect: React.FC<props> = ({ form, reduxForm, active, mutators, ...props }) => {
+const ArmoryCharPreview = React.lazy(() => import('../ArmoryCharPreview'));
+
+const ArmorySelect: React.FC<props> = ({
+  character, reduxForm, form, active, mutators, onNextClick, ...props
+}) => {
+  const _form = reduxForm[form];
+
   const debouncedUserInput = useDebounce<string>(
-    reduxForm[form].values.armory_select_user_input,
-    500
+    _form.values.armory_select_user_input,
+    250
   );
 
   useEffect(() => {
@@ -25,6 +30,8 @@ const ArmorySelect: React.FC<props> = ({ form, reduxForm, active, mutators, ...p
 
   useEffect(
     () => {
+      if (!debouncedUserInput) return;
+
       props.fetchCharacter(debouncedUserInput)
         .then(() => {
           if (mutators && mutators.setArmoryLink) {
@@ -48,6 +55,12 @@ const ArmorySelect: React.FC<props> = ({ form, reduxForm, active, mutators, ...p
         />
       </Label>
 
+      {(character.data || character.loading) && (
+        <React.Suspense fallback={null}>
+          <ArmoryCharPreview onNextClick={onNextClick} character={character} />
+        </React.Suspense>
+      )}
+
       <TextField
         name="armory_link"
         component="input"
@@ -59,15 +72,18 @@ const ArmorySelect: React.FC<props> = ({ form, reduxForm, active, mutators, ...p
 };
 
 export type props = {
-  form: i.Forms;
+  character: i.CharacterState;
   reduxForm: i.ReduxFormState;
+  form: i.Forms;
   fetchCharacter: i.FetchCharacter;
   active?: boolean;
   mutators?: { [key: string]: () => void };
+  onNextClick: () => void;
 };
 
 const mapStateToProps: i.MapStateToProps = (state) => ({
   reduxForm: state.form,
+  character: state.character,
 });
 
 export default connect(mapStateToProps, { fetchCharacter })(ArmorySelect);

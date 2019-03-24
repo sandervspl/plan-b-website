@@ -16,7 +16,7 @@ const renderAnswerComponents: { [key in i.AnswerType]: React.ComponentType<any> 
 /* eslint-enable */
 
 const Question: React.FC<props> = ({
-  isIntro, question, intro, onNextClick, loading, active, answered, image, mutators,
+  isIntro, question, intro, onNextClick, noButton, loading, active, answered, image, mutators,
 }) => {
   const FormFieldComponent = question
     ? renderAnswerComponents[question.answer_type]
@@ -29,7 +29,7 @@ const Question: React.FC<props> = ({
         <Left isIntro={isIntro}>
           <Header>{(intro && intro.title) || (question && question.question)}</Header>
           {intro && <Paragraph>{intro.text}</Paragraph>}
-          {onNextClick && (
+          {!noButton && onNextClick && (
             <Button onClick={onNextClick} disabled={loading}>
               {isIntro ? 'Get started' : 'Next question'}
             </Button>
@@ -43,6 +43,7 @@ const Question: React.FC<props> = ({
               form="application"
               mutators={mutators}
               active={active}
+              onNextClick={onNextClick}
             />
           )}
         </Right>
@@ -64,6 +65,7 @@ export type props = {
   onNextClick?: () => void;
   loading: boolean;
   mutators?: { [key: string]: () => void };
+  noButton?: boolean;
 };
 
 export default Question;

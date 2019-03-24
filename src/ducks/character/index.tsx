@@ -1,10 +1,9 @@
 import * as i from 'types';
 import { action, ActionType } from 'typesafe-actions';
-import { API_ENDPOINT } from 'services';
 
-const LOAD = 'recruitment/LOAD';
-const FAILED = 'recruitment/FAILED';
-const SUCCESS = 'recruitment/SUCCESS';
+const LOAD = 'character/LOAD';
+const FAILED = 'character/FAILED';
+const SUCCESS = 'character/SUCCESS';
 
 const initialState: i.RecruitmentState = {
   data: undefined,
@@ -23,6 +22,7 @@ export default (state = initialState, action: ActionType<typeof actions>) => {
     case FAILED:
       return {
         ...state,
+        data: undefined,
         loading: false,
         error: true,
       };
@@ -41,17 +41,22 @@ export default (state = initialState, action: ActionType<typeof actions>) => {
 export const actions = {
   load: () => action(LOAD),
   failed: () => action(FAILED),
-  success: (page: i.RecruitmentData) => action(SUCCESS, page),
+  success: (char: i.CharacterBody) => action(SUCCESS, char),
 };
 
-export const fetchRecruitment = (): i.ThunkAction => async (dispatch, getState, api) => {
+export const fetchCharacter: i.FetchCharacterDuck = (name) => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
-  return api.get({
-    url: api.url.cms,
-    path: `${API_ENDPOINT.RECRUITMENT}`,
+  return api.get<i.CharacterBody>({
+    url: api.url.api,
+    path: `blizzard/character/${name}`,
   })
     .then((res) => {
+      if ('status' in res) {
+        dispatch(actions.failed());
+        return;
+      }
+
       dispatch(actions.success(res));
     })
     .catch(() => {

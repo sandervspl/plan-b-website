@@ -9,7 +9,7 @@ import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
 import { RecruitmentContainer } from 'modules/Apply/styled';
 
-const ApplicationPage: i.NextPageComponent<Props> = ({ page, recruitment }) => {
+const ApplicationPage: i.NextPageComponent<Props> = ({ page, character }) => {
   const [questionIndex, setQuestionIndex] = useState(-1);
   const [questions, setQuestions] = useState<i.RecruitmentQuestionDetail[]>([]);
   const [loading, setLoading] = useState(true);
@@ -34,10 +34,6 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, recruitment }) => {
     setQuestionIndex(questionIndex + 1);
   };
 
-  const finalFormOnSubmit = async (values) => {
-    window.alert(JSON.stringify(values, null, 2));
-  };
-
   const formOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
@@ -47,11 +43,11 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, recruitment }) => {
       {/* <button onClick={handlePrevClick}>Previous question</button> */}
 
       <Form
-        onSubmit={finalFormOnSubmit}
+        onSubmit={() => {}}
         mutators={{
           setArmoryLink: (args, state, tools) => {
-            if (recruitment.character) {
-              const { name } = recruitment.character;
+            if (character.data) {
+              const { name } = character.data;
 
               tools.changeValue(state, 'armory_link', () => (
                 `https://worldofwarcraft.com/en-gb/character/eu/ragnaros/${name.toLowerCase()}`
@@ -85,6 +81,7 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, recruitment }) => {
                 active={questionIndex === i}
                 answered={questionIndex > i}
                 onNextClick={handleClick}
+                noButton={question.answer_type === 'armory_select'}
                 mutators={form.mutators}
               />
             ))}
@@ -105,12 +102,12 @@ ApplicationPage.getInitialProps = async ({ store }) => {
 
 type Props = {
   page: i.PageState;
-  recruitment: i.RecruitmentState;
+  character: i.CharacterState;
 }
 
 const mapStateToProps: i.MapStateToProps = (state) => ({
   page: state.page,
-  recruitment: state.recruitment,
+  character: state.character,
 });
 
 export default connect(mapStateToProps)(ApplicationPage);

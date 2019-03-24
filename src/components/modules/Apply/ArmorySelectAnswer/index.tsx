@@ -52,6 +52,7 @@ const ArmorySelect: React.FC<props> = ({
           name="armory_select_user_input"
           component="input"
           type="text"
+          tabIndex={-1}
         />
       </Label>
 
@@ -62,10 +63,11 @@ const ArmorySelect: React.FC<props> = ({
       )}
 
       <TextField
+        hidden
         name="armory_link"
         component="input"
         type="text"
-        hidden
+        tabIndex={-1}
       />
     </div>
   );

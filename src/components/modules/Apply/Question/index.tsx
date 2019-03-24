@@ -30,7 +30,7 @@ const Question: React.FC<props> = ({
           <Header>{(intro && intro.title) || (question && question.question)}</Header>
           {intro && <Paragraph>{intro.text}</Paragraph>}
           {!noButton && onNextClick && (
-            <Button onClick={onNextClick} disabled={loading}>
+            <Button onClick={onNextClick} disabled={loading} tabIndex={-1}>
               {isIntro ? 'Get started' : 'Next question'}
             </Button>
           )}
@@ -44,6 +44,7 @@ const Question: React.FC<props> = ({
               mutators={mutators}
               active={active}
               onNextClick={onNextClick}
+              tabIndex={-1}
             />
           )}
         </Right>

@@ -1,15 +1,31 @@
 import styled, { css } from 'styled-components';
 import { media } from 'styles/utils';
+import { TRANSITION_TIME_MS_SHORT, TRANSITION_TIME_MS } from 'styles/pageTransition';
 
-export const QuestionContainer = styled.div<QuestionContainerProps>`
+export const QuestionContainer = styled.div``;
+
+export const QuestionContent = styled.div<QuestionProps>`
   display: grid;
-  position: relative;
+  position: absolute;
   z-index: 1;
   width: 100%;
   height: 100%;
+  opacity: 0;
+  will-change: transform, opacity;
+  transform: translate(0, 100%);
+  transition: transform ${TRANSITION_TIME_MS}ms ${(props) => props.theme.easing.easeInOutCirc},
+              opacity ${TRANSITION_TIME_MS_SHORT}ms ${(props) => props.theme.easing.easeOutCirc};
 
-  ${(props) => props.next && css`
+  ${(props) => props.answered && css`
+    transition: transform ${TRANSITION_TIME_MS_SHORT}ms ${(props) => props.theme.easing.easeInOutCirc},
+                opacity ${TRANSITION_TIME_MS_SHORT}ms ${(props) => props.theme.easing.easeOutCirc};
+    transform: translate(0, -100%);
     opacity: 0;
+  `}
+
+  ${(props) => props.active && css`
+    transform: translate(0, 0%);
+    opacity: 1;
   `}
 
   ${media.tablet`
@@ -18,11 +34,12 @@ export const QuestionContainer = styled.div<QuestionContainerProps>`
   `}
 `;
 
-type QuestionContainerProps = {
-  next?: boolean;
+type QuestionProps = {
+  answered?: boolean;
+  active?: boolean;
 }
 
-export const QuestionContent = styled.div<QuestionProps>`
+export const Left = styled.div<LeftProps>`
   grid-column: 1 / 1;
 
   ${(props) => props.isIntro && css`
@@ -38,6 +55,10 @@ export const QuestionContent = styled.div<QuestionProps>`
   }
 `;
 
-type QuestionProps = {
+type LeftProps = {
   isIntro?: boolean;
 }
+
+export const Right = styled.div`
+  grid-column: 2;
+`;

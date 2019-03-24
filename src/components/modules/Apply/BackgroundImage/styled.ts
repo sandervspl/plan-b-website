@@ -1,13 +1,18 @@
 import styled, { css } from 'styled-components';
+import { TRANSITION_TIME_MS } from 'styles/pageTransition';
 
 export const FadedBackgroundImageContainer = styled.div<FadedBackgroundImageContainerProps>`
-  ${(props) => props.next && css`
-    opacity: 0;
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity ${TRANSITION_TIME_MS}ms ${(props) => props.theme.easing.easeInOutCirc};
+
+  ${(props) => props.active && css`
+    opacity: 1;
   `}
 `;
 
 type FadedBackgroundImageContainerProps = {
-  next?: boolean;
+  active?: boolean;
 }
 
 export const BackgroundImage = styled.img`
@@ -15,8 +20,8 @@ export const BackgroundImage = styled.img`
   top: 0;
   left: 0;
   z-index: 0;
-  width: 110%;
-  height: 110%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   opacity: .3;
   transform: translate(-20%);

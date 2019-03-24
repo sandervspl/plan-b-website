@@ -47,12 +47,15 @@ export type Post = i.BaseResponseBody & {
 export type RecruitmentQuestion = {
   id: number;
   question: string;
-  answer_type: 'text' | 'long_text' | 'armory_select';
+  description?: string;
+  answer_type: i.AnswerType;
   created_at: Date;
   updated_at: Date;
   list_of_answers?: string;
   recruitmentpage: number;
 }
+
+export type AnswerType = 'text' | 'long_text' | 'armory_select';
 
 export type RecruitmentQuestionDetail = RecruitmentQuestion & {
   recruitmentpage: i.BaseResponseBody & {

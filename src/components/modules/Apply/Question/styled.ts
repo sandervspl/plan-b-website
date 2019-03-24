@@ -2,8 +2,6 @@ import styled, { css } from 'styled-components';
 import { media } from 'styles/utils';
 import { TRANSITION_TIME_MS_SHORT, TRANSITION_TIME_MS } from 'styles/pageTransition';
 
-export const QuestionContainer = styled.div``;
-
 export const QuestionContent = styled.div<QuestionProps>`
   display: grid;
   position: absolute;

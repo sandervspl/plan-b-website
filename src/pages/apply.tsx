@@ -9,7 +9,7 @@ import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
 import { RecruitmentContainer } from 'modules/Apply/styled';
 
-const ApplicationPage: i.NextPageComponent<Props> = ({ page }) => {
+const ApplicationPage: i.NextPageComponent<Props> = ({ page, recruitment }) => {
   const [questionIndex, setQuestionIndex] = useState(-1);
   const [questions, setQuestions] = useState<i.RecruitmentQuestionDetail[]>([]);
   const [loading, setLoading] = useState(true);
@@ -46,10 +46,23 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page }) => {
     <RecruitmentContainer>
       {/* <button onClick={handlePrevClick}>Previous question</button> */}
 
-      <Form onSubmit={finalFormOnSubmit}>
-        {() => (
+      <Form
+        onSubmit={finalFormOnSubmit}
+        mutators={{
+          setArmoryLink: (args, state, tools) => {
+            if (recruitment.character) {
+              const { name } = recruitment.character;
+
+              tools.changeValue(state, 'armory_link', () => (
+                `https://worldofwarcraft.com/en-gb/character/eu/ragnaros/${name.toLowerCase()}`
+              ));
+            }
+          },
+        }}
+      >
+        {({ form }) => (
           <form onSubmit={formOnSubmit}>
-            <FormStateToRedux form="recruitment" />
+            <FormStateToRedux form="application" />
             <Question
               intro={{
                 title: page.application!.intro_title,
@@ -72,6 +85,7 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page }) => {
                 active={questionIndex === i}
                 answered={questionIndex > i}
                 onNextClick={handleClick}
+                mutators={form.mutators}
               />
             ))}
           </form>
@@ -91,11 +105,12 @@ ApplicationPage.getInitialProps = async ({ store }) => {
 
 type Props = {
   page: i.PageState;
+  recruitment: i.RecruitmentState;
 }
 
 const mapStateToProps: i.MapStateToProps = (state) => ({
   page: state.page,
-  form: state.form,
+  recruitment: state.recruitment,
 });
 
 export default connect(mapStateToProps)(ApplicationPage);

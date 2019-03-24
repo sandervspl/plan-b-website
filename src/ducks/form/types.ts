@@ -1,6 +1,9 @@
 import * as i from 'types';
+import { FormState } from 'final-form';
 
-export type ReduxFormState = {}
+export type ReduxFormState = {
+  [key in i.Forms]: FormState;
+}
 
 export type Forms = 'application';
 

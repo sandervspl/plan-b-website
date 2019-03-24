@@ -1,16 +1,29 @@
 import * as i from 'types';
 import React from 'react';
-import { Field } from 'react-final-form';
 import { Header, Paragraph } from 'common';
+import { Field } from 'react-final-form';
 import Button from '../Button';
 import FadedBackgroundImage from '../BackgroundImage';
-import { QuestionContainer, QuestionContent, Left, Right } from './styled';
+import ArmorySelect from '../ArmorySelectAnswer';
+import { QuestionContent, Left, Right } from './styled';
+
+/* eslint-disable @typescript-eslint/camelcase */
+const renderAnswerComponents: { [key in i.AnswerType]: React.ComponentType<any> } = {
+  armory_select: ArmorySelect,
+  text: Field,
+  long_text: Field,
+};
+/* eslint-enable */
 
 const Question: React.FC<props> = ({
-  isIntro, question, intro, onNextClick, loading, active, answered, image,
+  isIntro, question, intro, onNextClick, loading, active, answered, image, mutators,
 }) => {
+  const FormFieldComponent = question
+    ? renderAnswerComponents[question.answer_type]
+    : () => null;
+
   return (
-    <QuestionContainer>
+    <>
       <FadedBackgroundImage next image={image} active={active} />
       <QuestionContent active={active} answered={answered}>
         <Left isIntro={isIntro}>
@@ -24,17 +37,17 @@ const Question: React.FC<props> = ({
         </Left>
         <Right>
           {!isIntro && question && (
-            <Field
-              name={question.question.replace(/ /g, '_').toLowerCase()}
+            <FormFieldComponent
+              question={question}
               component="input"
-              type="text"
-              placeholder="TODO placeholder"
-
+              form="application"
+              mutators={mutators}
+              active={active}
             />
           )}
         </Right>
       </QuestionContent>
-    </QuestionContainer>
+    </>
   );
 };
 
@@ -50,6 +63,7 @@ export type props = {
   active?: boolean;
   onNextClick?: () => void;
   loading: boolean;
+  mutators?: { [key: string]: () => void };
 };
 
 export default Question;

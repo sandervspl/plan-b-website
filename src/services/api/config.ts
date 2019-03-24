@@ -12,9 +12,9 @@ const apiConfig = {
 
     api: (() => {
       switch (config.env.toLowerCase()) {
-        case 'production':
+        case 'production': return 'http://api.planbguild.eu';
         default:
-          return 'http://api.planbguild.eu';
+          return 'http://localhost:8080';
       };
     })(),
   },

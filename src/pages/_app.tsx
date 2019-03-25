@@ -71,18 +71,18 @@ class MyApp extends App<Props, State> {
     const { Component, pageProps, reduxStore, router } = this.props;
 
     return (
-      <>
+      <Container>
         <GlobalStyle />
         <ThemeProvider theme={theme}>
-          <Container>
+          <>
             <Provider store={reduxStore}>
               <PageTransition timeout={transitionTime} classNames="page">
                 <Component {...pageProps} key={router.route} />
               </PageTransition>
             </Provider>
-          </Container>
+          </>
         </ThemeProvider>
-      </>
+      </Container>
     );
   }
 }

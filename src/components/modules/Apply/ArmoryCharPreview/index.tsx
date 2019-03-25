@@ -3,14 +3,14 @@ import React from 'react';
 import { Paragraph } from 'common';
 import { ArmoryCharPreviewContainer, Name, Guild, ArmoryCharacter, Loader } from './styled';
 
-const ArmoryCharPreview: React.FC<props> = ({ character, onNextClick }) => (
+const ArmoryCharPreview: React.FC<props> = ({ character, onCharacterClick }) => (
   <ArmoryCharPreviewContainer>
     {character.loading ? (
       <Loader />
     ) : character.error ? (
       <Paragraph>Sorry, we couldn't not find your character.</Paragraph>
     ) : character.data && (
-      <ArmoryCharacter onClick={onNextClick}>
+      <ArmoryCharacter onClick={onCharacterClick}>
         <img
           src={`https://render-eu.worldofwarcraft.com/character/${character.data.thumbnail}`}
           alt={`${character.data.name}'s avatar`}
@@ -29,7 +29,7 @@ const ArmoryCharPreview: React.FC<props> = ({ character, onNextClick }) => (
 
 export type props = {
   character: i.CharacterState;
-  onNextClick: () => void;
+  onCharacterClick: () => void;
 };
 
 export default ArmoryCharPreview;

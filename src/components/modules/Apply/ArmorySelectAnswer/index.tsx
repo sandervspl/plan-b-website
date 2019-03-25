@@ -32,15 +32,17 @@ const ArmorySelect: React.FC<props> = ({
     () => {
       if (!debouncedUserInput) return;
 
-      props.fetchCharacter(debouncedUserInput)
-        .then(() => {
-          if (mutators && mutators.setArmoryLink) {
-            mutators.setArmoryLink();
-          }
-        });
+      props.fetchCharacter(debouncedUserInput);
     },
     [debouncedUserInput]
   );
+
+  const handleClick = () => {
+    if (mutators && mutators.setArmoryLink) {
+      mutators.setArmoryLink();
+      onNextClick();
+    }
+  };
 
   return (
     <div>
@@ -58,7 +60,7 @@ const ArmorySelect: React.FC<props> = ({
 
       {(character.data || character.loading || character.error) && (
         <React.Suspense fallback={null}>
-          <ArmoryCharPreview onNextClick={onNextClick} character={character} />
+          <ArmoryCharPreview onCharacterClick={handleClick} character={character} />
         </React.Suspense>
       )}
 

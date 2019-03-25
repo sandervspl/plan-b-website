@@ -9,7 +9,7 @@ const ArmoryCharPreview: React.FC<props> = ({ character, onCharacterClick }) => 
     {character.loading ? (
       <Loader />
     ) : character.error ? (
-      <Paragraph>Sorry, we couldn't not find your character.</Paragraph>
+      <Paragraph>Sorry, we couldn't find your character.</Paragraph>
     ) : character.data && (
       <ArmoryCharacter>
         <Field

@@ -10,12 +10,11 @@ export const SpecializationSelectContainer = styled.div`
   height: 100%;
 `;
 
-export const RoleList = styled.ul`
+export const RoleList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
   height: 100%;
-  list-style: none;
 `;
 
 export const BackgroundImage = styled.div<ImageProps>`
@@ -78,7 +77,7 @@ export const RoleText = styled(Paragraph)`
   transition: color 300ms ease-in-out;
 `;
 
-export const ListItem = styled.li`
+export const ListItem = styled.label`
   display: flex;
   justify-content: center;
   position: relative;
@@ -97,5 +96,9 @@ export const ListItem = styled.li`
     ${BackgroundImage}:after, ${RoleIcon}:after {
       opacity: 0;
     }
+  }
+
+  input {
+    display: none;
   }
 `;

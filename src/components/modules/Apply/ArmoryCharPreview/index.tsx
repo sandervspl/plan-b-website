@@ -1,5 +1,6 @@
 import * as i from 'types';
 import React from 'react';
+import { Field } from 'react-final-form';
 import { Paragraph } from 'common';
 import { ArmoryCharPreviewContainer, Name, Guild, ArmoryCharacter, Loader } from './styled';
 
@@ -10,7 +11,15 @@ const ArmoryCharPreview: React.FC<props> = ({ character, onCharacterClick }) => 
     ) : character.error ? (
       <Paragraph>Sorry, we couldn't not find your character.</Paragraph>
     ) : character.data && (
-      <ArmoryCharacter onClick={onCharacterClick}>
+      <ArmoryCharacter>
+        <Field
+          name="armory_link"
+          component="input"
+          type="radio"
+          value={`https://worldofwarcraft.com/en-gb/character/eu/ragnaros/${character.data.name.toLowerCase()}`}
+          tabIndex={-1}
+          onClick={onCharacterClick}
+        />
         <img
           src={`https://render-eu.worldofwarcraft.com/character/${character.data.thumbnail}`}
           alt={`${character.data.name}'s avatar`}

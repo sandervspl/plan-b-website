@@ -1,5 +1,6 @@
 import * as i from 'types';
 import React from 'react';
+import { Field } from 'react-final-form';
 import { getUploadsUrl } from 'services';
 import { TextField } from '../styled';
 import { SpecializationSelectContainer, RoleList, ListItem, BackgroundImage, RoleIcon, RoleText } from './styled';
@@ -18,31 +19,26 @@ const roles = [{
   text: 'Tank',
 }];
 
-const SpecializationSelect: React.FC<Props> = ({ mutators, onNextClick }) => {
-  const handleClick = (role: string) => () => {
-    mutators.setRole(role);
-    onNextClick();
-  };
-
+const SpecializationSelect: React.FC<Props> = ({ onNextClick }) => {
   return (
     <SpecializationSelectContainer>
       <RoleList>
         {roles.map((role) => (
-          <ListItem onClick={handleClick(role.text)}>
+          <ListItem key={role.text}>
+            <Field
+              name="character_specialization"
+              component="input"
+              type="radio"
+              value={role.text}
+              tabIndex={-1}
+              onClick={onNextClick}
+            />
             <BackgroundImage src={role.background} />
             <RoleIcon src={role.icon} />
             <RoleText>{role.text}</RoleText>
           </ListItem>
         ))}
       </RoleList>
-
-      <TextField
-        hidden
-        name="character_specialization"
-        component="input"
-        type="text"
-        tabIndex={-1}
-      />
     </SpecializationSelectContainer>
   );
 };

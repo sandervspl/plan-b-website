@@ -9,7 +9,7 @@ import { TextField, Label } from '../styled';
 const ArmoryCharPreview = React.lazy(() => import('../ArmoryCharPreview'));
 
 const ArmorySelect: React.FC<props> = ({
-  character, reduxForm, form, active, mutators, onNextClick, ...props
+  character, reduxForm, form, active, onNextClick, ...props
 }) => {
   const _form = reduxForm[form];
 
@@ -37,11 +37,6 @@ const ArmorySelect: React.FC<props> = ({
     [debouncedUserInput]
   );
 
-  const handleClick = () => {
-    mutators.setArmoryLink();
-    onNextClick();
-  };
-
   return (
     <div>
       <Label htmlFor="armory_select_user_input">
@@ -58,17 +53,9 @@ const ArmorySelect: React.FC<props> = ({
 
       {(character.data || character.loading || character.error) && (
         <React.Suspense fallback={null}>
-          <ArmoryCharPreview onCharacterClick={handleClick} character={character} />
+          <ArmoryCharPreview onCharacterClick={onNextClick} character={character} />
         </React.Suspense>
       )}
-
-      <TextField
-        hidden
-        name="armory_link"
-        component="input"
-        type="text"
-        tabIndex={-1}
-      />
     </div>
   );
 };

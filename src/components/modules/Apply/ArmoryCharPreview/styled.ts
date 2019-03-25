@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Field } from 'react-final-form';
 import { media } from 'styles/utils';
 import { Header, Paragraph } from 'common';
 import LoaderSvg from './loader.svg';
@@ -9,7 +10,7 @@ export const ArmoryCharPreviewContainer = styled.div`
   width: 100%;
 `;
 
-export const ArmoryCharacter = styled.div`
+export const ArmoryCharacter = styled.label`
   display: grid;
   grid-template-columns: 20% 1fr;
   position: relative;
@@ -43,6 +44,10 @@ export const ArmoryCharacter = styled.div`
     &:after {
       transform: scaleX(.65);
     }
+  }
+
+  input {
+    display: none;
   }
 `;
 

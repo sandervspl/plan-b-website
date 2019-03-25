@@ -9,7 +9,7 @@ import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
 import { RecruitmentContainer } from 'modules/Apply/styled';
 
-const ApplicationPage: i.NextPageComponent<Props> = ({ page, character }) => {
+const ApplicationPage: i.NextPageComponent<Props> = ({ page }) => {
   const [questionIndex, setQuestionIndex] = useState(-1);
   const [questions, setQuestions] = useState<i.RecruitmentQuestionDetail[]>([]);
   const [loading, setLoading] = useState(true);
@@ -42,25 +42,7 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, character }) => {
     <RecruitmentContainer>
       {/* <button onClick={handlePrevClick}>Previous question</button> */}
 
-      <Form
-        onSubmit={() => {}}
-        mutators={{
-          setArmoryLink: (args, state, tools) => {
-            if (character.data) {
-              const { name } = character.data;
-
-              tools.changeValue(state, 'armory_link', () => (
-                `https://worldofwarcraft.com/en-gb/character/eu/ragnaros/${name.toLowerCase()}`
-              ));
-            }
-          },
-          setRole: (args: [string], state, tools) => {
-            tools.changeValue(state, 'character_specialization', () => (
-              args[0]
-            ));
-          },
-        }}
-      >
+      <Form onSubmit={() => {}}>
         {({ form }) => (
           <form onSubmit={formOnSubmit}>
             <FormStateToRedux form="application" />
@@ -87,7 +69,6 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, character }) => {
                 answered={questionIndex > i}
                 onNextClick={handleClick}
                 noButton={question.answer_type !== 'text' && question.answer_type !== 'long_text'}
-                mutators={form.mutators}
               />
             ))}
           </form>
@@ -107,12 +88,10 @@ ApplicationPage.getInitialProps = async ({ store }) => {
 
 type Props = {
   page: i.PageState;
-  character: i.CharacterState;
 }
 
 const mapStateToProps: i.MapStateToProps = (state) => ({
   page: state.page,
-  character: state.character,
 });
 
 export default connect(mapStateToProps)(ApplicationPage);

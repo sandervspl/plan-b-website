@@ -1,6 +1,6 @@
 import * as i from 'types';
 import React from 'react';
-import apiConfig from 'services/api/config';
+import { getUploadsUrl } from 'services';
 import { Paragraph } from 'common';
 import { ClassGrid, ClassRow, ClassIcon } from './styled';
 
@@ -23,7 +23,7 @@ const RecruitmentClassGrid: React.FC<Props> = ({ playerClasses }) => (
               return (
                 <ClassIcon
                   key={i}
-                  src={`${apiConfig.url.cms}/uploads/classes/${plrClass}/${spec}.jpg`}
+                  src={getUploadsUrl(`classes/${plrClass}/${spec}.jpg`)}
                   alt={infoText}
                   title={infoText}
                   active={isRecruiting}

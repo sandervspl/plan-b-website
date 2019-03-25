@@ -54,6 +54,11 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, character }) => {
               ));
             }
           },
+          setRole: (args: [string], state, tools) => {
+            tools.changeValue(state, 'character_specialization', () => (
+              args[0]
+            ));
+          },
         }}
       >
         {({ form }) => (
@@ -81,7 +86,7 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, character }) => {
                 active={questionIndex === i}
                 answered={questionIndex > i}
                 onNextClick={handleClick}
-                noButton={question.answer_type === 'armory_select'}
+                noButton={question.answer_type !== 'text' && question.answer_type !== 'long_text'}
                 mutators={form.mutators}
               />
             ))}

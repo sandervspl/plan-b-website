@@ -5,6 +5,7 @@ import { Field } from 'react-final-form';
 import Button from '../Button';
 import FadedBackgroundImage from '../BackgroundImage';
 import ArmorySelect from '../ArmorySelectAnswer';
+import SpecializationSelect from '../SpecializationSelectAnswer';
 import { QuestionContent, Left, Right } from './styled';
 
 /* eslint-disable @typescript-eslint/camelcase */
@@ -12,6 +13,7 @@ const renderAnswerComponents: { [key in i.AnswerType]: React.ComponentType<any> 
   armory_select: ArmorySelect,
   text: Field,
   long_text: Field,
+  list_select: SpecializationSelect,
 };
 /* eslint-enable */
 

@@ -38,10 +38,8 @@ const ArmorySelect: React.FC<props> = ({
   );
 
   const handleClick = () => {
-    if (mutators && mutators.setArmoryLink) {
-      mutators.setArmoryLink();
-      onNextClick();
-    }
+    mutators.setArmoryLink();
+    onNextClick();
   };
 
   return (
@@ -75,14 +73,10 @@ const ArmorySelect: React.FC<props> = ({
   );
 };
 
-export type props = {
+export type props = i.QuestionComponentProps & {
   character: i.CharacterState;
   reduxForm: i.ReduxFormState;
-  form: i.Forms;
   fetchCharacter: i.FetchCharacter;
-  active?: boolean;
-  mutators?: { [key: string]: () => void };
-  onNextClick: () => void;
 };
 
 const mapStateToProps: i.MapStateToProps = (state) => ({

@@ -22,6 +22,18 @@ declare module '*.png' {
   const value: string;
   export = value;
 }
+declare module '*.jpg' {
+  const value: string;
+  export = value;
+}
+declare module '*.png?external' {
+  const value: string;
+  export = value;
+}
+declare module '*.jpg?external' {
+  const value: string;
+  export = value;
+}
 declare module '*.otf' {
   const value: string;
   export = value;

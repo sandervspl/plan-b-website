@@ -55,7 +55,7 @@ export type RecruitmentQuestion = {
   recruitmentpage: number;
 }
 
-export type AnswerType = 'text' | 'long_text' | 'armory_select';
+export type AnswerType = 'text' | 'long_text' | 'armory_select' | 'list_select';
 
 export type RecruitmentQuestionDetail = RecruitmentQuestion & {
   recruitmentpage: i.BaseResponseBody & {

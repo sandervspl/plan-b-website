@@ -16,7 +16,23 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page }) => {
 
   useEffect(() => {
     getQuestions();
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return function cleanup() {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
+
+  function handleKeyDown(e: KeyboardEvent) {
+    if (
+      e.key === 'Enter' &&
+      document.activeElement &&
+      document.activeElement.nodeName !== 'TEXTAREA'
+    ) {
+      e.preventDefault();
+    }
+  }
 
   const getQuestions = async () => {
     const qstns = await Promise.all<any>(

@@ -9,7 +9,7 @@ import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
 import { RecruitmentContainer } from 'modules/Apply/styled';
 
-const ApplicationPage: i.NextPageComponent<Props> = ({ page }) => {
+const ApplicationPage: i.NextPageComponent<Props> = ({ page, form }) => {
   const [questionIndex, setQuestionIndex] = useState(-1);
   const [questions, setQuestions] = useState<i.RecruitmentQuestionDetail[]>([]);
   const [loading, setLoading] = useState(true);
@@ -47,6 +47,15 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page }) => {
   };
 
   const handleClick = () => {
+    // I need to clean myself after this. Disgusting.
+    /** @todo Fix a way to figure out if input value is not empty */
+    const el = document.querySelector<HTMLInputElement>(`[name='${form.activeField}']`);
+
+    if (el && (el.type === 'text' || el.type === 'textarea') && el.value.length === 0) {
+      /** @todo Display error */
+      return;
+    }
+
     setQuestionIndex(questionIndex + 1);
   };
 
@@ -59,7 +68,7 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page }) => {
       {/* <button onClick={handlePrevClick}>Previous question</button> */}
 
       <Form onSubmit={() => {}}>
-        {({ form }) => (
+        {() => (
           <form onSubmit={formOnSubmit}>
             <FormStateToRedux form="application" />
             <Question
@@ -104,10 +113,13 @@ ApplicationPage.getInitialProps = async ({ store }) => {
 
 type Props = {
   page: i.PageState;
+  form: i.ReduxFormState;
+  setActiveField: i.SetActiveField;
 }
 
 const mapStateToProps: i.MapStateToProps = (state) => ({
   page: state.page,
+  form: state.form,
 });
 
 export default connect(mapStateToProps)(ApplicationPage);

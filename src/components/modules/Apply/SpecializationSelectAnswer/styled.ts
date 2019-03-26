@@ -5,11 +5,6 @@ type ImageProps = {
   src: string;
 }
 
-export const SpecializationSelectContainer = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
 export const RoleList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);

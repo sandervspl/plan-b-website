@@ -13,6 +13,11 @@ export const RecruitmentContainer = styled(Fullscreenpage)`
   }
 `;
 
+export const AnswerContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
 export const TextField = styled(Field)`
   width: 100%;
   border: 0;

@@ -6,13 +6,14 @@ import Button from '../Button';
 import FadedBackgroundImage from '../BackgroundImage';
 import ArmorySelect from '../ArmorySelectAnswer';
 import SpecializationSelect from '../SpecializationSelectAnswer';
+import LongTextAnswer from '../LongTextAnswer';
 import { QuestionContent, Left, Right } from './styled';
 
 /* eslint-disable @typescript-eslint/camelcase */
 const renderAnswerComponents: { [key in i.AnswerType]: React.ComponentType<any> } = {
   armory_select: ArmorySelect,
   text: Field,
-  long_text: Field,
+  long_text: LongTextAnswer,
   list_select: SpecializationSelect,
 };
 /* eslint-enable */
@@ -29,10 +30,22 @@ const Question: React.FC<props> = ({
       <FadedBackgroundImage next image={image} active={active} />
       <QuestionContent active={active} answered={answered}>
         <Left isIntro={isIntro}>
-          <Header>{(intro && intro.title) || (question && question.question)}</Header>
-          {intro && <Paragraph>{intro.text}</Paragraph>}
+          <Header>
+            {(intro && intro.title) || (question && question.question)}
+          </Header>
+
+          {intro && (
+            <Paragraph>
+              {intro.text}
+            </Paragraph>
+          )}
+
           {!noButton && onNextClick && (
-            <Button onClick={onNextClick} disabled={loading} tabIndex={-1}>
+            <Button
+              onClick={onNextClick}
+              disabled={loading}
+              tabIndex={-1}
+            >
               {isIntro ? 'Get started' : 'Next question'}
             </Button>
           )}
@@ -69,6 +82,7 @@ export type props = {
   loading: boolean;
   mutators?: { [key: string]: () => void };
   noButton?: boolean;
+  setActiveField?: i.SetActiveField;
 };
 
 export default Question;

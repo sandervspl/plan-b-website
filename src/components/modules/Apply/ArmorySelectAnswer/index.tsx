@@ -1,5 +1,5 @@
 import * as i from 'types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { fetchCharacter } from 'ducks/character';
 import { TRANSITION_TIME_MS } from 'styles/pageTransition';
@@ -8,15 +8,9 @@ import { TextField, Label } from '../styled';
 
 const ArmoryCharPreview = React.lazy(() => import('../ArmoryCharPreview'));
 
-const ArmorySelect: React.FC<props> = ({
-  character, reduxForm, form, active, onNextClick, ...props
-}) => {
-  const _form = reduxForm[form];
-
-  const debouncedUserInput = useDebounce<string>(
-    _form.values.armory_select_user_input,
-    250
-  );
+const ArmorySelect: React.FC<props> = ({ character, active, onNextClick, ...props }) => {
+  const [inputValue, setInputValue] = useState('');
+  const debouncedUserInput = useDebounce<string>(inputValue, 250);
 
   useEffect(() => {
     if (!active) return;
@@ -28,14 +22,11 @@ const ArmorySelect: React.FC<props> = ({
     }, TRANSITION_TIME_MS);
   }, [active]);
 
-  useEffect(
-    () => {
-      if (!debouncedUserInput) return;
+  useEffect(() => {
+    if (!debouncedUserInput) return;
 
-      props.fetchCharacter(debouncedUserInput);
-    },
-    [debouncedUserInput]
-  );
+    props.fetchCharacter(inputValue);
+  }, [debouncedUserInput]);
 
   return (
     <div>
@@ -43,17 +34,24 @@ const ArmorySelect: React.FC<props> = ({
         <span>Character name</span>
 
         <TextField
+          as="input"
           id="armory_select_user_input"
           name="armory_select_user_input"
           component="input"
           type="text"
           tabIndex={-1}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.currentTarget.value)}
         />
       </Label>
 
       {(character.data || character.loading || character.error) && (
         <React.Suspense fallback={null}>
-          <ArmoryCharPreview onCharacterClick={onNextClick} character={character} />
+          <ArmoryCharPreview
+            active={active}
+            onCharacterClick={onNextClick}
+            character={character}
+          />
         </React.Suspense>
       )}
     </div>
@@ -62,12 +60,10 @@ const ArmorySelect: React.FC<props> = ({
 
 export type props = i.QuestionComponentProps & {
   character: i.CharacterState;
-  reduxForm: i.ReduxFormState;
   fetchCharacter: i.FetchCharacter;
 };
 
 const mapStateToProps: i.MapStateToProps = (state) => ({
-  reduxForm: state.form,
   character: state.character,
 });
 

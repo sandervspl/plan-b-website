@@ -2,8 +2,8 @@ import * as i from 'types';
 import React from 'react';
 import { Field } from 'react-final-form';
 import { getUploadsUrl } from 'services';
-import { TextField } from '../styled';
-import { SpecializationSelectContainer, RoleList, ListItem, BackgroundImage, RoleIcon, RoleText } from './styled';
+import { AnswerContainer } from '../styled';
+import { RoleList, ListItem, BackgroundImage, RoleIcon, RoleText } from './styled';
 
 const roles = [{
   background: getUploadsUrl('roles/dps.jpg'),
@@ -21,7 +21,7 @@ const roles = [{
 
 const SpecializationSelect: React.FC<Props> = ({ onNextClick }) => {
   return (
-    <SpecializationSelectContainer>
+    <AnswerContainer>
       <RoleList>
         {roles.map((role) => (
           <ListItem key={role.text}>
@@ -39,7 +39,7 @@ const SpecializationSelect: React.FC<Props> = ({ onNextClick }) => {
           </ListItem>
         ))}
       </RoleList>
-    </SpecializationSelectContainer>
+    </AnswerContainer>
   );
 };
 

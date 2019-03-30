@@ -3,6 +3,8 @@ export * from './general';
 export * from './redux';
 export * from './next';
 
+export * from 'server/types';
+
 export * from 'modules/Apply/types';
 
 export { ApiHelper, ContentId, BaseResponseBody } from 'services/api/types';

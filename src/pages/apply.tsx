@@ -2,14 +2,17 @@ import * as i from 'types';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Form } from 'react-final-form';
+import router from 'router';
 import { API_ENDPOINT } from 'services';
 import apiConfig from 'services/api/config';
 import { fetchPage } from 'ducks/page';
 import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
-import { RecruitmentContainer } from 'modules/Apply/styled';
+import { RecruitmentContainer, QuestionsForm } from 'modules/Apply/styled';
+import { compose } from 'redux';
+import { withRouter } from 'next/router';
 
-const ApplicationPage: i.NextPageComponent<Props> = ({ page, form }) => {
+const ApplicationPage: i.NextPageComponent<Props> = ({ page, form, ...props }) => {
   const [questionIndex, setQuestionIndex] = useState(-1);
   const [questions, setQuestions] = useState<i.RecruitmentQuestionDetail[]>([]);
   const [loading, setLoading] = useState(true);
@@ -23,6 +26,22 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, form }) => {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
+
+  useEffect(() => {
+    const paramQstnId = props.router!.query!.questionId
+      ? Number(props.router!.query!.questionId)
+      : -1;
+
+    if (!form.application) {
+      (router as i.Router).push('apply', {}, { shallow: true });
+      return;
+    }
+
+    if (questionIndex !== paramQstnId) {
+      setQuestionIndex(paramQstnId);
+    }
+  }, [props.router!.query!.questionId]);
+
 
   function handleKeyDown(e: KeyboardEvent) {
     if (
@@ -56,7 +75,13 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, form }) => {
       return;
     }
 
-    setQuestionIndex(questionIndex + 1);
+    (router as i.Router).push(
+      'apply',
+      { questionId: questionIndex + 1 },
+      { shallow: true },
+    );
+
+    // setQuestionIndex(questionIndex + 1);
   };
 
   const formOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -69,7 +94,7 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, form }) => {
 
       <Form onSubmit={() => {}}>
         {() => (
-          <form onSubmit={formOnSubmit}>
+          <QuestionsForm onSubmit={formOnSubmit}>
             <FormStateToRedux form="application" />
             <Question
               intro={{
@@ -96,7 +121,7 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, form }) => {
                 noButton={question.answer_type !== 'text' && question.answer_type !== 'long_text'}
               />
             ))}
-          </form>
+          </QuestionsForm>
         )}
       </Form>
 
@@ -111,7 +136,7 @@ ApplicationPage.getInitialProps = async ({ store }) => {
   return {};
 };
 
-type Props = {
+type Props = i.WithRouterProps & {
   page: i.PageState;
   form: i.ReduxFormState;
   setActiveField: i.SetActiveField;
@@ -122,4 +147,4 @@ const mapStateToProps: i.MapStateToProps = (state) => ({
   form: state.form,
 });
 
-export default connect(mapStateToProps)(ApplicationPage);
+export default compose(withRouter, connect(mapStateToProps))(ApplicationPage);

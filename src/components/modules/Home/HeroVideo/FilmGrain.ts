@@ -3,7 +3,7 @@ class FilmGrainFx {
   readonly patternScaleX = 1;
   readonly patternScaleY = 1;
   readonly patternSize = 64;
-  readonly patternRefreshInterval = 4;
+  readonly patternRefreshInterval = 8;
   readonly patternAlpha = 25; // Integer between 0 and 255
 
   readonly patternPixelDataLength = this.patternSize * this.patternSize * 4;

@@ -4,10 +4,12 @@ import { TRANSITION_TIME_MS_SHORT, TRANSITION_TIME_MS } from 'styles/pageTransit
 
 export const QuestionContent = styled.div<QuestionProps>`
   display: grid;
+  gap: 5%;
   position: absolute;
   z-index: 1;
   width: 100%;
   height: 100%;
+  max-width: 1200px;
   opacity: 0;
   will-change: transform, opacity;
   transform: translate(0, 100%);

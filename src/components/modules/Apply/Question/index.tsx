@@ -1,16 +1,17 @@
 import * as i from 'types';
 import React from 'react';
-import { Header, Paragraph } from 'common';
 import { Field } from 'react-final-form';
+import { Header, Paragraph } from 'common';
 import Button from '../Button';
 import FadedBackgroundImage from '../BackgroundImage';
 import ArmorySelect from '../ArmorySelectAnswer';
 import SpecializationSelect from '../SpecializationSelectAnswer';
 import LongTextAnswer from '../LongTextAnswer';
 import { QuestionContent, Left, Right } from './styled';
+import { AnswerComponents } from './types';
 
 /* eslint-disable @typescript-eslint/camelcase */
-const renderAnswerComponents: { [key in i.AnswerType]: React.ComponentType<any> } = {
+const renderAnswerComponents: AnswerComponents = {
   armory_select: ArmorySelect,
   text: Field,
   long_text: LongTextAnswer,
@@ -21,9 +22,7 @@ const renderAnswerComponents: { [key in i.AnswerType]: React.ComponentType<any> 
 const Question: React.FC<props> = ({
   isIntro, question, intro, onNextClick, noButton, loading, active, answered, image, mutators,
 }) => {
-  const FormFieldComponent = question
-    ? renderAnswerComponents[question.answer_type]
-    : () => null;
+  const FormFieldComponent = question && renderAnswerComponents[question.answer_type];
 
   return (
     <>
@@ -51,7 +50,7 @@ const Question: React.FC<props> = ({
           )}
         </Left>
         <Right>
-          {!isIntro && question && (
+          {!isIntro && question && FormFieldComponent && (
             <FormFieldComponent
               question={question}
               component="input"

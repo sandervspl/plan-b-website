@@ -4,13 +4,15 @@ import { Fullscreenpage } from 'common';
 
 export const RecruitmentContainer = styled(Fullscreenpage)`
   overflow: hidden;
+`;
 
-  form {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-  }
+export const QuestionsForm = styled.form`
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 `;
 
 export const AnswerContainer = styled.div`

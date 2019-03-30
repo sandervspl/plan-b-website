@@ -143,7 +143,7 @@ export const ToHomeTransitionStyle = createGlobalStyle`
         `}
 
         @media (min-width: 940px) {
-          transform: translate(0, -150px);
+          transform: translate(0, -23vh);
         }
       }
     }

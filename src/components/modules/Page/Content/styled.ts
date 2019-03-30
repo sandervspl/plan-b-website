@@ -19,7 +19,7 @@ export const PageContentContainer = styled.div`
 
   @media (min-width: 940px) {
     ${(props) => props.positionLower && css`
-      transform: translate(0, -150px);
+      transform: translate(0, -23vh);
     `}
   }
 

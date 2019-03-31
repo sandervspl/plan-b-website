@@ -18,7 +18,7 @@ const useBgAnim = () => {
         translateY: ['100%', '0%'],
         scaleX: 1,
         duration: 400,
-        delay: 500 + i * 100,
+        delay: 200 + i * 100,
         easing: 'easeOutCirc',
       } as AnimeAnimParams)
       .add({

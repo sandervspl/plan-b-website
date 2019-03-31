@@ -1,28 +1,26 @@
 import styled from 'styled-components';
 import { media } from 'styles';
-import { HamburgerContainer } from '../Hamburger/styled';
 
-const ROTATION = 40;
+const ROTATION = 50;
 
 export const MobileNavContainer = styled.nav`
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 20px;
-  position: fixed;
-  right: -65px;
-  bottom: -32px;
-  z-index: 3;
-  width: 170px;
-  height: 90px;
-  background: ${(props) => props.theme.color.secondary.dark};
-  transform: rotate(-${ROTATION}deg);
-  
+  &:before {
+    content: '';
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 110px;
+    height: 230px;
+    background: ${(props) => props.theme.color.secondary.dark};
+    transform: rotate(${ROTATION}deg) translate(95%, 20%);
+  }
+
   ${media.tablet`
     display: none;
   `}
-
-  ${HamburgerContainer} {
-    transform: rotate(${ROTATION}deg);
-  }
 `;

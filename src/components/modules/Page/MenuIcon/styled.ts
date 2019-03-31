@@ -1,6 +1,13 @@
 import styled, { css } from 'styled-components';
 
-export const HamburgerContainer = styled.div<Props>`
+export const VeganBurgerContainer = styled.div<Props>`
+  position: fixed;
+  z-index: 4;
+  bottom: 20px;
+  right: 20px;
+  transform: rotate(0deg);
+  transition: transform 300ms ease-in-out;
+
   &:hover {
     cursor: pointer;
   }
@@ -22,6 +29,8 @@ export const HamburgerContainer = styled.div<Props>`
   }
 
   ${(props) => props.active && css`
+    transform: rotate(40deg);
+
     span {
       &:nth-child(1) {
         transform: translate(17px,-4px) rotate(45deg) scaleX(0.5666666666666667);

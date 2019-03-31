@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Hamburger from '../Hamburger';
+import MenuIcon from '../MenuIcon';
 import FullscreenMenu from '../FullscreenMenu';
 import { MobileNavContainer } from './styled';
 
@@ -32,7 +32,7 @@ const MobileNav: React.FC = () => {
   return (
     <>
       <MobileNavContainer onClick={handleClick}>
-        <Hamburger active={open} />
+        <MenuIcon active={open} />
       </MobileNavContainer>
       <FullscreenMenu active={open} visible={visible} />
     </>

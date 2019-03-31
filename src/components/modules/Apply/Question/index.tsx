@@ -7,48 +7,41 @@ import FadedBackgroundImage from '../BackgroundImage';
 import ArmorySelect from '../ArmorySelectAnswer';
 import SpecializationSelect from '../SpecializationSelectAnswer';
 import LongTextAnswer from '../LongTextAnswer';
-import { QuestionContent, Left, Right } from './styled';
-import { AnswerComponents } from './types';
-
-/* eslint-disable @typescript-eslint/camelcase */
-const renderAnswerComponents: AnswerComponents = {
-  armory_select: ArmorySelect,
-  text: Field,
-  long_text: LongTextAnswer,
-  list_select: SpecializationSelect,
-};
-/* eslint-enable */
+import { QuestionContent } from './styled';
+// import { AnswerComponents } from './types';
 
 const Question: React.FC<props> = ({
-  isIntro, question, intro, onNextClick, noButton, loading, active, answered, image, mutators,
+  isIntro, onNextClick, noButton, loading, active, answered, image, mutators, Component, ...props
 }) => {
-  const FormFieldComponent = question && renderAnswerComponents[question.answer_type];
+  // const FormFieldComponent = question && renderAnswerComponents[question.answer_type];
 
   return (
     <>
       <FadedBackgroundImage next image={image} active={active} />
       <QuestionContent active={active} answered={answered}>
-        <Left isIntro={isIntro}>
+        <Component {...props} />
+        {/* <Left isIntro={isIntro}>
+        {question.question && (
           <Header>
-            {(intro && intro.title) || (question && question.question)}
+            {question.question}
           </Header>
+        )}
 
-          {intro && (
-            <Paragraph>
-              {intro.text}
-            </Paragraph>
-          )}
+        {intro && (
+          <Paragraph>
+            {intro.text}
+          </Paragraph>
+        )}
 
-          {!noButton && onNextClick && (
-            <Button
-              onClick={onNextClick}
-              disabled={loading}
-              tabIndex={-1}
-            >
-              {isIntro ? 'Get started' : 'Next question'}
-            </Button>
-          )}
-        </Left>
+        {!noButton && onNextClick && (
+          <Button
+            onClick={onNextClick}
+            disabled={loading}
+            tabIndex={-1}
+          >
+            {isIntro ? 'Get started' : 'Next question'}
+          </Button>
+        )}
         <Right>
           {!isIntro && question && FormFieldComponent && (
             <FormFieldComponent
@@ -61,7 +54,7 @@ const Question: React.FC<props> = ({
               tabIndex={-1}
             />
           )}
-        </Right>
+        </Right> */}
       </QuestionContent>
     </>
   );
@@ -70,10 +63,10 @@ const Question: React.FC<props> = ({
 export type props = {
   isIntro?: boolean;
   question?: i.RecruitmentQuestionDetail;
-  intro?: {
+  data?: {
     title?: string;
     text?: string;
-  };
+  } | i.RecruitmentQuestionDetail;
   image?: i.Image;
   answered?: boolean;
   active?: boolean;
@@ -82,6 +75,7 @@ export type props = {
   mutators?: { [key: string]: () => void };
   noButton?: boolean;
   setActiveField?: i.SetActiveField;
+  Component: React.ComponentType<any>;
 };
 
 export default Question;

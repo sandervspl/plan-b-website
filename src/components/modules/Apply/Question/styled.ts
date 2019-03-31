@@ -1,15 +1,17 @@
 import styled, { css } from 'styled-components';
 import { media } from 'styles/utils';
 import { TRANSITION_TIME_MS_SHORT, TRANSITION_TIME_MS } from 'styles/pageTransition';
+import { Header, Paragraph } from 'common';
 
 export const QuestionContent = styled.div<QuestionProps>`
-  display: grid;
-  gap: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: absolute;
   z-index: 1;
   width: 100%;
   height: 100%;
-  max-width: 1200px;
+  width: 76%;
   opacity: 0;
   will-change: transform, opacity;
   transform: translate(0, 100%);
@@ -29,9 +31,27 @@ export const QuestionContent = styled.div<QuestionProps>`
   `}
 
   ${media.tablet`
-    grid-template-columns: 50% 50%;
     padding: 100px 50px;
   `}
+
+  h1 {
+    margin-bottom: 5vh;
+    font-size: 90px;
+    line-height: 1.1;
+  }
+
+  ${Header}, ${Paragraph} {
+    text-align: center;
+
+    ${media.large`
+      max-width: 75%;
+    `}
+
+    ${media.veryLarge`
+      max-width: 50%;  
+    `}
+  }
+
 `;
 
 type QuestionProps = {
@@ -39,26 +59,48 @@ type QuestionProps = {
   active?: boolean;
 }
 
-export const Left = styled.div<LeftProps>`
-  grid-column: 1 / 1;
+export const NextButton = styled.button`
+  position: relative;
+  margin-top: 50px;
+  padding: 20px 50px;
+  border: 0;
+  font-family: ${(props) => props.theme.font.primary};
+  font-size: 20px;
+  color: ${(props) => props.theme.color.primary};
+  text-transform: uppercase;
+  background-color: ${(props) => props.theme.color.secondary};
+  cursor: pointer;
+  will-change: color;
+  transition: color 200ms linear;
+  overflow: hidden;
+  outline: 0;
 
-  ${(props) => props.isIntro && css`
-    grid-column: 2;
-  `}
+  &:hover {
+    color: ${(props) => props.theme.color.secondary};
 
-  h1 {
-    margin-bottom: 20px;
-
-    ${media.tablet`
-      margin-bottom: 40px;
-    `}
+    &:before {
+      transform: scale(1) translate(-25%, -50%);
+    }
   }
-`;
 
-type LeftProps = {
-  isIntro?: boolean;
-}
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250%;
+    height: auto;
+    padding-top: 250%;
+    background: ${(props) => props.theme.color.primary};
+    border-radius: 100%;
+    transform: scale(0) translate(-25%, -50%);
+    transform-origin: top left;
+    will-change: transform;
+    transition: transform 300ms ${(props) => props.theme.easing.easeInOutCirc};
+  }
 
-export const Right = styled.div`
-  grid-column: 2;
+  span {
+    position: relative;
+    z-index: 1;
+  }
 `;

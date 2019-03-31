@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Form } from 'react-final-form';
 import router from 'router';
-import { API_ENDPOINT } from 'services';
+import { API_ENDPOINT, getSourceUrl } from 'services';
 import apiConfig from 'services/api/config';
 import { fetchPage } from 'ducks/page';
 import FormStateToRedux from 'common/form/FormStateToRedux';
@@ -42,6 +42,11 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, form, ...props }) =
     }
   }, [props.router!.query!.questionId]);
 
+  useEffect(() => {
+    if (questions.length > 0) {
+      preloadNextBgImage(questionIndex + 1);
+    }
+  }, [questions, questionIndex]);
 
   function handleKeyDown(e: KeyboardEvent) {
     if (
@@ -52,6 +57,13 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, form, ...props }) =
       e.preventDefault();
     }
   }
+
+  const preloadNextBgImage = (id: number) => {
+    if (questions[id] && questions[id].background_image) {
+      const img = new Image();
+      img.src = getSourceUrl(questions[id].background_image!.url);
+    }
+  };
 
   const getQuestions = async () => {
     const qstns = await Promise.all<any>(
@@ -80,8 +92,6 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, form, ...props }) =
       { questionId: questionIndex + 1 },
       { shallow: true },
     );
-
-    // setQuestionIndex(questionIndex + 1);
   };
 
   const formOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -90,8 +100,6 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, form, ...props }) =
 
   return (
     <RecruitmentContainer>
-      {/* <button onClick={handlePrevClick}>Previous question</button> */}
-
       <Form onSubmit={() => {}}>
         {() => (
           <QuestionsForm onSubmit={formOnSubmit}>

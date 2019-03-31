@@ -13,6 +13,7 @@ export const FadedBackgroundImageContainer = styled.div<FadedBackgroundImageCont
 
 type FadedBackgroundImageContainerProps = {
   active?: boolean;
+  next?: boolean;
 }
 
 export const BackgroundImage = styled.img`

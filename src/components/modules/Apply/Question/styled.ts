@@ -71,7 +71,7 @@ export const NextButton = styled.button`
   background-color: ${(props) => props.theme.color.secondary};
   cursor: pointer;
   will-change: color;
-  transition: color 200ms linear;
+  transition: color 500ms linear;
   overflow: hidden;
   outline: 0;
 
@@ -79,7 +79,7 @@ export const NextButton = styled.button`
     color: ${(props) => props.theme.color.secondary};
 
     &:before {
-      transform: scale(1) translate(-25%, -50%);
+      transform: scaleX(1);
     }
   }
 
@@ -88,15 +88,13 @@ export const NextButton = styled.button`
     position: absolute;
     top: 0;
     left: 0;
-    width: 250%;
-    height: auto;
-    padding-top: 250%;
+    width: 100%;
+    height: 100%;
     background: ${(props) => props.theme.color.primary};
-    border-radius: 100%;
-    transform: scale(0) translate(-25%, -50%);
-    transform-origin: top left;
+    transform: scaleX(0);
+    transform-origin: left;
     will-change: transform;
-    transition: transform 300ms ${(props) => props.theme.easing.easeInOutCirc};
+    transition: transform 600ms cubic-bezier(0.77, 0, 0.175, 1);
   }
 
   span {

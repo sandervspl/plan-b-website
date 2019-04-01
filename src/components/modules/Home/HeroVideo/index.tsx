@@ -35,12 +35,10 @@ const HeroVideo: React.FC<Props> = ({ page }) => {
     if (firstScriptTag.parentNode) {
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     }
-  });
+  }, []);
 
   // Set Youtube player variables and callbacks
   useEffect(() => {
-    if (isServer) return;
-
     // This function creates an <iframe> (and YouTube player)
     // after the API code downloads.
     window.onYouTubeIframeAPIReady = initYoutubeVideo;
@@ -57,7 +55,7 @@ const HeroVideo: React.FC<Props> = ({ page }) => {
         player.playVideo();
       }
     };
-  });
+  }, []);
 
   const onPlayerReady = (event: YT.PlayerEvent) => {
     event.target.playVideo();

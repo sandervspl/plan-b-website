@@ -1,19 +1,17 @@
-import * as i from 'types';
 import React from 'react';
-import { getSourceUrl } from 'services';
 import { FadedBackgroundImageContainer, BackgroundImage, Fade } from './styled';
 
 const FadedBackgroundImage: React.FC<Props> = ({ image, active, next }) => (
   <FadedBackgroundImageContainer active={active} next={next}>
     {image && active && (
-      <BackgroundImage src={getSourceUrl(image.url)} />
+      <BackgroundImage src={image} />
     )}
     <Fade />
   </FadedBackgroundImageContainer>
 );
 
 export type Props = {
-  image?: i.Image;
+  image?: string;
   next?: boolean;
   active?: boolean;
 };

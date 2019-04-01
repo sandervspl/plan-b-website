@@ -16,7 +16,7 @@ const HeroVideo: React.FC<Props> = ({ page }) => {
     if (canvas.current) {
       new FilmGrainFx(canvas.current);
     }
-  });
+  }, []);
 
   // Init Youtube player
   useEffect(() => {

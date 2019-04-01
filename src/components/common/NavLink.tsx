@@ -6,14 +6,14 @@ import _ from 'lodash';
 
 import { getPageFromRoute } from 'services';
 
-class NavLink extends React.PureComponent<Props> {
-  static defaultProps: Partial<Props>;
+class NavLink extends React.PureComponent<NavLinkProps> {
+  static defaultProps: Partial<NavLinkProps>;
 
   state = {
     active: false,
   }
 
-  static getDerivedStateFromProps(props: Props) {
+  static getDerivedStateFromProps(props: NavLinkProps) {
     const { router, to } = props;
 
     // @ts-ignore Get route object from next-routes
@@ -84,7 +84,7 @@ class NavLink extends React.PureComponent<Props> {
   }
 };
 
-type Props = WithRouterProps & {
+export type NavLinkProps = WithRouterProps & {
   ariaLabel?: string;
   children: React.ReactNode;
   className?: string;

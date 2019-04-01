@@ -5,24 +5,34 @@ export const NavContainer = styled.nav`
   display: none;
 
   ${media.tablet`
-    display: flex;
-    justify-content: space-between;
-    padding: 0 55px 20px;
+    display: block;
+    padding: 0 55px;
+    height: 30px;
 
     a {
       color: ${(props) => props.theme.color.tertiary};
-      font: 400 23px/25px ${(props) => props.theme.font.primary};
+      font: 600 23px/25px ${(props) => props.theme.font.primary};
       text-decoration: none;
       text-transform: uppercase;
       transition: color .1s linear;
-
-      &:hover {
-        color: ${(props) => props.theme.color.primary.medium};
-      }
 
       &.active {
         color: ${(props) => props.theme.color.primary};
       }
     }
   `}
+`;
+
+export const NavList = styled.ul`
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  list-style: none;
+
+  li {
+    position: relative;
+  }
 `;

@@ -68,7 +68,7 @@ const Link: React.FC<Props> = ({
   );
 };
 
-type Props = WithRouterProps & {
+export type LinkComponentProps = WithRouterProps & {
   children: React.ReactNode;
   className?: string;
   to: string;

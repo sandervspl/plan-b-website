@@ -1,15 +1,19 @@
 import React from 'react';
-import { NavLink } from 'common';
+import { LinkTextFill } from 'common';
 import { navigationMenu } from 'services';
-import { NavContainer } from './styled';
+import { NavContainer, NavList } from './styled';
 
 const Navigation: React.FC = () => (
   <NavContainer>
-    {navigationMenu.items.map((item, i) => (
-      <NavLink key={i} to={item.page}>
-        {item.label}
-      </NavLink>
-    ))}
+    <NavList>
+      {navigationMenu.items.map((item, i) => (
+        <li key={i}>
+          <LinkTextFill linkType="navlink" to={item.page}>
+            {item.label}
+          </LinkTextFill>
+        </li>
+      ))}
+    </NavList>
   </NavContainer>
 );
 

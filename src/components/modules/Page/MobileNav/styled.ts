@@ -14,10 +14,10 @@ export const MobileNavContainer = styled.nav`
     right: 0;
     bottom: 0;
     z-index: 1;
-    width: 110px;
-    height: 230px;
+    width: 70px;
+    height: 70px;
     background: ${(props) => props.theme.color.secondary.dark};
-    transform: rotate(${ROTATION}deg) translate(95%, 20%);
+    clip-path: polygon( 100% 0,100% 0,100% 100%,0% 100% );
   }
 
   ${media.tablet`

@@ -40,16 +40,17 @@ export const FullscreenMenuContainer = styled.div<FullscreenMenuContainerProps>`
     bottom: 0;
     right: 0;
     z-index: 2;
-    width: 230vh;
-    height: 280vh;
+    width: 200vh;
+    height: 100vh;
     background: ${(props) => props.theme.color.secondary.dark};
-    transform: scale(0, 0) translate(-120vw, 180vh) rotate(50deg);
+    clip-path: polygon( 50% 0,100% 0,100% 100%,0% 100% );
+    transform: translate3d(100%, 0, 0);
     transform-origin: bottom right;
     transition: all 800ms ${(props) => props.theme.easing.easeOutQuint};
     transition-delay: 250ms;
 
     ${(props) => props.active && css`
-      transform: scale(1, 1) translate(-120vw, 180vh) rotate(50deg);
+      transform: translate3d(0, 0, 0);
       transition-delay: 0ms;
     `};
   }

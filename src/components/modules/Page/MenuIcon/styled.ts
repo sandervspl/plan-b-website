@@ -3,9 +3,10 @@ import styled, { css } from 'styled-components';
 export const VeganBurgerContainer = styled.div<Props>`
   position: fixed;
   z-index: 4;
-  bottom: 20px;
-  right: 20px;
+  bottom: 15px;
+  right: 15px;
   transform: rotate(0deg);
+  transform-style: preserve-3d;
   transition: transform 300ms ease-in-out;
 
   &:hover {

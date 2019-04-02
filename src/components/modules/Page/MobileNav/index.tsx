@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import MenuIcon from '../MenuIcon';
 import FullscreenMenu from '../FullscreenMenu';
 import { MobileNavContainer } from './styled';
@@ -7,10 +8,19 @@ const MobileNav: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [locked, setLocked] = useState(false);
   const [visible, setVisible] = useState(false);
+  const mobileNavRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+
+    return function cleanup() {
+      clearAllBodyScrollLocks();
+    };
+  }, []);
 
   useEffect(() => {
     if (open) {
       setVisible(true);
+      disableBodyScroll(mobileNavRef.current!);
     } else {
       setTimeout(() => {
         setVisible(false);
@@ -23,6 +33,7 @@ const MobileNav: React.FC = () => {
 
     setOpen(!open);
     setLocked(true);
+    enableBodyScroll(mobileNavRef.current!);
 
     setTimeout(() => {
       setLocked(false);
@@ -31,7 +42,7 @@ const MobileNav: React.FC = () => {
 
   return (
     <>
-      <MobileNavContainer onClick={handleClick}>
+      <MobileNavContainer onClick={handleClick} ref={mobileNavRef}>
         <MenuIcon active={open} />
       </MobileNavContainer>
       <FullscreenMenu active={open} visible={visible} />

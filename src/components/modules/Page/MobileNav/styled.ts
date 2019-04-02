@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'styles';
 
-const ROTATION = 50;
-
 export const MobileNavContainer = styled.nav`
   &:before {
     content: '';

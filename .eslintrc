@@ -68,12 +68,12 @@
     "import/named": false,
     "import/order": ["error", {
       "groups": [
+        "builtin",
         "external",
         "internal",
         "index",
         "parent",
-        "sibling",
-        "builtin"
+        "sibling"
       ]
     }],
     "@typescript-eslint/indent": ["error", 2],

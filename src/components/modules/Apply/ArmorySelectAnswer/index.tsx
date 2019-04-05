@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { fetchCharacter } from 'ducks/character';
 import { TRANSITION_TIME_MS } from 'styles/pageTransition';
 import { useDebounce } from 'services/hooks';
-import { TextField, Label } from '../styled';
+import { TextField, Label, RecruitmentHeader } from '../styled';
+import { SearchContent } from './styled';
 
 const ArmoryCharPreview = React.lazy(() => import('../ArmoryCharPreview'));
 
@@ -30,30 +31,36 @@ const ArmorySelect: React.FC<props> = ({ character, active, onNextClick, ...prop
 
   return (
     <div>
-      <Label htmlFor="armory_select_user_input">
-        <span>Character name</span>
+      <RecruitmentHeader as="h2">
+        Select your character
+      </RecruitmentHeader>
 
-        <TextField
-          as="input"
-          id="armory_select_user_input"
-          name="armory_select_user_input"
-          component="input"
-          type="text"
-          tabIndex={-1}
-          value={inputValue}
-          onChange={(e) => setInputValue(e.currentTarget.value)}
-        />
-      </Label>
+      <SearchContent>
+        <Label htmlFor="armory_select_user_input">
+          <span>Character name</span>
 
-      {(character.data || character.loading || character.error) && (
-        <React.Suspense fallback={null}>
-          <ArmoryCharPreview
-            active={active}
-            onCharacterClick={onNextClick}
-            character={character}
+          <TextField
+            as="input"
+            id="armory_select_user_input"
+            name="armory_select_user_input"
+            component="input"
+            type="text"
+            tabIndex={-1}
+            value={inputValue}
+            onChange={(e) => setInputValue(e.currentTarget.value)}
           />
-        </React.Suspense>
-      )}
+        </Label>
+
+        {(character.data || character.loading || character.error) && (
+          <React.Suspense fallback={null}>
+            <ArmoryCharPreview
+              active={active}
+              onCharacterClick={onNextClick}
+              character={character}
+            />
+          </React.Suspense>
+        )}
+      </SearchContent>
     </div>
   );
 };

@@ -2,8 +2,8 @@ import * as i from 'types';
 import React from 'react';
 import { Field } from 'react-final-form';
 import { getUploadsUrl } from 'services';
-import { AnswerContainer } from '../styled';
-import { RoleList, ListItem, BackgroundImage, RoleIcon, RoleText } from './styled';
+import { RecruitmentHeader } from '../styled';
+import { RoleList, ListItem, BackgroundImage, RoleIcon, RoleText, SpecializationAnswerContainer } from './styled';
 
 const roles = [{
   background: getUploadsUrl('roles/dps.jpg'),
@@ -19,9 +19,13 @@ const roles = [{
   text: 'Tank',
 }];
 
-const SpecializationSelect: React.FC<Props> = ({ onNextClick }) => {
+const SpecializationSelectAnswer: React.FC<Props> = ({ onNextClick }) => {
   return (
-    <AnswerContainer>
+    <SpecializationAnswerContainer>
+      <RecruitmentHeader as="h2">
+        What role will you play?
+      </RecruitmentHeader>
+
       <RoleList>
         {roles.map((role) => (
           <ListItem key={role.text}>
@@ -39,10 +43,10 @@ const SpecializationSelect: React.FC<Props> = ({ onNextClick }) => {
           </ListItem>
         ))}
       </RoleList>
-    </AnswerContainer>
+    </SpecializationAnswerContainer>
   );
 };
 
 type Props = i.QuestionComponentProps;
 
-export default SpecializationSelect;
+export default SpecializationSelectAnswer;

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { media } from 'styles/utils';
 import { TRANSITION_TIME_MS_SHORT, TRANSITION_TIME_MS } from 'styles/pageTransition';
-import { Header, Paragraph } from 'common';
+import { Paragraph } from 'common';
 
 export const QuestionContent = styled.div<QuestionProps>`
   display: flex;
@@ -9,6 +9,7 @@ export const QuestionContent = styled.div<QuestionProps>`
   align-items: center;
   position: absolute;
   z-index: 1;
+  padding: 50px 0;
   width: 100%;
   height: 100%;
   width: 76%;
@@ -30,17 +31,11 @@ export const QuestionContent = styled.div<QuestionProps>`
     opacity: 1;
   `}
 
-  ${media.tablet`
-    padding: 100px 50px;
+  ${media.veryLarge`
+    padding: 15vh 50px;
   `}
 
-  h1 {
-    margin-bottom: 5vh;
-    font-size: 90px;
-    line-height: 1.1;
-  }
-
-  ${Header}, ${Paragraph} {
+  > ${Paragraph} {
     text-align: center;
 
     ${media.large`

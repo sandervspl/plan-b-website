@@ -3,9 +3,9 @@ import styled, { css } from 'styled-components';
 import { media } from 'styles';
 import { BaseText } from './BaseText';
 
-export const Header = styled(BaseText).attrs<Props>((props) => ({
+export const Header = styled(BaseText).attrs<HeaderProps>((props) => ({
   as: props.as,
-}))<Props>`
+}))<HeaderProps>`
   font-size: 65px;
   font-weight: 700;
   line-height: 60px;
@@ -25,7 +25,7 @@ export const Header = styled(BaseText).attrs<Props>((props) => ({
   `}
 `;
 
-type Props = {
+export type HeaderProps = {
   as?: i.HeaderType;
 }
 

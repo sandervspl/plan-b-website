@@ -1,15 +1,39 @@
 import styled from 'styled-components';
+import { media } from 'styles/utils';
 import { Paragraph } from 'common';
+import { AnswerContainer, RecruitmentHeader } from '../styled';
 
 type ImageProps = {
   src: string;
 }
 
+export const SpecializationAnswerContainer = styled(AnswerContainer)`
+  display: grid;
+  grid-template-rows: 20% 1fr;
+  gap: 2vh;
+
+  ${RecruitmentHeader} {
+    margin: 0;
+  }
+
+  ${media.veryLarge`
+    grid-template-columns: repeat(2,1fr);
+    grid-template-rows: 100%;
+    grid-gap: 2vh;
+    height: 100%;
+    gap: 0;
+  `}
+`;
+
 export const RoleList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
+  gap: 12vh;
   height: 100%;
+
+  ${media.veryLarge`
+    gap: 2vh;
+  `}
 `;
 
 export const BackgroundImage = styled.div<ImageProps>`

@@ -11,19 +11,34 @@ import Introduction from 'modules/Apply/Introduction';
 import { RecruitmentContainer, QuestionsForm } from 'modules/Apply/styled';
 import { compose } from 'redux';
 import { withRouter } from 'next/router';
+import ArmorySelectAnswer from 'modules/Apply/ArmorySelectAnswer';
+import SpecializationSelectAnswer from 'modules/Apply/SpecializationSelectAnswer';
 
 type Question = {
   component: React.ComponentType<i.QuestionComponentProps>;
   image?: string;
 };
 
-const questions: Question[] = [{
-  component: Introduction,
-  image: 'http://cms.planbguild.eu/uploads/1e8c94ccaa63414989b718e01e5795fa.jpg',
-}];
+const questions: Question[] = [
+  {
+    component: () => null,
+  },
+  {
+    component: Introduction,
+    image: 'http://cms.planbguild.eu/uploads/1e8c94ccaa63414989b718e01e5795fa.jpg',
+  },
+  {
+    component: ArmorySelectAnswer,
+    image: 'http://cms.planbguild.eu/uploads/ce5492e3f5964415897b6d8f12d907d4.jpg',
+  },
+  {
+    component: SpecializationSelectAnswer,
+    image: 'http://cms.planbguild.eu/uploads/fc4f9be1230747619532d3bc7155fc92.jpg',
+  },
+];
 
 const ApplicationPage: i.NextPageComponent<Props> = ({ page, form, ...props }) => {
-  const [questionIndex, setQuestionIndex] = useState(-1);
+  const [questionIndex, setQuestionIndex] = useState(1);
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
@@ -36,7 +51,7 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, form, ...props }) =
   useEffect(() => {
     const paramQstnId = props.router!.query!.questionId
       ? Number(props.router!.query!.questionId)
-      : -1;
+      : 1;
 
     if (!form.application) {
       (router as i.Router).push('apply', {}, { shallow: true });
@@ -67,7 +82,7 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, form, ...props }) =
   const preloadNextBgImage = (id: number) => {
     if (questions[id] && questions[id].image) {
       const img = new Image();
-      img.src = getSourceUrl(questions[id].image!);
+      img.src = questions[id].image!;
     }
   };
 
@@ -99,11 +114,12 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ page, form, ...props }) =
           <QuestionsForm onSubmit={formOnSubmit}>
             <FormStateToRedux form="application" />
 
-            {questions.map((qstn) => (
+            {questions.map((qstn, i) => (
               <Question
+                key={i}
                 image={qstn.image}
-                active={questionIndex === -1}
-                answered={questionIndex > -1}
+                active={questionIndex === i}
+                answered={questionIndex > i}
                 onNextClick={handleClick}
                 Component={qstn.component}
               />

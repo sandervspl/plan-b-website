@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Field } from 'react-final-form';
-import { Fullscreenpage } from 'common';
+import { media } from 'styles/utils';
+import { Fullscreenpage, Header, HeaderProps } from 'common';
 
 export const RecruitmentContainer = styled(Fullscreenpage)`
   overflow: hidden;
@@ -36,12 +37,30 @@ export const TextField = styled(Field)`
 `;
 
 export const Label = styled.label`
+  width: 100%;
+
   span {
     display: block;
     margin-bottom: 10px;
     font-family: ${(props) => props.theme.font.primary};
     font-size: 16px;
-    color: ${(props) => props.theme.color.primary};
+    color: ${(props) => props.theme.color.paragraph};
   }
 `;
 
+export const RecruitmentHeader = styled(Header)`
+  margin-bottom: 5vh;
+  text-align: center;
+
+  ${media.tablet<HeaderProps>`
+    line-height: 1.1;
+
+    ${(props) => props.as === 'h1' && css`
+      font-size: 90px;
+    `}
+
+    ${(props) => props.as === 'h2' && css`
+      font-size: 70px;
+    `}
+  `}
+`;

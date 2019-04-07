@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from 'styles/utils';
 
 export const SearchContent = styled.div`
   display: flex;
@@ -7,5 +8,8 @@ export const SearchContent = styled.div`
   justify-content: center;
   margin: 0 auto;
   width: 100%;
-  max-width: 67%;
+
+  ${media.tablet`
+    max-width: 67%;
+  `}
 `;

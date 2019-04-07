@@ -30,7 +30,7 @@ const ArmorySelect: React.FC<props> = ({ character, active, onNextClick, ...prop
   }, [debouncedUserInput]);
 
   return (
-    <div>
+    <>
       <RecruitmentHeader as="h2">
         Select your character
       </RecruitmentHeader>
@@ -61,7 +61,7 @@ const ArmorySelect: React.FC<props> = ({ character, active, onNextClick, ...prop
           </React.Suspense>
         )}
       </SearchContent>
-    </div>
+    </>
   );
 };
 

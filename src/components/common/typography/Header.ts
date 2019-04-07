@@ -8,13 +8,9 @@ export const Header = styled(BaseText).attrs<HeaderProps>((props) => ({
 }))<HeaderProps>`
   font-size: 65px;
   font-weight: 700;
-  line-height: 60px;
+  line-height: 1.1;
   text-transform: uppercase;
   font-family: ${(props) => props.theme.font.primary};
-  
-  ${media.tablet`
-    line-height: 70px;
-  `}
 
   ${(props) => props.as === 'h2' && css`
     font-size: 30px;

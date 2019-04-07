@@ -1,20 +1,29 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { media } from 'styles/utils';
 import { Header, Paragraph } from 'common';
 import LoaderSvg from './loader.svg';
 
 export const ArmoryCharPreviewContainer = styled.div`
   display: flex;
+  justify-content: center;
   margin-top: 5vh;
   width: 100%;
 `;
 
+export const ImageContainer = styled.img`
+  width: 100%;
+
+  ${media.tablet`
+    width: 70px;
+  `}
+`;
+
 export const ArmoryCharacter = styled.label`
   display: grid;
-  grid-template-columns: 70px 1fr;
-  gap: 4vh;
+  grid-template-columns: 48px 1fr;
+  gap: 10px;
   position: relative;
-  padding: 15px 30px;
+  padding: 10px;
   width: 100%;
   background: ${(props) => props.theme.color.secondary};
   cursor: pointer;
@@ -45,29 +54,33 @@ export const ArmoryCharacter = styled.label`
     }
   }
 
+  ${media.tablet`
+    grid-template-columns: 70px 1fr;
+    gap: 4vh;
+    padding: 15px 30px;
+  `}
+
   input {
     display: none;
-  }
-
-  img {
-    width: 70px;
   }
 `;
 
 export const Loader = styled(LoaderSvg)`
-  flex: 1;
   justify-self: center;
-  width: 100px;
-  height: 100px;
+  height: 12px;
+  width: 53px;
+
+  ${media.tablet`
+    width: 100px;
+  `}
 `;
 
 export const Name = styled(Header)`
   text-transform: none;
-  font-size: 30px;
-  line-height: 35px;
+  font-size: 18px;
 
   ${media.tablet`
-    line-height: 35px;
+    font-size: 30px;
   `}
 
   span {
@@ -79,10 +92,9 @@ export const Name = styled(Header)`
 
 export const Guild = styled(Paragraph)`
   text-transform: none;
-  font-size: 20px;
-  line-height: 25px;
+  font-size: 14px;
 
   ${media.tablet`
-    line-height: 25px;
+    font-size: 20px;
   `}
 `;

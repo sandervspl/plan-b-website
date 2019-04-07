@@ -4,7 +4,9 @@ import { Field } from 'react-final-form';
 import { connect } from 'react-redux';
 import { actions } from 'ducks/form';
 import { Paragraph } from 'common';
-import { ArmoryCharPreviewContainer, Name, Guild, ArmoryCharacter, Loader } from './styled';
+import {
+  ArmoryCharPreviewContainer, Name, Guild, ArmoryCharacter, ImageContainer, Loader,
+} from './styled';
 
 const ArmoryCharPreview: React.FC<props> = ({ active, character, onCharacterClick, ...props }) => {
   const FIELD_NAME: i.FieldNames = 'armory_link';
@@ -31,7 +33,7 @@ const ArmoryCharPreview: React.FC<props> = ({ active, character, onCharacterClic
             tabIndex={-1}
             onClick={onCharacterClick}
           />
-          <img
+          <ImageContainer
             src={`https://render-eu.worldofwarcraft.com/character/${character.data.thumbnail}`}
             alt={`${character.data.name}'s avatar`}
             title={`${character.data.name}'s avatar`}

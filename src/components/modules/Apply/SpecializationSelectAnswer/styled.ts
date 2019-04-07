@@ -9,17 +9,20 @@ type ImageProps = {
 
 export const SpecializationAnswerContainer = styled(AnswerContainer)`
   display: grid;
-  grid-template-rows: 20% 1fr;
+  grid-template-rows: 15% 70%;
   gap: 2vh;
 
   ${RecruitmentHeader} {
     margin: 0;
   }
 
+  ${media.tablet`
+    grid-template-rows: 15% 1fr;
+  `}
+
   ${media.veryLarge`
     grid-template-columns: repeat(2,1fr);
     grid-template-rows: 100%;
-    grid-gap: 2vh;
     height: 100%;
     gap: 0;
   `}
@@ -28,8 +31,12 @@ export const SpecializationAnswerContainer = styled(AnswerContainer)`
 export const RoleList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12vh;
+  gap: 10px;
   height: 100%;
+
+  ${media.tablet`
+    gap: 50px;
+  `}
 
   ${media.veryLarge`
     gap: 2vh;
@@ -37,9 +44,9 @@ export const RoleList = styled.div`
 `;
 
 export const BackgroundImage = styled.div<ImageProps>`
-  position: absolute;
+  position: relative;
   width: 100%;
-  height: 80%;
+  height: 100%;
   transform: scale(1);
   background: url(${(props) => props.src}) center center;
   background-size: cover;
@@ -60,9 +67,9 @@ export const BackgroundImage = styled.div<ImageProps>`
 
 export const RoleIcon = styled.div<ImageProps>`
   position: absolute;
-  top: calc(80% - 30px);
-  width: 60px;
-  height: 60px;
+  top: calc(80% - 4vh);
+  width: 8vh;
+  height: 8vh;
   border-radius: 100%;
   border: 2px solid black;
   background: url(${(props) => props.src}) center center;
@@ -89,16 +96,25 @@ export const RoleText = styled(Paragraph)`
   width: 100%;
   height: auto;
   color: ${(props) => props.theme.color.paragraph};
-  font-size: 30px;
+  font-size: 18px;
   font-weight: 600;
   text-transform: uppercase;
   will-change: color;
   transition: color 300ms ease-in-out;
+
+  ${media.tablet`
+    font-size: 30px;
+  `}
+
+  ${media.veryLarge`
+    font-size: 4.5vh;
+  `}
 `;
 
 export const ListItem = styled.label`
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-rows: 80% 1fr;
+  justify-items: center;
   position: relative;
   overflow: hidden;
   cursor: pointer;

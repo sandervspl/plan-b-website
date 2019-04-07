@@ -22,17 +22,23 @@ export const AnswerContainer = styled.div`
 `;
 
 export const TextField = styled(Field)`
+  padding: 0;
   width: 100%;
   border: 0;
   background: none;
   border-bottom: 1px solid ${(props) => props.theme.color.primary};
+  border-radius: 0;
   outline: 0;
   font-family: ${(props) => props.theme.font.primary};
-  font-size: 30px;
+  font-size: 16px;
   color: ${(props) => props.theme.color.primary};
 
   ${(props) => props.hidden && css`
     visibility: hidden;
+  `}
+
+  ${media.tablet`
+    font-size: 30px;
   `}
 `;
 
@@ -51,6 +57,10 @@ export const Label = styled.label`
 export const RecruitmentHeader = styled(Header)`
   margin-bottom: 5vh;
   text-align: center;
+
+  ${(props) => props.as === 'h1' && css`
+    font-size: 35px;
+  `}
 
   ${media.tablet<HeaderProps>`
     line-height: 1.1;

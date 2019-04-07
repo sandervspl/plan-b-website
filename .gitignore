@@ -4,3 +4,5 @@ dist/
 .vscode
 .gitattributes
 .DS_Store
+
+deploy.sh

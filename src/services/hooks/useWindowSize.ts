@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import _ from 'lodash/fp';
-import { isServer } from './isServer';
+import { isServer } from 'services';
 
 export const useWindowSize = () => {
   const [mounted, setMounted] = useState(false);

@@ -1,16 +1,16 @@
 import * as i from 'types';
 import React, { useState, useEffect } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Form } from 'react-final-form';
+import { withRouter } from 'next/router';
 import router from 'router';
-import { API_ENDPOINT, getSourceUrl } from 'services';
+import { API_ENDPOINT } from 'services';
 import { fetchPage } from 'ducks/page';
 import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
 import Introduction from 'modules/Apply/Introduction';
 import { RecruitmentContainer, QuestionsForm } from 'modules/Apply/styled';
-import { compose } from 'redux';
-import { withRouter } from 'next/router';
 import ArmorySelectAnswer from 'modules/Apply/ArmorySelectAnswer';
 import SpecializationSelectAnswer from 'modules/Apply/SpecializationSelectAnswer';
 
@@ -37,7 +37,7 @@ const questions: Question[] = [
   },
 ];
 
-const ApplicationPage: i.NextPageComponent<Props> = ({ page, form, ...props }) => {
+const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
   const [questionIndex, setQuestionIndex] = useState(1);
 
   useEffect(() => {
@@ -140,14 +140,15 @@ ApplicationPage.getInitialProps = async ({ store }) => {
 };
 
 type Props = i.WithRouterProps & {
-  page: i.PageState;
   form: i.ReduxFormState;
   setActiveField: i.SetActiveField;
 }
 
 const mapStateToProps: i.MapStateToProps = (state) => ({
-  page: state.page,
   form: state.form,
 });
 
-export default compose(withRouter, connect(mapStateToProps))(ApplicationPage);
+export default compose(
+  withRouter,
+  connect(mapStateToProps),
+)(ApplicationPage);

@@ -36,6 +36,9 @@
       "vectors/*": ["src/static/vectors/*"]
     },
     "typeRoots": ["node_modules/@types"],
-    "lib": ["dom", "es2015", "es2016"]
+    "lib": ["dom", "es2015", "es2016"],
+    "plugins": [
+      { "transform": "ts-optchain/transform" }
+    ]
   }
 }

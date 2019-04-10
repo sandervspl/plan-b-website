@@ -12,7 +12,7 @@ const PageContent: React.FC<Props> = ({ children, positionLower }) => (
 );
 
 type Props = {
-  positionLower: boolean;
+  positionLower?: boolean;
 }
 
 export default PageContent;

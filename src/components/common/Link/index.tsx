@@ -2,11 +2,12 @@ import React from 'react';
 import _ from 'lodash';
 import Router from 'router';
 import { withRouter, WithRouterProps } from 'next/router';
-import { getPageFromRoute } from 'services';
 import { RouteParams } from 'next-routes';
+import { oc } from 'ts-optchain';
+import { getPageFromRoute } from 'services';
 import { LinkProps } from './types';
 
-const Link: React.FC<Props> = ({
+const Link: React.FC<LinkComponentProps> = ({
   children, className, to, params, external, ariaLabel, currentTab, type, router, ...props
 }) => {
   const formattedAriaLabel = _.capitalize(ariaLabel);
@@ -53,7 +54,7 @@ const Link: React.FC<Props> = ({
 
   if (prefetchPage) {
     prefetchProps = {
-      onMouseOver: () => router!.prefetch(prefetchPage),
+      onMouseOver: () => oc(router).prefetch(prefetchPage),
     };
   }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter, WithRouterProps } from 'next/router';
 import { RouteParams } from 'next-routes';
 import Router from 'router';
+import { oc } from 'ts-optchain';
 import _ from 'lodash';
 
 import { getPageFromRoute } from 'services';
@@ -20,7 +21,7 @@ class NavLink extends React.PureComponent<NavLinkProps> {
     const routerRoute = Router.routes.find((r: string) => r.name === to);
 
     // Check if pathname from current route and page from routes are equal
-    if (routerRoute && router!.pathname === routerRoute.page) {
+    if (routerRoute && oc(router).pathname === routerRoute.page) {
       if (props.params) {
         // If current pathname and route page are the same, and we have params, then the params also have to be the same
         // We compare every params passed to NavLink and the queries from router to decide if this is the current route
@@ -64,7 +65,7 @@ class NavLink extends React.PureComponent<NavLinkProps> {
 
     if (prefetchPage) {
       prefetchProps = {
-        onMouseOver: () => router!.prefetch(prefetchPage),
+        onMouseOver: () => oc(router).prefetch(prefetchPage),
       };
     }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, SingletonRouter } from 'next/router';
+import { useRouter } from 'services/hooks';
 import MobileNav from './MobileNav';
 import Content from './Content';
 import { HeroContainer } from './HeroContainer';
@@ -7,7 +7,8 @@ import LogoLink from './LogoLink';
 import BaseHero from './BaseHero';
 import { AwayFromHomeTransitionStyle, ToHomeTransitionStyle } from './styled';
 
-const Page: React.FC<Props> = ({ children, hero, className, router }) => {
+const Page: React.FC<Props> = ({ children, hero, className }) => {
+  const router = useRouter();
   const heroContent = hero && typeof hero.content === 'string'
     ? <BaseHero src={hero.content} />
     : hero!.content;
@@ -34,7 +35,6 @@ type Props = {
     big?: boolean;
     content?: React.ReactNode;
   };
-  router: SingletonRouter;
 }
 
 Page.defaultProps = {
@@ -44,4 +44,4 @@ Page.defaultProps = {
   },
 };
 
-export default withRouter(Page);
+export default Page;

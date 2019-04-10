@@ -1,15 +1,16 @@
 import React from 'react';
 import _ from 'lodash';
 import Router from 'router';
-import { withRouter, WithRouterProps } from 'next/router';
 import { RouteParams } from 'next-routes';
 import { oc } from 'ts-optchain';
 import { getPageFromRoute } from 'services';
+import { useRouter } from 'services/hooks';
 import { LinkProps } from './types';
 
 const Link: React.FC<LinkComponentProps> = ({
-  children, className, to, params, external, ariaLabel, currentTab, type, router, ...props
+  children, className, to, params, external, ariaLabel, currentTab, type, ...props
 }) => {
+  const router = useRouter();
   const formattedAriaLabel = _.capitalize(ariaLabel);
   const as = type === 'text' ? 'span' : 'a';
 
@@ -69,7 +70,7 @@ const Link: React.FC<LinkComponentProps> = ({
   );
 };
 
-export type LinkComponentProps = WithRouterProps & {
+export type LinkComponentProps = {
   children: React.ReactNode;
   className?: string;
   to: string;
@@ -84,4 +85,4 @@ Link.defaultProps = {
   type: 'route',
 };
 
-export default withRouter(Link);
+export default Link;

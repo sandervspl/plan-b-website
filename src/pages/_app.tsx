@@ -9,6 +9,7 @@ import _ from 'lodash/fp';
 import { withReduxStore, isServer } from 'services';
 import { theme, GlobalStyle, sizes } from 'styles';
 import { TRANSITION_TIME_MS, TRANSITION_TIME_MS_SHORT } from 'styles/pageTransition';
+import { RouterContextProvider } from 'services/hooks';
 
 class MyApp extends App<Props, State> {
   constructor(props: Props) {
@@ -72,16 +73,18 @@ class MyApp extends App<Props, State> {
 
     return (
       <Container>
-        <GlobalStyle />
-        <ThemeProvider theme={theme}>
-          <>
-            <Provider store={reduxStore}>
-              <PageTransition timeout={transitionTime} classNames="page">
-                <Component {...pageProps} key={router.route} />
-              </PageTransition>
-            </Provider>
-          </>
-        </ThemeProvider>
+        <RouterContextProvider>
+          <GlobalStyle />
+          <ThemeProvider theme={theme}>
+            <>
+              <Provider store={reduxStore}>
+                <PageTransition timeout={transitionTime} classNames="page">
+                  <Component {...pageProps} key={router.route} />
+                </PageTransition>
+              </Provider>
+            </>
+          </ThemeProvider>
+        </RouterContextProvider>
       </Container>
     );
   }

@@ -1,9 +1,5 @@
 import * as i from 'types';
-import { action, ActionType } from 'typesafe-actions';
-
-const LOAD = 'character/LOAD';
-const FAILED = 'character/FAILED';
-const SUCCESS = 'character/SUCCESS';
+import { ActionType, createStandardAction, getType } from 'typesafe-actions';
 
 const initialState: i.RecruitmentState = {
   data: undefined,
@@ -13,20 +9,20 @@ const initialState: i.RecruitmentState = {
 
 export default (state = initialState, action: ActionType<typeof actions>) => {
   switch (action.type) {
-    case LOAD:
+    case getType(actions.load):
       return {
         ...state,
         error: false,
         loading: true,
       };
-    case FAILED:
+    case getType(actions.failed):
       return {
         ...state,
         data: undefined,
         loading: false,
         error: true,
       };
-    case SUCCESS:
+    case getType(actions.success):
       return {
         ...state,
         data: action.payload,
@@ -39,9 +35,9 @@ export default (state = initialState, action: ActionType<typeof actions>) => {
 };
 
 export const actions = {
-  load: () => action(LOAD),
-  failed: () => action(FAILED),
-  success: (char: i.CharacterBody) => action(SUCCESS, char),
+  load: createStandardAction('character/LOAD')(),
+  failed: createStandardAction('character/FAILED')(),
+  success: createStandardAction('character/SUCCESS')<i.CharacterBody>(),
 };
 
 export const fetchCharacter: i.FetchCharacterDuck = (name) => async (dispatch, getState, api) => {

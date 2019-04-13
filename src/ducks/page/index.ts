@@ -1,10 +1,6 @@
 import * as i from 'types';
-import { action, ActionType } from 'typesafe-actions';
+import { ActionType, createStandardAction, getType } from 'typesafe-actions';
 import { API_ENDPOINT } from 'services';
-
-const LOAD = 'page/LOAD';
-const SUCCESS = 'page/SUCCESS';
-const FAILED = 'page/FAILED';
 
 const initialState: i.PageState = {
   error: false,
@@ -13,13 +9,13 @@ const initialState: i.PageState = {
 
 export default (state = initialState, action: ActionType<typeof actions>) => {
   switch (action.type) {
-    case LOAD:
+    case getType(actions.load):
       return {
         ...state,
         error: false,
         loading: true,
       };
-    case SUCCESS: {
+    case getType(actions.success): {
       if (action.payload.home) {
         const home = action.payload.home;
 
@@ -36,7 +32,7 @@ export default (state = initialState, action: ActionType<typeof actions>) => {
         loading: false,
       };
     }
-    case FAILED:
+    case getType(actions.failed):
       return {
         ...state,
         loading: false,
@@ -48,9 +44,9 @@ export default (state = initialState, action: ActionType<typeof actions>) => {
 };
 
 export const actions = {
-  load: () => action(LOAD),
-  success: (payload: i.ApiDataPayloads) => action(SUCCESS, payload),
-  failed: () => action(FAILED),
+  load: createStandardAction('page/LOAD')(),
+  success: createStandardAction('page/SUCCESS')<i.ApiDataPayloads>(),
+  failed: createStandardAction('page/FAILED')(),
 };
 
 const generatePayload: i.GeneratePayload = (endpoint, payload) => {

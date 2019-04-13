@@ -1,10 +1,6 @@
 import * as i from 'types';
-import { action, ActionType } from 'typesafe-actions';
+import { ActionType, createStandardAction, getType } from 'typesafe-actions';
 import { API_ENDPOINT } from 'services';
-
-const LOAD = 'recruitment/LOAD';
-const FAILED = 'recruitment/FAILED';
-const SUCCESS = 'recruitment/SUCCESS';
 
 const initialState: i.RecruitmentState = {
   data: undefined,
@@ -14,19 +10,19 @@ const initialState: i.RecruitmentState = {
 
 export default (state = initialState, action: ActionType<typeof actions>) => {
   switch (action.type) {
-    case LOAD:
+    case getType(actions.load):
       return {
         ...state,
         error: false,
         loading: true,
       };
-    case FAILED:
+    case getType(actions.failed):
       return {
         ...state,
         loading: false,
         error: true,
       };
-    case SUCCESS:
+    case getType(actions.success):
       return {
         ...state,
         data: action.payload,
@@ -39,9 +35,9 @@ export default (state = initialState, action: ActionType<typeof actions>) => {
 };
 
 export const actions = {
-  load: () => action(LOAD),
-  failed: () => action(FAILED),
-  success: (page: i.RecruitmentData) => action(SUCCESS, page),
+  load: createStandardAction('recruitment/LOAD')(),
+  failed: createStandardAction('recruitment/FAILED')(),
+  success: createStandardAction('recruitment/SUCCESS')<i.RecruitmentData>(),
 };
 
 export const fetchRecruitment = (): i.ThunkAction => async (dispatch, getState, api) => {

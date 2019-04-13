@@ -5,12 +5,12 @@ import { FormSpy } from 'react-final-form';
 import { actions } from 'ducks/form';
 
 const FormStateToRedux: React.FC<FormStateToReduxProps> = ({ form, update }) => (
-  <FormSpy onChange={(state) => update(form, state)} />
+  <FormSpy onChange={(state) => update({ form, data: state })} />
 );
 
 type FormStateToReduxProps = {
   form: i.Forms;
-  update: any; /** @todo action type */
+  update: typeof actions.update;
 }
 
 export default connect(undefined, {

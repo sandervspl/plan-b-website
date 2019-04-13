@@ -30,7 +30,7 @@ export const PageContentContainer = styled.div`
 `;
 
 type PageContentContainerProps = {
-  positionLower: boolean;
+  positionLower?: boolean;
 }
 
 export const ContentContainer = styled.div`

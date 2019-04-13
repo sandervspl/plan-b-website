@@ -87,15 +87,6 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
   };
 
   const handleClick = () => {
-    // I need to clean myself after this. Disgusting.
-    /** @todo Fix a way to figure out if input value is not empty */
-    const el = document.querySelector<HTMLInputElement>(`[name='${form.activeField}']`);
-
-    if (el && (el.type === 'text' || el.type === 'textarea') && el.value.length === 0) {
-      /** @todo Display error */
-      return;
-    }
-
     (router as i.Router).push(
       'apply',
       { questionId: questionIndex + 1 },
@@ -141,7 +132,6 @@ ApplicationPage.getInitialProps = async ({ store }) => {
 
 type Props = i.WithRouterProps & {
   form: i.ReduxFormState;
-  setActiveField: i.SetActiveField;
 }
 
 const mapStateToProps: i.MapStateToProps = (state) => ({

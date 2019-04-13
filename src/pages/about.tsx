@@ -11,7 +11,7 @@ import { AboutContent } from 'modules/About/styled';
 const About: i.NextPageComponent<Props> = ({ page }) => (
   <Page
     hero={{
-      content: page.about!.hero_image ? getSourceUrl(page.about!.hero_image.url) : null,
+      content: page.about!.hero_image ? getSourceUrl(page.about!.hero_image!.url) : null,
     }}
   >
     <TransitionPost>

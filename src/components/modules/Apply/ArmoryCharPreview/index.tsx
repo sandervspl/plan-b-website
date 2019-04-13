@@ -1,21 +1,13 @@
 import * as i from 'types';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Field } from 'react-final-form';
-import { connect } from 'react-redux';
-import { actions } from 'ducks/form';
 import { Paragraph } from 'common';
 import {
   ArmoryCharPreviewContainer, Name, Guild, ArmoryCharacter, ImageContainer, Loader,
 } from './styled';
 
-const ArmoryCharPreview: React.FC<props> = ({ active, character, onCharacterClick, ...props }) => {
+const ArmoryCharPreview: React.FC<props> = ({ character, onCharacterClick }) => {
   const FIELD_NAME: i.FieldNames = 'armory_link';
-
-  useEffect(() => {
-    if (active) {
-      props.setActiveField(FIELD_NAME);
-    }
-  }, [active]);
 
   return (
     <ArmoryCharPreviewContainer>
@@ -58,9 +50,6 @@ export type props = {
   active?: boolean;
   character: i.CharacterState;
   onCharacterClick: () => void;
-  setActiveField: i.SetActiveField;
 };
 
-export default connect(null, {
-  setActiveField: actions.setActiveField,
-})(ArmoryCharPreview);
+export default ArmoryCharPreview;

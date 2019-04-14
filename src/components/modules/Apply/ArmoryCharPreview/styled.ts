@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { media } from 'styles/utils';
 import { Header, Paragraph } from 'common';
 import LoaderSvg from './loader.svg';

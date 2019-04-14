@@ -1,7 +1,7 @@
 import * as i from 'types';
 import styled, { css } from 'styled-components';
 import { media } from 'styles';
-import { Header, Paragraph } from 'common';
+import { Header } from 'common';
 import { ContentBlockContainer } from 'modules/Home/styled';
 
 export const RecruitmentBlock = styled(ContentBlockContainer)`

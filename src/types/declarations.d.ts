@@ -9,13 +9,6 @@ interface Window {
   onYouTubeIframeAPIReady: Function;
 }
 
-// extend NodeJS modules
-interface NodeModule {
-  hot: {
-    accept: (path: string, cb: Function) => any;
-  };
-}
-
 // files
 declare module '*.svg';
 declare module '*.png' {
@@ -39,6 +32,7 @@ declare module '*.otf' {
   export = value;
 }
 declare module '*.json' {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const value: any;
   export default value;
 }

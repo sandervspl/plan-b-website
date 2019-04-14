@@ -2,7 +2,6 @@
 import * as i from 'types';
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
-import { isServer } from 'services';
 import { VideoContainer, VideoInner, VideoOverlay, FilmGrainContainer } from './styled';
 import FilmGrainFx from './FilmGrain';
 

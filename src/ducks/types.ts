@@ -28,7 +28,7 @@ export type Image = {
   size: string;
   url: string;
   provider: string;
-  public_id?: any;
+  public_id?: string;
   created_at: Date;
   updated_at: Date;
 }

@@ -63,7 +63,12 @@
       "component": true,
       "html": true
     }],
-    "react/jsx-space-before-closing": ["error", "always"],
+    "react/jsx-tag-spacing": {
+      "closingSlash": "never",
+      "beforeSelfClosing": "always",
+      "afterOpening": "never",
+      "beforeClosing": "never"
+    },
     "import/no-unresolved": false,
     "import/named": false,
     "import/order": ["error", {

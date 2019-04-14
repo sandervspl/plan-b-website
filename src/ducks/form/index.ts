@@ -16,6 +16,7 @@ export default (state = initialState, action: ActionType<typeof actions>) => {
 };
 
 export const actions = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   update: createStandardAction('form/UPDATE')<{ form: i.Forms; data: any }>(),
 };
 

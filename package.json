@@ -8,7 +8,8 @@
     "build": "npm run clean && next build src && npm run build:server",
     "build:server": "tsc --project tsconfig.server.json",
     "start": "NODE_ENV=production node dist/server/index.js",
-    "clean": "rimraf dist/"
+    "clean": "rimraf dist/",
+    "lint": "eslint --ext .ts --ext .tsx src/"
   },
   "keywords": [],
   "author": "Sander Vispoel <contact@sandervispoel.com>",
@@ -54,8 +55,8 @@
     "@types/reselect": "2.2.0",
     "@types/styled-components": "4.1.14",
     "@types/youtube": "0.0.35",
-    "@typescript-eslint/eslint-plugin": "1.5.0",
-    "@typescript-eslint/parser": "1.5.0",
+    "@typescript-eslint/eslint-plugin": "1.6.0",
+    "@typescript-eslint/parser": "1.6.0",
     "@zeit/next-typescript": "^1.1.1",
     "babel-eslint": "10.0.1",
     "babel-plugin-styled-components": "1.10.0",

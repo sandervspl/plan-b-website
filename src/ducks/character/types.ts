@@ -2,9 +2,7 @@ import * as i from 'types';
 
 export type CharacterState = i.BaseState<i.CharacterData>;
 
-export type CharacterData = i.BaseResponseBody & i.CharacterBody;
-
-export type CharacterBody = {
+export type CharacterData = {
   lastModified: number;
   name: string;
   realm: string;

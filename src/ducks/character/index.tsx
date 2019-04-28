@@ -1,13 +1,13 @@
 import * as i from 'types';
 import { ActionType, createStandardAction, getType } from 'typesafe-actions';
 
-const initialState: i.RecruitmentState = {
+const initialState: i.CharacterState = {
   data: undefined,
   error: false,
   loading: false,
 };
 
-export default (state = initialState, action: ActionType<typeof actions>) => {
+export default (state = initialState, action: ActionType<typeof actions>): i.CharacterState => {
   switch (action.type) {
     case getType(actions.load):
       return {
@@ -37,13 +37,13 @@ export default (state = initialState, action: ActionType<typeof actions>) => {
 export const actions = {
   load: createStandardAction('character/LOAD')(),
   failed: createStandardAction('character/FAILED')(),
-  success: createStandardAction('character/SUCCESS')<i.CharacterBody>(),
+  success: createStandardAction('character/SUCCESS')<i.CharacterData>(),
 };
 
 export const fetchCharacter: i.FetchCharacterDuck = (name) => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
-  return api.get<i.CharacterBody>({
+  return api.get<i.CharacterData>({
     url: api.url.api,
     path: `blizzard/character/${name}`,
   })

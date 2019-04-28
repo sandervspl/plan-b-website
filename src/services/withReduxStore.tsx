@@ -3,6 +3,8 @@ import React from 'react';
 import initializeStore from 'store';
 import { NextAppContext, AppComponentProps as IAppComponentProps } from 'next/app';
 import { Store } from 'redux';
+import _ from 'lodash/fp';
+import { actions as uiActions } from 'ducks/ui';
 import { isServer } from './isServer';
 
 type AppComponentProps = IAppComponentProps & {
@@ -26,7 +28,7 @@ function getOrCreateStore(initialState?: any): Store {
 }
 
 export const withReduxStore = (App: any) => (
-  class AppWithRedux extends React.Component {
+  class AppWithRedux extends React.Component<AppComponentProps> {
     reduxStore: Store;
 
     // eslint-disable-next-line react/sort-comp
@@ -55,8 +57,25 @@ export const withReduxStore = (App: any) => (
       this.reduxStore = getOrCreateStore(props.initialReduxState);
     }
 
+    componentDidMount() {
+      window.addEventListener('resize', this.handleResize);
+      this.handleResize();
+    }
+
+    componentWillUnmount() {
+      window.removeEventListener('resize', this.handleResize);
+    }
+
+    handleResize = _.debounce(1000)(() => {
+      if (isServer) return;
+
+      this.reduxStore.dispatch(uiActions.setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      }));
+    });
+
     render() {
-      // @ts-ignore does not infer AppComponentType properly
       return <App {...this.props} reduxStore={this.reduxStore} />;
     }
   }

@@ -1,21 +1,16 @@
 import * as i from 'types';
 import React from 'react';
-import FadedBackgroundImage from '../BackgroundImage';
-import { QuestionContent } from './styled';
+import { QuestionContainer } from './styled';
 
-const Question: React.FC<Props> = ({ active, answered, image, Component, ...props }) => {
+const Question: React.FC<Props> = ({ Component, ...props }) => {
   return (
-    <>
-      <FadedBackgroundImage next image={image} active={active} />
-      <QuestionContent active={active} answered={answered}>
-        {<Component {...props} />}
-      </QuestionContent>
-    </>
+    <QuestionContainer>
+      {<Component {...props} />}
+    </QuestionContainer>
   );
 };
 
 export type Props = i.QuestionComponentProps & {
-  image?: string;
   answered?: boolean;
   Component: React.ComponentType<i.QuestionComponentProps>;
 };

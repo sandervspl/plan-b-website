@@ -7,7 +7,7 @@ const initialState: i.PageState = {
   loading: false,
 };
 
-export default (state = initialState, action: ActionType<typeof actions>) => {
+export default (state = initialState, action: ActionType<typeof actions>): i.PageState => {
   switch (action.type) {
     case getType(actions.load):
       return {

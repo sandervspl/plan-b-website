@@ -3,7 +3,7 @@ import { ActionType, getType, createStandardAction } from 'typesafe-actions';
 
 const initialState: i.ReduxFormState = {};
 
-export default (state = initialState, action: ActionType<typeof actions>) => {
+export default (state = initialState, action: ActionType<typeof actions>): i.ReduxFormState => {
   switch (action.type) {
     case getType(actions.update):
       return {

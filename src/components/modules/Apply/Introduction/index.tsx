@@ -1,32 +1,16 @@
 import * as i from 'types';
 import React from 'react';
-import img1 from 'images/recruitment/WoWScrnShot_060409_194034.jpg';
-import img2 from 'images/recruitment/WoWScrnShot_060509_204812.jpg';
-import img3 from 'images/recruitment/WoWScrnShot_060709_214610.jpg';
-import img4 from 'images/recruitment/WoWScrnShot_060709_221845.jpg';
-import { getStaticUrl } from 'services';
 import { Paragraph } from 'common';
 import { NextButton } from '../Question/styled';
 import QuestionHeader from '../QuestionHeader';
-import { QuestionContentHeader, ImagesContainer, ImageContainer } from '../styled';
+import { QuestionContentHeader } from '../styled';
 import { IntroductionContainer } from './styled';
+import IntroductionImages from './Images';
 
 const Introduction: React.FC<i.QuestionComponentProps> = ({ onNextClick }) => (
   <IntroductionContainer>
-    <ImagesContainer>
-      <ImageContainer>
-        <img src={getStaticUrl(img1)} />
-      </ImageContainer>
-      <ImageContainer>
-        <img src={getStaticUrl(img2)} />
-      </ImageContainer>
-      <ImageContainer>
-        <img src={getStaticUrl(img3)} />
-      </ImageContainer>
-      <ImageContainer>
-        <img src={getStaticUrl(img4)} />
-      </ImageContainer>
-    </ImagesContainer>
+    <IntroductionImages />
+
     <QuestionHeader>
       Hi there, adventurer!
     </QuestionHeader>

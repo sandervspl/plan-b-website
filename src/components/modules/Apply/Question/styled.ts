@@ -1,7 +1,4 @@
-import styled, { css } from 'styled-components';
-import { media } from 'styles/utils';
-import { TRANSITION_TIME_MS_SHORT, TRANSITION_TIME_MS } from 'styles/pageTransition';
-import { Paragraph } from 'common';
+import styled from 'styled-components';
 
 export const QuestionContainer = styled.div`
   position: absolute;
@@ -26,14 +23,23 @@ export const NextButton = styled.button`
   font-family: ${(props) => props.theme.font.primary};
   color: ${(props) => props.theme.color.primary};
   cursor: pointer;
-  will-change: transform;
-  transition: transform 300ms;
 
   &:before {
-    content: '— ';
+    content: '';
+    position: relative;
+    bottom: 0.3em;
+    display: inline-block;
+    margin-right: 12px;
+    width: 30px;
+    height: 2px;
+    background-color: ${(props) => props.theme.color.primary};
+    transition: width 400ms, padding-right 400ms 400ms, margin-left 400ms;
   }
 
-  &:hover {
-    transform: translate3d(55%, 0, 0);
+  &:hover:before {
+    padding-right: 20px;
+    margin-left: 20px;
+    width: 10px;
+    transition: width 400ms 400ms, padding-right 400ms, margin-left 400ms 400ms;
   }
 `;

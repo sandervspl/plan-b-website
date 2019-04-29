@@ -72,39 +72,17 @@ export const ImageContainer = styled.div`
 export const ImagesContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(20, 20px);
-  grid-template-rows: repeat(40, 20px);
+  grid-template-rows: repeat(20, 20px);
   gap: 2px;
   position: absolute;
   top: -58px;
   right: 0;
-  transform: translateX(75%);
   object-fit: cover;
 
-  ${ImageContainer} {
-    img {
-      height: 100%;
-    }
-
-    &:nth-child(1) {
-      grid-column: 1 / span 5;
-      grid-row: 1 / span 11;
-    }
-
-    &:nth-child(2) {
-      grid-column: 6 / span 5;
-      grid-row: 1 / span 11;
-    }
-
-    &:nth-child(3) {
-      grid-column: 1 / span 14;
-      grid-row: 12 / span 11;
-    }
-
-    &:nth-child(4) {
-      grid-column: 15 / span 5;
-      grid-row: 12 / span 11;
-    }
-  }
+  ${media.tablet`
+    grid-template-columns: repeat(70, 20px);
+    grid-template-rows: repeat(30, 20px);
+  `}
 `;
 
 // export const RecruitmentHeader = styled(Header)`

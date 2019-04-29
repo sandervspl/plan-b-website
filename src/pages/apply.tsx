@@ -94,7 +94,6 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
             {questions.map((qstn, i) => (
               <Question
                 key={i}
-                // image={qstn.image}
                 active={questionIndex === i}
                 answered={questionIndex > i}
                 onNextClick={handleClick}

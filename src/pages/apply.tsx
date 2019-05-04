@@ -1,22 +1,23 @@
 import * as i from 'types';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Form } from 'react-final-form';
 import { withRouter } from 'next/router';
 import router from 'router';
 import { API_ENDPOINT } from 'services';
+import { useTilt } from 'services/hooks';
 import { fetchPage } from 'ducks/page';
 import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
 import Introduction from 'modules/Apply/Introduction';
-import ArmorySelectAnswer from 'modules/Apply/ArmorySelectAnswer';
-import SpecializationSelectAnswer from 'modules/Apply/SpecializationSelectAnswer';
+// import ArmorySelectAnswer from 'modules/Apply/ArmorySelectAnswer';
+// import SpecializationSelectAnswer from 'modules/Apply/SpecializationSelectAnswer';
 import { RecruitmentContainer, QuestionsForm } from 'modules/Apply/styled';
 
 type Question = React.ComponentType<i.QuestionComponentProps>;
 
-const questions: Question[] = [
+const questionComponents: Question[] = [
   () => null,
   Introduction,
   // ArmorySelectAnswer,
@@ -24,7 +25,9 @@ const questions: Question[] = [
 ];
 
 const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [questionIndex, setQuestionIndex] = useState(1);
+  const { tiltStyle, setRef, mouseEvents } = useTilt();
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
@@ -48,6 +51,12 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
       setQuestionIndex(paramQstnId);
     }
   }, [props.router!.query!.questionId]);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      setRef(containerRef.current);
+    }
+  }, [containerRef]);
 
   // useEffect(() => {
   //   if (questions.length > 0) {
@@ -85,19 +94,20 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
   };
 
   return (
-    <RecruitmentContainer>
+    <RecruitmentContainer {...mouseEvents} ref={containerRef}>
       <Form onSubmit={() => {}}>
         {() => (
           <QuestionsForm onSubmit={formOnSubmit}>
             <FormStateToRedux form="application" />
 
-            {questions.map((qstn, i) => (
+            {questionComponents.map((component, i) => (
               <Question
                 key={i}
                 active={questionIndex === i}
                 answered={questionIndex > i}
                 onNextClick={handleClick}
-                Component={qstn}
+                Component={component}
+                tiltStyle={tiltStyle}
               />
             ))}
           </QuestionsForm>

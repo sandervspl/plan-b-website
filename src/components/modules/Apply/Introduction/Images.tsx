@@ -1,3 +1,4 @@
+import * as i from 'types';
 import React from 'react';
 import img1 from 'images/recruitment/WoWScrnShot_060409_194034.jpg';
 import img3 from 'images/recruitment/WoWScrnShot_060709_214610.jpg';
@@ -7,8 +8,8 @@ import { ImagesContainer, ImageContainer } from '../styled';
 
 const images = [img1, img3, img4];
 
-const IntroductionImages: React.FC = () => (
-  <ImagesContainer>
+const IntroductionImages: React.FC<IntroductionImagesProps> = (props) => (
+  <ImagesContainer {...props}>
     {images.map((img) => (
       <ImageContainer>
         <img src={getStaticUrl(img)} alt="" />
@@ -16,5 +17,9 @@ const IntroductionImages: React.FC = () => (
     ))}
   </ImagesContainer>
 );
+
+type IntroductionImagesProps = {
+  tiltStyle: i.TiltStyle;
+}
 
 export default IntroductionImages;

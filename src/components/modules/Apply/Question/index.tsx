@@ -13,6 +13,7 @@ const Question: React.FC<Props> = ({ Component, ...props }) => {
 export type Props = i.QuestionComponentProps & {
   answered?: boolean;
   Component: React.ComponentType<i.QuestionComponentProps>;
+  tiltStyle: i.TiltStyle;
 };
 
 export default Question;

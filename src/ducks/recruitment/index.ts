@@ -2,6 +2,12 @@ import * as i from 'types';
 import { ActionType, createStandardAction, getType } from 'typesafe-actions';
 import { API_ENDPOINT } from 'services';
 
+export const actions = {
+  load: createStandardAction('recruitment/LOAD')(),
+  failed: createStandardAction('recruitment/FAILED')(),
+  success: createStandardAction('recruitment/SUCCESS')<i.RecruitmentData>(),
+};
+
 const initialState: i.RecruitmentState = {
   data: undefined,
   error: false,
@@ -32,12 +38,6 @@ export default (state = initialState, action: ActionType<typeof actions>) => {
     default:
       return state;
   }
-};
-
-export const actions = {
-  load: createStandardAction('recruitment/LOAD')(),
-  failed: createStandardAction('recruitment/FAILED')(),
-  success: createStandardAction('recruitment/SUCCESS')<i.RecruitmentData>(),
 };
 
 export const fetchRecruitment = (): i.ThunkAction => async (dispatch, getState, api) => {

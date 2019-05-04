@@ -1,6 +1,10 @@
 import * as i from 'types';
 import { ActionType, createStandardAction, getType } from 'typesafe-actions';
 
+export const actions = {
+  setWindowSize: createStandardAction('ui/RESIZE')<i.WindowSize>(),
+};
+
 const initialState: i.UiState = {
   windowHeight: 0,
   windowWidth: 0,
@@ -17,8 +21,4 @@ export default (state = initialState, action: ActionType<typeof actions>): i.UiS
     default:
       return state;
   }
-};
-
-export const actions = {
-  setWindowSize: createStandardAction('ui/WINDOW_SIZE')<i.WindowSize>(),
 };

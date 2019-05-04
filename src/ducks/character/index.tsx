@@ -1,6 +1,12 @@
 import * as i from 'types';
 import { ActionType, createStandardAction, getType } from 'typesafe-actions';
 
+export const actions = {
+  load: createStandardAction('character/LOAD')(),
+  failed: createStandardAction('character/FAILED')(),
+  success: createStandardAction('character/SUCCESS')<i.CharacterData>(),
+};
+
 const initialState: i.CharacterState = {
   data: undefined,
   error: false,
@@ -32,12 +38,6 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Cha
     default:
       return state;
   }
-};
-
-export const actions = {
-  load: createStandardAction('character/LOAD')(),
-  failed: createStandardAction('character/FAILED')(),
-  success: createStandardAction('character/SUCCESS')<i.CharacterData>(),
 };
 
 export const fetchCharacter: i.FetchCharacterDuck = (name) => async (dispatch, getState, api) => {

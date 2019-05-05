@@ -36,13 +36,23 @@ type CharacterPaneContainerProps = {
   active?: boolean;
 }
 
+export const CharacterInfoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 120px;
+  width: 38%;
+  height: 100%;
+`;
+
 export const Loader = styled(LoaderSvg)`
-  justify-self: center;
   height: 12px;
   width: 53px;
 
   ${media.tablet`
-    width: 100px;
+    width: 53px;
   `}
 `;
 

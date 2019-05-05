@@ -11,7 +11,7 @@ const images = [img1, img3, img4];
 const IntroductionImages: React.FC<IntroductionImagesProps> = (props) => (
   <ImagesContainer {...props}>
     {images.map((img) => (
-      <ImageContainer>
+      <ImageContainer key={img}>
         <img src={getStaticUrl(img)} alt="" />
       </ImageContainer>
     ))}

@@ -11,7 +11,7 @@ import { fetchPage } from 'ducks/page';
 import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
 import Introduction from 'modules/Apply/Introduction';
-// import ArmorySelectAnswer from 'modules/Apply/ArmorySelectAnswer';
+import ArmorySelectAnswer from 'modules/Apply/ArmorySelectAnswer';
 // import SpecializationSelectAnswer from 'modules/Apply/SpecializationSelectAnswer';
 import { RecruitmentContainer, QuestionsForm } from 'modules/Apply/styled';
 
@@ -20,7 +20,7 @@ type Question = React.ComponentType<i.QuestionComponentProps>;
 const questionComponents: Question[] = [
   () => null,
   Introduction,
-  // ArmorySelectAnswer,
+  ArmorySelectAnswer,
   // SpecializationSelectAnswer,
 ];
 

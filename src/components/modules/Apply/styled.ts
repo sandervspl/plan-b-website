@@ -10,9 +10,8 @@ export const RecruitmentContainer = styled(Fullscreenpage)`
   margin: 0 auto;
   padding: 75px 140px;
   max-width: 1280px;
+  max-height: 800px;
   overflow: hidden;
-  background: url(${getStaticUrl(bgImg)}) center center;
-  background-size: cover;
 
   &:before {
     content: '';
@@ -21,8 +20,9 @@ export const RecruitmentContainer = styled(Fullscreenpage)`
     left: 0;
     width: 100vw;
     height: 100vh;
-    opacity: .87;
-    background-color: ${(props) => props.theme.color.secondary.dark};
+    background: url(${getStaticUrl(bgImg)}) center center;
+    background-size: cover;
+    opacity: .05;
   }
 `;
 
@@ -32,7 +32,6 @@ export const QuestionsForm = styled.form`
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: hidden;
 `;
 
 export const AnswerContainer = styled.div`
@@ -40,17 +39,16 @@ export const AnswerContainer = styled.div`
   height: 100%;
 `;
 
-export const TextField = styled(Field)`
+export const TextInputField = styled(Field)`
+  display: inline-block;
   padding: 0;
-  width: 100%;
   border: 0;
   background: none;
-  border-bottom: 1px solid ${(props) => props.theme.color.primary};
   border-radius: 0;
   outline: 0;
   font-family: ${(props) => props.theme.font.primary};
   font-size: 16px;
-  color: ${(props) => props.theme.color.primary};
+  color: ${(props) => props.theme.color.primary.medium};
 
   ${(props) => props.hidden && css`
     visibility: hidden;
@@ -59,6 +57,18 @@ export const TextField = styled(Field)`
   ${media.tablet`
     font-size: 30px;
   `}
+
+  &::placeholder {
+    color: ${(props) => props.theme.color.secondary};
+  }
+`;
+
+export const QuestionField = styled.div`
+  width: 42%;
+  font-family: ${(props) => props.theme.font.primary};
+  color: ${(props) => props.theme.color.primary};
+  font-size: 30px;
+  font-weight: bold;
 `;
 
 export const Label = styled.label`
@@ -132,12 +142,16 @@ type ImagesContainerProps = {
 }
 
 export const QuestionContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   position: relative;
   top: 155px;
+  height: calc(100% - 155px);
 `;
 
 export const NextButton = styled.button`
-  margin-top: 32px;
+  margin-top: auto;
   background: none;
   border: 0;
   outline: 0;
@@ -147,6 +161,7 @@ export const NextButton = styled.button`
   font-family: ${(props) => props.theme.font.primary};
   color: ${(props) => props.theme.color.primary};
   cursor: pointer;
+  transition: color 300ms;
 
   &:before {
     content: '';
@@ -157,13 +172,27 @@ export const NextButton = styled.button`
     width: 30px;
     height: 2px;
     background-color: ${(props) => props.theme.color.primary};
-    transition: width 400ms, padding-right 400ms 400ms, margin-left 400ms;
+    transition: width 400ms,
+                padding-right 400ms 400ms,
+                margin-left 400ms,
+                background-color 300ms;
   }
 
-  &:hover:before {
-    padding-right: 20px;
-    margin-left: 20px;
-    width: 10px;
-    transition: width 400ms 400ms, padding-right 400ms, margin-left 400ms 400ms;
+  &:not(:disabled) {
+    &:hover:before {
+      padding-right: 20px;
+      margin-left: 20px;
+      width: 10px;
+      transition: width 400ms 400ms, padding-right 400ms, margin-left 400ms 400ms;
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    color: ${(props) => props.theme.color.secondary};
+
+    &:before {
+      background-color: ${(props) => props.theme.color.secondary};
+    }
   }
 `;

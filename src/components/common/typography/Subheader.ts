@@ -11,7 +11,7 @@ export const Subheader = styled.h2.attrs<Props>((props) => ({
 `;
 
 type Props = {
-  as?: i.HeaderType;
+  as?: i.HeaderType | 'p';
 }
 
 Subheader.defaultProps = {

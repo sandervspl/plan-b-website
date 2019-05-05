@@ -5,7 +5,7 @@ const PERSPECTIVE = 1000;
 const SPEED = 1000;
 const MAX_TILT_DEG = 35;
 
-export const useTilt = () => {
+export function useTilt() {
   const containerRef = useRef<HTMLElement>();
   const [tiltStyle, setTiltStyle] = useState<i.TiltStyle>({
     style: {

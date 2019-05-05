@@ -13,6 +13,10 @@ const theme = {
     tertiary: '#476369',
     paragraph: '#8e9496',
     highlight: '#ffffff',
+    border: {
+      light: '#8e9496',
+      dark: '#131516',
+    },
   },
 
   font: {

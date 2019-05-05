@@ -1,23 +1,43 @@
 import * as i from 'types';
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
+import { Field, FieldRenderProps } from 'react-final-form';
 import { fetchCharacter } from 'ducks/character';
 import { TRANSITION_TIME_MS } from 'styles/pageTransition';
 import { useDebounce } from 'services/hooks';
-import { TextField, Label, RecruitmentHeader } from '../styled';
-import { SearchContent } from './styled';
+import CharacterPane from 'modules/CharacterPane';
+import { TextInputField, NextButton, QuestionContent, QuestionField } from '../styled';
+import QuestionHeader from '../QuestionHeader';
 
-const ArmoryCharPreview = React.lazy(() => import('../ArmoryCharPreview'));
+const NextRadioButton: React.FC<NextRadioButtonProps> = ({ onNextClick, input }) => {
+  const character: i.CharacterState = useSelector((state: i.ReduxState) => state.character);
 
-const ArmorySelect: React.FC<props> = ({ character, active, onNextClick, ...props }) => {
+  const handleNextClick = () => {
+    input.onChange(input.value);
+    onNextClick();
+  };
+
+  return (
+    <NextButton onClick={handleNextClick} disabled={!character.data || character.loading}>
+      <span>Continue</span>
+    </NextButton>
+  );
+};
+
+type NextRadioButtonProps = FieldRenderProps<HTMLButtonElement> & {
+  onNextClick: Function;
+}
+
+const ArmorySelect: React.FC<Props> = ({ character, active, onNextClick, ...props }) => {
   const [inputValue, setInputValue] = useState('');
+  const [armoryLink, setArmoryLink] = useState('');
   const debouncedUserInput = useDebounce<string>(inputValue, 250);
 
   useEffect(() => {
     if (!active) return;
 
     setTimeout(() => {
-      const el = document.querySelector<HTMLInputElement>('#armory_select_user_input');
+      const el = document.querySelector<HTMLInputElement>('#character_name');
 
       if (el) el.focus();
     }, TRANSITION_TIME_MS);
@@ -29,43 +49,55 @@ const ArmorySelect: React.FC<props> = ({ character, active, onNextClick, ...prop
     props.fetchCharacter(inputValue);
   }, [debouncedUserInput]);
 
+  useEffect(() => {
+    if (!character.data) return;
+
+    const name = character.data!.name.toLowerCase();
+    setArmoryLink(`https://worldofwarcraft.com/en-gb/character/eu/ragnaros/${name}`);
+  }, [character.data]);
+
+  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
+    return setInputValue(e.currentTarget.value);
+  };
+
   return (
     <>
-      <RecruitmentHeader as="h2">
+      <QuestionHeader>
         Select your character
-      </RecruitmentHeader>
+      </QuestionHeader>
 
-      <SearchContent>
-        <Label htmlFor="armory_select_user_input">
-          <span>Character name</span>
-
-          <TextField
+      <QuestionContent>
+        <QuestionField>
+          I am {''}
+          <TextInputField
             as="input"
-            id="armory_select_user_input"
-            name="armory_select_user_input"
             component="input"
-            type="text"
+            id="character_name"
+            name="character_name"
+            placeholder="character name"
             tabIndex={-1}
+            onChange={onChange}
             value={inputValue}
-            onChange={(e) => setInputValue(e.currentTarget.value)}
           />
-        </Label>
+        </QuestionField>
 
-        {(character.data || character.loading || character.error) && (
-          <React.Suspense fallback={null}>
-            <ArmoryCharPreview
-              active={active}
-              onCharacterClick={onNextClick}
-              character={character}
-            />
-          </React.Suspense>
-        )}
-      </SearchContent>
+        <CharacterPane character={character} tiltStyle={props.tiltStyle} />
+
+        <Field
+          name="character_armory_link"
+          // @ts-ignore onNextClick type error
+          component={NextRadioButton}
+          type="radio"
+          value={armoryLink}
+          tabIndex={-1}
+          onNextClick={onNextClick}
+        />
+      </QuestionContent>
     </>
   );
 };
 
-export type props = i.QuestionComponentProps & {
+export type Props = i.QuestionComponentProps & {
   character: i.CharacterState;
   fetchCharacter: i.FetchCharacter;
 };

@@ -4,7 +4,7 @@ import { QuestionContainer } from './styled';
 
 const Question: React.FC<Props> = ({ Component, ...props }) => {
   return (
-    <QuestionContainer>
+    <QuestionContainer active={props.active} answered={props.answered}>
       {<Component {...props} />}
     </QuestionContainer>
   );

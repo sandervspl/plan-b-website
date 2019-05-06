@@ -1,8 +1,10 @@
 import * as i from 'types';
 import React, { useState, useEffect, useRef } from 'react';
+import _ from 'lodash';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Form } from 'react-final-form';
+import arrayMutators from 'final-form-arrays';
 import { withRouter } from 'next/router';
 import router from 'router';
 import { API_ENDPOINT } from 'services';
@@ -13,6 +15,7 @@ import Question from 'modules/Apply/Question';
 import IntroductionQuestion from 'modules/Apply/IntroductionQuestion';
 import CharacterQuestion from 'modules/Apply/CharacterQuestion';
 import RoleQuestion from 'modules/Apply/RoleQuestion';
+import RaidQuestion from 'modules/Apply/RaidQuestion';
 import { RecruitmentContainer, QuestionsForm } from 'modules/Apply/styled';
 
 type Question = React.ComponentType<i.QuestionComponentProps>;
@@ -22,12 +25,14 @@ const questionComponents: Question[] = [
   IntroductionQuestion,
   CharacterQuestion,
   RoleQuestion,
+  RaidQuestion,
 ];
 
 const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [questionIndex, setQuestionIndex] = useState(1);
   const { tiltStyle, setRef, mouseEvents } = useTilt();
+  const [canContinue, setCanContinue] = useState(true); // Can't get debounce to work on handleClick :/
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
@@ -82,22 +87,35 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
   // };
 
   const handleClick = () => {
+    // Prevent double clicks
+    if (!canContinue) return;
+
     (router as i.Router).push(
       'apply',
       { questionId: questionIndex + 1 },
       { shallow: true },
     );
+
+    setCanContinue(false);
+
+    setTimeout(() => {
+      setCanContinue(true);
+    }, 500);
   };
 
-  const formOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const formOnSubmit = (finalFormSubmit: Function) => (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
 
   return (
     <RecruitmentContainer {...mouseEvents} ref={containerRef}>
-      <Form onSubmit={() => {}}>
-        {() => (
-          <QuestionsForm onSubmit={formOnSubmit}>
+      <Form
+        onSubmit={() => {}}
+        mutators={{ ...arrayMutators }}
+        keepDirtyOnReinitialize
+      >
+        {({ handleSubmit }) => (
+          <QuestionsForm onSubmit={formOnSubmit(handleSubmit)}>
             <FormStateToRedux form="application" />
 
             {questionComponents.map((component, i) => (

@@ -26,15 +26,16 @@ export const RecruitmentContainer = styled(Fullscreenpage)`
   }
 `;
 
-export const QuestionsForm = styled.form`
-  display: flex;
-  justify-content: center;
+export const RecruitmentContainerInner = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
 `;
 
-export const AnswerContainer = styled.div`
+export const QuestionsForm = styled.form`
+  display: flex;
+  justify-content: center;
+  position: relative;
   width: 100%;
   height: 100%;
 `;
@@ -140,14 +141,23 @@ type ImagesContainerProps = {
   tiltStyle: i.TiltStyle;
 }
 
-export const QuestionContent = styled.div`
+export const QuestionContent = styled.div<QuestionContentProps>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   position: relative;
   top: 155px;
   height: calc(100% - 155px);
+
+  ${(props) => props.fullSize && css`
+    top: 0;
+    height: 100%;
+  `}
 `;
+
+type QuestionContentProps = {
+  fullSize?: boolean;
+}
 
 export const NextButton = styled.button`
   margin-top: auto;

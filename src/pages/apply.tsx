@@ -12,7 +12,7 @@ import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
 import IntroductionQuestion from 'modules/Apply/IntroductionQuestion';
 import CharacterQuestion from 'modules/Apply/CharacterQuestion';
-// import SpecializationSelectAnswer from 'modules/Apply/SpecializationSelectAnswer';
+import RoleQuestion from 'modules/Apply/RoleQuestion';
 import { RecruitmentContainer, QuestionsForm } from 'modules/Apply/styled';
 
 type Question = React.ComponentType<i.QuestionComponentProps>;
@@ -21,7 +21,7 @@ const questionComponents: Question[] = [
   () => null,
   IntroductionQuestion,
   CharacterQuestion,
-  // SpecializationSelectAnswer,
+  RoleQuestion,
 ];
 
 const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {

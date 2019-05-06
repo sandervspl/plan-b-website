@@ -1,57 +1,42 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { media } from 'styles/utils';
 import { Paragraph } from 'common';
-import { AnswerContainer, RecruitmentHeader } from '../styled';
 
 type ImageProps = {
   src: string;
 }
 
-export const SpecializationAnswerContainer = styled(AnswerContainer)`
-  display: grid;
-  grid-template-rows: 15% 70%;
-  gap: 2vh;
-
-  ${RecruitmentHeader} {
-    margin: 0;
-  }
-
-  ${media.tablet`
-    grid-template-rows: 15% 1fr;
-  `}
-
-  ${media.veryLarge`
-    grid-template-columns: repeat(2,1fr);
-    grid-template-rows: 100%;
-    height: 100%;
-    gap: 0;
-  `}
-`;
-
 export const RoleList = styled.div`
+  position: absolute;
+  top: 95px;
+  right: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+  width: 70%;
   height: 100%;
+  max-height: 440px;
 
   ${media.tablet`
-    gap: 50px;
+    gap: 30px;
   `}
 
   ${media.veryLarge`
-    gap: 2vh;
+    max-height: 500px;
   `}
 `;
 
-export const BackgroundImage = styled.div<ImageProps>`
+export const BackgroundImage = styled.figure`
+  display: flex;
+  justify-content: center;
   position: relative;
+  margin: 0;
   width: 100%;
   height: 100%;
-  transform: scale(1);
-  background: url(${(props) => props.src}) center center;
-  background-size: cover;
-  will-change: transform;
-  transition: transform 200ms ease-in-out;
+  overflow: hidden;
+  border: 1px solid transparent;
+  will-change: border-color;
+  transition: border-color 200ms ease-in-out;
 
   &:after {
     content: '';
@@ -63,15 +48,23 @@ export const BackgroundImage = styled.div<ImageProps>`
     will-change: opacity;
     transition: opacity 200ms ease-in-out;
   }
+
+  img {
+    width: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    will-change: transform;
+    transition: transform 200ms ease-in-out;
+  }
 `;
 
 export const RoleIcon = styled.div<ImageProps>`
   position: absolute;
-  top: calc(80% - 4vh);
-  width: 8vh;
-  height: 8vh;
+  top: calc(80% - 25px);
+  width: 50px;
+  height: 50px;
   border-radius: 100%;
-  border: 2px solid black;
+  border: 1px solid ${(props) => props.theme.color.border.light};
   background: url(${(props) => props.src}) center center;
   background-size: cover;
 
@@ -105,13 +98,24 @@ export const RoleText = styled(Paragraph)`
   ${media.tablet`
     font-size: 30px;
   `}
-
-  ${media.veryLarge`
-    font-size: 4.5vh;
-  `}
 `;
 
-export const ListItem = styled.label`
+const RoleItemActiveStyle = css`
+  ${RoleText} {
+    opacity: 1;
+    color: ${(props) => props.theme.color.highlight};
+  }
+
+  ${BackgroundImage} img {
+    transform: scale(1.02);  
+  }
+
+  ${BackgroundImage}:after, ${RoleIcon}:after {
+    opacity: 0;
+  }
+`;
+
+export const RoleItem = styled.label<RoleItemProps>`
   display: grid;
   grid-template-rows: 80% 1fr;
   justify-items: center;
@@ -119,21 +123,34 @@ export const ListItem = styled.label`
   overflow: hidden;
   cursor: pointer;
 
-  &:hover {
+  ${(props) => props.unchecked && css`
     ${RoleText} {
-      color: ${(props) => props.theme.color.highlight};
-    }
-
-    ${BackgroundImage} {
-      transform: scale(1.02);  
+      opacity: .5;
     }
 
     ${BackgroundImage}:after, ${RoleIcon}:after {
-      opacity: 0;
+      opacity: .5;
     }
+  `}
+
+  ${(props) => props.checked && css`
+    ${BackgroundImage} {
+      border-color: ${(props) => props.theme.color.border.light};
+    }
+
+    ${RoleItemActiveStyle}
+  `}
+
+  &:hover {
+    ${RoleItemActiveStyle}
   }
 
   input {
     display: none;
   }
 `;
+
+type RoleItemProps = {
+  checked?: boolean;
+  unchecked?: boolean;
+}

@@ -1,8 +1,6 @@
 import styled from 'styled-components';
+import { RecruitmentContainerInner } from '../styled';
 
-export const IntroductionContainer = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
+export const IntroductionContainer = styled(RecruitmentContainerInner)`
   max-width: 445px;
 `;

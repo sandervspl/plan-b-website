@@ -6,7 +6,7 @@ import { QuestionContentHeader, QuestionContent, NextButton } from '../styled';
 import { IntroductionContainer } from './styled';
 import IntroductionImages from './Images';
 
-const Introduction: React.FC<i.QuestionComponentProps> = ({ onNextClick, ...props }) => (
+const IntroductionQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, ...props }) => (
   <IntroductionContainer>
     <IntroductionImages tiltStyle={props.tiltStyle} />
 
@@ -32,4 +32,4 @@ const Introduction: React.FC<i.QuestionComponentProps> = ({ onNextClick, ...prop
   </IntroductionContainer>
 );
 
-export default Introduction;
+export default IntroductionQuestion;

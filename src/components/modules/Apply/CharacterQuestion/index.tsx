@@ -9,26 +9,7 @@ import CharacterPane from 'modules/CharacterPane';
 import { TextInputField, NextButton, QuestionContent, QuestionField } from '../styled';
 import QuestionHeader from '../QuestionHeader';
 
-const NextRadioButton: React.FC<NextRadioButtonProps> = ({ onNextClick, input }) => {
-  const character: i.CharacterState = useSelector((state: i.ReduxState) => state.character);
-
-  const handleNextClick = () => {
-    input.onChange(input.value);
-    onNextClick();
-  };
-
-  return (
-    <NextButton onClick={handleNextClick} disabled={!character.data || character.loading}>
-      <span>Continue</span>
-    </NextButton>
-  );
-};
-
-type NextRadioButtonProps = FieldRenderProps<HTMLButtonElement> & {
-  onNextClick: Function;
-}
-
-const ArmorySelect: React.FC<Props> = ({ character, active, onNextClick, ...props }) => {
+const CharacterSelect: React.FC<Props> = ({ character, active, onNextClick, ...props }) => {
   const [inputValue, setInputValue] = useState('');
   const [armoryLink, setArmoryLink] = useState('');
   const debouncedUserInput = useDebounce<string>(inputValue, 250);
@@ -106,4 +87,24 @@ const mapStateToProps: i.MapStateToProps = (state) => ({
   character: state.character,
 });
 
-export default connect(mapStateToProps, { fetchCharacter })(ArmorySelect);
+export default connect(mapStateToProps, { fetchCharacter })(CharacterSelect);
+
+
+const NextRadioButton: React.FC<NextRadioButtonProps> = ({ onNextClick, input }) => {
+  const character: i.CharacterState = useSelector((state: i.ReduxState) => state.character);
+
+  const handleNextClick = () => {
+    input.onChange(input.value);
+    onNextClick();
+  };
+
+  return (
+    <NextButton onClick={handleNextClick} disabled={!character.data || character.loading}>
+      <span>Continue</span>
+    </NextButton>
+  );
+};
+
+type NextRadioButtonProps = FieldRenderProps<HTMLButtonElement> & {
+  onNextClick: Function;
+}

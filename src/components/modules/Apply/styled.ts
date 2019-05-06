@@ -110,7 +110,6 @@ export const ImagesContainer = styled.div.attrs<ImagesContainerProps>((props) =>
   right: 45px;
   width: 50%;
   height: calc(100% - ${75 * 2}px);
-  transition: transform 100ms;
 
   ${ImageContainer} {
     img {

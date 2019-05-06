@@ -10,8 +10,8 @@ import { useTilt } from 'services/hooks';
 import { fetchPage } from 'ducks/page';
 import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
-import Introduction from 'modules/Apply/Introduction';
-import ArmorySelectAnswer from 'modules/Apply/ArmorySelectAnswer';
+import IntroductionQuestion from 'modules/Apply/IntroductionQuestion';
+import CharacterQuestion from 'modules/Apply/CharacterQuestion';
 // import SpecializationSelectAnswer from 'modules/Apply/SpecializationSelectAnswer';
 import { RecruitmentContainer, QuestionsForm } from 'modules/Apply/styled';
 
@@ -19,8 +19,8 @@ type Question = React.ComponentType<i.QuestionComponentProps>;
 
 const questionComponents: Question[] = [
   () => null,
-  Introduction,
-  ArmorySelectAnswer,
+  IntroductionQuestion,
+  CharacterQuestion,
   // SpecializationSelectAnswer,
 ];
 

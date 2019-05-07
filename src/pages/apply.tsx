@@ -16,6 +16,7 @@ import CharacterQuestion from 'modules/Apply/CharacterQuestion';
 import RoleQuestion from 'modules/Apply/RoleQuestion';
 import RaidQuestion from 'modules/Apply/RaidQuestion';
 import AboutYouQuestion from 'modules/Apply/AboutYouQuestion';
+import CompleteApplication from 'modules/Apply/CompleteApplication';
 import { RecruitmentContainer, QuestionsForm } from 'modules/Apply/styled';
 
 type Question = React.ComponentType<i.QuestionComponentProps>;
@@ -27,6 +28,7 @@ const questionComponents: Question[] = [
   RoleQuestion,
   RaidQuestion,
   AboutYouQuestion,
+  CompleteApplication,
 ];
 
 const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {

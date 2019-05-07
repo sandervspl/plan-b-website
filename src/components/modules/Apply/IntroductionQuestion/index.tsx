@@ -1,14 +1,16 @@
 import * as i from 'types';
 import React from 'react';
+import img1 from 'images/recruitment/WoWScrnShot_060409_194034.jpg';
+import img2 from 'images/recruitment/WoWScrnShot_060709_214610.jpg';
+import img3 from 'images/recruitment/WoWScrnShot_060709_221845.jpg';
 import { Paragraph } from 'common';
 import QuestionHeader from '../QuestionHeader';
-import { QuestionContentHeader, QuestionContent, NextButton } from '../styled';
-import { IntroductionContainer } from './styled';
-import IntroductionImages from './Images';
+import { QuestionContentHeader, QuestionContent, NextButton, RecruitmentContainerInner } from '../styled';
+import TiltImages from '../TiltImages';
 
 const IntroductionQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, ...props }) => (
-  <IntroductionContainer>
-    <IntroductionImages tiltStyle={props.tiltStyle} />
+  <RecruitmentContainerInner small>
+    <TiltImages images={[img1, img2, img3]} tiltStyle={props.tiltStyle} />
 
     <QuestionHeader>
       Hi there, adventurer!
@@ -29,7 +31,7 @@ const IntroductionQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick,
         <span>Start</span>
       </NextButton>
     </QuestionContent>
-  </IntroductionContainer>
+  </RecruitmentContainerInner>
 );
 
 export default IntroductionQuestion;

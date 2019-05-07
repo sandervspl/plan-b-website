@@ -58,6 +58,10 @@ export const RaidItem = styled.label`
     }
   }
 
+  &:active {
+    transform: scale(.98);
+  }
+
   input {
     display: none;
   }

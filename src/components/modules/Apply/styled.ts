@@ -26,11 +26,19 @@ export const RecruitmentContainer = styled(Fullscreenpage)`
   }
 `;
 
-export const RecruitmentContainerInner = styled.div`
+export const RecruitmentContainerInner = styled.div<RecruitmentContainerInnerProps>`
   position: relative;
   width: 100%;
   height: 100%;
+
+  ${(props) => props.small && css`
+    max-width: 445px;
+  `}
 `;
+
+type RecruitmentContainerInnerProps = {
+  small?: boolean;
+}
 
 export const QuestionsForm = styled.form`
   display: flex;

@@ -22,7 +22,6 @@ const PaperPlaneHoverAnim = keyframes`
 `;
 
 export const SubmitButton = styled.button`
-  margin-top: auto;
   padding: 17px 75px;
   font-size: 30px;
   color: ${(props) => props.theme.color.secondary.dark};
@@ -35,6 +34,10 @@ export const SubmitButton = styled.button`
   cursor: pointer;
   will-change: transform;
   transition: 50ms transform;
+
+  input[type="submit"] {
+    display: none;
+  }
 
   svg {
     margin-left: 20px;
@@ -59,4 +62,8 @@ export const SubmitButton = styled.button`
 export const Name = styled.span`
   text-transform: capitalize;
   color: ${(props) => props.theme.color.tertiary};
+`;
+
+export const SubmitLabel = styled.label`
+  margin-top: auto;
 `;

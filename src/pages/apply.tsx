@@ -9,6 +9,7 @@ import router from 'router';
 import { API_ENDPOINT } from 'services';
 import { useTilt } from 'services/hooks';
 import { fetchPage } from 'ducks/page';
+import { sendApplication } from 'ducks/form';
 import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
 import IntroductionQuestion from 'modules/Apply/IntroductionQuestion';
@@ -107,8 +108,11 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const formOnSubmit = (finalFormSubmit: Function) => (e: React.FormEvent<HTMLFormElement>) => {
+  const formOnSubmit = (finalFormSubmit: Function) => async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // finalFormSubmit();
+
+    await props.sendApplication();
   };
 
   return (
@@ -149,6 +153,7 @@ ApplicationPage.getInitialProps = async ({ store }) => {
 
 type Props = i.WithRouterProps & {
   form: i.ReduxFormState;
+  sendApplication: i.SendApplication;
 }
 
 const mapStateToProps: i.MapStateToProps = (state) => ({
@@ -157,5 +162,5 @@ const mapStateToProps: i.MapStateToProps = (state) => ({
 
 export default compose(
   withRouter,
-  connect(mapStateToProps),
+  connect(mapStateToProps, { sendApplication }),
 )(ApplicationPage);

@@ -31,8 +31,8 @@ const story = [
 const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, active }) => {
   const form: i.ReduxFormState = useSelector((state: i.ReduxState) => state.form);
   const questionsAmount = story.filter((qstn) => typeof qstn === 'object').length;
-  const answerAmount = form.application && form.application.values.about
-    ? Object.values(form.application.values.about).length
+  const answerAmount = form.application && form.application.values.about_applicant
+    ? Object.values(form.application.values.about_applicant).length
     : 0;
 
   /** @todo turn into hook */
@@ -40,7 +40,7 @@ const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, act
     if (!active) return;
 
     setTimeout(() => {
-      const el = document.querySelector<HTMLInputElement>('#fake-about\\.name');
+      const el = document.querySelector<HTMLInputElement>('#fake-about_applicant\\.name');
 
       if (el) {
         el.focus();
@@ -55,11 +55,11 @@ const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, act
   return (
     <RecruitmentContainerInner>
       <QuestionHeader>
-      Tell us about yourself
+       Tell us about yourself
       </QuestionHeader>
 
       <QuestionContent>
-        <FieldArray name="about">
+        <FieldArray name="about_applicant">
           {({ fields }) => (
             <QuestionField fullSize>
               {story.map((item) => {

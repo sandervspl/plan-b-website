@@ -180,7 +180,7 @@ type QuestionContentProps = {
   fullSize?: boolean;
 }
 
-export const NextButton = styled.button`
+export const NextButton = styled.button.attrs({ type: 'button' })`
   margin-top: auto;
   background: none;
   border: 0;

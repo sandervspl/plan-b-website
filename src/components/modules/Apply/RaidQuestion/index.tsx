@@ -41,7 +41,7 @@ const raids = [
 const RaidQuestion: React.FC<Props> = ({ onNextClick }) => {
   const form: i.ReduxFormState = useSelector((state: i.ReduxState) => state.form);
   const selected = form.application
-    ? form.application.values.raids || {}
+    ? form.application.values.raid_experience || {}
     : {};
   const selectedArray = Object.keys(selected).filter((raid) => selected[raid]);
 
@@ -55,7 +55,7 @@ const RaidQuestion: React.FC<Props> = ({ onNextClick }) => {
 
       <QuestionContent fullSize>
         <RaidList>
-          <FieldArray name="raids">
+          <FieldArray name="raid_experience">
             {({ fields }) => (
               raids.map((raidRow, i) => (
                 <RaidRow key={i} row={i}>

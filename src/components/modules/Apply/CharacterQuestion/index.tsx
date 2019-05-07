@@ -67,7 +67,7 @@ const CharacterSelect: React.FC<Props> = ({ character, active, onNextClick, ...p
         <CharacterPane character={character} tiltStyle={props.tiltStyle} />
 
         <Field
-          name="character_armory_link"
+          name="armory_link"
           // @ts-ignore onNextClick type error
           component={NextRadioButton}
           type="radio"

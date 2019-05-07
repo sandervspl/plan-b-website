@@ -4,5 +4,5 @@ export { CharacterData, Professions, Profession, Items, Item } from './character
 
 export type CharacterState = i.BaseState<i.CharacterData>;
 
-export type FetchCharacterDuck = (name: string) => i.ThunkAction<Promise<void>>;
-export type FetchCharacter = (name: string) => Promise<void>;
+export type FetchCharacter<T = Promise<void>> = (name: string) => T;
+export type FetchCharacterDuck = FetchCharacter<i.ThunkAction<Promise<void>>>;

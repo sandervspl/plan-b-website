@@ -24,7 +24,7 @@ const roles = [{
 const RoleQuestion: React.FC<Props> = ({ onNextClick }) => {
   const form: i.ReduxFormState = useSelector((state: i.ReduxState) => state.form);
   const activeRole = form.application
-    ? form.application.values && form.application.values.character_role
+    ? form.application.values && form.application.values.role
     : null;
 
   return (
@@ -42,7 +42,7 @@ const RoleQuestion: React.FC<Props> = ({ onNextClick }) => {
               unchecked={activeRole != null && role.text !== activeRole}
             >
               <Field
-                name="character_role"
+                name="role"
                 component="input"
                 type="radio"
                 value={role.text}

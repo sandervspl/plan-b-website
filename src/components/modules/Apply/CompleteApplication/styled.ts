@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { Button } from 'common';
 
 const PaperPlaneHoverAnim = keyframes`
   0% {
@@ -21,20 +22,7 @@ const PaperPlaneHoverAnim = keyframes`
   }
 `;
 
-export const SubmitButton = styled.button`
-  padding: 17px 75px;
-  font-size: 30px;
-  color: ${(props) => props.theme.color.secondary.dark};
-  font-family: ${(props) => props.theme.font.primary};
-  font-weight: bold;
-  text-transform: uppercase;
-  background-color: ${(props) => props.theme.color.primary};
-  border: 0;
-  outline: 0;
-  cursor: pointer;
-  will-change: transform;
-  transition: 50ms transform;
-
+export const SubmitButton = styled(Button)`
   input[type="submit"] {
     display: none;
   }
@@ -45,17 +33,11 @@ export const SubmitButton = styled.button`
   }
 
   &:hover {
-    transform: scale(1.01);
-
     svg {
       animation-name: ${PaperPlaneHoverAnim};
       animation-duration: 2s;
       animation-iteration-count: infinite;
     }
-  }
-
-  &:active {
-    transform: scale(.98);
   }
 `;
 

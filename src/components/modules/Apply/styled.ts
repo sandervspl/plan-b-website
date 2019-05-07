@@ -22,7 +22,7 @@ export const RecruitmentContainer = styled(Fullscreenpage)`
     height: 100vh;
     background: url(${getStaticUrl(bgImg)}) center center;
     background-size: cover;
-    opacity: .05;
+    opacity: .065;
   }
 `;
 

@@ -1,7 +1,7 @@
 import * as i from 'types';
 import React, { useState, useEffect, useRef } from 'react';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { withRouter } from 'next/router';
@@ -9,7 +9,7 @@ import router from 'router';
 import { API_ENDPOINT } from 'services';
 import { useTilt } from 'services/hooks';
 import { fetchPage } from 'ducks/page';
-import { sendApplication } from 'ducks/form';
+import { sendApplication, actions as formActions } from 'ducks/form';
 import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
 import IntroductionQuestion from 'modules/Apply/IntroductionQuestion';
@@ -33,16 +33,16 @@ const questionComponents: Question[] = [
 ];
 
 const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
+  const dispatch = useDispatch();
   const containerRef = useRef<HTMLDivElement>(null);
   const [questionIndex, setQuestionIndex] = useState(1);
   const { tiltStyle, setRef, mouseEvents } = useTilt();
   const [canContinue, setCanContinue] = useState(true); // Can't get debounce to work on handleClick :/
 
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown);
-
     return function cleanup() {
-      document.removeEventListener('keydown', handleKeyDown);
+      // Reset form
+      dispatch(formActions.reset());
     };
   }, []);
 
@@ -73,16 +73,6 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
   //   }
   // }, [questions, questionIndex]);
 
-  function handleKeyDown(e: KeyboardEvent) {
-    if (
-      e.key === 'Enter' &&
-      document.activeElement &&
-      document.activeElement.nodeName !== 'TEXTAREA'
-    ) {
-      e.preventDefault();
-    }
-  }
-
   // const preloadNextBgImage = (id: number) => {
   //   if (questions[id] && questions[id].image) {
   //     const img = new Image();
@@ -108,9 +98,8 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const formOnSubmit = (finalFormSubmit: Function) => async (e: React.FormEvent<HTMLFormElement>) => {
+  const formOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // finalFormSubmit();
 
     await props.sendApplication();
   };
@@ -122,8 +111,8 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
         mutators={{ ...arrayMutators }}
         keepDirtyOnReinitialize
       >
-        {({ handleSubmit }) => (
-          <QuestionsForm onSubmit={formOnSubmit(handleSubmit)}>
+        {() => (
+          <QuestionsForm onSubmit={formOnSubmit}>
             <FormStateToRedux form="application" />
 
             {questionComponents.map((component, i) => (

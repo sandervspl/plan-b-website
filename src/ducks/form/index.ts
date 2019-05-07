@@ -7,6 +7,7 @@ export const actions = {
   sendStart: createStandardAction('form/SEND_START')(),
   sendSuccess: createStandardAction('form/SEND_SUCCESS')(),
   sendFailed: createStandardAction('form/SEND_FAILED')(),
+  reset: createStandardAction('form/RESET')(),
 };
 
 const initialState: i.ReduxFormState = {
@@ -15,6 +16,8 @@ const initialState: i.ReduxFormState = {
 
 export default (state = initialState, action: ActionType<typeof actions>): i.ReduxFormState => {
   switch (action.type) {
+    case getType(actions.reset):
+      return initialState;
     case getType(actions.update):
       return {
         ...state,

@@ -4,7 +4,7 @@ import img1 from 'images/recruitment/WoWScrnShot_060409_194034.jpg';
 import img2 from 'images/recruitment/WoWScrnShot_060709_214610.jpg';
 import img3 from 'images/recruitment/WoWScrnShot_060709_221845.jpg';
 import SendIcon from 'vectors/send.svg';
-import { Paragraph } from 'common';
+import { Paragraph, Link, Button } from 'common';
 import { useSelector } from 'react-redux';
 import QuestionHeader from '../QuestionHeader';
 import TiltImages from '../TiltImages';
@@ -12,6 +12,7 @@ import { QuestionContentHeader, QuestionContent, RecruitmentContainerInner } fro
 import { SubmitButton, SubmitLabel, Name } from './styled';
 
 const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ tiltStyle }) => {
+  const form: i.ReduxFormState = useSelector((state: i.ReduxState) => state.form);
   const character: i.CharacterData | null = useSelector(
     (state: i.ReduxState) => state.character.data
   );
@@ -21,28 +22,62 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ tiltStyle }) 
     <RecruitmentContainerInner small>
       <TiltImages images={[img1, img2, img3]} tiltStyle={tiltStyle} />
 
-      <QuestionHeader>
-        That's it!
-      </QuestionHeader>
+      {form.sending.success ? (
+        <>
+          <QuestionHeader>
+            Thank you!
+          </QuestionHeader>
 
-      <QuestionContent>
-        <QuestionContentHeader>
-          Thank you, <Name>{name}</Name>.
-        </QuestionContentHeader>
+          <QuestionContent>
+            <Link to="home">
+              <Button>
+                Return to home
+              </Button>
+            </Link>
+          </QuestionContent>
+        </>
+      ) : form.sending.failed ? (
+        <>
+          <QuestionHeader>
+            Whoops, something went wrong.
+          </QuestionHeader>
 
-        <Paragraph>
-          You can review your application before sending it in. <br />
-          An officer will contact you in-game if we think you are a match for Plan B.
-        </Paragraph>
+          <QuestionContent>
+            <SubmitLabel htmlFor="submit_application">
+              <SubmitButton disabled={form.sending.loading}>
+                <span>Try again</span>
+                <SendIcon />
+                <input id="submit_application" type="submit" />
+              </SubmitButton>
+            </SubmitLabel>
+          </QuestionContent>
+        </>
+      ) : (
+        <>
+          <QuestionHeader>
+            That's it!
+          </QuestionHeader>
 
-        <SubmitLabel htmlFor="submit_application">
-          <SubmitButton>
-            <span>Send</span>
-            <SendIcon />
-            <input id="submit_application" type="submit" />
-          </SubmitButton>
-        </SubmitLabel>
-      </QuestionContent>
+          <QuestionContent>
+            <QuestionContentHeader>
+              Thank you, <Name>{name}</Name>.
+            </QuestionContentHeader>
+
+            <Paragraph>
+              You can review your application before sending it in. <br />
+              An officer will contact you in-game if we think you are a match for Plan B.
+            </Paragraph>
+
+            <SubmitLabel htmlFor="submit_application">
+              <SubmitButton disabled={form.sending.loading}>
+                <span>Send</span>
+                <SendIcon />
+                <input id="submit_application" type="submit" />
+              </SubmitButton>
+            </SubmitLabel>
+          </QuestionContent>
+        </>
+      )}
     </RecruitmentContainerInner>
   );
 };

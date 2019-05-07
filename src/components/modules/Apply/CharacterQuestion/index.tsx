@@ -20,7 +20,9 @@ const CharacterSelect: React.FC<Props> = ({ character, active, onNextClick, ...p
     setTimeout(() => {
       const el = document.querySelector<HTMLInputElement>('#character_name');
 
-      if (el) el.focus();
+      if (el) {
+        el.focus();
+      }
     }, TRANSITION_TIME_MS);
   }, [active]);
 

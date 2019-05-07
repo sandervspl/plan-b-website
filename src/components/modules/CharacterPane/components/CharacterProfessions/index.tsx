@@ -1,6 +1,5 @@
 import * as i from 'types';
 import React from 'react';
-import { Paragraph } from 'common';
 import ProfessionDetail from '../ProfessionDetail';
 import { CharacterProfessionsContainer, ProfessionsError } from './styled';
 

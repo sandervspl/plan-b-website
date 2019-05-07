@@ -66,10 +66,10 @@ const RaidQuestion: React.FC<Props> = ({ onNextClick }) => {
                     return (
                       <RaidItem key={j} data-tip={raid.name}>
                         <Field
-                          name={`${fields.name}.${raidName}`}
-                          id={`${fields.name}.${raidName}`}
                           component="input"
                           type="checkbox"
+                          name={`${fields.name}.${raidName}`}
+                          id={`${fields.name}.${raidName}`}
                         />
                         <RaidImage selected={selected}>
                           <img src={raid.img} alt={raid.name} />

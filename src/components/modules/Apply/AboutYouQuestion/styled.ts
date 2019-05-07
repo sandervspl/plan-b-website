@@ -1,0 +1,43 @@
+import styled, { css } from 'styled-components';
+import { media } from 'styles';
+import { TextInputField } from '../styled';
+
+export const Placeholder = styled.span<PlaceholderProps>`
+  display: none;
+  left: 0;
+  z-index: 0;
+  color: ${(props) => props.theme.color.primary.dark};
+  cursor: text;
+  
+  ${(props) => props.visible && css`
+    display: inline-block;
+  `}
+`;
+
+type PlaceholderProps = {
+  visible?: boolean;
+}
+
+export const FakeInputFieldContainer = styled.span`
+  position: relative;
+`;
+
+export const FakeInputField = styled(TextInputField)<FakeInputFieldProps>`
+  min-width: initial;
+  max-height: 200px;
+  overflow-y: scroll;
+
+  ${media.tablet`
+    min-width: initial;
+  `}
+
+  ${(props) => !props.hasInput && css`
+    ${media.tablet`
+      min-width: 1px;
+    `}
+  `}
+`;
+
+type FakeInputFieldProps = {
+  hasInput?: boolean;
+}

@@ -1,6 +1,5 @@
 import * as i from 'types';
 import React, { useState, useEffect, useRef } from 'react';
-import _ from 'lodash';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Form } from 'react-final-form';
@@ -16,6 +15,7 @@ import IntroductionQuestion from 'modules/Apply/IntroductionQuestion';
 import CharacterQuestion from 'modules/Apply/CharacterQuestion';
 import RoleQuestion from 'modules/Apply/RoleQuestion';
 import RaidQuestion from 'modules/Apply/RaidQuestion';
+import AboutYouQuestion from 'modules/Apply/AboutYouQuestion';
 import { RecruitmentContainer, QuestionsForm } from 'modules/Apply/styled';
 
 type Question = React.ComponentType<i.QuestionComponentProps>;
@@ -26,6 +26,7 @@ const questionComponents: Question[] = [
   CharacterQuestion,
   RoleQuestion,
   RaidQuestion,
+  AboutYouQuestion,
 ];
 
 const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
@@ -103,6 +104,7 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
     }, 500);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const formOnSubmit = (finalFormSubmit: Function) => (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };

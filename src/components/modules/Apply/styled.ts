@@ -41,36 +41,49 @@ export const QuestionsForm = styled.form`
 `;
 
 export const TextInputField = styled(Field)`
+  position: relative;
   display: inline-block;
   padding: 0;
   border: 0;
+  min-width: 16px;
   background: none;
   border-radius: 0;
   outline: 0;
   font-family: ${(props) => props.theme.font.primary};
   font-size: 16px;
-  color: ${(props) => props.theme.color.primary.medium};
+  color: ${(props) => props.theme.color.tertiary};
+  overflow: hidden;
+  vertical-align: bottom;
 
   ${(props) => props.hidden && css`
     visibility: hidden;
   `}
 
   ${media.tablet`
+    min-width: 30px;
     font-size: 30px;
   `}
 
   &::placeholder {
-    color: ${(props) => props.theme.color.secondary};
+    color: ${(props) => props.theme.color.primary.dark};
   }
 `;
 
-export const QuestionField = styled.div`
+export const QuestionField = styled.div<QuestionFieldProps>`
   width: 42%;
   font-family: ${(props) => props.theme.font.primary};
   color: ${(props) => props.theme.color.primary};
   font-size: 30px;
   font-weight: bold;
+
+  ${(props) => props.fullSize && css`
+    width: 100%;
+  `}
 `;
+
+type QuestionFieldProps = {
+  fullSize?: boolean;
+}
 
 export const Label = styled.label`
   width: 100%;

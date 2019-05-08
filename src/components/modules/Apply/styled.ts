@@ -7,7 +7,7 @@ import bgImg from 'images/recruitment/bg.jpg?external';
 import { Fullscreenpage, Header } from 'common';
 
 export const RecruitmentContainer = styled(Fullscreenpage)`
-  margin: 0 auto;
+  margin: auto;
   padding: 75px 140px;
   max-width: 1280px;
   max-height: 800px;

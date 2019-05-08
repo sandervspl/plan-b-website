@@ -34,4 +34,13 @@ export default createGlobalStyle`
   a {
     text-decoration: none;
   }
+
+  #__next {
+    height: 100%;
+
+    > div {
+      height: 100%;
+      display: flex;
+    }
+  }
 `;

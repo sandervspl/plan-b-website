@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Subheader } from 'common';
+import { Subheader, Header } from 'common';
 import { media } from 'styles/utils';
 
 export const CharacterInfoContainer = styled.div`
@@ -21,6 +21,17 @@ export const CharacterDetails = styled.div`
   flex-direction: column;
   margin-left: 20px;
   transform: translateY(-5px);
+
+  ${Header} {
+    max-width: 300px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    
+    ${media.tablet`
+      font-size: 35px;
+    `}
+  }
 `;
 
 export const Guild = styled(Subheader)`

@@ -5,7 +5,7 @@ import Content from './Content';
 import { HeroContainer } from './HeroContainer';
 import LogoLink from './LogoLink';
 import BaseHero from './BaseHero';
-import { AwayFromHomeTransitionStyle, ToHomeTransitionStyle } from './styled';
+import { Main, AwayFromHomeTransitionStyle, ToHomeTransitionStyle } from './styled';
 
 const Page: React.FC<Props> = ({ children, hero, className }) => {
   const router = useRouter();
@@ -14,7 +14,7 @@ const Page: React.FC<Props> = ({ children, hero, className }) => {
     : hero!.content;
 
   return (
-    <main className={className}>
+    <Main className={className}>
       {router.route !== '/home' && <AwayFromHomeTransitionStyle />}
       {router.route === '/home' && <ToHomeTransitionStyle />}
       <MobileNav />
@@ -25,7 +25,7 @@ const Page: React.FC<Props> = ({ children, hero, className }) => {
       <Content positionLower={hero!.big!}>
         {children}
       </Content>
-    </main>
+    </Main>
   );
 };
 

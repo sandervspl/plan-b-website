@@ -1,4 +1,4 @@
-import { createGlobalStyle, keyframes } from 'styled-components';
+import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import { media } from 'styles/utils';
 import { TRANSITION_TIME_MS, TRANSITION_TIME_MS_SHORT } from 'styles/pageTransition';
 import { VideoContainer } from 'modules/Home/HeroVideo/styled';
@@ -9,6 +9,10 @@ import { HeroContainer } from './HeroContainer';
 import { PageContentContainer, ContentContainer } from './Content/styled';
 import { LogoLinkContainer } from './LogoLink/styled';
 import { BaseHeroContainer } from './BaseHero/styled';
+
+export const Main = styled.main`
+  width: 100%;
+`;
 
 const AppearAnim = keyframes`
   from {

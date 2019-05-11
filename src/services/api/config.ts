@@ -4,6 +4,8 @@ const apiConfig = {
   url: {
     cms: (() => {
       switch (config.appEnv.toLowerCase()) {
+        case 'test':
+        case 'acceptation':
         case 'production':
         default:
           return 'http://cms.planbguild.eu';
@@ -12,6 +14,8 @@ const apiConfig = {
 
     api: (() => {
       switch (config.appEnv.toLowerCase()) {
+        case 'test':
+        case 'acceptation':
         case 'production':
           return 'http://api.planbguild.eu';
         default:

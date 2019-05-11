@@ -1,5 +1,5 @@
 class NavigationMenu {
-  private _items = [
+  private readonly _items = [
     {
       label: 'News',
       page: 'home',
@@ -12,17 +12,25 @@ class NavigationMenu {
       label: 'About us',
       page: 'about',
     },
+    {
+      label: 'forums',
+      page: 'http://forums.planbguild.eu/',
+      external: true,
+      invisible: !__DEV__,
+    },
   ];
 
   get items() {
     // "typeof this._items" resolves into an error
     const tempItems = this._items;
 
-    const items = tempItems.reduce((items, item) => {
-      item.label = item.label.replace(/ /g, '.');
+    const items = tempItems
+      .filter((item) => !item.invisible)
+      .reduce((items, item) => {
+        item.label = item.label.replace(/ /g, '.');
 
-      return [...items, item];
-    }, [] as typeof tempItems);
+        return [...items, item];
+      }, [] as typeof tempItems);
 
     return items;
   }

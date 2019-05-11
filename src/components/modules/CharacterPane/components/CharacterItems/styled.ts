@@ -10,7 +10,7 @@ export const CharacterItemsContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 20px 30px;
-  overflow: scroll;
+  overflow: hidden;
 `;
 
 export const StyledTooltip = styled(ReactTooltip)`

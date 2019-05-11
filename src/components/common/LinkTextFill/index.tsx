@@ -1,14 +1,30 @@
+import * as i from 'types';
 import React from 'react';
+import * as _ from 'lodash';
 import Link, { LinkComponentProps } from 'common/Link';
 import NavLink from 'common/NavLink';
 import { MaskWrap, Mask } from './styled';
 
-const LinkTextFill: React.FC<Props> = ({ children, linkType, ...props }) => {
-  const Component = linkType === 'link' ? Link : NavLink;
+const LinkTextFill: React.FC<Props> = ({ children, component, ...props }) => {
+  let linkProps: LinkProps = props;
+  let Component;
+
+  switch (component) {
+    case 'Link': Component = Link; break;
+    case 'NavLink': Component = NavLink; break;
+    case 'a':
+      Component = 'a';
+
+      linkProps = _.omit(linkProps, 'to');
+      linkProps.href = props.to;
+      linkProps.target = '_blank';
+      break;
+    default: Component = Link;
+  }
 
   return (
     <MaskWrap>
-      <Component {...props}>
+      <Component {...linkProps}>
         <Mask>
           <span>{children}</span>
         </Mask>
@@ -19,11 +35,13 @@ const LinkTextFill: React.FC<Props> = ({ children, linkType, ...props }) => {
 };
 
 LinkTextFill.defaultProps = {
-  linkType: 'link',
+  component: 'Link',
 };
 
 export type Props = LinkComponentProps & {
-  linkType: 'link' | 'navlink';
+  component: 'a' | 'Link' | 'NavLink';
 };
+
+type LinkProps = i.Omit<LinkComponentProps, 'children'> & React.AnchorHTMLAttributes<{}>;
 
 export default LinkTextFill;

@@ -8,7 +8,7 @@ const Navigation: React.FC = () => (
     <NavList>
       {navigationMenu.items.map((item, i) => (
         <li key={i}>
-          <LinkTextFill linkType="navlink" to={item.page}>
+          <LinkTextFill component={item.external ? 'a' : 'NavLink'} to={item.page}>
             {item.label}
           </LinkTextFill>
         </li>

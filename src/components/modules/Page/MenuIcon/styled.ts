@@ -29,7 +29,7 @@ export const VeganBurgerContainer = styled.div<Props>`
     }
   }
 
-  ${(props) => props.active && css`
+  ${(props) => props.isActive && css`
     transform: rotate(40deg);
 
     span {
@@ -45,5 +45,5 @@ export const VeganBurgerContainer = styled.div<Props>`
 `;
 
 type Props = {
-  active: boolean;
+  isActive: boolean;
 };

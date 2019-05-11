@@ -4,7 +4,7 @@ import { TRANSITION_TIME_MS_SHORT } from 'styles/pageTransition';
 import { NavLink } from 'common';
 
 type MenuProps = i.VisibilityProps & {
-  active: boolean;
+  isActive: boolean;
 }
 
 type MenuItemProps = {
@@ -24,7 +24,7 @@ export const FullscreenMenuContainer = styled.div<FullscreenMenuContainerProps>`
   transition: all 1ms linear;
   transition-delay: 1s;
 
-  ${(props) => props.active && css`
+  ${(props) => props.isActive && css`
     top: 0;
     left: 0;
     bottom: 0;
@@ -49,7 +49,7 @@ export const FullscreenMenuContainer = styled.div<FullscreenMenuContainerProps>`
     transition: all 800ms ${(props) => props.theme.easing.easeOutQuint};
     transition-delay: 250ms;
 
-    ${(props) => props.active && css`
+    ${(props) => props.isActive && css`
       transform: translate3d(0, 0, 0);
       transition-delay: 0ms;
     `};
@@ -69,7 +69,7 @@ export const MenuItems = styled.div<MenuItemsProps>`
   height: 100%;
   padding: 30px 30px 100px;
 
-  ${(props) => props.active && css`
+  ${(props) => props.isActive && css`
     pointer-events: auto;
   `}
 `;
@@ -92,7 +92,7 @@ export const Background = styled.div`
   will-change: transform;
 `;
 
-export const MenuLink = styled(NavLink)<MenuLinkProps>`
+const MenuLinkStyle = css<MenuLinkProps>`
   display: block;
   color: ${(props) => props.theme.color.tertiary};
   font-family: ${(props) => props.theme.font.primary};
@@ -105,7 +105,7 @@ export const MenuLink = styled(NavLink)<MenuLinkProps>`
   transition: ${TRANSITION_TIME_MS_SHORT}ms opacity ${(props) => props.theme.easing.easeOutCirc};
   transition-delay: ${({ num }) => num * 50}ms;
 
-  ${(props) => props.active && css<MenuLinkProps>`
+  ${(props) => props.isActive && css<MenuLinkProps>`
     opacity: 1;
     transition-delay: ${({ num }) => 300 + num * 100}ms;
   `}
@@ -113,6 +113,14 @@ export const MenuLink = styled(NavLink)<MenuLinkProps>`
   &.active {
     color: ${(props) => props.theme.color.primary};
   }
+`;
+
+export const MenuClientLink = styled(NavLink)`
+  ${MenuLinkStyle}
+`;
+
+export const MenuExternalLink = styled.a`
+  ${MenuLinkStyle}
 `;
 
 type MenuLinkProps = MenuProps & MenuItemProps;

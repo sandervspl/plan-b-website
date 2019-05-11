@@ -43,9 +43,9 @@ const MobileNav: React.FC = () => {
   return (
     <>
       <MobileNavContainer onClick={handleClick} ref={mobileNavRef}>
-        <MenuIcon active={open} />
+        <MenuIcon isActive={open} />
       </MobileNavContainer>
-      <FullscreenMenu active={open} visible={visible} />
+      <FullscreenMenu isActive={open} visible={visible} />
     </>
   );
 };

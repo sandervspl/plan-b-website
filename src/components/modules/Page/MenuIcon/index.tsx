@@ -10,7 +10,7 @@ const MenuIcon: React.FC<props> = (props) => (
 );
 
 export type props = {
-  active: boolean;
+  isActive: boolean;
 };
 
 export default MenuIcon;

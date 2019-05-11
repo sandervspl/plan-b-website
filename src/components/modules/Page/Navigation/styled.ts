@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'styles';
+import { MaskWrap } from 'common/LinkTextFill/styled';
 
 export const NavContainer = styled.nav`
   display: none;
@@ -9,15 +10,17 @@ export const NavContainer = styled.nav`
     padding: 0 55px;
     height: 30px;
 
-    a {
-      color: ${(props) => props.theme.color.tertiary};
-      font: 600 23px/25px ${(props) => props.theme.font.primary};
-      text-decoration: none;
-      text-transform: uppercase;
-      transition: color .1s linear;
+    ${MaskWrap} {
+        > a, > span {
+        color: ${(props) => props.theme.color.tertiary};
+        font: 600 23px/25px ${(props) => props.theme.font.primary};
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: color .1s linear;
 
-      &.active {
-        color: ${(props) => props.theme.color.primary};
+        &.active {
+          color: ${(props) => props.theme.color.primary};
+        }
       }
     }
   `}

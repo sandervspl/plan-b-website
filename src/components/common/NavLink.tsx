@@ -53,6 +53,16 @@ class NavLink extends React.PureComponent<NavLinkProps> {
   render() {
     const { children, to, router, ariaLabel, ...props } = this.props;
 
+    if (this.state.active) {
+      const clsName = this.setActiveClassName(props.className!);
+
+      return (
+        <span {...props} className={clsName}>
+          {children}
+        </span>
+      );
+    }
+
     const child = React.Children.only(
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <a aria-label={_.capitalize(ariaLabel)} className={props.className}>{children}</a>

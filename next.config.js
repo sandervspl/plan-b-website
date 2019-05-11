@@ -24,12 +24,14 @@ const config = (phase) => {
     cfg = {
       ...cfg,
       webpack: (config) => {
-      /*
-        WEBPACK CONFIG
-        Your regular Webpack configuration, except we have to work with an already existing
-        Webpack configuration from Next. When changing anything, keep in mind to preserve the
-        config of Next (unless you are trying to overwrite something) or things might break.
-      */
+        const appEnv = process.env.APP_ENV || 'development';
+
+        /*
+          WEBPACK CONFIG
+          Your regular Webpack configuration, except we have to work with an already existing
+          Webpack configuration from Next. When changing anything, keep in mind to preserve the
+          config of Next (unless you are trying to overwrite something) or things might break.
+        */
         const rules = [
           {
             test: /\.svg$/,
@@ -87,10 +89,10 @@ const config = (phase) => {
             APP_ENV: JSON.stringify(process.env.APP_ENV || 'development'),
             PORT: process.env.PORT || 3000,
           },
-          __DEV__: config.appEnv === 'development',
-          __TEST__: config.appEnv === 'test',
-          __ACC__: config.appEnv === 'acceptation',
-          __PROD__: config.appEnv === 'production',
+          __DEV__: appEnv === 'development',
+          __TEST__: appEnv === 'test',
+          __ACC__: appEnv === 'acceptation',
+          __PROD__: appEnv === 'production',
         }));
 
         return config;

@@ -1,15 +1,13 @@
+
+import { Request } from './types';
 import 'isomorphic-fetch';
-// import redirectToLogin from './redirectToLogin';
+
 import { triggerErrorMessage } from './triggerErrorMessage';
 import { handleStatusCodes } from './handleStatusCodes';
-import { Request } from './types';
-// import { isServer } from 'services/isServer';
 
 export const request: Request = ({
   path, options, file, errorConfig = {},
-}) => new Promise((resolve, reject) => {
-  // if (!isServer && !localStorage.getItem('x-access-token')) return redirectToLogin();
-
+}) => new Promise(async (resolve, reject) => {
   fetch(path, options)
     .then((response) => {
       if (handleStatusCodes(response.status)) return;

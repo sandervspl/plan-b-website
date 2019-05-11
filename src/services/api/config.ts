@@ -15,7 +15,7 @@ const apiConfig = {
         case 'production':
           return 'http://api.planbguild.eu';
         default:
-          return 'http://api.planbguild.eu';
+          return 'http://localhost:8080';
       };
     })(),
   },

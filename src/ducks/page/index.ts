@@ -65,7 +65,7 @@ const generatePayload: i.GeneratePayload = (endpoint, payload) => {
 export const fetchPage: i.FetchPageAction = (endpoint) => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
-  return api.get<i.PagesBody>({
+  return api.methods.get<i.PagesBody>({
     url: api.url.cms,
     path: `${endpoint}`,
   })

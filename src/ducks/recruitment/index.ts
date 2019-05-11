@@ -43,7 +43,7 @@ export default (state = initialState, action: ActionType<typeof actions>) => {
 export const fetchRecruitment = (): i.ThunkAction => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
-  return api.get({
+  return api.methods.get({
     url: api.url.cms,
     path: `${API_ENDPOINT.RECRUITMENT}`,
   })

@@ -66,7 +66,7 @@ export const sendApplication: i.SendApplicationDuck = () => async (dispatch, get
 
   const { values } = getState().form.application!;
 
-  return api.post({
+  return api.methods.post({
     url: api.url.cms,
     path: 'recruitmentapplications',
     body: values,

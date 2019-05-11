@@ -43,7 +43,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Cha
 export const fetchCharacter: i.FetchCharacterDuck = (name) => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
-  return api.get<i.CharacterData>({
+  return api.methods.get<i.CharacterData>({
     url: api.url.api,
     path: `blizzard/character/${name}`,
   })

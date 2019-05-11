@@ -11,6 +11,7 @@ export type RequestOptions = {
   options: RequestInit;
   file: any;
   errorConfig: ErrorConfig;
+  withAuth: boolean;
 }
 
 export type Options = {
@@ -40,16 +41,12 @@ export type TriggerErrorMessage = (errorConfig: ErrorConfig, apiError: ApiError)
 
 export type HandleStatusCodes = (code: number) => boolean;
 
-export type ApiHelper = {
+export type ApiMethods = {
   get: FetchCall;
   del: FetchCall;
   post: FetchCall;
   put: FetchCall;
   patch: FetchCall;
-  url: {
-    api: string;
-    cms: string;
-  };
 }
 
 export type ContentId = number;
@@ -59,3 +56,10 @@ export type BaseResponseBody = {
   created_at: Date;
   updated_at: Date;
 }
+
+export type RunMiddleware = (options: RequestOptions, middlewares: Middleware[]) => Promise<RequestOptions>;
+
+export type SetupRequest = (middlewares: Middleware[], options: Options) => Promise<any>;
+
+export type Middleware = (next: NextMiddleware) => (options: RequestOptions, ...args: any) => void;
+export type NextMiddleware = (options: RequestOptions, ...args: any) => void;

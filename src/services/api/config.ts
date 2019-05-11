@@ -3,7 +3,7 @@ import config from 'config';
 const apiConfig = {
   url: {
     cms: (() => {
-      switch (config.env.toLowerCase()) {
+      switch (config.appEnv.toLowerCase()) {
         case 'production':
         default:
           return 'http://cms.planbguild.eu';
@@ -11,8 +11,9 @@ const apiConfig = {
     })(),
 
     api: (() => {
-      switch (config.env.toLowerCase()) {
+      switch (config.appEnv.toLowerCase()) {
         case 'production':
+          return 'http://api.planbguild.eu';
         default:
           return 'http://api.planbguild.eu';
       };

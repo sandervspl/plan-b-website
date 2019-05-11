@@ -5,6 +5,7 @@ import { Field, FieldRenderProps } from 'react-final-form';
 import { fetchCharacter } from 'ducks/character';
 import { TRANSITION_TIME_MS } from 'styles/pageTransition';
 import { useDebounce } from 'services/hooks';
+import { validate } from 'services';
 import CharacterPane from 'modules/CharacterPane';
 import { TextInputField, NextButton, QuestionContent, QuestionField } from '../styled';
 import QuestionHeader from '../QuestionHeader';

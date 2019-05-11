@@ -6,9 +6,8 @@ import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { withRouter } from 'next/router';
 import router from 'router';
-import { API_ENDPOINT } from 'services';
+import { validate } from 'services';
 import { useTilt } from 'services/hooks';
-import { fetchPage } from 'ducks/page';
 import { sendApplication, actions as formActions } from 'ducks/form';
 import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
@@ -34,15 +33,20 @@ const questionComponents: Question[] = [
 
 const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
   const dispatch = useDispatch();
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerEl = useRef<HTMLDivElement>(null);
+  const formEl = useRef<HTMLFormElement>(null);
   const [questionIndex, setQuestionIndex] = useState(1);
   const { tiltStyle, setRef, mouseEvents } = useTilt();
   const [canContinue, setCanContinue] = useState(true); // Can't get debounce to work on handleClick :/
 
   useEffect(() => {
+    formEl.current!.addEventListener('keypress', preventSubmit);
+
     return function cleanup() {
       // Reset form
       dispatch(formActions.reset());
+
+      formEl.current!.removeEventListener('keypress', preventSubmit);
     };
   }, []);
 
@@ -62,10 +66,10 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
   }, [props.router!.query!.questionId]);
 
   useEffect(() => {
-    if (containerRef.current) {
-      setRef(containerRef.current);
+    if (containerEl.current) {
+      setRef(containerEl.current);
     }
-  }, [containerRef]);
+  }, [containerEl]);
 
   // useEffect(() => {
   //   if (questions.length > 0) {
@@ -79,6 +83,8 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
   //     img.src = questions[id].image!;
   //   }
   // };
+
+  function preventSubmit(e: KeyboardEvent) {};
 
   const handleClick = () => {
     // Prevent double clicks
@@ -98,21 +104,24 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const formOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const formOnSubmit = (values) => async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Validate form before submitting
+    if (validate.applyFormValidate(values)) return;
 
     await props.sendApplication();
   };
 
   return (
-    <RecruitmentContainer {...mouseEvents} ref={containerRef}>
+    <RecruitmentContainer {...mouseEvents} ref={containerEl}>
       <Form
         onSubmit={() => {}}
         mutators={{ ...arrayMutators }}
         keepDirtyOnReinitialize
       >
-        {() => (
-          <QuestionsForm onSubmit={formOnSubmit}>
+        {({ values }) => (
+          <QuestionsForm ref={formEl} onSubmit={formOnSubmit(values)}>
             <FormStateToRedux form="application" />
 
             {questionComponents.map((component, i) => (
@@ -132,12 +141,6 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
       {/* <Progress /> */}
     </RecruitmentContainer>
   );
-};
-
-ApplicationPage.getInitialProps = async ({ store }) => {
-  await store.dispatch(fetchPage(API_ENDPOINT.APPLICATION));
-
-  return {};
 };
 
 type Props = i.WithRouterProps & {

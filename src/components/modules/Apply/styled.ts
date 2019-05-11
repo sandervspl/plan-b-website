@@ -34,6 +34,18 @@ export const RecruitmentContainerInner = styled.div<RecruitmentContainerInnerPro
   ${(props) => props.small && css`
     max-width: 445px;
   `}
+
+  textarea {
+    margin-top: 10px;
+    height: 200px;
+    width: 100%;
+    overflow-y: scroll;
+    resize: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 `;
 
 type RecruitmentContainerInnerProps = {

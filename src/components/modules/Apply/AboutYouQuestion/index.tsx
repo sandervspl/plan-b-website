@@ -2,35 +2,32 @@ import * as i from 'types';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { FieldArray } from 'react-final-form-arrays';
-import { FieldRenderProps } from 'react-final-form';
 import { TRANSITION_TIME_MS } from 'styles/pageTransition';
+import FakeInput from 'common/FakeInput';
 import QuestionHeader from '../QuestionHeader';
-import {
-  QuestionContent, NextButton, RecruitmentContainerInner, QuestionField, TextInputField,
-} from '../styled';
-import { Placeholder, FakeInputFieldContainer, FakeInputField } from './styled';
+import { QuestionContent, NextButton, RecruitmentContainerInner, QuestionField, TextInputField } from '../styled';
 
-const story = [
+const questions = [
   'Hello! My name is ',
   {
     name: 'name',
     placeholder: 'real name',
+    maxLength: 20,
+    type: 'string',
   },
   ', I am ',
   {
     name: 'age',
     placeholder: 'age',
+    maxLength: 3,
+    type: 'number',
   },
-  ' years old. ',
-  {
-    name: 'story',
-    placeholder: 'My story...',
-  },
+  ' years old.',
 ];
 
 const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, active }) => {
   const form: i.ReduxFormState = useSelector((state: i.ReduxState) => state.form);
-  const questionsAmount = story.filter((qstn) => typeof qstn === 'object').length;
+  const questionsAmount = 1 + questions.filter((qstn) => typeof qstn === 'object').length;
   const answerAmount = form.application && form.application.values.about_applicant
     ? Object.values(form.application.values.about_applicant).length
     : 0;
@@ -48,10 +45,6 @@ const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, act
     }, TRANSITION_TIME_MS);
   }, [active]);
 
-  const handleOnInput: HandleOnInput = (input) => (e) => {
-    input.onChange(e.currentTarget.textContent || '');
-  };
-
   return (
     <RecruitmentContainerInner>
       <QuestionHeader>
@@ -62,47 +55,32 @@ const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, act
         <FieldArray name="about_applicant">
           {({ fields }) => (
             <QuestionField fullSize>
-              {story.map((item) => {
+              {questions.map((item) => {
                 if (typeof item === 'string') {
                   return item;
                 }
 
                 return (
-                  <TextInputField
+                  <FakeInput
                     key={item.name}
-                    id={`${fields.name}.${item.name}`}
-                    name={`${fields.name}.${item.name}`}
+                    fieldArrayName={fields.name}
+                    fieldName={item.name}
                     placeholder={item.placeholder}
-                    tabIndex={-1}
-                    render={({ input }: FieldRenderProps<HTMLSpanElement>) => (
-                      <FakeInputFieldContainer>
-                        <FakeInputField
-                          as="span"
-                          contentEditable
-                          onInput={handleOnInput(input)}
-                          hasInput={!!input.value}
-                          id={`fake-${fields.name}.${item.name}`}
-                        />
-                        <Placeholder
-                          visible={!input.value}
-                          onClick={() => {
-                            // Set focus on FakeInputField on click
-                            const el = document.querySelector<HTMLSpanElement>(
-                              `#fake-${fields.name}\\.${item.name}`
-                            );
-
-                            if (el) {
-                              el.focus();
-                            }
-                          }}
-                        >
-                          {item.placeholder}
-                        </Placeholder>
-                      </FakeInputFieldContainer>
-                    )}
+                    maxLength={item.maxLength}
+                    type={item.type as 'string' | 'number'}
                   />
                 );
               })}
+
+              <br />
+
+              <TextInputField
+                component="textarea"
+                id={`${fields.name}.story`}
+                name={`${fields.name}.story`}
+                placeholder="My story..."
+                tabIndex={-1}
+              />
             </QuestionField>
           )}
         </FieldArray>
@@ -114,8 +92,5 @@ const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, act
     </RecruitmentContainerInner>
   );
 };
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type HandleOnInput = (input) => (e: any) => void;
 
 export default AboutYouQuestion;

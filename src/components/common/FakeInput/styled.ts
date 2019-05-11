@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { media } from 'styles';
-import { TextInputField } from '../styled';
+import { media } from 'styles/utils';
+import { TextInputField } from 'modules/Apply/styled';
 
 export const Placeholder = styled.span<PlaceholderProps>`
   display: none;
@@ -8,6 +8,7 @@ export const Placeholder = styled.span<PlaceholderProps>`
   z-index: 0;
   color: ${(props) => props.theme.color.primary.dark};
   cursor: text;
+  font-weight: normal;
   
   ${(props) => props.visible && css`
     display: inline-block;
@@ -25,7 +26,7 @@ export const FakeInputFieldContainer = styled.span`
 export const FakeInputField = styled(TextInputField)<FakeInputFieldProps>`
   min-width: initial;
   max-height: 200px;
-  overflow-y: scroll;
+  overflow: hidden;
 
   ${media.tablet`
     min-width: initial;

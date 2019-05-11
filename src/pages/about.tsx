@@ -16,7 +16,7 @@ const About: i.NextPageComponent<Props> = ({ page }) => (
   >
     <TransitionPost>
       {(visible) => (
-        <SingleContentContainer visible={visible}>
+        <SingleContentContainer isVisible={visible}>
           <Header>{page.about && page.about.title}</Header>
           {page.about && page.about.content && (
             <AboutContent>

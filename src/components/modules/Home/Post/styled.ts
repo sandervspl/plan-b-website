@@ -29,7 +29,7 @@ export const PostContent = styled.div<PostContentProps>`
   transform: translate(-100px);
   transition: transform 1s 300ms ${(props) => props.theme.easing.easeOutCirc};
 
-  ${(props) => props.visible && css`
+  ${(props) => props.isVisible && css`
     transform: translate(0);
   `}
 `;

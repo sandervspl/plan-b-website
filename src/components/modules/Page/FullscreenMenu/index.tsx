@@ -6,7 +6,7 @@ import {
   FullscreenMenuContainer, MenuItems, LinkContainer, Background, MenuExternalLink, MenuClientLink,
 } from './styled';
 
-const FullscreenMenu: React.FC<Props> = (props) => {
+const FullscreenMenu: React.FC<Props> = ({ isActive, ...props }) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const { generateAnim, startAnims, generated } = useBgAnim();
 
@@ -15,25 +15,25 @@ const FullscreenMenu: React.FC<Props> = (props) => {
   }, [!generated]);
 
   useEffect(() => {
-    if (props.isActive) {
+    if (isActive) {
       startAnims();
     }
-  }, [props.isActive]);
+  }, [isActive]);
 
   return (
     <>
-      <FullscreenMenuContainer ref={overlayRef} {...props}>
+      <FullscreenMenuContainer ref={overlayRef} isActive={isActive} {...props}>
         <a href="www.google.nl">test</a>
-        <MenuItems {...props}>
+        <MenuItems isActive={isActive} {...props}>
           {navigationMenu.items.map((item, i) => (
             <LinkContainer key={i}>
               <Background className={`link-bg link-bg-${i}`} />
               {item.external ? (
-                <MenuExternalLink href={item.page} num={i} {...props}>
+                <MenuExternalLink href={item.page} num={i} isActive={isActive} {...props}>
                   {item.label}
                 </MenuExternalLink>
               ) : (
-                <MenuClientLink to={item.page} num={i} {...props}>
+                <MenuClientLink to={item.page} num={i} isActive={isActive} {...props}>
                   {item.label}
                 </MenuClientLink>
               )}

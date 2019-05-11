@@ -12,7 +12,7 @@ export const SingleContentContainer = styled.div<SingleContentContainerProps>`
   transition: transform 1s 300ms ${(props) => props.theme.easing.easeOutCirc};
   overflow: hidden;
 
-  ${(props) => props.visible && css`
+  ${(props) => props.isVisible && css`
     transform: translate(0);
   `}
 

@@ -8,7 +8,7 @@ const Post: React.FC<Props> = ({ data }) => (
   <TransitionPost>
     {(visible) => (
       <PostBlock>
-        <PostContent visible={visible}>
+        <PostContent isVisible={visible}>
           <Header>{data.title}</Header>
           <DateText>
             {getDate(data.created_at, {}).replace(/\//g, '.')}

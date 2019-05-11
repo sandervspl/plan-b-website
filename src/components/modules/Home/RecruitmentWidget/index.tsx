@@ -10,7 +10,7 @@ const RecruitmentWidget: React.FC<Props> = ({ recruitment, playerClasses }) => (
   <TransitionPost direction="right">
     {(visible) => (
       <RecruitmentBlock>
-        <RecruitmentContent visible={visible}>
+        <RecruitmentContent isVisible={visible}>
           {recruitment && (
               <>
                 <Header dark>{recruitment.title}</Header>

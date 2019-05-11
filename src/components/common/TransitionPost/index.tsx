@@ -31,7 +31,7 @@ const TransitionPost: React.FC<Props> = ({ children, direction }) => {
 
   return (
     <TransitionPostContainer ref={postRef}>
-      <TransitionOverlay visible={visible} direction={direction} />
+      <TransitionOverlay isVisible={visible} direction={direction} />
       {children(visible)}
     </TransitionPostContainer>
   );

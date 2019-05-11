@@ -15,7 +15,7 @@ export const TransitionOverlay = styled.div<TransitionOverlayProps>`
   transform: scaleX(1);
   transition: transform 1s 300ms ${(props) => props.theme.easing.easeOutCirc};
 
-  ${(props) => props.visible && css`
+  ${(props) => props.isVisible && css`
     transform: scaleX(0);
   `}
 `;

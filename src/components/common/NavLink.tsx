@@ -51,7 +51,11 @@ class NavLink extends React.PureComponent<NavLinkProps> {
   }
 
   render() {
-    const { children, to, router, ariaLabel, ...props } = this.props;
+    const {
+      // @ts-ignore Remove from props to fix react warnings (unknown dom attribute)
+      isActive, isVisible, // eslint-disable-line
+      children, to, router, ariaLabel, ...props
+    } = this.props;
 
     if (this.state.active) {
       const clsName = this.setActiveClassName(props.className!);

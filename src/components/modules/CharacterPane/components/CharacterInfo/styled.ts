@@ -1,19 +1,27 @@
 import styled from 'styled-components';
 import { Subheader, Header } from 'common';
-import { media } from 'styles/utils';
+import { media } from 'styles';
 
 export const CharacterInfoContainer = styled.div`
   display: flex;
-  padding: 0 30px;
   width: 100%;
   align-items: center;
+
+  ${media.tablet`
+    padding: 0 30px;
+  `}
 `;
 
 export const Avatar = styled.img`
-  width: 84px;
-  height: 84px;
+  width: 75px;
+  height: 75px;
   border-radius: 100%;
   border: 1px solid ${(props) => props.theme.color.border.light};
+
+  ${media.tablet`
+    width: 84px;
+    height: 84px;
+  `}
 `;
 
 export const CharacterDetails = styled.div`
@@ -27,6 +35,7 @@ export const CharacterDetails = styled.div`
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    font-size: 20px;
     
     ${media.tablet`
       font-size: 35px;

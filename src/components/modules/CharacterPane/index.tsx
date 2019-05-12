@@ -1,12 +1,12 @@
 import * as i from 'types';
 import React from 'react';
 import { Paragraph } from 'common';
-import {
-  CharacterPaneContainer, CharacterPaneContent, CharacterData, Loader, CharacterInfoContainer,
-} from './styled';
 import CharacterInfo from './components/CharacterInfo';
 import CharacterProfessions from './components/CharacterProfessions';
 import CharacterItems from './components/CharacterItems';
+import {
+  CharacterPaneContainer, CharacterPaneContent, CharacterData, Loader, CharacterInfoContainer,
+} from './styled';
 
 const CharacterPane: React.FC<Props> = ({ character, tiltStyle }) => {
   const hasCharacter = !!character.data && !character.loading && !character.error;

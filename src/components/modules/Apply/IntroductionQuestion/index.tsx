@@ -17,14 +17,14 @@ const IntroductionQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick,
     </QuestionHeader>
 
     <QuestionContent>
-      <QuestionContentHeader>
+      <QuestionContentHeader as="h2">
         Thank you for your interest in Plan B.
       </QuestionContentHeader>
 
       <Paragraph>
-      Before we welcome you to our guild, we would like to ask you a few questions so we can get a
-      quick idea about who you are.
-      Take your time to fill in these questions and we might get back to you in-game!
+        Before we welcome you to our guild, we would like to ask you a few questions so we can get a
+        quick idea about who you are.
+        Take your time to fill in these questions and we might get back to you in-game!
       </Paragraph>
 
       <NextButton onClick={onNextClick}>

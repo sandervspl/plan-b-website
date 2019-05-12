@@ -67,7 +67,7 @@ export const MenuItems = styled.div<MenuItemsProps>`
   justify-content: flex-end;
   width: 100%;
   height: 100%;
-  padding: 30px 30px 100px;
+  padding: 30px 30px 150px;
 
   ${(props) => props.isActive && css`
     pointer-events: auto;

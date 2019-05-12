@@ -200,15 +200,16 @@ export const QuestionContent = styled.div<QuestionContentProps>`
   top: 100px;
   height: calc(100% - 150px);
 
-  ${media.tablet`
+  ${media.tablet<QuestionContentProps>`
     top: 155px;
     height: calc(100% - 155px);
+
+    ${(props) => props.fullSize && css`
+      top: 0;
+      height: 100%;
+    `}
   `}
 
-  ${(props) => props.fullSize && css`
-    top: 0;
-    height: 100%;
-  `}
 `;
 
 type QuestionContentProps = {
@@ -216,6 +217,8 @@ type QuestionContentProps = {
 }
 
 export const NextButton = styled.button.attrs({ type: 'button' })`
+  position: relative;
+  z-index: 1;
   margin-top: auto;
   background: none;
   border: 0;

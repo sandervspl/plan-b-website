@@ -8,17 +8,21 @@ type ImageProps = {
 
 export const RoleList = styled.div`
   position: absolute;
-  top: 95px;
+  top: 0;
   right: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  width: 70%;
+  grid-template-rows: repeat(3, 85px);
+  gap: 5px;
+  width: 100%;
   height: 100%;
-  max-height: 440px;
 
   ${media.tablet`
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: none;
     gap: 30px;
+    top: 95px;
+    width: 70%;
+    max-height: 440px;
   `}
 
   ${media.veryLarge`
@@ -44,9 +48,13 @@ export const BackgroundImage = styled.figure`
     width: 100%;
     height: 100%;
     background: black;
-    opacity: .2;
+    opacity: .3;
     will-change: opacity;
     transition: opacity 200ms ease-in-out;
+
+    ${media.tablet`
+      opacity: .2;
+    `}
   }
 
   img {
@@ -59,44 +67,58 @@ export const BackgroundImage = styled.figure`
 `;
 
 export const RoleIcon = styled.div<ImageProps>`
-  position: absolute;
-  top: calc(80% - 25px);
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  border: 1px solid ${(props) => props.theme.color.border.light};
-  background: url(${(props) => props.src}) center center;
-  background-size: cover;
+  display: none;
 
-  &:after {
-    content: '';
+  ${media.tablet<ImageProps>`
+    display: block;
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background: black;
-    opacity: .2;
+    top: calc(80% - 25px);
+    width: 50px;
+    height: 50px;
     border-radius: 100%;
-    will-change: opacity;
-    transition: opacity 200ms ease-in-out;
-  }
+    border: 1px solid ${(props) => props.theme.color.border.light};
+    background: url(${(props) => props.src}) center center;
+    background-size: cover;
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: black;
+      opacity: .2;
+      border-radius: 100%;
+      will-change: opacity;
+      transition: opacity 200ms ease-in-out;
+    }
+  `}
 `;
 
 export const RoleText = styled(Paragraph)`
   display: flex;
   justify-content: center;
   position: absolute;
-  bottom: 0;
-  width: 100%;
+  top: 50%;
+  right: 30px;
   height: auto;
-  color: ${(props) => props.theme.color.paragraph};
-  font-size: 18px;
+  transform: translateY(-50%);
+  color: #FFFFFF;
   font-weight: 600;
   text-transform: uppercase;
-  will-change: color;
-  transition: color 300ms ease-in-out;
+
+  &&& {
+    font-size: 30px;
+  }
 
   ${media.tablet`
-    font-size: 30px;
+    bottom: 0;
+    top: auto;
+    right: 0;
+    width: 100%;
+    color: ${(props) => props.theme.color.paragraph};
+    transform: translateY(0);
+    will-change: color;
+    transition: color 300ms ease-in-out;
   `}
 `;
 
@@ -116,12 +138,15 @@ const RoleItemActiveStyle = css`
 `;
 
 export const RoleItem = styled.label<RoleItemProps>`
-  display: grid;
-  grid-template-rows: 80% 1fr;
-  justify-items: center;
   position: relative;
   overflow: hidden;
   cursor: pointer;
+
+  ${media.tablet`
+    display: grid;
+    grid-template-rows: 80% 1fr;
+    justify-items: center;
+  `}
 
   ${(props) => props.unchecked && css`
     ${RoleText} {

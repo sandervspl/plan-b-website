@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { media } from 'styles';
 import { Button } from 'common';
 
 const PaperPlaneHoverAnim = keyframes`
@@ -28,8 +29,13 @@ export const SubmitButton = styled(Button)`
   }
 
   svg {
-    margin-left: 20px;
-    width: 25px;
+    margin-left: 10px;
+    width: 20px;
+    
+    ${media.tablet`
+      margin-left: 20px;
+      width: 25px;
+    `}
   }
 
   &:hover {
@@ -48,4 +54,5 @@ export const Name = styled.span`
 
 export const SubmitLabel = styled.label`
   margin-top: auto;
+  width: 100%;
 `;

@@ -27,7 +27,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ tiltStyle }) 
           </QuestionHeader>
 
           <QuestionContent>
-            <Link to="home">
+            <Link to="home" style={{ width: '100%' }}>
               <Button>
                 Return to home
               </Button>
@@ -62,7 +62,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ tiltStyle }) 
             </QuestionContentHeader>
 
             <Paragraph>
-              You can review your application before sending it in. <br />
+              You can review your application before sending it. <br />
               An officer will contact you in-game if we think you are a match for Plan B.
             </Paragraph>
 

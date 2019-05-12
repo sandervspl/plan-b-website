@@ -50,10 +50,18 @@ export const RecruitmentContainerInner = styled.div<RecruitmentContainerInnerPro
 
   ${QuestionContentHeader} {
     font-size: 20px;
+
+    ${media.tablet`
+      font-size: 30px;
+    `}
   }
 
   ${Paragraph} {
     font-size: 16px;
+
+    ${media.tablet`
+      font-size: 18px;
+    `}
   }
 
   textarea {
@@ -116,18 +124,26 @@ export const QuestionField = styled.div<QuestionFieldProps>`
   font-size: 18px;
   line-height: 1.5;
   color: ${(props) => props.theme.color.primary};
-  
   font-weight: bold;
 
-  ${media.tablet`
+  input {
+    line-height: 1.5;
+  }
+
+  ${media.tablet<QuestionFieldProps>`
     width: 42%;
     font-size: 30px;
     line-height: 1.1;
+
+    input {
+      line-height: 1.1;
+    }
+
+    ${(props) => props.fullSize && css`
+      width: 100%;
+    `}
   `}
 
-  ${(props) => props.fullSize && css`
-    width: 100%;
-  `}
 `;
 
 type QuestionFieldProps = {

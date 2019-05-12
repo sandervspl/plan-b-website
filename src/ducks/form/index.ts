@@ -27,9 +27,9 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Red
       return {
         ...state,
         sending: {
+          ...state.sending,
           loading: true,
           success: false,
-          failed: false,
         },
       };
     case getType(actions.sendSuccess):

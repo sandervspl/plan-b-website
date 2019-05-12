@@ -70,7 +70,7 @@ const Link: React.FC<LinkComponentProps> = ({
   );
 };
 
-export type LinkComponentProps = {
+export type LinkComponentProps = React.AnchorHTMLAttributes<{}> & {
   children: React.ReactNode;
   className?: string;
   to: string;

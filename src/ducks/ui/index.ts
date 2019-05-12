@@ -1,5 +1,6 @@
 import * as i from 'types';
 import { ActionType, createStandardAction, getType } from 'typesafe-actions';
+import { sizes } from 'styles';
 
 export const actions = {
   setWindowSize: createStandardAction('ui/RESIZE')<i.WindowSize>(),
@@ -8,6 +9,7 @@ export const actions = {
 const initialState: i.UiState = {
   windowHeight: 0,
   windowWidth: 0,
+  isMobile: false,
 };
 
 export default (state = initialState, action: ActionType<typeof actions>): i.UiState => {
@@ -17,6 +19,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.UiS
         ...state,
         windowWidth: action.payload.width,
         windowHeight: action.payload.height,
+        isMobile: action.payload.width < sizes.desktop,
       };
     default:
       return state;

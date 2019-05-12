@@ -1,11 +1,13 @@
 import * as i from 'types';
 import React, { useState, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 
 const PERSPECTIVE = 1000;
 const SPEED = 1000;
 const MAX_TILT_DEG = 35;
 
 export function useTilt() {
+  const isMobile = useSelector((state: i.ReduxState) => state.ui.isMobile);
   const containerRef = useRef<HTMLElement>();
   const [tiltStyle, setTiltStyle] = useState<i.TiltStyle>({
     style: {
@@ -60,6 +62,8 @@ export function useTilt() {
   };
 
   const setTransition = () => {
+    if (isMobile) return;
+
     if (transitionTimeout) {
       clearTimeout(transitionTimeout);
     }
@@ -82,6 +86,8 @@ export function useTilt() {
   };
 
   const update = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => () => {
+    if (isMobile) return;
+
     const values = getValues(e);
 
     setTiltStyle({

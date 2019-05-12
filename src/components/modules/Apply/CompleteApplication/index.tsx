@@ -1,15 +1,19 @@
 import * as i from 'types';
 import React from 'react';
-import img1 from 'images/recruitment/WoWScrnShot_060409_194034.jpg';
-import img2 from 'images/recruitment/WoWScrnShot_060709_214610.jpg';
-import img3 from 'images/recruitment/WoWScrnShot_060709_221845.jpg';
 import SendIcon from 'vectors/send.svg';
 import { Paragraph, Link, Button } from 'common';
 import { useSelector } from 'react-redux';
+import { getUploadsUrl } from 'services';
 import QuestionHeader from '../QuestionHeader';
 import TiltImages from '../TiltImages';
 import { QuestionContentHeader, QuestionContent, RecruitmentContainerInner } from '../styled';
 import { SubmitButton, SubmitLabel, Name } from './styled';
+
+const images = [
+  `${getUploadsUrl('recruitment_imgs/outro_top-left.jpg')}`,
+  `${getUploadsUrl('recruitment_imgs/outro_bottom-left.jpg')}`,
+  `${getUploadsUrl('recruitment_imgs/outro_right.jpg')}`,
+];
 
 const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ tiltStyle }) => {
   const form = useSelector((state: i.ReduxState) => state.form);
@@ -18,7 +22,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ tiltStyle }) 
 
   return (
     <RecruitmentContainerInner small>
-      <TiltImages images={[img1, img2, img3]} tiltStyle={tiltStyle} />
+      <TiltImages images={images} tiltStyle={tiltStyle} />
 
       {form.sending.success ? (
         <>

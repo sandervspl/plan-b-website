@@ -184,6 +184,8 @@ export const ImagesContainer = styled.div.attrs<ImagesContainerProps>((props) =>
 
     ${ImageContainer} {
       img {
+        width: 100%;
+        height: 100%;
         object-fit: cover;
       }
 

@@ -1,13 +1,12 @@
 import * as i from 'types';
 import React from 'react';
-import { getStaticUrl } from 'services';
 import { ImagesContainer, ImageContainer } from '../styled';
 
 const TiltImages: React.FC<TiltImagesProps> = ({ images, ...props }) => (
   <ImagesContainer {...props}>
     {images.map((img) => (
       <ImageContainer key={img}>
-        <img src={getStaticUrl(img)} alt="" />
+        <img src={img} alt="" />
       </ImageContainer>
     ))}
   </ImagesContainer>

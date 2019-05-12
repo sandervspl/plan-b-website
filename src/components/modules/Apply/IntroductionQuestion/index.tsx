@@ -1,16 +1,21 @@
 import * as i from 'types';
 import React from 'react';
-import img1 from 'images/recruitment/WoWScrnShot_060409_194034.jpg';
-import img2 from 'images/recruitment/WoWScrnShot_060709_214610.jpg';
-import img3 from 'images/recruitment/WoWScrnShot_060709_221845.jpg';
+import { getUploadsUrl } from 'services';
 import { Paragraph } from 'common';
 import QuestionHeader from '../QuestionHeader';
-import { QuestionContentHeader, QuestionContent, NextButton, RecruitmentContainerInner } from '../styled';
+import { QuestionContentHeader, QuestionContent, NextButton, RecruitmentContainerInner,
+} from '../styled';
 import TiltImages from '../TiltImages';
+
+const images = [
+  `${getUploadsUrl('recruitment_imgs/intro_top-left.jpg')}`,
+  `${getUploadsUrl('recruitment_imgs/intro_bottom-left.jpg')}`,
+  `${getUploadsUrl('recruitment_imgs/intro_right.jpg')}`,
+];
 
 const IntroductionQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, ...props }) => (
   <RecruitmentContainerInner small>
-    <TiltImages images={[img1, img2, img3]} tiltStyle={props.tiltStyle} />
+    <TiltImages images={images} tiltStyle={props.tiltStyle} />
 
     <QuestionHeader>
       Hi there, adventurer!

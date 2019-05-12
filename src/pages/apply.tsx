@@ -90,6 +90,8 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
     // Prevent double clicks
     if (!canContinue) return;
 
+    window.scrollTo(0, 0);
+
     (router as i.Router).push(
       'apply',
       { questionId: questionIndex + 1 },

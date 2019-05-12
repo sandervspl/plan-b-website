@@ -1,14 +1,28 @@
 import styled, { css } from 'styled-components';
 import ReactToolTip from 'react-tooltip';
+import { sizes, media } from 'styles';
+import { RecruitmentContainerInner, QuestionContent } from '../styled';
+
+export const RaidQuestionContainer = styled(RecruitmentContainerInner)`
+  @media (max-width: ${sizes.tablet}px) {
+    ${QuestionContent} {
+      top: 75px;
+      height: calc(100% - 100px);
+    }
+  }
+`;
 
 export const RaidList = styled.div`
   display: flex;
-  position: absolute;
-  top: 115px;
-  right: -35px;
-  width: 820px;
-  justify-content: space-between;
   flex-flow: wrap;
+  justify-content: space-between;
+
+  ${media.tablet`
+    position: absolute;
+    top: 115px;
+    right: -35px;
+    width: 820px;
+  `}
 `;
 
 export const RaidImage = styled.figure<RaidImageProps>`
@@ -19,6 +33,10 @@ export const RaidImage = styled.figure<RaidImageProps>`
   opacity: .45;
   will-change: opacity;
   transition: opacity 200ms ease-in-out;
+
+  ${media.tablet`
+    border-radius: 10px;
+  `}
 
   img {
     width: 100%;
@@ -31,6 +49,7 @@ export const RaidImage = styled.figure<RaidImageProps>`
 
   ${(props) => props.selected && css`
     opacity: 1 !important;
+    border: 1px solid ${(props) => props.theme.color.border.light};
   `}
 `;
 
@@ -40,12 +59,28 @@ type RaidImageProps = {
 
 export const RaidItem = styled.label`
   display: flex;
+  flex: 1 1 48%;
   justify-content: center;
-  margin-right: 10px;
-  border-radius: 10px;
+  margin-bottom: 10px;
+  height: 65px;
   overflow: hidden;
   cursor: pointer;
   border: 1px solid transparent;
+
+  &:nth-child(odd) {
+    margin-right: 10px;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  ${media.tablet`
+    flex-basis: auto;
+    margin-right: 10px;
+    margin-bottom: 0;
+    border-radius: 10px;
+  `}
 
   &:hover {
     ${RaidImage} {

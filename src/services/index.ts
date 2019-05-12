@@ -9,3 +9,4 @@ export * from './getSourceUrl';
 export * from './getUploadsUrl';
 export * from './getStaticUrl';
 export * from './form';
+export * from './redirect';

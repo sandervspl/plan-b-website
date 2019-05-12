@@ -6,7 +6,7 @@ import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { withRouter } from 'next/router';
 import router from 'router';
-import { validate } from 'services';
+import { validate, redirect } from 'services';
 import { useTilt } from 'services/hooks';
 import { sendApplication, actions as formActions } from 'ducks/form';
 import FormStateToRedux from 'common/form/FormStateToRedux';
@@ -54,11 +54,6 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
     const paramQstnId = props.router!.query!.questionId
       ? Number(props.router!.query!.questionId)
       : 1;
-
-    if (!form.application) {
-      (router as i.Router).push('apply', {}, { shallow: true });
-      return;
-    }
 
     if (questionIndex !== paramQstnId) {
       setQuestionIndex(paramQstnId);
@@ -143,6 +138,14 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
       {/* <Progress /> */}
     </RecruitmentContainer>
   );
+};
+
+ApplicationPage.getInitialProps = async ({ req, res }) => {
+  if (req && res && /\d/.test(req.url)) {
+    redirect(res);
+  }
+
+  return {};
 };
 
 type Props = i.WithRouterProps & {

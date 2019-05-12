@@ -15,7 +15,7 @@ const questions = [
     maxLength: 20,
     type: 'string',
   },
-  ', I am ',
+  '. I am ',
   {
     name: 'age',
     placeholder: 'age',

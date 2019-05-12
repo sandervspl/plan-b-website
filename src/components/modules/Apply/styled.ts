@@ -91,7 +91,7 @@ export const TextInputField = styled(Field)`
   border-radius: 0;
   outline: 0;
   font-family: ${(props) => props.theme.font.primary};
-  font-size: 24px;
+  font-size: 18px;
   color: ${(props) => props.theme.color.tertiary};
   overflow: hidden;
   vertical-align: bottom;
@@ -113,12 +113,16 @@ export const TextInputField = styled(Field)`
 export const QuestionField = styled.div<QuestionFieldProps>`
   width: 100%;
   font-family: ${(props) => props.theme.font.primary};
+  font-size: 18px;
+  line-height: 1.5;
   color: ${(props) => props.theme.color.primary};
-  font-size: 30px;
+  
   font-weight: bold;
 
   ${media.tablet`
     width: 42%;
+    font-size: 30px;
+    line-height: 1.1;
   `}
 
   ${(props) => props.fullSize && css`

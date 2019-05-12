@@ -22,7 +22,7 @@ const roles = [{
 }];
 
 const RoleQuestion: React.FC<Props> = ({ onNextClick }) => {
-  const form: i.ReduxFormState = useSelector((state: i.ReduxState) => state.form);
+  const form = useSelector((state: i.ReduxState) => state.form);
   const activeRole = form.application
     ? form.application.values && form.application.values.role
     : null;

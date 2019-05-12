@@ -39,7 +39,7 @@ const raids = [
 ];
 
 const RaidQuestion: React.FC<Props> = ({ onNextClick }) => {
-  const form: i.ReduxFormState = useSelector((state: i.ReduxState) => state.form);
+  const form = useSelector((state: i.ReduxState) => state.form);
   const selected = form.application
     ? form.application.values.raid_experience || {}
     : {};

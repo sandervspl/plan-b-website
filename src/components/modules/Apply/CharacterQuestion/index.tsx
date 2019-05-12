@@ -94,7 +94,7 @@ export default connect(mapStateToProps, { fetchCharacter })(CharacterSelect);
 
 
 const NextRadioButton: React.FC<NextRadioButtonProps> = ({ onNextClick, input }) => {
-  const character: i.CharacterState = useSelector((state: i.ReduxState) => state.character);
+  const character = useSelector((state: i.ReduxState) => state.character);
 
   const handleNextClick = () => {
     input.onChange(input.value);

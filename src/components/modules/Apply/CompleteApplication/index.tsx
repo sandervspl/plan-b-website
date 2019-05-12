@@ -12,10 +12,8 @@ import { QuestionContentHeader, QuestionContent, RecruitmentContainerInner } fro
 import { SubmitButton, SubmitLabel, Name } from './styled';
 
 const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ tiltStyle }) => {
-  const form: i.ReduxFormState = useSelector((state: i.ReduxState) => state.form);
-  const character: i.CharacterData | null = useSelector(
-    (state: i.ReduxState) => state.character.data
-  );
+  const form = useSelector((state: i.ReduxState) => state.form);
+  const character = useSelector((state: i.ReduxState) => state.character.data);
   const name = character ? character.name : 'unknown';
 
   return (
@@ -59,7 +57,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ tiltStyle }) 
           </QuestionHeader>
 
           <QuestionContent>
-            <QuestionContentHeader>
+            <QuestionContentHeader as="h2">
               Thank you, <Name>{name}</Name>.
             </QuestionContentHeader>
 

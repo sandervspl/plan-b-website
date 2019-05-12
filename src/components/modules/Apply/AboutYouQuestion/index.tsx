@@ -26,7 +26,7 @@ const questions = [
 ];
 
 const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, active }) => {
-  const form: i.ReduxFormState = useSelector((state: i.ReduxState) => state.form);
+  const form = useSelector((state: i.ReduxState) => state.form);
   const questionsAmount = 1 + questions.filter((qstn) => typeof qstn === 'object').length;
   const answerAmount = form.application && form.application.values.about_applicant
     ? Object.values(form.application.values.about_applicant).length

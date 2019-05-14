@@ -1,6 +1,6 @@
 import * as i from 'types';
 import { ActionType, createStandardAction, getType } from 'typesafe-actions';
-import { API_ENDPOINT } from 'services';
+import { API_ENDPOINT, LOCALSTORAGE } from 'services';
 
 export const actions = {
   load: createStandardAction('user/LOAD')(),
@@ -40,6 +40,7 @@ export default (state = initialState, action: ActionType<typeof actions>) => {
   }
 };
 
+// @ts-ignore
 export const fetchUser: i.FetchUserDuck = () => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
@@ -48,10 +49,14 @@ export const fetchUser: i.FetchUserDuck = () => async (dispatch, getState, api) 
     path: `${API_ENDPOINT.AUTH_USER}`,
     withAuth: true,
   })
-    .then((res) => {
-      dispatch(actions.success(res));
+    .then((user) => {
+      dispatch(actions.success(user));
 
-      return res;
+      // Save credentials so we know user is logged in
+      localStorage.setItem(LOCALSTORAGE.USER_ID, user.id);
+      localStorage.setItem(LOCALSTORAGE.USER_FETCHED_AT, user.fetchedAt.toString());
+
+      return user;
     })
     .catch(() => {
       dispatch(actions.failed());

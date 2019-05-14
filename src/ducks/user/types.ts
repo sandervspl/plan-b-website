@@ -10,5 +10,5 @@ export type UserData = {
   authLevel: number;
 }
 
-export type FetchUser<T = Promise<void>> = () => T;
-export type FetchUserDuck = FetchUser<i.ThunkAction<Promise<void | i.UserData>>>;
+export type FetchUser<T = Promise<i.UserData>> = () => T;
+export type FetchUserDuck = FetchUser<i.ThunkAction<Promise<i.UserData>>>;

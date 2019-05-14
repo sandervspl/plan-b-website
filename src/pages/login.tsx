@@ -1,30 +1,29 @@
 import * as i from 'types';
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { fetchUser } from 'ducks/user';
-import Page from 'modules/Page';
+import Router from 'router';
 import { api, API_ENDPOINT } from 'services';
 import { useRouter } from 'services/hooks';
 import { Paragraph } from 'common';
+import { LoginContainer } from 'modules/Login/styled';
 
 const Login: i.NextPageComponent<Props> = (props) => {
   const router = useRouter();
+  const user = useSelector((state: i.ReduxState) => state.user.data);
   const isLoggingIn = !!(router.query && router.query.auth);
 
   useEffect(() => {
     if (!isLoggingIn) return;
 
+    // Redirect if we already have user data
+    if (user) (Router as i.Router).push('home');
+
     // Get user data
     props.fetchUser()
-      .then((user: i.UserData) => {
-        // Save credentials so we know user is logged in
-        if (user) {
-          localStorage.setItem('user_id', user.id);
-          localStorage.setItem('user_fetched_at', user.fetchedAt.toString());
-        }
+      .then(() => {
+        (Router as i.Router).push('home');
       });
-
-    /** @todo set user data in Redux */
   }, []);
 
   const handleOnClick = () => {
@@ -32,18 +31,18 @@ const Login: i.NextPageComponent<Props> = (props) => {
   };
 
   return (
-    <Page>
-      {isLoggingIn ? (
+    <LoginContainer>
+      {isLoggingIn || user ? (
         <Paragraph>Signing in...</Paragraph>
       ) : (
         <button onClick={handleOnClick}>Sign in with Discord</button>
       )}
-    </Page>
+    </LoginContainer>
   );
 };
 
 type Props = {
-  fetchUser: i.FetchUserDuck;
+  fetchUser: i.FetchUser;
 }
 
 // @ts-ignore

@@ -3,7 +3,7 @@ import { useRouter } from 'services/hooks';
 import MobileNav from './MobileNav';
 import Content from './Content';
 import { HeroContainer } from './HeroContainer';
-import LogoLink from './LogoLink';
+import Topmenu from './TopMenu';
 import BaseHero from './BaseHero';
 import { Main, AwayFromHomeTransitionStyle, ToHomeTransitionStyle } from './styled';
 
@@ -18,7 +18,7 @@ const Page: React.FC<Props> = ({ children, hero, className }) => {
       {router.route !== '/home' && <AwayFromHomeTransitionStyle />}
       {router.route === '/home' && <ToHomeTransitionStyle />}
       <MobileNav />
-      <LogoLink />
+      <Topmenu />
       <HeroContainer big={hero!.big}>
         {heroContent}
       </HeroContainer>

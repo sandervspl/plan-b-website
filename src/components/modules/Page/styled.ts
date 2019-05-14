@@ -7,7 +7,7 @@ import { MiscPostsContainer } from 'modules/Home/styled';
 import { Content } from 'modules/Home/Hero/styled';
 import { HeroContainer } from './HeroContainer';
 import { PageContentContainer, ContentContainer } from './Content/styled';
-import { LogoLinkContainer } from './LogoLink/styled';
+import { TopMenuContainer, Logo } from './TopMenu/styled';
 import { BaseHeroContainer } from './BaseHero/styled';
 
 export const Main = styled.main`
@@ -23,8 +23,8 @@ const AppearAnim = keyframes`
 `;
 
 export const AwayFromHomeTransitionStyle = createGlobalStyle`
-  ${LogoLinkContainer} {
-    display: block;
+  ${TopMenuContainer} {
+    display: flex;
   }
 
   .page-enter {
@@ -64,9 +64,12 @@ export const AwayFromHomeTransitionStyle = createGlobalStyle`
         transition: opacity ${TRANSITION_TIME_MS_SHORT}ms linear;
       }
 
-      ${LogoLinkContainer} {
-        display: block;
-        transform: translateY(-80px);
+      ${TopMenuContainer} {
+        display: flex;
+
+        ${Logo} {
+          transform: translateY(-80px);
+        }
       }
 
       ${HeroContainer} {
@@ -94,9 +97,12 @@ export const AwayFromHomeTransitionStyle = createGlobalStyle`
     .page-enter,
     .page-exit-active,
     .page-enter-done {
-      ${LogoLinkContainer} {
-        display: block;
-        transform: translateY(0);
+      ${TopMenuContainer} {
+        display: flex;
+        
+        ${Logo} {
+          transform: translateY(0);
+        }
       }
     }
   `}
@@ -104,8 +110,8 @@ export const AwayFromHomeTransitionStyle = createGlobalStyle`
 
 export const ToHomeTransitionStyle = createGlobalStyle`
   .page-exit {
-    ${LogoLinkContainer} {
-      display: block;
+    ${TopMenuContainer} {
+      display: flex;
     }
 
     ${BaseHeroContainer} {
@@ -129,8 +135,10 @@ export const ToHomeTransitionStyle = createGlobalStyle`
     }
 
     .page-exit {
-      ${LogoLinkContainer} {
-        transform: translateY(-80px);
+      ${TopMenuContainer} {
+        ${Logo} {
+          transform: translateY(-80px);
+        }
       }
 
       ${ContentContainer} > * {

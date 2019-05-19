@@ -4,13 +4,9 @@ import { API_ENDPOINT } from 'services';
 import { fetchPage } from 'ducks/page';
 import { fetchRecruitment } from 'ducks/recruitment';
 import Page from 'modules/Page';
-import { Posts, Hero, RecruitmentWidget } from 'modules/Home';
-import { MiscPostsContainer } from 'modules/Home/styled';
 
 const Home: i.NextPageComponent = () => (
-  <Page>
-    home
-  </Page>
+  <Page />
 );
 
 Home.getInitialProps = async ({ store }) => {

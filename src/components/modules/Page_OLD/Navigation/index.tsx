@@ -6,7 +6,7 @@ import { NavContainer, NavList } from './styled';
 const Navigation: React.FC = () => (
   <NavContainer>
     <NavList>
-      {navigationMenu.items.map((item, i) => (
+      {navigationMenu.__OLD__items.map((item, i) => (
         <li key={i}>
           <LinkTextFill component={item.external ? 'a' : 'NavLink'} to={item.page}>
             {item.label}

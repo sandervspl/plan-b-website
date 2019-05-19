@@ -25,7 +25,7 @@ const FullscreenMenu: React.FC<Props> = ({ isActive, ...props }) => {
       <FullscreenMenuContainer ref={overlayRef} isActive={isActive} {...props}>
         <a href="www.google.nl">test</a>
         <MenuItems isActive={isActive} {...props}>
-          {navigationMenu.items.map((item, i) => (
+          {navigationMenu.__OLD__items.map((item, i) => (
             <LinkContainer key={i}>
               <Background className={`link-bg link-bg-${i}`} />
               {item.external ? (

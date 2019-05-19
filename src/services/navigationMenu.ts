@@ -5,32 +5,31 @@ class NavigationMenu {
       page: 'home',
     },
     {
-      label: 'Join the guild',
-      page: 'apply',
-    },
-    {
       label: 'About us',
       page: 'about',
     },
     {
-      label: 'forums',
-      page: 'http://forums.planbguild.eu/',
+      label: 'forum',
+      page: 'http://forum.planbguild.eu/',
       external: true,
       invisible: !__DEV__,
     },
   ];
 
   get items() {
+    return this._items.filter((item) => !item.invisible);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/camelcase
+  get __OLD__items() {
     // "typeof this._items" resolves into an error
     const tempItems = this._items;
 
-    const items = tempItems
-      .filter((item) => !item.invisible)
-      .reduce((items, item) => {
-        item.label = item.label.replace(/ /g, '.');
+    const items = this.items.reduce((items, item) => {
+      item.label = item.label.replace(/ /g, '.');
 
-        return [...items, item];
-      }, [] as typeof tempItems);
+      return [...items, item];
+    }, [] as typeof tempItems);
 
     return items;
   }

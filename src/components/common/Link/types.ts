@@ -1,5 +1,5 @@
 export type LinkProps = {
-  as: string;
+  // as: string;
   className: string;
   'aria-label': string;
   target?: '_blank' | '_self';

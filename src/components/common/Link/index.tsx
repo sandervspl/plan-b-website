@@ -12,10 +12,10 @@ const Link: React.FC<LinkComponentProps> = ({
 }) => {
   const router = useRouter();
   const formattedAriaLabel = _.capitalize(ariaLabel);
-  const as = type === 'text' ? 'span' : 'a';
+  // const as = type === 'text' ? 'span' : 'a';
 
   let linkProps: LinkProps = {
-    as,
+    // as,
     className: className || '',
     'aria-label': formattedAriaLabel,
   };

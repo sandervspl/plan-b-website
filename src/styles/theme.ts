@@ -1,5 +1,14 @@
 const theme = {
   color: {
+    primary: Object.assign('#DE3D3D', {
+      dark: '#A24444',
+    }),
+    secondary: '#131516',
+    tertiary: Object.assign('#476369', {
+      light: '#E4E3E3',
+    }),
+    background: '#FFFFFF',
+
     __OLD__: {
       primary: Object.assign('#BFCE9E', {
         medium: '#7a8e72',
@@ -31,6 +40,10 @@ const theme = {
     easeOutCirc: 'cubic-bezier(0.075, 0.82, 0.165, 1)',
     easeOutQuart: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
     easeInOutCirc: 'cubic-bezier(0.785, 0.135, 0.15, 0.86)',
+  },
+
+  shadows: {
+    card: '0 0 4px 1px rgba(0, 0, 0, .11)',
   },
 };
 

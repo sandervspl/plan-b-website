@@ -3,7 +3,7 @@ import React from 'react';
 import { FieldArray } from 'react-final-form-arrays';
 import { Field } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import * as _ from 'lodash';
+import _ from 'lodash';
 import { getUploadsUrl } from 'services';
 import QuestionHeader from '../QuestionHeader';
 import { NextButton, QuestionContent } from '../styled';

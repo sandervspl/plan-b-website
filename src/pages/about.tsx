@@ -2,7 +2,7 @@ import * as i from 'types';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
-import Page from 'modules/Page';
+import Page from 'modules/Page_OLD';
 import { API_ENDPOINT, getSourceUrl } from 'services';
 import { fetchPage } from 'ducks/page';
 import { Header, SingleContentContainer, TransitionPost } from 'common';

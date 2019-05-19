@@ -6,6 +6,7 @@ export * from 'ducks/form/types';
 export * from 'ducks/character/types';
 export * from 'ducks/ui/types';
 export * from 'ducks/user/types';
+export * from 'ducks/posts/types';
 
 export type ReduxState = {
   page: i.PageState;
@@ -14,6 +15,7 @@ export type ReduxState = {
   character: i.CharacterState;
   ui: i.UiState;
   user: i.UserState;
+  posts: i.PostsState;
 }
 
 export type BaseState<T = null> = {

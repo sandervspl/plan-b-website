@@ -10,7 +10,7 @@ export type HomePageData = i.BaseResponseBody & {
   hero_title?: string;
   hero_server?: string;
   hero_video?: string;
-  posts?: i.Post[];
+  posts?: i.BasePost[];
 }
 
 export type AboutPageData = i.BaseResponseBody & {
@@ -36,12 +36,6 @@ export type ApiDataPayloads = {
   home?: i.HomePageData;
   about?: i.AboutPageData;
   application?: i.ApplicationPageData;
-}
-
-export type Post = i.BaseResponseBody & {
-  title?: string;
-  content?: string;
-  published: boolean;
 }
 
 export type RecruitmentQuestion = {

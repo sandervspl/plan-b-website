@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+const withCSS = require('@zeit/next-css');
 const { PHASE_PRODUCTION_SERVER } = require('next/constants');
 
 const config = (phase) => {
@@ -99,7 +100,13 @@ const config = (phase) => {
       },
     };
 
-    cfg = withTypescript(withFonts(cfg));
+    cfg = (
+      withTypescript(
+        withFonts(
+          withCSS(cfg)
+        )
+      )
+    );
   }
 
   return cfg;

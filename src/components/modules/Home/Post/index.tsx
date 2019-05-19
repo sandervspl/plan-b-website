@@ -21,7 +21,7 @@ const Post: React.FC<Props> = ({ data }) => (
 );
 
 type Props = {
-  data: i.Post;
+  data: i.BasePost;
 }
 
 export default Post;

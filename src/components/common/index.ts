@@ -7,3 +7,4 @@ export * from './typography';
 export * from './FullscreenPage';
 export * from './ClassText';
 export * from './Button';
+export * from './Tag';

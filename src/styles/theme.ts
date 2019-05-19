@@ -42,7 +42,7 @@ const theme = {
     easeInOutCirc: 'cubic-bezier(0.785, 0.135, 0.15, 0.86)',
   },
 
-  shadows: {
+  shadow: {
     card: '0 0 4px 1px rgba(0, 0, 0, .11)',
   },
 };

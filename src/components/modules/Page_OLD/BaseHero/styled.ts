@@ -12,7 +12,7 @@ export const HeroOverlay = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  background: ${(props) => props.theme.color.secondary};
+  background: ${(props) => props.theme.color.__OLD__.secondary};
   opacity: .8;
 `;
 

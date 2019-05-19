@@ -22,7 +22,7 @@ export const TopMenuContainer = styled.div`
       width: 30px;
       height: 30px;
       border-radius: 100%;
-      border: 1px solid ${(props) => props.theme.color.border.light};
+      border: 1px solid ${(props) => props.theme.color.__OLD__.border.light};
       margin-right: 10px;
     }
   `}

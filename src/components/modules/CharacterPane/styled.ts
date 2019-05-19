@@ -33,7 +33,7 @@ export const CharacterPaneContainer = styled.div<CharacterPaneContainerProps>`
       width: 100%;
       height: 100%;
       opacity: .85;
-      background-color: ${(props) => props.theme.color.secondary.dark};
+      background-color: ${(props) => props.theme.color.__OLD__.secondary.dark};
     }
   `}
 `;

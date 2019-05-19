@@ -21,12 +21,12 @@ export default createGlobalStyle`
   body, html {
     width: 100%;
     height: 100%;
-    background-color: ${theme.color.secondary.dark};
+    background-color: ${theme.color.__OLD__.secondary.dark};
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: ${theme.font.primary};
-    color: ${theme.color.primary};
+    color: ${theme.color.__OLD__.primary};
     margin: 0;
     padding: 0;
   }

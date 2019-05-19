@@ -42,7 +42,7 @@ export const FullscreenMenuContainer = styled.div<FullscreenMenuContainerProps>`
     z-index: 2;
     width: 200vh;
     height: 100vh;
-    background: ${(props) => props.theme.color.secondary.dark};
+    background: ${(props) => props.theme.color.__OLD__.secondary.dark};
     clip-path: polygon( 50% 0,100% 0,100% 100%,0% 100% );
     transform: translate3d(100%, 0, 0);
     transform-origin: bottom right;
@@ -87,14 +87,14 @@ export const Background = styled.div`
   width: 100%;
   height: 100%;
   z-index: 6;
-  background: ${(props) => props.theme.color.primary};
+  background: ${(props) => props.theme.color.__OLD__.primary};
   transform-origin: left;
   will-change: transform;
 `;
 
 const MenuLinkStyle = css<MenuLinkProps>`
   display: block;
-  color: ${(props) => props.theme.color.tertiary};
+  color: ${(props) => props.theme.color.__OLD__.tertiary};
   font-family: ${(props) => props.theme.font.primary};
   text-decoration: none;
   font-size: 33px;
@@ -111,7 +111,7 @@ const MenuLinkStyle = css<MenuLinkProps>`
   `}
 
   &.active {
-    color: ${(props) => props.theme.color.primary};
+    color: ${(props) => props.theme.color.__OLD__.primary};
   }
 `;
 

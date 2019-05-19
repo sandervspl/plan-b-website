@@ -14,7 +14,7 @@ export const MobileNavContainer = styled.nav`
     z-index: 1;
     width: 70px;
     height: 70px;
-    background: ${(props) => props.theme.color.secondary.dark};
+    background: ${(props) => props.theme.color.__OLD__.secondary.dark};
     clip-path: polygon( 100% 0,100% 0,100% 100%,0% 100% );
   }
 

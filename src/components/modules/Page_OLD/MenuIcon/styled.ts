@@ -16,7 +16,7 @@ export const VeganBurgerContainer = styled.div<Props>`
   span {
     width: 30px;
     height: 3px;
-    background-color: ${(props) => props.theme.color.primary};
+    background-color: ${(props) => props.theme.color.__OLD__.primary};
     display: block;
     margin: 5px auto;
     transform: scale(1);

@@ -12,14 +12,14 @@ export const ProfessionDetailsContainer = styled.div`
 export const ProfessionIcon = styled.img`
   width: 36px;
   height: 36px;
-  border: 1px solid ${(props) => props.theme.color.border.dark};
+  border: 1px solid ${(props) => props.theme.color.__OLD__.border.dark};
   border-radius: 100%;
 `;
 
 export const ProfessionName = styled(Subheader)`
   margin-top: 5px;
   width: 100%;
-  color: ${(props) => props.theme.color.primary};
+  color: ${(props) => props.theme.color.__OLD__.primary};
   font-weight: bold;
   white-space: nowrap;
   overflow: hidden;
@@ -31,7 +31,7 @@ export const ProfessionSkill = styled.div<ProfessionSkillProps>`
   margin-top: 5px;
   width: 80%;
   height: 20px;
-  border: 1px solid ${(props) => props.theme.color.secondary.medium};
+  border: 1px solid ${(props) => props.theme.color.__OLD__.secondary.medium};
 
   &:before {
     content: '';
@@ -41,7 +41,7 @@ export const ProfessionSkill = styled.div<ProfessionSkillProps>`
     height: 100%;
     width: ${(props) => (props.rank / props.max) * 100}%;
     max-width: 100%;
-    background-color: ${(props) => props.theme.color.secondary.medium};
+    background-color: ${(props) => props.theme.color.__OLD__.secondary.medium};
   }
 
   &:after {
@@ -50,7 +50,7 @@ export const ProfessionSkill = styled.div<ProfessionSkillProps>`
     top: 50%;
     left: 10px;
     transform: translateY(-50%);
-    color: ${(props) => props.theme.color.primary.medium};
+    color: ${(props) => props.theme.color.__OLD__.primary.medium};
     font-size: 11px;
     font-family: ${(props) => props.theme.font.primary};
   }

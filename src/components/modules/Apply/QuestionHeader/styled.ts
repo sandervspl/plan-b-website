@@ -16,7 +16,7 @@ export const QuestionHeaderContainer = styled.div`
   ${media.tablet`
     white-space: nowrap;
     padding: 20px 80px 20px 20px;
-    background: ${(props) => props.theme.color.secondary.dark};
+    background: ${(props) => props.theme.color.__OLD__.secondary.dark};
 
     ${Header} {
       font-size: 65px;

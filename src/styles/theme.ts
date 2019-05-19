@@ -1,21 +1,23 @@
 const theme = {
   color: {
-    primary: Object.assign('#BFCE9E', {
-      medium: '#7a8e72',
-      dark: '#495347',
-    }),
-    secondary: Object.assign('#202425', {
-      medium: '#1E2122',
-      dark: '#131516',
-      darkest: '#000000',
-      hover: '#272a2b',
-    }),
-    tertiary: '#476369',
-    paragraph: '#8e9496',
-    highlight: '#ffffff',
-    border: {
-      light: '#8e9496',
-      dark: '#131516',
+    __OLD__: {
+      primary: Object.assign('#BFCE9E', {
+        medium: '#7a8e72',
+        dark: '#495347',
+      }),
+      secondary: Object.assign('#202425', {
+        medium: '#1E2122',
+        dark: '#131516',
+        darkest: '#000000',
+        hover: '#272a2b',
+      }),
+      tertiary: '#476369',
+      paragraph: '#8e9496',
+      highlight: '#ffffff',
+      border: {
+        light: '#8e9496',
+        dark: '#131516',
+      },
     },
   },
 

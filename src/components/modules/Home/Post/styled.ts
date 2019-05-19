@@ -21,7 +21,7 @@ export const PostBlock = styled(ContentBlockContainer)`
 export const DateText = styled(Paragraph)`
   margin-bottom: 20px;
   font-size: 15px;
-  color: ${(props) => props.theme.color.primary.medium};
+  color: ${(props) => props.theme.color.__OLD__.primary.medium};
 `;
 
 export const PostContent = styled.div<PostContentProps>`

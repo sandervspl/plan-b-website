@@ -5,11 +5,11 @@ export const Button = styled.button`
   padding: 13px 0;
   width: 100%;
   font-size: 18px;
-  color: ${(props) => props.theme.color.secondary.dark};
+  color: ${(props) => props.theme.color.__OLD__.secondary.dark};
   font-family: ${(props) => props.theme.font.primary};
   font-weight: bold;
   text-transform: uppercase;
-  background-color: ${(props) => props.theme.color.primary};
+  background-color: ${(props) => props.theme.color.__OLD__.primary};
   border: 0;
   outline: 0;
   cursor: pointer;
@@ -31,6 +31,6 @@ export const Button = styled.button`
 
   &:disabled {
     cursor: not-allowed;
-    background-color: ${(props) => props.theme.color.primary.medium};
+    background-color: ${(props) => props.theme.color.__OLD__.primary.medium};
   }
 `;

@@ -10,7 +10,7 @@ export const Mask = styled.div`
 
   > span {
     position: absolute;
-    color: ${(props) => props.theme.color.primary};
+    color: ${(props) => props.theme.color.__OLD__.primary};
     transform: translateX(102%);
     transition: all 600ms cubic-bezier(0.77, 0, 0.175, 1);
   }

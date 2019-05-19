@@ -9,7 +9,7 @@ export const TransitionOverlay = styled.div<TransitionOverlayProps>`
   width: 100%;
   height: 100%;
   opacity: 1;
-  background: ${(props) => props.theme.color.secondary.dark};
+  background: ${(props) => props.theme.color.__OLD__.secondary.dark};
   will-change: transform;
   transform-origin: ${(props) => props.direction};
   transform: scaleX(1);

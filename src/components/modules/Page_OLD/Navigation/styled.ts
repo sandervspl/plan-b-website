@@ -12,14 +12,14 @@ export const NavContainer = styled.nav`
 
     ${MaskWrap} {
         > a, > span {
-        color: ${(props) => props.theme.color.tertiary};
+        color: ${(props) => props.theme.color.__OLD__.tertiary};
         font: 600 23px/25px ${(props) => props.theme.font.primary};
         text-decoration: none;
         text-transform: uppercase;
         transition: color .1s linear;
 
         &.active {
-          color: ${(props) => props.theme.color.primary};
+          color: ${(props) => props.theme.color.__OLD__.primary};
         }
       }
     }

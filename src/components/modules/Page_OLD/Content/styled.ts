@@ -36,7 +36,7 @@ type PageContentContainerProps = {
 export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column-reverse;
-  background-color: ${(props) => props.theme.color.secondary};
+  background-color: ${(props) => props.theme.color.__OLD__.secondary};
 
   > * {
     opacity: 1;

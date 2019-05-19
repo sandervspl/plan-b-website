@@ -5,7 +5,7 @@ import { Header } from 'common';
 import { ContentBlockContainer } from 'modules/Home/styled';
 
 export const RecruitmentBlock = styled(ContentBlockContainer)`
-  background: ${(props) => props.theme.color.primary.medium};
+  background: ${(props) => props.theme.color.__OLD__.primary.medium};
   overflow-x: hidden;
 
   ${media.tablet`

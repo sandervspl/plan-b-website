@@ -14,7 +14,7 @@ export const PostsContainer = styled.div`
 
   > *:nth-child(even) {
     ${ContentBlockContainer} {
-      background-color: ${(props) => props.theme.color.secondary.medium};
+      background-color: ${(props) => props.theme.color.__OLD__.secondary.medium};
     }
   }
 `;

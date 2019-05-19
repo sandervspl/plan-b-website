@@ -8,16 +8,8 @@ import { Posts, Hero, RecruitmentWidget } from 'modules/Home';
 import { MiscPostsContainer } from 'modules/Home/styled';
 
 const Home: i.NextPageComponent = () => (
-  <Page
-    hero={{
-      big: true,
-      content: <Hero />,
-    }}
-  >
-    <Posts />
-    <MiscPostsContainer>
-      <RecruitmentWidget />
-    </MiscPostsContainer >
+  <Page>
+    home
   </Page>
 );
 

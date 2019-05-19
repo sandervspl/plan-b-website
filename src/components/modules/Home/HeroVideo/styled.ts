@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { TRANSITION_TIME_MS_SHORT } from 'styles/pageTransition';
 
 export const VideoContainer = styled.div`
-  background: ${(props) => props.theme.color.secondary.dark};
+  background: ${(props) => props.theme.color.__OLD__.secondary.dark};
   position: absolute;
   top: 0;
   right: 0;
@@ -48,7 +48,7 @@ export const VideoOverlay = styled.div<VideoOverlayProps>`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: ${(props) => props.theme.color.secondary.dark};
+  background-color: ${(props) => props.theme.color.__OLD__.secondary.dark};
   opacity: ${(props) => props.ready ? .55 : 1};
   transition: opacity .3s ease-out;
   will-change: opacity;

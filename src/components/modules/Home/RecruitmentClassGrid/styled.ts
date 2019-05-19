@@ -23,7 +23,7 @@ export const ClassRow = styled.div`
 export const ClassIcon = styled.img<ClassIconProps>`
   width: 35px;
   height: 35px;
-  border: 1px solid ${(props) => props.theme.color.secondary};
+  border: 1px solid ${(props) => props.theme.color.__OLD__.secondary};
 
   &:not(:last-child) {
     margin-right: 5px;

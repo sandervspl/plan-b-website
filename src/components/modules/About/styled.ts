@@ -31,7 +31,7 @@ export const AboutContent = styled.div`
         left: -16px;
         width: 12px;
         text-align: right;
-        color: ${(props) => props.theme.color.primary};
+        color: ${(props) => props.theme.color.__OLD__.primary};
       }
     }
   }
@@ -55,11 +55,11 @@ export const AboutContent = styled.div`
   }
 
   a {
-    color: ${(props) => props.theme.color.primary};
+    color: ${(props) => props.theme.color.__OLD__.primary};
     transition: color 100ms linear;
 
     &:hover {
-      color: ${(props) => props.theme.color.primary.medium};
+      color: ${(props) => props.theme.color.__OLD__.primary.medium};
     }
   }
 

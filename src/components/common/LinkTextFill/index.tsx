@@ -1,13 +1,13 @@
 import * as i from 'types';
 import React from 'react';
-import * as _ from 'lodash';
+import _ from 'lodash';
 import Link, { LinkComponentProps } from 'common/Link';
-import NavLink from 'common/NavLink';
+import NavLink, { NavLinkProps } from 'common/NavLink';
 import { MaskWrap, Mask } from './styled';
 
 const LinkTextFill: React.FC<Props> = ({ children, component, ...props }) => {
   let linkProps: LinkProps = props;
-  let Component;
+  let Component: LinkComponentType;
 
   switch (component) {
     case 'Link': Component = Link; break;
@@ -43,5 +43,10 @@ export type Props = LinkComponentProps & {
 };
 
 type LinkProps = i.Omit<LinkComponentProps, 'children'> & React.AnchorHTMLAttributes<{}>;
+
+type LinkComponentType =
+  | 'a'
+  | React.FunctionComponent<LinkComponentProps>
+  | React.ComponentType<NavLinkProps>;
 
 export default LinkTextFill;

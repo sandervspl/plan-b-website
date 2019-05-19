@@ -1,6 +1,6 @@
 import * as i from 'types';
 import styled, { css } from 'styled-components';
-import { media } from 'styles/utils';
+import { media } from 'styles';
 import { Header } from './typography';
 
 export const SingleContentContainer = styled.div<SingleContentContainerProps>`

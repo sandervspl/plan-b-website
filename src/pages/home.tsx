@@ -1,5 +1,5 @@
 import * as i from 'types';
-import * as React from 'react';
+import React from 'react';
 import { API_ENDPOINT } from 'services';
 import { fetchPage } from 'ducks/page';
 import { fetchRecruitment } from 'ducks/recruitment';

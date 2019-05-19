@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
-import { media } from 'styles/utils';
+import { media } from 'styles';
 import { TRANSITION_TIME_MS, TRANSITION_TIME_MS_SHORT } from 'styles/pageTransition';
 import { VideoContainer } from 'modules/Home/HeroVideo/styled';
 import { PostsContainer } from 'modules/Home/Posts/styled';

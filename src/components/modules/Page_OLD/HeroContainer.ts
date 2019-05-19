@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { media } from 'styles/utils';
+import { media } from 'styles';
 import { TRANSITION_TIME_MS } from 'styles/pageTransition';
 
 export const HeroContainer = styled.div<HeroContainerProps>`

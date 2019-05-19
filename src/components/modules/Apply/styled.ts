@@ -1,7 +1,7 @@
 import * as i from 'types';
 import styled, { css } from 'styled-components';
 import { Field } from 'react-final-form';
-import { media } from 'styles/utils';
+import { media } from 'styles';
 import { getStaticUrl } from 'services';
 import bgImg from 'images/recruitment/bg.jpg?external';
 import { Fullscreenpage, Header, Paragraph } from 'common';

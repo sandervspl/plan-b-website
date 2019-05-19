@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { media } from 'styles/utils';
+import { media } from 'styles';
 import { TextInputField } from 'modules/Apply/styled';
 
 export const Placeholder = styled.span<PlaceholderProps>`

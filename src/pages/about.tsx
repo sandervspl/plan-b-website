@@ -1,5 +1,5 @@
 import * as i from 'types';
-import * as React from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 import Page from 'modules/Page_OLD';

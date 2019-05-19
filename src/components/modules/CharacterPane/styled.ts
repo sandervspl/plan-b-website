@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { media } from 'styles/utils';
+import { media } from 'styles';
 import { getStaticUrl } from 'services';
 import bgImg from 'images/recruitment/char_pane_bg.jpg?external';
 import { Paragraph } from 'common';

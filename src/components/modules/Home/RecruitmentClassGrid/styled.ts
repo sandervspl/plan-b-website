@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { media } from 'styles/utils';
+import { media } from 'styles';
 import { Paragraph } from 'common';
 
 export const ClassRow = styled.div`

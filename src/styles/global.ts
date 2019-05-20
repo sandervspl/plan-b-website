@@ -20,7 +20,6 @@ export default createGlobalStyle`
 
   body, html {
     width: 100%;
-    height: 100%;
     background-color: ${theme.color.__OLD__.secondary.dark};
   }
 

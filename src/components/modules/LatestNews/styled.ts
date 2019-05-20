@@ -1,16 +1,15 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import 'slick-carousel/slick/slick.css';
+import LogoSvg from 'vectors/logo.svg';
+import { media } from 'styles';
 
-export const LatestNewsContainer = styled.div`
-  margin: 30px 0 60px;
-  width: 100%;
-
+const SlickSliderStyle = css`
   .slick-track {
     padding: 2px 0;
   }
 
   .slick-slide {
-    height: 243px;
+    height: 300px;
     border-right: 10px solid transparent; /* Used for spacing between cards */
     
     > div {
@@ -20,4 +19,30 @@ export const LatestNewsContainer = styled.div`
       overflow: hidden;
     }
   }
+`;
+
+export const LatestNewsContainer = styled.div`
+  ${SlickSliderStyle};
+  
+  margin: 30px 0 60px;
+  width: 100%;
+
+  ${media.tablet`
+    display: flex;
+    position: relative;
+    margin-top: 90px;
+    height: 595px;
+  `}
+`;
+
+export const Logo = styled(LogoSvg)`
+  display: none;
+
+  ${media.tablet`
+    display: initial;
+    position: absolute;
+    left: 50%;
+    top: 35%;
+    transform: translate(-50%, -50%);
+  `}
 `;

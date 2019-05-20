@@ -1,9 +1,9 @@
 import * as i from 'types';
 import React from 'react';
 import { getSourceUrl, getDate } from 'services';
-import { Tag } from 'common';
+import { Tag, Heading, Link } from 'common';
 import {
-  NewsItemContainer, PostImage, PostTitle, Tags, PostContent, PostText, PostDate,
+  NewsItemContainer, PostImage, Tags, PostContent, PostText, PostDate, PostHeading, ReadMore,
 } from './styled';
 
 const NewsItem: React.FC<Props> = ({ post }) => {
@@ -13,19 +13,26 @@ const NewsItem: React.FC<Props> = ({ post }) => {
 
   return (
     <NewsItemContainer>
-      <PostImage>
-        {post.image && <img src={getSourceUrl(post.image.url)} alt="" />}
-      </PostImage>
-      <PostContent>
-        {title && <PostTitle>{title}</PostTitle>}
-        <Tags>
-          {post.tags && post.tags.length > 0 && post.tags.map((tag) => (
-            <Tag key={tag.id} as="li" color={tag.color}>{tag.name}</Tag>
-          ))}
-        </Tags>
-        {post.abstract && <PostText>{post.abstract}</PostText>}
-        <PostDate>{getDate(post.created_at)}</PostDate>
-      </PostContent>
+      {/** @todo link to news detail page */}
+      <Link to="home">
+        <PostImage>
+          {post.image && <img src={getSourceUrl(post.image.url)} alt="" />}
+        </PostImage>
+        <PostContent>
+          <PostHeading>
+            {title && <Heading>{title}</Heading>}
+            <Tags>
+              {post.tags && post.tags.length > 0 && post.tags.map((tag) => (
+                <Tag key={tag.id} as="li" color={tag.color}>{tag.name}</Tag>
+              ))}
+            </Tags>
+
+            <ReadMore>Read More</ReadMore>
+          </PostHeading>
+          {post.abstract && <PostText>{post.abstract}</PostText>}
+          <PostDate>{getDate(post.created_at)}</PostDate>
+        </PostContent>
+      </Link>
     </NewsItemContainer>
   );
 };

@@ -43,7 +43,7 @@ export const FullscreenMenuContainer = styled.div<FullscreenMenuContainerProps>`
     width: 200vh;
     height: 100vh;
     background: ${(props) => props.theme.color.__OLD__.secondary.dark};
-    clip-path: polygon( 50% 0,100% 0,100% 100%,0% 100% );
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 0% 100%);
     transform: translate3d(100%, 0, 0);
     transform-origin: bottom right;
     transition: all 800ms ${(props) => props.theme.easing.easeOutQuint};

@@ -3,7 +3,7 @@ import { media } from 'styles';
 
 export const PageContainer = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background-color: ${(props) => props.theme.color.background};
 `;
 

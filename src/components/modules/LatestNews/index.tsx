@@ -2,8 +2,8 @@ import * as i from 'types';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Slider, { Settings } from 'react-slick';
-import { LatestNewsContainer } from './styled';
 import NewsItem from './components/NewsItem';
+import { LatestNewsContainer, Logo } from './styled';
 
 const sliderSettings: Settings = {
   dots: false,
@@ -15,24 +15,29 @@ const sliderSettings: Settings = {
   slidesToShow: 1.012,
 };
 
-const LatestNews: React.FC<Props> = () => {
+const LatestNews: React.FC = () => {
   const posts = useSelector((state: i.ReduxState) => state.posts);
+  const isMobile = useSelector((state: i.ReduxState) => state.ui.isMobile);
 
   if (!posts.list) return null;
 
   return (
     <LatestNewsContainer>
-      <Slider {...sliderSettings}>
-        {posts.list!.map((post) => (
+      {isMobile ? (
+        <Slider {...sliderSettings}>
+          {posts.list!.map((post) => (
+            <NewsItem key={post.id} post={post} />
+          ))}
+        </Slider>
+      ) : (
+        posts.list!.map((post) => (
           <NewsItem key={post.id} post={post} />
-        ))}
-      </Slider>
+        ))
+      )}
+
+      <Logo />
     </LatestNewsContainer>
   );
-};
-
-export type Props = {
-
 };
 
 export default LatestNews;

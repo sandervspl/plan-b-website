@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { media } from 'styles';
-import { NavLink } from 'common';
+import { NavLink, UnderlineStyle } from 'common';
 
 export const HeaderContainer = styled.header`
   padding: 15px 25px;
@@ -9,7 +9,7 @@ export const HeaderContainer = styled.header`
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-    padding: 58px 0;
+    padding: 28px 0;
   `}
 `;
 
@@ -52,13 +52,7 @@ export const HeaderNavLinkStyle = css`
     backface-visibility: hidden;
 
     &:after {
-      content: "";
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      background: ${(props) => props.theme.color.secondary};
-      height: 2px;
-      width: calc(100% - .02em);
+      ${UnderlineStyle};
       transform: scaleX(0);
       will-change: transform;
       transition: transform .2s ease-in-out;

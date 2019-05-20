@@ -5,6 +5,7 @@ import { NextAppContext, AppComponentProps as IAppComponentProps } from 'next/ap
 import { Store } from 'redux';
 import _ from 'lodash/fp';
 import { actions as uiActions } from 'ducks/ui';
+import { fetchUser } from 'ducks/user';
 import { isServer } from './isServer';
 
 type AppComponentProps = IAppComponentProps & {
@@ -43,6 +44,14 @@ export const withReduxStore = (App: any) => (
       let appProps = {};
       if (typeof App.getInitialProps === 'function') {
         appProps = await App.getInitialProps.call(App, appContext);
+      }
+
+      // Fetch user data on initial request
+      if (appContext.ctx.req) {
+        // @ts-ignore
+        await reduxStore.dispatch(fetchUser(
+          appContext.ctx.req.headers.cookie!
+        ));
       }
 
       return {

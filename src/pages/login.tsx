@@ -1,14 +1,13 @@
 import * as i from 'types';
 import React, { useEffect } from 'react';
-import { connect, useSelector } from 'react-redux';
-import { fetchUser } from 'ducks/user';
+import { useSelector } from 'react-redux';
 import Router from 'router';
 import { api, API_ENDPOINT } from 'services';
 import { useRouter } from 'services/hooks';
 import { Paragraph } from 'common';
 import { LoginContainer } from 'modules/Login/styled';
 
-const Login: i.NextPageComponent<Props> = (props) => {
+const Login: i.NextPageComponent = () => {
   const router = useRouter();
   const user = useSelector((state: i.ReduxState) => state.user.data);
   const isLoggingIn = !!(router.query && router.query.auth);
@@ -18,12 +17,6 @@ const Login: i.NextPageComponent<Props> = (props) => {
 
     // Redirect if we already have user data
     if (user) (Router as i.Router).push('home');
-
-    // Get user data
-    props.fetchUser()
-      .then(() => {
-        (Router as i.Router).push('home');
-      });
   }, []);
 
   const handleOnClick = () => {
@@ -41,9 +34,5 @@ const Login: i.NextPageComponent<Props> = (props) => {
   );
 };
 
-type Props = {
-  fetchUser: i.FetchUser;
-}
-
 // @ts-ignore
-export default connect(null, { fetchUser })(Login);
+export default Login;

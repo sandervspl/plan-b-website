@@ -1,6 +1,6 @@
 import * as i from 'types';
 import { ActionType, createStandardAction, getType } from 'typesafe-actions';
-import { API_ENDPOINT, LOCALSTORAGE } from 'services';
+import { API_ENDPOINT } from 'services';
 
 export const actions = {
   load: createStandardAction('user/LOAD')(),
@@ -42,20 +42,18 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Use
 };
 
 // @ts-ignore
-export const fetchUser: i.FetchUserDuck = () => async (dispatch, getState, api) => {
+export const fetchUser: i.FetchUserDuck = (ctxCookie) => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
   return api.methods.get<i.UserData>({
     url: api.url.api,
     path: `${API_ENDPOINT.AUTH_USER}`,
-    withAuth: true,
+    headers: {
+      cookie: ctxCookie,
+    },
   })
     .then((user) => {
       dispatch(actions.success(user));
-
-      // Save credentials so we know user is logged in
-      localStorage.setItem(LOCALSTORAGE.USER_ID, user.id);
-      localStorage.setItem(LOCALSTORAGE.USER_FETCHED_AT, user.fetchedAt.toString());
 
       return user;
     })

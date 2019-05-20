@@ -23,6 +23,7 @@ export type Options = {
   file?: any;
   error?: any;
   url: string;
+  headers?: HeadersInit_;
 }
 
 export type FetchOptions = i.Omit<Options, 'method'>;

@@ -6,11 +6,10 @@ import { Provider } from 'react-redux';
 import { PageTransition } from 'next-page-transitions';
 import _ from 'lodash/fp';
 // import registerServiceWorker from 'services/registerServiceWorker';
-import { withReduxStore, isServer, LOCALSTORAGE } from 'services';
+import { withReduxStore, isServer } from 'services';
 import { theme, GlobalStyle, sizes } from 'styles';
 import { TRANSITION_TIME_MS, TRANSITION_TIME_MS_SHORT } from 'styles/pageTransition';
 import { RouterContextProvider } from 'services/hooks';
-import { fetchUser } from 'ducks/user';
 
 class MyApp extends App<Props, State> {
   constructor(props: Props) {
@@ -18,20 +17,16 @@ class MyApp extends App<Props, State> {
 
     this.state = {
       curRoute: '/',
-      transitionTime: props.router.route === '/home'
-        ? TRANSITION_TIME_MS
-        : TRANSITION_TIME_MS_SHORT,
+      // transitionTime: props.router.route === '/home'
+      //   ? TRANSITION_TIME_MS
+      //   : TRANSITION_TIME_MS_SHORT,
+      transitionTime: 0,
     };
   }
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
     this.handleResize();
-
-    // Fetch user data
-    if (localStorage.getItem(LOCALSTORAGE.USER_ID)) {
-      this.props.reduxStore.dispatch(fetchUser());
-    }
   }
 
   componentDidUpdate() {

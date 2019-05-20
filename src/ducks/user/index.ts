@@ -8,13 +8,13 @@ export const actions = {
   success: createStandardAction('user/SUCCESS')<i.UserData>(),
 };
 
-const initialState: i.RecruitmentState = {
-  data: undefined,
+const initialState: i.UserState = {
   error: false,
   loading: false,
+  isSignedIn: false,
 };
 
-export default (state = initialState, action: ActionType<typeof actions>) => {
+export default (state = initialState, action: ActionType<typeof actions>): i.UserState => {
   switch (action.type) {
     case getType(actions.load):
       return {
@@ -34,6 +34,7 @@ export default (state = initialState, action: ActionType<typeof actions>) => {
         data: action.payload,
         error: false,
         loading: false,
+        isSignedIn: true,
       };
     default:
       return state;

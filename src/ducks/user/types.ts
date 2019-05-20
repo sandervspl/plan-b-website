@@ -1,6 +1,8 @@
 import * as i from 'types';
 
-export type UserState = i.BaseState<i.UserData>;
+export type UserState = i.BaseState<i.UserData> & {
+  isSignedIn: boolean;
+};
 
 export type UserData = {
   username: string;

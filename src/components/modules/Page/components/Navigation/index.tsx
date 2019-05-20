@@ -1,18 +1,31 @@
+import * as i from 'types';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link, NavLink } from 'common';
 import { navigationMenu } from 'services';
+import User from '../User';
 import {
   HeaderContainer, UserContainer, NavContainer, SignIn, JoinGuildBanner, NavList, NavItem,
 } from './styled';
 
-const Navigation: React.FC<Props> = (props) => {
+const Navigation: React.FC<Props> = () => {
+  const user = useSelector((state: i.ReduxState) => state.user);
+
   return (
     <HeaderContainer>
       <UserContainer>
-        <SignIn to="login">Sign in</SignIn>
-        <Link to="apply">
-          <JoinGuildBanner>Join the guild</JoinGuildBanner>
-        </Link>
+        {user.isSignedIn ? (
+          <User />
+        ) : user.loading ? (
+          <SignIn as="span" to="login">Signing in...</SignIn>
+        ) : (
+          <SignIn to="login">Sign in</SignIn>
+        )}
+        {!user.isSignedIn && (
+          <Link to="apply">
+            <JoinGuildBanner>Join the guild</JoinGuildBanner>
+          </Link>
+        )}
       </UserContainer>
 
       <NavContainer>

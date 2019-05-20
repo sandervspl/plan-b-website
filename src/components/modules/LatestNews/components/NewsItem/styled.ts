@@ -126,6 +126,7 @@ export const ReadMore = styled.span`
 export const PostHeading = styled.header`
   align-self: flex-end;
   max-width: 95%;
+  z-index: 1;
 
   ${media.tablet`
     max-width: none;
@@ -183,7 +184,7 @@ export const NewsItemContainer = styled.article`
         }
 
         ${ReadMore} {
-          bottom: 0;
+          bottom: -2px;
         }
       }
     }
@@ -201,7 +202,7 @@ export const NewsItemContainer = styled.article`
         right: 25px;
 
         ${ReadMore} {
-          top: -5px;
+          top: -7px;
         }
       }
 

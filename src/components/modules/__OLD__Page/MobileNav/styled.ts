@@ -15,7 +15,7 @@ export const MobileNavContainer = styled.nav`
     width: 70px;
     height: 70px;
     background: ${(props) => props.theme.color.__OLD__.secondary.dark};
-    clip-path: polygon( 100% 0,100% 0,100% 100%,0% 100% );
+    clip-path: polygon(100% 0, 100% 0, 100% 100%, 0% 100%);
   }
 
   ${media.tablet`

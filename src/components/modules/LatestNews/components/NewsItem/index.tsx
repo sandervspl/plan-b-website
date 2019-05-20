@@ -14,6 +14,10 @@ const NewsItem: React.FC<Props> = ({ post }) => {
     ? post.title.substring(0, 40) + '...'
     : post.title;
 
+  const capeColor = post.tags && post.tags.length > 0
+    ? post.tags[0].color
+    : undefined;
+
   return (
     <NewsItemContainer>
       {/** @todo link to news detail page */}
@@ -27,9 +31,10 @@ const NewsItem: React.FC<Props> = ({ post }) => {
             {post.image && <img src={getSourceUrl(post.image.url)} alt="" />}
           </PostImage>
         ))}
+
         <PostContent>
           <PostHeading>
-            {title && <Heading>{title}</Heading>}
+            {title && <Heading capeColor={capeColor}>{title}</Heading>}
             <Tags>
               {post.tags && post.tags.length > 0 && post.tags.map((tag) => (
                 <Tag key={tag.id} as="li" color={tag.color}>{tag.name}</Tag>
@@ -38,7 +43,9 @@ const NewsItem: React.FC<Props> = ({ post }) => {
 
             <ReadMore>Read More</ReadMore>
           </PostHeading>
+
           {post.abstract && <PostText>{post.abstract}</PostText>}
+
           <PostDate>{getDate(post.created_at)}</PostDate>
         </PostContent>
       </Link>

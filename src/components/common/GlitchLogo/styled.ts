@@ -1,13 +1,11 @@
-import styled, { keyframes } from 'styled-components';
-import { getStaticUrl } from 'services';
-import LogoSvg from 'images/recruitment/bg.jpg';
+import styled from 'styled-components';
 import { media } from 'styles';
 import * as glitch from 'styles/glitch';
 
 export const LogoContainer = styled.div<LogoContainerProps>`
   display: none;
   position: absolute;
-  top: 14%;
+  top: 17%;
   left: calc(50% - 136.5px);
   width: 273px;
   height: 253px;

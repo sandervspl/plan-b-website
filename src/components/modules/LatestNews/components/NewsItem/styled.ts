@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { media } from 'styles';
 import { Heading, Tag, UnderlineStyle } from 'common';
 import * as glitch from 'styles/glitch';
@@ -136,6 +136,15 @@ export const PostHeading = styled.header`
   `}
 `;
 
+const levitateAnim = keyframes`
+  0%, 100% {
+    transform: translate3d(0, -.75%, 0);
+  }
+  50% {
+    transform: translate3d(0, .75%, 0);
+  }
+`;
+
 export const NewsItemContainer = styled.article`
   display: flex;
   flex-direction: column;
@@ -150,8 +159,16 @@ export const NewsItemContainer = styled.article`
   }
 
   ${media.tablet`
+    animation: ${levitateAnim} 7s ease-in-out infinite forwards;
+    animation-delay: -2s;
+
     a {
       height: auto;
+    }
+
+    &:first-child {
+      margin-top: 60px;
+      animation-delay: 0s;
     }
 
     &:nth-child(odd) {

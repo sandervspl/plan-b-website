@@ -18,7 +18,7 @@ const GlitchLogo: React.FC = () => {
       randomTime1: MIN_TIME + Math.random() * MAX_TIME1,
       randomTime2: MIN_TIME + Math.random() * MAX_TIME2,
     });
-  }, timeProps.randomTime2);
+  }, Math.max(timeProps.randomTime1, timeProps.randomTime2));
 
   return (
     <LogoContainer {...timeProps}>

@@ -1,7 +1,7 @@
 import * as i from 'types';
 import React from 'react';
 import { getDate } from 'services';
-import { Header, Paragraph, TransitionPost } from 'common';
+import { __OLD__Header, Paragraph, TransitionPost } from 'common';
 import { PostBlock, DateText, PostContent } from './styled';
 
 const Post: React.FC<Props> = ({ data }) => (
@@ -9,7 +9,7 @@ const Post: React.FC<Props> = ({ data }) => (
     {(visible) => (
       <PostBlock>
         <PostContent isVisible={visible}>
-          <Header>{data.title}</Header>
+          <__OLD__Header>{data.title}</__OLD__Header>
           <DateText>
             {getDate(data.created_at, {}).replace(/\//g, '.')}
           </DateText>

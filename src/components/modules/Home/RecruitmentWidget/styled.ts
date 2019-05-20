@@ -1,7 +1,7 @@
 import * as i from 'types';
 import styled, { css } from 'styled-components';
 import { media } from 'styles';
-import { Header } from 'common';
+import { __OLD__Header } from 'common';
 import { ContentBlockContainer } from 'modules/Home/styled';
 
 export const RecruitmentBlock = styled(ContentBlockContainer)`
@@ -13,7 +13,7 @@ export const RecruitmentBlock = styled(ContentBlockContainer)`
     padding: 50px 30px;
   `}
 
-  ${Header} {
+  ${__OLD__Header} {
     font-size: 30px;
     line-height: 40px;
     margin-bottom: 10px;

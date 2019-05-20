@@ -1,7 +1,7 @@
 import * as i from 'types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, Subheader } from 'common';
+import { __OLD__Header, Subheader } from 'common';
 import { HeroVideo } from 'modules/Home';
 import { HeroContent, Content } from './styled';
 
@@ -13,7 +13,7 @@ const Hero: React.FC<Props> = ({ page }) => {
         <Content>
           {page.home && (
             <>
-              <Header>{page.home.hero_title}</Header>
+              <__OLD__Header>{page.home.hero_title}</__OLD__Header>
               <Subheader>{page.home.hero_server}</Subheader>
             </>
           )}

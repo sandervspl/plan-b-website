@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'styles';
-import { Header } from 'common';
+import { __OLD__Header } from 'common';
 
 export const TopMenuContainer = styled.div`
   display: none;
@@ -33,7 +33,7 @@ export const User = styled.div`
   align-items: center;
 `;
 
-export const Logo = styled(Header)`
+export const Logo = styled(__OLD__Header)`
   transform: translate3d(0, -80px, 0);
   will-change: transform;
   transition: transform 500ms 500ms ${(props) => props.theme.easing.easeOutQuint};

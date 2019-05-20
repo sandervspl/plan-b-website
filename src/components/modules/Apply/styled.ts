@@ -4,7 +4,7 @@ import { Field } from 'react-final-form';
 import { media } from 'styles';
 import { getStaticUrl } from 'services';
 import bgImg from 'images/recruitment/bg.jpg?external';
-import { Fullscreenpage, Header, Paragraph } from 'common';
+import { Fullscreenpage, __OLD__Header, Paragraph } from 'common';
 
 export const RecruitmentContainer = styled(Fullscreenpage)`
   margin: auto;
@@ -30,7 +30,7 @@ export const RecruitmentContainer = styled(Fullscreenpage)`
   `}
 `;
 
-export const QuestionContentHeader = styled(Header)`
+export const QuestionContentHeader = styled(__OLD__Header)`
   margin-bottom: 10px;
   text-transform: none;
 

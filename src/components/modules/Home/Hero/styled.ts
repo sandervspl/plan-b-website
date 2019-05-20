@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { Header, Subheader } from 'common';
+import { __OLD__Header, Subheader } from 'common';
 import { media } from 'styles';
 
 export const HeroContent = styled.header`
@@ -47,7 +47,7 @@ export const Content = styled.div`
     width: auto;
   `}
 
-  ${Header} {
+  ${__OLD__Header} {
     text-transform: uppercase;
 
     ${media.tablet`

@@ -1,13 +1,13 @@
 import * as i from 'types';
 import styled, { css } from 'styled-components';
-import { Paragraph, Header } from 'common';
+import { Paragraph, __OLD__Header } from 'common';
 import { media } from 'styles';
 import { ContentBlockContainer } from 'modules/Home/styled';
 
 export const PostBlock = styled(ContentBlockContainer)`
   overflow-x: hidden;
 
-  ${Header} {
+  ${__OLD__Header} {
     line-height: 50px;
     font-size: 40px;
 

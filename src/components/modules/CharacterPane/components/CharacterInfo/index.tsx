@@ -1,7 +1,7 @@
 import * as i from 'types';
 import React from 'react';
 import { useImageLoader } from 'services/hooks';
-import { Header, ClassText } from 'common';
+import { __OLD__Header, ClassText } from 'common';
 import { Avatar, CharacterDetails, CharacterInfoContainer, Guild, ClassAndLevel } from './styled';
 
 const CharacterInfo: React.FC<CharacterInfoProps> = ({ character }) => {
@@ -13,7 +13,7 @@ const CharacterInfo: React.FC<CharacterInfoProps> = ({ character }) => {
     <CharacterInfoContainer>
       <Avatar src={avatar} />
       <CharacterDetails>
-        <Header as="h2">{character.name}</Header>
+        <__OLD__Header as="h2">{character.name}</__OLD__Header>
         {character.guild && (
           <Guild>
             {'<'}{character.guild.name}{'>'}

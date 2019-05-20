@@ -2,14 +2,14 @@ import * as i from 'types';
 import React from 'react';
 import { connect } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
-import Page from 'modules/Page_OLD';
+import __OLD__Page from 'modules/__OLD__Page';
 import { API_ENDPOINT, getSourceUrl } from 'services';
 import { fetchPage } from 'ducks/page';
-import { Header, SingleContentContainer, TransitionPost } from 'common';
+import { __OLD__Header, SingleContentContainer, TransitionPost } from 'common';
 import { AboutContent } from 'modules/About/styled';
 
 const About: i.NextPageComponent<Props> = ({ page }) => (
-  <Page
+  <__OLD__Page
     hero={{
       content: page.about!.hero_image ? getSourceUrl(page.about!.hero_image!.url) : null,
     }}
@@ -17,7 +17,7 @@ const About: i.NextPageComponent<Props> = ({ page }) => (
     <TransitionPost>
       {(visible) => (
         <SingleContentContainer isVisible={visible}>
-          <Header>{page.about && page.about.title}</Header>
+          <__OLD__Header>{page.about && page.about.title}</__OLD__Header>
           {page.about && page.about.content && (
             <AboutContent>
               <ReactMarkdown
@@ -29,7 +29,7 @@ const About: i.NextPageComponent<Props> = ({ page }) => (
         </SingleContentContainer>
       )}
     </TransitionPost>
-  </Page>
+  </__OLD__Page>
 );
 
 About.getInitialProps = async ({ store }) => {

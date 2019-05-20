@@ -1,7 +1,7 @@
 import * as i from 'types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Header, TransitionPost } from 'common';
+import { __OLD__Header, TransitionPost } from 'common';
 import { getRecruitmentClassSpecs } from 'ducks/recruitment/reselect';
 import RecruitmentClassGrid from '../RecruitmentClassGrid';
 import { RecruitmentBlock, RecruitmentContent } from './styled';
@@ -13,7 +13,7 @@ const RecruitmentWidget: React.FC<Props> = ({ recruitment, playerClasses }) => (
         <RecruitmentContent isVisible={visible}>
           {recruitment && (
               <>
-                <Header dark>{recruitment.title}</Header>
+                <__OLD__Header dark>{recruitment.title}</__OLD__Header>
                 <RecruitmentClassGrid playerClasses={playerClasses} />
               </>
           )}

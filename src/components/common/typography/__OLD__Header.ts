@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { media } from 'styles';
 import { BaseText } from './BaseText';
 
-export const Header = styled(BaseText).attrs<HeaderProps>((props) => ({
+export const __OLD__Header = styled(BaseText).attrs<HeaderProps>((props) => ({
   as: props.as,
 }))<HeaderProps>`
   font-size: 65px;
@@ -25,6 +25,6 @@ export type HeaderProps = {
   as?: i.HeaderType;
 }
 
-Header.defaultProps = {
+__OLD__Header.defaultProps = {
   as: 'h1',
 };

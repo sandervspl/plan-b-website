@@ -7,7 +7,7 @@ import Topmenu from './TopMenu';
 import BaseHero from './BaseHero';
 import { Main, AwayFromHomeTransitionStyle, ToHomeTransitionStyle } from './styled';
 
-const Page: React.FC<Props> = ({ children, hero, className }) => {
+const __OLD__Page: React.FC<Props> = ({ children, hero, className }) => {
   const router = useRouter();
   const heroContent = hero && typeof hero.content === 'string'
     ? <BaseHero src={hero.content} />
@@ -37,11 +37,11 @@ type Props = {
   };
 }
 
-Page.defaultProps = {
+__OLD__Page.defaultProps = {
   hero: {
     big: false,
     content: null,
   },
 };
 
-export default Page;
+export default __OLD__Page;

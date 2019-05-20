@@ -8,9 +8,8 @@ export type PageState = i.Omit<i.BaseState, 'data'> & i.ApiDataPayloads;
 // Page bodies
 export type HomePageData = i.BaseResponseBody & {
   hero_title?: string;
-  hero_server?: string;
-  hero_video?: string;
   posts?: i.BasePost[];
+  meta?: i.PageMeta;
 }
 
 export type AboutPageData = i.BaseResponseBody & {
@@ -57,6 +56,14 @@ export type RecruitmentQuestionDetail = RecruitmentQuestion & {
     intro_title: string;
   };
   background_image?: i.Image;
+}
+
+export type PageMeta = i.BaseResponseBody & {
+  aboutpage?: number; // Page ID
+  homepage?: number;  // Page ID
+  title?: string;
+  description?: string;
+  image?: i.Image;
 }
 
 

@@ -2,8 +2,9 @@ import * as i from 'types';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Slider, { Settings } from 'react-slick';
+import { GlitchLogo } from 'common';
 import NewsItem from './components/NewsItem';
-import { LatestNewsContainer, Logo } from './styled';
+import { LatestNewsContainer } from './styled';
 
 const sliderSettings: Settings = {
   dots: false,
@@ -35,7 +36,7 @@ const LatestNews: React.FC = () => {
         ))
       )}
 
-      <Logo />
+      <GlitchLogo />
     </LatestNewsContainer>
   );
 };

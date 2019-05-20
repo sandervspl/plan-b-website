@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import 'slick-carousel/slick/slick.css';
-import LogoSvg from 'vectors/logo.svg';
 import { media } from 'styles';
 
 const SlickSliderStyle = css`
@@ -35,14 +34,3 @@ export const LatestNewsContainer = styled.div`
   `}
 `;
 
-export const Logo = styled(LogoSvg)`
-  display: none;
-
-  ${media.tablet`
-    display: initial;
-    position: absolute;
-    left: 50%;
-    top: 35%;
-    transform: translate(-50%, -50%);
-  `}
-`;

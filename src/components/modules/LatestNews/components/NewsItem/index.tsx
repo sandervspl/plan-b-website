@@ -1,5 +1,6 @@
 import * as i from 'types';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { getSourceUrl, getDate } from 'services';
 import { Tag, Heading, Link } from 'common';
 import {
@@ -7,6 +8,8 @@ import {
 } from './styled';
 
 const NewsItem: React.FC<Props> = ({ post }) => {
+  const isMobile = useSelector((state: i.ReduxState) => state.ui.isMobile);
+
   const title = post.title && post.title.length > 40
     ? post.title.substring(0, 40) + '...'
     : post.title;
@@ -15,9 +18,15 @@ const NewsItem: React.FC<Props> = ({ post }) => {
     <NewsItemContainer>
       {/** @todo link to news detail page */}
       <Link to="home">
-        <PostImage>
-          {post.image && <img src={getSourceUrl(post.image.url)} alt="" />}
-        </PostImage>
+        {isMobile ? (
+          <PostImage>
+            {post.image && <img src={getSourceUrl(post.image.url)} alt="" />}
+          </PostImage>
+        ) : Array.from({ length: 5 }).map((_, i) => (
+          <PostImage key={i}>
+            {post.image && <img src={getSourceUrl(post.image.url)} alt="" />}
+          </PostImage>
+        ))}
         <PostContent>
           <PostHeading>
             {title && <Heading>{title}</Heading>}

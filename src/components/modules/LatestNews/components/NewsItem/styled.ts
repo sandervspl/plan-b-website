@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { media } from 'styles';
 import { Heading, Tag, UnderlineStyle } from 'common';
+import * as glitch from 'styles/glitch';
 
 export const PostImage = styled.figure`
   position: relative;
@@ -30,6 +31,17 @@ export const PostImage = styled.figure`
   ${media.tablet`
     height: 437px;
     width: 257px;
+
+    &:nth-child(n+2) {
+      position: absolute;
+      top: 0;
+      opacity: 0;
+    }
+
+    &:nth-child(5) {
+      background-color: #af4949;
+      opacity: .2;
+    }
   `}
 `;
 
@@ -196,9 +208,35 @@ export const NewsItemContainer = styled.article`
         transform: scaleY(2);
       }
 
-      ${PostImage}:after {
-        opacity: .15;
+      ${PostImage} {
+        &:after {
+          opacity: 0.1;
+        }
+
+        &:nth-child(n+2) {
+          opacity: 1;
+        }
+
+        &:nth-child(2) {
+          transform: translate3d(10px, 0, 0);
+          animation: ${glitch.anim1} 2.345s infinite linear alternate;
+        }
+
+        &:nth-child(3) {
+          transform: translate3d(calc(-1 * 10px), 0, 0);
+          animation: ${glitch.anim2} 3.234s infinite linear alternate;
+        }
+
+        &:nth-child(4) {
+          transform: translate3d(0, calc(-1 * 5px), 0) scale3d(-1, -1, 1);
+          animation: ${glitch.anim3} 2.987s infinite linear alternate;
+        }
+
+        &:nth-child(5) {
+          animation: ${glitch.flashAnim1} 1.5s steps(1,end) infinite;
+        }
       }
+
     }
   `}
 `;

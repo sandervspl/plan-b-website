@@ -8,6 +8,10 @@ const theme = {
       light: '#E4E3E3',
     }),
     background: '#FFFFFF',
+    glitch: {
+      primary: '#AF4949',
+      secondary: '#31CD32',
+    },
 
     __OLD__: {
       primary: Object.assign('#BFCE9E', {

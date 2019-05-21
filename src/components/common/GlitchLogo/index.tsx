@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import LogoSvg from 'vectors/logo.svg';
 import { useInterval } from 'services/hooks';
-import { LogoContainer } from './styled';
+import { LogoContainer, Logo } from './styled';
 
 const MIN_TIME = 2000;
 const MAX_TIME1 = 4500;
@@ -21,10 +20,13 @@ const GlitchLogo: React.FC = () => {
   }, Math.max(timeProps.randomTime1, timeProps.randomTime2));
 
   return (
-    <LogoContainer {...timeProps}>
-      {Array.from({ length: 6 }).map((_, i) => (
-        <LogoSvg key={i} />
-      ))}
+    <LogoContainer>
+      <Logo animTime={timeProps.randomTime1} />
+      <Logo />
+      <Logo />
+      <Logo />
+      <Logo animTime={timeProps.randomTime1} />
+      <Logo animTime={timeProps.randomTime1} />
     </LogoContainer>
   );
 };

@@ -1,5 +1,4 @@
 import React, { createContext, useContext } from 'react';
-import {} from 'next-routes';
 import { withRouter, SingletonRouter, WithRouterProps } from 'next/router';
 
 const RouterContext = createContext({} as SingletonRouter);

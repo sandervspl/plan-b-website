@@ -15,8 +15,8 @@ export const LogoContainer = styled.div<LogoContainerProps>`
 
     > svg {
       position: absolute;
-      top: calc(-1 * 5px);
-      left: calc(-1 * 10px);
+      top: -5px;
+      left: -10px;
       width: calc(100% + 10px * 2);
       height: calc(100% + 5px * 2);
 
@@ -46,7 +46,7 @@ export const LogoContainer = styled.div<LogoContainerProps>`
       }
 
       &:nth-child(3) {
-        transform: translate3d(calc(-1 * 10px), 0, 0);
+        transform: translate3d(-10px, 0, 0);
         animation: ${glitch.anim2} 4s infinite linear alternate;
 
         > g path:nth-child(4) {
@@ -56,7 +56,7 @@ export const LogoContainer = styled.div<LogoContainerProps>`
       }
 
       &:nth-child(4) {
-        transform: translate3d(0, calc(-1 * 5px), 0) scale3d(-1, -1, 1);
+        transform: translate3d(0, -5px, 0) scale3d(-1, -1, 1);
         animation: ${glitch.anim3} 4s infinite linear alternate;
 
         > g path:nth-child(2) {

@@ -241,12 +241,12 @@ export const NewsItemContainer = styled.article`
         }
 
         &:nth-child(3) {
-          transform: translate3d(calc(-1 * 10px), 0, 0);
+          transform: translate3d(-10px, 0, 0);
           animation: ${glitch.anim2} 3.234s infinite linear alternate;
         }
 
         &:nth-child(4) {
-          transform: translate3d(0, calc(-1 * 5px), 0) scale3d(-1, -1, 1);
+          transform: translate3d(0, -5px, 0) scale3d(-1, -1, 1);
           animation: ${glitch.anim3} 2.987s infinite linear alternate;
         }
 

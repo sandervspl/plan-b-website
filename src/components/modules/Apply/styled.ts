@@ -180,7 +180,7 @@ export const ImagesContainer = styled.div.attrs<ImagesContainerProps>((props) =>
     top: 75px;
     right: 45px;
     width: 50%;
-    height: calc(100% - ${75 * 2}px);
+    height: calc(100% - 150px);
 
     ${ImageContainer} {
       img {

@@ -167,32 +167,32 @@ export const anim3 = keyframes`
 
 /* Flash */
 export const flashAnim1 = keyframes`
-	0%, 5% { 
+	0%, 2% { 
 		opacity: 0.2; 
-		transform: translate3d(10px, 5px, 0);
+		transform: translate3d(5px, 3px, 0);
 	}
-	5.5%, 100% {
+	2.5%, 100% {
 		opacity: 0;
 		transform: translate3d(0, 0, 0);
 	}
 `;
 
 export const flashAnim2 = keyframes`
-	0%, 5% { 
+	0%, 2% { 
 		opacity: 0.2; 
-		transform: translate3d(-10px, 5px, 0);
+		transform: translate3d(-5px, 3px, 0);
 	}
-	5.5%, 100% {
+	2.5%, 100% {
 		opacity: 0;
 		transform: translate3d(0, 0, 0);
 	}
 `;
 
 export const flashAnim3 = keyframes`
-	0%, 5% {
-		transform: translate3d(-5px, 2px, 0);
+	0%, 2% {
+		transform: translate3d(5px, -3px, 0);
 	}
-	5.5%, 100% {
+	2.5%, 100% {
 		transform: translate3d(0, 0, 0);
 	}
 `;

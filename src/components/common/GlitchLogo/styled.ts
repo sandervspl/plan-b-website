@@ -31,10 +31,12 @@ export const Logo = styled(LogoSvg).attrs((props: LogoProps) => props.animTime &
   &:nth-child(6) {
     > g path:nth-child(2) {
       fill: ${(props) => props.theme.color.glitch.primary};
+      mix-blend-mode: color;
     }
 
     > g path:nth-child(4) {
       fill: ${(props) => props.theme.color.glitch.secondary};
+      mix-blend-mode: color;
     }
   }
 
@@ -49,6 +51,7 @@ export const Logo = styled(LogoSvg).attrs((props: LogoProps) => props.animTime &
     > g path:nth-child(2) {
       fill: ${(props) => props.theme.color.glitch.primary};
       opacity: .2;
+      mix-blend-mode: color;
     }
   }
 
@@ -58,6 +61,7 @@ export const Logo = styled(LogoSvg).attrs((props: LogoProps) => props.animTime &
 
     > g path:nth-child(4) {
       fill: ${(props) => props.theme.color.glitch.secondary};
+      mix-blend-mode: color;
       opacity: .2;
     }
   }
@@ -68,11 +72,13 @@ export const Logo = styled(LogoSvg).attrs((props: LogoProps) => props.animTime &
 
     > g path:nth-child(2) {
       fill: ${(props) => props.theme.color.glitch.primary};
+      mix-blend-mode: color;
       opacity: .3;
     }
 
     > g path:nth-child(4) {
       fill: ${(props) => props.theme.color.glitch.secondary};
+      mix-blend-mode: color;
       opacity: .1;
     }
   }

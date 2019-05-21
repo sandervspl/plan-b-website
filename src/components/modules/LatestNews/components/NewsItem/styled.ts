@@ -36,12 +36,31 @@ export const PostImage = styled.figure`
       position: absolute;
       top: 0;
       opacity: 0;
+
+      &:after {
+        opacity: 1;
+      }
     }
 
-    &:nth-child(5) {
-      background-color: #af4949;
-      opacity: .2;
+    &:nth-child(2),
+    &:nth-child(3) {
+      &:after {
+        background-color: ${(props) => props.theme.color.glitch.primary};
+        mix-blend-mode: difference;
+      }
     }
+    
+    &:nth-child(4),
+    &:nth-child(5) {
+      &:after {
+        background-color: ${(props) => props.theme.color.glitch.secondary};
+        mix-blend-mode: difference;
+      }
+    }
+
+    /* &:nth-child(5) {
+      opacity: .2;
+    } */
   `}
 `;
 

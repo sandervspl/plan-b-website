@@ -9,8 +9,8 @@ const theme = {
     }),
     background: '#FFFFFF',
     glitch: {
-      primary: '#AF4949',
-      secondary: '#31CD32',
+      primary: 'palevioletred',
+      secondary: 'darkturquoise',
     },
 
     __OLD__: {

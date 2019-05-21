@@ -24,7 +24,7 @@ export const Heading = styled.h2<Props>`
         left: -4px;
         z-index: -1;
         width: 100%;
-        height: calc(100% + 4px);
+        height: calc(100% + 5px);
         background-color: ${props.capeColor};
         clip-path: polygon(0 0, 100% 0, 100% 95%, 0% 100%);
       }

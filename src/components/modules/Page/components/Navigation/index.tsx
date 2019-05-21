@@ -16,8 +16,6 @@ const Navigation: React.FC<Props> = () => {
       <UserContainer>
         {user.isSignedIn ? (
           <User />
-        ) : user.loading ? (
-          <SignIn as="span" to="login">Signing in...</SignIn>
         ) : (
           <SignIn to="login">Sign in</SignIn>
         )}

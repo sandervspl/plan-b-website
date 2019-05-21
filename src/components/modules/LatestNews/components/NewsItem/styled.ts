@@ -46,7 +46,6 @@ export const PostImage = styled.figure`
     &:nth-child(3) {
       &:after {
         background-color: ${(props) => props.theme.color.glitch.primary};
-        mix-blend-mode: difference;
       }
     }
     
@@ -54,7 +53,6 @@ export const PostImage = styled.figure`
     &:nth-child(5) {
       &:after {
         background-color: ${(props) => props.theme.color.glitch.secondary};
-        mix-blend-mode: difference;
       }
     }
 

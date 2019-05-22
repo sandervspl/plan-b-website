@@ -12,6 +12,9 @@ const theme = {
       primary: 'palevioletred',
       secondary: 'darkturquoise',
     },
+    blocks: {
+      recruitment: '#476369',
+    },
 
     __OLD__: {
       primary: Object.assign('#BFCE9E', {
@@ -47,7 +50,8 @@ const theme = {
   },
 
   shadow: {
-    card: '0 0 4px 1px rgba(0, 0, 0, .11)',
+    card: '0px 0px 15px -5px rgba(0, 0, 0, .2)',
+    icon: '-2px 2px 4px 0 rgba(0, 0, 0, .5)',
   },
 };
 

@@ -1,3 +1,4 @@
+import * as i from 'types';
 import styled from 'styled-components';
 
 export const Tag = styled.span<TagProps>`
@@ -11,5 +12,5 @@ export const Tag = styled.span<TagProps>`
 `;
 
 type TagProps = {
-  color: string;
+  color: i.HexCode;
 }

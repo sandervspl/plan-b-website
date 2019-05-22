@@ -33,6 +33,6 @@ export type Post = i.BasePost & {
 
 export type Tag = i.BaseResponseBody & {
   name?: string;
-  color: string;
+  color: i.HexCode;
   posts: null;
 }

@@ -43,32 +43,34 @@ export const HeaderNavLinkStyle = css`
   font-family: ${(props) => props.theme.font.primary};
   text-transform: uppercase;
 
+  &:after {
+    ${UnderlineStyle};
+    transform: scaleX(0);
+    will-change: transform;
+    transition: transform .2s ease-in-out;
+    transform-origin: 100% 50%;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+
   &.active {
     color: ${(props) => props.theme.color.primary};
     cursor: pointer;
+
+    &:after {
+      background: ${(props) => props.theme.color.primary};
+      transform: scaleX(1);
+    }
   }
 
   ${media.tablet`
     backface-visibility: hidden;
 
-    &:after {
-      ${UnderlineStyle};
-      transform: scaleX(0);
-      will-change: transform;
-      transition: transform .2s ease-in-out;
-      transform-origin: 100% 50%;
-      transform-style: preserve-3d;
-      backface-visibility: hidden;
-    }
+    
 
     &:hover:after {
       transform: scaleX(1);
       transform-origin: 0 50%;
-    }
-
-    &.active:after {
-      background: ${(props) => props.theme.color.primary};
-      transform: scaleX(1);
     }
   `}
 `;

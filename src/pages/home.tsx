@@ -2,11 +2,11 @@ import * as i from 'types';
 import React from 'react';
 import { API_ENDPOINT } from 'services';
 import { fetchPage } from 'ducks/page';
-import { fetchRecruitment } from 'ducks/recruitment';
+import { fetchRecruitment, fetchRecruitmentClass } from 'ducks/recruitment';
 import Page from 'modules/Page';
 import LatestNews from 'modules/LatestNews';
 import { fetchPosts } from 'ducks/posts';
-import RecruitmentBlock from 'modules/Home/RecruitmentBlock';
+import RecruitmentBlock from 'modules/RecruitmentBlock';
 
 const Home: i.NextPageComponent = () => (
   <Page>
@@ -21,11 +21,23 @@ Home.getInitialProps = async ({ store }) => {
     store.dispatch(fetchRecruitment()),
   ]);
 
+  // Get detailed post data
   const { home } = store.getState().page;
 
   if (home && home!.posts) {
     const postIds = home.posts.map((post) => post.id);
     await store.dispatch(fetchPosts(postIds));
+  }
+
+  // Get detailed class data
+  const recruitment = store.getState().recruitment.data;
+
+  if (recruitment && recruitment.classes) {
+    const classFetches = recruitment.classes.map((cls) => (
+      store.dispatch(fetchRecruitmentClass(cls.id))
+    ));
+
+    await Promise.all(classFetches);
   }
 
   return {};

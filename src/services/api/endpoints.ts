@@ -6,5 +6,6 @@ export enum API_ENDPOINT {
   AUTH = 'discord/auth',
   AUTH_USER = 'discord/auth/me',
   POSTS = 'posts',
-  META = 'pagemetas'
+  META = 'pagemetas',
+  CLASS = 'classes'
 };

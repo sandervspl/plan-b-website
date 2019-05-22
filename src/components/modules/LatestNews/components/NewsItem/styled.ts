@@ -1,7 +1,8 @@
 import styled, { keyframes } from 'styled-components';
 import { media } from 'styles';
-import { Heading, Tag, UnderlineStyle } from 'common';
 import * as glitch from 'styles/glitch';
+import { Tag, UnderlineStyle } from 'common';
+import { HeadingContainer } from 'common/typography/Heading/style';
 
 export const PostImage = styled.figure`
   position: relative;
@@ -88,7 +89,7 @@ export const PostContent = styled.div`
   padding-left: 11px;
   transform: translateY(-10px);
 
-  ${Heading} {
+  ${HeadingContainer} {
     margin-bottom: 10px;
   }
 
@@ -148,7 +149,7 @@ export const PostHeading = styled.header`
   ${media.tablet`
     max-width: none;
 
-    ${Heading} {
+    ${HeadingContainer} {
       margin-right: 0;
     }
   `}
@@ -196,7 +197,7 @@ export const NewsItemContainer = styled.article`
         top: -35%;
         align-self: flex-start;
 
-        ${Heading} {
+        ${HeadingContainer} {
           text-align: left;
         }
 

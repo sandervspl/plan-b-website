@@ -4,7 +4,7 @@ import { media } from 'styles';
 
 const SlickSliderStyle = css`
   .slick-track {
-    padding: 2px 0;
+    padding: 20px 0;
   }
 
   .slick-slide {
@@ -29,7 +29,7 @@ export const LatestNewsContainer = styled.div`
   ${media.tablet`
     display: flex;
     position: relative;
-    margin-top: 90px;
+    margin: 90px 0 150px;
     height: 595px;
   `}
 `;

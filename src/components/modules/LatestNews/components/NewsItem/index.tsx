@@ -21,7 +21,7 @@ const NewsItem: React.FC<Props> = ({ post }) => {
   return (
     <NewsItemContainer>
       {/** @todo link to news detail page */}
-      <Link to="home">
+      <Link to="news-detail" params={{ id: post.id }}>
         {isMobile ? (
           <PostImage>
             {post.image && <img src={getSourceUrl(post.image.url)} alt="" />}

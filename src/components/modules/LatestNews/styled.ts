@@ -9,7 +9,7 @@ const SlickSliderStyle = css`
 
   .slick-slide {
     height: 300px;
-    border-right: 10px solid transparent; /* Used for spacing between cards */
+    border-right: 20px solid transparent; /* Used for spacing between cards */
     
     > div {
       height: 100%;

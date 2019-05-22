@@ -6,10 +6,12 @@ import { fetchRecruitment } from 'ducks/recruitment';
 import Page from 'modules/Page';
 import LatestNews from 'modules/LatestNews';
 import { fetchPosts } from 'ducks/posts';
+import RecruitmentBlock from 'modules/Home/RecruitmentBlock';
 
 const Home: i.NextPageComponent = () => (
   <Page>
     <LatestNews />
+    <RecruitmentBlock />
   </Page>
 );
 

@@ -143,7 +143,7 @@ export const ReadMore = styled.span`
 export const PostHeading = styled.header`
   align-self: flex-end;
   max-width: 95%;
-  z-index: 1;
+  z-index: 2;
 
   ${media.tablet`
     max-width: none;

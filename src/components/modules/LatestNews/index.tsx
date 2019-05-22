@@ -1,20 +1,12 @@
 import * as i from 'types';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Slider, { Settings } from 'react-slick';
+import dynamic from 'next/dynamic';
 import { GlitchLogo } from 'common';
 import NewsItem from './components/NewsItem';
 import { LatestNewsContainer } from './styled';
 
-const sliderSettings: Settings = {
-  dots: false,
-  arrows: false,
-  centerMode: true,
-  swipeToSlide: true,
-  infinite: false,
-  centerPadding: '25px',
-  slidesToShow: 1.012,
-};
+const MobileNewsSlider = dynamic(import('./components/MobileNewsSlider'));
 
 const LatestNews: React.FC = () => {
   const posts = useSelector((state: i.ReduxState) => state.posts);
@@ -25,11 +17,7 @@ const LatestNews: React.FC = () => {
   return (
     <LatestNewsContainer>
       {isMobile ? (
-        <Slider {...sliderSettings}>
-          {posts.list!.map((post) => (
-            <NewsItem key={post.id} post={post} />
-          ))}
-        </Slider>
+        <MobileNewsSlider />
       ) : (
         posts.list!.map((post) => (
           <NewsItem key={post.id} post={post} />

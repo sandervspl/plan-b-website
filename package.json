@@ -23,6 +23,7 @@
     "intl": "1.2.5",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "4.17.11",
+    "mobile-detect": "1.4.3",
     "next": "^8.0.3",
     "next-page-transitions": "1.0.0-beta.1",
     "next-routes": "^1.4.2",

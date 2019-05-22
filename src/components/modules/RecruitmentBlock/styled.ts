@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'common';
+import { Link, UnderlineStyle } from 'common';
 import { media } from 'styles';
 import { HeadingContainer, Text } from 'common/typography/Heading/style';
 
@@ -58,5 +58,22 @@ export const ApplyNow = styled(Link)`
     right: 60px;
     width: auto;
     font-size: 50px;
+
+    &:after {
+      ${UnderlineStyle};
+      height: 4px;
+      background: #FFFFFF;
+      transform: scaleX(0);
+      will-change: transform;
+      transition: transform .2s ease-in-out;
+      transform-origin: 100% 50%;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+    }
+
+    &:hover:after {
+      transform: scaleX(1);
+      transform-origin: 0 50%;
+    }
   `}
 `;

@@ -272,7 +272,6 @@ export const NewsItemContainer = styled.article`
           animation: ${glitch.flashAnim1} 1.5s steps(1,end) infinite;
         }
       }
-
     }
   `}
 `;

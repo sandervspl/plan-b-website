@@ -66,8 +66,6 @@ export const HeaderNavLinkStyle = css`
   ${media.tablet`
     backface-visibility: hidden;
 
-    
-
     &:hover:after {
       transform: scaleX(1);
       transform-origin: 0 50%;

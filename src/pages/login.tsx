@@ -1,21 +1,18 @@
 import * as i from 'types';
 import React, { useEffect } from 'react';
-import Router from 'router';
 import { api, API_ENDPOINT } from 'services';
 import { useRouter, useSelector } from 'hooks';
-import { Paragraph } from 'common';
-import { LoginContainer } from 'modules/Login/styled';
+import { Paragraph, GlitchLogo, Link } from 'common';
+import Page from 'modules/Page';
+import { LoginContainer, Heading, Button, DiscordLogo } from 'modules/Login/styled';
 
 const Login: i.NextPageComponent = () => {
   const router = useRouter();
   const user = useSelector((state) => state.user.data);
-  const isLoggingIn = !!(router.query && router.query.auth);
 
   useEffect(() => {
-    if (!isLoggingIn) return;
-
     // Redirect if we already have user data
-    if (user) (Router as i.Router).push('home');
+    if (user) router.push('/');
   }, []);
 
   const handleOnClick = () => {
@@ -23,15 +20,27 @@ const Login: i.NextPageComponent = () => {
   };
 
   return (
-    <LoginContainer>
-      {isLoggingIn || user ? (
-        <Paragraph>Signing in...</Paragraph>
-      ) : (
-        <button onClick={handleOnClick}>Sign in with Discord</button>
-      )}
-    </LoginContainer>
+    <Page withoutNav>
+      <LoginContainer>
+        {!user && (
+          <>
+            <Link to="home">
+              <GlitchLogo />
+            </Link>
+            <Heading>Sign in</Heading>
+            <Paragraph>
+              Sign in to see your DKP, visit the forums, or upload that awesome screenshot you just took.
+            </Paragraph>
+            <Button onClick={handleOnClick}>
+              <DiscordLogo />
+              Sign in with Discord
+            </Button>
+            <small>* You will have to be a member of the guild before you can sign in.</small>
+          </>
+        )}
+      </LoginContainer>
+    </Page>
   );
 };
 
-// @ts-ignore
 export default Login;

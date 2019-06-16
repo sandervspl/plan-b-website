@@ -2,19 +2,23 @@ import React from 'react';
 import Navigation from './components/Navigation';
 import { PageContainer, PageContent } from './styled';
 
-const Page: React.FC<Props> = ({ children }) => {
+const Page: React.FC<PageProps> = ({ children, withoutNav }) => {
   return (
     <PageContainer>
       <PageContent>
-        <Navigation />
+        {!withoutNav && <Navigation />}
         {children}
       </PageContent>
     </PageContainer>
   );
 };
 
-export type Props = {
+export type PageProps = {
+  withoutNav?: boolean;
+};
 
+Page.defaultProps = {
+  withoutNav: false,
 };
 
 export default Page;

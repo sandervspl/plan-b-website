@@ -45,6 +45,7 @@ const theme = {
 
   width: {
     page: '1005px',
+    login: '365px',
   },
 
   easing: {

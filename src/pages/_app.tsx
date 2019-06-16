@@ -79,9 +79,9 @@ class MyApp extends App<Props, State> {
           <ThemeProvider theme={theme}>
             <>
               <Provider store={reduxStore}>
-                <PageTransition timeout={transitionTime} classNames="page">
-                  <Component {...pageProps} key={router.route} />
-                </PageTransition>
+                {/* <PageTransition timeout={transitionTime} classNames="page"> */}
+                <Component {...pageProps} key={router.route} />
+                {/* </PageTransition> */}
               </Provider>
             </>
           </ThemeProvider>

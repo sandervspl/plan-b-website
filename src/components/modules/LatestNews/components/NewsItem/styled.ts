@@ -3,6 +3,7 @@ import { media } from 'styles';
 import * as glitch from 'styles/glitch';
 import { Tag, UnderlineStyle } from 'common';
 import { HeadingContainer } from 'common/typography/Heading/style';
+import { lineClamp } from 'common/styles';
 
 export const PostImage = styled.figure`
   position: relative;
@@ -56,10 +57,6 @@ export const PostImage = styled.figure`
         background-color: ${(props) => props.theme.color.glitch.secondary};
       }
     }
-
-    /* &:nth-child(5) {
-      opacity: .2;
-    } */
   `}
 `;
 
@@ -99,6 +96,7 @@ export const PostContent = styled.div`
 `;
 
 export const PostText = styled.p`
+  ${lineClamp(3)}
   padding-right: 11px;
   font-family: ${(props) => props.theme.font.primary};
   font-size: 14px;
@@ -145,6 +143,10 @@ export const PostHeading = styled.header`
   align-self: flex-end;
   max-width: 95%;
   z-index: 2;
+
+  ${HeadingContainer} h2 {
+    ${lineClamp(2)}
+  }
 
   ${media.tablet`
     max-width: none;

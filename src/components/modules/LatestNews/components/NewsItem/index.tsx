@@ -1,18 +1,14 @@
 import * as i from 'types';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { getSourceUrl, getDate } from 'services';
 import { Tag, Heading, Link } from 'common';
+import { useSelector } from 'hooks';
 import {
   NewsItemContainer, PostImage, Tags, PostContent, PostText, PostDate, PostHeading, ReadMore,
 } from './styled';
 
 const NewsItem: React.FC<Props> = ({ post }) => {
-  const isMobile = useSelector((state: i.ReduxState) => state.ui.isMobile);
-
-  const title = post.title && post.title.length > 40
-    ? post.title.substring(0, 40) + '...'
-    : post.title;
+  const isMobile = useSelector((state) => state.ui.isMobile);
 
   const capeColor = post.tags && post.tags.length > 0
     ? post.tags[0].color
@@ -20,7 +16,6 @@ const NewsItem: React.FC<Props> = ({ post }) => {
 
   return (
     <NewsItemContainer>
-      {/** @todo link to news detail page */}
       <Link to="news-detail" params={{ id: post.id }}>
         {isMobile ? (
           <PostImage>
@@ -34,7 +29,7 @@ const NewsItem: React.FC<Props> = ({ post }) => {
 
         <PostContent>
           <PostHeading>
-            {title && <Heading capeColor={capeColor}>{title}</Heading>}
+            {post.title && <Heading capeColor={capeColor}>{post.title}</Heading>}
             <Tags>
               {post.tags && post.tags.length > 0 && post.tags.map((tag) => (
                 <Tag key={tag.id} as="li" color={tag.color}>{tag.name}</Tag>

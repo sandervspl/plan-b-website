@@ -39,7 +39,7 @@
     "redux-thunk": "^2.3.0",
     "reselect": "4.0.0",
     "slick-carousel": "1.8.1",
-    "styled-components": "5.0.0-beta.0",
+    "styled-components": "5.0.0-beta.2",
     "ts-optchain": "0.1.5",
     "typesafe-actions": "4.0.0"
   },

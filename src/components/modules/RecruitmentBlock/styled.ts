@@ -6,6 +6,7 @@ import { HeadingContainer, Text } from 'common/typography/Heading/style';
 export const RecruitmentBlockContainer = styled.div`
   position: relative;
   padding: 35px 25px 30px;
+  margin-bottom: 45px;
   width: 100%;
   background-color: ${(props) => props.theme.color.blocks.recruitment};
 

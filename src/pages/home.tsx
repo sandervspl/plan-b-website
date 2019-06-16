@@ -7,11 +7,13 @@ import Page from 'modules/Page';
 import LatestNews from 'modules/LatestNews';
 import { fetchPosts } from 'ducks/posts';
 import RecruitmentBlock from 'modules/RecruitmentBlock';
+import OtherNews from 'modules/OtherNews';
 
 const Home: i.NextPageComponent = () => (
   <Page>
     <LatestNews />
     <RecruitmentBlock />
+    <OtherNews />
   </Page>
 );
 

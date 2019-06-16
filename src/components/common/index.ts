@@ -9,3 +9,4 @@ export * from './FullscreenPage';
 export * from './ClassText';
 export * from './Button';
 export * from './Tag';
+export * from './NewsCard';

@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider, { Settings } from 'react-slick';
 import { useSelector } from 'hooks';
+import { getLatestTwoNews } from 'ducks/posts/reselect';
 import NewsItem from '../NewsItem';
 
 const sliderSettings: Settings = {
@@ -14,11 +15,11 @@ const sliderSettings: Settings = {
 };
 
 const MobileNewsSlider: React.FC = () => {
-  const posts = useSelector((state) => state.posts);
+  const posts = useSelector((state) => getLatestTwoNews(state));
 
   return (
     <Slider {...sliderSettings}>
-      {posts.list!.map((post) => (
+      {posts.map((post) => (
         <NewsItem key={post.id} post={post} />
       ))}
     </Slider>

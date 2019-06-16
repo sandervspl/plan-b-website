@@ -10,6 +10,7 @@ export const actions = {
 };
 
 const initialState: i.PostsState = {
+  data: [],
   error: false,
   loading: false,
 };
@@ -38,7 +39,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Pos
     case getType(actions.listuccess):
       return {
         ...state,
-        list: action.payload,
+        data: action.payload,
         error: false,
         loading: false,
       };

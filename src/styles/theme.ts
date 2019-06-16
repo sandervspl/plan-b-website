@@ -14,6 +14,7 @@ const theme = {
     },
     blocks: {
       recruitment: '#476369',
+      otherNews: '#E4E3E3',
     },
 
     __OLD__: {

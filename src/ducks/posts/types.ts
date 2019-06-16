@@ -1,8 +1,7 @@
 import * as i from 'types';
 
-export type PostsState = i.BaseState<never> & {
+export type PostsState = i.BaseState<i.Post[]> & {
   single?: i.Post;
-  list?: i.Post[];
 };
 
 export type BasePost = i.BaseResponseBody & {
@@ -24,7 +23,7 @@ export type Post = i.BasePost & {
     size: string;
     url: string;
     provider: string;
-    public_id?: any;
+    public_id?: number;
     created_at: Date;
     updated_at: Date;
   };

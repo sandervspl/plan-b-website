@@ -3,7 +3,7 @@ import { useSelector } from 'hooks';
 import { getOtherNews } from 'ducks/posts/reselect';
 import { theme } from 'styles';
 import { Heading, NewsCard } from 'common';
-import { OtherNewsContainer } from './styled';
+import { OtherNewsContainer, OlderNewsLink } from './styled';
 
 const OtherNews: React.FC = () => {
   const posts = useSelector((state) => getOtherNews(state));
@@ -14,8 +14,9 @@ const OtherNews: React.FC = () => {
         In Other News
       </Heading>
       {posts.map((post) => (
-        <NewsCard post={post} />
+        <NewsCard key={post.id} post={post} />
       ))}
+      <OlderNewsLink to="news">All news</OlderNewsLink>
     </OtherNewsContainer>
   );
 };

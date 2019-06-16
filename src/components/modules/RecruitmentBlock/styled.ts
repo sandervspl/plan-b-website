@@ -17,6 +17,7 @@ export const RecruitmentBlockContainer = styled.div`
 
     ${media.tablet`
       top: -85px;
+      margin-left: 50px;
     `}
     
     ${Text} {
@@ -30,6 +31,7 @@ export const RecruitmentBlockContainer = styled.div`
 
   ${media.tablet`
     padding: 85px 60px 50px;
+    margin-bottom: 170px;
   `}
 `;
 

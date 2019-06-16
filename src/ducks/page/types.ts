@@ -2,7 +2,7 @@ import * as i from 'types';
 import { API_ENDPOINT } from 'services';
 
 // Duck state
-export type PageState = i.Omit<i.BaseState, 'data'> & i.ApiDataPayloads;
+export type PageState = Omit<i.BaseState, 'data'> & i.ApiDataPayloads;
 
 
 // Page bodies

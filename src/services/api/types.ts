@@ -26,7 +26,7 @@ export type Options = {
   headers?: HeadersInit_;
 }
 
-export type FetchOptions = i.Omit<Options, 'method'>;
+export type FetchOptions = Omit<Options, 'method'>;
 
 export type GenerateOptions = (options: Options) => RequestOptions;
 

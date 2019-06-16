@@ -42,7 +42,7 @@ export type Props = LinkComponentProps & {
   component: 'a' | 'Link' | 'NavLink';
 };
 
-type LinkProps = i.Omit<LinkComponentProps, 'children'> & React.AnchorHTMLAttributes<{}>;
+type LinkProps = Omit<LinkComponentProps, 'children'> & React.AnchorHTMLAttributes<{}>;
 
 type LinkComponentType =
   | 'a'

@@ -1,3 +1,4 @@
+import * as i from 'types';
 import React from 'react';
 import _ from 'lodash';
 import Router from 'router';
@@ -73,7 +74,7 @@ const Link: React.FC<LinkComponentProps> = ({
 export type LinkComponentProps = React.AnchorHTMLAttributes<{}> & {
   children: React.ReactNode;
   className?: string;
-  to: string;
+  to: i.RouteNames;
   params?: RouteParams;
   external?: boolean;
   ariaLabel?: string;

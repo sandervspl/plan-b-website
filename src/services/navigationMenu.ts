@@ -1,12 +1,14 @@
+import { routeNames } from 'router';
+
 class NavigationMenu {
   private readonly _items = [
     {
       label: 'News',
-      page: 'home',
+      page: routeNames.home,
     },
     {
       label: 'About us',
-      page: 'about',
+      page: routeNames.about,
     },
     {
       label: 'forum',

@@ -87,7 +87,7 @@ export const PostContent = styled.div`
   transform: translateY(-10px);
 
   ${HeadingContainer} {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   ${media.tablet`
@@ -220,6 +220,10 @@ export const NewsItemContainer = styled.article`
         flex-direction: column-reverse;
         position: relative;
         right: 25px;
+        
+        ${HeadingContainer} {
+          margin-bottom: 0;
+        }
 
         ${ReadMore} {
           top: -7px;

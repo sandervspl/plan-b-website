@@ -1,6 +1,6 @@
 import * as i from 'types';
 import React from 'react';
-import { useImageLoader } from 'services/hooks';
+import { useImageLoader } from 'hooks';
 import { __OLD__Header, ClassText } from 'common';
 import { Avatar, CharacterDetails, CharacterInfoContainer, Guild, ClassAndLevel } from './styled';
 

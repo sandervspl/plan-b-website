@@ -4,7 +4,7 @@ import Router from 'router';
 import { RouteParams } from 'next-routes';
 import { oc } from 'ts-optchain';
 import { getPageFromRoute } from 'services';
-import { useRouter } from 'services/hooks';
+import { useRouter } from 'hooks';
 import { LinkProps } from './types';
 
 const Link: React.FC<LinkComponentProps> = ({

@@ -2,9 +2,9 @@ import * as i from 'types';
 import React from 'react';
 import { FieldArray } from 'react-final-form-arrays';
 import { Field } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import _ from 'lodash';
 import { getUploadsUrl } from 'services';
+import { useSelector } from 'hooks';
 import QuestionHeader from '../QuestionHeader';
 import { NextButton, QuestionContent } from '../styled';
 import {
@@ -42,10 +42,9 @@ const raids = [
 ];
 
 const RaidQuestion: React.FC<Props> = ({ onNextClick }) => {
-  const { form, isMobile } = useSelector((state: i.ReduxState) => ({
-    form: state.form,
-    isMobile: state.ui.isMobile,
-  }));
+  const form = useSelector((state) => state.form);
+  const isMobile = useSelector((state) => state.ui.isMobile);
+
   const selected = form.application
     ? form.application.values.raid_experience || {}
     : {};

@@ -16,9 +16,9 @@ export const LogoContainer = styled.div`
   `}
 `;
 
-export const Logo = styled(LogoSvg).attrs((props: LogoProps) => props.animTime && ({
+export const Logo = styled(LogoSvg).attrs((props: LogoProps) => props.animtime && ({
   style: {
-    'animationDuration': `${props.animTime}ms`,
+    'animationDuration': `${props.animtime}ms`,
   },
 }))`
   position: absolute;
@@ -90,5 +90,5 @@ export const Logo = styled(LogoSvg).attrs((props: LogoProps) => props.animTime &
 `;
 
 type LogoProps = {
-  animTime?: number;
+  animtime?: number;
 }

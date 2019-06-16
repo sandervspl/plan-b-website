@@ -1,7 +1,6 @@
-import * as i from 'types';
 import React from 'react';
 import Slider, { Settings } from 'react-slick';
-import { useSelector } from 'react-redux';
+import { useSelector } from 'hooks';
 import NewsItem from '../NewsItem';
 
 const sliderSettings: Settings = {
@@ -15,7 +14,7 @@ const sliderSettings: Settings = {
 };
 
 const MobileNewsSlider: React.FC = () => {
-  const posts = useSelector((state: i.ReduxState) => state.posts);
+  const posts = useSelector((state) => state.posts);
 
   return (
     <Slider {...sliderSettings}>

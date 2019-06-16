@@ -1,19 +1,19 @@
 import * as i from 'types';
 import React, { useEffect, useState } from 'react';
-import { connect, useSelector } from 'react-redux';
 import { Field, FieldRenderProps } from 'react-final-form';
 import { fetchCharacter } from 'ducks/character';
 import { TRANSITION_TIME_MS } from 'styles/pageTransition';
-import { useDebounce } from 'services/hooks';
-import { validate } from 'services';
+import { useDebounce, useSelector, useDispatch } from 'hooks';
 import CharacterPane from 'modules/CharacterPane';
 import { TextInputField, NextButton, QuestionContent, QuestionField } from '../styled';
 import QuestionHeader from '../QuestionHeader';
 
-const CharacterSelect: React.FC<Props> = ({ character, active, onNextClick, ...props }) => {
+const CharacterSelect: React.FC<Props> = ({ active, onNextClick, ...props }) => {
   const [inputValue, setInputValue] = useState('');
   const [armoryLink, setArmoryLink] = useState('');
   const debouncedUserInput = useDebounce<string>(inputValue, 250);
+  const character = useSelector((state) => state.character);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!active) return;
@@ -30,7 +30,7 @@ const CharacterSelect: React.FC<Props> = ({ character, active, onNextClick, ...p
   useEffect(() => {
     if (!debouncedUserInput) return;
 
-    props.fetchCharacter(inputValue);
+    dispatch(fetchCharacter(inputValue));
   }, [debouncedUserInput]);
 
   useEffect(() => {
@@ -81,20 +81,13 @@ const CharacterSelect: React.FC<Props> = ({ character, active, onNextClick, ...p
   );
 };
 
-export type Props = i.QuestionComponentProps & {
-  character: i.CharacterState;
-  fetchCharacter: i.FetchCharacter;
-};
+export type Props = i.QuestionComponentProps;
 
-const mapStateToProps: i.MapStateToProps = (state) => ({
-  character: state.character,
-});
-
-export default connect(mapStateToProps, { fetchCharacter })(CharacterSelect);
+export default CharacterSelect;
 
 
 const NextRadioButton: React.FC<NextRadioButtonProps> = ({ onNextClick, input }) => {
-  const character = useSelector((state: i.ReduxState) => state.character);
+  const character = useSelector((state) => state.character);
 
   const handleNextClick = () => {
     input.onChange(input.value);

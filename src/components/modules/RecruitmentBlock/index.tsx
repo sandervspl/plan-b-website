@@ -1,13 +1,12 @@
-import * as i from 'types';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { theme } from 'styles';
+import { useSelector } from 'hooks';
 import { Heading } from 'common';
 import ClassList from './components/ClassList';
 import { RecruitmentBlockContainer, RecruitmentBlockInner, ApplyNow, Disclaimer } from './styled';
 
 const RecruitmentBlock: React.FC = () => {
-  const recruitment = useSelector((state: i.ReduxState) => state.recruitment);
+  const recruitment = useSelector((state) => state.recruitment);
 
   if (!recruitment.data) return null;
   if (!recruitment.data.active) return null;

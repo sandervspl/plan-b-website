@@ -1,7 +1,7 @@
 import * as i from 'types';
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { FieldArray } from 'react-final-form-arrays';
+import { useSelector } from 'hooks';
 import { TRANSITION_TIME_MS } from 'styles/pageTransition';
 import FakeInput from 'common/FakeInput';
 import QuestionHeader from '../QuestionHeader';
@@ -26,7 +26,7 @@ const questions = [
 ];
 
 const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, active }) => {
-  const form = useSelector((state: i.ReduxState) => state.form);
+  const form = useSelector((state) => state.form);
   const questionsAmount = 1 + questions.filter((qstn) => typeof qstn === 'object').length;
   const answerAmount = form.application && form.application.values.about_applicant
     ? Object.values(form.application.values.about_applicant).length

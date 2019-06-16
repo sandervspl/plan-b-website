@@ -1,15 +1,14 @@
 import * as i from 'types';
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import Router from 'router';
 import { api, API_ENDPOINT } from 'services';
-import { useRouter } from 'services/hooks';
+import { useRouter, useSelector } from 'hooks';
 import { Paragraph } from 'common';
 import { LoginContainer } from 'modules/Login/styled';
 
 const Login: i.NextPageComponent = () => {
   const router = useRouter();
-  const user = useSelector((state: i.ReduxState) => state.user.data);
+  const user = useSelector((state) => state.user.data);
   const isLoggingIn = !!(router.query && router.query.auth);
 
   useEffect(() => {

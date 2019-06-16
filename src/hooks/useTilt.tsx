@@ -1,13 +1,13 @@
 import * as i from 'types';
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from 'hooks';
 
 const PERSPECTIVE = 1000;
 const SPEED = 1000;
 const MAX_TILT_DEG = 35;
 
 export function useTilt() {
-  const isMobile = useSelector((state: i.ReduxState) => state.ui.isMobile);
+  const isMobile = useSelector((state) => state.ui.isMobile);
   const containerRef = useRef<HTMLElement>();
   const [tiltStyle, setTiltStyle] = useState<i.TiltStyle>({
     style: {

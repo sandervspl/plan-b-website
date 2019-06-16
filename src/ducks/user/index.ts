@@ -1,11 +1,11 @@
 import * as i from 'types';
-import { ActionType, createStandardAction, getType } from 'typesafe-actions';
+import { ActionType, action } from 'typesafe-actions';
 import { API_ENDPOINT } from 'services';
 
 export const actions = {
-  load: createStandardAction('user/LOAD')(),
-  failed: createStandardAction('user/FAILED')(),
-  success: createStandardAction('user/SUCCESS')<i.UserData>(),
+  load: () => action('user/LOAD'),
+  failed: () => action('user/FAILED'),
+  success: (user: i.UserData) => action('user/SUCCESS', user),
 };
 
 const initialState: i.UserState = {
@@ -16,19 +16,19 @@ const initialState: i.UserState = {
 
 export default (state = initialState, action: ActionType<typeof actions>): i.UserState => {
   switch (action.type) {
-    case getType(actions.load):
+    case 'user/LOAD':
       return {
         ...state,
         error: false,
         loading: true,
       };
-    case getType(actions.failed):
+    case 'user/FAILED':
       return {
         ...state,
         loading: false,
         error: true,
       };
-    case getType(actions.success):
+    case 'user/SUCCESS':
       return {
         ...state,
         data: action.payload,
@@ -41,8 +41,8 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Use
   }
 };
 
-// @ts-ignore
-export const fetchUser: i.FetchUserDuck = (ctxCookie) => async (dispatch, getState, api) => {
+type FetchUser = i.ThunkAction<Promise<void | i.UserData>>;
+export const fetchUser = (ctxCookie: string): FetchUser => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
   return api.methods.get<i.UserData>({

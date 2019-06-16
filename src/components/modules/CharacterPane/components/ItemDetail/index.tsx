@@ -1,7 +1,7 @@
 import * as i from 'types';
 import React from 'react';
 import QuestionMark from 'images/questionmark.jpg?external';
-import { useImageLoader } from 'services/hooks';
+import { useImageLoader } from 'hooks';
 import { ItemDetailContainer, ItemIcon } from './styled';
 
 const ItemDetail: React.FC<Props> = ({ item, paperdoll }) => {

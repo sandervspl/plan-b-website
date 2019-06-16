@@ -1,9 +1,8 @@
-import * as i from 'types';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import dynamic from 'next/dynamic';
 import { Link, NavLink } from 'common';
 import { navigationMenu } from 'services';
+import { useSelector } from 'hooks';
 import {
   HeaderContainer, UserContainer, NavContainer, SignIn, JoinGuildBanner, NavList, NavItem,
 } from './styled';
@@ -11,7 +10,7 @@ import {
 const User = dynamic(import('../User'));
 
 const Navigation: React.FC<Props> = () => {
-  const user = useSelector((state: i.ReduxState) => state.user);
+  const user = useSelector((state) => state.user);
 
   return (
     <HeaderContainer>

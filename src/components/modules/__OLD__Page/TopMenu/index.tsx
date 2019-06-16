@@ -1,12 +1,11 @@
-import * as i from 'types';
 import React, { useState, useEffect } from 'react';
 import { Link, Subheader } from 'common';
-import { useSelector } from 'react-redux';
+import { useSelector } from 'hooks';
 import { TopMenuContainer, User, Logo } from './styled';
 
 const TopMenu: React.FC<Props> = ({ className }) => {
   const [mounted, setMounted] = useState(false);
-  const userStore = useSelector((state: i.ReduxState) => state.user);
+  const userStore = useSelector((state) => state.user);
 
   useEffect(() => {
     setMounted(true);

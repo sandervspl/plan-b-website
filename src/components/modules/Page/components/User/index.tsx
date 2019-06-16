@@ -1,10 +1,9 @@
-import * as i from 'types';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from 'hooks';
 import { Avatar, UserInfo, UserData, DKPContainer, DKPIcon, Username } from './styled';
 
 const User: React.FC = () => {
-  const user = useSelector((state: i.ReduxState) => state.user);
+  const user = useSelector((state) => state.user);
 
   if (!user.data) return null;
 

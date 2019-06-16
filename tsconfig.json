@@ -20,6 +20,7 @@
       "ducks": ["src/ducks/index"],
       "ducks/*": ["src/ducks/*"],
       "fonts/*": ["src/static/fonts/*"],
+      "hooks": ["src/hooks/index"],
       "modules": ["src/components/modules/index"],
       "modules/*": ["src/components/modules/*"],
       "common": ["src/components/common/index"],

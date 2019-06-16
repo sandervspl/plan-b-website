@@ -9,7 +9,7 @@ import _ from 'lodash/fp';
 import { withReduxStore, isServer } from 'services';
 import { theme, GlobalStyle, sizes } from 'styles';
 import { TRANSITION_TIME_MS, TRANSITION_TIME_MS_SHORT } from 'styles/pageTransition';
-import { RouterContextProvider } from 'services/hooks';
+import { RouterContextProvider } from 'hooks';
 
 class MyApp extends App<Props, State> {
   constructor(props: Props) {

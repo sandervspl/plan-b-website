@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useInterval } from 'services/hooks';
+import { useInterval } from 'hooks';
 import { LogoContainer, Logo } from './styled';
 
 const MIN_TIME = 2000;
@@ -21,12 +21,12 @@ const GlitchLogo: React.FC = () => {
 
   return (
     <LogoContainer>
-      <Logo animTime={timeProps.randomTime1} />
+      <Logo animtime={timeProps.randomTime1} />
       <Logo />
       <Logo />
       <Logo />
-      <Logo animTime={timeProps.randomTime1} />
-      <Logo animTime={timeProps.randomTime1} />
+      <Logo animtime={timeProps.randomTime1} />
+      <Logo animtime={timeProps.randomTime1} />
     </LogoContainer>
   );
 };

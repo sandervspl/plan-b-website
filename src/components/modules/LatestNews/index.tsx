@@ -1,7 +1,7 @@
 import * as i from 'types';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import dynamic from 'next/dynamic';
+import { useSelector } from 'hooks';
 import { GlitchLogo } from 'common';
 import NewsItem from './components/NewsItem';
 import { LatestNewsContainer } from './styled';
@@ -9,8 +9,8 @@ import { LatestNewsContainer } from './styled';
 const MobileNewsSlider = dynamic(import('./components/MobileNewsSlider'));
 
 const LatestNews: React.FC = () => {
-  const posts = useSelector((state: i.ReduxState) => state.posts);
-  const isMobile = useSelector((state: i.ReduxState) => state.ui.isMobile);
+  const posts = useSelector((state) => state.posts);
+  const isMobile = useSelector((state) => state.ui.isMobile);
 
   if (!posts.list) return null;
 

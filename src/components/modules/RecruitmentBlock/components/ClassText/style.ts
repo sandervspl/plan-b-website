@@ -4,9 +4,9 @@ import { media } from 'styles';
 
 export const ClassTextContainer = styled.li<ClassTextContainerProps>`
   display: flex;
-  flex-basis: 30%;
   position: relative;
   margin-bottom: 15px;
+  margin-right: 15px;
   font-family: ${(props) => props.theme.font.primary};
   font-size: 18px;
   font-weight: bold;

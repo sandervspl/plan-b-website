@@ -11,8 +11,12 @@ export const RecruitmentBlockContainer = styled.div`
 
   ${HeadingContainer} {
     position: absolute;
-    top: 0;
+    top: -35px;
     transform: translateY(-50%);
+
+    ${media.tablet`
+      top: -85px;
+    `}
     
     ${Text} {
       font-size: 24px;
@@ -28,12 +32,23 @@ export const RecruitmentBlockContainer = styled.div`
   `}
 `;
 
+export const RecruitmentBlockInner = styled.div`
+  position: relative;
+  
+  ${media.tablet`
+    margin: 0 auto;
+    max-width: ${(props) => props.theme.width.page};
+  `}
+`;
+
 export const Disclaimer = styled.small`
   display: block;
   margin-top: 15px;
   font-family: ${(props) => props.theme.font.primary};
   font-size: 12px;
+  line-height: 17px;
   color: #FFFFFF;
+
 
   ${media.tablet`
     margin-top: 70px;
@@ -54,7 +69,7 @@ export const ApplyNow = styled(Link)`
 
   ${media.tablet`
     position: absolute;
-    top: 50px;
+    top: -35px;
     right: 60px;
     width: auto;
     font-size: 50px;

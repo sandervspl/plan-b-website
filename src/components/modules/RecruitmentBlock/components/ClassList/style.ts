@@ -3,7 +3,7 @@ import { media } from 'styles';
 
 export const ClassListContainer = styled.ul`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
   margin: 0;
   padding: 0;

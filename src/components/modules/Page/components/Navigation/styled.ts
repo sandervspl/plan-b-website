@@ -10,6 +10,8 @@ export const HeaderContainer = styled.header`
     flex-direction: row-reverse;
     justify-content: space-between;
     padding: 28px 0;
+    margin: 0 auto;
+    max-width: ${(props) => props.theme.width.page};
   `}
 `;
 

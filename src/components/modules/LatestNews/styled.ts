@@ -29,8 +29,9 @@ export const LatestNewsContainer = styled.div`
   ${media.tablet`
     display: flex;
     position: relative;
-    margin: 90px 0 150px;
+    margin: 90px auto 150px;
     height: 595px;
+    max-width: ${(props) => props.theme.width.page};
   `}
 `;
 

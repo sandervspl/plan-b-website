@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { theme } from 'styles';
 import { Heading } from 'common';
 import ClassList from './components/ClassList';
-import { RecruitmentBlockContainer, ApplyNow, Disclaimer } from './styled';
+import { RecruitmentBlockContainer, RecruitmentBlockInner, ApplyNow, Disclaimer } from './styled';
 
 const RecruitmentBlock: React.FC = () => {
   const recruitment = useSelector((state: i.ReduxState) => state.recruitment);
@@ -14,16 +14,18 @@ const RecruitmentBlock: React.FC = () => {
 
   return (
     <RecruitmentBlockContainer>
-      <Heading capeColor={theme.color.primary.dark}>
-        {recruitment.data.title || 'We are recruiting!'}
-      </Heading>
-      <ClassList />
-      {recruitment.data.disclaimer && (
-        <Disclaimer>
-          * {recruitment.data.disclaimer}
-        </Disclaimer>
-      )}
-      <ApplyNow to="apply">Apply now</ApplyNow>
+      <RecruitmentBlockInner>
+        <Heading capeColor={theme.color.primary.dark}>
+          {recruitment.data.title || 'We are recruiting!'}
+        </Heading>
+        <ClassList />
+        {recruitment.data.disclaimer && (
+          <Disclaimer>
+            * {recruitment.data.disclaimer}
+          </Disclaimer>
+        )}
+        <ApplyNow to="apply">Apply now</ApplyNow>
+      </RecruitmentBlockInner>
     </RecruitmentBlockContainer>
   );
 };

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const withCSS = require('@zeit/next-css');
 const { PHASE_PRODUCTION_SERVER } = require('next/constants');
 
 const config = (phase) => {
@@ -19,6 +18,7 @@ const config = (phase) => {
     // Only add dev packages config for compile phases
     const webpack = require('webpack');
     const withTypescript = require('@zeit/next-typescript');
+    const withCSS = require('@zeit/next-css');
     const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
     const withFonts = require('next-fonts');
 

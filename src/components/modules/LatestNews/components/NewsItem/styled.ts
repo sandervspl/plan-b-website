@@ -1,15 +1,13 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { media } from 'styles';
-import * as glitch from 'styles/glitch';
-import { Tag, UnderlineStyle } from 'common';
-import { HeadingContainer } from 'common/typography/Heading/style';
+import { Tag } from 'common';
 import { lineClamp } from 'common/styles';
 
 export const PostImage = styled.figure`
   position: relative;
   margin: 0;
   width: 100%;
-  height: 93px;
+  height: 100%;
 
   &:after {
     content: '';
@@ -18,10 +16,7 @@ export const PostImage = styled.figure`
     left: 0;
     width: 100%;
     height: 100%;
-    background: #FFFFFF;
-    opacity: .2;
-    will-change: opacity;
-    transition: opacity .2s ease-in-out;
+    background-image: linear-gradient(180deg, rgba(0,0,0,0.00) 0%, #171717 100%);
   }
 
   > img {
@@ -29,42 +24,13 @@ export const PostImage = styled.figure`
     height: 100%;
     object-fit: cover;
   }
-
-  ${media.tablet`
-    height: 437px;
-    width: 257px;
-
-    &:nth-child(n+2) {
-      position: absolute;
-      top: 0;
-      opacity: 0;
-
-      &:after {
-        opacity: 1;
-      }
-    }
-
-    &:nth-child(2),
-    &:nth-child(3) {
-      &:after {
-        background-color: ${(props) => props.theme.color.glitch.primary};
-      }
-    }
-    
-    &:nth-child(4),
-    &:nth-child(5) {
-      &:after {
-        background-color: ${(props) => props.theme.color.glitch.secondary};
-      }
-    }
-  `}
 `;
 
 export const Tags = styled.ul`
   display: flex;
   justify-content: flex-end;
   padding: 0;
-  padding-right: 11px;
+  padding-right: 10px;
   margin: 0;
   width: 100%;
   list-style: none;
@@ -79,16 +45,13 @@ export const Tags = styled.ul`
 `;
 
 export const PostContent = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   flex: 2;
-  padding-left: 11px;
+  position: absolute;
+  bottom: 0;
+  padding-left: 10px;
   transform: translateY(-10px);
-
-  ${HeadingContainer} {
-    margin-bottom: 20px;
-  }
 
   ${media.tablet`
     padding: 0;
@@ -109,60 +72,47 @@ export const PostText = styled.p`
 `;
 
 export const PostDate = styled(PostText)`
-  flex-grow: 2;
-  align-items: flex-end;
   display: flex;
+  flex-grow: 2;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
   margin: 0;
   font-size: 12px;
+
+  svg {
+    height: 12px;
+    fill: ${(props) => props.theme.color.secondary};
+    margin-right: 3px;
+    transform: translateY(-1px);
+  }
 `;
 
 export const ReadMore = styled.span`
-  display: none;
-
-  ${media.tablet`
-    display: inline-block;
-    align-self: flex-end;
-    position: absolute;
-    text-transform: uppercase;
-    font-family: ${(props) => props.theme.font.primary};
-    font-size: 16px;
-    line-height: 24px;
-    color: ${(props) => props.theme.color.secondary};
-
-    &:after {
-      ${UnderlineStyle};
-      transform: scaleY(1);
-      transform-origin: top;
-      will-change: transform;
-      transition: transform .1s ease-in-out;
-    }
-  `}
+  display: inline-block;
+  align-self: flex-end;
+  text-transform: uppercase;
+  font-family: ${(props) => props.theme.font.primary};
+  font-size: 12px;
+  line-height: 24px;
+  color: ${(props) => props.theme.color.primary};
+  
+  svg {
+    height: 14px;
+    fill: ${(props) => props.theme.color.primary};
+    margin-left: 2px;
+    transform: translateY(3px);
+  }
 `;
 
 export const PostHeading = styled.header`
   align-self: flex-end;
-  max-width: 95%;
   z-index: 2;
 
-  ${HeadingContainer} h2 {
-    ${lineClamp(2)}
-  }
-
-  ${media.tablet`
-    max-width: none;
-
-    ${HeadingContainer} {
-      margin-right: 0;
-    }
-  `}
-`;
-
-const levitateAnim = keyframes`
-  0%, 100% {
-    transform: translate3d(0, -.75%, 0);
-  }
-  50% {
-    transform: translate3d(0, .75%, 0);
+  h3 {
+    padding-right: 10px;
   }
 `;
 
@@ -176,108 +126,7 @@ export const NewsItemContainer = styled.article`
   a {
     display: flex;
     flex-direction: column;
+    position: relative;
     height: 100%;
   }
-
-  ${media.tablet`
-    animation: ${levitateAnim} 7s ease-in-out infinite forwards;
-    animation-delay: -2s;
-
-    a {
-      height: auto;
-    }
-
-    &:first-child {
-      margin-top: 60px;
-      animation-delay: 0s;
-    }
-
-    &:nth-child(odd) {
-      ${PostHeading} {
-        position: relative;
-        left: 25px;
-        top: -35%;
-        align-self: flex-start;
-
-        ${HeadingContainer} {
-          text-align: left;
-        }
-
-        ${ReadMore} {
-          bottom: -2px;
-        }
-      }
-    }
-
-    &:nth-child(even) {
-      ${PostContent} {
-        transform: none;
-        top: calc(-100% + 50px);
-      }
-
-      ${PostHeading} {
-        display: flex;
-        flex-direction: column-reverse;
-        position: relative;
-        right: 25px;
-        
-        ${HeadingContainer} {
-          margin-bottom: 0;
-        }
-
-        ${ReadMore} {
-          top: -7px;
-        }
-      }
-
-      ${Tags} {
-        justify-content: flex-start;
-        margin-bottom: 10px;
-
-        ${Tag} {
-          margin-left: 0;
-          margin-right: 5px;
-        }
-      }
-
-      ${PostImage} {
-        align-self: flex-end;
-      }
-    }
-
-    &:hover {
-      ${ReadMore}:after {
-        transform: scaleY(2);
-      }
-
-      ${PostImage} {
-        &:after {
-          opacity: 0.1;
-        }
-
-        &:nth-child(n+2) {
-          opacity: 1;
-        }
-
-        &:nth-child(2) {
-          transform: translate3d(10px, 0, 0);
-          animation: ${glitch.anim1} 2.345s infinite linear alternate;
-        }
-
-        &:nth-child(3) {
-          transform: translate3d(-10px, 0, 0);
-          animation: ${glitch.anim2} 3.234s infinite linear alternate;
-        }
-
-        &:nth-child(4) {
-          transform: translate3d(0, -5px, 0) scale3d(-1, -1, 1);
-          animation: ${glitch.anim3} 2.987s infinite linear alternate;
-        }
-
-        &:nth-child(5) {
-          animation: ${glitch.flashAnim1} 1.5s steps(1,end) infinite;
-        }
-      }
-    }
-  `}
 `;

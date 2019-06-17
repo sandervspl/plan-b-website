@@ -4,27 +4,28 @@ import { Link, NavLink } from 'common';
 import { navigationMenu } from 'services';
 import { useSelector } from 'hooks';
 import {
-  HeaderContainer, UserContainer, NavContainer, SignIn, JoinGuildBanner, NavList, NavItem,
+  HeaderContainer, UserContainer, NavContainer, SignIn, NavList, NavItem, LogoNameIcon,
 } from './styled';
 
 const User = dynamic(import('../User'));
 
-const Navigation: React.FC<Props> = () => {
+const Navigation: React.FC = () => {
   const user = useSelector((state) => state.user);
 
   return (
     <HeaderContainer>
       <UserContainer>
+        <LogoNameIcon />
         {user.isSignedIn ? (
           <User />
         ) : (
           <SignIn to="login">Sign in</SignIn>
         )}
-        {!user.isSignedIn && (
+        {/* {!user.isSignedIn && (
           <Link to="apply">
             <JoinGuildBanner>Join the guild</JoinGuildBanner>
           </Link>
-        )}
+        )} */}
       </UserContainer>
 
       <NavContainer>
@@ -32,6 +33,7 @@ const Navigation: React.FC<Props> = () => {
           {navigationMenu.items.map((item, i) => (
             <NavItem key={i}>
               {item.external
+                // @ts-ignore @TODO create conditional type
                 ? <Link to={item.page} external>{item.label}</Link>
                 : <NavLink to={item.page}>{item.label}</NavLink>
               }
@@ -41,10 +43,6 @@ const Navigation: React.FC<Props> = () => {
       </NavContainer>
     </HeaderContainer>
   );
-};
-
-export type Props = {
-
 };
 
 export default Navigation;

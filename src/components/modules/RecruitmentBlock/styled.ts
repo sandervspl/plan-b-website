@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link, UnderlineStyle } from 'common';
 import { media } from 'styles';
-import { HeadingContainer, Text } from 'common/typography/Heading/style';
+import { HeadingContainer, Text } from 'common/typography/__OLD__Heading/style';
 
 export const RecruitmentBlockContainer = styled.div`
   position: relative;
@@ -80,7 +80,7 @@ export const ApplyNow = styled(Link)`
     &:after {
       ${UnderlineStyle};
       height: 4px;
-      background: #FFFFFF;
+      background-color: ${(props) => props.theme.color.background};
       transform: scaleX(0);
       will-change: transform;
       transition: transform .2s ease-in-out;

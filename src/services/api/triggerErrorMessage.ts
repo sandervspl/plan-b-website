@@ -5,6 +5,8 @@ import { TriggerErrorMessage } from './types';
 export const triggerErrorMessage: TriggerErrorMessage = (errorConfig, apiError) => {
   if (errorConfig.hide === true && typeof config.errorMessageFunction !== 'function') return;
 
+  console.error(apiError);
+
   let message = errorMessages.default;
   if (errorConfig && errorConfig.message) {
     message = errorConfig.message;

@@ -63,19 +63,20 @@ export const Button = styled.button`
   align-items: center;
   width: 100%;
   height: 37px;
-  line-height: 37px;
   padding: 0 18px;
+  line-height: 37px;
   font-size: 17px;
-  border: 1px solid rgba(0, 0, 0, .15);
+  color: ${(props) => props.theme.color.secondary};
+  border: 1px solid rgba(255, 255, 255, .15);
   border-radius: 4px;
   cursor: pointer;
   user-select: none;
-  background-color: #FFFFFF;
+  background-color: ${(props) => props.theme.color.background};
   font-family: ${(props) => props.theme.font.primary};
   transition: .1s border-color;
 
   &:hover {
-    border-color: rgba(0, 0, 0, .54);
+    border-color: rgba(255, 255, 255, .54);
   }
 `;
 

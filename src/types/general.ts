@@ -8,5 +8,6 @@ export type VisibilityProps = {
 }
 
 export type HexCode = string;
+export type Percentage = number;
 
 export type RouteNames = ValueOf<typeof routeNames>;

@@ -1,47 +1,40 @@
 import * as i from 'types';
 import React from 'react';
+import TimeIcon from 'vectors/time.svg';
+import ArrowRightIcon from 'vectors/arrow-right.svg';
 import { getSourceUrl, getDate } from 'services';
-import { Tag, Heading, Link } from 'common';
-import { useSelector } from 'hooks';
+import { Heading, Link } from 'common';
 import {
-  NewsItemContainer, PostImage, Tags, PostContent, PostText, PostDate, PostHeading, ReadMore,
+  NewsItemContainer, PostImage, PostContent, PostDate, PostHeading, ReadMore,
 } from './styled';
 
 const NewsItem: React.FC<Props> = ({ post }) => {
-  const isMobile = useSelector((state) => state.ui.isMobile);
-
-  const capeColor = post.tags && post.tags.length > 0
-    ? post.tags[0].color
-    : undefined;
-
   return (
     <NewsItemContainer>
       <Link to="news-detail" params={{ id: post.id }}>
-        {isMobile ? (
-          <PostImage>
-            {post.image && <img src={getSourceUrl(post.image.url)} alt="" />}
-          </PostImage>
-        ) : Array.from({ length: 5 }).map((_, i) => (
-          <PostImage key={i}>
-            {post.image && <img src={getSourceUrl(post.image.url)} alt="" />}
-          </PostImage>
-        ))}
+        <PostDate>
+          <TimeIcon />
+          {getDate(post.created_at)}
+        </PostDate>
+
+        <PostImage>
+          {post.image && <img src={getSourceUrl(post.image.url)} alt="" />}
+        </PostImage>
 
         <PostContent>
           <PostHeading>
-            {post.title && <Heading capeColor={capeColor}>{post.title}</Heading>}
-            <Tags>
+            {post.title && <Heading as="h3">{post.title}</Heading>}
+            {/* <Tags>
               {post.tags && post.tags.length > 0 && post.tags.map((tag) => (
                 <Tag key={tag.id} as="li" color={tag.color}>{tag.name}</Tag>
               ))}
-            </Tags>
+            </Tags> */}
 
-            <ReadMore>Read More</ReadMore>
+            <ReadMore>
+              Read More
+              <ArrowRightIcon />
+            </ReadMore>
           </PostHeading>
-
-          {post.abstract && <PostText>{post.abstract}</PostText>}
-
-          <PostDate>{getDate(post.created_at)}</PostDate>
         </PostContent>
       </Link>
     </NewsItemContainer>

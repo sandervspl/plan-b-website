@@ -3,11 +3,11 @@ const theme = {
     primary: Object.assign('#DE3D3D', {
       dark: '#A24444',
     }),
-    secondary: '#131516',
+    secondary: '#FFFFFF',
     tertiary: Object.assign('#476369', {
       light: '#E4E3E3',
     }),
-    background: '#FFFFFF',
+    background: '#181818',
     glitch: {
       primary: 'palevioletred',
       secondary: 'darkturquoise',
@@ -15,6 +15,9 @@ const theme = {
     blocks: {
       recruitment: '#476369',
       otherNews: '#E4E3E3',
+    },
+    border: {
+      primary: '#0C0C0C',
     },
 
     __OLD__: {

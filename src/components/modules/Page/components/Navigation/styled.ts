@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import LogoNameSvg from 'vectors/logo-name.svg';
 import { media } from 'styles';
 import { NavLink, UnderlineStyle } from 'common';
 
@@ -100,14 +101,18 @@ export const SignIn = styled(NavLink)`
   }
 `;
 
-export const JoinGuildBanner = styled.button`
-  appearance: none;
-  padding: 7px 15px;
-  background-color: ${(props) => props.theme.color.background};
-  color: ${(props) => props.theme.color.primary};
-  font-family: ${(props) => props.theme.font.primary};
-  border: 1px solid ${(props) => props.theme.color.primary};
-  border-radius: 5px;
-  outline: 0;
-  cursor: pointer;
+// export const JoinGuildBanner = styled.button`
+//   appearance: none;
+//   padding: 7px 15px;
+//   background-color: ${(props) => props.theme.color.background};
+//   color: ${(props) => props.theme.color.primary};
+//   font-family: ${(props) => props.theme.font.primary};
+//   border: 1px solid ${(props) => props.theme.color.primary};
+//   border-radius: 5px;
+//   outline: 0;
+//   cursor: pointer;
+// `;
+
+export const LogoNameIcon = styled(LogoNameSvg)`
+  height: 40px;
 `;

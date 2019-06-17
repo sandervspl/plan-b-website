@@ -10,12 +10,12 @@ export const Avatar = styled.img`
 export const UserInfo = styled.button`
   appearance: none;
   display: flex;
-  flex-grow: 1;
   justify-content: flex-end;
   padding: 0;
   border: 0;
   background: none;
   cursor: pointer;
+  outline: 0;
 `;
 
 export const UserData = styled.div`
@@ -23,7 +23,7 @@ export const UserData = styled.div`
   flex-direction: column;
   align-items: flex-end;
   position: relative;
-  top: -10px;
+  top: -5px;
   margin-right: 10px;
 `;
 
@@ -39,8 +39,8 @@ export const DKPIcon = styled(DKPSvg)`
   position: relative;
   top: 3px;
   margin-right: 5px;
-  width: 27px;
-  height: 24px;
+  height: 19px;
+  fill: ${(props) => props.theme.color.secondary};
 `;
 
 export const Username = styled.span`

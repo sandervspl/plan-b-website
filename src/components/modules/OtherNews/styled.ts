@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { HeadingContainer } from 'common/typography/Heading/style';
+import { HeadingContainer } from 'common/typography/__OLD__Heading/style';
 import { media } from 'styles';
 import { Link, UnderlineStyle } from 'common';
 
@@ -31,7 +31,7 @@ export const OtherNewsContainer = styled.div`
       top: 0;
       width: 85px;
       height: 100%;
-      background-color: #FFFFFF;
+      background-color: ${(props) => props.theme.color.background};
     }
 
     > ${HeadingContainer} {
@@ -63,7 +63,7 @@ export const OlderNewsLink = styled(Link)`
     &:after {
       ${UnderlineStyle};
       height: 4px;
-      background: #FFFFFF;
+      background-color: ${(props) => props.theme.color.background};
       transform: scaleX(0);
       will-change: transform;
       transition: transform .2s ease-in-out;

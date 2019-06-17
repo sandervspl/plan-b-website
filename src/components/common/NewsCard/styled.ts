@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { HeadingContainer } from 'common/typography/Heading/style';
+import { HeadingContainer } from 'common/typography/__OLD__Heading/style';
 import { media } from 'styles';
 import * as glitch from 'styles/glitch';
 import { Tag, Link } from 'common';
@@ -47,7 +47,7 @@ export const NewsImage = styled.figure`
     left: 0;
     width: 100%;
     height: 100%;
-    background: #FFFFFF;
+    background: ${(props) => props.theme.color.background};
     opacity: .2;
     will-change: opacity;
     transition: opacity .2s ease-in-out;

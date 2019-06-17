@@ -65,19 +65,6 @@ const ApplicationPage: i.NextPageComponent<Props> = (props) => {
     }
   }, [containerEl]);
 
-  // useEffect(() => {
-  //   if (questions.length > 0) {
-  //     preloadNextBgImage(questionIndex + 1);
-  //   }
-  // }, [questions, questionIndex]);
-
-  // const preloadNextBgImage = (id: number) => {
-  //   if (questions[id] && questions[id].image) {
-  //     const img = new Image();
-  //     img.src = questions[id].image!;
-  //   }
-  // };
-
   function preventSubmit(e: KeyboardEvent) {};
 
   const handleClick = () => {
@@ -86,7 +73,7 @@ const ApplicationPage: i.NextPageComponent<Props> = (props) => {
 
     window.scrollTo(0, 0);
 
-    (NextRouter as i.Router).push(
+    NextRouter.push(
       'apply',
       { questionId: questionIndex + 1 },
       { shallow: true },

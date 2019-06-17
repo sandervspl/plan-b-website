@@ -1,7 +1,7 @@
 import path from 'path';
 import next from 'next';
 import express from 'express';
-import config from '../config/index';
+import config from '../../config/index';
 import router from './router';
 
 const app = next({

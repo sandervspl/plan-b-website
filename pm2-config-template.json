@@ -2,7 +2,7 @@
 {
   "apps": [{
     "name": "dev.planbguild.eu",
-    "script": "/var/www/PROJECT/dist/server/index.js",
+    "script": "/var/www/PROJECT/dist/src/server/index.js",
     "cwd": "/var/www/PROJECT",
     "instances": INSTANCES,
     "env_production": {

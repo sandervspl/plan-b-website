@@ -12,7 +12,7 @@ const config = (phase) => {
   let cfg = dirPaths;
 
   /*
-    BASE CONFIG
+    BUILD CONFIG
   */
   if (phase !== PHASE_PRODUCTION_SERVER) {
     // Only add dev packages config for compile phases

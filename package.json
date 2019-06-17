@@ -4,10 +4,10 @@
   "description": "Code for plan-b-website.",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node server/index.ts",
+    "dev": "ts-node src/server/index.ts",
     "build": "npm run clean && next build src && npm run build:server",
     "build:server": "tsc --project tsconfig.server.json",
-    "start": "NODE_ENV=production node dist/server/index.js",
+    "start": "NODE_ENV=production node dist/src/server/index.js",
     "clean": "rimraf dist/",
     "lint": "eslint --ext .ts --ext .tsx src/"
   },

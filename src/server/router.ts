@@ -1,13 +1,5 @@
 import Routes from 'next-routes';
-
-export const routeNames = {
-  home: 'home',
-  apply: 'apply',
-  about: 'about',
-  login: 'login',
-  news: 'news',
-  newsDetail: 'news-detail',
-};
+import { routeNames } from './routeNames';
 
 const router = new Routes()
   .add({ pattern: '/', page: 'home', name: routeNames.home })

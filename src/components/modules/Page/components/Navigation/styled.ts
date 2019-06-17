@@ -3,6 +3,14 @@ import LogoNameSvg from 'vectors/logo-name.svg';
 import { media } from 'styles';
 import { NavLink, UnderlineStyle } from 'common';
 
+export const LogoNameIcon = styled(LogoNameSvg)`
+  height: 40px;
+
+  ${media.tablet`
+    height: 75px;
+  `}
+`;
+
 export const HeaderContainer = styled.header`
   padding: 15px 25px;
 
@@ -10,7 +18,7 @@ export const HeaderContainer = styled.header`
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-    padding: 28px 0;
+    padding: 15px 0 30px;
     margin: 0 auto;
     max-width: ${(props) => props.theme.width.page};
   `}
@@ -25,11 +33,29 @@ export const UserContainer = styled.div`
     > * {
       margin-left: 20px;
     }
+
+    ${LogoNameIcon} {
+      display: none;
+    }
   `}
 `;
 
 export const NavContainer = styled.nav`
+  display: flex;
+  align-items: center;
   margin-top: 15px;
+
+  ${LogoNameIcon} {
+    display: none;
+
+    ${media.tablet`
+      display: block;
+    `}
+  }
+
+  ${media.tablet`
+    margin-top: 0;
+  `}
 `;
 
 export const NavList = styled.ul`
@@ -37,7 +63,12 @@ export const NavList = styled.ul`
   justify-content: space-between;
   padding: 0;
   margin: 0;
+  width: 100%;
   list-style: none;
+
+  ${media.tablet`
+    margin-left: 50px;
+  `}
 `;
 
 export const HeaderNavLinkStyle = css`
@@ -112,7 +143,3 @@ export const SignIn = styled(NavLink)`
 //   outline: 0;
 //   cursor: pointer;
 // `;
-
-export const LogoNameIcon = styled(LogoNameSvg)`
-  height: 40px;
-`;

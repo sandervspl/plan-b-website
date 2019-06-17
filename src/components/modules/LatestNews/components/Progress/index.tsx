@@ -4,7 +4,6 @@ import { ProgressContainer, ProgressBar, ProgressSlider } from './styled';
 
 const Progress: React.FC<Props> = ({ slides, activeId, progress, toSlide }) => {
   const handleClick = (id: number) => () => {
-    console.log(id);
     toSlide(id);
   };
 

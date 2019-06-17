@@ -49,8 +49,6 @@ const LatestNewsSlider: React.FC = () => {
   const toSlide = (id: number) => {
     if (!slider.current) return;
 
-    console.log(id);
-
     slider.current.slickGoTo(id);
     resetTime();
   };

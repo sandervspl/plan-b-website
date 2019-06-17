@@ -120,6 +120,7 @@ export const PostHeading = styled.header`
 
   h3 {
     padding-right: 10px;
+    text-transform: uppercase;
   }
 `;
 

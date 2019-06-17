@@ -29,6 +29,8 @@ const Navigation: React.FC = () => {
       </UserContainer>
 
       <NavContainer>
+        <LogoNameIcon />
+
         <NavList>
           {navigationMenu.items.map((item, i) => (
             <NavItem key={i}>

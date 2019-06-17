@@ -2,18 +2,21 @@ import * as i from 'types';
 import React from 'react';
 import { API_ENDPOINT } from 'services';
 import { fetchPage } from 'ducks/page';
+import { fetchPosts } from 'ducks/posts';
 import { fetchRecruitment, fetchRecruitmentClass } from 'ducks/recruitment';
 import Page from 'modules/Page';
 import LatestNews from 'modules/LatestNews';
-import { fetchPosts } from 'ducks/posts';
-import RecruitmentBlock from 'modules/RecruitmentBlock';
-import OtherNews from 'modules/OtherNews';
+// import RecruitmentBlock from 'modules/RecruitmentBlock';
+// import OtherNews from 'modules/OtherNews';
+import { HomeContainer } from 'modules/Home/styled';
 
 const Home: i.NextPageComponent = () => (
   <Page>
-    <LatestNews />
-    <RecruitmentBlock />
-    <OtherNews />
+    <HomeContainer>
+      <LatestNews />
+      {/* <RecruitmentBlock />
+      <OtherNews /> */}
+    </HomeContainer>
   </Page>
 );
 

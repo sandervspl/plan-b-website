@@ -1,14 +1,19 @@
 import * as i from 'types';
 import styled, { css } from 'styled-components';
+import { media } from 'styles';
 
 export const ProgressContainer = styled.ul`
   display: flex;
   position: absolute;
-  bottom: 20px;
-  right: 10px;
+  right: 0;
+  bottom: 0;
+  padding: 20px 10px;
   margin: 0;
-  padding: 0;
   list-style: none;
+
+  ${media.tablet`
+    padding: 25px 20px;
+  `}
 `;
 
 export const ProgressBar = styled.li<ProgressBarProps>`
@@ -23,9 +28,19 @@ export const ProgressBar = styled.li<ProgressBarProps>`
   &:not(:last-child) {
     margin-right: 5px;
   }
+
+  ${media.tablet`
+    width: 40px;
+    height: 6px;
+    cursor: pointer;
+  `}
   
   ${(props) => props.isActive && css`
     width: 30px;
+
+    ${media.tablet`
+      width: 55px;
+    `}
   `}
 `;
 

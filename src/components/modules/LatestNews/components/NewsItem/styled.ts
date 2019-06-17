@@ -38,10 +38,6 @@ export const Tags = styled.ul`
   ${Tag} {
     margin-left: 5px;
   }
-
-  ${media.tablet`
-    padding-right: 0;
-  `}
 `;
 
 export const PostContent = styled.div`
@@ -50,25 +46,21 @@ export const PostContent = styled.div`
   flex: 2;
   position: absolute;
   bottom: 0;
-  padding-left: 10px;
+  left: 10px;
   transform: translateY(-10px);
 
   ${media.tablet`
-    padding: 0;
+    bottom: 10px;
+    left: 20px;
   `}
 `;
 
 export const PostText = styled.p`
   ${lineClamp(3)}
-  padding-right: 11px;
   font-family: ${(props) => props.theme.font.primary};
   font-size: 14px;
   line-height: 17px;
   color: ${(props) => props.theme.color.secondary};
-
-  ${media.tablet`
-    display: none;
-  `}
 `;
 
 export const PostDate = styled(PostText)`
@@ -83,11 +75,22 @@ export const PostDate = styled(PostText)`
   font-size: 12px;
 
   svg {
+    margin-right: 3px;
     height: 12px;
     fill: ${(props) => props.theme.color.secondary};
-    margin-right: 3px;
     transform: translateY(-1px);
   }
+
+  ${media.tablet`
+    top: 20px;
+    right: 20px;
+    font-size: 16px;
+
+    svg {
+      height: 16px;
+      margin-right: 5px;
+    }
+  `}
 `;
 
 export const ReadMore = styled.span`
@@ -105,6 +108,10 @@ export const ReadMore = styled.span`
     margin-left: 2px;
     transform: translateY(3px);
   }
+
+  ${media.tablet`
+    font-size: 14px;
+  `}
 `;
 
 export const PostHeading = styled.header`

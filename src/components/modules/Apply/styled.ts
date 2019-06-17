@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { Field } from 'react-final-form';
 import { media } from 'styles';
 import { getStaticUrl } from 'services';
-import bgImg from 'images/recruitment/bg.jpg?external';
+import bgImg from 'images/bg.jpg?external';
 import { Fullscreenpage, __OLD__Header, Paragraph } from 'common';
 
 export const RecruitmentContainer = styled(Fullscreenpage)`

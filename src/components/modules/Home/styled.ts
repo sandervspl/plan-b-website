@@ -1,21 +1,13 @@
 import styled from 'styled-components';
 import { media } from 'styles';
-import { TRANSITION_TIME_MS_SHORT } from 'styles/pageTransition';
 
-export const MiscPostsContainer = styled.div`
-  opacity: 1;
-  will-change: opacity;
-  transition: opacity ${TRANSITION_TIME_MS_SHORT}ms ease-out;
-
+export const HomeContainer = styled.div`
   ${media.tablet`
-    max-width: 35%;
-  `}
-`;
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
 
-export const ContentBlockContainer = styled.article`
-  padding: 20px;
-
-  ${media.tablet`
-    padding: 50px;
+    > *:nth-child(1) {
+      grid-column: 1/15;
+    }
   `}
 `;

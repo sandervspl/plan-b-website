@@ -1,17 +1,21 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Slider, { Settings } from 'react-slick';
-import { useSelector, useAnimationFrame } from 'hooks';
+import { useSelector, useInterval } from 'hooks';
 import { getLatestTwoNews } from 'ducks/posts/reselect';
 import NewsItem from '../NewsItem';
 import Progress from '../Progress';
 import { SliderContainer } from './styled';
 
-const MobileNewsSlider: React.FC = () => {
+const LatestNewsSlider: React.FC = () => {
   const slider = useRef<Slider>(null);
   const posts = useSelector((state) => getLatestTwoNews(state));
   const [nextSlideTime, setNextSlideTime] = useState(Date.now());
   const [slideId, setSlideId] = useState(0);
   const [progress, setProgress] = useState(0);
+
+  const resetTime = () => {
+    setNextSlideTime(Date.now());
+  };
 
   const sliderSettings: Settings = {
     dots: false,
@@ -24,12 +28,10 @@ const MobileNewsSlider: React.FC = () => {
     beforeChange: (prevSlideId, nextSlideId) => {
       setSlideId(nextSlideId);
     },
-    onSwipe: () => {
-      setNextSlideTime(Date.now());
-    },
+    onSwipe: resetTime,
   };
 
-  useAnimationFrame(() => {
+  useInterval(() => {
     if (!slider.current) return;
 
     const now = Date.now();
@@ -42,7 +44,16 @@ const MobileNewsSlider: React.FC = () => {
     }
 
     setProgress(diff / time);
-  });
+  }, 1000 / 27); // 27 fps
+
+  const toSlide = (id: number) => {
+    if (!slider.current) return;
+
+    console.log(id);
+
+    slider.current.slickGoTo(id);
+    resetTime();
+  };
 
   return (
     <SliderContainer>
@@ -51,9 +62,9 @@ const MobileNewsSlider: React.FC = () => {
           <NewsItem key={post.id} post={post} />
         ))}
       </Slider>
-      <Progress slides={posts.length} activeId={slideId} progress={progress} />
+      <Progress slides={posts.length} activeId={slideId} progress={progress} toSlide={toSlide} />
     </SliderContainer>
   );
 };
 
-export default MobileNewsSlider;
+export default LatestNewsSlider;

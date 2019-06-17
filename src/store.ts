@@ -6,7 +6,6 @@ import { isServer, api } from 'services';
 
 export default (initialState = {}) => {
   let middleware = applyMiddleware(thunk.withExtraArgument(api));
-  // @ts-ignore payload is required bullshit
   const reducers = combineReducers<i.ReduxState>({ ...appReducers });
 
   if (

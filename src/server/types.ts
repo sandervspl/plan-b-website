@@ -7,4 +7,8 @@ export type Router = Registry & {
     params?: RouteParams,
     options?: EventChangeOptions
   ): Promise<boolean>;
+  routes: {
+    name: string;
+    page: string;
+  }[];
 }

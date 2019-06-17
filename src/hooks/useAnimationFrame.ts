@@ -2,28 +2,22 @@ import { useEffect, useRef, useLayoutEffect } from 'react';
 
 export function useAnimationFrame(callback: Function) {
   const callbackRef = useRef(callback);
-  // const frameRef = useRef();
 
   useEffect(() => {
     callbackRef.current = callback;
   }, [callback]);
 
   const loop = () => {
-    // @ts-ignore
     frameRef.current = requestAnimationFrame(loop);
     const cb = callbackRef.current;
     cb();
   };
 
-  const frameRef = useRef();
+  const frameRef = useRef<number>();
 
   useLayoutEffect(() => {
-    //@ts-ignore
-    frameRef.current = requestAnimationFrame(
-      loop
-    );
+    frameRef.current = requestAnimationFrame(loop);
 
-    // @ts-ignore
-    return () => cancelAnimationFrame(frameRef.current);
+    return () => cancelAnimationFrame(frameRef.current!);
   }, []);
 };

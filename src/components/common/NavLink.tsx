@@ -15,9 +15,7 @@ class NavLink extends React.PureComponent<NavLinkProps> {
 
   static getDerivedStateFromProps(props: NavLinkProps) {
     const { router, to } = props;
-
-    // @ts-ignore Get route object from next-routes
-    const routerRoute = Router.routes.find((r: string) => r.name === to);
+    const routerRoute = Router.routes.find((r) => r.name === to);
 
     // Check if pathname from current route and page from routes are equal
     if (routerRoute && router!.pathname === routerRoute.page) {

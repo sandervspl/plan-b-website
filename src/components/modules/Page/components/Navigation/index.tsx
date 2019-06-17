@@ -35,8 +35,7 @@ const Navigation: React.FC = () => {
           {navigationMenu.items.map((item, i) => (
             <NavItem key={i}>
               {item.external
-                // @ts-ignore @TODO create conditional type
-                ? <Link to={item.page} external>{item.label}</Link>
+                ? <Link external to={item.page}>{item.label}</Link>
                 : <NavLink to={item.page}>{item.label}</NavLink>
               }
             </NavItem>

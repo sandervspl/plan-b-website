@@ -1,12 +1,5 @@
-import * as i from 'types';
 import { routeNames } from 'server/routeNames';
-
-type NavigationItem = {
-  label: string;
-  page: i.RouteNames;
-  external?: boolean;
-  invisible?: boolean;
-}
+import { NavigationItem } from './types';
 
 class NavigationMenu {
   private readonly _items: NavigationItem[] = [
@@ -20,7 +13,6 @@ class NavigationMenu {
     },
     {
       label: 'forum',
-      // @ts-ignore @TODO create conditional type
       page: 'http://forum.planbguild.eu/',
       external: true,
       invisible: !__DEV__,

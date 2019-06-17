@@ -71,16 +71,26 @@ const Link: React.FC<LinkComponentProps> = ({
   );
 };
 
-export type LinkComponentProps = React.AnchorHTMLAttributes<{}> & {
+type BaseProps = React.AnchorHTMLAttributes<{}> & {
   children: React.ReactNode;
   className?: string;
-  to: i.RouteNames;
   params?: RouteParams;
-  external?: boolean;
   ariaLabel?: string;
   currentTab?: boolean;
   type?: 'route' | 'text' | 'mail' | 'phone';
 }
+
+type InternalLinkProps = BaseProps & {
+  to: i.RouteNames;
+  external?: false;
+}
+
+type ExternalLinkProps = BaseProps & {
+  to: string;
+  external: true;
+}
+
+export type LinkComponentProps = InternalLinkProps | ExternalLinkProps;
 
 Link.defaultProps = {
   type: 'route',

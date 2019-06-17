@@ -50,7 +50,7 @@ export const PostContent = styled.div`
   transform: translateY(-10px);
 
   ${media.tablet`
-    bottom: 10px;
+    bottom: 30px;
     left: 20px;
   `}
 `;

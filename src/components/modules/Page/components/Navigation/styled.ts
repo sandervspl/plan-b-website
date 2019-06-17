@@ -7,7 +7,7 @@ export const LogoNameIcon = styled(LogoNameSvg)`
   height: 40px;
 
   ${media.tablet`
-    height: 75px;
+    height: 85px;
   `}
 `;
 
@@ -110,10 +110,6 @@ export const HeaderNavLinkStyle = css`
 export const NavItem = styled.li`
   padding: 0;
   margin: 0;
-
-  ${media.tablet`
-    margin-right: 40px;
-  `}
 
   a, span {
     ${HeaderNavLinkStyle};

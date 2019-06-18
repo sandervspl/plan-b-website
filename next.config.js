@@ -39,7 +39,10 @@ const config = (phase) => {
             oneOf: [
               {
                 resourceQuery: /external/,
-                loader: 'url-loader?limit=10000',
+                loader: 'url-loader',
+                query: {
+                  limit: 10000,
+                },
               },
               {
                 loader: '@svgr/webpack',

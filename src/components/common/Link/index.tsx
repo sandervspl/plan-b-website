@@ -3,7 +3,6 @@ import React from 'react';
 import _ from 'lodash';
 import Router from 'router';
 import { RouteParams } from 'next-routes';
-import { oc } from 'ts-optchain';
 import { getPageFromRoute } from 'services';
 import { useRouter } from 'hooks';
 import { LinkProps } from './types';
@@ -13,10 +12,8 @@ const Link: React.FC<LinkComponentProps> = ({
 }) => {
   const router = useRouter();
   const formattedAriaLabel = _.capitalize(ariaLabel);
-  // const as = type === 'text' ? 'span' : 'a';
 
   let linkProps: LinkProps = {
-    // as,
     className: className || '',
     'aria-label': formattedAriaLabel,
   };
@@ -56,7 +53,7 @@ const Link: React.FC<LinkComponentProps> = ({
 
   if (prefetchPage) {
     prefetchProps = {
-      onMouseOver: () => oc(router).prefetch(prefetchPage),
+      onMouseOver: () => router.prefetch(prefetchPage),
     };
   }
 

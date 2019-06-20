@@ -11,7 +11,7 @@ import QuestionHeader from '../QuestionHeader';
 const CharacterSelect: React.FC<Props> = ({ active, onNextClick, ...props }) => {
   const [inputValue, setInputValue] = useState('');
   const [armoryLink, setArmoryLink] = useState('');
-  const debouncedUserInput = useDebounce<string>(inputValue, 250);
+  const debouncedUserInput = useDebounce(inputValue, 250);
   const character = useSelector((state) => state.character);
   const dispatch = useDispatch();
 

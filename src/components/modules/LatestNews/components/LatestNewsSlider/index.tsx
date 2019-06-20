@@ -10,7 +10,7 @@ const LatestNewsSlider: React.FC = () => {
   const slider = useRef<Slider>(null);
   const posts = useSelector((state) => getLatestTwoNews(state));
   const [nextSlideTime, setNextSlideTime] = useState(Date.now());
-  const [slideId, setSlideId] = useState(0);
+  const [activeSlideId, setActiveSlideId] = useState(0);
   const [progress, setProgress] = useState(0);
 
   const resetTime = () => {
@@ -26,7 +26,7 @@ const LatestNewsSlider: React.FC = () => {
     centerPadding: '0',
     slidesToShow: 1,
     beforeChange: (prevSlideId, nextSlideId) => {
-      setSlideId(nextSlideId);
+      setActiveSlideId(nextSlideId);
     },
     onSwipe: resetTime,
   };
@@ -48,6 +48,7 @@ const LatestNewsSlider: React.FC = () => {
 
   const toSlide = (id: number) => {
     if (!slider.current) return;
+    if (id === activeSlideId) return;
 
     slider.current.slickGoTo(id);
     resetTime();
@@ -60,7 +61,7 @@ const LatestNewsSlider: React.FC = () => {
           <NewsItem key={post.id} post={post} />
         ))}
       </Slider>
-      <Progress slides={posts.length} activeId={slideId} progress={progress} toSlide={toSlide} />
+      <Progress slides={posts.length} activeId={activeSlideId} progress={progress} toSlide={toSlide} />
     </SliderContainer>
   );
 };

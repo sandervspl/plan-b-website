@@ -40,6 +40,7 @@ export const LatestNewsContainer = styled.div`
   ${media.tablet`
     margin-top: 0;
     height: 410px;
+    border: 1px solid;
   `}
 `;
 

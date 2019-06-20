@@ -14,6 +14,9 @@ export const RecruitmentBlockContainer = styled.div`
     padding-bottom: 50px;
     height: 410px;
     overflow: hidden;
+    border-color: ${(props) => props.theme.color.border.primary};
+    border-top: 1px solid;
+    border-right: 1px solid;
 
     &::-webkit-scrollbar {
       display: none;

@@ -4,11 +4,13 @@
   "description": "Code for plan-b-website.",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node src/server/index.ts",
-    "build": "npm run clean && next build src && npm run build:server",
+    "dev": "npm run build:nextconfig && ts-node src/server/index.ts",
+    "build": "npm run build:nextconfig && npm run clean && next build src && npm run build:server && npm run clean:nextconfig",
     "build:server": "tsc --project tsconfig.server.json",
+    "build:nextconfig": "npm run clean:nextconfig && tsc --project tsconfig.nextconfig.json",
     "start": "NODE_ENV=production node dist/src/server/index.js",
     "clean": "rimraf dist/",
+    "clean:nextconfig": "rimraf next.config.js",
     "lint": "eslint --ext .ts --ext .tsx src/"
   },
   "keywords": [],

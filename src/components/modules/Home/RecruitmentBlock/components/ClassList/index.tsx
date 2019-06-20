@@ -13,7 +13,7 @@ const ClassList: React.FC = () => {
   return (
     <ClassListContainer>
       {recruitment.data.classes.map((plrClass) => (
-        <ClassText key={plrClass.id} plrClass={(plrClass as i.ClassData)} />
+        <ClassText key={plrClass.id} as="li" plrClass={(plrClass as i.ClassData)} />
       ))}
     </ClassListContainer>
   );

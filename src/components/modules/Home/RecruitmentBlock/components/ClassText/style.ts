@@ -2,7 +2,7 @@ import styled from 'styled-components';
 // import { darken } from 'polished';
 import { media } from 'styles';
 
-export const ClassTextContainer = styled.li<ClassTextContainerProps>`
+export const ClassTextContainer = styled.span<ClassTextContainerProps>`
   display: flex;
   position: relative;
   margin-bottom: 15px;

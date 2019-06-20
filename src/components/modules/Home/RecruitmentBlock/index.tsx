@@ -1,9 +1,9 @@
 import React from 'react';
-import { theme } from 'styles';
 import { useSelector } from 'hooks';
+import ArrowRightIcon from 'vectors/arrow-right.svg';
 import { Heading } from 'common';
 import ClassList from './components/ClassList';
-import { RecruitmentBlockContainer, RecruitmentBlockInner, ApplyNow, Disclaimer } from './styled';
+import { RecruitmentBlockContainer, ApplyNow, Disclaimer, RecruitmentInner } from './styled';
 
 const RecruitmentBlock: React.FC = () => {
   const recruitment = useSelector((state) => state.recruitment);
@@ -13,18 +13,19 @@ const RecruitmentBlock: React.FC = () => {
 
   return (
     <RecruitmentBlockContainer>
-      <RecruitmentBlockInner>
-        <Heading capeColor={theme.color.primary.dark}>
-          {recruitment.data.title || 'We are recruiting!'}
-        </Heading>
+      <RecruitmentInner>
+        <Heading as="h2">{recruitment.data.title || 'We are recruiting!'}</Heading>
         <ClassList />
         {recruitment.data.disclaimer && (
           <Disclaimer>
             * {recruitment.data.disclaimer}
           </Disclaimer>
         )}
-        <ApplyNow to="apply">Apply now</ApplyNow>
-      </RecruitmentBlockInner>
+      </RecruitmentInner>
+      <ApplyNow to="apply">
+        Apply now
+        <ArrowRightIcon />
+      </ApplyNow>
     </RecruitmentBlockContainer>
   );
 };

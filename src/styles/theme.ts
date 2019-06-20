@@ -7,7 +7,9 @@ const theme = {
     tertiary: Object.assign('#476369', {
       light: '#E4E3E3',
     }),
-    background: '#181818',
+    background: Object.assign('#181818', {
+      light: '#1E1E1E',
+    }),
     glitch: {
       primary: 'palevioletred',
       secondary: 'darkturquoise',
@@ -18,6 +20,9 @@ const theme = {
     },
     border: {
       primary: '#0C0C0C',
+    },
+    text: {
+      disclaimer: '#7b7b7b',
     },
 
     __OLD__: {

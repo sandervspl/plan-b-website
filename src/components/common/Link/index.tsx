@@ -1,24 +1,26 @@
 import * as i from 'types';
 import React from 'react';
 import _ from 'lodash';
+import { Union } from 'ts-toolbelt';
 import Router from 'router';
-import { RouteParams } from 'next-routes';
 import { getPageFromRoute } from 'services';
 import { useRouter } from 'hooks';
 import { LinkProps } from './types';
 
 const Link: React.FC<LinkComponentProps> = ({
-  children, className, to, params, external, ariaLabel, currentTab, type, ...props
+  children, className, to, ariaLabel, currentTab, type, ...props
 }) => {
   const router = useRouter();
   const formattedAriaLabel = _.capitalize(ariaLabel);
+  const externalProps = props as ExternalLinkProps;
+  const paramsProps = props as IdParamsLinkProps;
 
   let linkProps: LinkProps = {
     className: className || '',
     'aria-label': formattedAriaLabel,
   };
 
-  if (external || type !== 'route') {
+  if (externalProps.external || type !== 'route') {
     const target = currentTab || type !== 'route'
       ? '_self'
       : '_blank';
@@ -58,7 +60,7 @@ const Link: React.FC<LinkComponentProps> = ({
   }
 
   return (
-    <Router.Link route={to} params={params}>
+    <Router.Link route={to} params={paramsProps.params}>
       {React.Children.only(
         <a {...prefetchProps} {...linkProps} {...props}>
           {children}
@@ -71,23 +73,29 @@ const Link: React.FC<LinkComponentProps> = ({
 type BaseProps = React.AnchorHTMLAttributes<{}> & {
   children: React.ReactNode;
   className?: string;
-  params?: RouteParams;
   ariaLabel?: string;
   currentTab?: boolean;
   type?: 'route' | 'text' | 'mail' | 'phone';
 }
 
 type InternalLinkProps = BaseProps & {
-  to: i.RouteNames;
   external?: false;
+  to: Union.Exclude<i.RouteNames, 'news-detail'>;
 }
 
 type ExternalLinkProps = BaseProps & {
-  to: string;
   external: true;
+  to: string;
 }
 
-export type LinkComponentProps = InternalLinkProps | ExternalLinkProps;
+type IdParamsLinkProps = BaseProps & {
+  to: 'news-detail';
+  params: {
+    id: number;
+  };
+}
+
+export type LinkComponentProps = InternalLinkProps | ExternalLinkProps | IdParamsLinkProps;
 
 Link.defaultProps = {
   type: 'route',

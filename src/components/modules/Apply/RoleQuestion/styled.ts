@@ -76,7 +76,7 @@ export const RoleIcon = styled.div<ImageProps>`
     width: 50px;
     height: 50px;
     border-radius: 100%;
-    border: 1px solid ${(props) => props.theme.color.primary};
+    border: 1px solid ${(props) => props.theme.color.secondary.dark};
     background: url(${(props) => props.src}) center center;
     background-size: cover;
 
@@ -134,6 +134,10 @@ const RoleItemActiveStyle = css`
 
   ${BackgroundImage}:after, ${RoleIcon}:after {
     opacity: 0;
+  }
+
+  ${RoleIcon} {
+    border: 1px solid ${(props) => props.theme.color.secondary};
   }
 `;
 

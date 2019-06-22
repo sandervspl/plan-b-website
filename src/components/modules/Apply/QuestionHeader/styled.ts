@@ -11,12 +11,12 @@ export const QuestionHeaderContainer = styled.div`
   ${__OLD__Header} {
     font-size: 28px;
     line-height: 1.2;
+    color: ${(props) => props.theme.color.primary.dark};
   }
   
   ${media.tablet`
     white-space: nowrap;
     padding: 20px 80px 20px 20px;
-    background: ${(props) => props.theme.color.secondary};
 
     ${__OLD__Header} {
       font-size: 65px;

@@ -12,7 +12,7 @@ export const ProfessionDetailsContainer = styled.div`
 export const ProfessionIcon = styled.img`
   width: 36px;
   height: 36px;
-  border: 1px solid ${(props) => props.theme.color.secondary.dark};
+  border: 1px solid ${(props) => props.theme.color.border};
   border-radius: 100%;
 `;
 
@@ -31,7 +31,7 @@ export const ProfessionSkill = styled.div<ProfessionSkillProps>`
   margin-top: 5px;
   width: 80%;
   height: 20px;
-  border: 1px solid ${(props) => props.theme.color.secondary.dark};
+  border: 1px solid ${(props) => props.theme.color.border};
 
   &:before {
     content: '';
@@ -41,7 +41,7 @@ export const ProfessionSkill = styled.div<ProfessionSkillProps>`
     height: 100%;
     width: ${(props) => (props.rank / props.max) * 100}%;
     max-width: 100%;
-    background-color: ${(props) => props.theme.color.secondary};
+    background-color: ${(props) => props.theme.color.primary.dark};
   }
 
   &:after {

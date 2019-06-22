@@ -5,16 +5,20 @@ export const Button = styled.button`
   padding: 13px 0;
   width: 100%;
   font-size: 18px;
-  color: ${(props) => props.theme.color.secondary};
+  color: ${(props) => props.theme.color.primary};
   font-family: ${(props) => props.theme.font.primary};
   font-weight: bold;
   text-transform: uppercase;
-  background-color: ${(props) => props.theme.color.background};
+  background-color: ${(props) => props.theme.color.background.light};
   border: 0;
   outline: 0;
   cursor: pointer;
   will-change: transform;
   transition: 50ms transform;
+
+  svg {
+    fill: ${(props) => props.theme.color.primary};
+  }
 
   ${media.tablet`
     padding: 17px 75px;

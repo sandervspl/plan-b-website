@@ -249,7 +249,7 @@ export const NextButton = styled.button.attrs({ type: 'button' })`
   font-weight: bold;
   text-transform: uppercase;
   font-family: ${(props) => props.theme.font.primary};
-  color: ${(props) => props.theme.color.secondary};
+  color: ${(props) => props.theme.color.primary.dark};
   cursor: pointer;
   transition: color 300ms;
 
@@ -261,7 +261,7 @@ export const NextButton = styled.button.attrs({ type: 'button' })`
     margin-right: 12px;
     width: 30px;
     height: 2px;
-    background-color: ${(props) => props.theme.color.secondary};
+    background-color: ${(props) => props.theme.color.primary.dark};
     transition: width 400ms,
                 padding-right 400ms 400ms,
                 margin-left 400ms,
@@ -281,10 +281,11 @@ export const NextButton = styled.button.attrs({ type: 'button' })`
 
   &:disabled {
     cursor: not-allowed;
-    color: ${(props) => props.theme.color.secondary};
+    color: ${(props) => props.theme.color.primary.dark};
+    opacity: .5;
 
     &:before {
-      background-color: ${(props) => props.theme.color.background};
+      background-color: ${(props) => props.theme.color.primary.dark};
     }
   }
 `;

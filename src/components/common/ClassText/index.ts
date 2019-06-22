@@ -8,7 +8,7 @@ const classColors = [
   '#FFF569',   // Rogue
   '#FFFFFF',   // Priest
   '#C41F3B',   // Death Knight
-  '#0070DE',   // Shaman
+  '#F58CBA',   // Shaman
   '#40C7EB',   // Mage
   '#8787ED',   // Warlock
   '#00FF96',  // Monk

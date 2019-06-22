@@ -5,7 +5,7 @@ import { fetchPage } from 'ducks/page';
 import { fetchPosts } from 'ducks/posts';
 import { fetchRecruitment, fetchRecruitmentClass } from 'ducks/recruitment';
 import Page from 'modules/Page';
-import { LatestNews, RecruitmentBlock, OtherNews } from 'modules/Home';
+import { LatestNews, RecruitmentBlock, OtherNews, Twitch } from 'modules/Home';
 import { HomeContainer } from 'modules/Home/styled';
 
 const Home: i.NextPageComponent = () => (
@@ -13,6 +13,7 @@ const Home: i.NextPageComponent = () => (
     <HomeContainer>
       <LatestNews />
       <RecruitmentBlock />
+      <Twitch />
       <OtherNews />
     </HomeContainer>
   </Page>

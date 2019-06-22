@@ -42,21 +42,6 @@ export const RecruitmentInner = styled.div`
   `}
 `;
 
-export const Disclaimer = styled.small`
-  display: block;
-  margin-top: 10px;
-  font-family: ${(props) => props.theme.font.primary};
-  font-size: 12px;
-  line-height: 14px;
-  color: ${(props) => props.theme.color.text.disclaimer};
-
-  ${media.tablet`
-    margin-top: 20px;
-    font-size: 14px;
-    line-height: 20px;
-  `}
-`;
-
 export const ApplyNow = styled(Link)`
   display: flex;
   justify-content: center;

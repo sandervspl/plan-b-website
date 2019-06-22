@@ -3,4 +3,5 @@ export * from './Heading';
 export * from './Subheader';
 export * from './Paragraph';
 export * from './UnderlineStyle';
+export * from './Small';
 export { BaseTextStyle } from './BaseText';

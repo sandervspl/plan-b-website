@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'styles';
-import { Heading, Link } from 'common';
+import { Heading } from 'common';
 import { NewsItemContainer } from 'common/NewsItem/styled';
 import { lineClamp } from 'common/styles';
 

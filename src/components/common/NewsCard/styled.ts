@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { HeadingContainer } from 'common/typography/__OLD__Heading/style';
 import { media } from 'styles';
 import * as glitch from 'styles/glitch';
 import { Tag, Link } from 'common';
@@ -175,22 +174,6 @@ export const NewsHeading = styled.header`
   align-self: flex-start;
   max-width: 95%;
   z-index: 2;
-
-  ${HeadingContainer} {
-    margin-left: 25px;
-    transform: translateY(-25%);
-
-    h2 {
-      ${lineClamp(2)};
-      text-align: left;
-    }
-
-    ${media.tablet`
-      margin-right: 0;
-      margin-bottom: 15px;
-      transform: translateY(0);
-    `}
-  }
 
   ${media.tablet`
     padding-right: 60px;

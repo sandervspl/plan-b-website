@@ -76,7 +76,7 @@ export const RoleIcon = styled.div<ImageProps>`
     width: 50px;
     height: 50px;
     border-radius: 100%;
-    border: 1px solid ${(props) => props.theme.color.__OLD__.border.light};
+    border: 1px solid ${(props) => props.theme.color.primary};
     background: url(${(props) => props.src}) center center;
     background-size: cover;
 
@@ -115,7 +115,7 @@ export const RoleText = styled(Paragraph)`
     top: auto;
     right: 0;
     width: 100%;
-    color: ${(props) => props.theme.color.__OLD__.paragraph};
+    color: ${(props) => props.theme.color.secondary};
     transform: translateY(0);
     will-change: color;
     transition: color 300ms ease-in-out;
@@ -125,7 +125,7 @@ export const RoleText = styled(Paragraph)`
 const RoleItemActiveStyle = css`
   ${RoleText} {
     opacity: 1;
-    color: ${(props) => props.theme.color.__OLD__.highlight};
+    color: ${(props) => props.theme.color.secondary};
   }
 
   ${BackgroundImage} img {
@@ -160,7 +160,7 @@ export const RoleItem = styled.label<RoleItemProps>`
 
   ${(props) => props.checked && css`
     ${BackgroundImage} {
-      border-color: ${(props) => props.theme.color.__OLD__.border.light};
+      border-color: ${(props) => props.theme.color.secondary};
     }
 
     ${RoleItemActiveStyle}

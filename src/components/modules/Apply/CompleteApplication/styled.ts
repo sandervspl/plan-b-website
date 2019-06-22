@@ -49,7 +49,7 @@ export const SubmitButton = styled(Button)`
 
 export const Name = styled.span`
   text-transform: capitalize;
-  color: ${(props) => props.theme.color.__OLD__.tertiary};
+  color: ${(props) => props.theme.color.secondary};
 `;
 
 export const SubmitLabel = styled.label`

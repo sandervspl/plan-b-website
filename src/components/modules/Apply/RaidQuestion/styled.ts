@@ -49,7 +49,7 @@ export const RaidImage = styled.figure<RaidImageProps>`
 
   ${(props) => props.selected && css`
     opacity: 1 !important;
-    border: 1px solid ${(props) => props.theme.color.__OLD__.border.light};
+    border: 1px solid ${(props) => props.theme.color.secondary};
   `}
 `;
 
@@ -156,7 +156,7 @@ export const RaidTooltip = styled(ReactToolTip)`
   && {
     font-family: ${(props) => props.theme.font.primary};
     font-size: 16px;
-    color: ${(props) => props.theme.color.__OLD__.primary};
+    color: ${(props) => props.theme.color.secondary};
     text-transform: capitalize;
   }
 `;

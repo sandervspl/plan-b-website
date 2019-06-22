@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { HeadingContainer } from 'common/typography/__OLD__Heading/style';
 import { media } from 'styles';
 import { Link, UnderlineStyle } from 'common';
 
@@ -7,18 +6,7 @@ export const OtherNewsContainer = styled.div`
   position: relative;
   margin-bottom: 45px;
   padding: 35px 0 30px;
-  background-color: ${(props) => props.theme.color.blocks.otherNews};
-
-  > ${HeadingContainer} {
-    position: absolute;
-    top: 0;
-    margin-left: 25px;
-    transform: translateY(-50%);
-
-    h2 {
-      font-size: 20px;
-    }
-  }
+  background-color: ${(props) => props.theme.color.background};
 
   ${media.tablet`
     margin: 0 auto 170px;
@@ -32,14 +20,6 @@ export const OtherNewsContainer = styled.div`
       width: 85px;
       height: 100%;
       background-color: ${(props) => props.theme.color.background};
-    }
-
-    > ${HeadingContainer} {
-      margin-left: 50px;
-
-      h2 {
-        font-size: 50px;
-      }
     }
   `}
 `;

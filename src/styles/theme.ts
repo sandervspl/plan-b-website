@@ -3,9 +3,8 @@ const theme = {
     primary: Object.assign('#DE3D3D', {
       dark: '#A24444',
     }),
-    secondary: '#FFFFFF',
-    tertiary: Object.assign('#476369', {
-      light: '#E4E3E3',
+    secondary: Object.assign('#FFFFFF', {
+      dark: '#DADADA',
     }),
     background: Object.assign('#181818', {
       light: '#1E1E1E',
@@ -14,35 +13,11 @@ const theme = {
       primary: 'palevioletred',
       secondary: 'darkturquoise',
     },
-    blocks: {
-      recruitment: '#476369',
-      otherNews: '#E4E3E3',
-    },
     border: {
       primary: '#0C0C0C',
     },
     text: {
       disclaimer: '#7b7b7b',
-    },
-
-    __OLD__: {
-      primary: Object.assign('#BFCE9E', {
-        medium: '#7a8e72',
-        dark: '#495347',
-      }),
-      secondary: Object.assign('#202425', {
-        medium: '#1E2122',
-        dark: '#131516',
-        darkest: '#000000',
-        hover: '#272a2b',
-      }),
-      tertiary: '#476369',
-      paragraph: '#8e9496',
-      highlight: '#ffffff',
-      border: {
-        light: '#8e9496',
-        dark: '#131516',
-      },
     },
   },
 

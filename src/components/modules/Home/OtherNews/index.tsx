@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'hooks';
 import { getOtherNews } from 'ducks/posts/reselect';
-import { theme } from 'styles';
 import { Heading, NewsCard } from 'common';
 import { OtherNewsContainer, OlderNewsLink } from './styled';
 
@@ -10,7 +9,7 @@ const OtherNews: React.FC = () => {
 
   return (
     <OtherNewsContainer>
-      <Heading capeColor={theme.color.primary.dark}>
+      <Heading as="h2">
         In Other News
       </Heading>
       {posts.map((post) => (

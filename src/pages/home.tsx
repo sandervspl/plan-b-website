@@ -5,9 +5,7 @@ import { fetchPage } from 'ducks/page';
 import { fetchPosts } from 'ducks/posts';
 import { fetchRecruitment, fetchRecruitmentClass } from 'ducks/recruitment';
 import Page from 'modules/Page';
-import LatestNews from 'modules/LatestNews';
-import RecruitmentBlock from 'modules/Home/RecruitmentBlock';
-// import OtherNews from 'modules/OtherNews';
+import { LatestNews, RecruitmentBlock, OtherNews } from 'modules/Home';
 import { HomeContainer } from 'modules/Home/styled';
 
 const Home: i.NextPageComponent = () => (

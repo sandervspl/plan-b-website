@@ -16,7 +16,7 @@ export const Avatar = styled.img`
   width: 75px;
   height: 75px;
   border-radius: 100%;
-  border: 1px solid ${(props) => props.theme.color.__OLD__.border.light};
+  border: 1px solid ${(props) => props.theme.color.secondary};
 
   ${media.tablet`
     width: 84px;

@@ -6,7 +6,7 @@ export const Placeholder = styled.span<PlaceholderProps>`
   display: none;
   left: 0;
   z-index: 0;
-  color: ${(props) => props.theme.color.__OLD__.primary.dark};
+  color: ${(props) => props.theme.color.secondary.dark};
   cursor: text;
   font-weight: normal;
   

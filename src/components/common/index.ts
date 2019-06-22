@@ -1,7 +1,5 @@
 export { default as Link } from './Link';
 export { default as NavLink } from './NavLink';
-export { default as LinkTextFill } from './LinkTextFill';
-export { default as TransitionPost } from './TransitionPost';
 export { default as GlitchLogo } from './GlitchLogo';
 export * from './SingleContentContainer';
 export * from './typography';

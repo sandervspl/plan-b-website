@@ -20,7 +20,7 @@ export const CharacterItemsContainer = styled.div`
 
 export const StyledTooltip = styled(ReactTooltip)`
   && {
-    color: ${(props) => props.theme.color.__OLD__.primary};
+    color: ${(props) => props.theme.color.secondary};
     font-family: ${(props) => props.theme.font.primary};
   }
 `;

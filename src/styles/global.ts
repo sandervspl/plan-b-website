@@ -20,12 +20,12 @@ export default createGlobalStyle`
 
   body, html {
     width: 100%;
-    background-color: ${theme.color.__OLD__.secondary.dark};
+    background-color: ${theme.color.background};
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: ${theme.font.primary};
-    color: ${theme.color.__OLD__.primary};
+    color: ${theme.color.secondary};
     margin: 0;
     padding: 0;
   }

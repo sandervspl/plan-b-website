@@ -140,13 +140,20 @@ export const NewsItemContainer = styled.article<NewsItemContainerProps>`
     height: 100%;
   }
 
-  ${(props) => props.asColumns && css`
-    a {
-      ${Paragraph} {
-        display: none;
-      }
-    }
+  ${Paragraph} {
+    ${lineClamp(1)};
+    display: none;
+    color: ${(props) => props.theme.color.secondary.medium};
 
+    ${media.tablet`
+      display: block;
+      margin-bottom: 10px;
+      font-size: 15px;
+      line-height: 22px;
+    `}
+  }
+
+  ${(props) => props.asColumns && css`
     ${media.tablet`
       margin-bottom: 20px;
 
@@ -170,23 +177,13 @@ export const NewsItemContainer = styled.article<NewsItemContainerProps>`
           transform: none;
         }
 
-        ${Heading} {
-          margin-bottom: 15px;
-        }
-
         ${Paragraph} {
-          display: block;
-          font-size: 15px;
-          line-height: 22px;
+          margin: 15px 0;
         }
 
         ${PostDate} {
           top: auto;
           bottom: 20px;
-        }
-
-        ${ReadMore} {
-          margin-top: 10px;
         }
       }
     `}

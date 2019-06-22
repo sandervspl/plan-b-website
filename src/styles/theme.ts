@@ -4,6 +4,7 @@ const theme = {
       dark: '#A24444',
     }),
     secondary: Object.assign('#FFFFFF', {
+      medium: '#CFCECE',
       dark: '#B6B6B6',
     }),
     background: Object.assign('#181818', {

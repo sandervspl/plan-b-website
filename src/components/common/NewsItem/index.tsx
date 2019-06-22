@@ -26,7 +26,7 @@ export const NewsItem: React.FC<Props> = ({ post, columns }) => {
           <PostHeading>
             {post.title && <Heading as="h3">{post.title}</Heading>}
 
-            {columns && post.abstract && (
+            {post.abstract && (
               <Paragraph>{post.abstract}</Paragraph>
             )}
 

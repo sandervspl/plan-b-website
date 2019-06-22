@@ -8,7 +8,7 @@ import { useRouter } from 'hooks';
 import { LinkProps } from './types';
 
 const Link: React.FC<LinkComponentProps> = ({
-  children, className, to, ariaLabel, currentTab, type, ...props
+  children, className, to, ariaLabel, currentTab, type, disabled, ...props
 }) => {
   const router = useRouter();
   const formattedAriaLabel = _.capitalize(ariaLabel);
@@ -17,7 +17,6 @@ const Link: React.FC<LinkComponentProps> = ({
 
   let linkProps: LinkProps = {
     className: className || '',
-    'aria-label': formattedAriaLabel,
   };
 
   if (externalProps.external || type !== 'route') {
@@ -39,7 +38,21 @@ const Link: React.FC<LinkComponentProps> = ({
         target,
         href,
         rel: 'noopener noreferrer',
+        'aria-label': formattedAriaLabel,
       };
+    }
+
+    if (type === 'text' || disabled) {
+      linkProps = {
+        ...linkProps,
+        className: `${linkProps.className} disabled`,
+      };
+
+      return (
+        <span {...linkProps} {...props}>
+          {children}
+        </span>
+      );
     }
 
     return (
@@ -76,6 +89,7 @@ type BaseProps = React.AnchorHTMLAttributes<{}> & {
   ariaLabel?: string;
   currentTab?: boolean;
   type?: 'route' | 'text' | 'mail' | 'phone';
+  disabled?: boolean;
 }
 
 type InternalLinkProps = BaseProps & {

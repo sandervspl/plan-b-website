@@ -2,7 +2,7 @@ import * as i from 'types';
 
 type BaseNavItem = {
   label: string;
-  invisible?: boolean;
+  disabled?: boolean;
 }
 
 type ExternalNavItem = BaseNavItem & {

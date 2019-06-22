@@ -34,6 +34,12 @@ export default createGlobalStyle`
     text-decoration: none;
   }
 
+  a.disabled,
+  span.disabled {
+    cursor: not-allowed;
+    opacity: .5;
+  }
+
   #__next {
     height: 100%;
 

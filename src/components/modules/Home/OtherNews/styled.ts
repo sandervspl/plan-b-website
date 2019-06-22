@@ -24,6 +24,10 @@ export const OtherNewsContainer = styled.div`
 
     &:not(:last-of-type) {
       border-bottom: 1px solid ${(props) => props.theme.color.border.primary};
+
+      ${media.tablet`
+        border: 0;
+      `}
     }
 
     ${Heading} {

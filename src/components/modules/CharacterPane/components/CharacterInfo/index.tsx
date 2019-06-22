@@ -13,7 +13,9 @@ const CharacterInfo: React.FC<CharacterInfoProps> = ({ character }) => {
     <CharacterInfoContainer>
       <Avatar src={avatar} />
       <CharacterDetails>
-        <__OLD__Header as="h2">{character.name}</__OLD__Header>
+        <__OLD__Header as="h2">
+          {character.name}
+        </__OLD__Header>
         {character.guild && (
           <Guild>
             {'<'}{character.guild.name}{'>'}

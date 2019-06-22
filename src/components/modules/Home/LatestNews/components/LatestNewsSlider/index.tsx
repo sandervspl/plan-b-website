@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import Slider, { Settings } from 'react-slick';
 import { useSelector, useInterval } from 'hooks';
 import { getLatestTwoNews } from 'ducks/posts/reselect';
-import NewsItem from '../NewsItem';
+import { NewsItem } from 'common';
 import Progress from '../Progress';
 import { SliderContainer } from './styled';
 

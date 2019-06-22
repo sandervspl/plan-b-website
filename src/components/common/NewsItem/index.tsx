@@ -4,13 +4,14 @@ import TimeIcon from 'vectors/time.svg';
 import ArrowRightIcon from 'vectors/arrow-right.svg';
 import { getSourceUrl, getDate } from 'services';
 import { Heading, Link } from 'common';
+import { Paragraph } from 'common/typography';
 import {
   NewsItemContainer, PostImage, PostContent, PostDate, PostHeading, ReadMore,
 } from './styled';
 
-const NewsItem: React.FC<Props> = ({ post }) => {
+export const NewsItem: React.FC<Props> = ({ post, columns }) => {
   return (
-    <NewsItemContainer>
+    <NewsItemContainer asColumns={columns}>
       <Link to="news-detail" params={{ id: post.id }}>
         <PostDate>
           <TimeIcon />
@@ -24,11 +25,10 @@ const NewsItem: React.FC<Props> = ({ post }) => {
         <PostContent>
           <PostHeading>
             {post.title && <Heading as="h3">{post.title}</Heading>}
-            {/* <Tags>
-              {post.tags && post.tags.length > 0 && post.tags.map((tag) => (
-                <Tag key={tag.id} as="li" color={tag.color}>{tag.name}</Tag>
-              ))}
-            </Tags> */}
+
+            {columns && post.abstract && (
+              <Paragraph>{post.abstract}</Paragraph>
+            )}
 
             <ReadMore>
               Read More
@@ -43,6 +43,5 @@ const NewsItem: React.FC<Props> = ({ post }) => {
 
 export type Props = {
   post: i.Post;
+  columns?: boolean;
 };
-
-export default NewsItem;

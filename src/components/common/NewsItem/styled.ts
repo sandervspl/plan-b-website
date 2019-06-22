@@ -1,13 +1,15 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { media } from 'styles';
 import { Tag } from 'common';
 import { lineClamp } from 'common/styles';
+import { Paragraph, Heading } from 'common/typography';
 
 export const PostImage = styled.figure`
   position: relative;
   margin: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 
   &:after {
     content: '';
@@ -124,17 +126,73 @@ export const PostHeading = styled.header`
   }
 `;
 
-export const NewsItemContainer = styled.article`
+export const NewsItemContainer = styled.article<NewsItemContainerProps>`
   display: flex;
   flex-direction: column;
   position: relative;
   width: 100%;
   height: 100%;
-  
+
   a {
     display: flex;
     flex-direction: column;
     position: relative;
     height: 100%;
   }
+
+  ${(props) => props.asColumns && css`
+    a {
+      ${Paragraph} {
+        display: none;
+      }
+    }
+
+    ${media.tablet`
+      margin-bottom: 20px;
+
+      a {
+        display: grid;
+        grid-template-columns: 42% 1fr;
+        padding: 0 20px;
+
+        ${PostImage} {
+          grid-column: 1;
+
+          &::after {
+            content: none;
+          }
+        }
+
+        ${PostContent} {
+          grid-column: 2;
+          top: 0;
+          bottom: auto;
+          transform: none;
+        }
+
+        ${Heading} {
+          margin-bottom: 15px;
+        }
+
+        ${Paragraph} {
+          display: block;
+          font-size: 15px;
+          line-height: 22px;
+        }
+
+        ${PostDate} {
+          top: auto;
+          bottom: 20px;
+        }
+
+        ${ReadMore} {
+          margin-top: 10px;
+        }
+      }
+    `}
+  `}
 `;
+
+type NewsItemContainerProps = {
+  asColumns?: boolean;
+}

@@ -35,8 +35,8 @@ const Navigation: React.FC = () => {
           {navigationMenu.items.map((item, i) => (
             <NavItem key={i}>
               {item.external
-                ? <Link external to={item.page}>{item.label}</Link>
-                : <NavLink to={item.page}>{item.label}</NavLink>
+                ? <Link external to={item.page} disabled={item.disabled}>{item.label}</Link>
+                : <NavLink to={item.page} disabled={item.disabled}>{item.label}</NavLink>
               }
             </NavItem>
           ))}

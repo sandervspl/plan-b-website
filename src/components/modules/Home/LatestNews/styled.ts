@@ -30,7 +30,7 @@ const SlickSliderStyle = css`
 
 export const LatestNewsContainer = styled.div`
   ${SlickSliderStyle};
-  margin-top: 30px;
+  margin-top: 20px;
   width: 100%;
   height: 187px;
   border-color: ${(props) => props.theme.color.border.primary};

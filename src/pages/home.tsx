@@ -13,7 +13,7 @@ const Home: i.NextPageComponent = () => (
     <HomeContainer>
       <LatestNews />
       <RecruitmentBlock />
-      {/* <OtherNews /> */}
+      <OtherNews />
     </HomeContainer>
   </Page>
 );

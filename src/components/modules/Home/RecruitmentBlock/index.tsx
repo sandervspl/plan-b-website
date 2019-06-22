@@ -14,7 +14,9 @@ const RecruitmentBlock: React.FC = () => {
   return (
     <RecruitmentBlockContainer>
       <RecruitmentInner>
-        <Heading as="h2">{recruitment.data.title || 'We are recruiting!'}</Heading>
+        <Heading as="h2">
+          {recruitment.data.title || 'We are recruiting!'}
+        </Heading>
         <ClassList />
         {recruitment.data.disclaimer && (
           <Disclaimer>

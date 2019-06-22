@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import PlayfairRegularFont from 'fonts/playfair-display/PlayfairDisplay-Regular.otf';
 import styledNormalize from './normalize';
 import theme from './theme';
 
@@ -7,12 +6,6 @@ export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Heebo:300,400,700');
   
   ${styledNormalize};
-
-  @font-face {
-    font-family: 'playfair';
-    src: url(${PlayfairRegularFont});
-    font-weight: normal;
-  }
 
   * {
     box-sizing: border-box;

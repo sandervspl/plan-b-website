@@ -17,8 +17,8 @@ export const PageContainer = styled.div`
       left: 0;
       width: 100%;
       height: 100%;
-      background: url(${getStaticUrl(bgImg)}) center center;
-      background-repeat: repeat;
+      background-image: url(${getStaticUrl(bgImg)});
+      background-position: center center;
       background-size: cover;
       opacity: .1;
     }

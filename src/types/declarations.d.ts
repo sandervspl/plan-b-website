@@ -7,7 +7,6 @@ declare const __TEST__: boolean;
 // extend window object
 interface Window {
   __REDUX_DEVTOOLS_EXTENSION__: Function;
-  onYouTubeIframeAPIReady: Function;
 }
 
 // files

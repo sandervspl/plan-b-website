@@ -71,6 +71,7 @@ const config = (phase: string): NextConfig => {
           {
             exclude: [
               /\.[tj]sx?$/,
+              /\.mjs$/,
               /\.css$/,
               /\.svg$/,
               /\.(jpe?g|png|gif)$/i,

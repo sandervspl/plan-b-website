@@ -1,10 +1,10 @@
 import * as i from 'types';
-import { ActionType, createStandardAction, getType } from 'typesafe-actions';
+import { ActionType, action, getType } from 'typesafe-actions';
 
 export const actions = {
-  load: createStandardAction('character/LOAD')(),
-  failed: createStandardAction('character/FAILED')(),
-  success: createStandardAction('character/SUCCESS')<i.CharacterData>(),
+  load: () => action('character/LOAD'),
+  failed: () => action('character/FAILED'),
+  success: (character: i.CharacterData) => action('character/SUCCESS', character),
 };
 
 const initialState: i.CharacterState = {
@@ -15,20 +15,20 @@ const initialState: i.CharacterState = {
 
 export default (state = initialState, action: ActionType<typeof actions>): i.CharacterState => {
   switch (action.type) {
-    case getType(actions.load):
+    case 'character/LOAD':
       return {
         ...state,
         error: false,
         loading: true,
       };
-    case getType(actions.failed):
+    case 'character/FAILED':
       return {
         ...state,
         data: undefined,
         loading: false,
         error: true,
       };
-    case getType(actions.success):
+    case 'character/SUCCESS':
       return {
         ...state,
         data: action.payload,

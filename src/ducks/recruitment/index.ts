@@ -1,12 +1,12 @@
 import * as i from 'types';
-import { ActionType, createStandardAction, getType } from 'typesafe-actions';
+import { ActionType, action, getType } from 'typesafe-actions';
 import { API_ENDPOINT } from 'services';
 
 export const actions = {
-  load: createStandardAction('recruitment/LOAD')(),
-  failed: createStandardAction('recruitment/FAILED')(),
-  success: createStandardAction('recruitment/SUCCESS')<i.RecruitmentData>(),
-  classSuccess: createStandardAction('recruitment/CLASS_SUCCESS')<i.ClassData>(),
+  load: () => action('recruitment/LOAD'),
+  failed: () => action('recruitment/FAILED'),
+  success: (data: i.RecruitmentData) => action('recruitment/SUCCESS', data),
+  classSuccess: (data: i.ClassData) => action('recruitment/CLASS_SUCCESS', data),
 };
 
 const initialState: i.RecruitmentState = {
@@ -17,19 +17,19 @@ const initialState: i.RecruitmentState = {
 
 export default (state = initialState, action: ActionType<typeof actions>): i.RecruitmentState => {
   switch (action.type) {
-    case getType(actions.load):
+    case 'recruitment/LOAD':
       return {
         ...state,
         error: false,
         loading: true,
       };
-    case getType(actions.failed):
+    case 'recruitment/FAILED':
       return {
         ...state,
         loading: false,
         error: true,
       };
-    case getType(actions.success): {
+    case 'recruitment/SUCCESS': {
       const { classes } = action.payload;
 
       if (!classes) {
@@ -51,7 +51,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Rec
         loading: false,
       };
     }
-    case getType(actions.classSuccess): {
+    case 'recruitment/CLASS_SUCCESS': {
       if (!state.data || !state.data.classes) return state;
 
       // Look for class object we want to replace

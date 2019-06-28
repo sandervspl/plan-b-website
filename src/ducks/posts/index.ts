@@ -1,12 +1,12 @@
 import * as i from 'types';
-import { ActionType, createStandardAction, getType } from 'typesafe-actions';
+import { ActionType, action } from 'typesafe-actions';
 import { API_ENDPOINT } from 'services';
 
 export const actions = {
-  load: createStandardAction('posts/LOAD')(),
-  failed: createStandardAction('posts/FAILED')(),
-  singleSuccess: createStandardAction('posts/SINGLE_SUCCESS')<i.Post>(),
-  listuccess: createStandardAction('posts/LIST_SUCCESS')<i.Post[]>(),
+  load: () => action('posts/LOAD'),
+  failed: () => action('posts/FAILED'),
+  singleSuccess: (post: i.Post) => action('posts/SINGLE_SUCCESS', post),
+  listuccess: (posts: i.Post[]) => action('posts/LIST_SUCCESS', posts),
 };
 
 const initialState: i.PostsState = {
@@ -17,26 +17,26 @@ const initialState: i.PostsState = {
 
 export default (state = initialState, action: ActionType<typeof actions>): i.PostsState => {
   switch (action.type) {
-    case getType(actions.load):
+    case 'posts/LOAD':
       return {
         ...state,
         error: false,
         loading: true,
       };
-    case getType(actions.failed):
+    case 'posts/FAILED':
       return {
         ...state,
         loading: false,
         error: true,
       };
-    case getType(actions.singleSuccess):
+    case 'posts/SINGLE_SUCCESS':
       return {
         ...state,
         single: action.payload,
         error: false,
         loading: false,
       };
-    case getType(actions.listuccess):
+    case 'posts/LIST_SUCCESS':
       return {
         ...state,
         data: action.payload,
@@ -52,13 +52,13 @@ export const fetchPosts = (ids: number[]): i.ThunkAction => async (dispatch, get
   dispatch(actions.load());
 
   const fetches = ids.map((id) => (
-    api.methods.get({
+    api.methods.get<i.Post>({
       url: api.url.cms,
       path: `${API_ENDPOINT.POSTS}/${id}`,
     })
   ));
 
-  return Promise.all<i.Post>(fetches)
+  return Promise.all(fetches)
     .then((res) => {
       dispatch(actions.listuccess(res));
     })

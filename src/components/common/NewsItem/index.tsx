@@ -2,7 +2,7 @@ import * as i from 'types';
 import React from 'react';
 import TimeIcon from 'vectors/time.svg';
 import ArrowRightIcon from 'vectors/arrow-right.svg';
-import { getSourceUrl, getDate } from 'services';
+import { getCmsUrl, getDate } from 'services';
 import { Heading, Link } from 'common';
 import { Paragraph } from 'common/typography';
 import {
@@ -19,7 +19,7 @@ export const NewsItem: React.FC<Props> = ({ post, columns }) => {
         </PostDate>
 
         <PostImage>
-          {post.image && <img src={getSourceUrl(post.image.url)} alt="" />}
+          <img src={getCmsUrl(post.image.url)} alt="" />
         </PostImage>
 
         <PostContent>

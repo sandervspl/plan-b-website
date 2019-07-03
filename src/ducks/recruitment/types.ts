@@ -3,8 +3,7 @@ import * as i from 'types';
 export type RecruitmentState = i.BaseState<i.RecruitmentData>;
 
 export type RecruitmentData = i.BaseResponseBody & {
-  active: boolean;
-  title?: string;
+  title: string;
   classes?: (BaseClassData | ClassData)[];
   disclaimer?: string;
 };

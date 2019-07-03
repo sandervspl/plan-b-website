@@ -5,15 +5,15 @@ export type PostsState = i.BaseState<i.Post[]> & {
 };
 
 export type BasePost = i.BaseResponseBody & {
-  title?: string;
+  title: string;
   homepage?: number; // Home page ID
-  content?: string;
-  abstract?: string;
+  content: string;
+  abstract: string;
   published: boolean;
 }
 
 export type Post = i.BasePost & {
-  image?: {
+  image: {
     id: number;
     name: string;
     hash: string;

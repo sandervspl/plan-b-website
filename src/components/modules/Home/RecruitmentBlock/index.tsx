@@ -9,7 +9,6 @@ const RecruitmentBlock: React.FC = () => {
   const recruitment = useSelector((state) => state.recruitment);
 
   if (!recruitment.data) return null;
-  if (!recruitment.data.active) return null;
 
   return (
     <RecruitmentBlockContainer>

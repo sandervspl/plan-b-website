@@ -1,5 +1,5 @@
 import * as i from 'types';
-import { ActionType, action, getType } from 'typesafe-actions';
+import { ActionType, action } from 'typesafe-actions';
 
 export const actions = {
   load: () => action('character/LOAD'),

@@ -1,5 +1,5 @@
 import * as i from 'types';
-import { ActionType, action, getType } from 'typesafe-actions';
+import { ActionType, action } from 'typesafe-actions';
 import { API_ENDPOINT } from 'services';
 
 export const actions = {
@@ -40,9 +40,6 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Rec
           loading: false,
         };
       }
-
-      const newClasses = classes.filter((cls) => cls.active);
-      action.payload.classes = newClasses;
 
       return {
         ...state,

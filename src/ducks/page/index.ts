@@ -1,5 +1,5 @@
 import * as i from 'types';
-import { ActionType, action, getType } from 'typesafe-actions';
+import { ActionType, action } from 'typesafe-actions';
 import { API_ENDPOINT } from 'services';
 
 export const actions = {
@@ -31,9 +31,13 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Pag
         }
       }
 
+      const pageKey = Object.keys(action.payload)[0];
+      const meta = (action.payload[pageKey] as i.BasePageData).meta;
+
       return {
         ...state,
         ...action.payload,
+        meta,
         error: false,
         loading: false,
       };

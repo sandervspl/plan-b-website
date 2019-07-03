@@ -8,16 +8,18 @@ import Page from 'modules/Page';
 import { LatestNews, RecruitmentBlock, OtherNews, Twitch } from 'modules/Home';
 import { HomeContainer } from 'modules/Home/styled';
 
-const Home: i.NextPageComponent = () => (
-  <Page>
-    <HomeContainer>
-      <LatestNews />
-      <RecruitmentBlock />
-      <Twitch />
-      <OtherNews />
-    </HomeContainer>
-  </Page>
-);
+const Home: i.NextPageComponent = () => {
+  return (
+    <Page>
+      <HomeContainer>
+        <LatestNews />
+        <RecruitmentBlock />
+        <Twitch />
+        <OtherNews />
+      </HomeContainer>
+    </Page>
+  );
+};
 
 Home.getInitialProps = async ({ store }) => {
   await Promise.all([
@@ -34,6 +36,7 @@ Home.getInitialProps = async ({ store }) => {
   }
 
   // Get detailed class data
+  // @TODO can be removed -- latest Strapi version gives detailed data in homepages fetch
   const recruitment = store.getState().recruitment.data;
 
   if (recruitment && recruitment.classes) {

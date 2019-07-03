@@ -2,22 +2,26 @@ import * as i from 'types';
 import { API_ENDPOINT } from 'services';
 
 // Duck state
-export type PageState = Omit<i.BaseState, 'data'> & i.ApiDataPayloads;
+export type PageState = Omit<i.BaseState, 'data'> & i.ApiDataPayloads & {
+  meta?: i.PageMeta;
+};
 
-
-// Page bodies
-export type HomePageData = i.BaseResponseBody & {
-  posts: i.BasePost[];
-  meta: i.PageMeta;
+export type BasePageData = i.BaseResponseBody & {
+  meta?: i.PageMeta;
 }
 
-export type AboutPageData = i.BaseResponseBody & {
+// Page bodies
+export type HomePageData = BasePageData & {
+  posts: i.BasePost[];
+}
+
+export type AboutPageData = BasePageData & {
   title?: string;
   content?: string;
   hero_image?: i.Image;
 }
 
-export type ApplicationPageData = i.BaseResponseBody & {
+export type ApplicationPageData = BasePageData & {
   intro_title: string;
   intro_text: string;
   intro_image?: i.Image;

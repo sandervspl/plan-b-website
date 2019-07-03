@@ -6,7 +6,7 @@ const config = {
   domain: () => {
     switch (process.env.APP_ENV || 'development') {
       case 'test':
-        return 'http://dev.planbguild.eu';
+        return 'https://dev.planbguild.eu';
       case 'acceptation':
         return 'https://acc.planbguild.eu';
       case 'production':

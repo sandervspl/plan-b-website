@@ -3,10 +3,10 @@ import React from 'react';
 import ReactMarkdown, { ReactMarkdownProps } from 'react-markdown';
 import { API_ENDPOINT, getCmsUrl } from 'services';
 import { fetchPage } from 'ducks/page';
-import Page from 'modules/Page';
-import { AboutContainer } from 'modules/About/styled';
 import { useSelector } from 'hooks';
 import { Heading } from 'common';
+import Page from 'modules/Page';
+import { AboutContainer } from 'modules/About/styled';
 
 type TransformImageUri = ReactMarkdownProps['transformImageUri'];
 

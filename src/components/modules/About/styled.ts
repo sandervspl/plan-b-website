@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import { media } from 'styles';
 
 export const AboutContainer = styled.div`
-  margin-top: 55px;
+  margin-top: 20px;
   background: ${(props) => props.theme.color.background};
   border: 1px solid ${(props) => props.theme.color.border.primary};
 
   ${media.tablet`
-    margin-top: 25px;
+    margin-top: 0;
   `}
 
   h1, h2, h3, h4, h5, h6, p {

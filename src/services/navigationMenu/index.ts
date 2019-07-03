@@ -9,7 +9,6 @@ const navigationMenu: readonly NavigationItem[] = [
   {
     label: 'About us',
     page: routeNames.about,
-    disabled: !__DEV__,
   },
   {
     label: 'Photo gallery',

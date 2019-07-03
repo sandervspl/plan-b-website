@@ -32,7 +32,7 @@ const Navigation: React.FC = () => {
         <LogoNameIcon />
 
         <NavList>
-          {navigationMenu.items.map((item, i) => (
+          {navigationMenu.map((item, i) => (
             <NavItem key={i}>
               {item.external
                 ? <Link external to={item.page} disabled={item.disabled}>{item.label}</Link>

@@ -20,7 +20,7 @@ const apiConfig = {
           return 'https://api.planbguild.eu';
         default:
           // return 'http://api.planbguild.eu';
-          return 'https://localhost:8080';
+          return 'http://localhost:8080';
       };
     })(),
   },

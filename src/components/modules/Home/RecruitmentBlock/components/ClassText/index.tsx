@@ -1,12 +1,12 @@
 import * as i from 'types';
 import React from 'react';
-import { getSourceUrl } from 'services';
+import { getCmsUrl } from 'services';
 import { ClassTextContainer, ClassIcon } from './style';
 
 const ClassText: React.FC<Props> = ({ plrClass, as }) => {
   return (
     <ClassTextContainer as={as} data-shadow-text={plrClass.name} color={plrClass.color}>
-      {plrClass.icon && <ClassIcon src={getSourceUrl(plrClass.icon.url)} />}
+      <ClassIcon src={getCmsUrl(plrClass.icon.url)} />
       <span>{plrClass.name}</span>
     </ClassTextContainer>
   );

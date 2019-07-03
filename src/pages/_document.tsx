@@ -19,7 +19,7 @@ class MyDocument extends Document<Props> {
       const { req, store } = ctx as unknown as i.NextAppContext;
 
       const url = req
-        ? `${req.protocol}://${req.get('host')}${req.originalUrl}}`
+        ? `${req.protocol}://${req.get('host')}${req.originalUrl}`
         : window
           ? window.location.href
           : '';

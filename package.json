@@ -40,6 +40,7 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "reselect": "4.0.0",
+    "serve-favicon": "2.5.0",
     "slick-carousel": "1.8.1",
     "styled-components": "5.0.0-beta.2",
     "typesafe-actions": "4.0.0"
@@ -61,6 +62,7 @@
     "@types/redux": "^3.6.0",
     "@types/redux-thunk": "^2.1.0",
     "@types/reselect": "2.2.0",
+    "@types/serve-favicon": "2.2.30",
     "@types/styled-components": "4.1.15",
     "@typescript-eslint/eslint-plugin": "1.6.0",
     "@typescript-eslint/parser": "1.6.0",

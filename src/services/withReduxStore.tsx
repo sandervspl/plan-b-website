@@ -4,7 +4,9 @@ import initializeStore from 'store';
 import { NextAppContext, AppComponentProps as IAppComponentProps } from 'next/app';
 import { Store } from 'redux';
 import _ from 'lodash/fp';
+import MobileDetect from 'mobile-detect';
 import { actions as uiActions } from 'ducks/ui';
+import { fetchUser } from 'ducks/user';
 import { isServer } from './isServer';
 
 type AppComponentProps = IAppComponentProps & {
@@ -43,6 +45,21 @@ export const withReduxStore = (App: any) => (
       let appProps = {};
       if (typeof App.getInitialProps === 'function') {
         appProps = await App.getInitialProps.call(App, appContext);
+      }
+
+      // Check if request is from mobile phone
+      const md = appContext.ctx.req
+        ? new MobileDetect(appContext.ctx.req.headers['user-agent'] || '')
+        : new MobileDetect(navigator.userAgent);
+
+      reduxStore.dispatch(uiActions.setIsMobile(!!md.mobile()));
+
+      // Fetch user data on initial request
+      if (appContext.ctx.req) {
+        // @ts-ignore
+        await reduxStore.dispatch(fetchUser(
+          appContext.ctx.req.headers.cookie!
+        ));
       }
 
       return {

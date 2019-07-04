@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import _ from 'lodash';
 
 enum FORM_VALIDATE_ERR {
   REQUIRED = 'This field is required.',
@@ -11,9 +11,10 @@ class Validate {
     return 'This field is required.';
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, (any is fine in this case)
   public applyFormValidate = (values: any): boolean => {
-    /* eslint-disable */
-    let errors: any = {};
+    /* eslint-disable @typescript-eslint/camelcase, @typescript-eslint/no-explicit-any */
+    const errors: any = {};
 
     if (!values.armory_link) {
       errors.armory_link = FORM_VALIDATE_ERR.REQUIRED;

@@ -7,7 +7,6 @@ declare const __TEST__: boolean;
 // extend window object
 interface Window {
   __REDUX_DEVTOOLS_EXTENSION__: Function;
-  onYouTubeIframeAPIReady: Function;
 }
 
 // files
@@ -17,6 +16,10 @@ declare module '*.png' {
   export = value;
 }
 declare module '*.jpg' {
+  const value: string;
+  export = value;
+}
+declare module '*.svg?external' {
   const value: string;
   export = value;
 }

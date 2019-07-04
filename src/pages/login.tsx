@@ -1,30 +1,18 @@
 import * as i from 'types';
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { fetchUser } from 'ducks/user';
-import Page from 'modules/Page';
 import { api, API_ENDPOINT } from 'services';
-import { useRouter } from 'services/hooks';
-import { Paragraph } from 'common';
+import { useRouter, useSelector } from 'hooks';
+import { Paragraph, GlitchLogo, Link } from 'common';
+import Page from 'modules/Page';
+import { LoginContainer, Heading, Button, DiscordLogo } from 'modules/Login/styled';
 
-const Login: i.NextPageComponent<Props> = (props) => {
+const Login: i.NextPageComponent = () => {
   const router = useRouter();
-  const isLoggingIn = !!(router.query && router.query.auth);
+  const user = useSelector((state) => state.user.data);
 
   useEffect(() => {
-    if (!isLoggingIn) return;
-
-    // Get user data
-    props.fetchUser()
-      .then((user: i.UserData) => {
-        // Save credentials so we know user is logged in
-        if (user) {
-          localStorage.setItem('user_id', user.id);
-          localStorage.setItem('user_fetched_at', user.fetchedAt.toString());
-        }
-      });
-
-    /** @todo set user data in Redux */
+    // Redirect if we already have user data
+    if (user) router.push('/');
   }, []);
 
   const handleOnClick = () => {
@@ -32,19 +20,27 @@ const Login: i.NextPageComponent<Props> = (props) => {
   };
 
   return (
-    <Page>
-      {isLoggingIn ? (
-        <Paragraph>Signing in...</Paragraph>
-      ) : (
-        <button onClick={handleOnClick}>Sign in with Discord</button>
-      )}
+    <Page withoutNav>
+      <LoginContainer>
+        {!user && (
+          <>
+            <Link to="home">
+              <GlitchLogo />
+            </Link>
+            <Heading>Sign in</Heading>
+            <Paragraph>
+              Sign in to see your DKP, visit the forums, or upload that awesome screenshot you just took.
+            </Paragraph>
+            <Button onClick={handleOnClick}>
+              <DiscordLogo />
+              Sign in with Discord
+            </Button>
+            <small>* You will have to be a member of the guild before you can sign in.</small>
+          </>
+        )}
+      </LoginContainer>
     </Page>
   );
 };
 
-type Props = {
-  fetchUser: i.FetchUserDuck;
-}
-
-// @ts-ignore
-export default connect(null, { fetchUser })(Login);
+export default Login;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { media } from 'styles/utils';
+import { media } from 'styles';
 
 export const SearchContent = styled.div`
   display: flex;

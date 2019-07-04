@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import PlayfairRegularFont from 'fonts/playfair-display/PlayfairDisplay-Regular.otf';
 import styledNormalize from './normalize';
 import theme from './theme';
 
@@ -8,31 +7,30 @@ export default createGlobalStyle`
   
   ${styledNormalize};
 
-  @font-face {
-    font-family: 'playfair';
-    src: url(${PlayfairRegularFont});
-    font-weight: normal;
-  }
-
   * {
     box-sizing: border-box;
   }
 
   body, html {
     width: 100%;
-    height: 100%;
-    background-color: ${theme.color.secondary.dark};
+    background-color: ${theme.color.background};
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: ${theme.font.primary};
-    color: ${theme.color.primary};
+    color: ${theme.color.secondary};
     margin: 0;
     padding: 0;
   }
 
   a {
     text-decoration: none;
+  }
+
+  a.disabled,
+  span.disabled {
+    cursor: not-allowed;
+    opacity: .5;
   }
 
   #__next {

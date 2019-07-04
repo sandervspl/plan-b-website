@@ -1,6 +1,8 @@
 import * as i from 'types';
 
-export type UserState = i.BaseState<i.UserData>;
+export type UserState = i.BaseState<i.UserData> & {
+  isSignedIn: boolean;
+};
 
 export type UserData = {
   username: string;
@@ -10,5 +12,5 @@ export type UserData = {
   authLevel: number;
 }
 
-export type FetchUser<T = Promise<void>> = () => T;
-export type FetchUserDuck = FetchUser<i.ThunkAction<Promise<void | i.UserData>>>;
+export type FetchUser<T = Promise<i.UserData>> = (ctxCookie: string) => T;
+export type FetchUserDuck = FetchUser<i.ThunkAction<Promise<i.UserData>>>;

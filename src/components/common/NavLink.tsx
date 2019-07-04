@@ -15,9 +15,7 @@ class NavLink extends React.PureComponent<NavLinkProps> {
 
   static getDerivedStateFromProps(props: NavLinkProps) {
     const { router, to } = props;
-
-    // @ts-ignore Get route object from next-routes
-    const routerRoute = Router.routes.find((r: string) => r.name === to);
+    const routerRoute = Router.routes.find((r) => r.name === to);
 
     // Check if pathname from current route and page from routes are equal
     if (routerRoute && router!.pathname === routerRoute.page) {
@@ -56,9 +54,14 @@ class NavLink extends React.PureComponent<NavLinkProps> {
       isActive, isVisible, // eslint-disable-line
       children, to, router, ariaLabel, ...props
     } = this.props;
+    let clsName = props.className!;
 
-    if (this.state.active) {
-      const clsName = this.setActiveClassName(props.className!);
+    if (this.props.disabled) {
+      clsName = `${clsName} disabled`;
+    }
+
+    if (this.state.active || this.props.disabled) {
+      clsName = this.setActiveClassName(clsName);
 
       return (
         <span {...props} className={clsName}>
@@ -69,7 +72,9 @@ class NavLink extends React.PureComponent<NavLinkProps> {
 
     const child = React.Children.only(
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
-      <a aria-label={_.capitalize(ariaLabel)} className={props.className}>{children}</a>
+      <a aria-label={_.capitalize(ariaLabel)} className={clsName}>
+        {children}
+      </a>
     );
 
     // We route with route name, but prefetch with page name
@@ -99,11 +104,12 @@ class NavLink extends React.PureComponent<NavLinkProps> {
 };
 
 export type NavLinkProps = WithRouterProps & {
-  ariaLabel?: string;
+  to: string;
   children: React.ReactNode;
+  ariaLabel?: string;
   className?: string;
   params?: RouteParams;
-  to: string;
+  disabled?: boolean;
 }
 
 NavLink.defaultProps = {

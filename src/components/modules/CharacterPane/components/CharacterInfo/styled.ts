@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Subheader, Header } from 'common';
+import { Subheader, __OLD__Header } from 'common';
 import { media } from 'styles';
 
 export const CharacterInfoContainer = styled.div`
@@ -16,7 +16,7 @@ export const Avatar = styled.img`
   width: 75px;
   height: 75px;
   border-radius: 100%;
-  border: 1px solid ${(props) => props.theme.color.border.light};
+  border: 1px solid ${(props) => props.theme.color.secondary};
 
   ${media.tablet`
     width: 84px;
@@ -30,7 +30,7 @@ export const CharacterDetails = styled.div`
   margin-left: 20px;
   transform: translateY(-5px);
 
-  ${Header} {
+  ${__OLD__Header} {
     max-width: 300px;
     white-space: nowrap;
     text-overflow: ellipsis;

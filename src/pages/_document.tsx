@@ -1,3 +1,4 @@
+import * as i from 'types';
 import React from 'react';
 import Document, { Head, Main, NextScript, NextDocumentContext } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
@@ -30,10 +31,12 @@ class MyDocument extends Document {
   }
 
   render() {
+    const { styles } = this.props;
+
     return (
       <html lang="en">
         <Head>
-          {this.props.styles}
+          {styles}
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10" />
           <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136522405-1" />
           {Object.values(externalScripts).map((script, i) => (

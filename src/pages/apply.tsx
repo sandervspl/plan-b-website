@@ -1,13 +1,11 @@
 import * as i from 'types';
 import React, { useState, useEffect, useRef } from 'react';
-import { compose } from 'redux';
 import { connect, useDispatch } from 'react-redux';
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
-import { withRouter } from 'next/router';
-import router from 'router';
+import NextRouter from 'router';
 import { validate, redirect } from 'services';
-import { useTilt } from 'services/hooks';
+import { useTilt, useRouter } from 'hooks';
 import { sendApplication, actions as formActions } from 'ducks/form';
 import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
@@ -31,7 +29,8 @@ const questionComponents: Question[] = [
   CompleteApplication,
 ];
 
-const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
+const ApplicationPage: i.NextPageComponent<Props> = (props) => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const containerEl = useRef<HTMLDivElement>(null);
   const formEl = useRef<HTMLFormElement>(null);
@@ -51,33 +50,20 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
   }, []);
 
   useEffect(() => {
-    const paramQstnId = props.router!.query!.questionId
-      ? Number(props.router!.query!.questionId)
+    const paramQstnId = router!.query!.questionId
+      ? Number(router!.query!.questionId)
       : 1;
 
     if (questionIndex !== paramQstnId) {
       setQuestionIndex(paramQstnId);
     }
-  }, [props.router!.query!.questionId]);
+  }, [router!.query!.questionId]);
 
   useEffect(() => {
     if (containerEl.current) {
       setRef(containerEl.current);
     }
   }, [containerEl]);
-
-  // useEffect(() => {
-  //   if (questions.length > 0) {
-  //     preloadNextBgImage(questionIndex + 1);
-  //   }
-  // }, [questions, questionIndex]);
-
-  // const preloadNextBgImage = (id: number) => {
-  //   if (questions[id] && questions[id].image) {
-  //     const img = new Image();
-  //     img.src = questions[id].image!;
-  //   }
-  // };
 
   function preventSubmit(e: KeyboardEvent) {};
 
@@ -87,7 +73,7 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
 
     window.scrollTo(0, 0);
 
-    (router as i.Router).push(
+    NextRouter.push(
       'apply',
       { questionId: questionIndex + 1 },
       { shallow: true },
@@ -134,30 +120,20 @@ const ApplicationPage: i.NextPageComponent<Props> = ({ form, ...props }) => {
           </QuestionsForm>
         )}
       </Form>
-
-      {/* <Progress /> */}
     </RecruitmentContainer>
   );
 };
 
 ApplicationPage.getInitialProps = async ({ req, res }) => {
   if (req && res && /\d/.test(req.url)) {
-    redirect(res);
+    redirect(res, '/apply');
   }
 
   return {};
 };
 
-type Props = i.WithRouterProps & {
-  form: i.ReduxFormState;
+type Props = {
   sendApplication: i.SendApplication;
 }
 
-const mapStateToProps: i.MapStateToProps = (state) => ({
-  form: state.form,
-});
-
-export default compose(
-  withRouter,
-  connect(mapStateToProps, { sendApplication }),
-)(ApplicationPage);
+export default connect(null, { sendApplication })(ApplicationPage);

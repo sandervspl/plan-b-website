@@ -1,13 +1,13 @@
 import * as i from 'types';
-import { ActionType, getType, createStandardAction } from 'typesafe-actions';
+import { ActionType, action } from 'typesafe-actions';
 
 export const actions = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  update: createStandardAction('form/UPDATE')<{ form: i.Forms; data: any }>(),
-  sendStart: createStandardAction('form/SEND_START')(),
-  sendSuccess: createStandardAction('form/SEND_SUCCESS')(),
-  sendFailed: createStandardAction('form/SEND_FAILED')(),
-  reset: createStandardAction('form/RESET')(),
+  update: (payload: { form: i.Forms; data: any }) => action('form/UPDATE', payload),
+  sendStart: () => action('form/SEND_START'),
+  sendSuccess: () => action('form/SEND_SUCCESS'),
+  sendFailed: () => action('form/SEND_FAILED'),
+  reset: () => action('form/RESET'),
 };
 
 const initialState: i.ReduxFormState = {
@@ -16,14 +16,14 @@ const initialState: i.ReduxFormState = {
 
 export default (state = initialState, action: ActionType<typeof actions>): i.ReduxFormState => {
   switch (action.type) {
-    case getType(actions.reset):
+    case 'form/RESET':
       return initialState;
-    case getType(actions.update):
+    case 'form/UPDATE':
       return {
         ...state,
         [action.payload.form]: action.payload.data,
       };
-    case getType(actions.sendStart):
+    case 'form/SEND_START':
       return {
         ...state,
         sending: {
@@ -32,7 +32,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Red
           success: false,
         },
       };
-    case getType(actions.sendSuccess):
+    case 'form/SEND_SUCCESS':
       return {
         ...state,
         sending: {
@@ -41,7 +41,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Red
           failed: false,
         },
       };
-    case getType(actions.sendFailed):
+    case 'form/SEND_FAILED':
       return {
         ...state,
         sending: {

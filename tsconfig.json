@@ -20,12 +20,14 @@
       "ducks": ["src/ducks/index"],
       "ducks/*": ["src/ducks/*"],
       "fonts/*": ["src/static/fonts/*"],
+      "hooks": ["src/hooks/index"],
       "modules": ["src/components/modules/index"],
       "modules/*": ["src/components/modules/*"],
       "common": ["src/components/common/index"],
       "common/*": ["src/components/common/*"],
       "images/*": ["src/static/images/*"],
-      "router": ["server/router"],
+      "router": ["src/server/router"],
+      "server/*": ["src/server/*"],
       "styles/*": ["src/styles/*"],
       "styles": ["src/styles/index"],
       "services": ["src/services/index"],
@@ -36,9 +38,6 @@
       "vectors/*": ["src/static/vectors/*"]
     },
     "typeRoots": ["node_modules/@types"],
-    "lib": ["dom", "es2015", "es2016"],
-    "plugins": [
-      { "transform": "ts-optchain/transform" }
-    ]
+    "lib": ["dom", "es2015", "es2016"]
   }
 }

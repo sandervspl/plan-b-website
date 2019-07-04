@@ -1,2 +1,2 @@
-export * from './hotjar';
+// export * from './hotjar';
 export * from './ga';

@@ -2,7 +2,7 @@ import * as i from 'types';
 import React from 'react';
 import { Field } from 'react-final-form';
 import { getUploadsUrl } from 'services';
-import { useSelector } from 'react-redux';
+import { useSelector } from 'hooks';
 import QuestionHeader from '../QuestionHeader';
 import { NextButton, QuestionContent, RecruitmentContainerInner } from '../styled';
 import { RoleList, RoleItem, BackgroundImage, RoleIcon, RoleText } from './styled';
@@ -22,7 +22,7 @@ const roles = [{
 }];
 
 const RoleQuestion: React.FC<Props> = ({ onNextClick }) => {
-  const form = useSelector((state: i.ReduxState) => state.form);
+  const form = useSelector((state) => state.form);
   const activeRole = form.application
     ? form.application.values && form.application.values.role
     : null;

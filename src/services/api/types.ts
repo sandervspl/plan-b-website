@@ -23,9 +23,10 @@ export type Options = {
   file?: any;
   error?: any;
   url: string;
+  headers?: HeadersInit_;
 }
 
-export type FetchOptions = i.Omit<Options, 'method'>;
+export type FetchOptions = Omit<Options, 'method'>;
 
 export type GenerateOptions = (options: Options) => RequestOptions;
 

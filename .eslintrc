@@ -93,6 +93,9 @@
     "@typescript-eslint/no-use-before-define": false,
     "@typescript-eslint/no-object-literal-type-assertion": false,
     "@typescript-eslint/no-parameter-properties": false,
-    "@typescript-eslint/no-non-null-assertion": false
+    "@typescript-eslint/no-non-null-assertion": false,
+    
+    "@typescript-eslint/camelcase": false,
+    "react/jsx-pascal-case": false
   }
 }

@@ -10,7 +10,7 @@ export const CharacterProfessionsContainer = styled.div<Props>`
     justify-content: space-between;
     align-items: flex-start;
     padding: 25px 30px 0;
-    background: ${(props) => props.theme.color.primary.dark};
+    background: ${(props) => props.theme.color.background.light};
 
     ${(props) => !props.hasProfessions && css`
       padding: 0;

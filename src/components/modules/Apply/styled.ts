@@ -1,10 +1,10 @@
 import * as i from 'types';
 import styled, { css } from 'styled-components';
 import { Field } from 'react-final-form';
-import { media } from 'styles/utils';
+import { media } from 'styles';
 import { getStaticUrl } from 'services';
-import bgImg from 'images/recruitment/bg.jpg?external';
-import { Fullscreenpage, Header, Paragraph } from 'common';
+import bgImg from 'images/bg.jpg?external';
+import { Fullscreenpage, __OLD__Header, Paragraph } from 'common';
 
 export const RecruitmentContainer = styled(Fullscreenpage)`
   margin: auto;
@@ -30,7 +30,7 @@ export const RecruitmentContainer = styled(Fullscreenpage)`
   `}
 `;
 
-export const QuestionContentHeader = styled(Header)`
+export const QuestionContentHeader = styled(__OLD__Header)`
   margin-bottom: 10px;
   text-transform: none;
 
@@ -100,7 +100,7 @@ export const TextInputField = styled(Field)`
   outline: 0;
   font-family: ${(props) => props.theme.font.primary};
   font-size: 18px;
-  color: ${(props) => props.theme.color.tertiary};
+  color: ${(props) => props.theme.color.secondary};
   overflow: hidden;
   vertical-align: bottom;
 
@@ -114,7 +114,7 @@ export const TextInputField = styled(Field)`
   `}
 
   &::placeholder {
-    color: ${(props) => props.theme.color.primary.dark};
+    color: ${(props) => props.theme.color.secondary.dark};
   }
 `;
 
@@ -123,7 +123,7 @@ export const QuestionField = styled.div<QuestionFieldProps>`
   font-family: ${(props) => props.theme.font.primary};
   font-size: 18px;
   line-height: 1.5;
-  color: ${(props) => props.theme.color.primary};
+  color: ${(props) => props.theme.color.secondary};
   font-weight: bold;
 
   input {
@@ -158,7 +158,7 @@ export const Label = styled.label`
     margin-bottom: 10px;
     font-family: ${(props) => props.theme.font.primary};
     font-size: 16px;
-    color: ${(props) => props.theme.color.paragraph};
+    color: ${(props) => props.theme.color.secondary};
   }
 `;
 
@@ -180,7 +180,7 @@ export const ImagesContainer = styled.div.attrs<ImagesContainerProps>((props) =>
     top: 75px;
     right: 45px;
     width: 50%;
-    height: calc(100% - ${75 * 2}px);
+    height: calc(100% - 150px);
 
     ${ImageContainer} {
       img {
@@ -249,7 +249,7 @@ export const NextButton = styled.button.attrs({ type: 'button' })`
   font-weight: bold;
   text-transform: uppercase;
   font-family: ${(props) => props.theme.font.primary};
-  color: ${(props) => props.theme.color.primary};
+  color: ${(props) => props.theme.color.primary.dark};
   cursor: pointer;
   transition: color 300ms;
 
@@ -261,7 +261,7 @@ export const NextButton = styled.button.attrs({ type: 'button' })`
     margin-right: 12px;
     width: 30px;
     height: 2px;
-    background-color: ${(props) => props.theme.color.primary};
+    background-color: ${(props) => props.theme.color.primary.dark};
     transition: width 400ms,
                 padding-right 400ms 400ms,
                 margin-left 400ms,
@@ -281,10 +281,11 @@ export const NextButton = styled.button.attrs({ type: 'button' })`
 
   &:disabled {
     cursor: not-allowed;
-    color: ${(props) => props.theme.color.secondary};
+    color: ${(props) => props.theme.color.primary.dark};
+    opacity: .5;
 
     &:before {
-      background-color: ${(props) => props.theme.color.secondary};
+      background-color: ${(props) => props.theme.color.primary.dark};
     }
   }
 `;

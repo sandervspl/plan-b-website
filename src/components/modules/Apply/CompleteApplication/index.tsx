@@ -2,8 +2,8 @@ import * as i from 'types';
 import React from 'react';
 import SendIcon from 'vectors/send.svg';
 import { Paragraph, Link, Button } from 'common';
-import { useSelector } from 'react-redux';
 import { getUploadsUrl } from 'services';
+import { useSelector } from 'hooks';
 import QuestionHeader from '../QuestionHeader';
 import TiltImages from '../TiltImages';
 import { QuestionContentHeader, QuestionContent, RecruitmentContainerInner } from '../styled';
@@ -16,8 +16,8 @@ const images = [
 ];
 
 const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ tiltStyle }) => {
-  const form = useSelector((state: i.ReduxState) => state.form);
-  const character = useSelector((state: i.ReduxState) => state.character.data);
+  const form = useSelector((state) => state.form);
+  const character = useSelector((state) => state.character.data);
   const name = character ? character.name : 'unknown';
 
   return (

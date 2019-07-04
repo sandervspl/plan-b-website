@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { media } from 'styles/utils';
+import { media } from 'styles';
 import { getStaticUrl } from 'services';
 import bgImg from 'images/recruitment/char_pane_bg.jpg?external';
 import { Paragraph } from 'common';
@@ -33,7 +33,7 @@ export const CharacterPaneContainer = styled.div<CharacterPaneContainerProps>`
       width: 100%;
       height: 100%;
       opacity: .85;
-      background-color: ${(props) => props.theme.color.secondary.dark};
+      background-color: ${(props) => props.theme.color.background};
     }
   `}
 `;

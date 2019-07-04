@@ -1,70 +1,71 @@
 import styled from 'styled-components';
-import { BaseTextStyle, ParagraphStyle } from 'common/typography';
+import { media } from 'styles';
 
-export const AboutContent = styled.div`
-  max-width: 740px;
+export const AboutContainer = styled.div`
+  margin-top: 20px;
+  background: ${(props) => props.theme.color.background};
+  border: 1px solid ${(props) => props.theme.color.border.primary};
 
-  * {
-    ${BaseTextStyle};
-    margin-bottom: 30px;
+  ${media.tablet`
+    margin-top: 0;
+  `}
+
+  h1, h2, h3, h4, h5, h6, p {
+    margin: 0 21px;
+    color: ${(props) => props.theme.color.secondary};
+    font-family: ${(props) => props.theme.font.primary};
+
+    ${media.tablet`
+      margin: 0 40px;
+    `}
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+
+    ${media.tablet`
+      margin-top: 60px;
+    `}
+  }
+
+  h2 {
+    font-size: 21px;
+
+    ${media.tablet`
+      font-size: 30px;
+    `}
+  }
+
+  h3 {
+    font-size: 19px;
+
+    ${media.tablet`
+      font-size: 26px;
+    `}
   }
 
   p {
-    ${ParagraphStyle};
-    margin-bottom: 30px;
-  }
+    position: relative;
+    margin-bottom: 15px;
+    font-size: 16px;
+    line-height: 28px;
 
-  ul, ol {
-    margin-left: -25px;
-    counter-reset: li 0;
-    list-style: none;
-
-    li {
-      ${ParagraphStyle};
-      counter-increment: li 1;
-      position: relative;
-      padding-left: 25px;
+    ${media.tablet`
       margin-bottom: 25px;
-
-      &:before {
-        position: absolute;
-        left: -16px;
-        width: 12px;
-        text-align: right;
-        color: ${(props) => props.theme.color.primary};
-      }
-    }
-  }
-
-  ol li {
-    &:before {
-      content: counter(li) ".";
-    }
-  }
-
-  ul li {
-    &:before {
-      content: "•";
-      top: -5px;
-      font-size: 25px;
-    }
-  }
-
-  b, strong {
-    font-weight: 600;
-  }
-
-  a {
-    color: ${(props) => props.theme.color.primary};
-    transition: color 100ms linear;
-
-    &:hover {
-      color: ${(props) => props.theme.color.primary.medium};
-    }
+    `}
   }
 
   img {
-    width: 100%;
-    margin: 20px 0;
+    position: relative;
+    left: -21px;
+    margin: 35px 0;
+    width: 100vw;
+
+    ${media.tablet`
+      left: 0;
+      margin: 70px 0 50px;
+      width: 100%;
+    `}
   }
 `;

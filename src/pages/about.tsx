@@ -1,49 +1,49 @@
 import * as i from 'types';
-import * as React from 'react';
-import { connect } from 'react-redux';
-import ReactMarkdown from 'react-markdown';
-import Page from 'modules/Page';
-import { API_ENDPOINT, getSourceUrl } from 'services';
+import React from 'react';
+import ReactMarkdown, { ReactMarkdownProps } from 'react-markdown';
+import { API_ENDPOINT, getCmsUrl, getUrl } from 'services';
 import { fetchPage } from 'ducks/page';
-import { Header, SingleContentContainer, TransitionPost } from 'common';
-import { AboutContent } from 'modules/About/styled';
+import { useSelector } from 'hooks';
+import { Heading } from 'common';
+import Page from 'modules/Page';
+import { AboutContainer } from 'modules/About/styled';
 
-const About: i.NextPageComponent<Props> = ({ page }) => (
-  <Page
-    hero={{
-      content: page.about!.hero_image ? getSourceUrl(page.about!.hero_image!.url) : null,
-    }}
-  >
-    <TransitionPost>
-      {(visible) => (
-        <SingleContentContainer isVisible={visible}>
-          <Header>{page.about && page.about.title}</Header>
-          {page.about && page.about.content && (
-            <AboutContent>
-              <ReactMarkdown
-                className="result"
-                source={page.about.content}
-              />
-            </AboutContent>
-          )}
-        </SingleContentContainer>
-      )}
-    </TransitionPost>
-  </Page>
-);
+const About: i.NextPageComponent<Props> = ({ url }) => {
+  const about = useSelector((state) => state.page.about);
 
-About.getInitialProps = async ({ store }) => {
+  const transformImageUri: TransformImageUri = (uri) => {
+    return getCmsUrl(uri);
+  };
+
+  return (
+    <Page meta={about && about.meta} url={url}>
+      <AboutContainer>
+        {about && (
+          <>
+            <Heading as="h1">{about.title}</Heading>
+            <ReactMarkdown
+              source={about.content}
+              transformImageUri={transformImageUri}
+            />
+          </>
+        )}
+      </AboutContainer>
+    </Page>
+  );
+};
+
+About.getInitialProps = async ({ req, store }) => {
   await store.dispatch(fetchPage(API_ENDPOINT.ABOUT));
 
-  return {};
+  return {
+    url: getUrl(req),
+  };
 };
 
 type Props = {
-  page: i.PageState;
+  url: string;
 }
 
-const mapStateToProps: i.MapStateToProps = (state) => ({
-  page: state.page,
-});
+type TransformImageUri = ReactMarkdownProps['transformImageUri'];
 
-export default connect(mapStateToProps)(About);
+export default About;

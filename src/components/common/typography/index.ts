@@ -1,4 +1,7 @@
-export * from './Header';
+export * from './__OLD__Header';
+export * from './Heading';
 export * from './Subheader';
 export * from './Paragraph';
+export * from './UnderlineStyle';
+export * from './Small';
 export { BaseTextStyle } from './BaseText';

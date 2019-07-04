@@ -1,47 +1,48 @@
+import * as i from 'types';
 import React from 'react';
-import { useRouter } from 'services/hooks';
-import MobileNav from './MobileNav';
-import Content from './Content';
-import { HeroContainer } from './HeroContainer';
-import LogoLink from './LogoLink';
-import BaseHero from './BaseHero';
-import { Main, AwayFromHomeTransitionStyle, ToHomeTransitionStyle } from './styled';
+import Head from 'next/head';
+import { getCmsUrl } from 'services';
+import Navigation from './components/Navigation';
+import { PageContainer, PageContent } from './styled';
 
-const Page: React.FC<Props> = ({ children, hero, className }) => {
-  const router = useRouter();
-  const heroContent = hero && typeof hero.content === 'string'
-    ? <BaseHero src={hero.content} />
-    : hero!.content;
+const Page: React.FC<PageProps> = ({ children, withoutNav, meta, url }) => {
+  const title = meta ? meta.title : 'Plan B';
+  const description = meta ? meta.description : 'Plan B — Classic WoW Guild';
 
   return (
-    <Main className={className}>
-      {router.route !== '/home' && <AwayFromHomeTransitionStyle />}
-      {router.route === '/home' && <ToHomeTransitionStyle />}
-      <MobileNav />
-      <LogoLink />
-      <HeroContainer big={hero!.big}>
-        {heroContent}
-      </HeroContainer>
-      <Content positionLower={hero!.big!}>
+    <PageContainer>
+      <Head>
+        <title>{title}</title>
+        <meta property="og:title" content={title} />
+        <meta property="twitter:title" content={title} />
+        <meta name="description" content={description} />
+        <meta name="og:description" content={description} />
+        <meta name="twitter:description" content={description} />
+        <meta property="og:url" content={url} />
+        <meta property="twitter:url" content={url} />
+        {meta && meta.image && (
+          <>
+            <meta name="og:image" content={getCmsUrl(meta.image.url)} />
+            <meta name="twitter:image" content={getCmsUrl(meta.image.url)} />
+          </>
+        )}
+      </Head>
+      <PageContent>
+        {!withoutNav && <Navigation />}
         {children}
-      </Content>
-    </Main>
+      </PageContent>
+    </PageContainer>
   );
 };
 
-type Props = {
-  className?: string;
-  hero?: {
-    big?: boolean;
-    content?: React.ReactNode;
-  };
-}
+export type PageProps = {
+  withoutNav?: boolean;
+  meta?: i.PageMeta;
+  url: string;
+};
 
 Page.defaultProps = {
-  hero: {
-    big: false,
-    content: null,
-  },
+  withoutNav: false,
 };
 
 export default Page;

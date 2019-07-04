@@ -1,11 +1,11 @@
 import * as i from 'types';
-import { ActionType, createStandardAction, getType } from 'typesafe-actions';
+import { ActionType, action } from 'typesafe-actions';
 import { API_ENDPOINT } from 'services';
 
 export const actions = {
-  load: createStandardAction('page/LOAD')(),
-  success: createStandardAction('page/SUCCESS')<i.ApiDataPayloads>(),
-  failed: createStandardAction('page/FAILED')(),
+  load: () => action('page/LOAD'),
+  success: (pageData: i.ApiDataPayloads) => action('page/SUCCESS', pageData),
+  failed: () => action('page/FAILED'),
 };
 
 const initialState: i.PageState = {
@@ -15,13 +15,13 @@ const initialState: i.PageState = {
 
 export default (state = initialState, action: ActionType<typeof actions>): i.PageState => {
   switch (action.type) {
-    case getType(actions.load):
+    case 'page/LOAD':
       return {
         ...state,
         error: false,
         loading: true,
       };
-    case getType(actions.success): {
+    case 'page/SUCCESS': {
       if (action.payload.home) {
         const home = action.payload.home;
 
@@ -31,14 +31,18 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Pag
         }
       }
 
+      const pageKey = Object.keys(action.payload)[0];
+      const meta = (action.payload[pageKey] as i.BasePageData).meta;
+
       return {
         ...state,
         ...action.payload,
+        meta,
         error: false,
         loading: false,
       };
     }
-    case getType(actions.failed):
+    case 'page/FAILED':
       return {
         ...state,
         loading: false,

@@ -1,12 +1,12 @@
 import * as i from 'types';
 import React, { useEffect } from 'react';
-import { api, API_ENDPOINT } from 'services';
+import { api, API_ENDPOINT, getUrl } from 'services';
 import { useRouter, useSelector } from 'hooks';
 import { Paragraph, GlitchLogo, Link } from 'common';
 import Page from 'modules/Page';
 import { LoginContainer, Heading, Button, DiscordLogo } from 'modules/Login/styled';
 
-const Login: i.NextPageComponent = () => {
+const Login: i.NextPageComponent = ({ url }) => {
   const router = useRouter();
   const user = useSelector((state) => state.user.data);
 
@@ -20,7 +20,7 @@ const Login: i.NextPageComponent = () => {
   };
 
   return (
-    <Page withoutNav>
+    <Page withoutNav url={url}>
       <LoginContainer>
         {!user && (
           <>
@@ -41,6 +41,12 @@ const Login: i.NextPageComponent = () => {
       </LoginContainer>
     </Page>
   );
+};
+
+Login.getInitialProps = ({ req }) => {
+  return {
+    url: getUrl(req),
+  };
 };
 
 export default Login;

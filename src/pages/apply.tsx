@@ -4,7 +4,7 @@ import { connect, useDispatch } from 'react-redux';
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import NextRouter from 'router';
-import { validate, redirect } from 'services';
+import { validate, redirect, getUrl } from 'services';
 import { useTilt, useRouter } from 'hooks';
 import { sendApplication, actions as formActions } from 'ducks/form';
 import FormStateToRedux from 'common/form/FormStateToRedux';
@@ -124,15 +124,17 @@ const ApplicationPage: i.NextPageComponent<Props> = (props) => {
   );
 };
 
-ApplicationPage.getInitialProps = async ({ req, res }) => {
+ApplicationPage.getInitialProps = ({ req, res }) => {
   if (req && res && /\d/.test(req.url)) {
     redirect(res, '/apply');
   }
 
-  return {};
+  return {
+    url: getUrl(req),
+  };
 };
 
-type Props = {
+type Props = i.NextPageComponentProps & {
   sendApplication: i.SendApplication;
 }
 

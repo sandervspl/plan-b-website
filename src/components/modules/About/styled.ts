@@ -48,7 +48,7 @@ export const AboutContainer = styled.div`
   p {
     position: relative;
     margin-bottom: 15px;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 28px;
 
     ${media.tablet`

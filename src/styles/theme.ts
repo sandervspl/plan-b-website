@@ -3,7 +3,7 @@ const theme = {
     primary: Object.assign('#DE3D3D', {
       dark: '#A24444',
     }),
-    secondary: Object.assign('#FFFFFF', {
+    secondary: Object.assign('#EEEEEE', {
       medium: '#CFCECE',
       dark: '#B6B6B6',
     }),

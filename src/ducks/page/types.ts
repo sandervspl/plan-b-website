@@ -16,9 +16,8 @@ export type HomePageData = BasePageData & {
 }
 
 export type AboutPageData = BasePageData & {
-  title?: string;
-  content?: string;
-  hero_image?: i.Image;
+  title: string;
+  content: string;
 }
 
 export type ApplicationPageData = BasePageData & {

@@ -1,16 +1,19 @@
 import * as i from 'types';
 import React from 'react';
-import { API_ENDPOINT } from 'services';
+import { API_ENDPOINT, getUrl } from 'services';
 import { fetchPage } from 'ducks/page';
 import { fetchPosts } from 'ducks/posts';
 import { fetchRecruitment, fetchRecruitmentClass } from 'ducks/recruitment';
 import Page from 'modules/Page';
 import { LatestNews, RecruitmentBlock, OtherNews, Twitch } from 'modules/Home';
 import { HomeContainer } from 'modules/Home/styled';
+import { useSelector } from 'hooks';
 
-const Home: i.NextPageComponent = () => {
+const Home: i.NextPageComponent<Props> = ({ url }) => {
+  const home = useSelector((state) => state.page.home);
+
   return (
-    <Page>
+    <Page meta={home && home.meta} url={url}>
       <HomeContainer>
         <LatestNews />
         <RecruitmentBlock />
@@ -21,7 +24,7 @@ const Home: i.NextPageComponent = () => {
   );
 };
 
-Home.getInitialProps = async ({ store }) => {
+Home.getInitialProps = async ({ req, store }) => {
   await Promise.all([
     store.dispatch(fetchPage(API_ENDPOINT.HOME)),
     store.dispatch(fetchRecruitment()),
@@ -47,7 +50,13 @@ Home.getInitialProps = async ({ store }) => {
     await Promise.all(classFetches);
   }
 
-  return {};
+  return {
+    url: getUrl(req),
+  };
 };
+
+type Props = {
+  url: string;
+}
 
 export default Home;

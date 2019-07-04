@@ -5,10 +5,12 @@ import { useRouter, useSelector } from 'hooks';
 import { Paragraph, GlitchLogo, Link } from 'common';
 import Page from 'modules/Page';
 import { LoginContainer, Heading, Button, DiscordLogo } from 'modules/Login/styled';
+import { fetchPage } from 'ducks/page';
 
 const Login: i.NextPageComponent = ({ url }) => {
   const router = useRouter();
   const user = useSelector((state) => state.user.data);
+  const login = useSelector((state) => state.page.login);
 
   useEffect(() => {
     // Redirect if we already have user data
@@ -22,20 +24,20 @@ const Login: i.NextPageComponent = ({ url }) => {
   return (
     <Page withoutNav url={url}>
       <LoginContainer>
-        {!user && (
+        {!user && login && (
           <>
             <Link to="home">
               <GlitchLogo />
             </Link>
-            <Heading>Sign in</Heading>
+            <Heading>{login.title}</Heading>
             <Paragraph>
-              Sign in to see your DKP, visit the forums, or upload that awesome screenshot you just took.
+              {login.content}
             </Paragraph>
             <Button onClick={handleOnClick}>
               <DiscordLogo />
               Sign in with Discord
             </Button>
-            <small>* You will have to be a member of the guild before you can sign in.</small>
+            {login.disclaimer && <small>{login.disclaimer}</small>}
           </>
         )}
       </LoginContainer>
@@ -43,7 +45,9 @@ const Login: i.NextPageComponent = ({ url }) => {
   );
 };
 
-Login.getInitialProps = ({ req }) => {
+Login.getInitialProps = async ({ req, store }) => {
+  await store.dispatch(fetchPage(API_ENDPOINT.LOGIN));
+
   return {
     url: getUrl(req),
   };

@@ -1,15 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import QuestionMark from 'images/questionmark.jpg';
 
 export function useImageLoader(path: string) {
-  const [image, setImage] = useState(QuestionMark);
+  const defaultImg = useRef(QuestionMark);
+  const [image, setImage] = useState();
 
   useEffect(() => {
+    if (image) return;
+
     const img = new Image();
     img.src = path;
-    img.onload = () => setImage(img.src);
+    img.onload = () => setImage(path);
     img.onerror = () => setImage(QuestionMark);
   }, [path]);
 
-  return image;
+  return image || defaultImg.current;
 }

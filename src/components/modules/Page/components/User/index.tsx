@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
-import { useSelector, useImageLoader } from 'hooks';
+import { useSelector } from 'hooks';
 import { Avatar } from 'common';
 import UserMenu from '../UserMenu';
 import { UserInfo, UserData, DKPContainer, DKPIcon, Username, UserContainer } from './styled';
 
 const User: React.FC = () => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.data);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  if (!user.data) return null;
-
-  const avatar = useImageLoader(user.data.avatar);
+  if (!user) return null;
 
   const toggleMenuOpen = () => setMenuOpen((open) => !open);
 
@@ -26,9 +24,9 @@ const User: React.FC = () => {
               <DKPIcon />
               <strong>0</strong> DKP
             </DKPContainer>
-            <Username>{user.data.username}</Username>
+            <Username>{user.username}</Username>
           </UserData>
-          <Avatar src={avatar} />
+          <Avatar src={user.avatar} />
         </UserInfo>
 
         <UserMenu open={menuOpen} />

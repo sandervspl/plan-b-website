@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import bgImg from 'images/bg.jpg?external';
-import { getStaticUrl } from 'services';
+import bgImg from 'images/bg.jpg';
 import { media } from 'styles';
 
 export const PageContainer = styled.div`
@@ -17,7 +16,7 @@ export const PageContainer = styled.div`
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url(${getStaticUrl(bgImg)});
+      background-image: url(${bgImg});
       background-position: center center;
       background-size: cover;
       opacity: .1;

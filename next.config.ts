@@ -21,7 +21,7 @@ const config = (phase: string): NextConfig => {
 
     cfg = {
       ...cfg,
-      webpack: (config: Configuration): Configuration => {
+      webpack: (config: Configuration, { isServer }): Configuration => {
         const appEnv = process.env.APP_ENV || 'development';
 
         /*
@@ -47,33 +47,20 @@ const config = (phase: string): NextConfig => {
             ],
           },
           {
-            test: /\.(jpe?g|png|gif)$/i,
-            oneOf: [
-              {
-                resource: /external/,
-                loader: 'file-loader',
-                options: { name: 'static/[name].[ext]' },
-              },
+            test: /\.(jpe?g|png|gif|ico|webp)$/,
+            exclude: cfg.exclude,
+            use: [
               {
                 loader: 'url-loader',
                 options: {
                   limit: 10000,
-                  name: 'static/[name].[ext]',
+                  fallback: 'file-loader',
+                  publicPath: '/_next/static/images/',
+                  outputPath: `${isServer ? '../' : ''}static/images/`,
+                  name: '[name].[ext]',
                 },
               },
             ],
-          },
-          {
-            exclude: [
-              /\.[tj]sx?$/,
-              /\.mjs$/,
-              /\.css$/,
-              /\.svg$/,
-              /\.(jpe?g|png|gif)$/i,
-              /\.json$/,
-            ],
-            loader: 'file-loader',
-            options: { name: 'static/[name].[ext]' },
           },
         ];
 

@@ -2,8 +2,7 @@ import * as i from 'types';
 import styled, { css } from 'styled-components';
 import { Field } from 'react-final-form';
 import { media } from 'styles';
-import { getStaticUrl } from 'services';
-import bgImg from 'images/bg.jpg?external';
+import bgImg from 'images/bg.jpg';
 import { Fullscreenpage, __OLD__Header, Paragraph } from 'common';
 
 export const RecruitmentContainer = styled(Fullscreenpage)`
@@ -18,7 +17,7 @@ export const RecruitmentContainer = styled(Fullscreenpage)`
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: url(${getStaticUrl(bgImg)}) center center;
+    background: url(${bgImg}) center center;
     background-size: cover;
     opacity: .065;
   }

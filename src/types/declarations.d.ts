@@ -19,18 +19,6 @@ declare module '*.jpg' {
   const value: string;
   export = value;
 }
-declare module '*.svg?external' {
-  const value: string;
-  export = value;
-}
-declare module '*.png?external' {
-  const value: string;
-  export = value;
-}
-declare module '*.jpg?external' {
-  const value: string;
-  export = value;
-}
 declare module '*.otf' {
   const value: string;
   export = value;

@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { media } from 'styles';
-import { getStaticUrl } from 'services';
-import bgImg from 'images/recruitment/char_pane_bg.jpg?external';
+import bgImg from 'images/recruitment/char_pane_bg.jpg';
 import { Paragraph } from 'common';
 import LoaderSvg from './components/loader.svg';
 
@@ -21,7 +20,7 @@ export const CharacterPaneContainer = styled.div<CharacterPaneContainerProps>`
     right: 120px;
     width: 38%;
     height: calc(100% + 70px);
-    background: url(${getStaticUrl(bgImg)}) center center;
+    background: url(${bgImg}) center center;
     background-size: cover;
     box-shadow: 5px 6px 15px rgba(0, 0, 0, .3);
 

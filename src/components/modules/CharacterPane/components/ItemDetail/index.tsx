@@ -1,6 +1,6 @@
 import * as i from 'types';
 import React from 'react';
-import QuestionMark from 'images/questionmark.jpg?external';
+import QuestionMark from 'images/questionmark.jpg';
 import { useImageLoader } from 'hooks';
 import { ItemDetailContainer, ItemIcon } from './styled';
 

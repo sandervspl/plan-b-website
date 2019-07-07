@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import QuestionMark from 'images/questionmark.jpg?external';
+import QuestionMark from 'images/questionmark.jpg';
 
 export function useImageLoader(path: string) {
   const [image, setImage] = useState();

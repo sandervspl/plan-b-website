@@ -3,7 +3,7 @@ import bgImg from 'images/bg.jpg';
 import { media } from 'styles';
 
 export const PageContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100%;
   min-height: 100vh;
   background-color: ${(props) => props.theme.color.background};

@@ -1,13 +1,11 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "sourceMap": false,
     "noEmit": false,
+    "skipLibCheck": true,
     "module": "commonjs",
-    "outDir": "dist",
-    "target": "es2017",
-    "lib": [
-      "es2017"
-    ]
+    "outDir": "serverDist"
   },
-  "include": ["src/server/index.ts"]
+  "include": ["src/types/declarations.d.ts", "src/server/index.ts"]
 }

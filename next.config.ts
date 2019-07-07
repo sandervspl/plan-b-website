@@ -4,14 +4,9 @@ import { NextConfig } from 'next';
 import { Configuration, Rule } from 'webpack';
 
 const config = (phase: string): NextConfig => {
-  const dirPaths: Partial<NextConfig> = {
+  let cfg: NextConfig = {
     distDir: '../dist',
-    publicRuntimeConfig: {
-      staticFolder: '/static',
-    },
   };
-
-  let cfg: NextConfig = dirPaths;
 
   /*
     BUILD CONFIG

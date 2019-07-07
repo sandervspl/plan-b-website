@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm run build:nextconfig && ts-node src/server/index.ts",
-    "build": "npm run build:nextconfig && npm run clean && next build src && npm run build:server && npm run clean:nextconfig",
-    "build:server": "tsc --project tsconfig.server.json",
+    "build": "npm run build:nextconfig && npm run clean && next build src && npm run build:server",
+    "build:server": "rimraf dist/src/ && rimraf serverDist/ && tsc --project tsconfig.server.json && npm run server:move && rimraf rimraf serverDist/",
     "build:nextconfig": "npm run clean:nextconfig && tsc --project tsconfig.nextconfig.json",
-    "start": "NODE_ENV=production node dist/src/server/index.js",
+    "server:move": "mkdir -p dist/src/server && mv serverDist/src/server/ dist/src/server/ && mv serverDist/config/ dist/src/",
+    "start": "NODE_ENV=production node dist/src/server/server/index.js",
     "clean": "rimraf dist/",
     "clean:nextconfig": "rimraf next.config.js",
     "lint": "eslint --ext .ts --ext .tsx src/"

@@ -1,7 +1,7 @@
 {
   "apps": [{
     "name": "NAME",
-    "script": "/var/www/PROJECT/dist/src/server/index.js",
+    "script": "/var/www/PROJECT/dist/src/server/server/index.js",
     "cwd": "/var/www/PROJECT",
     "instances": INSTANCES,
     "env": {

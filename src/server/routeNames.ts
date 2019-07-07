@@ -5,5 +5,5 @@ export const routeNames = Object.freeze({
   login: 'login' as const,
   news: 'news' as const,
   newsDetail: 'news-detail' as const,
-  photos: 'photos' as const,
+  gallery: 'gallery' as const,
 });

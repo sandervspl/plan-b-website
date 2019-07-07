@@ -12,7 +12,7 @@ const navigationMenu: readonly NavigationItem[] = [
   },
   {
     label: 'Photo gallery',
-    page: routeNames.photos,
+    page: routeNames.gallery,
     disabled: !__DEV__,
   },
 ];

@@ -1,16 +1,15 @@
 import styled from 'styled-components';
 import DKPSvg from 'vectors/dkp.svg';
 
-export const Avatar = styled.img`
-  width: 32px;
-  height: 32px;
-  border-radius: 100%;
+export const UserContainer = styled.div`
+  position: relative;
 `;
 
 export const UserInfo = styled.button`
   appearance: none;
   display: flex;
   justify-content: flex-end;
+  position: relative;
   padding: 0;
   border: 0;
   background: none;

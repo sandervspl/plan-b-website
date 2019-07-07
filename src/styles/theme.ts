@@ -15,7 +15,9 @@ const theme = {
       secondary: 'darkturquoise',
     },
     border: {
-      primary: '#0C0C0C',
+      primary: Object.assign('#0C0C0C', {
+        light: '#333333',
+      }),
     },
     text: {
       disclaimer: '#7b7b7b',

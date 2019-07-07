@@ -6,6 +6,7 @@ export type UserState = i.BaseState<i.UserData> & {
 
 export type UserData = {
   username: string;
+  discordname: string;
   avatar: string;
   id: string;
   fetchedAt: Date;

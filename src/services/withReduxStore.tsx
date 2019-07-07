@@ -6,7 +6,7 @@ import { Store } from 'redux';
 import _ from 'lodash/fp';
 import MobileDetect from 'mobile-detect';
 import { actions as uiActions } from 'ducks/ui';
-import { fetchUser } from 'ducks/user';
+// import { fetchUser } from 'ducks/user';
 import { isServer } from './isServer';
 
 type AppComponentProps = IAppComponentProps & {
@@ -57,9 +57,9 @@ export const withReduxStore = (App: any) => (
       // Fetch user data on initial request
       if (appContext.ctx.req) {
         // @ts-ignore
-        await reduxStore.dispatch(fetchUser(
-          appContext.ctx.req.headers.cookie!
-        ));
+        // await reduxStore.dispatch(fetchUser(
+        //   appContext.ctx.req.headers.cookie!
+        // ));
       }
 
       return {

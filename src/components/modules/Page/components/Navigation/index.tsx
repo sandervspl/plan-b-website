@@ -18,9 +18,9 @@ const Navigation: React.FC = () => {
         <LogoNameIcon />
         {user.isSignedIn ? (
           <User />
-        ) : (
+        ) : !user.loading ? (
           <SignIn to="login">Sign in</SignIn>
-        )}
+        ) : null}
         {/* {!user.isSignedIn && (
           <Link to="apply">
             <JoinGuildBanner>Join the guild</JoinGuildBanner>

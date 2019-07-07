@@ -1,11 +1,13 @@
 import React from 'react';
-import { useSelector } from 'hooks';
+import { useSelector, useImageLoader } from 'hooks';
 import { Avatar, UserInfo, UserData, DKPContainer, DKPIcon, Username } from './styled';
 
 const User: React.FC = () => {
   const user = useSelector((state) => state.user);
 
   if (!user.data) return null;
+
+  const avatar = useImageLoader(user.data.avatar);
 
   return (
     <UserInfo>
@@ -16,7 +18,7 @@ const User: React.FC = () => {
         </DKPContainer>
         <Username>{user.data.username}</Username>
       </UserData>
-      <Avatar src={user.data.avatar} alt="" />
+      <Avatar src={avatar} alt="" />
     </UserInfo>
   );
 };

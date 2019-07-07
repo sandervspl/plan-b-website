@@ -1,13 +1,23 @@
 import * as i from 'types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
+import { useDispatch, useSelector } from 'hooks';
+import { fetchUser } from 'ducks/user';
 import { getCmsUrl } from 'services';
 import Navigation from './components/Navigation';
 import { PageContainer, PageContent } from './styled';
 
 const Page: React.FC<PageProps> = ({ children, withoutNav, meta, url }) => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
   const title = meta ? meta.title : 'Plan B';
   const description = meta ? meta.description : 'Plan B — Classic WoW Guild';
+
+  useEffect(() => {
+    if (user.loading && !user.isSignedIn) {
+      dispatch(fetchUser());
+    }
+  }, []);
 
   return (
     <PageContainer>

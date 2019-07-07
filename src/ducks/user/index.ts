@@ -10,7 +10,7 @@ export const actions = {
 
 const initialState: i.UserState = {
   error: false,
-  loading: false,
+  loading: true,
   isSignedIn: false,
 };
 
@@ -41,16 +41,13 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Use
   }
 };
 
-type FetchUser = i.ThunkAction<Promise<void | i.UserData>>;
-export const fetchUser = (ctxCookie: string): FetchUser => async (dispatch, getState, api) => {
+export const fetchUser: i.FetchUser['thunk'] = () => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
   return api.methods.get<i.UserData>({
     url: api.url.api,
     path: `${API_ENDPOINT.AUTH_USER}`,
-    headers: {
-      cookie: ctxCookie,
-    },
+    withAuth: true,
   })
     .then((user) => {
       dispatch(actions.success(user));

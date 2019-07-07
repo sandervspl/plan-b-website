@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as i from 'types';
+import apiConfig from './config';
 
 export type ErrorConfig = {
   hide?: boolean;
@@ -22,7 +23,7 @@ export type Options = {
   withAuth?: boolean;
   file?: any;
   error?: any;
-  url: string;
+  url: i.ValueOf<typeof apiConfig.url>;
   headers?: HeadersInit_;
 }
 

@@ -8,7 +8,7 @@ const apiConfig = {
         case 'acceptation':
         case 'production':
         default:
-          return 'https://cms.planbguild.eu';
+          return 'https://cms.planbguild.eu' as const;
       };
     })(),
 
@@ -17,10 +17,9 @@ const apiConfig = {
         case 'test':
         case 'acceptation':
         case 'production':
-          return 'https://api.planbguild.eu';
+          return 'https://api.planbguild.eu' as const;
         default:
-          // return 'http://api.planbguild.eu';
-          return 'http://localhost:8080';
+          return 'http://localhost:8080' as const;
       };
     })(),
   },

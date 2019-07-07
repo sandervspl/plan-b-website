@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { useDispatch, useSelector } from 'hooks';
 import { fetchUser } from 'ducks/user';
 import { getCmsUrl } from 'services';
+import { theme } from 'styles';
 import Navigation from './components/Navigation';
 import { PageContainer, PageContent } from './styled';
 
@@ -36,6 +37,13 @@ const Page: React.FC<PageProps> = ({ children, withoutNav, meta, url }) => {
             <meta name="twitter:image" content={getCmsUrl(meta.image.url)} />
           </>
         )}
+
+        <link rel="apple-touch-icon" sizes="180x180" href="static/favicon/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="static/favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="static/favicon/favicon-16x16.png" />
+        <link rel="mask-icon" href="static/favicon/safari-pinned-tab.svg" color={theme.color.primary} />
+        <meta name="msapplication-TileColor" content={theme.color.primary} />
+        <meta name="theme-color" content={theme.color.background} />
       </Head>
       <PageContent>
         {!withoutNav && <Navigation />}

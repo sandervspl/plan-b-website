@@ -19,6 +19,7 @@
       "config": ["config/index"],
       "ducks": ["src/ducks/index"],
       "ducks/*": ["src/ducks/*"],
+      "favicon/*": ["src/static/favicon/*"],
       "fonts/*": ["src/static/fonts/*"],
       "hooks": ["src/hooks/index"],
       "modules": ["src/components/modules/index"],

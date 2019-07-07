@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from 'hooks';
 import { fetchUser } from 'ducks/user';
 import { getCmsUrl } from 'services';
 import { theme } from 'styles';
+import AppleTouchIcon from 'favicon/apple-touch-icon.png';
+import Favicon32 from 'favicon/favicon-32x32.png';
+import Favicon16 from 'favicon/favicon-16x16.png';
+import SafariPinnedTab from 'favicon/safari-pinned-tab.svg';
 import Navigation from './components/Navigation';
 import { PageContainer, PageContent } from './styled';
 
@@ -38,10 +42,10 @@ const Page: React.FC<PageProps> = ({ children, withoutNav, meta, url }) => {
           </>
         )}
 
-        <link rel="apple-touch-icon" sizes="180x180" href="static/favicon/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="static/favicon/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="static/favicon/favicon-16x16.png" />
-        <link rel="mask-icon" href="static/favicon/safari-pinned-tab.svg" color={theme.color.primary} />
+        <link rel="apple-touch-icon" sizes="180x180" href={AppleTouchIcon} />
+        <link rel="icon" type="image/png" sizes="32x32" href={Favicon32} />
+        <link rel="icon" type="image/png" sizes="16x16" href={Favicon16} />
+        <link rel="mask-icon" href={SafariPinnedTab} color={theme.color.primary} />
         <meta name="msapplication-TileColor" content={theme.color.primary} />
         <meta name="theme-color" content={theme.color.background} />
       </Head>

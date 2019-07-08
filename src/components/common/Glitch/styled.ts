@@ -1,26 +1,11 @@
-import styled from 'styled-components';
-import LogoSvg from 'vectors/logo.svg';
-import { media } from 'styles';
+import styled, { css } from 'styled-components';
 import * as glitch from 'styles/glitch';
 
-export const LogoContainer = styled.div`
-  display: none;
+export const GlitchContainer = styled.div`
   position: absolute;
-  top: 17%;
-  left: calc(50% - 136.5px);
-  width: 273px;
-  height: 253px;
-
-  ${media.tablet`
-    display: initial;
-  `}
 `;
 
-export const Logo = styled(LogoSvg).attrs((props: LogoProps) => props.animtime && ({
-  style: {
-    'animationDuration': `${props.animtime}ms`,
-  },
-}))`
+export const GlitchStyle = css`
   position: absolute;
   top: -5px;
   left: -10px;
@@ -89,6 +74,14 @@ export const Logo = styled(LogoSvg).attrs((props: LogoProps) => props.animtime &
   }
 `;
 
-type LogoProps = {
+export const Glitch = (component: React.ComponentType) => styled(component).attrs((props: GlitchProps) => props.animtime && ({
+  style: {
+    'animationDuration': `${props.animtime}ms`,
+  },
+}))`
+  ${GlitchStyle};
+`;
+
+type GlitchProps = {
   animtime?: number;
 }

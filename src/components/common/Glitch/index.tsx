@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useInterval } from 'hooks';
-import { LogoContainer, Logo } from './styled';
+import { GlitchContainer } from './styled';
 
 const MIN_TIME = 2000;
 const MAX_TIME1 = 4500;
 const MAX_TIME2 = 5500;
 
-const GlitchLogo: React.FC = () => {
+const Glitch: React.FC<GlitchProps> = ({ children }) => {
   const [timeProps, setTimeProps] = useState({
     randomTime1: MIN_TIME + Math.random() * MAX_TIME1,
     randomTime2: MIN_TIME + Math.random() * MAX_TIME2,
@@ -19,16 +19,20 @@ const GlitchLogo: React.FC = () => {
     });
   }, Math.max(timeProps.randomTime1, timeProps.randomTime2));
 
-  return (
-    <LogoContainer>
-      <Logo animtime={timeProps.randomTime1} />
-      <Logo />
-      <Logo />
-      <Logo />
-      <Logo animtime={timeProps.randomTime1} />
-      <Logo animtime={timeProps.randomTime1} />
-    </LogoContainer>
+  return React.Children.only(
+    <GlitchContainer>
+      {React.cloneElement(children, { animtime: timeProps.randomTime1 })}
+      {children}
+      {children}
+      {children}
+      {React.cloneElement(children, { animtime: timeProps.randomTime1 })}
+      {React.cloneElement(children, { animtime: timeProps.randomTime1 })}
+    </GlitchContainer>
   );
 };
 
-export default GlitchLogo;
+type GlitchProps = {
+  children: React.ReactElement;
+}
+
+export default Glitch;

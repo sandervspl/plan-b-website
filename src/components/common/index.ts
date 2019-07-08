@@ -1,6 +1,6 @@
 export { default as Link } from './Link';
 export { default as NavLink } from './NavLink';
-export { default as GlitchLogo } from './GlitchLogo';
+export { default as Glitch } from './Glitch';
 export * from './SingleContentContainer';
 export * from './typography';
 export * from './FullscreenPage';
@@ -9,3 +9,5 @@ export * from './Button';
 export * from './Tag';
 export * from './NewsItem';
 export * from './Avatar';
+export * from './GlitchBullLogo';
+export * from './GlitchNameLogo';

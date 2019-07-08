@@ -9,6 +9,7 @@ const theme = {
     }),
     background: Object.assign('#181818', {
       light: '#1E1E1E',
+      content: '#1F1F1F',
     }),
     glitch: {
       primary: 'palevioletred',

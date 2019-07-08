@@ -3,7 +3,7 @@ import { media } from 'styles';
 
 export const AboutContainer = styled.div`
   margin-top: 20px;
-  background: ${(props) => props.theme.color.background};
+  background: ${(props) => props.theme.color.background.content};
   border: 1px solid ${(props) => props.theme.color.border.primary};
 
   ${media.tablet`
@@ -26,6 +26,16 @@ export const AboutContainer = styled.div`
 
     ${media.tablet`
       margin-top: 60px;
+    `}
+  }
+
+  h1:first-child {
+    line-height: 1.5;
+    border-bottom: 1px solid ${(props) => props.theme.color.border.primary.light};
+
+    ${media.tablet`
+      margin-bottom: 35px;
+      line-height: 1.2;
     `}
   }
 
@@ -59,12 +69,12 @@ export const AboutContainer = styled.div`
   img {
     position: relative;
     left: -21px;
-    margin: 35px 0;
+    margin: 25px 0 15px;
     width: 100vw;
 
     ${media.tablet`
       left: 0;
-      margin: 70px 0 50px;
+      margin: 50px 0 30px;
       width: 100%;
     `}
   }

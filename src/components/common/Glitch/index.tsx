@@ -3,30 +3,23 @@ import { useInterval } from 'hooks';
 import { GlitchContainer } from './styled';
 
 const MIN_TIME = 2000;
-const MAX_TIME1 = 4500;
-const MAX_TIME2 = 5500;
+const MAX_TIME = 4500;
 
 const Glitch: React.FC<GlitchProps> = ({ children }) => {
-  const [timeProps, setTimeProps] = useState({
-    randomTime1: MIN_TIME + Math.random() * MAX_TIME1,
-    randomTime2: MIN_TIME + Math.random() * MAX_TIME2,
-  });
+  const [time, setTime] = useState(MIN_TIME + Math.random() * MAX_TIME);
 
   useInterval(() => {
-    setTimeProps({
-      randomTime1: MIN_TIME + Math.random() * MAX_TIME1,
-      randomTime2: MIN_TIME + Math.random() * MAX_TIME2,
-    });
-  }, Math.max(timeProps.randomTime1, timeProps.randomTime2));
+    setTime(MIN_TIME + Math.random() * MAX_TIME);
+  }, time);
 
   return React.Children.only(
     <GlitchContainer>
-      {React.cloneElement(children, { animtime: timeProps.randomTime1 })}
+      {React.cloneElement(children, { animtime: time })}
       {children}
       {children}
       {children}
-      {React.cloneElement(children, { animtime: timeProps.randomTime1 })}
-      {React.cloneElement(children, { animtime: timeProps.randomTime1 })}
+      {React.cloneElement(children, { animtime: time })}
+      {React.cloneElement(children, { animtime: time })}
     </GlitchContainer>
   );
 };

@@ -4,7 +4,7 @@ import { Heading, Small } from 'common';
 
 export const TwitchContainer = styled.div`
   padding-bottom: 40px;
-  background-color: ${(props) => props.theme.color.background};
+  background-color: ${(props) => props.theme.color.background.content};
 
   > ${Heading} {
     margin-bottom: 15px;

@@ -3,7 +3,7 @@ import { media } from 'styles';
 
 export const AboutContainer = styled.div`
   margin-top: 20px;
-  background: ${(props) => props.theme.color.background.content};
+  background-color: ${(props) => props.theme.color.background.content};
   border: 1px solid ${(props) => props.theme.color.border.primary};
 
   ${media.tablet`

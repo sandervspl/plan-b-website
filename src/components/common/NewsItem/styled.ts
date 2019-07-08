@@ -52,7 +52,7 @@ export const PostContent = styled.div`
   transform: translateY(-10px);
 
   ${media.tablet`
-    bottom: 30px;
+    bottom: 0;
     left: 20px;
   `}
 `;
@@ -108,7 +108,7 @@ export const ReadMore = styled.span`
     height: 14px;
     fill: ${(props) => props.theme.color.primary};
     margin-left: 2px;
-    transform: translateY(3px);
+    transform: translateY(2px);
   }
 
   ${media.tablet`
@@ -187,6 +187,36 @@ export const NewsItemContainer = styled.article<NewsItemContainerProps>`
         }
       }
     `}
+  `}
+
+  ${media.tablet`
+      ${ReadMore} svg {
+        transition: transform .25s ease-in-out;
+      }
+
+      ${Paragraph} {
+        opacity: 0;
+        transition: opacity .25s ease-in-out;
+      }
+
+      ${Heading} {
+        transform: translate3d(0, 30px, 0);
+        transition: transform .25s ease-in-out;
+      }
+
+      &:hover {
+        ${ReadMore} svg {
+          transform: translate3d(5px, 2px, 0);
+        }
+
+        ${Paragraph} {
+          opacity: 1;
+        }
+
+        ${Heading} {
+          transform: translate3d(0, 0, 0);
+        }
+      }
   `}
 `;
 

@@ -7,7 +7,7 @@ import { lineClamp } from 'common/styles';
 export const OtherNewsContainer = styled.div`
   position: relative;
   margin-bottom: 45px;
-  background-color: ${(props) => props.theme.color.background};
+  background-color: ${(props) => props.theme.color.background.content};
 
   > ${Heading} {
     margin-bottom: 15px;
@@ -35,7 +35,13 @@ export const OtherNewsContainer = styled.div`
     }
 
     ${media.tablet`
+      margin-bottom: 20px;
+      padding: 0 20px;
       height: 230px;
+
+      a {
+        border: 1px solid ${(props) => props.theme.color.border.primary};
+      }
     `}
   }
 

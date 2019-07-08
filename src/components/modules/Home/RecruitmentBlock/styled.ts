@@ -6,7 +6,7 @@ export const RecruitmentBlockContainer = styled.div`
   position: relative;
   padding: 15px 0;
   width: 100%;
-  background-color: ${(props) => props.theme.color.background};
+  background-color: ${(props) => props.theme.color.background.content};
 
   ${media.tablet`
     grid-column: 15 / 21;
@@ -57,7 +57,7 @@ export const ApplyNow = styled(Link)`
   text-transform: uppercase;
   border-top: 1px solid ${(props) => props.theme.color.border.primary};
   border-bottom: 1px solid ${(props) => props.theme.color.border.primary};
-  background-color: ${(props) => props.theme.color.background.light};
+  background-color: ${(props) => props.theme.color.background};
 
   svg {
     margin-left: 5px;

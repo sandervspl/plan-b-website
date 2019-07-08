@@ -18,5 +18,3 @@ export type BaseClassData = i.BaseResponseBody & {
 export type ClassData = BaseClassData & {
   icon: i.Image;
 }
-
-export type PlayerClasses = 'druid' | 'hunter' | 'mage' | 'priest' | 'rogue' | 'shaman' | 'warlock' | 'warrior';

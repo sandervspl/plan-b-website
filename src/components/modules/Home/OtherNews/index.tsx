@@ -13,7 +13,7 @@ const OtherNews: React.FC = () => {
         In Other News
       </Heading>
       {posts.map((post) => (
-        <NewsItem key={post.id} post={post} columns />
+        <NewsItem key={post.id} post={post} />
       ))}
     </OtherNewsContainer>
   );

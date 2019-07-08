@@ -1,15 +1,8 @@
 import styled, { css } from 'styled-components';
-import LogoNameSvg from 'vectors/logo-name.svg';
 import { media } from 'styles';
 import { NavLink, UnderlineStyle } from 'common';
-
-export const LogoNameIcon = styled(LogoNameSvg)`
-  height: 40px;
-
-  ${media.tablet`
-    height: 85px;
-  `}
-`;
+import { GlitchContainer } from 'common/Glitch/styled';
+import { LogoNameIcon } from '../GlitchLogo/styled';
 
 export const HeaderContainer = styled.header`
   padding: 15px 25px;
@@ -26,10 +19,13 @@ export const HeaderContainer = styled.header`
 
 export const UserContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+  min-height: 35px;
 
   ${media.tablet`
+    min-height: 0;
+
     > * {
       margin-left: 20px;
     }
@@ -43,7 +39,7 @@ export const UserContainer = styled.div`
 export const NavContainer = styled.nav`
   display: flex;
   align-items: center;
-  margin-top: 15px;
+  margin-top: 25px;
 
   ${LogoNameIcon} {
     display: none;
@@ -53,8 +49,32 @@ export const NavContainer = styled.nav`
     `}
   }
 
+  ${GlitchContainer} {
+    top: 20px;
+    left: 20px;
+    height: 25px;
+    width: 80px;
+
+    ${media.tablet`
+      top: 5px;
+      left: 0;
+      height: 50px;
+      width: 120px;
+    `}
+  }
+
   ${media.tablet`
     margin-top: 0;
+    height: 90px;
+    
+    > a {
+      position: relative;
+      height: 50px;
+
+      svg {
+        height: 100%;
+      }
+    }
   `}
 `;
 
@@ -67,7 +87,8 @@ export const NavList = styled.ul`
   list-style: none;
 
   ${media.tablet`
-    margin-left: 50px;
+    margin-left: 170px;
+    width: 300px;
   `}
 `;
 

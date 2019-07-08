@@ -2,7 +2,7 @@ import * as i from 'types';
 import React, { useEffect } from 'react';
 import { api, API_ENDPOINT, getUrl } from 'services';
 import { useRouter, useSelector } from 'hooks';
-import { Paragraph, GlitchLogo, Link } from 'common';
+import { Paragraph, Link, Glitch, GlitchBullLogo } from 'common';
 import Page from 'modules/Page';
 import { LoginContainer, Heading, Button, DiscordLogo } from 'modules/Login/styled';
 import { fetchPage } from 'ducks/page';
@@ -27,7 +27,9 @@ const Login: i.NextPageComponent = ({ url }) => {
         {!user && login && (
           <>
             <Link to="home">
-              <GlitchLogo />
+              <Glitch>
+                <GlitchBullLogo />
+              </Glitch>
             </Link>
             <Heading>{login.title}</Heading>
             <Paragraph>

@@ -3,8 +3,9 @@ import dynamic from 'next/dynamic';
 import { Link, NavLink } from 'common';
 import { navigationMenu } from 'services';
 import { useSelector } from 'hooks';
+import GlitchLogo from '../GlitchLogo';
 import {
-  HeaderContainer, UserContainer, NavContainer, SignIn, NavList, NavItem, LogoNameIcon,
+  HeaderContainer, UserContainer, NavContainer, SignIn, NavList, NavItem,
 } from './styled';
 
 const User = dynamic(import('../User'));
@@ -15,21 +16,15 @@ const Navigation: React.FC = () => {
   return (
     <HeaderContainer>
       <UserContainer>
-        <LogoNameIcon />
         {user.isSignedIn ? (
           <User />
         ) : !user.loading ? (
           <SignIn to="login">Sign in</SignIn>
         ) : null}
-        {/* {!user.isSignedIn && (
-          <Link to="apply">
-            <JoinGuildBanner>Join the guild</JoinGuildBanner>
-          </Link>
-        )} */}
       </UserContainer>
 
       <NavContainer>
-        <LogoNameIcon />
+        <GlitchLogo />
 
         <NavList>
           {navigationMenu.map((item, i) => (

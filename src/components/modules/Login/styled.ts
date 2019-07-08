@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import DiscordLogoSvg from 'vectors/discord-logo.svg';
 import { Paragraph, ParagraphStyle } from 'common';
-import { LogoContainer } from 'common/GlitchLogo/styled';
 import { media } from 'styles';
+import { GlitchContainer } from 'common/Glitch/styled';
 
 export const LoginContainer = styled.div`
   position: relative;
@@ -36,7 +36,7 @@ export const LoginContainer = styled.div`
     text-align: center;
   }
 
-  ${LogoContainer} {
+  ${GlitchContainer} {
     display: block;
     position: relative;
     top: 0;

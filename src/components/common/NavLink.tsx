@@ -1,13 +1,16 @@
+import * as i from 'types';
 import React from 'react';
 import { withRouter, WithRouterProps } from 'next/router';
-import { RouteParams } from 'next-routes';
 import Router from 'router';
 import _ from 'lodash';
 
 import { getPageFromRoute } from 'services';
+import { Union } from 'ts-toolbelt';
 
 class NavLink extends React.PureComponent<NavLinkProps> {
-  static defaultProps: Partial<NavLinkProps>;
+  static defaultProps: Partial<NavLinkProps> = {
+    className: '',
+  };
 
   state = {
     active: false,
@@ -103,17 +106,25 @@ class NavLink extends React.PureComponent<NavLinkProps> {
   }
 };
 
-export type NavLinkProps = WithRouterProps & {
-  to: string;
+type BaseProps = WithRouterProps & {
   children: React.ReactNode;
   ariaLabel?: string;
   className?: string;
-  params?: RouteParams;
   disabled?: boolean;
 }
 
-NavLink.defaultProps = {
-  className: '',
-};
+type InternalLinkProps = {
+  to: Union.Exclude<i.RouteNames, 'news-detail'>;
+  params?: never;
+}
 
-export default withRouter(NavLink);
+type IdParamsLinkProps = {
+  to: 'news-detail';
+  params: {
+    id: number;
+  };
+}
+
+export type NavLinkProps = BaseProps & (InternalLinkProps | IdParamsLinkProps);
+
+export default withRouter<NavLinkProps>(NavLink);

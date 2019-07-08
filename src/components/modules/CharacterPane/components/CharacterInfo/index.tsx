@@ -5,7 +5,7 @@ import { __OLD__Header, ClassText } from 'common';
 import { Avatar, CharacterDetails, CharacterInfoContainer, Guild, ClassAndLevel } from './styled';
 
 const CharacterInfo: React.FC<CharacterInfoProps> = ({ character }) => {
-  const avatar = useImageLoader(
+  const [avatar] = useImageLoader(
     `https://render-eu.worldofwarcraft.com/character/${character.thumbnail}`
   );
 

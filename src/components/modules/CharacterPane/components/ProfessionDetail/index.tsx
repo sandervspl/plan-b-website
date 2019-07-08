@@ -7,9 +7,9 @@ import {
 } from './styled';
 
 const ProfessionDetail: React.FC<Props> = ({ profession }) => {
-  const icon = profession.icon
+  const [icon] = profession.icon
     ? useImageLoader(`https://render-eu.worldofwarcraft.com/icons/56/${profession.icon}.jpg`)
-    : QuestionMark;
+    : [QuestionMark];
 
   return (
     <ProfessionDetailsContainer>

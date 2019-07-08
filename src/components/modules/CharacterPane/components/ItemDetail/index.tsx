@@ -13,9 +13,9 @@ const ItemDetail: React.FC<Props> = ({ item, paperdoll }) => {
     );
   }
 
-  const icon = item.icon
+  const [icon] = item.icon
     ? useImageLoader(`https://render-eu.worldofwarcraft.com/icons/56/${item.icon}.jpg`)
-    : QuestionMark;
+    : [QuestionMark];
 
   return (
     <ItemDetailContainer data-tip={item.name}>

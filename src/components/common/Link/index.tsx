@@ -92,24 +92,30 @@ type BaseProps = React.AnchorHTMLAttributes<{}> & {
   disabled?: boolean;
 }
 
-type InternalLinkProps = BaseProps & {
+type InternalLinkProps = {
   external?: false;
   to: Union.Exclude<i.RouteNames, 'news-detail'>;
+  params?: never;
 }
 
-type ExternalLinkProps = BaseProps & {
+type ExternalLinkProps = {
   external: true;
   to: string;
+  params?: never;
 }
 
-type IdParamsLinkProps = BaseProps & {
+type IdParamsLinkProps = {
   to: 'news-detail';
   params: {
     id: number;
   };
 }
 
-export type LinkComponentProps = InternalLinkProps | ExternalLinkProps | IdParamsLinkProps;
+export type LinkComponentProps = BaseProps & (
+  | InternalLinkProps
+  | ExternalLinkProps
+  | IdParamsLinkProps
+);
 
 Link.defaultProps = {
   type: 'route',

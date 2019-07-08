@@ -50,6 +50,7 @@ export const NavContainer = styled.nav`
   }
 
   ${GlitchContainer} {
+    position: absolute;
     top: 20px;
     left: 20px;
     height: 25px;

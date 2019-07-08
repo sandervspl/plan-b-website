@@ -69,5 +69,15 @@ export const ApplyNow = styled(Link)`
   ${media.tablet`
     position: absolute;
     bottom: 0;
+
+    svg {
+      transition: transform .25s ease-in-out;
+    }
+
+    &:hover {
+      svg {
+        transform: translate3d(5px, -2px, 0);
+      }
+    }
   `}
 `;

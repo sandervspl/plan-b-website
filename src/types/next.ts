@@ -8,11 +8,11 @@ export type NextAppContext = INextAppContext & {
   req: Request;
 }
 
-export type NextPageComponentProps = {
+export type NextPageComponentProps<P = {}> = P & {
   url: string;
 }
 
-type NextPageComponentReturn = Partial<DefaultAppIProps> & NextPageComponentProps;
+type NextPageComponentReturn<P = {}> = Partial<DefaultAppIProps> & NextPageComponentProps<P>;
 
 export type NextPageComponent<P extends NextPageComponentProps = NextPageComponentProps> = React.FC<P> & {
   getInitialProps?(context: NextAppContext): NextPageComponentReturn | Promise<NextPageComponentReturn>;

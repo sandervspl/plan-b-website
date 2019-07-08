@@ -66,17 +66,19 @@ const generatePayload: i.GeneratePayload = (endpoint, payload) => {
   return { [key]: payload };
 };
 
-export const fetchPage: i.FetchPageAction = (endpoint) => async (dispatch, getState, api) => {
-  dispatch(actions.load());
+export function fetchPage<T extends i.PagesBody = i.PagesBody>(endpoint: API_ENDPOINT): i.ThunkAction<Promise<T | void>> {
+  return async (dispatch, getState, api) => {
+    dispatch(actions.load());
 
-  return api.methods.get<i.PagesBody>({
-    url: api.url.cms,
-    path: `${endpoint}`,
-  })
-    .then((res) => {
-      dispatch(actions.success(generatePayload(endpoint, res)));
+    return api.methods.get<i.PagesBody>({
+      url: api.url.cms,
+      path: endpoint,
     })
-    .catch(() => {
-      dispatch(actions.failed());
-    });
+      .then((res) => {
+        dispatch(actions.success(generatePayload(endpoint, res)));
+      })
+      .catch(() => {
+        dispatch(actions.failed());
+      });
+  };
 };

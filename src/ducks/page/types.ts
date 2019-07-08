@@ -47,6 +47,4 @@ export type PageMeta = i.BaseResponseBody & {
 
 
 // Methods
-export type FetchPageAction = (endpoint: API_ENDPOINT) => i.ThunkAction;
-
 export type GeneratePayload = (endpoint: API_ENDPOINT, payload: i.PagesBody) => i.ApiDataPayloads;

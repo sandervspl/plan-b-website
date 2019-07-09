@@ -1,22 +1,16 @@
 import * as i from 'types';
 import React from 'react';
-import TimeIcon from 'vectors/time.svg';
 import ArrowRightIcon from 'vectors/arrow-right.svg';
-import { getCmsUrl, getDate } from 'services';
-import { Heading, Link } from 'common';
+import { getCmsUrl } from 'services';
+import { Heading, Link, DateText } from 'common';
 import { Paragraph } from 'common/typography';
-import {
-  NewsItemContainer, PostImage, PostContent, PostDate, PostHeading, ReadMore,
-} from './styled';
+import { NewsItemContainer, PostImage, PostContent, PostHeading, ReadMore } from './styled';
 
 export const NewsItem: React.FC<Props> = ({ post, columns }) => {
   return (
     <NewsItemContainer asColumns={columns}>
       <Link to="news-detail" params={{ id: post.id }}>
-        <PostDate>
-          <TimeIcon />
-          {getDate(post.created_at)}
-        </PostDate>
+        <DateText date={post.created_at} />
 
         <PostImage>
           <img src={getCmsUrl(post.image.url)} alt="" />

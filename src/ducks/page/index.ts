@@ -25,7 +25,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Pag
       if (action.payload.home) {
         const home = action.payload.home;
 
-        // Filter only published posts
+        // @TODO move to API — Filter only published posts
         if (home.posts) {
           home.posts = home.posts.filter((post) => post.published);
         }
@@ -53,26 +53,30 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Pag
   }
 };
 
-const generatePayload: i.GeneratePayload = (endpoint, payload) => {
+const generatePayload = (endpoint: API_ENDPOINT, payload: i.PagesBody): i.ApiDataPayloads => {
   let key: i.PageKeys;
 
   switch (endpoint) {
     case API_ENDPOINT.HOME: key = 'home'; break;
     case API_ENDPOINT.ABOUT: key = 'about'; break;
     case API_ENDPOINT.LOGIN: key = 'login'; break;
+    case API_ENDPOINT.POSTS: key = 'post'; break;
     default: throw new Error(`No key found for endpoint: ${endpoint}`);
   }
 
   return { [key]: payload };
 };
 
-export function fetchPage<T extends i.PagesBody = i.PagesBody>(endpoint: API_ENDPOINT): i.ThunkAction<Promise<T | void>> {
+export function fetchPage<T extends i.PagesBody = i.PagesBody>(
+  endpoint: API_ENDPOINT,
+  param?: number
+): i.ThunkAction<Promise<T | void>> {
   return async (dispatch, getState, api) => {
     dispatch(actions.load());
 
     return api.methods.get<i.PagesBody>({
       url: api.url.cms,
-      path: endpoint,
+      path: param ? `${endpoint}/${param}` : endpoint,
     })
       .then((res) => {
         dispatch(actions.success(generatePayload(endpoint, res)));

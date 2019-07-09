@@ -13,25 +13,12 @@ export type BasePost = i.BaseResponseBody & {
 }
 
 export type Post = i.BasePost & {
-  image: {
-    id: number;
-    name: string;
-    hash: string;
-    sha256: string;
-    ext: string;
-    mime: string;
-    size: string;
-    url: string;
-    provider: string;
-    public_id?: number;
-    created_at: Date;
-    updated_at: Date;
-  };
-  tags?: i.Tag[];
+  image: i.Image;
+  // tags?: i.Tag[];
 }
 
-export type Tag = i.BaseResponseBody & {
-  name?: string;
-  color: i.HexCode;
-  posts: null;
-}
+// export type Tag = i.BaseResponseBody & {
+//   name?: string;
+//   color: i.HexCode;
+//   posts: null;
+// }

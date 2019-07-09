@@ -2,10 +2,11 @@ import * as i from 'types';
 import { NextAppContext as INextAppContext, DefaultAppIProps } from 'next/app';
 import { Response, Request } from 'express';
 
-export type NextAppContext = INextAppContext & {
+export type NextAppContext<Q = {}> = INextAppContext & {
   store: i.Store;
   res: Response;
   req: Request;
+  query: Q;
 }
 
 export type NextPageComponentProps<P = {}> = P & {
@@ -14,6 +15,9 @@ export type NextPageComponentProps<P = {}> = P & {
 
 type NextPageComponentReturn<P = {}> = Partial<DefaultAppIProps> & NextPageComponentProps<P>;
 
-export type NextPageComponent<P extends NextPageComponentProps = NextPageComponentProps> = React.FC<P> & {
-  getInitialProps?(context: NextAppContext): NextPageComponentReturn | Promise<NextPageComponentReturn>;
+export type NextPageComponent<
+  P extends NextPageComponentProps = NextPageComponentProps,
+  Q = {}
+> = React.FC<P> & {
+  getInitialProps?(context: NextAppContext<Q>): NextPageComponentReturn | Promise<NextPageComponentReturn>;
 }

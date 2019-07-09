@@ -3,6 +3,7 @@ import { media } from 'styles';
 import { Tag } from 'common';
 import { lineClamp } from 'common/styles';
 import { Paragraph, Heading } from 'common/typography';
+import { DateContainer } from 'common/DateText/styled';
 
 export const PostImage = styled.figure`
   position: relative;
@@ -63,36 +64,6 @@ export const PostText = styled.p`
   font-size: 14px;
   line-height: 17px;
   color: ${(props) => props.theme.color.secondary};
-`;
-
-export const PostDate = styled(PostText)`
-  display: flex;
-  flex-grow: 2;
-  align-items: center;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 1;
-  margin: 0;
-  font-size: 12px;
-
-  svg {
-    margin-right: 3px;
-    height: 12px;
-    fill: ${(props) => props.theme.color.secondary};
-    transform: translateY(-1px);
-  }
-
-  ${media.tablet`
-    top: 20px;
-    right: 20px;
-    font-size: 16px;
-
-    svg {
-      height: 16px;
-      margin-right: 5px;
-    }
-  `}
 `;
 
 export const ReadMore = styled.span`
@@ -181,7 +152,7 @@ export const NewsItemContainer = styled.article<NewsItemContainerProps>`
           margin: 15px 0;
         }
 
-        ${PostDate} {
+        ${DateContainer} {
           top: auto;
           bottom: 20px;
         }

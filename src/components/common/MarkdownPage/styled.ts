@@ -29,7 +29,7 @@ export const MarkdownPageContainer = styled.div`
     `}
   }
 
-  h1:first-child {
+  h1:first-of-type {
     line-height: 1.5;
     border-bottom: 1px solid ${(props) => props.theme.color.border.primary.light};
 
@@ -78,4 +78,23 @@ export const MarkdownPageContainer = styled.div`
       width: 100%;
     `}
   }
+`;
+
+export const HeadImage = styled.figure`
+  margin: 0;
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+
+  > img {
+    position: static;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  ${media.tablet`
+    height: 200px;
+  `}
 `;

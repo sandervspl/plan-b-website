@@ -1,24 +1,28 @@
 import * as i from 'types';
 import React from 'react';
-import ReactMarkdown, { ReactMarkdownProps } from 'react-markdown';
+import ReactMarkdown from 'react-markdown';
 import { getCmsUrl } from 'services';
-import { Heading } from 'common';
+import { Heading, DateText } from 'common';
 import Page from 'modules/Page';
-import { MarkdownPageContainer } from './styled';
+import { MarkdownPageContainer, HeadImage } from './styled';
 
 const MarkdownPage: i.NextPageComponent<Props> = ({ url, data }) => {
-  const transformImageUri: TransformImageUri = (uri) => {
-    return getCmsUrl(uri);
-  };
-
   return (
     <Page meta={data.meta} url={url}>
       <MarkdownPageContainer>
+        {'image' in data && (
+          <>
+            <HeadImage>
+              <img src={getCmsUrl(data.image.url)} alt={data.image.name} />
+            </HeadImage>
+            <DateText date={data.created_at} />
+          </>
+        )}
         {'title' in data && <Heading as="h1">{data.title}</Heading>}
         {'content' in data && (
           <ReactMarkdown
             source={data.content}
-            transformImageUri={transformImageUri}
+            transformImageUri={getCmsUrl}
           />
         )}
       </MarkdownPageContainer>
@@ -30,7 +34,5 @@ type Props = {
   url: string;
   data: i.PagesBody;
 }
-
-type TransformImageUri = ReactMarkdownProps['transformImageUri'];
 
 export default MarkdownPage;

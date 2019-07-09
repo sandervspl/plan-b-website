@@ -27,24 +27,23 @@ export type LoginPageData = BasePageData & {
   disclaimer?: string;
 }
 
+export type NewsDetailPageData = BasePageData & i.Post;
+
 
 // Misc types
-export type PagesBody = i.HomePageData | i.AboutPageData | i.LoginPageData;
-
-export type PageKeys = keyof i.ApiDataPayloads;
+export type PagesBody = i.HomePageData | i.AboutPageData | i.LoginPageData | NewsDetailPageData;
 
 export type ApiDataPayloads = {
   home?: i.HomePageData;
   about?: i.AboutPageData;
   login?: i.LoginPageData;
+  post?: i.NewsDetailPageData;
 }
+
+export type PageKeys = keyof i.ApiDataPayloads;
 
 export type PageMeta = i.BaseResponseBody & {
   title: string;
   description: string;
   image?: i.Image;
 }
-
-
-// Methods
-export type GeneratePayload = (endpoint: API_ENDPOINT, payload: i.PagesBody) => i.ApiDataPayloads;

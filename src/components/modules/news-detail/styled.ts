@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { media } from 'styles';
 import { Tag, Heading } from 'common';
-import { MarkdownPageContainer } from 'common/MarkdownPage/styled';
+import { MarkdownPageContainer, MarkdownContent } from 'common/MarkdownPage/styled';
 import { DateContainer } from 'common/DateText/styled';
 import { NewsItemContainer } from 'common/NewsItem/styled';
-import { RecruitmentBlockContainer, RecruitmentInner, ApplyNow } from 'modules/RecruitmentBlock/styled';
+import {
+  RecruitmentBlockContainer, RecruitmentInner, ApplyNow,
+} from 'modules/RecruitmentBlock/styled';
 import { TwitchContainer } from 'modules/Twitch/styled';
 
 export const NewsDetailContainer = styled(MarkdownPageContainer)`
@@ -14,6 +16,10 @@ export const NewsDetailContainer = styled(MarkdownPageContainer)`
   h1:first-of-type {
     margin-top: 0;
     padding-top: 20px;
+  }
+
+  ${MarkdownContent} {
+    margin-bottom: 50px;
   }
 
   ${media.tablet`

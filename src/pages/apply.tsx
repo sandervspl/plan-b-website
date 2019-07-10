@@ -100,7 +100,7 @@ const ApplicationPage: i.NextPageComponent<Props> = (props) => {
     <RecruitmentContainer {...mouseEvents} ref={containerEl}>
       <Form
         onSubmit={() => {}}
-        mutators={{ ...arrayMutators }}
+        mutators={arrayMutators}
         keepDirtyOnReinitialize
       >
         {({ values }) => (

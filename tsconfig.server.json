@@ -7,5 +7,8 @@
     "module": "commonjs",
     "outDir": "serverDist"
   },
-  "include": ["src/types/declarations.d.ts", "src/server/index.ts"]
+  "include": [
+    "src/types/declarations.d.ts",
+    "src/server/**/*.ts"
+  ]
 }

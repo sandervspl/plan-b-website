@@ -8,7 +8,7 @@ const headingSize = (as: HeadingProps['as']) => {
   switch (as) {
     case 'h1':
     default: px = 30; bigMediaPx = 65; break;
-    case 'h2': px = 18; bigMediaPx = 35; break;
+    case 'h2': px = 20; bigMediaPx = 30; break;
     case 'h3': px = 14; bigMediaPx = 25; break;
   }
 

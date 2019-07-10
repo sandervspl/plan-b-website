@@ -23,18 +23,18 @@ const NewsDetail: i.NextPageComponent<Props, Queries> = ({ url }) => {
 
   return (
     <Page meta={post.meta} url={url}>
+      <HeadImage>
+        <img src={getCmsUrl(post.image.url)} alt={post.image.name} />
+      </HeadImage>
+
+      <NewsInfo>
+        <DateText date={post.created_at} />
+
+        <Tag>pve</Tag>
+        <Tag>team</Tag>
+      </NewsInfo>
+
       <NewsDetailContainer>
-        <HeadImage>
-          <img src={getCmsUrl(post.image.url)} alt={post.image.name} />
-        </HeadImage>
-
-        <NewsInfo>
-          <DateText date={post.created_at} />
-
-          <Tag>pve</Tag>
-          <Tag>team</Tag>
-        </NewsInfo>
-
         <MarkdownContent>
           <Heading as="h1">{post.title}</Heading>
 
@@ -43,22 +43,22 @@ const NewsDetail: i.NextPageComponent<Props, Queries> = ({ url }) => {
             transformImageUri={getCmsUrl}
           />
         </MarkdownContent>
+
+        <SidebarContainer>
+          <RecruitmentBlock />
+
+          <Twitch />
+
+          {posts && posts.length > 0 && (
+            <MoreNewsContainer>
+              <Heading as="h2">More news</Heading>
+              {posts.filter((_, i) => i < 3).map((post) => (
+                <NewsItem key={post.id} post={post} />
+              ))}
+            </MoreNewsContainer>
+          )}
+        </SidebarContainer>
       </NewsDetailContainer>
-
-      <SidebarContainer>
-        <RecruitmentBlock />
-
-        <Twitch />
-
-        {posts && posts.length > 0 && (
-          <MoreNewsContainer>
-            <Heading as="h2">More news</Heading>
-            {posts.filter((_, i) => i < 3).map((post) => (
-              <NewsItem key={post.id} post={post} />
-            ))}
-          </MoreNewsContainer>
-        )}
-      </SidebarContainer>
     </Page>
   );
 };

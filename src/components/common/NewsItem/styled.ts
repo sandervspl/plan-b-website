@@ -124,6 +124,26 @@ export const NewsItemContainer = styled.article<NewsItemContainerProps>`
     `}
   }
 
+  ${DateContainer} {
+    display: flex;
+    flex-grow: 2;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+
+    svg {
+      transform: translateY(-1px);
+    }
+
+    ${media.tablet`
+      top: 20px;
+      right: 20px;
+      font-size: 16px;
+    `}
+  }
+
   ${(props) => props.asColumns && css`
     ${media.tablet`
       margin-bottom: 20px;

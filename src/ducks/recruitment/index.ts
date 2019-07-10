@@ -78,7 +78,7 @@ export const fetchRecruitment = (): i.ThunkAction => async (dispatch, getState, 
 
   return api.methods.get<i.RecruitmentData>({
     url: api.url.cms,
-    path: `${API_ENDPOINT.RECRUITMENT}`,
+    path: API_ENDPOINT.RECRUITMENT,
   })
     .then((res) => {
       dispatch(actions.success(res));

@@ -2,28 +2,23 @@ import * as i from 'types';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { getCmsUrl } from 'services';
-import { Heading, DateText } from 'common';
+import { Heading } from 'common';
 import Page from 'modules/Page';
-import { MarkdownPageContainer, HeadImage } from './styled';
+import { MarkdownPageContainer, MarkdownContent } from './styled';
 
 const MarkdownPage: i.NextPageComponent<Props> = ({ url, data }) => {
   return (
     <Page meta={data.meta} url={url}>
       <MarkdownPageContainer>
-        {'image' in data && (
-          <>
-            <HeadImage>
-              <img src={getCmsUrl(data.image.url)} alt={data.image.name} />
-            </HeadImage>
-            <DateText date={data.created_at} />
-          </>
-        )}
-        {'title' in data && <Heading as="h1">{data.title}</Heading>}
         {'content' in data && (
-          <ReactMarkdown
-            source={data.content}
-            transformImageUri={getCmsUrl}
-          />
+          <MarkdownContent>
+            {'title' in data && <Heading as="h1">{data.title}</Heading>}
+
+            <ReactMarkdown
+              source={data.content}
+              transformImageUri={getCmsUrl}
+            />
+          </MarkdownContent>
         )}
       </MarkdownPageContainer>
     </Page>

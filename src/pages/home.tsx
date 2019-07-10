@@ -1,13 +1,15 @@
 import * as i from 'types';
 import React from 'react';
 import { API_ENDPOINT, getUrl } from 'services';
+import { useSelector } from 'hooks';
 import { fetchPage } from 'ducks/page';
 import { fetchPosts } from 'ducks/posts';
-import { fetchRecruitment, fetchRecruitmentClass } from 'ducks/recruitment';
+import { fetchRecruitment } from 'ducks/recruitment';
 import Page from 'modules/Page';
-import { LatestNews, RecruitmentBlock, OtherNews, Twitch } from 'modules/Home';
+import { LatestNews, OtherNews } from 'modules/Home';
+import RecruitmentBlock from 'modules/RecruitmentBlock';
+import Twitch from 'modules/Twitch';
 import { HomeContainer } from 'modules/Home/styled';
-import { useSelector } from 'hooks';
 
 const Home: i.NextPageComponent<Props> = ({ url }) => {
   const home = useSelector((state) => state.page.home);
@@ -36,18 +38,6 @@ Home.getInitialProps = async ({ req, store }) => {
   if (home && home!.posts) {
     const postIds = home.posts.map((post) => post.id);
     await store.dispatch(fetchPosts(postIds));
-  }
-
-  // Get detailed class data
-  // @TODO can be removed -- latest Strapi version gives detailed data in homepages fetch
-  const recruitment = store.getState().recruitment.data;
-
-  if (recruitment && recruitment.classes) {
-    const classFetches = recruitment.classes.map((cls) => (
-      store.dispatch(fetchRecruitmentClass(cls.id))
-    ));
-
-    await Promise.all(classFetches);
   }
 
   return {

@@ -14,11 +14,10 @@ export type BasePost = i.BaseResponseBody & {
 
 export type Post = i.BasePost & {
   image: i.Image;
-  // tags?: i.Tag[];
+  tags?: i.Tag[];
 }
 
-// export type Tag = i.BaseResponseBody & {
-//   name?: string;
-//   color: i.HexCode;
-//   posts: null;
-// }
+export type Tag = i.BaseResponseBody & {
+  name: string;
+  posts: i.Post[];
+}

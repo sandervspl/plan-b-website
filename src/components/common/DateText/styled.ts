@@ -4,7 +4,7 @@ import { lineClamp } from 'common/styles';
 
 export const DateContainer = styled.p`
   margin: 0;
-  font-size: 12px;
+  font-size: 13px;
   font-family: ${(props) => props.theme.font.primary};
   line-height: 17px;
   color: ${(props) => props.theme.color.secondary};

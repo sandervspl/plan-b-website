@@ -5,8 +5,8 @@ import { API_ENDPOINT } from 'services';
 export const actions = {
   load: () => action('posts/LOAD'),
   failed: () => action('posts/FAILED'),
-  singleSuccess: (post: i.Post) => action('posts/SINGLE_SUCCESS', post),
-  listuccess: (posts: i.Post[]) => action('posts/LIST_SUCCESS', posts),
+  postsSuccess: (posts: i.Post[]) => action('posts/POSTS_SUCCESS', posts),
+  allSuccess: (posts: i.Post[]) => action('posts/ALL_SUCCESS', posts),
 };
 
 const initialState: i.PostsState = {
@@ -29,14 +29,8 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Pos
         loading: false,
         error: true,
       };
-    case 'posts/SINGLE_SUCCESS':
-      return {
-        ...state,
-        single: action.payload,
-        error: false,
-        loading: false,
-      };
-    case 'posts/LIST_SUCCESS':
+    case 'posts/POSTS_SUCCESS':
+    case 'posts/ALL_SUCCESS':
       return {
         ...state,
         data: action.payload,
@@ -46,6 +40,21 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Pos
     default:
       return state;
   }
+};
+
+export const fetchAllPosts = (): i.ThunkAction => async (dispatch, getState, api) => {
+  dispatch(actions.load());
+
+  return api.methods.get<i.Post[]>({
+    url: api.url.cms,
+    path: API_ENDPOINT.POSTS,
+  })
+    .then((res) => {
+      dispatch(actions.allSuccess(res));
+    })
+    .catch(() => {
+      dispatch(actions.failed());
+    });
 };
 
 export const fetchPosts = (ids: number[]): i.ThunkAction => async (dispatch, getState, api) => {
@@ -60,7 +69,7 @@ export const fetchPosts = (ids: number[]): i.ThunkAction => async (dispatch, get
 
   return Promise.all(fetches)
     .then((res) => {
-      dispatch(actions.listuccess(res));
+      dispatch(actions.postsSuccess(res));
     })
     .catch(() => {
       dispatch(actions.failed());

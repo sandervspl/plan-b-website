@@ -1,7 +1,7 @@
 import * as i from 'types';
 import React from 'react';
 import { getCmsUrl } from 'services';
-import { ClassTextContainer, ClassIcon } from './style';
+import { ClassTextContainer, ClassIcon } from './styled';
 
 const ClassText: React.FC<Props> = ({ plrClass, as }) => {
   return (

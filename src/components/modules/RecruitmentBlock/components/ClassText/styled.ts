@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-// import { darken } from 'polished';
 import { media } from 'styles';
 
 export const ClassTextContainer = styled.span<ClassTextContainerProps>`
@@ -15,15 +14,6 @@ export const ClassTextContainer = styled.span<ClassTextContainerProps>`
   span {
     z-index: 1;
   }
-
-  /* &:before {
-    content: attr(data-shadow-text);
-    position: absolute;
-    top: 2px;
-    left: 24px;
-    z-index: 0;
-    color: ${(props) => darken(.35, props.color)}
-  } */
 
   ${media.tablet`
     font-size: 40px;

@@ -33,4 +33,8 @@ export const PageContent = styled.div`
   width: 100%;
   max-width: 1005px;
   overflow-x: hidden;
+
+  ${media.tablet`
+    overflow-x: visible;
+  `}
 `;

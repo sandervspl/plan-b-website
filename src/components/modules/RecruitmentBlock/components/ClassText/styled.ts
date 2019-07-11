@@ -11,10 +11,6 @@ export const ClassTextContainer = styled.span<ClassTextContainerProps>`
   font-weight: bold;
   color: ${(props) => props.color};
 
-  span {
-    z-index: 1;
-  }
-
   ${media.tablet`
     font-size: 40px;
     align-items: center;

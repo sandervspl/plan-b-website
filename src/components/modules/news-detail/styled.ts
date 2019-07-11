@@ -93,6 +93,7 @@ export const SidebarContainer = styled.div`
 
 export const NewsInfo = styled.div`
   display: flex;
+  align-items: center;
   padding: 10px 20px;
   background-color: ${(props) => props.theme.color.background};
   border-top: 1px solid;

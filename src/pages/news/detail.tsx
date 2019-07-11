@@ -38,8 +38,9 @@ const NewsDetail: i.NextPageComponent<Props, Queries> = ({ url }) => {
       <NewsInfo>
         <DateText date={post.created_at} />
 
-        <Tag>pve</Tag>
-        <Tag>team</Tag>
+        {post.tags && post.tags.map((tag) => (
+          <Tag key={tag.id}>{tag.name}</Tag>
+        ))}
       </NewsInfo>
 
       <NewsDetailContainer>

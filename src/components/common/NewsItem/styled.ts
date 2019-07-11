@@ -188,6 +188,7 @@ export const NewsItemContainer = styled.article<NewsItemContainerProps>`
       ${Paragraph} {
         opacity: 0;
         transition: opacity .25s ease-in-out;
+        ${lineClamp(1)};
       }
 
       ${Heading} {

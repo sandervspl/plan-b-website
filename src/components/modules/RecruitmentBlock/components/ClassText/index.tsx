@@ -1,12 +1,15 @@
 import * as i from 'types';
 import React from 'react';
 import { getCmsUrl } from 'services';
+import { useImageLoader } from 'hooks';
 import { ClassTextContainer, ClassIcon } from './styled';
 
 const ClassText: React.FC<Props> = ({ plrClass, as }) => {
+  const [image] = useImageLoader(getCmsUrl(plrClass.icon.url));
+
   return (
     <ClassTextContainer as={as} data-shadow-text={plrClass.name} color={plrClass.color}>
-      <ClassIcon src={getCmsUrl(plrClass.icon.url)} />
+      <ClassIcon src={image} />
       <span>{plrClass.name}</span>
     </ClassTextContainer>
   );

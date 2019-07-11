@@ -1,6 +1,7 @@
 import * as i from 'types';
 import React, { useEffect } from 'react';
 import Head from 'next/head';
+import { Object } from 'ts-toolbelt';
 import { useDispatch, useSelector } from 'hooks';
 import { fetchUser } from 'ducks/user';
 import { getCmsUrl } from 'services';
@@ -59,7 +60,7 @@ const Page: React.FC<PageProps> = ({ children, withoutNav, meta, url }) => {
 
 export type PageProps = {
   withoutNav?: boolean;
-  meta?: i.PageMeta;
+  meta?: Object.Optional<i.PageMeta, 'id' | 'created_at' | 'updated_at'>;
   url: string;
 };
 

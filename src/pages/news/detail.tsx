@@ -22,7 +22,15 @@ const NewsDetail: i.NextPageComponent<Props, Queries> = ({ url }) => {
   if (!post) return null;
 
   return (
-    <Page meta={post.meta} url={url}>
+    <Page
+      meta={{
+        ...post.meta,
+        title: post.title,
+        description: post.abstract,
+        image: post.image,
+      }}
+      url={url}
+    >
       <HeadImage>
         <img src={getCmsUrl(post.image.url)} alt={post.image.name} />
       </HeadImage>

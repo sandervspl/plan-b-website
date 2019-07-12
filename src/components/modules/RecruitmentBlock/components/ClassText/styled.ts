@@ -24,11 +24,20 @@ type ClassTextContainerProps = {
 }
 
 export const ClassIcon = styled.img`
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+`;
+
+export const ClassIconImg = styled.figure`
+  margin: 0;
   margin-right: 10px;
   width: 16px;
   height: 16px;
   border-radius: 18px;
+  background: ${(props) => props.theme.color.background};
   box-shadow: ${(props) => props.theme.shadow.icon};
+  overflow: hidden;
 
   ${media.tablet`
     margin-right: 15px;

@@ -78,6 +78,7 @@ export const SidebarContainer = styled.div`
     text-align: center;
     background-color: ${(props) => props.theme.color.background};
     border-bottom: 1px solid;
+    border-top: 1px solid;
     border-color: ${(props) => props.theme.color.border.primary};
   }
 

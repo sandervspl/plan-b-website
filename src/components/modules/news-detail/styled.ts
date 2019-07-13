@@ -110,6 +110,7 @@ export const NewsInfo = styled.div`
   }
 
   ${media.tablet`
+    padding: 10px 40px;
     border: 1px solid ${(props) => props.theme.color.border.primary};
   `}
 `;

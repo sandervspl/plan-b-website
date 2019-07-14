@@ -39,7 +39,7 @@ const Login: i.NextPageComponent = ({ url }) => {
               <DiscordLogo />
               Sign in with Discord
             </Button>
-            {login.disclaimer && <small>{login.disclaimer}</small>}
+            {login.disclaimer && <small>* {login.disclaimer}</small>}
           </>
         )}
       </LoginContainer>

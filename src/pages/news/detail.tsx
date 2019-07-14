@@ -13,7 +13,7 @@ import RecruitmentBlock from 'modules/RecruitmentBlock';
 import Twitch from 'modules/Twitch';
 import {
   HeadImage, NewsDetailContainer, SidebarContainer, NewsInfo, MoreNewsContainer,
-} from 'modules/news-detail/styled';
+} from 'modules/NewsDetail/styled';
 
 const NewsDetail: i.NextPageComponent<Props, Queries> = ({ url }) => {
   const post = useSelector((state) => state.page.post);

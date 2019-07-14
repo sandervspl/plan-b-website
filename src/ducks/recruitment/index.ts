@@ -77,26 +77,11 @@ export const fetchRecruitment = (): i.ThunkAction => async (dispatch, getState, 
   dispatch(actions.load());
 
   return api.methods.get<i.RecruitmentData>({
-    url: api.url.cms,
+    url: api.url.api,
     path: API_ENDPOINT.RECRUITMENT,
   })
     .then((res) => {
       dispatch(actions.success(res));
-    })
-    .catch(() => {
-      dispatch(actions.failed());
-    });
-};
-
-export const fetchRecruitmentClass = (id: i.ContentId): i.ThunkAction => async (dispatch, getState, api) => {
-  dispatch(actions.load());
-
-  return api.methods.get<i.ClassData>({
-    url: api.url.cms,
-    path: `${API_ENDPOINT.CLASS}/${id}`,
-  })
-    .then((res) => {
-      dispatch(actions.classSuccess(res));
     })
     .catch(() => {
       dispatch(actions.failed());

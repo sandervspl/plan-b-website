@@ -75,7 +75,7 @@ export function fetchPage<T extends i.PagesBody = i.PagesBody>(
     dispatch(actions.load());
 
     return api.methods.get<i.PagesBody>({
-      url: api.url.cms,
+      url: api.url.api,
       path: param ? `${endpoint}/${param}` : endpoint,
     })
       .then((res) => {

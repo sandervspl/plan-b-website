@@ -1,6 +1,6 @@
 import * as i from 'types';
 import React from 'react';
-import { withRouter, WithRouterProps } from 'next/router';
+import { withRouter, SingletonRouter } from 'next/router';
 import Router from 'router';
 import _ from 'lodash';
 
@@ -21,12 +21,12 @@ class NavLink extends React.PureComponent<NavLinkProps> {
     const routerRoute = Router.routes.find((r) => r.name === to);
 
     // Check if pathname from current route and page from routes are equal
-    if (routerRoute && router!.pathname === routerRoute.page) {
+    if (routerRoute && router.pathname === routerRoute.page) {
       if (props.params) {
         // If current pathname and route page are the same, and we have params, then the params also have to be the same
         // We compare every params passed to NavLink and the queries from router to decide if this is the current route
-        if (props.params && Object.keys(props.params).length > 0) {
-          if (Object.keys(props.params).every((p) => router!.query![p] === props.params![p])) {
+        if (router.query && Object.keys(props.params).length > 0) {
+          if (Object.keys(props.params).every((p) => router.query![p] === props.params[p])) {
             return {
               active: true,
             };
@@ -86,7 +86,7 @@ class NavLink extends React.PureComponent<NavLinkProps> {
 
     if (prefetchPage) {
       prefetchProps = {
-        onMouseOver: () => router!.prefetch(prefetchPage),
+        onMouseOver: () => router.prefetch(prefetchPage),
       };
     }
 
@@ -106,7 +106,7 @@ class NavLink extends React.PureComponent<NavLinkProps> {
   }
 };
 
-type BaseProps = WithRouterProps & {
+type BaseProps = {
   children: React.ReactNode;
   ariaLabel?: string;
   className?: string;
@@ -116,6 +116,7 @@ type BaseProps = WithRouterProps & {
 type InternalLinkProps = {
   to: Union.Exclude<i.RouteNames, 'news-detail'>;
   params?: never;
+  router: SingletonRouter;
 }
 
 type IdParamsLinkProps = {
@@ -123,6 +124,9 @@ type IdParamsLinkProps = {
   params: {
     id: number;
   };
+  router: SingletonRouter<{
+    id: string;
+  }>;
 }
 
 export type NavLinkProps = BaseProps & (InternalLinkProps | IdParamsLinkProps);

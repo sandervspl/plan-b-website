@@ -46,7 +46,7 @@ export const fetchAllPosts = (): i.ThunkAction => async (dispatch, getState, api
   dispatch(actions.load());
 
   return api.methods.get<i.Post[]>({
-    url: api.url.cms,
+    url: api.url.api,
     path: API_ENDPOINT.POSTS,
   })
     .then((res) => {
@@ -62,7 +62,7 @@ export const fetchPosts = (ids: number[]): i.ThunkAction => async (dispatch, get
 
   const fetches = ids.map((id) => (
     api.methods.get<i.Post>({
-      url: api.url.cms,
+      url: api.url.api,
       path: `${API_ENDPOINT.POSTS}/${id}`,
     })
   ));

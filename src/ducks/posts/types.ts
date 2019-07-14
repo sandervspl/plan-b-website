@@ -17,7 +17,7 @@ export type Post = i.BasePost & {
   tags?: i.Tag[];
 }
 
-export type Tag = i.BaseResponseBody & {
+export type Tag = {
+  id: number;
   name: string;
-  posts: i.Post[];
 }

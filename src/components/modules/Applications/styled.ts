@@ -7,7 +7,7 @@ export const ApplicationsContainer = styled(PageContentContainer)`
 
   h2 {
     padding: 15px 20px 10px;
-    text-transform: none;
+    text-transform: capitalize;
     font-size: 18px;
 
     ${media.tablet`

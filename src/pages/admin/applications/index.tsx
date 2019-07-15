@@ -26,6 +26,18 @@ const Applications: i.NextPageComponent<Props, Query> = ({ url, status }) => {
   const applications = useSelector((state) => state.applications.data);
   const [curTab, setCurTab] = useState(status ? TAB[status] : TAB.open);
 
+  const getStatusStr = (statusId: number): i.ApplicationStatus => {
+    let status: i.ApplicationStatus = 'open';
+
+    Object.entries(TAB).forEach(([key, id]) => {
+      if (id === statusId) {
+        status = key as i.ApplicationStatus;
+      }
+    });
+
+    return status;
+  };
+
   useEffect(() => {
     if (user.isSignedIn && user.isAdmin) {
       dispatch(fetchApplications(status));
@@ -46,19 +58,11 @@ const Applications: i.NextPageComponent<Props, Query> = ({ url, status }) => {
   const onTabChange = (statusId: number) => () => {
     setCurTab(statusId);
 
-    let statusName: i.ApplicationStatus | null = null;
+    const statusName = getStatusStr(statusId);
 
-    Object.entries(TAB).forEach(([key, id]) => {
-      if (id === statusId) {
-        statusName = key as i.ApplicationStatus;
-      }
-    });
+    router.replace(`/admin/applications?status=${statusName}`, undefined, { shallow: true });
 
-
-    if (statusName) {
-      router.replace(`/admin/applications?status=${statusName}`, undefined, { shallow: true });
-      dispatch(fetchApplications(statusName));
-    }
+    dispatch(fetchApplications(statusName));
   };
 
   return (
@@ -86,7 +90,7 @@ const Applications: i.NextPageComponent<Props, Query> = ({ url, status }) => {
           </TabsContainer>
         </ApplicationsHeading>
 
-        <Heading as="h2">Open applications</Heading>
+        <Heading as="h2">{getStatusStr(curTab)} applications</Heading>
 
         <ApplicationsList>
           {applications && applications.map((application) => (

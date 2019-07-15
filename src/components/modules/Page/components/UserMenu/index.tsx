@@ -37,7 +37,7 @@ const UserMenu: React.FC<Props> = ({ open }) => {
         )}
         <li>
           <button onClick={logout}>
-            Logout
+            Sign out
           </button>
         </li>
       </OptionsContainer>

@@ -9,9 +9,9 @@ export const UserMenuContainer = styled.div<UserMenuContainerProps>`
   top: 113px;
   width: 100%;
   height: 100%;
-
   background: ${(props) => props.theme.color.background};
 	border-top: 1px solid ${(props) => props.theme.color.border.primary.light};
+  border-radius: 3px;
   color: ${(props) => props.theme.color.secondary};
   opacity: 0;
   visibility: hidden;

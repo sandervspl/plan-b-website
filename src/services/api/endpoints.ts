@@ -3,8 +3,8 @@ export enum API_ENDPOINT {
   RECRUITMENT = 'cms/recruitment',
   ABOUT = 'cms/aboutpage',
   LOGIN = 'cms/loginpage',
-  AUTH = 'discord/auth',
-  AUTH_USER = 'discord/auth/me',
+  AUTH = 'auth',
+  AUTH_USER = 'auth/me',
   POSTS = 'cms/news',
   APPLICATIONS = 'cms/applications'
 };

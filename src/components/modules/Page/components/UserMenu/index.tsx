@@ -9,7 +9,7 @@ const UserMenu: React.FC<Props> = ({ open }) => {
   const user = useSelector((state) => state.user.data!);
 
   const logout = () => {
-    window.location.href = `${apiConfig.url.api}/discord/auth/logout`;
+    window.location.href = `${apiConfig.url.api}/auth/logout`;
   };
 
   return (

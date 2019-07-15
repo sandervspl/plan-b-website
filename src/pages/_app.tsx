@@ -3,15 +3,59 @@ import React from 'react';
 import App, { Container, DefaultAppIProps, AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
+import MobileDetect from 'mobile-detect';
+import _ from 'lodash/fp';
 import { fetchUser } from 'ducks/user';
-import { withReduxStore } from 'services';
+import { actions as uiActions } from 'ducks/ui';
+import { withReduxStore, isServer } from 'services';
 import { RouterContextProvider } from 'hooks';
 import { theme, GlobalStyle } from 'styles';
 
 class MyApp extends App<Props> {
+  static getInitialProps = async ({ Component, ctx }) => {
+    let pageProps = {};
+
+    // Fire component's props first
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx);
+    }
+
+    // Check if request is from mobile phone
+    const md = ctx.req
+      ? new MobileDetect(ctx.req.headers['user-agent'] || '')
+      : new MobileDetect(navigator.userAgent);
+
+    ctx.store.dispatch(uiActions.setIsMobile(!!md.mobile()));
+
+    // Fetch user on server only
+    // if (ctx.req) {
+    //   await ctx.store.dispatch(fetchUser(
+    //     ctx.req.headers.cookie!
+    //   ));
+    // }
+
+    return { pageProps };
+  }
+
   componentDidMount() {
     this.props.reduxStore.dispatch(fetchUser());
+
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
   }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  handleResize = _.debounce(1000)(() => {
+    if (isServer) return;
+
+    this.props.reduxStore.dispatch(uiActions.setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    }));
+  });
 
   render() {
     const { Component, pageProps, reduxStore, router } = this.props;

@@ -3,10 +3,6 @@ import React from 'react';
 import initializeStore from 'store';
 import { NextAppContext, AppComponentProps as IAppComponentProps } from 'next/app';
 import { Store } from 'redux';
-import _ from 'lodash/fp';
-import MobileDetect from 'mobile-detect';
-import { actions as uiActions } from 'ducks/ui';
-// import { fetchUser } from 'ducks/user';
 import { isServer } from './isServer';
 
 type AppComponentProps = IAppComponentProps & {
@@ -47,21 +43,6 @@ export const withReduxStore = (App: any) => (
         appProps = await App.getInitialProps.call(App, appContext);
       }
 
-      // Check if request is from mobile phone
-      const md = appContext.ctx.req
-        ? new MobileDetect(appContext.ctx.req.headers['user-agent'] || '')
-        : new MobileDetect(navigator.userAgent);
-
-      reduxStore.dispatch(uiActions.setIsMobile(!!md.mobile()));
-
-      // Fetch user data on initial request
-      if (appContext.ctx.req) {
-        // @ts-ignore
-        // await reduxStore.dispatch(fetchUser(
-        //   appContext.ctx.req.headers.cookie!
-        // ));
-      }
-
       return {
         ...appProps,
         initialReduxState: reduxStore.getState(),
@@ -73,24 +54,6 @@ export const withReduxStore = (App: any) => (
 
       this.reduxStore = getOrCreateStore(props.initialReduxState);
     }
-
-    componentDidMount() {
-      window.addEventListener('resize', this.handleResize);
-      this.handleResize();
-    }
-
-    componentWillUnmount() {
-      window.removeEventListener('resize', this.handleResize);
-    }
-
-    handleResize = _.debounce(1000)(() => {
-      if (isServer) return;
-
-      this.reduxStore.dispatch(uiActions.setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      }));
-    });
 
     render() {
       return <App {...this.props} reduxStore={this.reduxStore} />;

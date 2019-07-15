@@ -13,8 +13,8 @@ export const RoleContainer = styled.div`
     margin-right: 5px;
 
     ${media.tablet`
-      width: 30px;
-      height: 30px;
+      width: 25px;
+      height: 25px;
     `}
   }
 
@@ -65,8 +65,10 @@ export const ApplicationItemContainer = styled.li`
 
       > * {
         &:first-child {
-          flex-basis: 30px;
-          margin-right: 15px;
+          flex-basis: 25px;
+          margin-right: 10px;
+          width: 25px;
+          height: 25px;
         }
 
         &:nth-child(2) {
@@ -86,7 +88,7 @@ export const ApplicationItemContainer = styled.li`
         }
 
         &:last-child {
-          flex-basis: calc(20% - 45px);
+          flex-basis: calc(20% - 35px);
           text-align: right;
         }
       }

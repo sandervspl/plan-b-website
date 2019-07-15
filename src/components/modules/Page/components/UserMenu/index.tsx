@@ -1,7 +1,8 @@
+import * as i from 'types';
 import React from 'react';
 import apiConfig from 'services/api/config';
 import { useSelector } from 'hooks';
-import { Paragraph, Avatar } from 'common';
+import { Paragraph, Avatar, Link } from 'common';
 import { UserMenuContainer, UserInfo, Line, OptionsContainer } from './styled';
 
 const UserMenu: React.FC<Props> = ({ open }) => {
@@ -17,15 +18,27 @@ const UserMenu: React.FC<Props> = ({ open }) => {
         <Avatar src={user.avatar} />
         <div>
           <Paragraph>{user.username}</Paragraph>
-          <Paragraph>{user.discordname}</Paragraph>
+          <Paragraph>@{user.discordname}</Paragraph>
         </div>
       </UserInfo>
 
       <Line />
 
       <OptionsContainer>
+        {user.authLevel === i.AUTH_LEVEL.ADMIN && (
+          <>
+            <li>
+              <Link to="applications">
+                <strong>Applications</strong>
+              </Link>
+            </li>
+            <Line />
+          </>
+        )}
         <li>
-          <button onClick={logout}>Logout</button>
+          <button onClick={logout}>
+            Logout
+          </button>
         </li>
       </OptionsContainer>
     </UserMenuContainer>

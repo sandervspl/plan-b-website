@@ -5,5 +5,6 @@ export enum API_ENDPOINT {
   LOGIN = 'cms/loginpage',
   AUTH = 'discord/auth',
   AUTH_USER = 'discord/auth/me',
-  POSTS = 'cms/news'
+  POSTS = 'cms/news',
+  APPLICATIONS = 'cms/applications'
 };

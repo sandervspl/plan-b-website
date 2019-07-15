@@ -5,3 +5,4 @@ export { default as character } from './character';
 export { default as ui } from './ui';
 export { default as user } from './user';
 export { default as posts } from './posts';
+export { default as applications } from './applications';

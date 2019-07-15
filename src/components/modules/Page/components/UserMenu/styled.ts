@@ -87,28 +87,44 @@ export const UserInfo = styled.div`
     &:first-child {
       font-weight: bold;
     }
+
+    &:nth-child(2) {
+      font-size: 15px;
+      line-height: 18px;
+      color: ${(props) => props.theme.color.secondary.dark};
+    }
   }
 `;
 
 export const Line = styled.hr`
   margin: 0;
+  margin-bottom: 10px;
   border: 1px solid ${(props) => props.theme.color.border.primary.light};
 `;
 
 export const OptionsContainer = styled.ul`
   margin: 0;
-  padding: 20px 25px;
+  padding: 0;
   list-style: none;
 
-  li, button {
+  li, button, a {
     ${ParagraphStyle};
     color: ${(props) => props.theme.color.secondary};
     font-size: 16px;
     cursor: pointer;
   }
 
+  li {
+    padding: 0 25px 10px;
+
+    strong {
+      font-weight: 700;
+    }
+  }
+
   button {
     appearance: none;
+    padding: 0;
     background: none;
     border: 0;
     outline: 0;

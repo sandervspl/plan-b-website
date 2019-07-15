@@ -3,11 +3,16 @@ import React from 'react';
 import App, { Container, DefaultAppIProps, AppProps } from 'next/app';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
+import { fetchUser } from 'ducks/user';
 import { withReduxStore } from 'services';
-import { theme, GlobalStyle } from 'styles';
 import { RouterContextProvider } from 'hooks';
+import { theme, GlobalStyle } from 'styles';
 
 class MyApp extends App<Props> {
+  componentDidMount() {
+    this.props.reduxStore.dispatch(fetchUser());
+  }
+
   render() {
     const { Component, pageProps, reduxStore, router } = this.props;
 

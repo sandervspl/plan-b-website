@@ -20,6 +20,10 @@ const theme = {
         light: '#333333',
       }),
     },
+    tab: {
+      active: '#EEEEEE',
+      inactive: '#5B5959',
+    },
     text: {
       disclaimer: '#7b7b7b',
     },

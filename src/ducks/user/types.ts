@@ -1,5 +1,10 @@
 import * as i from 'types';
 
+export enum AUTH_LEVEL {
+  'USER',
+  'ADMIN'
+}
+
 export type UserState = i.BaseState<i.UserData> & {
   isSignedIn: boolean;
 };
@@ -10,7 +15,7 @@ export type UserData = {
   avatar: string;
   id: string;
   fetchedAt: Date;
-  authLevel: number;
+  authLevel: i.AUTH_LEVEL;
 }
 
 export type FetchUser = i.BaseThunkAction<() => Promise<i.UserData | void>>;

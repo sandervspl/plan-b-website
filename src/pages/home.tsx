@@ -11,7 +11,7 @@ import RecruitmentBlock from 'modules/RecruitmentBlock';
 import Twitch from 'modules/Twitch';
 import { HomeContainer } from 'modules/Home/styled';
 
-const Home: i.NextPageComponent<Props> = ({ url }) => {
+const HomePage: i.NextPageComponent = ({ url }) => {
   const home = useSelector((state) => state.page.home);
 
   return (
@@ -26,7 +26,7 @@ const Home: i.NextPageComponent<Props> = ({ url }) => {
   );
 };
 
-Home.getInitialProps = async ({ req, store }) => {
+HomePage.getInitialProps = async ({ req, store }) => {
   await Promise.all([
     store.dispatch(fetchPage(API_ENDPOINT.HOME)),
     store.dispatch(fetchRecruitment()),
@@ -45,8 +45,4 @@ Home.getInitialProps = async ({ req, store }) => {
   };
 };
 
-type Props = {
-  url: string;
-}
-
-export default Home;
+export default HomePage;

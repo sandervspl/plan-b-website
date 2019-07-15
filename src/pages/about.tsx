@@ -5,7 +5,7 @@ import { fetchPage } from 'ducks/page';
 import MarkdownPage from 'common/MarkdownPage';
 import { useSelector } from 'hooks';
 
-const About: i.NextPageComponent<Props> = ({ url }) => {
+const AboutPage: i.NextPageComponent = ({ url }) => {
   const about = useSelector((state) => state.page.about);
 
   if (!about) return null;
@@ -13,7 +13,7 @@ const About: i.NextPageComponent<Props> = ({ url }) => {
   return <MarkdownPage url={url} data={about} />;
 };
 
-About.getInitialProps = async ({ req, store }) => {
+AboutPage.getInitialProps = async ({ req, store }) => {
   await store.dispatch(fetchPage<i.AboutPageData>(API_ENDPOINT.ABOUT));
 
   return {
@@ -21,8 +21,4 @@ About.getInitialProps = async ({ req, store }) => {
   };
 };
 
-type Props = {
-  url: string;
-}
-
-export default About;
+export default AboutPage;

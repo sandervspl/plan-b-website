@@ -19,7 +19,7 @@ const TAB: Record<i.ApplicationStatus, number> = {
   rejected: 2,
 };
 
-const Applications: i.NextPageComponent<Props, Query> = ({ url, status }) => {
+const ApplicationsPage: i.NextPageComponent<Props, Query> = ({ url, status }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -108,11 +108,11 @@ const Applications: i.NextPageComponent<Props, Query> = ({ url, status }) => {
   );
 };
 
-Applications.defaultProps = {
+ApplicationsPage.defaultProps = {
   status: 'open',
 };
 
-Applications.getInitialProps = async ({ req, query }) => {
+ApplicationsPage.getInitialProps = async ({ req, query }) => {
   return {
     url: getUrl(req),
     status: query.status,
@@ -120,7 +120,6 @@ Applications.getInitialProps = async ({ req, query }) => {
 };
 
 type Props = {
-  url: string;
   status: i.ApplicationStatus;
 }
 
@@ -128,4 +127,4 @@ type Query = {
   status?: i.ApplicationStatus;
 }
 
-export default Applications;
+export default ApplicationsPage;

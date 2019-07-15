@@ -16,8 +16,8 @@ export type NextPageComponentProps<P = {}> = P & {
 type NextPageComponentReturn<P = {}> = Partial<DefaultAppIProps> & NextPageComponentProps<P>;
 
 export type NextPageComponent<
-  P extends NextPageComponentProps = NextPageComponentProps,
+  P = {},
   Q = {}
-> = React.FC<P> & {
+> = React.FC<P & NextPageComponentProps> & {
   getInitialProps?(context: NextAppContext<Q>): NextPageComponentReturn | Promise<NextPageComponentReturn>;
 }

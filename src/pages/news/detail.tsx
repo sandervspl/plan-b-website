@@ -15,7 +15,7 @@ import {
   HeadImage, NewsDetailContainer, SidebarContainer, NewsInfo, MoreNewsContainer,
 } from 'modules/NewsDetail/styled';
 
-const NewsDetail: i.NextPageComponent<Props, Queries> = ({ url }) => {
+const NewsDetailPage: i.NextPageComponent<{}, Queries> = ({ url }) => {
   const post = useSelector((state) => state.page.post);
   const posts = useSelector((state) => state.posts.data);
 
@@ -72,7 +72,7 @@ const NewsDetail: i.NextPageComponent<Props, Queries> = ({ url }) => {
   );
 };
 
-NewsDetail.getInitialProps = async ({ req, query, store }) => {
+NewsDetailPage.getInitialProps = async ({ req, query, store }) => {
   await Promise.all([
     store.dispatch(fetchPage<i.NewsDetailPageData>(API_ENDPOINT.POSTS, query.id)),
     store.dispatch(fetchRecruitment()),
@@ -84,12 +84,8 @@ NewsDetail.getInitialProps = async ({ req, query, store }) => {
   };
 };
 
-type Props = {
-  url: string;
-}
-
 type Queries = {
   id: number;
 }
 
-export default NewsDetail;
+export default NewsDetailPage;

@@ -3,8 +3,23 @@ import 'intl/locale-data/jsonp/en-GB.js';
 
 // Format references:
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat
-export const defaultFormat = { day: 'numeric',  month: 'long', year: 'numeric' };
+const defaultFormat: Intl.DateTimeFormatOptions = {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+};
 
-export const getDate = (date: Date, format?: Intl.DateTimeFormatOptions) => (
+export const getDate = (date: Date | string, format?: Intl.DateTimeFormatOptions) => (
   new Intl.DateTimeFormat('en-GB', format || defaultFormat).format(new Date(date))
 );
+
+const dateWithTimeFormat: Intl.DateTimeFormatOptions = {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+  timeZoneName: 'short',
+};
+
+export const getDateWithTime = (date: Date | string) => getDate(date, dateWithTimeFormat);

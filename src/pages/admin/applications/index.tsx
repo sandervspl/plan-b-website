@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { getUrl, redirect } from 'services';
 import { fetchApplications } from 'ducks/applications';
 import { useSelector, useDispatch, useRouter } from 'hooks';
+import CircleIcon from 'vectors/circle.svg';
+import CheckCircleIcon from 'vectors/check-circle.svg';
+import NotInterestedIcon from 'vectors/not-interested.svg';
 import { Heading } from 'common';
 import Page from 'modules/Page';
 import ApplicationItem from 'modules/Applications/ApplicationItem';
@@ -67,12 +70,15 @@ const Applications: i.NextPageComponent<Props, Query> = ({ url, status }) => {
           <TabsContainer>
             <Tabs>
               <Tab isactive={curTab === TAB.open} onClick={onTabChange(TAB.open)}>
+                <CircleIcon />
                 Open
               </Tab>
               <Tab isactive={curTab === TAB.accepted} onClick={onTabChange(TAB.accepted)}>
+                <CheckCircleIcon />
                 Accepted
               </Tab>
               <Tab isactive={curTab === TAB.rejected} onClick={onTabChange(TAB.rejected)}>
+                <NotInterestedIcon />
                 Rejected
               </Tab>
             </Tabs>

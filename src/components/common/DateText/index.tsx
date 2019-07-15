@@ -13,5 +13,5 @@ export const DateText: React.FC<DateProps> = ({ date }) => {
 };
 
 export type DateProps = {
-  date: Date;
+  date: Date | string;
 };

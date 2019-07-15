@@ -7,7 +7,7 @@ export const CircleIconContainer = styled.figure`
   margin-right: 10px;
   width: 16px;
   height: 16px;
-  border-radius: 18px;
+  border-radius: 100%;
   background: ${(props) => props.theme.color.background};
   box-shadow: ${(props) => props.theme.shadow.icon};
   overflow: hidden;
@@ -26,4 +26,5 @@ export const CircleIconImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 100%;
 `;

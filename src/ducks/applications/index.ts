@@ -49,6 +49,7 @@ export const fetchApplications = (status: i.ApplicationStatus): i.ThunkAction =>
   return api.methods.get<i.ApplicationData[]>({
     url: api.url.api,
     path: `${API_ENDPOINT.APPLICATIONS}/${status}`,
+    withAuth: true,
   })
     .then((res) => {
       dispatch(actions.success(res));

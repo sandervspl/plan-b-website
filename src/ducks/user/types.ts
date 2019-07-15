@@ -7,6 +7,7 @@ export enum AUTH_LEVEL {
 
 export type UserState = i.BaseState<i.UserData> & {
   isSignedIn: boolean;
+  isAdmin: boolean;
 };
 
 export type UserData = {

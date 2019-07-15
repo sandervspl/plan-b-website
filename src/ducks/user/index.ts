@@ -12,6 +12,7 @@ const initialState: i.UserState = {
   error: false,
   loading: true,
   isSignedIn: false,
+  isAdmin: false,
 };
 
 export default (state = initialState, action: ActionType<typeof actions>): i.UserState => {
@@ -35,6 +36,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Use
         error: false,
         loading: false,
         isSignedIn: true,
+        isAdmin: action.payload.authLevel === i.AUTH_LEVEL.ADMIN,
       };
     default:
       return state;
@@ -48,6 +50,9 @@ export const fetchUser: i.FetchUser['thunk'] = () => async (dispatch, getState, 
     url: api.url.api,
     path: `${API_ENDPOINT.AUTH_USER}`,
     withAuth: true,
+    // headers: {
+    //   cookie,
+    // },
   })
     .then((user) => {
       dispatch(actions.success(user));

@@ -21,12 +21,17 @@ export type Class = i.BaseResponseBody & {
   icon: i.Image;
 }
 
+export type Role = i.BaseResponseBody & {
+  name: string;
+  icon: i.Image;
+}
+
 type Profession = {
   name?: string;
   level?: number;
 }
 
-export type Professions = {
+type Professions = {
   primary: Profession[];
   secondary: Profession[];
 }
@@ -36,7 +41,7 @@ type Character = {
   level: number;
   race: string;
   class: i.Class;
-  role: string;
+  role: i.Role;
   professions: i.Professions;
   server: string;
   raidExperience: i.RaidExperience;

@@ -2,8 +2,10 @@ import styled, { css } from 'styled-components';
 import { Heading, PageContentContainer } from 'common';
 
 export const ApplicationsContainer = styled(PageContentContainer)`
+  padding-bottom: 20px;
+
   h2 {
-    padding: 10px 20px 5px;
+    padding: 15px 20px 10px;
     text-transform: none;
     font-size: 18px;
   }
@@ -59,3 +61,9 @@ export const ActiveTabLine = styled.span<ActiveTabLineProps>`
 type ActiveTabLineProps = {
   activeId: number;
 }
+
+export const ApplicationsList = styled.ul`
+  margin: 0;
+  padding: 0 20px;
+  list-style: none;
+`;

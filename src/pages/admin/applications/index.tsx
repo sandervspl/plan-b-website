@@ -1,12 +1,13 @@
 import * as i from 'types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getUrl, redirect } from 'services';
 import { fetchApplications } from 'ducks/applications';
 import { useSelector, useDispatch, useRouter } from 'hooks';
 import { Heading } from 'common';
 import Page from 'modules/Page';
+import ApplicationItem from 'modules/Applications/ApplicationItem';
 import {
-  ApplicationsHeading, ApplicationsContainer, TabsContainer, Tabs, ActiveTabLine, Tab,
+  ApplicationsHeading, ApplicationsContainer, TabsContainer, Tabs, ActiveTabLine, Tab, ApplicationsList,
 } from 'modules/Applications/styled';
 
 const TAB: Record<i.ApplicationStatus, number> = {
@@ -22,12 +23,21 @@ const Applications: i.NextPageComponent<Props, Query> = ({ url, status }) => {
   const applications = useSelector((state) => state.applications.data);
   const [curTab, setCurTab] = useState(status ? TAB[status] : TAB.open);
 
+  useEffect(() => {
+    if (user.isSignedIn && user.isAdmin) {
+      dispatch(fetchApplications(status));
+    }
+  }, [user]);
+
   if (user.loading) {
-    return <div />;
+    return null;
   }
 
-  if (!user.data || user.data!.authLevel < i.AUTH_LEVEL.ADMIN) {
+  // Not logged in or not admin
+  if (!user.data || (user.isSignedIn && !user.isAdmin)) {
     redirect();
+
+    return null;
   }
 
   const onTabChange = (statusId: number) => () => {
@@ -43,8 +53,7 @@ const Applications: i.NextPageComponent<Props, Query> = ({ url, status }) => {
 
 
     if (statusName) {
-      // window.history.replaceState(null, '', window.location.href + `?status=${statusName}`);
-      router.replace(`/admin/applications?status=${statusName}`);
+      router.replace(`/admin/applications?status=${statusName}`, undefined, { shallow: true });
       dispatch(fetchApplications(statusName));
     }
   };
@@ -73,19 +82,21 @@ const Applications: i.NextPageComponent<Props, Query> = ({ url, status }) => {
 
         <Heading as="h2">Open applications</Heading>
 
-        <ul>
+        <ApplicationsList>
           {applications && applications.map((application) => (
-            <Heading key={application.id} as="h3">{application.character.name}</Heading>
+            <ApplicationItem application={application} />
           ))}
-        </ul>
+        </ApplicationsList>
       </ApplicationsContainer>
     </Page>
   );
 };
 
-Applications.getInitialProps = async ({ req, store, query }) => {
-  await store.dispatch(fetchApplications(query.status || 'open'));
+Applications.defaultProps = {
+  status: 'open',
+};
 
+Applications.getInitialProps = async ({ req, query }) => {
   return {
     url: getUrl(req),
     status: query.status,
@@ -94,7 +105,7 @@ Applications.getInitialProps = async ({ req, store, query }) => {
 
 type Props = {
   url: string;
-  status?: i.ApplicationStatus;
+  status: i.ApplicationStatus;
 }
 
 type Query = {

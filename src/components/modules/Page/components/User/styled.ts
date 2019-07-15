@@ -45,7 +45,7 @@ export const DKPIcon = styled(DKPSvg)`
 export const Username = styled.span`
   font-family: ${(props) => props.theme.font.primary};
   font-size: 13px;
-  color: #8E9496;
+  color: ${(props) => props.theme.color.secondary.darker};
   letter-spacing: 0;
   text-align: right;
 `;

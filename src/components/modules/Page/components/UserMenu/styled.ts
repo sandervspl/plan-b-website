@@ -81,8 +81,12 @@ export const UserInfo = styled.div`
   }
 
   ${Paragraph} {
+    width: 110px;
     font-size: 16px;
     line-height: 24px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
     &:first-child {
       font-weight: bold;

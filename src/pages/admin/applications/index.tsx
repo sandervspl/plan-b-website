@@ -66,7 +66,13 @@ const Applications: i.NextPageComponent<Props, Query> = ({ url, status }) => {
   };
 
   return (
-    <Page url={url}>
+    <Page
+      meta={{
+        title: 'Applications',
+        description: 'Plan B applications',
+      }}
+      url={url}
+    >
       <ApplicationsContainer>
         <ApplicationsHeading>
           <Heading as="h1">Applications</Heading>
@@ -94,7 +100,7 @@ const Applications: i.NextPageComponent<Props, Query> = ({ url, status }) => {
 
         <ApplicationsList>
           {applications && applications.map((application) => (
-            <ApplicationItem application={application} />
+            <ApplicationItem key={application.id} application={application} />
           ))}
         </ApplicationsList>
       </ApplicationsContainer>

@@ -1,6 +1,8 @@
 import * as i from 'types';
 
-export type ApplicationsState = i.BaseState<i.ApplicationData[]>;
+export type ApplicationsState = i.BaseState<i.ApplicationData[]> & {
+  detail?: i.ApplicationData;
+};
 
 export type ApplicationStatus = 'open' | 'accepted' | 'rejected';
 

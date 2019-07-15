@@ -11,7 +11,8 @@ const router = (new Routes() as i.Router)
   .add({ pattern: '/news/:id', page: 'news/detail', name: routeNames.newsDetail })
 
   // Admin
-  .add({ pattern: '/admin/applications', page: 'admin/applications', name: routeNames.applications });
+  .add({ pattern: '/admin/applications', page: 'admin/applications', name: routeNames.applications })
+  .add({ pattern: '/admin/applications/:id', page: 'admin/applications/detail', name: routeNames.applicationDetail });
 
 router.push = router.Router.pushRoute;
 

@@ -116,7 +116,7 @@ export const NewsInfo = styled.div`
 `;
 
 export const HeadImage = styled.figure`
-  margin: 0;
+  margin: 20px 0 0;
   width: 100%;
   height: 150px;
   overflow: hidden;

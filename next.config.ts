@@ -15,7 +15,7 @@ const config = (phase: string): NextConfig => {
     // Only add dev packages config for compile phases
     const webpack = require('webpack');
     const withTypescript = require('@zeit/next-typescript');
-    const withCSS = require('@zeit/next-css');
+    const withCSS = require('@zeit/next-css'); // For slick-slider
     const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
     const withFonts = require('next-fonts');
 

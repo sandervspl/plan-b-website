@@ -27,7 +27,7 @@ const ProfessionDetail: React.FC<Props> = ({ profession }) => {
 };
 
 export type Props = {
-  profession: i.Profession;
+  profession: i.ArmoryProfession;
 };
 
 export default ProfessionDetail;

@@ -117,7 +117,7 @@ export type Items = {
   offHand?: Item;
 }
 
-export type Profession = {
+export type ArmoryProfession = {
   id: number;
   name: string;
   icon?: string;
@@ -127,8 +127,8 @@ export type Profession = {
 }
 
 export type Professions = {
-  primary: Profession[];
-  secondary: Profession[];
+  primary: ArmoryProfession[];
+  secondary: ArmoryProfession[];
 }
 
 export type CharacterData = {

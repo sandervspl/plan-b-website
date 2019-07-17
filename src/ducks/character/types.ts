@@ -1,6 +1,6 @@
 import * as i from 'types';
 
-export { CharacterData, Professions, Profession, Items, Item } from './characterType';
+export { CharacterData, Professions, ArmoryProfession, Items, Item } from './characterType';
 
 export type CharacterState = i.BaseState<i.CharacterData>;
 

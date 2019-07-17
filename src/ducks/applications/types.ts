@@ -1,6 +1,7 @@
 import * as i from 'types';
 
-export type ApplicationsState = i.BaseState<i.ApplicationData[]> & {
+export type ApplicationsState = i.BaseState<never> & {
+  list?: i.ApplicationData[];
   detail?: i.ApplicationData;
 };
 
@@ -28,23 +29,25 @@ export type Role = i.BaseResponseBody & {
   icon: i.Image;
 }
 
-type Profession = {
+export type ApplicationProfession = {
   name?: string;
   level?: number;
 }
 
 type Professions = {
-  primary: Profession[];
-  secondary: Profession[];
+  primary: ApplicationProfession[];
+  secondary: ApplicationProfession[];
 }
 
-type Character = {
+export type CharacterProfessionTypes = keyof Professions;
+
+export type Character = {
   name: string;
   level: number;
   race: string;
   class: i.Class;
   role: i.Role;
-  professions: i.Professions;
+  professions: Professions;
   server: string;
   raidExperience: i.RaidExperience;
 }
@@ -56,6 +59,7 @@ type Personal = {
 }
 
 export type ApplicationData = i.BaseResponseBody & {
+  status: i.ApplicationStatus;
   character: Character;
   personal: Personal;
 }

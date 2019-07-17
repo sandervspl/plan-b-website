@@ -18,6 +18,7 @@ const theme = {
     },
     border: {
       primary: Object.assign('#0C0C0C', {
+        lighter: '#414141',
         light: '#333333',
       }),
     },

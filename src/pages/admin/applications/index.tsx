@@ -23,7 +23,7 @@ const ApplicationsPage: i.NextPageComponent<Props, Query> = ({ url, status }) =>
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const applications = useSelector((state) => state.applications.data);
+  const applications = useSelector((state) => state.applications.list);
   const [curTab, setCurTab] = useState(status ? TAB[status] : TAB.open);
 
   const getStatusStr = (statusId: number): i.ApplicationStatus => {

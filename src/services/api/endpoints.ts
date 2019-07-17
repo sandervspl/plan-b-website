@@ -6,5 +6,6 @@ export enum API_ENDPOINT {
   AUTH = 'auth',
   AUTH_USER = 'auth/me',
   POSTS = 'cms/news',
-  APPLICATIONS = 'cms/applications'
+  APPLICATIONS = 'cms/applications',
+  APPLICATION_DETAIL = 'cms/application'
 };

@@ -17,6 +17,7 @@ export type UserData = {
   id: string;
   fetchedAt: Date;
   authLevel: i.AUTH_LEVEL;
+  dkp: number;
 }
 
 export type FetchUser = i.BaseThunkAction<() => Promise<i.UserData | void>>;

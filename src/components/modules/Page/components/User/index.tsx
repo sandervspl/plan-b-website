@@ -22,7 +22,7 @@ const User: React.FC = () => {
           <UserData>
             <DKPContainer>
               <DKPIcon />
-              <strong>0</strong> DKP
+              <strong>{user.dkp}</strong> DKP
             </DKPContainer>
             <Username>{user.username}</Username>
           </UserData>

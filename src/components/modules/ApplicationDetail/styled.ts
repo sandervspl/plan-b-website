@@ -1,4 +1,6 @@
+import * as i from 'types';
 import styled, { css } from 'styled-components';
+import tinycolor from 'tinycolor2';
 import { media } from 'styles';
 import { ParagraphStyle, ClassText, PageContentContainer, Heading, Paragraph } from 'common';
 import { DateContainer } from 'common/DateText/styled';
@@ -29,7 +31,7 @@ export const ApplicationContainer = styled(PageContentContainer)`
   `}
 `;
 
-export const StatusButton = styled.button`
+export const StatusButton = styled.button<StatusButtonProps>`
   ${ParagraphStyle};
   display: inline-flex;
   align-items: center;
@@ -54,12 +56,34 @@ export const StatusButton = styled.button`
     `}
   }
 
+  ${(props) => props.status === 'accepted' && css`
+    color: ${(props) => props.theme.color.positive};
+    background-color: ${(props) => tinycolor(props.theme.color.positive).brighten(60).toString()};
+
+    svg {
+      fill: ${(props) => props.theme.color.positive};
+    }
+  `}
+
+  ${(props) => props.status === 'rejected' && css`
+    color: ${(props) => props.theme.color.negative};
+    background-color: ${(props) => tinycolor(props.theme.color.negative).brighten(60).toString()};
+
+    svg {
+      fill: ${(props) => props.theme.color.negative};
+    }
+  `}
+
   ${media.tablet`
     padding: 3px 25px;
     font-size: 25px;
     border-radius: 100px;
   `}
 `;
+
+type StatusButtonProps = {
+  status: i.ApplicationStatus;
+}
 
 export const ApplicationRole = styled.div`
   ${ParagraphStyle};

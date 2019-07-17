@@ -1,10 +1,12 @@
 import * as i from 'types';
 import React, { useEffect } from 'react';
 import CircleSvg from 'vectors/circle.svg';
+import NotInterestedSvg from 'vectors/not-interested.svg';
+import CheckCircleSvg from 'vectors/check-circle.svg';
 import Page from 'modules/Page';
 import { useSelector, useDispatch } from 'hooks';
 import { getUrl } from 'services';
-import { fetchApplicationDetail } from 'ducks/applications';
+import { fetchApplicationDetail, actions as applicationsActions } from 'ducks/applications';
 import { hasProfessions } from 'ducks/applications/reselect';
 import { DateText, ClassText, Paragraph, CircleIcon, Heading } from 'common';
 import Profession from 'modules/ApplicationDetail/Profession';
@@ -25,6 +27,10 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
     if (user.isSignedIn && user.isAdmin) {
       dispatch(fetchApplicationDetail(applicationId));
     }
+
+    return function cleanup() {
+      dispatch(applicationsActions.resetApplication());
+    };
   }, [user]);
 
   if (!application) {
@@ -32,6 +38,11 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
   }
 
   const { character, personal } = application;
+  const StatusIcon = application.status === 'accepted'
+    ? CheckCircleSvg
+    : application.status === 'rejected'
+      ? NotInterestedSvg
+      : CircleSvg;
 
   return (
     <Page
@@ -44,8 +55,8 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
       <ApplicationContainer>
         <ApplicationHeader>
           <Top>
-            <StatusButton>
-              <CircleSvg />
+            <StatusButton status={application.status}>
+              <StatusIcon />
               {application.status}
             </StatusButton>
 

@@ -45,6 +45,7 @@
     "reselect": "4.0.0",
     "slick-carousel": "1.8.1",
     "styled-components": "5.0.0-beta.8",
+    "tinycolor2": "1.4.1",
     "typesafe-actions": "4.0.0"
   },
   "devDependencies": {
@@ -66,6 +67,7 @@
     "@types/redux-thunk": "^2.1.0",
     "@types/reselect": "2.2.0",
     "@types/styled-components": "4.1.15",
+    "@types/tinycolor": "1.1.27",
     "@typescript-eslint/eslint-plugin": "1.6.0",
     "@typescript-eslint/parser": "1.6.0",
     "@zeit/next-css": "1.0.1",

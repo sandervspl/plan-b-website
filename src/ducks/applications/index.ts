@@ -7,6 +7,7 @@ export const actions = {
   failed: () => action('applications/FAILED'),
   successList: (applications: i.ApplicationData[]) => action('applications/SUCCESS_LIST', applications),
   successDetail: (application: i.ApplicationData) => action('applications/SUCCESS_DETAIL', application),
+  resetApplication: () => action('applications/RESET_DETAIL'),
 };
 
 const initialState: i.ApplicationsState = {
@@ -43,6 +44,11 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
         detail: action.payload,
         error: false,
         loading: false,
+      };
+    case 'applications/RESET_DETAIL':
+      return {
+        ...state,
+        detail: undefined,
       };
     default:
       return state;

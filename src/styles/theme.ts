@@ -29,6 +29,8 @@ const theme = {
     text: {
       disclaimer: '#7b7b7b',
     },
+    positive: '#32AA44',
+    negative: '#DE3D3D',
   },
 
   font: {

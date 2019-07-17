@@ -1,17 +1,32 @@
 import styled, { css } from 'styled-components';
+import { media } from 'styles';
 import { ParagraphStyle, ClassText, PageContentContainer, Heading, Paragraph } from 'common';
 import { DateContainer } from 'common/DateText/styled';
 import { CircleIconContainer } from 'common/CircleIcon/styled';
 
 export const ApplicationContainer = styled(PageContentContainer)`
+  padding-bottom: 40px;
+  
   ${Heading} {
     margin: 0 20px;
+
+    ${media.tablet`
+      margin: 0 40px;
+    `}
   }
 
   hr {
     margin: 5px 20px 10px;
     border: 1px solid ${(props) => props.theme.color.border.primary.lighter};
+
+    ${media.tablet`
+      margin: 7px 40px 12px;
+    `}
   }
+
+  ${media.tablet`
+    padding-bottom: 100px;
+  `}
 `;
 
 export const StatusButton = styled.button`
@@ -32,7 +47,18 @@ export const StatusButton = styled.button`
     width: 15px;
     height: 15px;
     fill: ${(props) => props.theme.color.secondary};
+
+    ${media.tablet`
+      width: 30px;
+      height: 30px;
+    `}
   }
+
+  ${media.tablet`
+    padding: 3px 25px;
+    font-size: 25px;
+    border-radius: 100px;
+  `}
 `;
 
 export const ApplicationRole = styled.div`
@@ -46,7 +72,17 @@ export const ApplicationRole = styled.div`
     width: 18px;
     height: 18px;
     border: 1px solid ${(props) => props.theme.color.secondary.darker};
+
+    ${media.tablet`
+      margin-right: 10px;
+      width: 30px;
+      height: 30px;
+    `}
   }
+
+  ${media.tablet`
+    font-size: 25px;
+  `}
 `;
 
 export const Top = styled.div`
@@ -66,6 +102,10 @@ export const ApplicationHeader = styled.div`
       width: 16px;
       height: 16px;
     }
+
+    ${media.tablet`
+      font-size: 16px;
+    `}
   }
 
   ${ClassText} {
@@ -77,7 +117,17 @@ export const ApplicationHeader = styled.div`
       font-weight: bold;
       text-transform: uppercase;
     }
+
+    ${media.tablet`
+      margin-top: 75px;
+      font-size: 50px;
+      line-height: 50px;
+    `}
   }
+
+  ${media.tablet`
+    padding: 40px 40px 0;
+  `}
 `;
 
 export const InfoGrid = styled.div`
@@ -93,35 +143,66 @@ export const InfoGrid = styled.div`
 
     &:nth-child(odd) {
       font-weight: bold;
+
+      ${media.tablet`
+        font-size: 18px;
+      `}
     }
 
     figure {
       margin-left: 7px;
       width: 18px;
       height: 18px;
+
+      ${media.tablet`
+        width: 20px;
+        height: 20px;
+      `}
     }
   }
+
+  ${media.tablet`
+    grid-template-columns: 30% 1fr;
+    margin: 0 40px;
+  `}
 `;
 
 export const EmptyState = styled(Paragraph)`
   margin: 0 20px;
   font-size: 14px;
+  color: ${(props) => props.theme.color.secondary.darker};
+
+  ${media.tablet`
+    margin: 0 40px;
+  `}
 `;
 
 export const ApplicationSection = styled.section<ApplicationSectionProps>`
   margin-top: 30px;
 
   ${Heading} {
-    ${(props) => props.secondary && css`
-      margin-bottom: 13px;
+    font-size: 18px;
+
+    ${media.tablet`
+      font-size: 35px;
     `}
 
-    font-size: 18px;
+    ${(props) => props.secondary && css`
+      margin-bottom: 13px;
+
+      ${media.tablet`
+        font-size: 18px;
+      `}
+    `}
   }
 
   > ${Paragraph} {
     margin: 0 20px;
     font-size: 16px;
+
+    ${media.tablet`
+      margin: 0 40px;
+    `}
   }
 `;
 
@@ -135,4 +216,10 @@ export const ProfessionsGrid = styled.div`
   grid-column-gap: 20px;
   grid-row-gap: 15px;
   margin: 0 20px;
+
+  ${media.tablet`
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 50px;
+    margin: 0 40px;
+  `}
 `;

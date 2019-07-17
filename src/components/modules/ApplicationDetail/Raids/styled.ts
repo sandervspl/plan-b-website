@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from 'styles';
 
 export const RaidsContainer = styled.div`
   display: grid;
@@ -6,6 +7,11 @@ export const RaidsContainer = styled.div`
   column-gap: 5px;
   row-gap: 10px;
   margin: 0 20px;
+
+  ${media.tablet`
+    display: flex;
+    margin: 0 40px;
+  `}
 `;
 
 export const RaidImage = styled.figure<RaidImageProps>`
@@ -14,7 +20,7 @@ export const RaidImage = styled.figure<RaidImageProps>`
   width: 100%;
   height: 100%;
   position: relative;
-  opacity: ${(props) => props.isactive ? 1 : .2};
+  opacity: ${(props) => props.isactive ? 1 : .1};
 
   img {
     position: absolute;
@@ -25,6 +31,13 @@ export const RaidImage = styled.figure<RaidImageProps>`
     object-fit: cover;
     border-radius: 10px;
   }
+
+  ${media.tablet`
+    padding-top: 0;
+    width: 100px;
+    height: 100px;
+    margin-right: 15px;
+  `}
 `;
 
 type RaidImageProps = {

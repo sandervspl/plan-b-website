@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from 'styles';
 import { ParagraphStyle, Paragraph } from 'common';
 import { ProgressBarContainer, ProgressIndicator } from 'common/ProgressBar/styled';
 
@@ -15,6 +16,10 @@ export const ProfessionContainer = styled.div`
       position: relative;
       line-height: initial;
       font-size: 14px;
+
+      ${media.tablet`
+        font-size: 16px;
+      `}
     }
   }
 
@@ -30,9 +35,19 @@ export const ProfessionName = styled.div`
   margin-bottom: 5px;
   font-size: 14px;
 
-  svg {
-    width: 16px;
-    height: 16px;
+  figure {
+    margin-right: 7px;
+    width: 18px;
+    height: 18px;
+
+    ${media.tablet`
+      width: 22px;
+      height: 22px;
+    `}
   }
+
+  ${media.tablet`
+    font-size: 16px;
+  `}
 `;
 

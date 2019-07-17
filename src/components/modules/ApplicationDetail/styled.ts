@@ -193,7 +193,7 @@ export const InfoGrid = styled.div`
 
 export const EmptyState = styled(Paragraph)`
   margin: 0 20px;
-  font-size: 14px;
+  font-size: 14px !important;
   color: ${(props) => props.theme.color.secondary.darker};
 
   ${media.tablet`
@@ -228,6 +228,10 @@ export const ApplicationSection = styled.section<ApplicationSectionProps>`
       margin: 0 40px;
     `}
   }
+
+  ${media.tablet`
+    margin-top: 50px;
+  `}
 `;
 
 type ApplicationSectionProps = {

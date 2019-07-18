@@ -26,7 +26,7 @@ export const ApplicationContainer = styled(PageContentContainer)`
 
   ${media.tablet`
     display: grid;
-    grid-template-columns: 70% 1fr;
+    grid-template-columns: 67% 1fr;
     
     > div {
       padding-bottom: 100px;

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { media } from 'styles';
 import { Heading } from 'common';
 import { CommentContainer } from 'modules/ApplicationDetail/Comment/styled';
+import { AddCommentContainer } from 'modules/ApplicationDetail/AddComment/styled';
 
 export const DiscussionContainer = styled.div`
   margin-top: 40px;
@@ -17,6 +18,10 @@ export const DiscussionContainer = styled.div`
 
   ${CommentContainer} {
     margin: 40px 20px 0;
+  }
+
+  ${AddCommentContainer} {
+    margin: 20px 20px 0;
   }
 
   ${media.tablet`

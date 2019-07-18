@@ -43,7 +43,7 @@ export const ReadMoreButton = styled.button`
   background: none;
   border: 0;
   outline: 0;
-  font-size: 16px;
+  font-size: 15px;
   color: ${(props) => props.theme.color.tab.inactive};
   text-align: left;
   cursor: pointer;

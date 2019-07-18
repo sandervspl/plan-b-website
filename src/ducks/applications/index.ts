@@ -6,8 +6,14 @@ export const actions = {
   load: () => action('applications/LOAD'),
   failed: () => action('applications/FAILED'),
   successList: (applications: i.ApplicationData[]) => action('applications/SUCCESS_LIST', applications),
+
   successDetail: (application: i.ApplicationData) => action('applications/SUCCESS_DETAIL', application),
+
   resetApplication: () => action('applications/RESET_DETAIL'),
+
+  sendComment: () => action('applications/SEND_COMMENT'),
+  sendCommentFailed: () => action('applications/SEND_COMMENT_FAILED'),
+  sendCommentSuccess: () => action('applications/SEND_COMMENT_SUCCESS'),
 };
 
 const initialState: i.ApplicationsState = {
@@ -87,5 +93,26 @@ export const fetchApplicationDetail = (id: number): i.ThunkAction =>
       })
       .catch(() => {
         dispatch(actions.failed());
+      });
+  };
+
+export const sendComment = (applicationId: number, userId: string, comment: string): i.ThunkAction =>
+  async (dispatch, getState, api) => {
+    dispatch(actions.sendComment());
+
+    return api.methods.post<i.ApplicationData>({
+      url: api.url.api,
+      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationId}/comment`,
+      body: {
+        userId,
+        comment,
+      },
+      withAuth: true,
+    })
+      .then(() => {
+        dispatch(actions.sendCommentSuccess());
+      })
+      .catch(() => {
+        dispatch(actions.sendCommentFailed());
       });
   };

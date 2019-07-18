@@ -1,12 +1,12 @@
 import React from 'react';
 import TimeIcon from 'vectors/time.svg';
-import { timeAgo } from 'services';
+import { timeAgo, getDateWithTime } from 'services';
 import { DateContainer } from './styled';
 
-export const DateText: React.FC<DateProps> = ({ date }) => {
+export const DateText: React.FC<DateProps> = ({ date, noIcon }) => {
   return (
-    <DateContainer>
-      <TimeIcon />
+    <DateContainer title={getDateWithTime(date)}>
+      {!noIcon && <TimeIcon />}
       {timeAgo(new Date(date))}
     </DateContainer>
   );
@@ -14,4 +14,5 @@ export const DateText: React.FC<DateProps> = ({ date }) => {
 
 export type DateProps = {
   date: Date | string;
+  noIcon?: boolean;
 };

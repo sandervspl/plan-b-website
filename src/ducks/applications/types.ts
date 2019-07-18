@@ -58,8 +58,18 @@ type Personal = {
   story: string;
 }
 
+export interface Comment {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  applicationId: number;
+  text: string;
+  user: i.DatabaseUserData;
+}
+
 export type ApplicationData = i.BaseResponseBody & {
   status: i.ApplicationStatus;
   character: Character;
   personal: Personal;
+  discussion: Comment[];
 }

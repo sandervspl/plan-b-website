@@ -7,8 +7,6 @@ import { DateContainer } from 'common/DateText/styled';
 import { CircleIconContainer } from 'common/CircleIcon/styled';
 
 export const ApplicationContainer = styled(PageContentContainer)`
-  padding-bottom: 40px;
-  
   ${Heading} {
     margin: 0 20px;
 

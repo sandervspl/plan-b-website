@@ -13,7 +13,7 @@ export const actions = {
 
   sendComment: () => action('applications/SEND_COMMENT'),
   sendCommentFailed: () => action('applications/SEND_COMMENT_FAILED'),
-  sendCommentSuccess: () => action('applications/SEND_COMMENT_SUCCESS'),
+  sendCommentSuccess: (newComment: i.Comment) => action('applications/SEND_COMMENT_SUCCESS', newComment),
 };
 
 const initialState: i.ApplicationsState = {
@@ -56,6 +56,17 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
         ...state,
         detail: undefined,
       };
+    case 'applications/SEND_COMMENT_SUCCESS':
+      return {
+        ...state,
+        detail: {
+          ...state.detail!,
+          discussion: [
+            action.payload,
+            ...state.detail!.discussion,
+          ],
+        },
+      };
     default:
       return state;
   }
@@ -96,11 +107,11 @@ export const fetchApplicationDetail = (id: number): i.ThunkAction =>
       });
   };
 
-export const sendComment = (applicationId: number, userId: string, comment: string): i.ThunkAction =>
+export const sendComment = (applicationId: number, userId: string, comment: string): i.ThunkAction<Promise<i.Comment | void>> =>
   async (dispatch, getState, api) => {
     dispatch(actions.sendComment());
 
-    return api.methods.post<i.ApplicationData>({
+    return api.methods.post<i.Comment>({
       url: api.url.api,
       path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationId}/comment`,
       body: {
@@ -109,8 +120,10 @@ export const sendComment = (applicationId: number, userId: string, comment: stri
       },
       withAuth: true,
     })
-      .then(() => {
-        dispatch(actions.sendCommentSuccess());
+      .then((res) => {
+        dispatch(actions.sendCommentSuccess(res));
+
+        return res;
       })
       .catch(() => {
         dispatch(actions.sendCommentFailed());

@@ -22,7 +22,8 @@ const AddComment: React.FC<Props> = ({ username, avatar }) => {
   const handleSubmit = () => {
     if (!userId || !applicationId) return;
 
-    dispatch(sendComment(applicationId, userId, text));
+    dispatch(sendComment(applicationId, userId, text))
+      .then(() => setText(''));
   };
 
   return (

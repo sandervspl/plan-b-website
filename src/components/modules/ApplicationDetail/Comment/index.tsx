@@ -17,9 +17,9 @@ const Comment: React.FC<Props> = ({ username, avatar, text, shareDate }) => {
       <CommentText>
         {showLongText ? text : shortText}
 
-        {isLongText && !showLongText && (
-          <ReadMoreButton onClick={() => setShowLongText(true)}>
-            Read more
+        {isLongText && (
+          <ReadMoreButton onClick={() => setShowLongText((val) => !val)}>
+            Read {showLongText ? 'less' : 'more'}
           </ReadMoreButton>
         )}
 

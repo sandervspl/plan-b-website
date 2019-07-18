@@ -5,12 +5,13 @@ import NotInterestedSvg from 'vectors/not-interested.svg';
 import CheckCircleSvg from 'vectors/check-circle.svg';
 import Page from 'modules/Page';
 import { useSelector, useDispatch } from 'hooks';
-import { getUrl } from 'services';
+import { getUrl, getCmsUrl } from 'services';
 import { fetchApplicationDetail, actions as applicationsActions } from 'ducks/applications';
 import { hasProfessions } from 'ducks/applications/reselect';
 import { DateText, ClassText, Paragraph, CircleIcon, Heading } from 'common';
 import Profession from 'modules/ApplicationDetail/Profession';
 import Raids from 'modules/ApplicationDetail/Raids';
+import Discussion from 'modules/ApplicationDetail/Discussion';
 import {
   ApplicationHeader, StatusButton, ApplicationRole, Top, ApplicationContainer, InfoGrid, EmptyState,
   ApplicationSection, ProfessionsGrid,
@@ -71,7 +72,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
           </Paragraph>
 
           <ApplicationRole>
-            <CircleIcon src={character.role.icon.url} />
+            <CircleIcon src={getCmsUrl(character.role.icon.url)} />
             {character.role.name}
           </ApplicationRole>
 
@@ -91,7 +92,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
             <Paragraph>Race/Class</Paragraph>
             <Paragraph as="div">
               {character.race} {character.class.name}
-              <CircleIcon src={character.class.icon.url} />
+              <CircleIcon src={getCmsUrl(character.class.icon.url)} />
             </Paragraph>
 
             <Paragraph>Level</Paragraph>
@@ -100,7 +101,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
             <Paragraph>Role</Paragraph>
             <Paragraph as="div">
               {character.role.name}
-              <CircleIcon src={character.role.icon.url} />
+              <CircleIcon src={getCmsUrl(character.role.icon.url)} />
             </Paragraph>
           </InfoGrid>
         </ApplicationSection>
@@ -152,6 +153,8 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
             <Paragraph>{personal.story}</Paragraph>
           </ApplicationSection>
         </ApplicationSection>
+
+        <Discussion comments={application.discussion} />
       </ApplicationContainer>
     </Page>
   );

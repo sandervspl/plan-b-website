@@ -25,7 +25,12 @@ export const ApplicationContainer = styled(PageContentContainer)`
   }
 
   ${media.tablet`
-    padding-bottom: 100px;
+    display: grid;
+    grid-template-columns: 70% 1fr;
+    
+    > div {
+      padding-bottom: 100px;
+    }
   `}
 `;
 

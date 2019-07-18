@@ -10,6 +10,7 @@ export const RaidsContainer = styled.div`
 
   ${media.tablet`
     display: flex;
+    flex-flow: wrap;
     margin: 0 40px;
   `}
 `;
@@ -33,10 +34,11 @@ export const RaidImage = styled.figure<RaidImageProps>`
   }
 
   ${media.tablet`
+    margin-right: 15px;
+    margin-bottom: 10px;
     padding-top: 0;
     width: 100px;
     height: 100px;
-    margin-right: 15px;
   `}
 `;
 

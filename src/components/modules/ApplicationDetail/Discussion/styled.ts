@@ -21,5 +21,8 @@ export const DiscussionContainer = styled.div`
 
   ${media.tablet`
     margin: 0;
+    padding: 40px 0;
+    border-top: 0;
+    border-left: 1px solid;
   `}
 `;

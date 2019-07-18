@@ -8,6 +8,9 @@ const Discussion: React.FC<Props> = ({ comments }) => {
   return (
     <DiscussionContainer>
       <Heading as="h2">Discussion</Heading>
+
+      {/* @TODO add comment section */}
+
       {comments.map((comment) => (
         <Comment
           key={comment.id}

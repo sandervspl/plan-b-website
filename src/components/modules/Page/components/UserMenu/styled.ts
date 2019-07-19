@@ -53,7 +53,6 @@ export const UserMenuContainer = styled.div<UserMenuContainerProps>`
 
   ${media.tablet`
     position: absolute;
-    z-index: 1;
     top: auto;
     left: -16px;
     width: 220px;

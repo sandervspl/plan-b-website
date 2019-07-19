@@ -114,7 +114,7 @@ export const AvatarRow = styled.div`
 `;
 
 export const Avatar = styled(CircleImg)<AvatarProps>`
-  transform: translateX(${(props) => (0 + props.num * 12) * -1}px);
+  transform: translateX(${(props) => (0 + props.num * 15) * -1}px);
   margin: 0;
   width: 24px;
   height: 24px;
@@ -135,7 +135,7 @@ export const ResultText = styled.span<ResultTextProps>`
   white-space: nowrap;
   
   ${(props) => props.votes > 0 && css<ResultTextProps>`
-    transform: translateX(${(props) => ((props.votes * 12) * - 1) + 3}px);
+    transform: translateX(${(props) => ((props.votes * 15) * - 1) + 3}px);
   `}
 
   ${(props) => props.votedThis && css`

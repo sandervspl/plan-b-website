@@ -68,8 +68,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
 
             <Paragraph>
               <ClassText classId={character.class.id}>
-                <strong>{character.name}</strong>, {' '}
-                ({character.level}) {character.class.name}
+                <strong>{character.name}</strong>, {character.class.name} ({character.level})
               </ClassText>
             </Paragraph>
 

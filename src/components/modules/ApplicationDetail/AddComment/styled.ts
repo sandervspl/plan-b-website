@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { ParagraphStyle } from 'common';
 import { CircleIconContainer } from 'common/CircleIcon/styled';
+import { media } from 'styles';
 
 export const AddCommentContainer = styled.div`
   display: flex;
@@ -39,6 +40,10 @@ export const CommentInput = styled.textarea<CommentInputProps>`
 
   ${(props) => props.hastext && css`
     width: calc(100% - 35px - 20px);
+
+    ${media.tablet`
+      width: 100%;
+    `}
   `}
 `;
 
@@ -51,6 +56,7 @@ export const CommentInputContainer = styled.div`
 `;
 
 export const SendButton = styled.button<SendButtonProps>`
+  ${ParagraphStyle};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,7 +73,6 @@ export const SendButton = styled.button<SendButtonProps>`
   visibility: hidden;
   transition: opacity .2s ease-in-out, visibility 0s .2s;
   will-change: opacity;
-  cursor: pointer;
 
   svg {
     height: 20px;
@@ -75,10 +80,21 @@ export const SendButton = styled.button<SendButtonProps>`
     transform: translate(-2px, 0);
   }
 
+  ${media.tablet`
+    position: static;
+    margin-top: 5px;
+    padding: 3px 15px;
+    width: auto;
+    border-radius: 3px;
+    opacity: .5;
+    visibility: visible;
+  `}
+
   ${(props) => props.show && css`
-    opacity: 1;
+    opacity: 1 !important;
     visibility: visible;
     transition: opacity .2s ease-in-out, visibility 0s;
+    cursor: pointer;
   `}
 `;
 

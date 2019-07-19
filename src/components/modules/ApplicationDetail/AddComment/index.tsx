@@ -13,6 +13,7 @@ const AddComment: React.FC<Props> = ({ username, avatar }) => {
   const applicationId = useSelector((state) => (
     state.applications.detail && state.applications.detail.id
   ));
+  const isMobile = useSelector((state) => state.ui.isMobile);
   const [text, setText] = useState('');
 
   const handleOnChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
@@ -20,7 +21,7 @@ const AddComment: React.FC<Props> = ({ username, avatar }) => {
   };
 
   const handleSubmit = () => {
-    if (!userId || !applicationId) return;
+    if (!userId || !applicationId || !text) return;
 
     dispatch(sendComment(applicationId, userId, text))
       .then(() => setText(''));
@@ -41,7 +42,7 @@ const AddComment: React.FC<Props> = ({ username, avatar }) => {
           hastext={text.length > 0}
         />
         <SendButton show={text.length > 0} onClick={handleSubmit}>
-          <SendIcon />
+          {isMobile ? <SendIcon /> : 'Share'}
         </SendButton>
       </CommentInputContainer>
     </AddCommentContainer>

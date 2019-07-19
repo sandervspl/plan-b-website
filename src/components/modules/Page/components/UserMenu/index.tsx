@@ -25,7 +25,7 @@ const UserMenu: React.FC<Props> = ({ open }) => {
       <Line />
 
       <OptionsContainer>
-        {user.authLevel === i.AUTH_LEVEL.ADMIN && (
+        {user.authLevel > i.AUTH_LEVEL.USER && (
           <>
             <li>
               <Link to="applications">

@@ -38,6 +38,7 @@ export const Button = styled.button<ButtonProps>`
   line-height: 1;
   border: 0;
   outline: 0;
+  border-radius: 3px;
   background-color: ${(props) => props.theme.color.negative};
   cursor: pointer;
   transition: .2s linear background-color;

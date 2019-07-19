@@ -36,7 +36,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Use
         error: false,
         loading: false,
         isSignedIn: true,
-        isAdmin: action.payload.authLevel === i.AUTH_LEVEL.ADMIN,
+        isAdmin: action.payload.authLevel > i.AUTH_LEVEL.USER,
       };
     default:
       return state;

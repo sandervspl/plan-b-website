@@ -1,8 +1,9 @@
 import * as i from 'types';
 
 export enum AUTH_LEVEL {
-  'USER',
-  'ADMIN'
+  USER,
+  OFFICER,
+  GUILD_MASTER
 }
 
 export type UserState = i.BaseState<i.UserData> & {

@@ -46,6 +46,7 @@ export const StatusButton = styled.button<StatusButtonProps>`
   background-color: ${(props) => props.theme.color.secondary.darker};
   border-radius: 18px;
   border: 0;
+  outline: 0;
 
   svg {
     margin-right: 5px;

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import DKPSvg from 'vectors/dkp.svg';
+import { CircleIconContainer } from 'common/CircleIcon/styled';
 
 export const UserContainer = styled.div`
   position: relative;
@@ -15,6 +16,12 @@ export const UserInfo = styled.button`
   background: none;
   cursor: pointer;
   outline: 0;
+
+  ${CircleIconContainer} {
+    margin: 0;
+    width: 32px;
+    height: 32px;
+  }
 `;
 
 export const UserData = styled.div`

@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Paragraph, ParagraphStyle } from 'common';
+import { CircleIconContainer } from 'common/CircleIcon/styled';
 import { media } from 'styles';
 
 export const UserMenuContainer = styled.div<UserMenuContainerProps>`
@@ -71,10 +72,12 @@ type UserMenuContainerProps = {
 }
 
 export const UserInfo = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 55px 1fr;
+  gap: 10px;
   padding: 20px 25px;
 
-  img {
+  ${CircleIconContainer} {
     margin-right: 15px;
     width: 55px;
     height: 55px;

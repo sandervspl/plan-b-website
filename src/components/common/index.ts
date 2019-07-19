@@ -8,7 +8,6 @@ export * from './CircleIcon';
 export * from './Button';
 export * from './Tag';
 export * from './NewsItem';
-export * from './Avatar';
 export * from './GlitchBullLogo';
 export * from './GlitchNameLogo';
 export * from './DateText';

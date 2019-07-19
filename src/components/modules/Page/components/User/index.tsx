@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { useSelector } from 'hooks';
-import { Avatar } from 'common';
+import { CircleIcon } from 'common';
 import UserMenu from '../UserMenu';
 import { UserInfo, UserData, DKPContainer, DKPIcon, Username, UserContainer } from './styled';
 
@@ -26,7 +26,7 @@ const User: React.FC = () => {
             </DKPContainer>
             <Username>{user.username}</Username>
           </UserData>
-          <Avatar src={user.avatar} />
+          <CircleIcon src={user.avatar} />
         </UserInfo>
 
         <UserMenu open={menuOpen} />

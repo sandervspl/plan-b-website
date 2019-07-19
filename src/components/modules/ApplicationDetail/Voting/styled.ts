@@ -132,8 +132,11 @@ type AvatarProps = {
 
 export const ResultText = styled.span<ResultTextProps>`
   font-size: 12px;
-  transform: translateX(${(props) => ((props.votes * 12) * - 1) + 2}px);
   white-space: nowrap;
+  
+  ${(props) => props.votes > 0 && css<ResultTextProps>`
+    transform: translateX(${(props) => ((props.votes * 12) * - 1) + 3}px);
+  `}
 
   ${(props) => props.votedThis && css`
     font-weight: bold;

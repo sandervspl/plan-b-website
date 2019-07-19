@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CircleIcon, DateText } from 'common';
+import { CircleImg, DateText } from 'common';
 import { CommentContainer, CommentText, CommentInfo, ReadMoreButton } from './styled';
 
 const MAX_TEXT_LENGTH = 200;
@@ -13,7 +13,7 @@ const Comment: React.FC<Props> = ({ username, avatar, text, shareDate }) => {
 
   return (
     <CommentContainer>
-      <CircleIcon src={avatar} />
+      <CircleImg src={avatar} />
       <CommentText>
         {showLongText ? text : shortText}
 

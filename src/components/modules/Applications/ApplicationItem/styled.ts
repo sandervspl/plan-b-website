@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { ParagraphStyle, ClassText, Paragraph } from 'common';
-import { CircleIconContainer } from 'common/CircleIcon/styled';
+import { CircleImgContainer } from 'common/CircleImg/styled';
 import { media } from 'styles';
 
 export const RoleContainer = styled.div`
   display: flex;
   align-items: center;
 
-  ${CircleIconContainer} {
+  ${CircleImgContainer} {
     width: 13px;
     height: 13px;
     margin-right: 5px;
@@ -45,7 +45,7 @@ export const ApplicationItemContainer = styled.li`
     padding: 10px 15px;
     width: 100%;
 
-    > ${CircleIconContainer} {
+    > ${CircleImgContainer} {
       width: 30px;
       height: 30px;
 

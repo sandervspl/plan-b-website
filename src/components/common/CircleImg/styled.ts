@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { media } from 'styles';
 
-export const CircleIconContainer = styled.figure`
+export const CircleImgContainer = styled.figure`
   position: relative;
   margin: 0;
   margin-right: 10px;
@@ -18,7 +18,7 @@ export const CircleIconContainer = styled.figure`
   `}
 `;
 
-export const CircleIconImg = styled.img`
+export const CircleImgInner = styled.img`
   position: absolute;
   top: 0;
   left: 0;

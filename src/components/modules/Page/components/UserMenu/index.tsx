@@ -2,7 +2,7 @@ import * as i from 'types';
 import React from 'react';
 import apiConfig from 'services/api/config';
 import { useSelector } from 'hooks';
-import { Paragraph, Link, CircleIcon } from 'common';
+import { Paragraph, Link, CircleImg } from 'common';
 import { UserMenuContainer, UserInfo, Line, OptionsContainer } from './styled';
 
 const UserMenu: React.FC<Props> = ({ open }) => {
@@ -15,7 +15,7 @@ const UserMenu: React.FC<Props> = ({ open }) => {
   return (
     <UserMenuContainer open={open}>
       <UserInfo>
-        <CircleIcon src={user.avatar} />
+        <CircleImg src={user.avatar} />
         <div>
           <Paragraph>{user.username}</Paragraph>
           <Paragraph>@{user.discordname}</Paragraph>

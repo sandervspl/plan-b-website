@@ -1,7 +1,7 @@
 import * as i from 'types';
 import styled, { css } from 'styled-components';
 import tinycolor from 'tinycolor2';
-import { ParagraphStyle, CircleIcon } from 'common';
+import { ParagraphStyle, CircleImg } from 'common';
 import { media } from 'styles';
 import { ProgressIndicator, ProgressBarContainer } from 'common/ProgressBar/styled';
 
@@ -113,7 +113,7 @@ export const AvatarRow = styled.div`
   display: flex;
 `;
 
-export const Avatar = styled(CircleIcon)<AvatarProps>`
+export const Avatar = styled(CircleImg)<AvatarProps>`
   transform: translateX(${(props) => (0 + props.num * 12) * -1}px);
   margin: 0;
   width: 24px;

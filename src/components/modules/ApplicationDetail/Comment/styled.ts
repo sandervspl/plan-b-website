@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import { ParagraphStyle } from 'common';
 import { DateContainer } from 'common/DateText/styled';
-import { CircleIconContainer } from 'common/CircleIcon/styled';
+import { CircleImgContainer } from 'common/CircleImg/styled';
 
 export const CommentContainer = styled.div`
   display: grid;
   grid-template-columns: 32px 1fr;
   grid-column-gap: 10px;
 
-  ${CircleIconContainer} {
+  ${CircleImgContainer} {
     width: 32px;
     height: 32px;
   }

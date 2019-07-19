@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SendIcon from 'vectors/send.svg';
 import { useDispatch, useSelector } from 'hooks';
 import { sendComment } from 'ducks/applications';
-import { CircleIcon } from 'common';
+import { CircleImg } from 'common';
 import {
   AddCommentContainer, User, CommentInput, CommentInputContainer, SendButton,
 } from './styled';
@@ -30,7 +30,7 @@ const AddComment: React.FC<Props> = ({ username, avatar }) => {
   return (
     <AddCommentContainer>
       <User>
-        <CircleIcon src={avatar} />
+        <CircleImg src={avatar} />
         {username}
       </User>
 

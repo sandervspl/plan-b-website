@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'hooks';
 import { getUrl, getCmsUrl } from 'services';
 import { fetchApplicationDetail, actions as applicationsActions } from 'ducks/applications';
 import { hasProfessions } from 'ducks/applications/reselect';
-import { DateText, ClassText, Paragraph, CircleIcon, Heading } from 'common';
+import { DateText, ClassText, Paragraph, CircleImg, Heading } from 'common';
 import Profession from 'modules/ApplicationDetail/Profession';
 import Raids from 'modules/ApplicationDetail/Raids';
 import Discussion from 'modules/ApplicationDetail/Discussion';
@@ -74,7 +74,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
             </Paragraph>
 
             <ApplicationRole>
-              <CircleIcon src={getCmsUrl(character.role.icon.url)} />
+              <CircleImg src={getCmsUrl(character.role.icon.url)} />
               {character.role.name}
             </ApplicationRole>
 
@@ -94,7 +94,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
               <Paragraph>Race/Class</Paragraph>
               <Paragraph as="div">
                 {character.race} {character.class.name}
-                <CircleIcon src={getCmsUrl(character.class.icon.url)} />
+                <CircleImg src={getCmsUrl(character.class.icon.url)} />
               </Paragraph>
 
               <Paragraph>Level</Paragraph>
@@ -103,7 +103,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
               <Paragraph>Role</Paragraph>
               <Paragraph as="div">
                 {character.role.name}
-                <CircleIcon src={getCmsUrl(character.role.icon.url)} />
+                <CircleImg src={getCmsUrl(character.role.icon.url)} />
               </Paragraph>
             </InfoGrid>
           </ApplicationSection>

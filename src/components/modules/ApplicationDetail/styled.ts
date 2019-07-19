@@ -4,7 +4,7 @@ import tinycolor from 'tinycolor2';
 import { media } from 'styles';
 import { ParagraphStyle, ClassText, PageContentContainer, Heading, Paragraph } from 'common';
 import { DateContainer } from 'common/DateText/styled';
-import { CircleIconContainer } from 'common/CircleIcon/styled';
+import { CircleImgContainer } from 'common/CircleImg/styled';
 
 export const ApplicationContainer = styled(PageContentContainer)`
   ${Heading} {
@@ -94,7 +94,7 @@ export const ApplicationRole = styled.div`
   align-items: center;
   font-size: 16px;
 
-  ${CircleIconContainer} {
+  ${CircleImgContainer} {
     margin-right: 5px;
     width: 18px;
     height: 18px;

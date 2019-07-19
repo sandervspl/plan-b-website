@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Paragraph, ParagraphStyle } from 'common';
-import { CircleIconContainer } from 'common/CircleIcon/styled';
+import { CircleImgContainer } from 'common/CircleImg/styled';
 import { media } from 'styles';
 
 export const UserMenuContainer = styled.div<UserMenuContainerProps>`
@@ -77,7 +77,7 @@ export const UserInfo = styled.div`
   gap: 10px;
   padding: 20px 25px;
 
-  ${CircleIconContainer} {
+  ${CircleImgContainer} {
     margin-right: 15px;
     width: 55px;
     height: 55px;

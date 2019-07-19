@@ -4,7 +4,7 @@ export { default as Glitch } from './Glitch';
 export * from './typography';
 export * from './FullscreenPage';
 export * from './ClassText';
-export * from './CircleIcon';
+export * from './CircleImg';
 export * from './Button';
 export * from './Tag';
 export * from './NewsItem';

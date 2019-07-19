@@ -1,13 +1,13 @@
 import * as i from 'types';
 import React from 'react';
 import { getCmsUrl } from 'services';
-import { CircleIcon } from 'common';
+import { CircleImg } from 'common';
 import { ClassTextContainer } from './styled';
 
 const ClassText: React.FC<Props> = ({ plrClass, as }) => {
   return (
     <ClassTextContainer as={as} color={plrClass.color}>
-      <CircleIcon src={getCmsUrl(plrClass.icon.url)} />
+      <CircleImg src={getCmsUrl(plrClass.icon.url)} />
       <span>{plrClass.name}</span>
     </ClassTextContainer>
   );

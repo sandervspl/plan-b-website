@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { ParagraphStyle } from 'common';
-import { CircleIconContainer } from 'common/CircleIcon/styled';
+import { CircleImgContainer } from 'common/CircleImg/styled';
 import { media } from 'styles';
 
 export const AddCommentContainer = styled.div`
@@ -15,7 +15,7 @@ export const User = styled.div`
   margin-bottom: 10px;
   color: ${(props) => props.theme.color.tab.inactive};
 
-  ${CircleIconContainer} {
+  ${CircleImgContainer} {
     width: 32px;
     height: 32px;
   }

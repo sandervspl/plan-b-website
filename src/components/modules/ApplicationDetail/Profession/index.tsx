@@ -1,7 +1,7 @@
 import * as i from 'types';
 import React from 'react';
 import QuestionMark from 'images/questionmark.jpg';
-import { CircleIcon, ProgressBar } from 'common';
+import { CircleImg, ProgressBar } from 'common';
 import { ProfessionName, ProfessionContainer } from './styled';
 
 const Profession: React.FC<Props> = ({ profession }) => {
@@ -20,7 +20,7 @@ const Profession: React.FC<Props> = ({ profession }) => {
   return (
     <ProfessionContainer>
       <ProfessionName>
-        <CircleIcon src={QuestionMark} />
+        <CircleImg src={QuestionMark} />
         {profession.name}
       </ProfessionName>
 

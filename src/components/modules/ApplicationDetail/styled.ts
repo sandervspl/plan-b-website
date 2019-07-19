@@ -61,7 +61,7 @@ export const StatusButton = styled.button<StatusButtonProps>`
 
   ${(props) => props.status === 'accepted' && css`
     color: ${(props) => props.theme.color.positive};
-    background-color: ${(props) => tinycolor(props.theme.color.positive).brighten(60).toString()};
+    background-color: ${(props) => tinycolor(props.theme.color.positive).brighten(40).toString()};
 
     svg {
       fill: ${(props) => props.theme.color.positive};
@@ -70,7 +70,7 @@ export const StatusButton = styled.button<StatusButtonProps>`
 
   ${(props) => props.status === 'rejected' && css`
     color: ${(props) => props.theme.color.negative};
-    background-color: ${(props) => tinycolor(props.theme.color.negative).brighten(60).toString()};
+    background-color: ${(props) => tinycolor(props.theme.color.negative).brighten(40).toString()};
 
     svg {
       fill: ${(props) => props.theme.color.negative};

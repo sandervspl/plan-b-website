@@ -3,9 +3,13 @@ import { Paragraph } from 'common/typography';
 import { ProgressBarContainer, ProgressIndicator } from './styled';
 
 export const ProgressBar: React.FC<Props> = ({ current, max, label }) => {
+  const progress = current > 0 && max > 0
+    ? current / max
+    : 0;
+
   return (
     <ProgressBarContainer>
-      <ProgressIndicator width={current / max} />
+      <ProgressIndicator progress={progress} />
       {label && (
         <Paragraph>{label}</Paragraph>
       )}

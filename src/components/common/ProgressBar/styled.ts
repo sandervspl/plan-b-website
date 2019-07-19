@@ -16,9 +16,9 @@ export const ProgressIndicator = styled.div<ProgressIndicatorProps>`
   height: 100%;
   transform-origin: left center;
   background-color: ${(props) => props.theme.color.primary};
-  transform: scaleX(${(props) => props.width});
+  transform: scaleX(${(props) => props.progress});
 `;
 
 type ProgressIndicatorProps = {
-  width: number;
+  progress: number;
 }

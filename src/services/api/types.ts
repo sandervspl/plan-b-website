@@ -59,6 +59,12 @@ export type BaseResponseBody = {
   updated_at: Date;
 }
 
+export type BaseDatabaseBody = {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export type RunMiddleware = (options: RequestOptions, middlewares: Middleware[]) => Promise<RequestOptions>;
 
 export type SetupRequest = (middlewares: Middleware[], options: Options) => Promise<any>;

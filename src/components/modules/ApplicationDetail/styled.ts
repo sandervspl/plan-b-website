@@ -118,7 +118,8 @@ export const Top = styled.div`
 `;
 
 export const ApplicationHeader = styled.div`
-  padding: 20px;
+  position: relative;
+  padding: 20px 20px 0;
 
   ${DateContainer} {
     display: inline-flex;
@@ -167,6 +168,7 @@ export const InfoGrid = styled.div`
     display: flex;
     align-items: center;
     font-size: 16px;
+    text-transform: capitalize;
 
     &:nth-child(odd) {
       font-weight: bold;

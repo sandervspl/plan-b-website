@@ -7,7 +7,7 @@ export * from 'server/types';
 
 export * from 'modules/Apply/types';
 
-export { ApiMethods, ContentId, BaseResponseBody } from 'services/api/types';
+export { ApiMethods, ContentId, BaseResponseBody, BaseDatabaseBody } from 'services/api/types';
 
 export * from 'styles/types';
 

@@ -1,0 +1,150 @@
+import * as i from 'types';
+import styled, { css } from 'styled-components';
+import tinycolor from 'tinycolor2';
+import { ParagraphStyle, CircleIcon } from 'common';
+import { media } from 'styles';
+import { ProgressIndicator, ProgressBarContainer } from 'common/ProgressBar/styled';
+
+export const VotingContainer = styled.div<VotingContainerProps>`
+  display: flex;
+  margin-top: 20px;
+  
+  ${(props) => !props.hasvoted && css`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  `}
+
+  ${media.tablet`
+    position: absolute;
+    top: 25px;
+    right: 40px;
+  `}
+`;
+
+type VotingContainerProps = {
+  hasvoted?: boolean;
+}
+
+export const Button = styled.button<ButtonProps>`
+  appearance: none;
+  ${ParagraphStyle};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  width: 100%;
+  font-size: 16px;
+  line-height: 1;
+  border: 0;
+  outline: 0;
+  background-color: ${(props) => props.theme.color.negative};
+  cursor: pointer;
+  transition: .2s linear background-color;
+
+  &:hover {
+    background-color: ${(props) => tinycolor(props.theme.color.negative).darken(10).toString()};
+  }
+  
+  ${(props) => props.status === 'accepted' && css`
+    background-color: ${(props) => props.theme.color.positive};
+
+    &:hover {
+      background-color: ${(props) => tinycolor(props.theme.color.positive).darken(10).toString()};
+    }
+  `}
+
+  svg {
+    margin-right: 6px;
+    width: 18px;
+    height: 18px;
+    fill: ${(props) => props.theme.color.secondary};
+  }
+
+  ${media.tablet`
+    width: 130px;
+  `}
+`;
+
+type ButtonProps = {
+  status: i.ApplicationStatus;
+}
+
+export const ResultContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  ${ProgressBarContainer} {
+    margin-top: 15px;
+  }
+
+  ${ProgressIndicator} {
+    background-color: ${(props) => props.theme.color.positive};
+  }
+`;
+
+export const Results = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+`;
+
+export const Result = styled.div`
+  ${ParagraphStyle};
+  display: flex;
+  align-items: center;
+`;
+
+export const AvatarRow = styled.div`
+  display: flex;
+`;
+
+export const Avatar = styled(CircleIcon)<AvatarProps>`
+  transform: translateX(${(props) => (0 + props.num * 12) * -1}px);
+  margin: 0;
+  width: 24px;
+  height: 24px;
+  border: 2px solid ${(props) => props.theme.color.background.content};
+`;
+
+type AvatarProps = {
+  num: number;
+}
+
+export const ResultText = styled.span<ResultTextProps>`
+  font-size: 12px;
+  transform: translateX(${(props) => ((props.votes * 12) * - 1) + 2}px);
+  white-space: nowrap;
+
+  ${(props) => props.votedthis && css`
+    font-weight: bold;
+  `}
+
+  svg {
+    width: 12px;
+    height: 12px;
+    fill: ${(props) => props.theme.color.secondary};
+    transform: translateY(1px);
+  }
+`;
+
+type ResultTextProps = {
+  votedthis?: boolean;
+  votes: number;
+}
+
+export const VotedText = styled.div`
+  ${ParagraphStyle};
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 14px;
+
+  svg {
+    margin-right: 2px;
+    width: 16px;
+    height: 16px;
+    fill: ${(props) => props.theme.color.secondary};
+    transform: translateY(-1px);
+  }
+`;

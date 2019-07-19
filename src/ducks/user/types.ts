@@ -20,7 +20,7 @@ export type UserData = {
   dkp: number;
 }
 
-export type DatabaseUserData = {
+export type FullDatabaseUserData = {
   id: string;
   username: string;
   avatar: string;
@@ -28,6 +28,12 @@ export type DatabaseUserData = {
   dkp: number;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export type SimpleDatabaseUserData = {
+  id: string;
+  username: string;
+  avatar: string;
 }
 
 export type FetchUser = i.BaseThunkAction<() => Promise<i.UserData | void>>;

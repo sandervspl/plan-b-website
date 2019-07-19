@@ -2,7 +2,8 @@ import * as i from 'types';
 
 export type ApplicationsState = i.BaseState<never> & {
   list?: i.ApplicationData[];
-  detail?: i.ApplicationData;
+  detail?: i.ApplicationDataDuck;
+  userVote?: i.VOTE;
 };
 
 export type ApplicationStatus = 'open' | 'accepted' | 'rejected';
@@ -58,18 +59,34 @@ type Personal = {
   story: string;
 }
 
-export interface Comment {
-  id: number;
-  createdAt: Date;
-  updatedAt: Date;
+export type Comment = i.BaseDatabaseBody & {
   applicationId: number;
   text: string;
-  user: i.DatabaseUserData;
+  user: i.SimpleDatabaseUserData;
 }
 
-export type ApplicationData = i.BaseResponseBody & {
+export enum VOTE { REJECT, ACCEPT }
+
+export type Vote = i.BaseDatabaseBody & {
+  applicationId: number;
+  vote: i.VOTE;
+  user: i.SimpleDatabaseUserData;
+}
+
+type ApplicationBase = i.BaseResponseBody & {
   status: i.ApplicationStatus;
-  character: Character;
+  character: i.Character;
   personal: Personal;
-  discussion: Comment[];
+  discussion: i.Comment[];
+}
+
+export type ApplicationData = ApplicationBase & {
+  votes: i.Vote[];
+}
+
+export type ApplicationDataDuck = ApplicationBase & {
+  votes: {
+    accepts: i.Vote[];
+    rejects: i.Vote[];
+  };
 }

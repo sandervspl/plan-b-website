@@ -7,19 +7,25 @@ export const actions = {
   failed: () => action('applications/FAILED'),
   successList: (applications: i.ApplicationData[]) => action('applications/SUCCESS_LIST', applications),
 
-  successDetail: (application: i.ApplicationData) => action('applications/SUCCESS_DETAIL', application),
+  successDetail: (application: i.ApplicationData, userVote: i.VOTE | undefined) =>
+    action('applications/SUCCESS_DETAIL', { application, userVote }),
 
   resetApplication: () => action('applications/RESET_DETAIL'),
 
   sendComment: () => action('applications/SEND_COMMENT'),
   sendCommentFailed: () => action('applications/SEND_COMMENT_FAILED'),
   sendCommentSuccess: (newComment: i.Comment) => action('applications/SEND_COMMENT_SUCCESS', newComment),
+
+  vote: () => action('applications/VOTE'),
+  voteFailed: () => action('applications/VOTE_FAILED'),
+  voteSuccess: (newVote: i.Vote) => action('applications/VOTE_SUCCESS', newVote),
 };
 
 const initialState: i.ApplicationsState = {
   data: undefined,
   error: false,
   loading: true,
+  userVote: undefined,
 };
 
 export default (state = initialState, action: ActionType<typeof actions>): i.ApplicationsState => {
@@ -47,9 +53,16 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
     case 'applications/SUCCESS_DETAIL':
       return {
         ...state,
-        detail: action.payload,
+        detail: {
+          ...action.payload.application,
+          votes: {
+            accepts: action.payload.application.votes.filter((vote) => vote.vote === i.VOTE.ACCEPT),
+            rejects: action.payload.application.votes.filter((vote) => vote.vote === i.VOTE.REJECT),
+          },
+        },
         error: false,
         loading: false,
+        userVote: action.payload.userVote,
       };
     case 'applications/RESET_DETAIL':
       return {
@@ -66,6 +79,22 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
             ...state.detail!.discussion,
           ],
         },
+      };
+    case 'applications/VOTE_SUCCESS':
+      return {
+        ...state,
+        detail: {
+          ...state.detail!,
+          votes: {
+            accepts: action.payload.vote === i.VOTE.ACCEPT
+              ? [action.payload, ...state.detail!.votes.accepts]
+              : state.detail!.votes.accepts,
+            rejects: action.payload.vote === i.VOTE.REJECT
+              ? [action.payload, ...state.detail!.votes.accepts]
+              : state.detail!.votes.accepts,
+          },
+        },
+        userVote: action.payload.vote,
       };
     default:
       return state;
@@ -100,7 +129,15 @@ export const fetchApplicationDetail = (id: number): i.ThunkAction =>
       withAuth: true,
     })
       .then((res) => {
-        dispatch(actions.successDetail(res));
+        const user = getState().user.data!;
+        const userVote = res.votes.find((vote) => vote.user.id === user.id);
+        let vote: i.ApplicationsState['userVote'];
+
+        if (userVote) {
+          vote = userVote.vote;
+        }
+
+        dispatch(actions.successDetail(res, vote));
       })
       .catch(() => {
         dispatch(actions.failed());
@@ -127,5 +164,28 @@ export const sendComment = (applicationId: number, userId: string, comment: stri
       })
       .catch(() => {
         dispatch(actions.sendCommentFailed());
+      });
+  };
+
+export const vote = (applicationId: number, userId: string, vote: i.VOTE): i.ThunkAction<Promise<i.Vote | void>> =>
+  async (dispatch, getState, api) => {
+    dispatch(actions.vote());
+
+    return api.methods.post<i.Vote>({
+      url: api.url.api,
+      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationId}/vote`,
+      body: {
+        userId,
+        vote,
+      },
+      withAuth: true,
+    })
+      .then((res) => {
+        dispatch(actions.voteSuccess(res));
+
+        return res;
+      })
+      .catch(() => {
+        dispatch(actions.voteFailed());
       });
   };

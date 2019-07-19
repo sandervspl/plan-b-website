@@ -9,7 +9,6 @@ export const CircleIconContainer = styled.figure`
   height: 16px;
   border-radius: 100%;
   background: ${(props) => props.theme.color.background};
-  box-shadow: ${(props) => props.theme.shadow.icon};
   overflow: hidden;
 
   ${media.tablet`

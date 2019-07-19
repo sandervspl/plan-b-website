@@ -12,6 +12,7 @@ import { DateText, ClassText, Paragraph, CircleIcon, Heading } from 'common';
 import Profession from 'modules/ApplicationDetail/Profession';
 import Raids from 'modules/ApplicationDetail/Raids';
 import Discussion from 'modules/ApplicationDetail/Discussion';
+import Voting from 'modules/ApplicationDetail/Voting';
 import {
   ApplicationHeader, StatusButton, ApplicationRole, Top, ApplicationContainer, InfoGrid, EmptyState,
   ApplicationSection, ProfessionsGrid,
@@ -77,7 +78,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
               {character.role.name}
             </ApplicationRole>
 
-            {/* @TODO: accept/reject buttons */}
+            <Voting />
           </ApplicationHeader>
 
           <ApplicationSection>

@@ -6,7 +6,7 @@ import CheckCircleSvg from 'vectors/check-circle.svg';
 import Page from 'modules/Page';
 import { useSelector, useDispatch } from 'hooks';
 import { getUrl, getCmsUrl } from 'services';
-import { fetchApplicationDetail, actions as applicationsActions } from 'ducks/applications';
+import { fetchApplicationDetail, actions as applicationsActions, setStatus } from 'ducks/applications';
 import { hasProfessions } from 'ducks/applications/reselect';
 import { DateText, ClassText, Paragraph, CircleImg, Heading } from 'common';
 import Profession from 'modules/ApplicationDetail/Profession';
@@ -14,8 +14,8 @@ import Raids from 'modules/ApplicationDetail/Raids';
 import Discussion from 'modules/ApplicationDetail/Discussion';
 import Voting from 'modules/ApplicationDetail/Voting';
 import {
-  ApplicationHeader, StatusButton, ApplicationRole, Top, ApplicationContainer, InfoGrid, EmptyState,
-  ApplicationSection, ProfessionsGrid,
+  ApplicationHeader, Status, ApplicationRole, Top, ApplicationContainer, InfoGrid, EmptyState,
+  ApplicationSection, ProfessionsGrid, GuildMasterTools, StatusChangeButton,
 } from 'modules/ApplicationDetail/styled';
 
 const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, applicationId }) => {
@@ -39,7 +39,12 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
     return null;
   }
 
+  const updateStatus = (status: i.ApplicationStatus) => () => {
+    dispatch(setStatus(applicationId, status));
+  };
+
   const { character, personal } = application;
+  const isGuildMaster = user.data!.authLevel === i.AUTH_LEVEL.GUILD_MASTER;
   const StatusIcon = application.status === 'accepted'
     ? CheckCircleSvg
     : application.status === 'rejected'
@@ -56,12 +61,35 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
     >
       <ApplicationContainer>
         <div>
-          <ApplicationHeader>
+          <ApplicationHeader withGuildMasterTools={isGuildMaster}>
+            {isGuildMaster && (
+              <GuildMasterTools>
+                <Heading as="h3">Guild Master Tools</Heading>
+
+                <div>
+                  <StatusChangeButton status="open" onClick={updateStatus('open')}>
+                    <CircleSvg />
+                    Open
+                  </StatusChangeButton>
+
+                  <StatusChangeButton status="accepted" onClick={updateStatus('accepted')}>
+                    <CheckCircleSvg />
+                    Accept
+                  </StatusChangeButton>
+
+                  <StatusChangeButton status="rejected" onClick={updateStatus('rejected')}>
+                    <NotInterestedSvg />
+                    Reject
+                  </StatusChangeButton>
+                </div>
+              </GuildMasterTools>
+            )}
+
             <Top>
-              <StatusButton status={application.status}>
+              <Status status={application.status}>
                 <StatusIcon />
                 {application.status}
-              </StatusButton>
+              </Status>
 
               <DateText date={application.created_at} />
             </Top>

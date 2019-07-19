@@ -73,18 +73,19 @@ export type Vote = i.BaseDatabaseBody & {
   user: i.SimpleDatabaseUserData;
 }
 
-type ApplicationBase = i.BaseResponseBody & {
+export type ApplicationBase = i.BaseResponseBody & {
   status: i.ApplicationStatus;
   character: i.Character;
   personal: Personal;
-  discussion: i.Comment[];
 }
 
 export type ApplicationData = ApplicationBase & {
+  discussion: i.Comment[];
   votes: i.Vote[];
 }
 
 export type ApplicationDataDuck = ApplicationBase & {
+  discussion: i.Comment[];
   votes: {
     accepts: i.Vote[];
     rejects: i.Vote[];

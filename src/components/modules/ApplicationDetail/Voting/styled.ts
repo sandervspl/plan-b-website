@@ -7,7 +7,7 @@ import { ProgressIndicator, ProgressBarContainer } from 'common/ProgressBar/styl
 
 export const VotingContainer = styled.div<VotingContainerProps>`
   display: flex;
-  margin-top: 20px;
+  margin: 20px 20px 0;
   
   ${(props) => !props.hasVoted && css`
     display: grid;
@@ -19,6 +19,7 @@ export const VotingContainer = styled.div<VotingContainerProps>`
     position: absolute;
     top: 25px;
     right: 40px;
+    margin: 0;
   `}
 `;
 

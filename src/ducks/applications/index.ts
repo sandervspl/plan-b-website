@@ -19,6 +19,10 @@ export const actions = {
   vote: () => action('applications/VOTE'),
   voteFailed: () => action('applications/VOTE_FAILED'),
   voteSuccess: (newVote: i.Vote) => action('applications/VOTE_SUCCESS', newVote),
+
+  setStatus: () => action('applications/SET_STATUS'),
+  setStatusFailed: () => action('applications/SET_STATUS_FAILED'),
+  setStatusSuccess: (application: i.ApplicationBase) => action('applications/SET_STATUS_SUCCESS', application),
 };
 
 const initialState: i.ApplicationsState = {
@@ -95,6 +99,14 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
           },
         },
         userVote: action.payload.vote,
+      };
+    case 'applications/SET_STATUS_SUCCESS':
+      return {
+        ...state,
+        detail: {
+          ...state.detail!,
+          status: action.payload.status,
+        },
       };
     default:
       return state;
@@ -187,5 +199,27 @@ export const vote = (applicationId: number, userId: string, vote: i.VOTE): i.Thu
       })
       .catch(() => {
         dispatch(actions.voteFailed());
+      });
+  };
+
+export const setStatus = (applicationId: number, status: i.ApplicationStatus): i.ThunkAction<Promise<i.ApplicationBase | void>> =>
+  async (dispatch, getState, api) => {
+    dispatch(actions.setStatus());
+
+    return api.methods.put<i.ApplicationBase>({
+      url: api.url.api,
+      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationId}/status`,
+      body: {
+        status,
+      },
+      withAuth: true,
+    })
+      .then((res) => {
+        dispatch(actions.setStatusSuccess(res));
+
+        return res;
+      })
+      .catch(() => {
+        dispatch(actions.setStatusFailed());
       });
   };

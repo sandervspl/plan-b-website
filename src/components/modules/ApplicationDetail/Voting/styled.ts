@@ -87,6 +87,11 @@ export const ResultContainer = styled.div`
 export const Results = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+
+  ${media.tablet`
+    display: flex;
+    justify-content: flex-end;
+  `}
 `;
 
 export const Result = styled.div`
@@ -105,6 +110,11 @@ export const Avatar = styled(CircleIcon)<AvatarProps>`
   width: 24px;
   height: 24px;
   border: 2px solid ${(props) => props.theme.color.background.content};
+
+  ${media.tablet`
+    width: 28px;
+    height: 28px;
+  `}
 `;
 
 type AvatarProps = {
@@ -126,6 +136,14 @@ export const ResultText = styled.span<ResultTextProps>`
     fill: ${(props) => props.theme.color.secondary};
     transform: translateY(1px);
   }
+
+  ${media.tablet<ResultTextProps>`
+    font-size: 14px;
+
+    ${(props) => props.votes < 2 && css`
+      margin-right: 15px;
+    `}
+  `}
 `;
 
 type ResultTextProps = {

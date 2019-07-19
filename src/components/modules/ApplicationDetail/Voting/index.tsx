@@ -33,7 +33,8 @@ const Voting: React.FC = () => {
   };
 
 
-  const userHasVoted = typeof userVote === 'number';
+  const userVoted = typeof userVote === 'number';
+  const votingDisabled = userVoted || application.status !== 'open';
   const acceptVotes = application.votes.accepts;
   const rejectVotes = application.votes.rejects;
   const acceptAmount = acceptVotes.length;
@@ -42,15 +43,17 @@ const Voting: React.FC = () => {
   const rejectAvatarAmount = rejectAmount > MAX_AMOUNT_AVATAR ? MAX_AMOUNT_AVATAR : rejectAmount;
   const userVotedAccept = userVote === i.VOTE.ACCEPT;
   const userVotedReject = userVote === i.VOTE.REJECT;
+  const isNegativeVoted = rejectAmount > acceptAmount;
 
   return (
-    <VotingContainer hasvoted={userHasVoted}>
-      {userHasVoted ? (
-        <ResultContainer>
-          <VotedText>
-            <CheckIcon />
-            Voted!
-          </VotedText>
+    <VotingContainer hasVoted={votingDisabled}>
+      {votingDisabled ? (
+        <ResultContainer isNegativeVoted={isNegativeVoted}>
+          {userVoted && (
+            <VotedText>
+              <CheckIcon /> Voted!
+            </VotedText>
+          )}
 
           <Results>
             <Result>
@@ -62,7 +65,8 @@ const Voting: React.FC = () => {
 
               <ResultText
                 votes={acceptAvatarAmount - 1}
-                votedthis={userVotedAccept}
+                votedThis={userVotedAccept}
+                canMargin
               >
                 {userVotedAccept && <CheckIcon />} {acceptAmount} accepted
               </ResultText>
@@ -75,7 +79,7 @@ const Voting: React.FC = () => {
 
               <ResultText
                 votes={rejectAvatarAmount - 1}
-                votedthis={userVotedReject}
+                votedThis={userVotedReject}
               >
                 {userVotedReject && <CheckIcon />} {rejectAmount} rejected
               </ResultText>

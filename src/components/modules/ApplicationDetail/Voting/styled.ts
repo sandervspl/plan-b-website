@@ -9,7 +9,7 @@ export const VotingContainer = styled.div<VotingContainerProps>`
   display: flex;
   margin-top: 20px;
   
-  ${(props) => !props.hasvoted && css`
+  ${(props) => !props.hasVoted && css`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
@@ -23,7 +23,7 @@ export const VotingContainer = styled.div<VotingContainerProps>`
 `;
 
 type VotingContainerProps = {
-  hasvoted?: boolean;
+  hasVoted?: boolean;
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -70,19 +70,28 @@ type ButtonProps = {
   status: i.ApplicationStatus;
 }
 
-export const ResultContainer = styled.div`
+export const ResultContainer = styled.div<ResultContainerProps>`
   display: flex;
   flex-direction: column;
   width: 100%;
 
   ${ProgressBarContainer} {
     margin-top: 15px;
+
+    ${media.tablet`
+      margin-left: auto;
+      width: 200px;
+    `}
   }
 
   ${ProgressIndicator} {
-    background-color: ${(props) => props.theme.color.positive};
+    background-color: ${(props) => props.isNegativeVoted ? props.theme.color.negative : props.theme.color.positive};
   }
 `;
+
+type ResultContainerProps = {
+  isNegativeVoted?: boolean;
+}
 
 export const Results = styled.div`
   display: grid;
@@ -126,7 +135,7 @@ export const ResultText = styled.span<ResultTextProps>`
   transform: translateX(${(props) => ((props.votes * 12) * - 1) + 2}px);
   white-space: nowrap;
 
-  ${(props) => props.votedthis && css`
+  ${(props) => props.votedThis && css`
     font-weight: bold;
   `}
 
@@ -140,15 +149,16 @@ export const ResultText = styled.span<ResultTextProps>`
   ${media.tablet<ResultTextProps>`
     font-size: 14px;
 
-    ${(props) => props.votes < 2 && css`
+    ${(props) => props.votes < 2 && props.canMargin && css`
       margin-right: 15px;
     `}
   `}
 `;
 
 type ResultTextProps = {
-  votedthis?: boolean;
   votes: number;
+  votedThis?: boolean;
+  canMargin?: boolean;
 }
 
 export const VotedText = styled.div`

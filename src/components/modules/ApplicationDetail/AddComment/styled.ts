@@ -45,6 +45,11 @@ export const CommentInput = styled.textarea<CommentInputProps>`
       width: 100%;
     `}
   `}
+
+  ${media.tablet`
+    min-height: 70px;
+    resize: vertical;
+  `}
 `;
 
 type CommentInputProps = {

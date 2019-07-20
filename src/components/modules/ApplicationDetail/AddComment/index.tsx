@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SendIcon from 'vectors/send.svg';
+import LockIcon from 'vectors/lock.svg';
 import { useDispatch, useSelector } from 'hooks';
 import { sendComment } from 'ducks/applications';
 import { CircleImg } from 'common';
@@ -12,6 +13,9 @@ const AddComment: React.FC<Props> = ({ username, avatar }) => {
   const userId = useSelector((state) => state.user.data && state.user.data.id);
   const applicationId = useSelector((state) => (
     state.applications.detail && state.applications.detail.id
+  ));
+  const applicationLocked = useSelector((state) => (
+    state.applications.detail && state.applications.detail.locked
   ));
   const isMobile = useSelector((state) => state.ui.isMobile);
   const [text, setText] = useState('');
@@ -35,15 +39,23 @@ const AddComment: React.FC<Props> = ({ username, avatar }) => {
       </User>
 
       <CommentInputContainer>
-        <CommentInput
-          placeholder="Add comment"
-          value={text}
-          onChange={handleOnChange}
-          hastext={text.length > 0}
-        />
-        <SendButton show={text.length > 0} onClick={handleSubmit}>
-          {isMobile ? <SendIcon /> : 'Share'}
-        </SendButton>
+        {applicationLocked ? (
+          <CommentInput as="div" disabled>
+            <LockIcon /> Locked
+          </CommentInput>
+        ) : (
+          <>
+            <CommentInput
+              placeholder="Add comment"
+              value={text}
+              onChange={handleOnChange}
+              hastext={text.length > 0}
+            />
+            <SendButton show={text.length > 0} onClick={handleSubmit}>
+              {isMobile ? <SendIcon /> : 'Share'}
+            </SendButton>
+          </>
+        )}
       </CommentInputContainer>
     </AddCommentContainer>
   );

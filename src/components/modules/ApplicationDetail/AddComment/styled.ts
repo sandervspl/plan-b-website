@@ -25,6 +25,7 @@ export const CommentInput = styled.textarea<CommentInputProps>`
   ${ParagraphStyle};
   padding: 10px;
   width: 100%;
+  min-height: 70px;
   background-color: ${(props) => props.theme.color.background.content};
   font-size: 16px;
   color: ${(props) => props.theme.color.secondary};
@@ -46,14 +47,26 @@ export const CommentInput = styled.textarea<CommentInputProps>`
     `}
   `}
 
-  ${media.tablet`
-    min-height: 70px;
+  ${(props) => props.disabled && css`
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    color: ${(props) => props.theme.color.tab.inactive};
+
+    svg {
+      margin-right: 5px;
+      fill: ${(props) => props.theme.color.tab.inactive};
+    }
+  `}
+
+  ${media.tablet<CommentInputProps>`
     resize: vertical;
   `}
 `;
 
 type CommentInputProps = {
   hastext?: boolean;
+  disabled?: boolean;
 }
 
 export const CommentInputContainer = styled.div`

@@ -88,6 +88,7 @@ export const NavList = styled.ul`
   list-style: none;
 
   ${media.tablet`
+    justify-content: flex-start;
     margin-left: 170px;
     width: 300px;
   `}
@@ -136,6 +137,10 @@ export const NavItem = styled.li`
   a, span {
     ${HeaderNavLinkStyle};
   }
+
+  ${media.tablet`
+    margin-right: 20px;
+  `}
 `;
 
 export const SignIn = styled(NavLink)`

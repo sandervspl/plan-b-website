@@ -82,6 +82,7 @@ export type ApplicationBase = i.BaseResponseBody & {
 export type ApplicationData = ApplicationBase & {
   discussion: i.Comment[];
   votes: i.Vote[];
+  commentsAmount: number;
 }
 
 export type ApplicationDataDuck = ApplicationBase & {

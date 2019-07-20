@@ -35,7 +35,7 @@ const ApplicationItem: React.FC<Props> = ({ application }) => {
 
         <CommentsContainer>
           <CommentIcon />
-          0
+          {application.commentsAmount}
         </CommentsContainer>
 
         <MiscInfo title={getDateWithTime(application.created_at)}>

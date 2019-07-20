@@ -77,6 +77,7 @@ export type ApplicationBase = i.BaseResponseBody & {
   status: i.ApplicationStatus;
   character: i.Character;
   personal: Personal;
+  locked: boolean;
 }
 
 export type ApplicationData = ApplicationBase & {

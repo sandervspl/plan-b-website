@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import CircleSvg from 'vectors/circle.svg';
 import NotInterestedSvg from 'vectors/not-interested.svg';
 import CheckCircleSvg from 'vectors/check-circle.svg';
+import LockedIcon from 'vectors/lock.svg';
 import Page from 'modules/Page';
 import { useSelector, useDispatch } from 'hooks';
 import { getUrl, getCmsUrl } from 'services';
@@ -15,7 +16,7 @@ import Discussion from 'modules/ApplicationDetail/Discussion';
 import Voting from 'modules/ApplicationDetail/Voting';
 import {
   ApplicationHeader, Status, ApplicationRole, Top, ApplicationContainer, InfoGrid, EmptyState,
-  ApplicationSection, ProfessionsGrid, GuildMasterTools, StatusChangeButton,
+  ApplicationSection, ProfessionsGrid, GuildMasterTools, StatusChangeButton, LockedStatus,
 } from 'modules/ApplicationDetail/styled';
 
 const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, applicationId }) => {
@@ -86,6 +87,13 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
             )}
 
             <Top>
+              {application.locked && (
+                <LockedStatus>
+                  <LockedIcon />
+                  This application is locked.
+                </LockedStatus>
+              )}
+
               <Status status={application.status}>
                 <StatusIcon />
                 {application.status}

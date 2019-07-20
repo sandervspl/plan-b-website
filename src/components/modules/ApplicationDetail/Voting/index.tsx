@@ -34,7 +34,7 @@ const Voting: React.FC = () => {
 
 
   const userVoted = typeof userVote === 'number';
-  const votingDisabled = userVoted || application.status !== 'open';
+  const votingDisabled = userVoted || application.locked;
   const acceptVotes = application.votes.accepts;
   const rejectVotes = application.votes.rejects;
   const acceptAmount = acceptVotes.length;

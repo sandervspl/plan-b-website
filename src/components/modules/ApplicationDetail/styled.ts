@@ -39,7 +39,7 @@ export const Status = styled.div<StatusButtonProps>`
   ${ParagraphStyle};
   display: inline-flex;
   align-items: center;
-  margin-right: 20px;
+  margin-right: 15px;
   padding: 4px 18px;
   font-size: 14px;
   font-weight: bold;
@@ -50,8 +50,8 @@ export const Status = styled.div<StatusButtonProps>`
 
   svg {
     margin-right: 5px;
-    width: 15px;
-    height: 15px;
+    width: 17px;
+    height: 17px;
     fill: ${(props) => props.theme.color.secondary};
 
     ${media.tablet`
@@ -80,7 +80,8 @@ export const Status = styled.div<StatusButtonProps>`
 
   ${media.tablet`
     padding: 3px 25px;
-    font-size: 25px;
+    margin-right: 20px;
+    font-size: 18px;
     border-radius: 100px;
   `}
 `;
@@ -147,6 +148,7 @@ export const ApplicationRole = styled.div`
   align-items: center;
   margin: 0 20px;
   font-size: 16px;
+  text-transform: capitalize;
 
   ${CircleImgContainer} {
     margin-right: 5px;
@@ -162,13 +164,34 @@ export const ApplicationRole = styled.div`
   }
 
   ${media.tablet`
+    margin: 5px 40px 0;
     font-size: 25px;
   `}
 `;
 
 export const Top = styled.div`
-  display: flex;
-  align-items: center;
+  display: block;
+  margin: 0 20px;
+
+  ${DateContainer} {
+    display: inline-block;
+    font-size: 14px;
+    transform: translateY(-25%);
+
+    svg {
+      display: none;
+      width: 16px;
+      height: 16px;
+    }
+
+    ${media.tablet`
+      transform: translateY(-50%);
+    `}
+  }
+
+  ${media.tablet`
+    margin: 0 40px;
+  `}
 `;
 
 export const ApplicationHeader = styled.div<ApplicationHeaderProps>`
@@ -178,21 +201,6 @@ export const ApplicationHeader = styled.div<ApplicationHeaderProps>`
   ${(props) => props.withGuildMasterTools && css`
     padding-top: 0;
   `}
-
-  ${DateContainer} {
-    display: inline-flex;
-    font-size: 14px;
-
-    svg {
-      display: none;
-      width: 16px;
-      height: 16px;
-    }
-
-    ${media.tablet`
-      font-size: 16px;
-    `}
-  }
 
   ${ClassText} {
     display: block;
@@ -205,14 +213,10 @@ export const ApplicationHeader = styled.div<ApplicationHeaderProps>`
     }
 
     ${media.tablet`
-      margin-top: 75px;
-      font-size: 50px;
-      line-height: 50px;
+      margin: 75px 40px 0;
+      font-size: 40px;
+      line-height: 1;
     `}
-  }
-
-  ${Status} {
-    margin-left: 20px;
   }
 
   ${media.tablet<ApplicationHeaderProps>`
@@ -347,4 +351,30 @@ export const GuildMasterTools = styled.div`
     display: flex;
     justify-content: center;
   }
+`;
+
+export const LockedStatus = styled.div`
+  ${ParagraphStyle};
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  line-height: 1;
+  font-size: 16px;
+
+  svg {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    fill: ${(props) => props.theme.color.secondary};
+    transform: translateY(-1px);
+
+    ${media.tablet`
+      transform: translateY(-3px);
+    `}
+  }
+
+  ${media.tablet`
+    margin-bottom: 20px;
+    font-size: 18px;
+  `}
 `;

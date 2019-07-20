@@ -106,6 +106,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
         detail: {
           ...state.detail!,
           status: action.payload.status,
+          locked: action.payload.locked,
         },
       };
     default:

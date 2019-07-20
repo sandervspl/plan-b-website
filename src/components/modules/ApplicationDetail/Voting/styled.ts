@@ -17,7 +17,7 @@ export const VotingContainer = styled.div<VotingContainerProps>`
 
   ${media.tablet`
     position: absolute;
-    top: 25px;
+    top: 40px;
     right: 40px;
     margin: 0;
   `}
@@ -35,7 +35,7 @@ export const Button = styled.button<ButtonProps>`
   justify-content: center;
   padding: 10px 15px;
   width: 100%;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1;
   border: 0;
   outline: 0;
@@ -64,7 +64,7 @@ export const Button = styled.button<ButtonProps>`
   }
 
   ${media.tablet`
-    width: 130px;
+    font-size: 16px;
   `}
 `;
 

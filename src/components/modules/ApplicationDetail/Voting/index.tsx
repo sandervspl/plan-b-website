@@ -93,14 +93,14 @@ const Voting: React.FC = () => {
         </ResultContainer>
       ) : (
         <>
-        <Button status="accepted" onClick={handleVote(i.VOTE.ACCEPT)}>
-          <CheckCircleIcon />
-          Accept
-        </Button>
-        <Button status="rejected" onClick={handleVote(i.VOTE.REJECT)}>
-          <NotInterestedIcon />
-          Reject
-        </Button>
+          <Button status="accepted" onClick={handleVote(i.VOTE.ACCEPT)}>
+            <CheckCircleIcon />
+            Vote accept
+          </Button>
+          <Button status="rejected" onClick={handleVote(i.VOTE.REJECT)}>
+            <NotInterestedIcon />
+            Vote reject
+          </Button>
         </>
       )}
     </VotingContainer>

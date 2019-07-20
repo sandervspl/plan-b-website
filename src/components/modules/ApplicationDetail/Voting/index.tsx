@@ -59,7 +59,7 @@ const Voting: React.FC = () => {
             <Result>
               <AvatarRow>
                 {getMaxAvatars(acceptVotes).map((vote, i) => (
-                  <Avatar key={vote.id} src={vote.user.avatar} num={i} />
+                  <Avatar key={vote.id} src={vote.user.avatar} num={i} title={vote.user.username} />
                 ))}
               </AvatarRow>
 

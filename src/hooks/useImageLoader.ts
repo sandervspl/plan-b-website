@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import QuestionMark from 'images/questionmark.jpg';
 
 export function useImageLoader(path: string) {
-  const [image, setImage] = useState<string>();
+  const [image, setImage] = useState<string>('');
   const [loading, setLoading] = useState(true);
 
   const done = (src: string) => () => {

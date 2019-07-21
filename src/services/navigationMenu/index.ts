@@ -1,5 +1,4 @@
 import { routeNames } from 'server/routeNames';
-import { NavigationItem } from './types';
 
 const navigationMenu = [
   {

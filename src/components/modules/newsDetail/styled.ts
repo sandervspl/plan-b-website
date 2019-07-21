@@ -20,6 +20,16 @@ export const NewsDetailContainer = styled(MarkdownPageContainer)`
 
   ${MarkdownContent} {
     margin-bottom: 50px;
+
+    h1, h2, h3, h4, h5, h6, p {
+      margin-left: 20px;
+      margin-right: 20px;
+
+      ${media.tablet`
+        margin-left: 40px;
+        margin-right: 40px;
+      `}
+    }
   }
 
   ${media.tablet`

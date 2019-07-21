@@ -285,7 +285,7 @@ export const EmptyState = styled(Paragraph)`
 `;
 
 export const ApplicationSection = styled.section<ApplicationSectionProps>`
-  margin-top: 30px;
+  margin-top: 50px;
 
   ${Heading} {
     font-size: 18px;

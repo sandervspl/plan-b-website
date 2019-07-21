@@ -70,19 +70,23 @@ const generatePayload = (endpoint: API_ENDPOINT, payload: i.PagesBody): i.ApiDat
 export function fetchPage<T extends i.PagesBody = i.PagesBody>(
   endpoint: API_ENDPOINT,
   param?: number
-): i.ThunkAction<Promise<T | void>> {
+): i.ThunkAction<Promise<T | undefined>> {
   return async (dispatch, getState, api) => {
     dispatch(actions.load());
 
-    return api.methods.get<i.PagesBody>({
+    return api.methods.get<T>({
       url: api.url.api,
       path: param ? `${endpoint}/${param}` : endpoint,
     })
       .then((res) => {
         dispatch(actions.success(generatePayload(endpoint, res)));
+
+        return res;
       })
       .catch(() => {
         dispatch(actions.failed());
+
+        return undefined;
       });
   };
 };

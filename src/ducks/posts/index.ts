@@ -5,7 +5,9 @@ import { API_ENDPOINT } from 'services';
 export const actions = {
   load: () => action('posts/LOAD'),
   failed: () => action('posts/FAILED'),
+
   postsSuccess: (posts: i.Post[]) => action('posts/POSTS_SUCCESS', posts),
+
   allSuccess: (posts: i.Post[]) => action('posts/ALL_SUCCESS', posts),
 };
 

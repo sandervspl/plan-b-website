@@ -5,7 +5,6 @@ import { API_ENDPOINT, getUrl, getCmsUrl } from 'services';
 import { useSelector } from 'hooks';
 import { fetchPage } from 'ducks/page';
 import { fetchRecruitment } from 'ducks/recruitment';
-import { fetchAllPosts } from 'ducks/posts';
 import { DateText, Tag, Heading, NewsItem } from 'common';
 import { MarkdownContent } from 'common/MarkdownPage/styled';
 import Page from 'modules/Page';
@@ -17,7 +16,6 @@ import {
 
 const NewsDetailPage: i.NextPageComponent<{}, Queries> = ({ url }) => {
   const post = useSelector((state) => state.page.post);
-  const posts = useSelector((state) => state.posts.data);
 
   if (!post) return null;
 
@@ -58,10 +56,10 @@ const NewsDetailPage: i.NextPageComponent<{}, Queries> = ({ url }) => {
 
           <Twitch />
 
-          {posts && posts.length > 0 && (
+          {post.relatedNews.length > 0 && (
             <MoreNewsContainer>
-              <Heading as="h2">More news</Heading>
-              {posts.filter((_, i) => i < 3).map((post) => (
+              <Heading as="h2">Related news</Heading>
+              {post.relatedNews.map((post) => (
                 <NewsItem key={post.id} post={post} />
               ))}
             </MoreNewsContainer>
@@ -76,7 +74,6 @@ NewsDetailPage.getInitialProps = async ({ req, query, store }) => {
   await Promise.all([
     store.dispatch(fetchPage<i.NewsDetailPageData>(API_ENDPOINT.POSTS, query.id)),
     store.dispatch(fetchRecruitment()),
-    store.dispatch(fetchAllPosts()),
   ]);
 
   return {

@@ -1,5 +1,4 @@
 import * as i from 'types';
-import { API_ENDPOINT } from 'services';
 
 // Duck state
 export type PageState = Omit<i.BaseState, 'data'> & i.ApiDataPayloads & {
@@ -27,11 +26,13 @@ export type LoginPageData = BasePageData & {
   disclaimer?: string;
 }
 
-export type NewsDetailPageData = BasePageData & i.Post;
+export type NewsDetailPageData = BasePageData & i.Post & {
+  relatedNews: i.Post[];
+};
 
 
 // Misc types
-export type PagesBody = i.HomePageData | i.AboutPageData | i.LoginPageData | NewsDetailPageData;
+export type PagesBody = i.HomePageData | i.AboutPageData | i.LoginPageData | i.NewsDetailPageData;
 
 export type ApiDataPayloads = {
   home?: i.HomePageData;

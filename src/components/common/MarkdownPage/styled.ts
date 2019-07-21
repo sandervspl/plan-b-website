@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'styles';
+import { UnderlineStyle, UnderlineStyleAnim } from 'common/typography';
 
 export const MarkdownContent = styled.div``;
 
@@ -17,14 +18,17 @@ export const MarkdownPageContainer = styled.div`
   ${MarkdownContent} {
     h1, h2, h3, h4, h5, h6, p {
       margin: 0 21px;
-      color: ${(props) => props.theme.color.secondary};
-      font-family: ${(props) => props.theme.font.primary};
 
       ${media.tablet`
         margin: 0 40px;
       `}
     }
-    
+
+    h1, h2, h3, h4, h5, h6, p, a {
+      color: ${(props) => props.theme.color.secondary};
+      font-family: ${(props) => props.theme.font.primary};
+    }
+
     h1, h2, h3, h4, h5, h6 {
       margin-top: 30px;
       margin-bottom: 15px;
@@ -32,6 +36,16 @@ export const MarkdownPageContainer = styled.div`
       ${media.tablet`
         margin-top: 60px;
       `}
+    }
+
+    a {
+      color: ${(props) => props.theme.color.primary};
+
+      ${UnderlineStyleAnim};
+
+      &::after {
+        background-color: ${(props) => props.theme.color.primary};
+      }
     }
 
     h1:first-of-type {

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { media } from 'styles';
-import { NavLink, UnderlineStyle, UnderlineStyleAnim } from 'common';
+import { NavLink, UnderlineStyleAnim } from 'common';
 import { GlitchContainer } from 'common/Glitch/styled';
 import { LogoNameIcon } from '../GlitchLogo/styled';
 

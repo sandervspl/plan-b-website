@@ -3,7 +3,7 @@ import { media } from 'styles';
 import { Tag, Heading } from 'common';
 import { MarkdownPageContainer, MarkdownContent } from 'common/MarkdownPage/styled';
 import { DateContainer } from 'common/DateText/styled';
-import { NewsItemContainer } from 'common/NewsItem/styled';
+import { NewsItemContainer, PostHeading } from 'common/NewsItem/styled';
 import {
   RecruitmentBlockContainer, RecruitmentInner, ApplyNow,
 } from 'modules/RecruitmentBlock/styled';
@@ -43,6 +43,14 @@ export const NewsDetailContainer = styled(MarkdownPageContainer)`
 export const MoreNewsContainer = styled.div`
   ${NewsItemContainer} {
     height: 178px;
+
+    ${DateContainer} {
+      font-size: 14px;
+    }
+
+    ${PostHeading} ${Heading} {
+      font-size: 24px;
+    }
   }
 `;
 

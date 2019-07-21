@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'styles';
-import { UnderlineStyle, UnderlineStyleAnim } from 'common/typography';
+import { UnderlineStyleAnim } from 'common/typography';
 
 export const MarkdownContent = styled.div``;
 

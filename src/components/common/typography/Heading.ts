@@ -3,11 +3,11 @@ import { media } from 'styles';
 
 const headingSize = (as: HeadingProps['as']) => {
   let px = 30;
-  let bigMediaPx = 65;
+  let bigMediaPx = 50;
 
   switch (as) {
     case 'h1':
-    default: px = 30; bigMediaPx = 65; break;
+    default: px = 30; bigMediaPx = 50; break;
     case 'h2': px = 20; bigMediaPx = 30; break;
     case 'h3': px = 14; bigMediaPx = 25; break;
   }

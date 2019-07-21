@@ -45,9 +45,5 @@ export const ProfessionName = styled.div`
       height: 22px;
     `}
   }
-
-  ${media.tablet`
-    font-size: 16px;
-  `}
 `;
 

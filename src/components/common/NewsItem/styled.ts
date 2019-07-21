@@ -133,10 +133,6 @@ export const NewsItemContainer = styled.article<NewsItemContainerProps>`
     right: 10px;
     z-index: 1;
 
-    svg {
-      transform: translateY(-1px);
-    }
-
     ${media.tablet`
       top: 20px;
       right: 20px;

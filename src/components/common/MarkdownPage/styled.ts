@@ -20,7 +20,7 @@ export const MarkdownPageContainer = styled.div`
       margin: 0 21px;
 
       ${media.tablet`
-        margin: 0 40px;
+        margin: 0 130px;
       `}
     }
 
@@ -82,6 +82,8 @@ export const MarkdownPageContainer = styled.div`
 
       ${media.tablet`
         margin-bottom: 25px;
+        font-size: 18px;
+        line-height: 1.6;
       `}
     }
 

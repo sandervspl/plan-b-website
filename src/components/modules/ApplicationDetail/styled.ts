@@ -55,8 +55,9 @@ export const Status = styled.div<StatusButtonProps>`
     fill: ${(props) => props.theme.color.secondary};
 
     ${media.tablet`
-      width: 30px;
-      height: 30px;
+      width: 20px;
+      height: 20px;
+      transform: translateY(-1px);
     `}
   }
 

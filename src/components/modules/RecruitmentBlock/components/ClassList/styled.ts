@@ -7,11 +7,11 @@ export const ClassListContainer = styled.ul`
   list-style: none;
 
   li {
-    margin-bottom: 10px;
-    font-size: 18px;
+    margin-bottom: 5px;
+    font-size: 16px;
 
     ${media.tablet`
-      font-size: 20px;
+      font-size: 16px;
     `}
   }
 

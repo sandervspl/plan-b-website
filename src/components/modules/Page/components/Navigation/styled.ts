@@ -81,7 +81,7 @@ export const NavContainer = styled.nav`
 
 export const NavList = styled.ul`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 0;
   margin: 0;
   width: 100%;
@@ -115,14 +115,11 @@ export const HeaderNavLinkStyle = css`
 export const NavItem = styled.li`
   padding: 0;
   margin: 0;
+  margin-right: 20px;
 
   a, span {
     ${HeaderNavLinkStyle};
   }
-
-  ${media.tablet`
-    margin-right: 20px;
-  `}
 `;
 
 export const SignIn = styled(NavLink)`

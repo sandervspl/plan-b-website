@@ -49,12 +49,6 @@ const Voting: React.FC = () => {
     <VotingContainer hasVoted={votingDisabled}>
       {votingDisabled ? (
         <ResultContainer isNegativeVoted={isNegativeVoted}>
-          {userVoted && (
-            <VotedText>
-              <CheckIcon /> Voted!
-            </VotedText>
-          )}
-
           <Results>
             <Result>
               <AvatarRow>

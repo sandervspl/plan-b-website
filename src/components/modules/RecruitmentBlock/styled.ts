@@ -9,6 +9,7 @@ export const RecruitmentBlockContainer = styled.div`
   background-color: ${(props) => props.theme.color.background.content};
 
   ${media.tablet`
+    padding-top: 0;
     grid-column: 15 / 21;
     position: relative;
     padding-bottom: 50px;
@@ -24,6 +25,7 @@ export const RecruitmentBlockContainer = styled.div`
 
     ${Heading} {
       margin-bottom: 20px;
+      font-size: 24px;
     }
   `}
 `;

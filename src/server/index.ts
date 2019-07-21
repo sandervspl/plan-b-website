@@ -22,6 +22,8 @@ app.prepare().then(() => {
     .listen(config.port, (err) => {
       if (err) throw err;
 
-      console.info(`[${config.env}] Server running on http://localhost:${config.port}`);
+      console.info(
+        `[${config.env} / ${config.appEnv}] Server running on port ${config.port} (${config.domain()})`
+      );
     });
 });

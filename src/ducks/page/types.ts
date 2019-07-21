@@ -18,6 +18,7 @@ export type HomePageData = BasePageData & {
 export type AboutPageData = BasePageData & {
   title: string;
   content: string;
+  header_image: i.Image;
 }
 
 export type LoginPageData = BasePageData & {

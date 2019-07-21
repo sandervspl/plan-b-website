@@ -122,22 +122,3 @@ export const NewsInfo = styled.div`
     border: 1px solid ${(props) => props.theme.color.border.primary};
   `}
 `;
-
-export const HeadImage = styled.figure`
-  margin: 20px 0 0;
-  width: 100%;
-  height: 150px;
-  overflow: hidden;
-
-  > img {
-    position: static;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  ${media.tablet`
-    height: 350px;
-  `}
-`;

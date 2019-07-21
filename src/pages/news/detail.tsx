@@ -11,8 +11,9 @@ import Page from 'modules/Page';
 import RecruitmentBlock from 'modules/RecruitmentBlock';
 import Twitch from 'modules/Twitch';
 import {
-  HeadImage, NewsDetailContainer, SidebarContainer, NewsInfo, MoreNewsContainer,
+  NewsDetailContainer, SidebarContainer, NewsInfo, MoreNewsContainer,
 } from 'modules/NewsDetail/styled';
+import HeaderImage from 'modules/Page/components/HeaderImage';
 
 const NewsDetailPage: i.NextPageComponent<{}, Queries> = ({ url }) => {
   const post = useSelector((state) => state.page.post);
@@ -29,9 +30,7 @@ const NewsDetailPage: i.NextPageComponent<{}, Queries> = ({ url }) => {
       }}
       url={url}
     >
-      <HeadImage>
-        <img src={getCmsUrl(post.image.url)} alt={post.image.name} />
-      </HeadImage>
+      <HeaderImage src={getCmsUrl(post.image.url)} alt={post.image.name} />
 
       <NewsInfo>
         <DateText date={post.created_at} />

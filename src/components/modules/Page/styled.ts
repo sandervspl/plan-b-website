@@ -19,7 +19,7 @@ export const PageContainer = styled.div`
       background-image: url(${bgImg});
       background-position: center center;
       background-size: cover;
-      opacity: .1;
+      opacity: .15;
     }
 
     > div {

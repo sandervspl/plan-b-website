@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 import { media } from 'styles';
-import { Tag, Heading } from 'common';
+import { Tag, Heading, GradientHeadingStyle } from 'common';
 import { MarkdownPageContainer, MarkdownContent } from 'common/MarkdownPage/styled';
 import { DateContainer } from 'common/DateText/styled';
 import { NewsItemContainer, PostHeading } from 'common/NewsItem/styled';
-import {
-  RecruitmentBlockContainer, RecruitmentInner, ApplyNow,
-} from 'modules/RecruitmentBlock/styled';
+import { RecruitmentBlockContainer, RecruitmentInner } from 'modules/RecruitmentBlock/styled';
 import { TwitchContainer } from 'modules/Twitch/styled';
 
 export const NewsDetailContainer = styled(MarkdownPageContainer)`
@@ -16,6 +14,10 @@ export const NewsDetailContainer = styled(MarkdownPageContainer)`
   h1:first-of-type {
     margin-top: 0;
     padding-top: 20px;
+
+    ${media.tablet`
+      padding-top: 40px;
+    `}
   }
 
   ${MarkdownContent} {
@@ -36,6 +38,7 @@ export const NewsDetailContainer = styled(MarkdownPageContainer)`
     display: grid;
     grid-template-columns: repeat(20, 1fr);
     padding-top: 0;
+    margin-bottom: 50px;
     border-left: 1px solid;
     border-right: 1px solid;
     border-color: ${(props) => props.theme.color.border.primary};
@@ -76,11 +79,12 @@ export const SidebarContainer = styled.div`
       ul, small {
         padding: 0 20px;
       }
-    }
 
-    ${ApplyNow} {
-      border: 0;
-      background-color: ${(props) => props.theme.color.background.content};
+      ${media.tablet`
+        ${Heading} {
+          border-top: 0;
+        }
+      `}
     }
 
     ${media.tablet`
@@ -91,10 +95,9 @@ export const SidebarContainer = styled.div`
   }
 
   div > ${Heading}:first-child {
+    ${GradientHeadingStyle};
     padding: 15px 20px;
     font-size: 20px;
-    text-align: center;
-    background-color: ${(props) => props.theme.color.background};
     border-bottom: 1px solid;
     border-top: 1px solid;
     border-color: ${(props) => props.theme.color.border.primary};
@@ -128,7 +131,7 @@ export const NewsInfo = styled.div`
   }
 
   ${media.tablet`
-    padding: 10px 40px;
+    padding: 15px 40px;
     border: 1px solid ${(props) => props.theme.color.border.primary};
   `}
 `;

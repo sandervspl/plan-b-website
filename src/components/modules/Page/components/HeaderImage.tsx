@@ -7,6 +7,9 @@ export const HeaderImageContainer = styled.figure`
   width: 100%;
   height: 150px;
   overflow: hidden;
+  background-color: ${(props) => props.theme.color.background.content};
+  border-color: ${(props) => props.theme.color.border.primary};
+  border-top: 1px solid;
 
   > img {
     position: static;
@@ -19,6 +22,8 @@ export const HeaderImageContainer = styled.figure`
   ${media.tablet`
     margin: 0;
     height: 350px;
+    border-left: 1px solid;
+    border-right: 1px solid;
   `}
 `;
 

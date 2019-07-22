@@ -14,7 +14,7 @@ export const LoginContainer = styled.div`
   max-width: 400px;
   height: calc(100vh - 128px);
   background-color: ${(props) => props.theme.color.background.content};
-  box-shadow: 0 7px 14px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: ${(props) => props.theme.shadow.content};
 
   small {
     ${ParagraphStyle};

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { MarkdownPageContainer, MarkdownContent } from 'common/MarkdownPage/styled';
 import { media } from 'styles';
+import { MarkdownPageContainer, MarkdownContent } from 'common/MarkdownPage/styled';
 
 export const AboutContainer = styled(MarkdownPageContainer)`
   margin-top: 0;

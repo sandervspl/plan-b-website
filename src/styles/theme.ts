@@ -38,7 +38,7 @@ const theme = {
   },
 
   font: {
-    primary: 'Heebo, sans-serif',
+    primary: '\'Source Sans Pro\', sans-serif',
     secondary: 'Playfair, serif',
   },
 

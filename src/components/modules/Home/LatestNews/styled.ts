@@ -41,6 +41,7 @@ export const LatestNewsContainer = styled.div`
     margin-top: 0;
     height: 410px;
     border: 1px solid;
+    border-bottom: 0;
   `}
 `;
 

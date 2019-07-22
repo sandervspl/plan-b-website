@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import { Link, Heading } from 'common';
+import { Link, Heading, Small, GradientHeadingStyle } from 'common';
 import { media } from 'styles';
 
 export const RecruitmentBlockContainer = styled.div`
   position: relative;
-  padding: 15px 0;
   width: 100%;
   background-color: ${(props) => props.theme.color.background.content};
 
@@ -22,19 +21,26 @@ export const RecruitmentBlockContainer = styled.div`
     &::-webkit-scrollbar {
       display: none;
     }
-
-    ${Heading} {
-      margin-bottom: 20px;
-      font-size: 24px;
-    }
   `}
 `;
 
 export const RecruitmentInner = styled.div`
-  padding: 0 10px;
+  ${Small} {
+    padding: 0 15px;
+  }
 
+  ${Heading} {
+    ${GradientHeadingStyle};
+    margin-bottom: 20px;
+    font-size: 20px;
+
+    ${media.tablet`
+      padding: 20px;
+      font-size: 24px;
+    `}
+  }
+  
   ${media.tablet`
-    padding: 20px;
     height: 100%;
     overflow: scroll;
 
@@ -49,34 +55,36 @@ export const ApplyNow = styled(Link)`
   justify-content: center;
   align-items: center;
   margin-top: 25px;
-  padding: 15px 0;
+  padding: 10px 0;
   width: 100%;
   font-family: ${(props) => props.theme.font.primary};
-  font-size: 25px;
-  line-height: 25px;
+  font-size: 18px;
   font-weight: bold;
-  color: ${(props) => props.theme.color.primary};
+  color: ${(props) => props.theme.color.secondary};
   text-transform: uppercase;
-  border-top: 1px solid ${(props) => props.theme.color.border.primary};
-  border-bottom: 1px solid ${(props) => props.theme.color.border.primary};
-  background-color: ${(props) => props.theme.color.background};
+  background-color: ${(props) => props.theme.color.primary};
 
   svg {
     margin-left: 5px;
     width: 25px;
-    fill: ${(props) => props.theme.color.primary};
+    fill: ${(props) => props.theme.color.secondary};
     transform: translateY(-2px);
   }
 
   ${media.tablet`
     position: absolute;
     bottom: 0;
+    padding: 15px 0;
+    font-size: 20px;
+    transition: background-color .25s ease-in-out;
 
     svg {
       transition: transform .25s ease-in-out;
     }
 
     &:hover {
+      background-color: ${(props) => props.theme.color.primary.dark};
+
       svg {
         transform: translate3d(5px, -2px, 0);
       }

@@ -2,8 +2,10 @@ import styled from 'styled-components';
 import { media } from 'styles';
 
 export const ClassListContainer = styled.ul`
-  margin-top: 15px;
-  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0;
+  padding: 0 15px;
   list-style: none;
 
   li {
@@ -14,8 +16,4 @@ export const ClassListContainer = styled.ul`
       font-size: 16px;
     `}
   }
-
-  ${media.tablet`
-    display: block;
-  `}
 `;

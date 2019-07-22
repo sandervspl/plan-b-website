@@ -5,3 +5,4 @@ export * from './Paragraph';
 export * from './UnderlineStyle';
 export * from './Small';
 export { BaseTextStyle } from './BaseText';
+export { GradientHeadingStyle } from './GradientHeadingStyle';

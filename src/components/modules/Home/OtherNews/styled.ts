@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'styles';
-import { Heading } from 'common';
+import { Heading, GradientHeadingStyle } from 'common';
 import { NewsItemContainer } from 'common/NewsItem/styled';
 import { lineClamp } from 'common/styles';
 
@@ -10,12 +10,11 @@ export const OtherNewsContainer = styled.div`
   background-color: ${(props) => props.theme.color.background.content};
 
   > ${Heading} {
-    margin-bottom: 15px;
-    padding: 0 15px;
+    ${GradientHeadingStyle};
 
     ${media.tablet`
       margin-bottom: 20px;
-      padding: 0 20px;
+      border-top: 0;
     `}
   }
 
@@ -47,7 +46,6 @@ export const OtherNewsContainer = styled.div`
 
   ${media.tablet`
     grid-column: 1 / 21;
-    padding-top: 30px;
     border: 1px solid ${(props) => props.theme.color.border.primary};
     border-top: none;
   `}

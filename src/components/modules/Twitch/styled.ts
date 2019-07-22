@@ -1,18 +1,17 @@
 import styled from 'styled-components';
 import { media } from 'styles';
-import { Heading, Small } from 'common';
+import { Heading, Small, GradientHeadingStyle } from 'common';
 
 export const TwitchContainer = styled.div`
   padding-bottom: 20px;
   background-color: ${(props) => props.theme.color.background.content};
 
   > ${Heading} {
+    ${GradientHeadingStyle};
     margin-bottom: 15px;
-    padding: 0 15px;
 
     ${media.tablet`
       margin-bottom: 20px;
-      padding: 0 20px;
     `}
   }
 
@@ -28,7 +27,6 @@ export const TwitchContainer = styled.div`
 
   ${media.tablet`
     grid-column: 1 / 21;
-    padding-top: 30px;
     border: 1px solid ${(props) => props.theme.color.border.primary};
     border-top: none;
   `}

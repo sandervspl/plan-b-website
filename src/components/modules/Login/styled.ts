@@ -1,39 +1,27 @@
 import styled from 'styled-components';
-import DiscordLogoSvg from 'vectors/discord-logo.svg';
-import { Paragraph, ParagraphStyle } from 'common';
+import tinycolor from 'tinycolor2';
+import DiscordLogoSvg from 'vectors/discord-logo-white.svg';
+import { ParagraphStyle } from 'common';
 import { media } from 'styles';
 import { GlitchContainer } from 'common/Glitch/styled';
 
 export const LoginContainer = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px 25px 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-
-  ${media.tablet`
-    max-width: ${(props) => props.theme.width.login};
-    margin: 0 auto;
-  `}
-
-  a {
-    width: 100%;
-  }
-
-  ${Paragraph} {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 16px;
-  }
+  margin: 20px auto 0;
+  padding: 30px 20px;
+  max-width: 400px;
+  height: calc(100vh - 128px);
+  background-color: ${(props) => props.theme.color.background.content};
+  box-shadow: 0 7px 14px 8px rgba(0, 0, 0, 0.15);
 
   small {
     ${ParagraphStyle};
-    margin-top: 20px;
-    font-size: 12px;
-    text-align: center;
+    margin-top: 15px;
+    margin-right: auto;
+    font-size: 14px;
+    color: ${(props) => props.theme.color.secondary.darker};
   }
 
   ${GlitchContainer} {
@@ -41,48 +29,48 @@ export const LoginContainer = styled.div`
     position: relative;
     top: 0;
     left: 0;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     width: 100%;
-    height: 105px;
+    height: 150px;
 
     ${media.tablet`
-      margin-bottom: 30px;
       height: 200px;
     `}
   }
-`;
-
-export const Heading = styled.h1`
-  color: ${(props) => props.theme.color.primary};
-  margin-bottom: 20px;
-  text-transform: uppercase;
+  
+  ${media.tablet`
+    justify-content: center;
+    margin: 0 auto;
+    padding: 50px 40px;
+    height: auto;
+  `}
 `;
 
 export const Button = styled.button`
+  ${ParagraphStyle};
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 37px;
-  padding: 0 18px;
-  line-height: 37px;
-  font-size: 17px;
-  color: ${(props) => props.theme.color.secondary};
-  border: 1px solid rgba(255, 255, 255, .15);
-  border-radius: 4px;
+  padding: 10px;
+  font-size: 16px;
+  border: 0;
+  outline: 0;
+  border-radius: 3px;
   cursor: pointer;
-  user-select: none;
-  background-color: ${(props) => props.theme.color.background};
-  font-family: ${(props) => props.theme.font.primary};
-  transition: .1s border-color;
+  background-color: ${(props) => props.theme.color.discord};
+  transition: .1s background-color;
 
   &:hover {
-    border-color: rgba(255, 255, 255, .54);
+    background-color: ${(props) => tinycolor(props.theme.color.discord).darken(5).toString()};
   }
+
+  ${media.tablet`
+    padding: 13px;
+  `}
 `;
 
 export const DiscordLogo = styled(DiscordLogoSvg)`
-  display: inline-block;
-  margin-right: 4px;
-  height: 25px;
-  line-height: 25px;
+  margin-right: 10px;
+  height: 24px;
 `;

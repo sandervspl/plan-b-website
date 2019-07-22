@@ -2,9 +2,9 @@ import * as i from 'types';
 import React, { useEffect } from 'react';
 import { api, API_ENDPOINT, getUrl } from 'services';
 import { useRouter, useSelector } from 'hooks';
-import { Paragraph, Link, Glitch, GlitchBullLogo } from 'common';
+import { Glitch, GlitchBullLogo } from 'common';
 import Page from 'modules/Page';
-import { LoginContainer, Heading, Button, DiscordLogo } from 'modules/Login/styled';
+import { LoginContainer, Button, DiscordLogo } from 'modules/Login/styled';
 import { fetchPage } from 'ducks/page';
 
 const Login: i.NextPageComponent = ({ url }) => {
@@ -14,7 +14,9 @@ const Login: i.NextPageComponent = ({ url }) => {
 
   useEffect(() => {
     // Redirect if we already have user data
-    if (user) router.push('/');
+    if (user) {
+      router.push('/');
+    }
   }, []);
 
   const handleOnClick = () => {
@@ -22,19 +24,14 @@ const Login: i.NextPageComponent = ({ url }) => {
   };
 
   return (
-    <Page withoutNav meta={login && login.meta} url={url}>
+    <Page meta={login && login.meta} url={url}>
       <LoginContainer>
         {!user && login && (
           <>
-            <Link to="home">
-              <Glitch>
-                <GlitchBullLogo />
-              </Glitch>
-            </Link>
-            <Heading>{login.title}</Heading>
-            <Paragraph>
-              {login.content}
-            </Paragraph>
+            <Glitch>
+              <GlitchBullLogo />
+            </Glitch>
+
             <Button onClick={handleOnClick}>
               <DiscordLogo />
               Sign in with Discord

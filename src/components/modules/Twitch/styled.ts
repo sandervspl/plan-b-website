@@ -40,7 +40,6 @@ export const NoStreamers = styled.div`
   width: 100%;
 
   ${Small} {
-    width: 50%;
     text-align: center;
   }
 `;

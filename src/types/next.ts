@@ -9,15 +9,12 @@ export type NextAppContext<Q = {}> = INextAppContext & {
   query: Q;
 }
 
-export type NextPageComponentProps<P = {}> = P & {
+export type NextPageComponentProps = {
   url: string;
 }
 
-type NextPageComponentReturn<P = {}> = Partial<DefaultAppIProps> & NextPageComponentProps<P>;
+type NextPageComponentReturn = Partial<DefaultAppIProps> & NextPageComponentProps;
 
-export type NextPageComponent<
-  P = {},
-  Q = {}
-> = React.FC<P & NextPageComponentProps> & {
+export type NextPageComponent<P = {}, Q = {}> = React.FC<P & NextPageComponentProps> & {
   getInitialProps?(context: NextAppContext<Q>): NextPageComponentReturn | Promise<NextPageComponentReturn>;
 }

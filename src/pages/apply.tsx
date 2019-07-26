@@ -135,7 +135,7 @@ ApplicationPage.getInitialProps = ({ req, res }) => {
   };
 };
 
-type Props = i.NextPageComponentProps & {
+type Props = {
   sendApplication: i.SendApplication;
 }
 

@@ -65,6 +65,7 @@ const ApplicationPage: i.NextPageComponent<Props> = (props) => {
     }
   }, [containerEl]);
 
+  // eslint-disable-next-line
   function preventSubmit(e: KeyboardEvent) {};
 
   const handleClick = () => {

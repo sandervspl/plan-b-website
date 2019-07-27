@@ -3,16 +3,10 @@ import { media } from 'styles';
 import { Heading, Small, GradientHeadingStyle } from 'common';
 
 export const TwitchContainer = styled.div`
-  padding-bottom: 20px;
   background-color: ${(props) => props.theme.color.background.content};
 
   > ${Heading} {
     ${GradientHeadingStyle};
-    margin-bottom: 15px;
-
-    ${media.tablet`
-      margin-bottom: 20px;
-    `}
   }
 
   svg {
@@ -37,6 +31,7 @@ export const NoStreamers = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 20px 0;
   width: 100%;
 
   ${Small} {

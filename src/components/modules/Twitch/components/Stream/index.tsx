@@ -1,7 +1,7 @@
 import * as i from 'types';
 import React from 'react';
 import { useSelector } from 'hooks';
-import { Heading } from 'common';
+import { Heading, Link } from 'common';
 import { StreamContainer, ViewCount, Thumbnail } from './styled';
 
 const Stream: React.FC<Props> = ({ stream }) => {
@@ -15,12 +15,14 @@ const Stream: React.FC<Props> = ({ stream }) => {
 
   return (
     <StreamContainer>
-      <Thumbnail>
-        <img src={bgUrl} alt="" />
-      </Thumbnail>
-      <ViewCount>{stream.viewer_count}</ViewCount>
-      <Heading as="h2">{stream.user_name}</Heading>
-      <Heading as="h4">{stream.title}</Heading>
+      <Link external to={`https://www.twitch.tv/${stream.user_name}`}>
+        <Thumbnail>
+          <img src={bgUrl} alt="" />
+        </Thumbnail>
+        <ViewCount>{stream.viewer_count}</ViewCount>
+        <Heading as="h2">{stream.user_name}</Heading>
+        <Heading as="h4">{stream.title}</Heading>
+      </Link>
     </StreamContainer>
   );
 };

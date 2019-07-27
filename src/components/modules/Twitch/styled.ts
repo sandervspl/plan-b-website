@@ -8,6 +8,10 @@ export const TwitchContainer = styled.div`
 
   > ${Heading} {
     ${GradientHeadingStyle};
+
+    ${media.tablet`
+      margin-bottom: 20px;
+    `}
   }
 
   svg {

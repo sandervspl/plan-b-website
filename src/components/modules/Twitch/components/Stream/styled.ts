@@ -1,29 +1,47 @@
 import styled from 'styled-components';
 import { Heading, ParagraphStyle } from 'common';
 import { lineClamp } from 'common/styles';
+import { media } from 'styles';
 
 export const StreamContainer = styled.li`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  position: relative;
-  padding: 10px;
-  width: 100%;
-  height: 100px;
-
-  ${Heading} {
-    ${lineClamp(1)};
+  a {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     position: relative;
-    z-index: 1;
+    padding: 10px;
+    width: 100%;
+    height: 100px;
 
-    &:first-child {
-      margin-top: auto;
+    ${Heading} {
+      ${lineClamp(1)};
+      position: relative;
+      z-index: 1;
+
+      &:first-child {
+        margin-top: auto;
+      }
     }
+
+    h4 {
+      font-weight: normal;
+    }
+
+    ${media.tablet`
+      height: 100%;
+      border: 1px solid ${(props) => props.theme.color.border.primary};
+
+      h2 {
+        margin-bottom: 5px;
+      }
+    `}
   }
 
-  h4 {
-    font-weight: normal;
-  }
+  ${media.tablet`
+      margin-bottom: 20px;
+      padding: 0 20px;
+      height: 230px;
+  `}
 `;
 
 export const Thumbnail = styled.figure`
@@ -70,4 +88,15 @@ export const ViewCount = styled.div`
     background-color: ${(props) => props.theme.color.primary};
     border-radius: 100%;
   }
+
+  ${media.tablet`
+    top: 15px;
+    right: 20px;
+    font-size: 16px;
+
+    &::before {
+      width: 10px;
+      height: 10px;
+    }
+  `}
 `;

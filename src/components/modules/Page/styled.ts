@@ -29,7 +29,7 @@ export const PageContainer = styled.div`
 `;
 
 export const PageContent = styled.div`
-  margin: 0 auto;
+  margin: 0 auto 50px;
   width: 100%;
   max-width: 1005px;
   overflow-x: hidden;

@@ -8,6 +8,7 @@ export * from 'ducks/ui/types';
 export * from 'ducks/user/types';
 export * from 'ducks/posts/types';
 export * from 'ducks/applications/types';
+export * from 'ducks/twitch/types';
 
 export type ReduxState = {
   page: i.PageState;

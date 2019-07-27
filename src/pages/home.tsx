@@ -5,6 +5,7 @@ import { useSelector } from 'hooks';
 import { fetchPage } from 'ducks/page';
 import { fetchPosts } from 'ducks/posts';
 import { fetchRecruitment } from 'ducks/recruitment';
+import { fetchActiveStreams } from 'ducks/twitch';
 import Page from 'modules/Page';
 import { LatestNews, OtherNews } from 'modules/Home';
 import RecruitmentBlock from 'modules/RecruitmentBlock';
@@ -30,6 +31,7 @@ HomePage.getInitialProps = async ({ req, store }) => {
   await Promise.all([
     store.dispatch(fetchPage(API_ENDPOINT.HOME)),
     store.dispatch(fetchRecruitment()),
+    store.dispatch(fetchActiveStreams()),
   ]);
 
   // Get detailed post data

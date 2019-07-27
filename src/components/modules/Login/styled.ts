@@ -13,7 +13,6 @@ export const LoginContainer = styled.div`
   padding: 30px 20px;
   max-width: 400px;
   height: calc(100vh - 128px);
-  background-color: ${(props) => props.theme.color.background.content};
   box-shadow: ${(props) => props.theme.shadow.content};
 
   small {
@@ -43,6 +42,7 @@ export const LoginContainer = styled.div`
     margin: 0 auto;
     padding: 50px 40px;
     height: auto;
+    background-color: ${(props) => props.theme.color.background.content};
   `}
 `;
 

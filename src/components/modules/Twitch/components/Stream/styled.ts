@@ -33,14 +33,19 @@ export const StreamContainer = styled.li`
 
       h2 {
         margin-bottom: 5px;
+        font-size: 20px;
+      }
+
+      h4 {
+        font-size: 14px;
       }
     `}
   }
 
   ${media.tablet`
       margin-bottom: 20px;
-      padding: 0 20px;
-      height: 230px;
+      padding: 0 10px;
+      height: 150px;
   `}
 `;
 
@@ -90,8 +95,6 @@ export const ViewCount = styled.div`
   }
 
   ${media.tablet`
-    top: 15px;
-    right: 20px;
     font-size: 16px;
 
     &::before {

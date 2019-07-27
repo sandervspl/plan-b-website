@@ -25,9 +25,10 @@ export const TwitchContainer = styled.div`
   }
 
   ${media.tablet`
-    grid-column: 1 / 21;
+    grid-column: 14 / 21;
     border: 1px solid ${(props) => props.theme.color.border.primary};
-    border-top: none;
+    border-left: 0;
+    border-top: 0;
   `}
 `;
 

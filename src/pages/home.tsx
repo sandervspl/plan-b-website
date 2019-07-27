@@ -20,8 +20,8 @@ const HomePage: i.NextPageComponent = ({ url }) => {
       <HomeContainer>
         <LatestNews />
         <RecruitmentBlock />
-        <Twitch />
         <OtherNews />
+        <Twitch />
       </HomeContainer>
     </Page>
   );

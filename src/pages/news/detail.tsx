@@ -5,6 +5,7 @@ import { API_ENDPOINT, getUrl, getCmsUrl } from 'services';
 import { useSelector } from 'hooks';
 import { fetchPage } from 'ducks/page';
 import { fetchRecruitment } from 'ducks/recruitment';
+import { fetchActiveStreams } from 'ducks/twitch';
 import { DateText, Tag, Heading, NewsItem } from 'common';
 import { MarkdownContent } from 'common/MarkdownPage/styled';
 import Page from 'modules/Page';
@@ -73,6 +74,7 @@ NewsDetailPage.getInitialProps = async ({ req, query, store }) => {
   await Promise.all([
     store.dispatch(fetchPage<i.NewsDetailPageData>(API_ENDPOINT.POSTS, query.id)),
     store.dispatch(fetchRecruitment()),
+    store.dispatch(fetchActiveStreams()),
   ]);
 
   return {

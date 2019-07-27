@@ -9,7 +9,7 @@ export const RecruitmentBlockContainer = styled.div`
 
   ${media.tablet`
     padding-top: 0;
-    grid-column: 15 / 21;
+    grid-column: 14 / 21;
     position: relative;
     padding-bottom: 50px;
     height: 410px;

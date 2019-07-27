@@ -6,7 +6,6 @@ import { lineClamp } from 'common/styles';
 
 export const OtherNewsContainer = styled.div`
   position: relative;
-  margin-bottom: 45px;
   background-color: ${(props) => props.theme.color.background.content};
 
   > ${Heading} {
@@ -14,7 +13,6 @@ export const OtherNewsContainer = styled.div`
 
     ${media.tablet`
       margin-bottom: 20px;
-      border-top: 0;
     `}
   }
 
@@ -45,7 +43,7 @@ export const OtherNewsContainer = styled.div`
   }
 
   ${media.tablet`
-    grid-column: 1 / 21;
+    grid-column: 1 / 14;
     border: 1px solid ${(props) => props.theme.color.border.primary};
     border-top: none;
   `}

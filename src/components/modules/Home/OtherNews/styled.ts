@@ -13,6 +13,8 @@ export const OtherNewsContainer = styled.div`
 
     ${media.tablet`
       margin-bottom: 20px;
+      padding: 15px 20px;
+      font-size: 24px;
     `}
   }
 

@@ -7,10 +7,6 @@ import { OtherNewsContainer } from './styled';
 const OtherNews: React.FC = () => {
   const posts = useSelector((state) => getOtherNews(state));
 
-  if (posts.length === 0) {
-    return null;
-  }
-
   return (
     <OtherNewsContainer>
       <Heading as="h2">

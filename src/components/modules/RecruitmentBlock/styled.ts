@@ -36,7 +36,7 @@ export const RecruitmentInner = styled.div`
     border-top: 0;
 
     ${media.tablet`
-      padding: 20px;
+      padding: 15px 20px;
       font-size: 24px;
     `}
   }

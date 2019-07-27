@@ -6,6 +6,7 @@ import { DateContainer } from 'common/DateText/styled';
 import { NewsItemContainer, PostHeading } from 'common/NewsItem/styled';
 import { RecruitmentBlockContainer, RecruitmentInner } from 'modules/RecruitmentBlock/styled';
 import { TwitchContainer } from 'modules/Twitch/styled';
+import { StreamContainer } from 'modules/Twitch/components/Stream/styled';
 
 export const NewsDetailContainer = styled(MarkdownPageContainer)`
   margin-top: 0;
@@ -94,12 +95,16 @@ export const SidebarContainer = styled.div`
     `}
   }
 
+  ${TwitchContainer} {
+    border-bottom: 0;
+  }
+
   div > ${Heading}:first-child {
     ${GradientHeadingStyle};
     padding: 15px 20px;
     font-size: 20px;
+    border-top: 0;
     border-bottom: 1px solid;
-    border-top: 1px solid;
     border-color: ${(props) => props.theme.color.border.primary};
   }
 
@@ -109,6 +114,15 @@ export const SidebarContainer = styled.div`
     ${TwitchContainer} {
       padding-top: 0;
       border: 0;
+
+      ${Heading} {
+        margin: 0;
+      }
+
+      ${StreamContainer} {
+        padding: 0;
+        margin: 0;
+      }
     }
   `}
 `;

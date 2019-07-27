@@ -39,3 +39,9 @@ export const NoStreamers = styled.div`
     text-align: center;
   }
 `;
+
+export const StreamsContainer = styled.ul`
+  padding: 0;
+  margin: 0;
+  list-style: none;
+`;

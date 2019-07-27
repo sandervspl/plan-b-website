@@ -10,6 +10,7 @@ const headingSize = (as: HeadingProps['as']) => {
     default: px = 30; bigMediaPx = 50; break;
     case 'h2': px = 20; bigMediaPx = 30; break;
     case 'h3': px = 14; bigMediaPx = 25; break;
+    case 'h4': px = 12; bigMediaPx = 20; break;
   }
 
   return css`
@@ -30,5 +31,5 @@ export const Heading = styled.h1<HeadingProps>`
 `;
 
 type HeadingProps = {
-  as: 'h1' | 'h2' | 'h3';
+  as: 'h1' | 'h2' | 'h3' | 'h4';
 };

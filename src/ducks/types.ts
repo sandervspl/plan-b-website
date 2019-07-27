@@ -19,6 +19,7 @@ export type ReduxState = {
   user: i.UserState;
   posts: i.PostsState;
   applications: i.ApplicationsState;
+  twitch: i.TwitchState;
 }
 
 export type BaseState<T = null> = {

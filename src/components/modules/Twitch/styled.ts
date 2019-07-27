@@ -4,6 +4,7 @@ import { Heading, Small, GradientHeadingStyle } from 'common';
 
 export const TwitchContainer = styled.div`
   background-color: ${(props) => props.theme.color.background.content};
+  border-bottom: 1px solid ${(props) => props.theme.color.border.primary};
 
   > ${Heading} {
     ${GradientHeadingStyle};

@@ -12,7 +12,7 @@ const theme = {
       light: '#1E1E1E',
       content: '#1F1F1F',
       gradient: {
-        title: '-webkit-gradient(linear, left top, left bottom, from(#1F1F1F), to(#1b1a1a))',
+        title: '-webkit-gradient(linear, left top, left bottom, from(#272727), to(#1b1a1a))',
       },
     }),
     glitch: {

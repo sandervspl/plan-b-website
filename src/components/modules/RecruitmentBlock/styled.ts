@@ -33,11 +33,11 @@ export const RecruitmentInner = styled.div`
     ${GradientHeadingStyle};
     margin-bottom: 20px;
     font-size: 20px;
+    border-top: 0;
 
     ${media.tablet`
       padding: 20px;
       font-size: 24px;
-      border-top: 0;
     `}
   }
   

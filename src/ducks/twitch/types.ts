@@ -2,17 +2,25 @@ import * as i from 'types';
 
 export type TwitchState = i.BaseState<i.ActiveStreams>;
 
-export type ActiveStreamData = {
-  id: string;
-  user_name: string;
-  game_id: string;
-  type: 'live';
-  title: string;
-  viewer_count: number;
-  started_at: Date;
-  thumbnail_url: string;
+export type ActiveStream = {
+  stream: {
+    id: string;
+    user_name: string;
+    game_id: string;
+    type: 'live';
+    title: string;
+    viewer_count: number;
+    started_at: Date;
+    thumbnail_url: string;
+  };
+  user: {
+    id: string;
+    display_name: string;
+    login: string;
+    profile_image_url: string;
+  };
 };
 
-export type ActiveStreams = i.ActiveStreamData[];
+export type ActiveStreams = i.ActiveStream[];
 
 export type fetchActiveStreams = i.BaseThunkAction<() => Promise<i.ActiveStreams | void>>;

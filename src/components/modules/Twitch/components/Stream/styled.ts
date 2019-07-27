@@ -3,6 +3,20 @@ import { Heading, ParagraphStyle } from 'common';
 import { lineClamp } from 'common/styles';
 import { media } from 'styles';
 
+export const StreamImg = styled.figure`
+  position: relative;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
 export const StreamContainer = styled.li`
   a {
     display: flex;
@@ -20,6 +34,22 @@ export const StreamContainer = styled.li`
 
       &:first-child {
         margin-top: auto;
+      }
+    }
+
+    > ${StreamImg} {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(180deg, rgba(0,0,0,0.00) 0%, #171717 100%);
       }
     }
 
@@ -49,32 +79,6 @@ export const StreamContainer = styled.li`
   `}
 `;
 
-export const Thumbnail = styled.figure`
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-
-  &:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(180deg, rgba(0,0,0,0.00) 0%, #171717 100%);
-  }
-
-  > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-
 export const ViewCount = styled.div`
   ${ParagraphStyle};
   display: flex;
@@ -102,4 +106,21 @@ export const ViewCount = styled.div`
       height: 10px;
     }
   `}
+`;
+
+export const Content = styled.div`
+  ${StreamImg} {
+    border-bottom: 2px solid ${(props) => props.theme.color.primary};
+    float: left;
+    margin-right: 5px;
+    width: 30px;
+    height: 30px;
+    transform: translateY(5px);
+
+    ${media.tablet`
+      transform: translateY(3px);
+      width: 40px;
+      height: 40px;
+    `}
+  }
 `;

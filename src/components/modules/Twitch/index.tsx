@@ -23,7 +23,7 @@ const Twitch: React.FC = () => {
       ) : (
         <StreamsContainer>
           {streams!.map((stream) => (
-            <Stream stream={stream} />
+            <Stream data={stream} />
           ))}
         </StreamsContainer>
       )}

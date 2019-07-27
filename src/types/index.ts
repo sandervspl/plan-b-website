@@ -4,6 +4,7 @@ export * from './redux';
 export * from './next';
 
 export * from 'server/types';
+export * from 'src/firebase/types';
 
 export * from 'modules/Apply/types';
 

@@ -4,46 +4,46 @@ import { FieldArray } from 'react-final-form-arrays';
 import { Field } from 'react-final-form';
 import _ from 'lodash';
 import { getUploadsUrl } from 'services';
-import { useSelector } from 'hooks';
+import { useSelector, useGetFirebaseImage } from 'hooks';
 import QuestionHeader from '../QuestionHeader';
 import { NextButton, QuestionContent } from '../styled';
 import {
   RaidList, RaidItem, RaidImage, RaidRow, RaidTooltip, RaidQuestionContainer,
 } from './styled';
 
-const raids = [
-  [
-    {
-      name: 'molten core',
-      img: getUploadsUrl('raids/molten-core.png'),
-    }, {
-      name: 'onyxia',
-      img: getUploadsUrl('raids/onyxia.jpg'),
-    }, {
-      name: 'blackwing lair',
-      img: getUploadsUrl('raids/blackwing-lair.jpg'),
-    },
-  ],
-  [
-    {
-      name: 'zul\'Gurub',
-      img: getUploadsUrl('raids/zul-gurub.jpg'),
-    }, {
-      name: 'ahn\'Qiraj (20)',
-      img: getUploadsUrl('raids/aq20.jpg'),
-    }, {
-      name: 'ahn\'Qiraj (40)',
-      img: getUploadsUrl('raids/aq40.jpg'),
-    }, {
-      name: 'naxxramas',
-      img: getUploadsUrl('raids/naxxramas.jpg'),
-    },
-  ],
-];
-
 const RaidQuestion: React.FC<Props> = ({ onNextClick }) => {
   const form = useSelector((state) => state.form);
   const isMobile = useSelector((state) => state.ui.isMobile);
+
+  const raids = [
+    [
+      {
+        name: 'molten core',
+        img: useGetFirebaseImage('raids', 'molten-core.png'),
+      }, {
+        name: 'onyxia',
+        img: useGetFirebaseImage('raids', 'onyxia.jpg'),
+      }, {
+        name: 'blackwing lair',
+        img: useGetFirebaseImage('raids', 'blackwing-lair.jpg'),
+      },
+    ],
+    [
+      {
+        name: 'zul\'Gurub',
+        img: useGetFirebaseImage('raids', 'zul\'gurub.jpg'),
+      }, {
+        name: 'ahn\'Qiraj (20)',
+        img: useGetFirebaseImage('raids', 'aq20.jpg'),
+      }, {
+        name: 'ahn\'Qiraj (40)',
+        img: useGetFirebaseImage('raids', 'aq40.jpg'),
+      }, {
+        name: 'naxxramas',
+        img: useGetFirebaseImage('raids', 'naxxramas.jpg'),
+      },
+    ],
+  ];
 
   const selected = form.application
     ? form.application.values.raid_experience || {}

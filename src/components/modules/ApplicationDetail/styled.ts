@@ -379,3 +379,8 @@ export const LockedStatus = styled.div`
     font-size: 18px;
   `}
 `;
+
+export const ApplicationContent = styled.div`
+  box-shadow: ${(props) => props.theme.shadow.innerContent};
+  z-index: 1;
+`;

@@ -17,6 +17,7 @@ import Voting from 'modules/ApplicationDetail/Voting';
 import {
   ApplicationHeader, Status, ApplicationRole, Top, ApplicationContainer, InfoGrid, EmptyState,
   ApplicationSection, ProfessionsGrid, GuildMasterTools, StatusChangeButton, LockedStatus,
+  ApplicationContent,
 } from 'modules/ApplicationDetail/styled';
 
 const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, applicationId }) => {
@@ -61,7 +62,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
       url={url}
     >
       <ApplicationContainer>
-        <div>
+        <ApplicationContent>
           <ApplicationHeader withGuildMasterTools={isGuildMaster}>
             {isGuildMaster && (
               <GuildMasterTools>
@@ -190,7 +191,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
               <Paragraph>{personal.story}</Paragraph>
             </ApplicationSection>
           </ApplicationSection>
-        </div>
+        </ApplicationContent>
 
         <Discussion comments={application.discussion} />
       </ApplicationContainer>

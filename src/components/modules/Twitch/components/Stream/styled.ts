@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Heading, ParagraphStyle } from 'common';
-import { lineClamp } from 'common/styles';
+import { lineClamp, boxGradient } from 'common/styles';
 import { media } from 'styles';
 
 export const StreamImg = styled.figure`
@@ -38,19 +38,10 @@ export const StreamContainer = styled.li`
     }
 
     > ${StreamImg} {
+      ${boxGradient};
       position: absolute;
       top: 0;
       left: 0;
-
-      &:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: linear-gradient(180deg, rgba(0,0,0,0.00) 0%, #171717 100%);
-      }
     }
 
     h4 {
@@ -62,7 +53,6 @@ export const StreamContainer = styled.li`
       border: 1px solid ${(props) => props.theme.color.border.primary};
 
       h2 {
-        margin-bottom: 5px;
         font-size: 20px;
       }
 
@@ -73,8 +63,6 @@ export const StreamContainer = styled.li`
   }
 
   ${media.tablet`
-      margin-bottom: 20px;
-      padding: 0 10px;
       height: 150px;
   `}
 `;
@@ -87,7 +75,11 @@ export const ViewCount = styled.div`
   position: absolute;
   top: 10px;
   right: 10px;
+  padding: 3px;
   font-size: 12px;
+  line-height: 1;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
 
   &::before {
     content: '';
@@ -96,15 +88,14 @@ export const ViewCount = styled.div`
     height: 8px;
     background-color: ${(props) => props.theme.color.primary};
     border-radius: 100%;
+
+    ${media.tablet`
+      transform: translateY(1px);
+    `}
   }
 
   ${media.tablet`
     font-size: 16px;
-
-    &::before {
-      width: 10px;
-      height: 10px;
-    }
   `}
 `;
 
@@ -118,7 +109,7 @@ export const Content = styled.div`
     transform: translateY(5px);
 
     ${media.tablet`
-      transform: translateY(3px);
+      transform: none;
       width: 40px;
       height: 40px;
     `}

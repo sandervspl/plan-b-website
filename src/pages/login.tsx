@@ -24,7 +24,7 @@ const Login: i.NextPageComponent = ({ url }) => {
   };
 
   return (
-    <Page meta={login && login.meta} url={url}>
+    <Page meta={login && login.meta} url={url} withoutShadow>
       <LoginContainer>
         {!user && login && (
           <>

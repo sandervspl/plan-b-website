@@ -22,7 +22,7 @@ export const NewsDetailContainer = styled(MarkdownPageContainer)`
   }
 
   ${MarkdownContent} {
-    margin-bottom: 50px;
+    padding-bottom: 50px;
 
     h1, h2, h3, h4, h5, h6, p {
       margin-left: 20px;
@@ -33,6 +33,11 @@ export const NewsDetailContainer = styled(MarkdownPageContainer)`
         margin-right: 40px;
       `}
     }
+
+    ${media.tablet`
+      box-shadow: ${(props) => props.theme.shadow.innerContent};
+      z-index: 1;
+    `}
   }
 
   ${media.tablet`

@@ -1,26 +1,16 @@
 import styled, { css } from 'styled-components';
 import { media } from 'styles';
 import { Tag } from 'common';
-import { lineClamp } from 'common/styles';
+import { lineClamp, boxGradient } from 'common/styles';
 import { Paragraph, Heading } from 'common/typography';
 import { DateContainer } from 'common/DateText/styled';
 
 export const PostImage = styled.figure`
-  position: relative;
+  ${boxGradient};
   margin: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
-
-  &:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(180deg, rgba(0,0,0,0.00) 0%, #171717 100%);
-  }
 
   > img {
     width: 100%;
@@ -109,6 +99,7 @@ export const NewsItemContainer = styled.article<NewsItemContainerProps>`
     flex-direction: column;
     position: relative;
     height: 100%;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .4);
   }
 
   ${Paragraph} {

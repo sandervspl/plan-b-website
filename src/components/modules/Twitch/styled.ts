@@ -10,7 +10,6 @@ export const TwitchContainer = styled.div`
     ${GradientHeadingStyle};
 
     ${media.tablet`
-      margin-bottom: 20px;
       padding: 15px 20px;
       font-size: 24px;
     `}

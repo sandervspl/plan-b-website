@@ -9,9 +9,9 @@ import Favicon32 from 'favicon/favicon-32x32.png';
 import Favicon16 from 'favicon/favicon-16x16.png';
 import SafariPinnedTab from 'favicon/safari-pinned-tab.svg';
 import Navigation from './components/Navigation';
-import { PageContainer, PageContent } from './styled';
+import { PageContainer, PageContent, PageInner } from './styled';
 
-const Page: React.FC<PageProps> = ({ children, withoutNav, meta, url }) => {
+const Page: React.FC<PageProps> = ({ children, withoutNav, meta, url, withoutShadow }) => {
   const title = meta ? meta.title : 'Plan B';
   const description = meta ? meta.description : 'Plan B — Classic WoW Guild';
 
@@ -42,16 +42,19 @@ const Page: React.FC<PageProps> = ({ children, withoutNav, meta, url }) => {
       </Head>
       <PageContent>
         {!withoutNav && <Navigation />}
-        {children}
+        <PageInner withoutShadow={withoutShadow}>
+          {children}
+        </PageInner>
       </PageContent>
     </PageContainer>
   );
 };
 
 export type PageProps = {
-  withoutNav?: boolean;
-  meta?: Object.Optional<i.PageMeta, 'id' | 'created_at' | 'updated_at'>;
   url: string;
+  withoutNav?: boolean;
+  withoutShadow?: boolean;
+  meta?: Object.Optional<i.PageMeta, 'id' | 'created_at' | 'updated_at'>;
 };
 
 Page.defaultProps = {

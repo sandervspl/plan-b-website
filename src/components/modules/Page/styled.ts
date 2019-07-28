@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import bgImg from 'images/bg.jpg';
 import { media } from 'styles';
 
@@ -19,7 +19,7 @@ export const PageContainer = styled.div`
       background-image: url(${bgImg});
       background-position: center center;
       background-size: cover;
-      opacity: .15;
+      opacity: .08;
     }
 
     > div {
@@ -38,3 +38,15 @@ export const PageContent = styled.div`
     overflow-x: visible;
   `}
 `;
+
+export const PageInner = styled.div<PageInnerProps>`
+  ${media.tablet<PageInnerProps>`
+    ${(props) => !props.withoutShadow && css`
+      box-shadow: ${(props) => props.theme.shadow.content};
+    `}
+  `}
+`;
+
+type PageInnerProps = {
+  withoutShadow?: boolean;
+}

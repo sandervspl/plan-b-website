@@ -57,7 +57,8 @@ const theme = {
   shadow: {
     card: '0px 0px 15px -5px rgba(0, 0, 0, .2)',
     icon: '-2px 2px 4px 0 rgba(0, 0, 0, .5)',
-    content: '0 7px 14px 8px rgba(0, 0, 0, 0.1)',
+    content: '0 0 6px rgba(0, 0, 0, .45)',
+    innerContent: '0 -1px 10px rgba(0, 0, 0, .5)',
   },
 };
 

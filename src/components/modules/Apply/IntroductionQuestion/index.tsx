@@ -1,22 +1,22 @@
 import * as i from 'types';
 import React from 'react';
-import { useGetFirebaseImages } from 'hooks';
+// import { useGetFirebaseImages } from 'hooks';
 import { Paragraph } from 'common';
 import QuestionHeader from '../QuestionHeader';
 import { QuestionContentHeader, QuestionContent, NextButton, RecruitmentContainerInner,
 } from '../styled';
-import TiltImages from '../TiltImages';
+// import TiltImages from '../TiltImages';
 
-const IntroductionQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, ...props }) => {
-  const images = useGetFirebaseImages('recruitment', [
-    'intro_top-left.jpg',
-    'intro_bottom-left.jpg',
-    'intro_right.jpg',
-  ]);
+const IntroductionQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick }) => {
+  // const images = useGetFirebaseImages('recruitment', [
+  //   'intro_top-left.jpg',
+  //   'intro_bottom-left.jpg',
+  //   'intro_right.jpg',
+  // ]);
 
   return (
     <RecruitmentContainerInner small>
-      <TiltImages images={images} tiltStyle={props.tiltStyle} />
+      {/* <TiltImages images={images} tiltStyle={props.tiltStyle} /> */}
 
       <QuestionHeader>
         Hi there!

@@ -4,7 +4,7 @@ export type QuestionComponentProps = {
   form?: i.Forms;
   active?: boolean;
   onNextClick: () => void;
-  tiltStyle: i.TiltStyle;
+  errors: Record<string, string>;
 }
 
 export type TiltStyle = {

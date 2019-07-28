@@ -5,7 +5,7 @@ import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import NextRouter from 'router';
 import { validate, redirect, getUrl } from 'services';
-import { useTilt, useRouter } from 'hooks';
+import { useRouter } from 'hooks';
 import { sendApplication, actions as formActions } from 'ducks/form';
 import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
@@ -37,7 +37,7 @@ const ApplicationPage: i.NextPageComponent<Props> = (props) => {
   const containerEl = useRef<HTMLDivElement>(null);
   const formEl = useRef<HTMLFormElement>(null);
   const [questionIndex, setQuestionIndex] = useState(1);
-  const { tiltStyle, setRef, mouseEvents } = useTilt();
+  // const { tiltStyle, setRef, mouseEvents } = useTilt();
   const [canContinue, setCanContinue] = useState(true); // Can't get debounce to work on handleClick :/
 
   useEffect(() => {
@@ -61,11 +61,11 @@ const ApplicationPage: i.NextPageComponent<Props> = (props) => {
     }
   }, [router!.query!.questionId]);
 
-  useEffect(() => {
-    if (containerEl.current) {
-      setRef(containerEl.current);
-    }
-  }, [containerEl]);
+  // useEffect(() => {
+  //   if (containerEl.current) {
+  //     setRef(containerEl.current);
+  //   }
+  // }, [containerEl]);
 
   // eslint-disable-next-line
   function preventSubmit(e: KeyboardEvent) {};
@@ -100,13 +100,20 @@ const ApplicationPage: i.NextPageComponent<Props> = (props) => {
   };
 
   return (
-    <RecruitmentContainer {...mouseEvents} ref={containerEl}>
+    // <RecruitmentContainer {...mouseEvents} ref={containerEl}>
+    <RecruitmentContainer ref={containerEl}>
       <Form
         onSubmit={() => {}}
         mutators={{ ...arrayMutators }}
         keepDirtyOnReinitialize
+        initialValues={{
+          character: {
+            server: 'Ragnaros',
+            level: 60,
+          },
+        }}
       >
-        {({ values }) => (
+        {({ values, errors }) => (
           <QuestionsForm ref={formEl} onSubmit={formOnSubmit(values)}>
             <FormStateToRedux form="application" />
 
@@ -117,7 +124,7 @@ const ApplicationPage: i.NextPageComponent<Props> = (props) => {
                 answered={questionIndex > i}
                 onNextClick={handleClick}
                 Component={component}
-                tiltStyle={tiltStyle}
+                errors={errors}
               />
             ))}
           </QuestionsForm>

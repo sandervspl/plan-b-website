@@ -219,7 +219,7 @@ export const QuestionContent = styled.div<QuestionContentProps>`
   flex-direction: column;
   align-items: flex-start;
   position: relative;
-  top: 100px;
+  top: 80px;
   height: calc(100% - 150px);
 
   ${media.tablet<QuestionContentProps>`

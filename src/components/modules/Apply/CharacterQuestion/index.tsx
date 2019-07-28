@@ -1,14 +1,13 @@
 import * as i from 'types';
-import React, { useEffect, useState } from 'react';
-import { Field, FieldRenderProps } from 'react-final-form';
+import React, { useEffect } from 'react';
+import { FieldArray } from 'react-final-form-arrays';
 import { TRANSITION_TIME_MS } from 'styles/pageTransition';
-import { useSelector } from 'hooks';
-import { NextButton, QuestionContent } from '../styled';
+import { QuestionContent, NextButton } from '../styled';
 import QuestionHeader from '../QuestionHeader';
+import { CharacterGrid } from './styled';
+import CharacterField from './CharacterField';
 
-const CharacterSelect: React.FC<Props> = ({ active, onNextClick, ...props }) => {
-  const [inputValue, setInputValue] = useState('');
-
+const CharacterQuestion: React.FC<Props> = ({ onNextClick, active, errors }) => {
   useEffect(() => {
     if (!active) return;
 
@@ -21,10 +20,6 @@ const CharacterSelect: React.FC<Props> = ({ active, onNextClick, ...props }) => 
     }, TRANSITION_TIME_MS);
   }, [active]);
 
-  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-    return setInputValue(e.currentTarget.value);
-  };
-
   return (
     <>
       <QuestionHeader>
@@ -32,7 +27,33 @@ const CharacterSelect: React.FC<Props> = ({ active, onNextClick, ...props }) => 
       </QuestionHeader>
 
       <QuestionContent>
-        hi
+        <CharacterGrid>
+          <div>
+            <FieldArray name="character">
+              {({ fields }) => (
+                <>
+                  <CharacterField name={`${fields.name}.name`} label="Character name" />
+                  <CharacterField name={`${fields.name}.level`} label="Level" />
+                  <CharacterField name={`${fields.name}.server`} label="Server" />
+                </>
+              )}
+            </FieldArray>
+          </div>
+          <div>
+            <FieldArray name="character">
+              {({ fields }) => (
+                <>
+                  <CharacterField name={`${fields.name}.race`} label="Race" />
+                  <CharacterField name={`${fields.name}.class`} label="Class" />
+                </>
+              )}
+            </FieldArray>
+          </div>
+        </CharacterGrid>
+
+        <NextButton onClick={onNextClick} disabled={!!errors.character}>
+          <span>Continue</span>
+        </NextButton>
       </QuestionContent>
     </>
   );
@@ -40,4 +61,4 @@ const CharacterSelect: React.FC<Props> = ({ active, onNextClick, ...props }) => 
 
 export type Props = i.QuestionComponentProps;
 
-export default CharacterSelect;
+export default CharacterQuestion;

@@ -3,7 +3,6 @@ import React from 'react';
 import { FieldArray } from 'react-final-form-arrays';
 import { Field } from 'react-final-form';
 import _ from 'lodash';
-import { getUploadsUrl } from 'services';
 import { useSelector, useGetFirebaseImage } from 'hooks';
 import QuestionHeader from '../QuestionHeader';
 import { NextButton, QuestionContent } from '../styled';

@@ -5,13 +5,13 @@ const apiConfig = {
     cms: (() => {
       switch (config.appEnv.toLowerCase()) {
         case 'test':
-          return 'https://cms-test.planbguild.eu';
+          return 'https://cms-test.planbguild.eu' as const;
         case 'acceptation':
-          return 'https://cms-acc.planbguild.eu';
+          return 'https://cms-acc.planbguild.eu' as const;
         case 'production':
-          return 'https://cms.planbguild.eu';
+          return 'https://cms.planbguild.eu' as const;
         default:
-          return 'http://cms-test.planbguild.eu';
+          return 'http://cms-test.planbguild.eu' as const;
       };
     })(),
 

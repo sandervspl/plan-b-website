@@ -127,7 +127,6 @@ export const OptionsContainer = styled.ul`
     ${ParagraphStyle};
     color: ${(props) => props.theme.color.secondary};
     font-size: 16px;
-    cursor: pointer;
   }
 
   li {
@@ -139,6 +138,10 @@ export const OptionsContainer = styled.ul`
 
     a, span {
       ${HeaderNavLinkStyle};
+    }
+
+    a, button {
+      cursor: pointer;
     }
 
     button {

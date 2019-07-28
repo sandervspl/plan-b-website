@@ -17,8 +17,8 @@ import { SubmitButton, SubmitLabel, Name } from './styled';
 
 const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
   const form = useSelector((state) => state.form);
-  const character = useSelector((state) => state.character.data);
-  const name = character ? character.name : 'unknown';
+  // const character = useSelector((state) => state.character.data);
+  // const name = character ? character.name : 'unknown';
 
   return (
     <RecruitmentContainerInner small>
@@ -62,7 +62,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
 
           <QuestionContent>
             <QuestionContentHeader as="h2">
-              Thank you, <Name>{name}</Name>.
+              Thank you, <Name>{form.application!.values.character.name}</Name>.
             </QuestionContentHeader>
 
             <Paragraph>

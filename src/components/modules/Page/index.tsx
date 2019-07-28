@@ -40,8 +40,8 @@ const Page: React.FC<PageProps> = ({ children, withoutNav, meta, url, withoutSha
         <meta name="msapplication-TileColor" content={theme.color.primary} />
         <meta name="theme-color" content={theme.color.background} />
       </Head>
+      {!withoutNav && <Navigation />}
       <PageContent>
-        {!withoutNav && <Navigation />}
         <PageInner withoutShadow={withoutShadow}>
           {children}
         </PageInner>

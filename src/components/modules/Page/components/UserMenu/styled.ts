@@ -2,12 +2,14 @@ import styled, { css } from 'styled-components';
 import { Paragraph, ParagraphStyle } from 'common';
 import { CircleImgContainer } from 'common/CircleImg/styled';
 import { media } from 'styles';
+import { DKPContainer } from 'common/DKP/styled';
+import { HeaderNavLinkStyle } from '../Navigation/styled';
 
 export const UserMenuContainer = styled.div<UserMenuContainerProps>`
   left: 0;
   position: fixed;
   z-index: 2;
-  top: 113px;
+  top: 55px;
   width: 100%;
   height: 100%;
   background: ${(props) => props.theme.color.background};
@@ -28,7 +30,7 @@ export const UserMenuContainer = styled.div<UserMenuContainerProps>`
   &::before,
   &::after {
     bottom: 100%;
-    right: 33px;
+    right: 23px;
     border: solid transparent;
     content: " ";
     height: 0;
@@ -54,15 +56,11 @@ export const UserMenuContainer = styled.div<UserMenuContainerProps>`
   ${media.tablet`
     position: absolute;
     top: auto;
-    left: -16px;
+    right: 0;
+    left: auto;
     width: 220px;
     height: auto;
     border: 1px solid ${(props) => props.theme.color.border.primary.light};
-
-    &::before,
-    &::after {
-      left: 50%;
-    }
   `}
 `;
 
@@ -100,6 +98,18 @@ export const UserInfo = styled.div`
       color: ${(props) => props.theme.color.secondary.dark};
     }
   }
+
+  ${DKPContainer} {
+    margin-top: 5px;
+
+    ${media.tablet`
+      display: none;
+    `}
+  }
+
+  + hr + ul {
+    margin-top: 0 !important;
+  }
 `;
 
 export const Line = styled.hr`
@@ -126,6 +136,14 @@ export const OptionsContainer = styled.ul`
     strong {
       font-weight: 700;
     }
+
+    a, span {
+      ${HeaderNavLinkStyle};
+    }
+
+    button {
+      text-transform: uppercase;
+    }
   }
 
   button {
@@ -135,4 +153,14 @@ export const OptionsContainer = styled.ul`
     border: 0;
     outline: 0;
   }
+
+  &:first-of-type {
+    margin-top: 15px;
+  }
+
+  ${media.tablet`
+    &:first-of-type {
+      display: none;
+    }
+  `}
 `;

@@ -2,11 +2,11 @@ import * as i from 'types';
 import React from 'react';
 import apiConfig from 'services/api/config';
 import { useSelector } from 'hooks';
-import { Paragraph, Link, CircleImg } from 'common';
+import { Paragraph, CircleImg, DKP, NavLink } from 'common';
 import { UserMenuContainer, UserInfo, Line, OptionsContainer } from './styled';
 
 const UserMenu: React.FC<Props> = ({ open }) => {
-  const user = useSelector((state) => state.user.data!);
+  const user = useSelector((state) => state.user.data);
 
   const logout = () => {
     window.location.href = `${apiConfig.url.api}/auth/logout`;
@@ -14,32 +14,54 @@ const UserMenu: React.FC<Props> = ({ open }) => {
 
   return (
     <UserMenuContainer open={open}>
-      <UserInfo>
-        <CircleImg src={user.avatar} />
-        <div>
-          <Paragraph>{user.username}</Paragraph>
-          <Paragraph>@{user.discordname}</Paragraph>
-        </div>
-      </UserInfo>
+      {user && (
+        <>
+          <UserInfo>
+            <CircleImg src={user.avatar} />
+            <div>
+              <Paragraph>{user.username}</Paragraph>
+              <Paragraph>@{user.discordname}</Paragraph>
+              <DKP />
+            </div>
+          </UserInfo>
 
-      <Line />
+          <Line />
+        </>
+      )}
 
       <OptionsContainer>
-        {user.authLevel > i.AUTH_LEVEL.USER && (
+        <li>
+          <NavLink to="home">News</NavLink>
+        </li>
+        <li>
+          <NavLink to="about">About</NavLink>
+        </li>
+        <Line />
+      </OptionsContainer>
+
+      <OptionsContainer>
+        {user && user.authLevel > i.AUTH_LEVEL.USER && (
           <>
             <li>
-              <Link to="applications">
+              <NavLink to="applications">
                 <strong>Applications</strong>
-              </Link>
+              </NavLink>
             </li>
             <Line />
           </>
         )}
-        <li>
-          <button onClick={logout}>
-            Sign out
-          </button>
-        </li>
+
+        {user ? (
+          <li>
+            <button onClick={logout}>
+              Sign out
+            </button>
+          </li>
+        ) : (
+          <li>
+            <NavLink to="login">Sign in</NavLink>
+          </li>
+        )}
       </OptionsContainer>
     </UserMenuContainer>
   );

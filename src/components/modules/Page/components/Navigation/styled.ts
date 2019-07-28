@@ -5,15 +5,19 @@ import { GlitchContainer } from 'common/Glitch/styled';
 import { LogoNameIcon } from '../GlitchLogo/styled';
 
 export const HeaderContainer = styled.header`
-  padding: 15px 25px;
+  position: fixed;
+  left: 0;
+  z-index: 10;
+  width: 100vw;
+  padding: 15px;
+  background-color: ${(props) => props.theme.color.background.content};
+  box-shadow: 0 4px 6px rgba(0,0,0,0.4);
 
   ${media.tablet`
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    padding: 15px 0 30px;
+    flex-direction: row;
+    justify-content: center;
     margin: 0 auto;
-    max-width: ${(props) => props.theme.width.page};
   `}
 `;
 
@@ -28,6 +32,10 @@ export const UserContainer = styled.div`
 
     > * {
       margin-left: 20px;
+    }
+
+    > div:first-of-type {
+      position: relative;
     }
 
     ${LogoNameIcon} {
@@ -66,7 +74,7 @@ export const NavContainer = styled.nav`
 
   ${media.tablet`
     margin-top: 0;
-    height: 90px;
+    height: auto;
     
     > a {
       position: relative;
@@ -80,14 +88,15 @@ export const NavContainer = styled.nav`
 `;
 
 export const NavList = styled.ul`
-  display: flex;
-  justify-content: flex-start;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  list-style: none;
+  display: none;
 
   ${media.tablet`
+    display: flex;
+    justify-content: flex-start;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    list-style: none;
     justify-content: flex-start;
     margin-left: 170px;
     width: 300px;
@@ -124,6 +133,7 @@ export const NavItem = styled.li`
 
 export const SignIn = styled(NavLink)`
   ${HeaderNavLinkStyle};
+  display: none;
   color: ${(props) => props.theme.color.primary};
   font-family: ${(props) => props.theme.font.primary};
 
@@ -132,4 +142,17 @@ export const SignIn = styled(NavLink)`
         background: ${(props) => props.theme.color.primary};
       }
   }
+
+  ${media.tablet`
+    display: block;
+  `}
+`;
+
+export const HeaderInner = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: ${(props) => props.theme.width.page};
 `;

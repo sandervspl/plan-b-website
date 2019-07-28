@@ -3,7 +3,6 @@ export const routeNames = Object.freeze({
   apply: 'apply',
   about: 'about',
   login: 'login',
-  news: 'news',
   newsDetail: 'news-detail',
   gallery: 'gallery',
   applications: 'applications',

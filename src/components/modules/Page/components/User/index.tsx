@@ -1,38 +1,26 @@
-import React, { useState } from 'react';
-import OutsideClickHandler from 'react-outside-click-handler';
+import React from 'react';
 import { useSelector } from 'hooks';
-import { CircleImg } from 'common';
-import UserMenu from '../UserMenu';
-import { UserInfo, UserData, DKPContainer, DKPIcon, Username, UserContainer } from './styled';
+import { CircleImg, DKP } from 'common';
+import { UserInfo, UserData, Username, UserContainer } from './styled';
 
-const User: React.FC = () => {
-  const user = useSelector((state) => state.user.data);
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  if (!user) return null;
-
-  const toggleMenuOpen = () => setMenuOpen((open) => !open);
-
-  const closeMenu = () => setMenuOpen(false);
+const User: React.FC<Props> = ({ onClick }) => {
+  const user = useSelector((state) => state.user.data!);
 
   return (
     <UserContainer>
-      <OutsideClickHandler onOutsideClick={closeMenu}>
-        <UserInfo onClick={toggleMenuOpen}>
-          <UserData>
-            <DKPContainer>
-              <DKPIcon />
-              <strong>{user.dkp}</strong> DKP
-            </DKPContainer>
-            <Username>{user.username}</Username>
-          </UserData>
-          <CircleImg src={user.avatar} />
-        </UserInfo>
-
-        <UserMenu open={menuOpen} />
-      </OutsideClickHandler>
+      <UserInfo onClick={onClick}>
+        <UserData>
+          <DKP />
+          <Username>{user.username}</Username>
+        </UserData>
+        <CircleImg src={user.avatar} />
+      </UserInfo>
     </UserContainer>
   );
 };
+
+type Props = {
+  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+}
 
 export default User;

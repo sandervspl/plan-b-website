@@ -13,3 +13,4 @@ export * from './GlitchNameLogo';
 export * from './DateText';
 export * from './PageContentContainer';
 export * from './ProgressBar';
+export * from './DKP';

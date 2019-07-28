@@ -1,42 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
+import OutsideClickHandler from 'react-outside-click-handler';
 import { Link, NavLink } from 'common';
 import { navigationMenu } from 'services';
 import { useSelector } from 'hooks';
 import GlitchLogo from '../GlitchLogo';
+import HamburgerMenu from '../HamburgerMenu';
+import UserMenu from '../UserMenu';
 import {
-  HeaderContainer, UserContainer, NavContainer, SignIn, NavList, NavItem,
+  HeaderContainer, UserContainer, NavContainer, SignIn, NavList, NavItem, HeaderInner,
 } from './styled';
 
 const User = dynamic(import('../User'));
 
 const Navigation: React.FC = () => {
   const user = useSelector((state) => state.user);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenuOpen = () => setMenuOpen((open) => !open);
+
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <HeaderContainer>
-      <UserContainer>
-        {user.isSignedIn ? (
-          <User />
-        ) : !user.loading ? (
-          <SignIn to="login">Sign in</SignIn>
-        ) : null}
-      </UserContainer>
+      <HeaderInner>
+        <UserContainer>
+          <OutsideClickHandler onOutsideClick={closeMenu}>
+            {user.isSignedIn ? (
+              <User onClick={toggleMenuOpen} />
+            ) : !user.loading ? (
+              <SignIn to="login">Sign in</SignIn>
+            ) : null}
 
-      <NavContainer>
-        <GlitchLogo />
+            <HamburgerMenu onClick={toggleMenuOpen} />
 
-        <NavList>
-          {navigationMenu.map((item, i) => (
-            <NavItem key={i}>
-              {item.external
-                ? <Link external to={item.page} disabled={item.disabled}>{item.label}</Link>
-                : <NavLink to={item.page} disabled={item.disabled}>{item.label}</NavLink>
-              }
-            </NavItem>
-          ))}
-        </NavList>
-      </NavContainer>
+            <UserMenu open={menuOpen} />
+          </OutsideClickHandler>
+        </UserContainer>
+
+
+        <NavContainer>
+          <GlitchLogo />
+
+          <NavList>
+            {navigationMenu.map((item, i) => (
+              <NavItem key={i}>
+                {item.external
+                  ? <Link external to={item.page} disabled={item.disabled}>{item.label}</Link>
+                  : <NavLink to={item.page} disabled={item.disabled}>{item.label}</NavLink>
+                }
+              </NavItem>
+            ))}
+          </NavList>
+        </NavContainer>
+      </HeaderInner>
     </HeaderContainer>
   );
 };

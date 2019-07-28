@@ -29,12 +29,13 @@ export const PageContainer = styled.div`
 `;
 
 export const PageContent = styled.div`
-  margin: 0 auto 50px;
+  margin: 65px auto 50px;
   width: 100%;
   max-width: ${(props) => props.theme.width.page};
   overflow-x: hidden;
 
   ${media.tablet`
+    margin-top: 110px;
     overflow-x: visible;
   `}
 `;

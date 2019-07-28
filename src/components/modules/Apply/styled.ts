@@ -22,6 +22,10 @@ export const RecruitmentContainer = styled(Fullscreenpage)`
     opacity: .065;
   }
 
+  h1 {
+    color: ${(props) => props.theme.color.primary.dark};
+  }
+
   ${media.tablet`
     padding: 75px 140px;
     max-width: 1280px;
@@ -280,11 +284,11 @@ export const NextButton = styled.button.attrs({ type: 'button' })`
 
   &:disabled {
     cursor: not-allowed;
-    color: ${(props) => props.theme.color.primary.dark};
+    color: ${(props) => props.theme.color.border.primary.light};
     opacity: .5;
 
     &:before {
-      background-color: ${(props) => props.theme.color.primary.dark};
+      background-color: ${(props) => props.theme.color.border.primary.light};
     }
   }
 `;

@@ -5,7 +5,9 @@ import { useSelector } from 'hooks';
 import { TRANSITION_TIME_MS } from 'styles/pageTransition';
 import FakeInput from 'common/FakeInput';
 import QuestionHeader from '../QuestionHeader';
-import { QuestionContent, NextButton, RecruitmentContainerInner, QuestionField, TextInputField } from '../styled';
+import {
+  QuestionContent, NextButton, RecruitmentContainerInner, QuestionField, TextInputField,
+} from '../styled';
 
 const questions = [
   'Hello! My name is ',

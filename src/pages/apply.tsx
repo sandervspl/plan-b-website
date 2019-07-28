@@ -10,6 +10,7 @@ import { sendApplication, actions as formActions } from 'ducks/form';
 import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
 import IntroductionQuestion from 'modules/Apply/IntroductionQuestion';
+// import CharacterApiQuestion from 'modules/Apply/CharacterApiQuestion';
 import CharacterQuestion from 'modules/Apply/CharacterQuestion';
 import RoleQuestion from 'modules/Apply/RoleQuestion';
 import RaidQuestion from 'modules/Apply/RaidQuestion';
@@ -22,6 +23,7 @@ type Question = React.ComponentType<i.QuestionComponentProps>;
 const questionComponents: Question[] = [
   () => null,
   IntroductionQuestion,
+  // CharacterApiQuestion,
   CharacterQuestion,
   RoleQuestion,
   RaidQuestion,

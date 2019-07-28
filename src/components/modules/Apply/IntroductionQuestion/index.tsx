@@ -19,7 +19,7 @@ const IntroductionQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick,
       <TiltImages images={images} tiltStyle={props.tiltStyle} />
 
       <QuestionHeader>
-        Hi there, adventurer!
+        Hi there!
       </QuestionHeader>
 
       <QuestionContent>

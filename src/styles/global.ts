@@ -3,7 +3,7 @@ import styledNormalize from './normalize';
 import theme from './theme';
 
 export default createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700&display=swap');
+  @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap');
   
   ${styledNormalize};
 

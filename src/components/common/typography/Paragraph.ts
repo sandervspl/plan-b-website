@@ -5,7 +5,7 @@ export const ParagraphStyle = css`
   margin: 0;
   color: ${(props) => props.theme.color.secondary};
   font-family: ${(props) => props.theme.font.primary};
-  font-weight: 300;
+  font-weight: 400;
   font-size: 18px;
   line-height: 1.58;
   letter-spacing: -.003em;

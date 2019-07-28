@@ -9,15 +9,14 @@ import { useSelector, useDispatch } from 'hooks';
 import { getUrl, getCmsUrl } from 'services';
 import { fetchApplicationDetail, actions as applicationsActions, setStatus } from 'ducks/applications';
 import { hasProfessions } from 'ducks/applications/reselect';
-import { DateText, ClassText, Paragraph, CircleImg, Heading } from 'common';
+import { DateText, ClassText, Paragraph, CircleImg, Heading, EmptyStateText } from 'common';
 import Profession from 'modules/ApplicationDetail/Profession';
 import Raids from 'modules/ApplicationDetail/Raids';
 import Discussion from 'modules/ApplicationDetail/Discussion';
 import Voting from 'modules/ApplicationDetail/Voting';
 import {
-  ApplicationHeader, Status, ApplicationRole, Top, ApplicationContainer, InfoGrid, EmptyState,
-  ApplicationSection, ProfessionsGrid, GuildMasterTools, StatusChangeButton, LockedStatus,
-  ApplicationContent,
+  ApplicationHeader, Status, ApplicationRole, Top, ApplicationContainer, InfoGrid, LockedStatus,
+  ApplicationSection, ProfessionsGrid, GuildMasterTools, StatusChangeButton, ApplicationContent,
 } from 'modules/ApplicationDetail/styled';
 
 const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, applicationId }) => {
@@ -153,7 +152,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
                 ))}
               </ProfessionsGrid>
             ) : (
-              <EmptyState>This player has no primary professions.</EmptyState>
+              <EmptyStateText>This player has no primary professions.</EmptyStateText>
             )}
           </ApplicationSection>
 
@@ -166,7 +165,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
                 ))}
               </ProfessionsGrid>
             ) : (
-              <EmptyState>This player has no secondary professions.</EmptyState>
+              <EmptyStateText>This player has no secondary professions.</EmptyStateText>
             )}
           </ApplicationSection>
 

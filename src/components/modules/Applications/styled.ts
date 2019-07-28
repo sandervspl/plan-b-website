@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Heading, PageContentContainer } from 'common';
+import { Heading, PageContentContainer, Loader } from 'common';
 import { media } from 'styles';
 
 export const ApplicationsContainer = styled(PageContentContainer)`
@@ -14,6 +14,15 @@ export const ApplicationsContainer = styled(PageContentContainer)`
       padding: 35px 50px 12px;
     `}
   }
+
+  ${Loader} {
+    display: block;
+    margin: 0 auto;
+  }
+
+  ${media.tablet`
+    min-height: 100vh;
+  `}
 `;
 
 export const ApplicationsHeading = styled.div`

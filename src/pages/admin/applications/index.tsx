@@ -6,7 +6,7 @@ import { useSelector, useDispatch, useRouter } from 'hooks';
 import CircleIcon from 'vectors/circle.svg';
 import CheckCircleIcon from 'vectors/check-circle.svg';
 import NotInterestedIcon from 'vectors/not-interested.svg';
-import { Heading } from 'common';
+import { Heading, Loader } from 'common';
 import Page from 'modules/Page';
 import ApplicationItem from 'modules/Applications/ApplicationItem';
 import {
@@ -24,6 +24,7 @@ const ApplicationsPage: i.NextPageComponent<Props, Query> = ({ url, status }) =>
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const applications = useSelector((state) => state.applications.list);
+  const loading = useSelector((state) => state.applications.loading);
   const [curTab, setCurTab] = useState(status ? TAB[status] : TAB.open);
 
   const getStatusStr = (statusId: number): i.ApplicationStatus => {
@@ -98,11 +99,16 @@ const ApplicationsPage: i.NextPageComponent<Props, Query> = ({ url, status }) =>
 
         <Heading as="h2">{getStatusStr(curTab)} applications</Heading>
 
-        <ApplicationsList>
-          {applications && applications.map((application) => (
-            <ApplicationItem key={application.id} application={application} />
-          ))}
-        </ApplicationsList>
+        {loading ? (
+          <Loader />
+        ) : (
+          <ApplicationsList>
+            {applications && applications.map((application) => (
+              <ApplicationItem key={application.id} application={application} />
+            ))}
+          </ApplicationsList>
+        )}
+
       </ApplicationsContainer>
     </Page>
   );

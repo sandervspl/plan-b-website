@@ -173,12 +173,13 @@ export const NewsItemContainer = styled.article<NewsItemContainerProps>`
       }
 
       ${Paragraph} {
+        ${lineClamp(1)};
         opacity: 0;
         transition: opacity .25s ease-in-out;
-        ${lineClamp(1)};
       }
 
       ${Heading} {
+        ${lineClamp(2)};
         transform: translate3d(0, 30px, 0);
         transition: transform .25s ease-in-out;
       }

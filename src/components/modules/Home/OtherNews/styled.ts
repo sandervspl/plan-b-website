@@ -45,7 +45,7 @@ export const OtherNewsContainer = styled.div`
   }
 
   ${media.tablet`
-    grid-column: 1 / 14;
+    grid-column: 1 / 15;
     border: 1px solid ${(props) => props.theme.color.border.primary};
     border-top: none;
   `}

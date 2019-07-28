@@ -50,11 +50,11 @@ export const NewsDetailContainer = styled(MarkdownPageContainer)`
     border-color: ${(props) => props.theme.color.border.primary};
 
     > *:nth-child(1) {
-      grid-column: 1/14;
+      grid-column: 1 / 15;
     }
 
     > *:nth-child(2) {
-      grid-column: 14/21;
+      grid-column: 15 / 21;
     }
   `}
 `;

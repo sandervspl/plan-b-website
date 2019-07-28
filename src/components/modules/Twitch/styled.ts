@@ -26,7 +26,7 @@ export const TwitchContainer = styled.div`
   }
 
   ${media.tablet`
-    grid-column: 14 / 21;
+    grid-column: 15 / 21;
     border: 1px solid ${(props) => props.theme.color.border.primary};
     border-left: 0;
     border-top: 0;

@@ -11,7 +11,7 @@ export const HomeContainer = styled.div`
     grid-template-columns: repeat(20, 1fr);
 
     > *:nth-child(1) {
-      grid-column: 1 / 14;
+      grid-column: 1 / 15;
     }
 
     ${LatestNewsContainer},

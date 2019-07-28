@@ -55,8 +55,10 @@ const Link: React.FC<LinkComponentProps> = ({
       );
     }
 
+    const validProps = _.omit(props, 'external');
+
     return (
-      <a {...linkProps} {...props}>
+      <a {...linkProps} {...validProps}>
         {children}
       </a>
     );
@@ -72,10 +74,12 @@ const Link: React.FC<LinkComponentProps> = ({
     };
   }
 
+  const validProps = _.omit(props, 'params');
+
   return (
     <Router.Link route={to} params={paramsProps.params}>
       {React.Children.only(
-        <a {...prefetchProps} {...linkProps} {...props}>
+        <a {...prefetchProps} {...linkProps} {...validProps}>
           {children}
         </a>
       )}

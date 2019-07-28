@@ -1,14 +1,13 @@
 import styled, { css } from 'styled-components';
-import bgImg from 'images/bg.jpg';
 import { media } from 'styles';
 
-export const PageContainer = styled.div`
+export const PageContainer = styled.div<PageContainerProps>`
   width: 100%;
   height: 100%;
   min-height: 100vh;
   background-color: ${(props) => props.theme.color.background};
   
-  ${media.tablet`
+  ${media.tablet<PageContainerProps>`
     &:before {
       content: '';
       position: absolute;
@@ -16,10 +15,10 @@ export const PageContainer = styled.div`
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url(${bgImg});
+      background-image: url(${(props) => props.bgImg});
       background-position: center center;
       background-size: cover;
-      opacity: .08;
+      opacity: .07;
     }
 
     > div {
@@ -27,6 +26,10 @@ export const PageContainer = styled.div`
     }
   `}
 `;
+
+type PageContainerProps = {
+  bgImg: string;
+}
 
 export const PageContent = styled.div`
   margin: 65px auto 50px;

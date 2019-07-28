@@ -1,7 +1,8 @@
 export type StorageRefs =
   | recruitmentRefs
   | classRefs
-  | 'raids';
+  | 'raids'
+  | 'general';
 
 type recruitmentRefs =
   | 'recruitment'

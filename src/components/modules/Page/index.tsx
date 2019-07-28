@@ -8,15 +8,17 @@ import AppleTouchIcon from 'favicon/apple-touch-icon.png';
 import Favicon32 from 'favicon/favicon-32x32.png';
 import Favicon16 from 'favicon/favicon-16x16.png';
 import SafariPinnedTab from 'favicon/safari-pinned-tab.svg';
+import { useGetFirebaseImage } from 'hooks';
 import Navigation from './components/Navigation';
 import { PageContainer, PageContent, PageInner } from './styled';
 
 const Page: React.FC<PageProps> = ({ children, withoutNav, meta, url, withoutShadow }) => {
   const title = meta ? meta.title : 'Plan B';
   const description = meta ? meta.description : 'Plan B — Classic WoW Guild';
+  const bgImg = useGetFirebaseImage('general', 'bg.jpg');
 
   return (
-    <PageContainer>
+    <PageContainer bgImg={bgImg}>
       <Head>
         <title>{title}</title>
         <meta property="og:title" content={title} />

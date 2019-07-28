@@ -39,12 +39,10 @@ const theme = {
 
   font: {
     primary: '\'Source Sans Pro\', sans-serif',
-    secondary: 'Playfair, serif',
   },
 
   width: {
-    page: '1005px',
-    login: '365px',
+    page: '1200px',
   },
 
   easing: {

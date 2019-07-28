@@ -1,18 +1,17 @@
 import * as i from 'types';
 import React, { useEffect } from 'react';
-import { FieldArray } from 'react-final-form-arrays';
 import { TRANSITION_TIME_MS } from 'styles/pageTransition';
 import { QuestionContent, NextButton } from '../styled';
 import QuestionHeader from '../QuestionHeader';
-import { CharacterGrid } from './styled';
 import CharacterField from './CharacterField';
+import { CharacterGrid } from './styled';
 
 const CharacterQuestion: React.FC<Props> = ({ onNextClick, active, errors }) => {
   useEffect(() => {
     if (!active) return;
 
     setTimeout(() => {
-      const el = document.querySelector<HTMLInputElement>('#character_name');
+      const el = document.querySelector<HTMLInputElement>('#character.name');
 
       if (el) {
         el.focus();
@@ -29,25 +28,13 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, active, errors }) => 
       <QuestionContent>
         <CharacterGrid>
           <div>
-            <FieldArray name="character">
-              {({ fields }) => (
-                <>
-                  <CharacterField name={`${fields.name}.name`} label="Character name" />
-                  <CharacterField name={`${fields.name}.level`} label="Level" />
-                  <CharacterField name={`${fields.name}.server`} label="Server" />
-                </>
-              )}
-            </FieldArray>
+            <CharacterField name="character.name" label="Character name" />
+            <CharacterField name="character.level" label="Level" />
+            <CharacterField name="character.server" label="Server" />
           </div>
           <div>
-            <FieldArray name="character">
-              {({ fields }) => (
-                <>
-                  <CharacterField name={`${fields.name}.race`} label="Race" />
-                  <CharacterField name={`${fields.name}.class`} label="Class" />
-                </>
-              )}
-            </FieldArray>
+            <CharacterField name="character.race" label="Race" />
+            <CharacterField name="character.class" label="Class" />
           </div>
         </CharacterGrid>
 

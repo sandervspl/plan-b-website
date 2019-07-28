@@ -12,6 +12,7 @@ import Question from 'modules/Apply/Question';
 import IntroductionQuestion from 'modules/Apply/IntroductionQuestion';
 // import CharacterApiQuestion from 'modules/Apply/CharacterApiQuestion';
 import CharacterQuestion from 'modules/Apply/CharacterQuestion';
+import ProfessionsQuestion from 'modules/Apply/ProfessionsQuestion';
 import RoleQuestion from 'modules/Apply/RoleQuestion';
 import RaidQuestion from 'modules/Apply/RaidQuestion';
 import AboutYouQuestion from 'modules/Apply/AboutYouQuestion';
@@ -25,6 +26,7 @@ const questionComponents: Question[] = [
   IntroductionQuestion,
   // CharacterApiQuestion,
   CharacterQuestion,
+  ProfessionsQuestion,
   RoleQuestion,
   RaidQuestion,
   AboutYouQuestion,
@@ -105,12 +107,14 @@ const ApplicationPage: i.NextPageComponent<Props> = (props) => {
       <Form
         onSubmit={() => {}}
         mutators={{ ...arrayMutators }}
+        destroyOnUnregister
         keepDirtyOnReinitialize
         initialValues={{
           character: {
             server: 'Ragnaros',
             level: 60,
           },
+          raid_experience: {},
         }}
       >
         {({ values, errors }) => (

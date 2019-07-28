@@ -103,7 +103,7 @@ export const StyledInput = styled.input`
     color: ${(props) => props.theme.color.secondary.dark};
 
     ${media.tablet`
-      top: -20px;
+      top: -15px;
     `}
   }
 

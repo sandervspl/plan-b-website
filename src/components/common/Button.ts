@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { media } from 'styles';
 
-export const Button = styled.button`
+export const Button = styled.button<ButtonProps>`
   padding: 13px 0;
   width: 100%;
   font-size: 18px;
@@ -12,6 +12,7 @@ export const Button = styled.button`
   background-color: ${(props) => props.theme.color.background.light};
   border: 0;
   outline: 0;
+  border-radius: 5px;
   cursor: pointer;
   will-change: transform;
   transition: 50ms transform;
@@ -37,4 +38,19 @@ export const Button = styled.button`
     cursor: not-allowed;
     background-color: ${(props) => props.theme.color.background.light};
   }
+
+  ${(props) => props.styleType === 'simple' && css`
+    background: transparent;
+    border: 1px solid ${(props) => props.theme.color.secondary.darker};
+    color: ${(props) => props.theme.color.secondary.darker};
+
+    &:hover {
+      border: 1px solid ${(props) => props.theme.color.secondary};
+      color: ${(props) => props.theme.color.secondary};
+    }
+  `}
 `;
+
+type ButtonProps = {
+  styleType?: 'simple';
+}

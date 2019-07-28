@@ -7,7 +7,7 @@ import { Fullscreenpage, __OLD__Header, Paragraph } from 'common';
 export const RecruitmentContainer = styled(Fullscreenpage)`
   margin: auto;
   padding: 40px 30px;
-  overflow: hidden;
+  overflow-x: hidden;
 
   &:before {
     content: '';
@@ -24,7 +24,7 @@ export const RecruitmentContainer = styled(Fullscreenpage)`
   }
 
   ${media.tablet`
-    padding: 75px 140px;
+    padding: 30px 75px;
     max-width: 1280px;
     max-height: 800px;
   `}
@@ -223,7 +223,7 @@ export const QuestionContent = styled.div<QuestionContentProps>`
   height: calc(100% - 150px);
 
   ${media.tablet<QuestionContentProps>`
-    top: 155px;
+    top: 105px;
     height: calc(100% - 155px);
 
     ${(props) => props.fullSize && css`

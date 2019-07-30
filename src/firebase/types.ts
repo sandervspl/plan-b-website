@@ -3,7 +3,8 @@ export type StorageRefs =
   | classRefs
   | 'raids'
   | 'general'
-  | 'icons/races';
+  | 'icons/races'
+  | 'icons/professions';
 
 type recruitmentRefs =
   | 'recruitment'

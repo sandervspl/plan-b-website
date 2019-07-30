@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components';
 import { media } from 'styles';
 
 export const Button = styled.button<ButtonProps>`
-  padding: 13px 0;
+  padding: 7px;
   width: 100%;
-  font-size: 18px;
+  font-size: 16px;
   color: ${(props) => props.theme.color.secondary};
   font-family: ${(props) => props.theme.font.primary};
   font-weight: bold;
@@ -20,11 +20,6 @@ export const Button = styled.button<ButtonProps>`
   svg {
     fill: ${(props) => props.theme.color.secondary};
   }
-
-  ${media.tablet`
-    padding: 17px 75px;
-    font-size: 30px;
-  `}
 
   &:hover {
     transform: scale(1.01);
@@ -48,6 +43,11 @@ export const Button = styled.button<ButtonProps>`
       border: 1px solid ${(props) => props.theme.color.secondary};
       color: ${(props) => props.theme.color.secondary};
     }
+  `}
+
+  ${media.tablet`
+    padding: 17px 75px;
+    font-size: 30px;
   `}
 `;
 

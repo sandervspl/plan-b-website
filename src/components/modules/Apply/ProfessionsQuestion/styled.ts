@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { media } from 'styles';
 import { Heading, Button } from 'common';
+import { DropdownContainer, DropdownList } from 'common/form/DropdownInput/styled';
 import { NextButton } from '../styled';
 
 export const ProfessionsGrid = styled.div`
@@ -32,6 +33,18 @@ export const ProfessionsGrid = styled.div`
       padding: 8px 18px;
       font-size: 18px;
       width: auto;
+    }
+
+    ${DropdownContainer} {
+      z-index: 2;
+
+      svg {
+        left: 175px;
+      }
+
+      ${DropdownList} {
+        width: 80%;
+      }
     }
   `}
 `;

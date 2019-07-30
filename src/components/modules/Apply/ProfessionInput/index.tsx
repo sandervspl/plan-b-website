@@ -1,11 +1,18 @@
 import React from 'react';
+import { Field } from 'react-final-form';
+import { DropdownInput } from 'common/form/DropdownInput';
 import CharacterField from '../CharacterQuestion/CharacterField';
 import { ProfessionInputContainer } from './styled';
 
-const ProfessionInput: React.FC<Props> = ({ name, index }) => {
+const ProfessionInput: React.FC<Props> = ({ name, index, items }) => {
   return (
     <ProfessionInputContainer>
-      <CharacterField name={`${name}.name`} label={`Profession #${index}`} />
+      <Field
+        component={DropdownInput}
+        name={`${name}.name`}
+        label={`profession #${index}`}
+        items={items}
+      />
       <CharacterField name={`${name}.level`} label="Level" type="number" min="0" max="300" />
     </ProfessionInputContainer>
   );
@@ -14,6 +21,10 @@ const ProfessionInput: React.FC<Props> = ({ name, index }) => {
 export type Props = React.ButtonHTMLAttributes<{}> & {
   name: string;
   index: number;
+  items: {
+    name: string;
+    icon: string;
+  }[];
 };
 
 export default ProfessionInput;

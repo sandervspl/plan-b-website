@@ -39,7 +39,7 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, active, errors }) => 
             <Field
               component={DropdownInput}
               name="character.race"
-              label="Race"
+              label="race"
               items={[{
                 name: 'Orc',
                 icon: useGetFirebaseImage('icons/races', 'Orc_Male.gif'),
@@ -57,7 +57,7 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, active, errors }) => 
             <Field
               component={DropdownInput}
               name="character.class"
-              label="Class"
+              label="class"
               items={[{
                 name: 'Druid',
                 icon: useGetFirebaseImage('icons/classes/druid', 'class.jpg'),

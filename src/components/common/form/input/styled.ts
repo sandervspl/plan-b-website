@@ -16,6 +16,14 @@ const inputHighlighter = keyframes`
 export const InputContainer = styled.div`  
   position: relative;
   margin-bottom: 25px;
+
+  select {
+    border-radius: 0;
+
+    option:disabled {
+      color: #333333;
+    }
+  }
   
   ${media.tablet`
     margin-bottom: 45px;

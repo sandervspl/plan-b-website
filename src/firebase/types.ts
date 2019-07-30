@@ -2,7 +2,8 @@ export type StorageRefs =
   | recruitmentRefs
   | classRefs
   | 'raids'
-  | 'general';
+  | 'general'
+  | 'icons/races';
 
 type recruitmentRefs =
   | 'recruitment'
@@ -11,7 +12,7 @@ type recruitmentRefs =
 type classRefs =
   | 'icons/classes/druid'
   | 'icons/classes/hunter'
-  | 'icons/classes/mages'
+  | 'icons/classes/mage'
   | 'icons/classes/priest'
   | 'icons/classes/rogue'
   | 'icons/classes/shaman'

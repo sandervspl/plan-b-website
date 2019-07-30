@@ -36,15 +36,18 @@ export const ProfessionsGrid = styled.div`
     }
 
     ${DropdownContainer} {
-      z-index: 2;
-
       svg {
         left: 175px;
       }
 
       ${DropdownList} {
+        z-index: 3;
         width: 80%;
       }
+    }
+
+    ${Heading} {
+      margin-bottom: 30px;
     }
   `}
 `;

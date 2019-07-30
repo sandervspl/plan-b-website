@@ -114,7 +114,6 @@ const ApplicationPage: i.NextPageComponent<Props> = (props) => {
             server: 'Ragnaros',
             level: 60,
           },
-          raid_experience: {},
         }}
       >
         {({ values, errors }) => (

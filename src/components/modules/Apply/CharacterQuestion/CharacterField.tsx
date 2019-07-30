@@ -19,6 +19,7 @@ const CharacterField: React.FC<Props> = ({ name, label, ...props }) => {
 export type Props = React.InputHTMLAttributes<{}> & {
   name: string;
   label: string;
+  as?: 'textarea';
 };
 
 export default CharacterField;

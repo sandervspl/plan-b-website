@@ -241,7 +241,7 @@ type QuestionContentProps = {
 export const NextButton = styled.button.attrs({ type: 'button' })`
   position: relative;
   z-index: 1;
-  margin-top: auto;
+  margin: auto 0 30px;
   background: none;
   border: 0;
   outline: 0;

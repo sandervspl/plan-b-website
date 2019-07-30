@@ -1,52 +1,11 @@
 import * as i from 'types';
-import React, { useEffect } from 'react';
-import { FieldArray } from 'react-final-form-arrays';
-import { useSelector } from 'hooks';
-import { TRANSITION_TIME_MS } from 'styles/pageTransition';
-import FakeInput from 'common/FakeInput';
+import React from 'react';
 import QuestionHeader from '../QuestionHeader';
-import {
-  QuestionContent, NextButton, RecruitmentContainerInner, QuestionField, TextInputField,
-} from '../styled';
+import { QuestionContent, NextButton, RecruitmentContainerInner } from '../styled';
+import CharacterField from '../CharacterQuestion/CharacterField';
+import { PersonalGrid } from './styled';
 
-const questions = [
-  'Hello! My name is ',
-  {
-    name: 'name',
-    placeholder: 'real name',
-    maxLength: 20,
-    type: 'string',
-  },
-  '. I am ',
-  {
-    name: 'age',
-    placeholder: 'age',
-    maxLength: 3,
-    type: 'number',
-  },
-  ' years old.',
-];
-
-const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, active }) => {
-  const form = useSelector((state) => state.form);
-  const questionsAmount = 1 + questions.filter((qstn) => typeof qstn === 'object').length;
-  const answerAmount = form.application && form.application.values.about_applicant
-    ? Object.values(form.application.values.about_applicant).length
-    : 0;
-
-  /** @todo turn into hook */
-  useEffect(() => {
-    if (!active) return;
-
-    setTimeout(() => {
-      const el = document.querySelector<HTMLInputElement>('#fake-about_applicant\\.name');
-
-      if (el) {
-        el.focus();
-      }
-    }, TRANSITION_TIME_MS);
-  }, [active]);
-
+const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, errors }) => {
   return (
     <RecruitmentContainerInner>
       <QuestionHeader>
@@ -54,40 +13,23 @@ const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, act
       </QuestionHeader>
 
       <QuestionContent>
-        <FieldArray name="about_applicant">
-          {({ fields }) => (
-            <QuestionField fullSize>
-              {questions.map((item) => {
-                if (typeof item === 'string') {
-                  return item;
-                }
+        <PersonalGrid>
+          <div>
+            <CharacterField name="personal.name" label="My name is" />
+            <CharacterField name="personal.age" label="My age is" type="number" min="0" max="99" />
+          </div>
 
-                return (
-                  <FakeInput
-                    key={item.name}
-                    fieldArrayName={fields.name}
-                    fieldName={item.name}
-                    placeholder={item.placeholder}
-                    maxLength={item.maxLength}
-                    type={item.type as 'string' | 'number'}
-                  />
-                );
-              })}
+          <div>
+            <CharacterField name="personal.story" label="Tell us about yourself" as="textarea" />
+            <CharacterField
+              name="personal.reason"
+              label="I want to join Plan B, because"
+              as="textarea"
+            />
+          </div>
+        </PersonalGrid>
 
-              <br />
-
-              <TextInputField
-                component="textarea"
-                id={`${fields.name}.story`}
-                name={`${fields.name}.story`}
-                placeholder="My story..."
-                tabIndex={-1}
-              />
-            </QuestionField>
-          )}
-        </FieldArray>
-
-        <NextButton onClick={onNextClick} disabled={questionsAmount !== answerAmount}>
+        <NextButton onClick={onNextClick} disabled={!!errors.personal}>
           <span>Finish</span>
         </NextButton>
       </QuestionContent>

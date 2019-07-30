@@ -5,7 +5,7 @@ export const Button = styled.button<ButtonProps>`
   padding: 13px 0;
   width: 100%;
   font-size: 18px;
-  color: ${(props) => props.theme.color.primary};
+  color: ${(props) => props.theme.color.secondary};
   font-family: ${(props) => props.theme.font.primary};
   font-weight: bold;
   text-transform: uppercase;
@@ -18,7 +18,7 @@ export const Button = styled.button<ButtonProps>`
   transition: 50ms transform;
 
   svg {
-    fill: ${(props) => props.theme.color.primary};
+    fill: ${(props) => props.theme.color.secondary};
   }
 
   ${media.tablet`

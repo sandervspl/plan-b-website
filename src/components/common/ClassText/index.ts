@@ -7,13 +7,9 @@ const classColors = [
   '#ABD473',   // Hunter
   '#FFF569',   // Rogue
   '#FFFFFF',   // Priest
-  '#C41F3B',   // Death Knight
-  '#F58CBA',   // Shaman
   '#40C7EB',   // Mage
-  '#8787ED',   // Warlock
-  '#00FF96',  // Monk
   '#FF7D0A',  // Druid
-  '#A330C9',  // Demon Hunter
+  '#8787ED',   // Warlock
 ];
 
 export const ClassText = styled.span<Props>`

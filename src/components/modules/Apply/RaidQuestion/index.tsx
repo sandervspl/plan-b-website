@@ -59,50 +59,46 @@ const RaidQuestion: React.FC<Props> = ({ onNextClick }) => {
 
       <QuestionContent fullSize>
         <RaidList>
-          <FieldArray name="raid_experience">
-            {({ fields }) => (
-              isMobile ? _.flatten(raids).map((raid, i) => {
-                const raidName = raid.name.replace(/[ ']/g, '').toLowerCase();
-                const selected = !!selectedArray.find((name) => raidName === name);
+          {isMobile ? _.flatten(raids).map((raid, i) => {
+            const raidName = raid.name.replace(/[ ']/g, '').toLowerCase();
+            const selected = !!selectedArray.find((name) => raidName === name);
 
-                return (
-                  <RaidItem key={i} data-tip={raid.name}>
-                    <Field
-                      component="input"
-                      type="checkbox"
-                      name={`${fields.name}.${raidName}`}
-                      id={`${fields.name}.${raidName}`}
-                    />
-                    <RaidImage selected={selected}>
-                      <img src={raid.img} alt={raid.name} />
-                    </RaidImage>
-                  </RaidItem>
-                );
-              }) : (
-                raids.map((raidRow, i) => (
-                  <RaidRow key={i} row={i}>
-                    {raidRow.map((raid, j) => {
-                      const raidName = raid.name.replace(/[ ']/g, '').toLowerCase();
-                      const selected = !!selectedArray.find((name) => raidName === name);
+            return (
+              <RaidItem key={i} data-tip={raid.name}>
+                <Field
+                  component="input"
+                  type="checkbox"
+                  name={`raid_experience.${raidName}`}
+                  id={`raid_experience.${raidName}`}
+                />
+                <RaidImage selected={selected}>
+                  <img src={raid.img} alt={raid.name} />
+                </RaidImage>
+              </RaidItem>
+            );
+          }) : (
+            raids.map((raidRow, i) => (
+              <RaidRow key={i} row={i}>
+                {raidRow.map((raid, j) => {
+                  const raidName = raid.name.replace(/[ ']/g, '').toLowerCase();
+                  const selected = !!selectedArray.find((name) => raidName === name);
 
-                      return (
-                        <RaidItem key={j} data-tip={raid.name}>
-                          <Field
-                            component="input"
-                            type="checkbox"
-                            name={`${fields.name}.${raidName}`}
-                            id={`${fields.name}.${raidName}`}
-                          />
-                          <RaidImage selected={selected}>
-                            <img src={raid.img} alt={raid.name} />
-                          </RaidImage>
-                        </RaidItem>
-                      );
-                    })}
-                  </RaidRow>
-                ))
-              ))}
-          </FieldArray>
+                  return (
+                    <RaidItem key={j} data-tip={raid.name}>
+                      <Field
+                        component="input"
+                        type="checkbox"
+                        name={`raid_experience.${raidName}`}
+                        id={`raid_experience.${raidName}`}
+                      />
+                      <RaidImage selected={selected}>
+                        <img src={raid.img} alt={raid.name} />
+                      </RaidImage>
+                    </RaidItem>
+                  );
+                })}
+              </RaidRow>
+            )))}
         </RaidList>
 
         <NextButton onClick={onNextClick}>

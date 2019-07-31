@@ -11,11 +11,12 @@ const ProfessionInput: React.FC<Props> = ({ name, index, items }) => {
       <Field
         component={DropdownInput}
         name={`${name}.name`}
-        label={`profession #${index}`}
+        label={`profession #${index + 1}`}
         items={items}
         validate={validate.required}
       />
       <CharacterField name={`${name}.level`} label="Level" type="number" min="0" max="300" />
+      {/* <CloseIcon onClick={removeInput} /> */}
     </ProfessionInputContainer>
   );
 };

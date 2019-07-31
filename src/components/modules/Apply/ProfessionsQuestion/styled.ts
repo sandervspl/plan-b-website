@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'styles';
 import { Heading, Button } from 'common';
-import { DropdownContainer, DropdownList } from 'common/form/DropdownInput/styled';
 import { NextButton } from '../styled';
 
 export const ProfessionsGrid = styled.div`
@@ -12,12 +11,14 @@ export const ProfessionsGrid = styled.div`
     color: ${(props) => props.theme.color.secondary.darker};
   }
 
-  > div:nth-of-type(n+2) {
-    margin-top: 30px;
+  > div {
+    &:nth-of-type(n+2) {
+      margin-top: 30px;
 
-    ${media.tablet`
-      margin: 0;
-    `}
+      ${media.tablet`
+        margin: 0;
+      `}
+    }
   }
 
   + ${NextButton} {
@@ -33,17 +34,6 @@ export const ProfessionsGrid = styled.div`
       padding: 8px 18px;
       font-size: 18px;
       width: auto;
-    }
-
-    ${DropdownContainer} {
-      svg {
-        left: 175px;
-      }
-
-      ${DropdownList} {
-        z-index: 3;
-        width: 80%;
-      }
     }
 
     ${Heading} {

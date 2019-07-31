@@ -4,9 +4,11 @@ import { ActionType, action } from 'typesafe-actions';
 export const actions = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   update: (payload: { form: i.Forms; data: any }) => action('form/UPDATE', payload),
+
   sendStart: () => action('form/SEND_START'),
   sendSuccess: () => action('form/SEND_SUCCESS'),
   sendFailed: () => action('form/SEND_FAILED'),
+
   reset: () => action('form/RESET'),
 };
 

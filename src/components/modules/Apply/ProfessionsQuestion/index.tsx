@@ -2,17 +2,14 @@ import * as i from 'types';
 import React, { useState } from 'react';
 import { useGetFirebaseImage } from 'hooks';
 import { Button, Heading } from 'common';
-// import { actions } from 'ducks/form';
 import { QuestionContent, NextButton } from '../styled';
 import QuestionHeader from '../QuestionHeader';
 import ProfessionInput from '../ProfessionInput';
 import { ProfessionsGrid } from './styled';
 
 const CharacterQuestion: React.FC<Props> = ({ onNextClick }) => {
-  // const dispatch = useDispatch();
-  // const form = useSelector((state) => state.form.application!);
-  const [primaries, setPrimaries] = useState<(number | null)[]>([]);
-  const [secondaries, setSecondaries] = useState<(number | null)[]>([]);
+  const [primaries, setPrimaries] = useState<string[]>([]);
+  const [secondaries, setSecondaries] = useState<string[]>([]);
   const primaryFieldName = 'professions.primary';
   const secondaryFieldName = 'professions.secondary';
 
@@ -34,52 +31,13 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick }) => {
     fishing: useGetFirebaseImage('icons/professions', 'Trade_fishing.png'),
   };
 
-  // eslint-disable-next-line
-  const getCleanArray = (arr: any[]) => arr.filter((val) => val != null);
-
-  const add = (arr: (number | null)[], setFn: Function) => () => {
-    const copy = [...arr];
-    const cleanArray = getCleanArray(arr);
-    const firstEmptyIndex = arr.indexOf(null);
-
-    if (firstEmptyIndex > -1) {
-      copy[firstEmptyIndex] = firstEmptyIndex;
-    } else {
-      copy.push(cleanArray.length);
-    }
-
-    setFn(copy);
+  const addPrimary = () => {
+    setPrimaries([...primaries, '']);
   };
 
-  // const removePrimary = (num: number) => () => {
-  //   const copy = [...primaries];
-
-  //   copy[num] = null;
-
-  //   setPrimaries(copy);
-  // };
-
-  // const removeSecondary = (num: number) => () => {
-  //   const copy = [...secondaries];
-
-  //   copy[num] = null;
-
-  //   dispatch(actions.update({
-  //     form: 'application',
-  //     data: {
-  //       ...form,
-  //       values: {
-  //         ...form.values,
-  //         professions: {
-  //           ...form.values.professions,
-  //           secondary: copy,
-  //         },
-  //       },
-  //     },
-  //   }));
-
-  //   setSecondaries(copy);
-  // };
+  const addSecondary = () => {
+    setSecondaries([...secondaries, '']);
+  };
 
   return (
     <>
@@ -92,78 +50,82 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick }) => {
           <div>
             <Heading as="h2">Primary professions</Heading>
 
-            {primaries.map((num, i) => (
+            {primaries.map((_, i) => (
               <ProfessionInput
                 key={i}
-                name={`${primaryFieldName}[${num}]`}
+                name={`${primaryFieldName}[${i}]`}
                 index={i}
-                items={[
-                  {
-                    name: 'Alchemy',
-                    icon: icons.alchemy,
-                  }, {
-                    name: 'Blacksmithing',
-                    icon: icons.blacksmithing,
-                  }, {
-                    name: 'Enchanting',
-                    icon: icons.enchanting,
-                  }, {
-                    name: 'Engineering',
-                    icon: icons.engineering,
-                  }, {
-                    name: 'Herbalism',
-                    icon: icons.herbalism,
-                  }, {
-                    name: 'Leatherworking',
-                    icon: icons.leatherworking,
-                  }, {
-                    name: 'Mining',
-                    icon: icons.mining,
-                  }, {
-                    name: 'Skinning',
-                    icon: icons.skinning,
-                  }, {
-                    name: 'Tailoring',
-                    icon: icons.tailoring,
-                  },
-                ]}
+                items={[{
+                  id: 0,
+                  name: 'Alchemy',
+                  icon: icons.alchemy,
+                }, {
+                  id: 1,
+                  name: 'Blacksmithing',
+                  icon: icons.blacksmithing,
+                }, {
+                  id: 2,
+                  name: 'Enchanting',
+                  icon: icons.enchanting,
+                }, {
+                  id: 3,
+                  name: 'Engineering',
+                  icon: icons.engineering,
+                }, {
+                  id: 4,
+                  name: 'Herbalism',
+                  icon: icons.herbalism,
+                }, {
+                  id: 5,
+                  name: 'Leatherworking',
+                  icon: icons.leatherworking,
+                }, {
+                  id: 6,
+                  name: 'Mining',
+                  icon: icons.mining,
+                }, {
+                  id: 7,
+                  name: 'Skinning',
+                  icon: icons.skinning,
+                }, {
+                  id: 8,
+                  name: 'Tailoring',
+                  icon: icons.tailoring,
+                }]}
               />
             ))}
 
             {primaries.length < 2 && (
-              <Button type="button" onClick={add(primaries, setPrimaries)} styleType="simple">
-                + Profession
-              </Button>
+              <Button type="button" onClick={addPrimary} styleType="simple">+ Profession</Button>
             )}
           </div>
 
           <div>
             <Heading as="h2">Secondary professions</Heading>
 
-            {secondaries.map((num, i) => (
+            {secondaries.map((_, i) => (
               <ProfessionInput
                 key={i}
-                name={`${secondaryFieldName}[${num}]`}
+                name={`${secondaryFieldName}[${i}]`}
                 index={i}
-                items={[
-                  {
-                    name: 'Cooking',
-                    icon: icons.cooking,
-                  }, {
-                    name: 'First Aid',
-                    icon: icons.firstAid,
-                  }, {
-                    name: 'Fishing',
-                    icon: icons.fishing,
-                  },
-                ]}
+                items={[{
+                  id: 9,
+                  name: 'Cooking',
+                  icon: icons.cooking,
+                }, {
+                  id: 10,
+                  name: 'First Aid',
+                  icon: icons.firstAid,
+                }, {
+                  id: 11,
+                  name: 'Fishing',
+                  icon: icons.fishing,
+                }]}
               />
             ))}
 
             {secondaries.length < 3 && (
-              <Button type="button" onClick={add(secondaries, setSecondaries)} styleType="simple">
-                + Profession
-              </Button>
+              <Button type="button" onClick={addSecondary} styleType="simple">+ Profession</Button>
             )}
           </div>
         </ProfessionsGrid>

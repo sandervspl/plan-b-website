@@ -1,6 +1,5 @@
 import * as i from 'types';
 import React from 'react';
-import { FieldArray } from 'react-final-form-arrays';
 import { Field } from 'react-final-form';
 import _ from 'lodash';
 import { useSelector, useGetFirebaseImage } from 'hooks';
@@ -18,27 +17,34 @@ const RaidQuestion: React.FC<Props> = ({ onNextClick }) => {
     [
       {
         name: 'molten core',
+        value: 'molten_core',
         img: useGetFirebaseImage('raids', 'molten-core.png'),
       }, {
         name: 'onyxia',
+        value: 'onyxia',
         img: useGetFirebaseImage('raids', 'onyxia.jpg'),
       }, {
         name: 'blackwing lair',
+        value: 'blackwing_lair',
         img: useGetFirebaseImage('raids', 'blackwing-lair.jpg'),
       },
     ],
     [
       {
         name: 'zul\'Gurub',
+        value: 'zul_gurub',
         img: useGetFirebaseImage('raids', 'zul\'gurub.jpg'),
       }, {
         name: 'ahn\'Qiraj (20)',
+        value: 'aq_20',
         img: useGetFirebaseImage('raids', 'aq20.jpg'),
       }, {
         name: 'ahn\'Qiraj (40)',
+        value: 'aq_40',
         img: useGetFirebaseImage('raids', 'aq40.jpg'),
       }, {
         name: 'naxxramas',
+        value: 'naxxramas',
         img: useGetFirebaseImage('raids', 'naxxramas.jpg'),
       },
     ],
@@ -59,17 +65,16 @@ const RaidQuestion: React.FC<Props> = ({ onNextClick }) => {
 
       <QuestionContent fullSize>
         <RaidList>
-          {isMobile ? _.flatten(raids).map((raid, i) => {
-            const raidName = raid.name.replace(/[ ']/g, '').toLowerCase();
-            const selected = !!selectedArray.find((name) => raidName === name);
+          {isMobile ? _.flatten(raids).map((raid) => {
+            const selected = !!selectedArray.find((name) => raid.value === name);
 
             return (
-              <RaidItem key={i} data-tip={raid.name}>
+              <RaidItem key={raid.value} data-tip={raid.name}>
                 <Field
                   component="input"
                   type="checkbox"
-                  name={`raid_experience.${raidName}`}
-                  id={`raid_experience.${raidName}`}
+                  name={`raid_experience.${raid.value}`}
+                  id={`raid_experience.${raid.value}`}
                 />
                 <RaidImage selected={selected}>
                   <img src={raid.img} alt={raid.name} />
@@ -79,17 +84,16 @@ const RaidQuestion: React.FC<Props> = ({ onNextClick }) => {
           }) : (
             raids.map((raidRow, i) => (
               <RaidRow key={i} row={i}>
-                {raidRow.map((raid, j) => {
-                  const raidName = raid.name.replace(/[ ']/g, '').toLowerCase();
-                  const selected = !!selectedArray.find((name) => raidName === name);
+                {raidRow.map((raid) => {
+                  const selected = !!selectedArray.find((name) => raid.value === name);
 
                   return (
-                    <RaidItem key={j} data-tip={raid.name}>
+                    <RaidItem key={raid.value} data-tip={raid.name}>
                       <Field
                         component="input"
                         type="checkbox"
-                        name={`raid_experience.${raidName}`}
-                        id={`raid_experience.${raidName}`}
+                        name={`raid_experience.${raid.value}`}
+                        id={`raid_experience.${raid.value}`}
                       />
                       <RaidImage selected={selected}>
                         <img src={raid.img} alt={raid.name} />

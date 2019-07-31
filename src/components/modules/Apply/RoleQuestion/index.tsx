@@ -10,14 +10,17 @@ const RoleQuestion: React.FC<Props> = ({ onNextClick }) => {
   const form = useSelector((state) => state.form);
 
   const roles = [{
+    id: 1,
     background: useGetFirebaseImage('recruitment/roles', 'dps_low.jpg'),
     icon: useGetFirebaseImage('icons/classes/rogue', 'combat.jpg'),
     text: 'DPS',
   }, {
+    id: 3,
     background: useGetFirebaseImage('recruitment/roles', 'healer_low.jpg'),
     icon: useGetFirebaseImage('icons/classes/druid', 'restoration.jpg'),
     text: 'Healer',
   }, {
+    id: 2,
     background: useGetFirebaseImage('recruitment/roles', 'tank_low.jpg'),
     icon: useGetFirebaseImage('icons/classes/warrior', 'protection.jpg'),
     text: 'Tank',
@@ -35,26 +38,30 @@ const RoleQuestion: React.FC<Props> = ({ onNextClick }) => {
 
       <QuestionContent fullSize>
         <RoleList>
-          {roles.map((role) => (
-            <RoleItem
-              key={role.text}
-              checked={role.text === activeRole}
-              unchecked={activeRole != null && role.text !== activeRole}
-            >
-              <Field
-                name="role"
-                component="input"
-                type="radio"
-                value={role.text}
-                tabIndex={-1}
-              />
-              <BackgroundImage>
-                <img src={role.background} alt={role.text} />
-              </BackgroundImage>
-              <RoleIcon src={role.icon} />
-              <RoleText>{role.text}</RoleText>
-            </RoleItem>
-          ))}
+          {roles.map((role) => {
+            const roleId = role.id.toString();
+
+            return (
+              <RoleItem
+                key={role.id}
+                checked={roleId === activeRole}
+                unchecked={activeRole != null && roleId !== activeRole}
+              >
+                <Field
+                  name="role"
+                  component="input"
+                  type="radio"
+                  value={roleId}
+                  tabIndex={-1}
+                />
+                <BackgroundImage>
+                  <img src={role.background} alt={role.text} />
+                </BackgroundImage>
+                <RoleIcon src={role.icon} />
+                <RoleText>{role.text}</RoleText>
+              </RoleItem>
+            );
+          })}
         </RoleList>
 
         <NextButton onClick={onNextClick} disabled={!activeRole}>

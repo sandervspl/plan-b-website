@@ -10,7 +10,7 @@ const ProfessionInput: React.FC<Props> = ({ name, index, items }) => {
     <ProfessionInputContainer>
       <Field
         component={DropdownInput}
-        name={`${name}.name`}
+        name={`${name}.id`}
         label={`profession #${index + 1}`}
         items={items}
         validate={validate.required}
@@ -25,6 +25,7 @@ export type Props = React.ButtonHTMLAttributes<{}> & {
   name: string;
   index: number;
   items: {
+    id: number;
     name: string;
     icon: string;
   }[];

@@ -4,7 +4,7 @@ import { connect, useDispatch } from 'react-redux';
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import NextRouter from 'router';
-import { validate, redirect, getUrl } from 'services';
+import { redirect, getUrl } from 'services';
 import { useRouter } from 'hooks';
 import { sendApplication, actions as formActions } from 'ducks/form';
 import FormStateToRedux from 'common/form/FormStateToRedux';
@@ -20,6 +20,39 @@ import CompleteApplication from 'modules/Apply/CompleteApplication';
 import { RecruitmentContainer, QuestionsForm } from 'modules/Apply/styled';
 
 type Question = React.ComponentType<i.QuestionComponentProps>;
+
+const initValues = {};
+if (__DEV__) {
+  // initValues = {
+  //   character: {
+  //     server: 'Ragnaros',
+  //     level: 60,
+  //     name: 'msa',
+  //     race: 2,
+  //     'class': 1,
+  //   },
+  //   role: '1',
+  //   raid_experience: {
+  //     molten_core: true,
+  //     onyxia: true,
+  //     blackwing_lair: true,
+  //   },
+  //   personal: {
+  //     name: 'asd',
+  //     age: '12',
+  //     story: 'as',
+  //     reason: 'asd',
+  //   },
+  //   professions: {
+  //     primary: [
+  //       {
+  //         level: '123',
+  //         id: 0,
+  //       },
+  //     ],
+  //   },
+  // };
+}
 
 const questionComponents: Question[] = [
   () => null,
@@ -39,7 +72,7 @@ const ApplicationPage: i.NextPageComponent<Props> = (props) => {
   const containerEl = useRef<HTMLDivElement>(null);
   const formEl = useRef<HTMLFormElement>(null);
   const [questionIndex, setQuestionIndex] = useState(1);
-  // const { tiltStyle, setRef, mouseEvents } = useTilt();
+  // const [questionIndex, setQuestionIndex] = useState(__DEV__ ? 7 : 1);
   const [canContinue, setCanContinue] = useState(true); // Can't get debounce to work on handleClick :/
 
   useEffect(() => {
@@ -54,6 +87,10 @@ const ApplicationPage: i.NextPageComponent<Props> = (props) => {
   }, []);
 
   useEffect(() => {
+    // if (__DEV__) {
+    //   return;
+    // }
+
     const paramQstnId = router!.query!.questionId
       ? Number(router!.query!.questionId)
       : 1;
@@ -63,14 +100,7 @@ const ApplicationPage: i.NextPageComponent<Props> = (props) => {
     }
   }, [router!.query!.questionId]);
 
-  // useEffect(() => {
-  //   if (containerEl.current) {
-  //     setRef(containerEl.current);
-  //   }
-  // }, [containerEl]);
-
-  // eslint-disable-next-line
-  function preventSubmit(e: KeyboardEvent) {};
+  function preventSubmit() {};
 
   const handleClick = () => {
     // Prevent double clicks
@@ -92,20 +122,15 @@ const ApplicationPage: i.NextPageComponent<Props> = (props) => {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const formOnSubmit = (values) => async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // Validate form before submitting
-    if (validate.applyFormValidate(values)) return;
-
-    await props.sendApplication();
+  const formOnSubmit = () => {
+    props.sendApplication();
   };
 
   return (
     // <RecruitmentContainer {...mouseEvents} ref={containerEl}>
     <RecruitmentContainer ref={containerEl}>
       <Form
-        onSubmit={() => {}}
+        onSubmit={formOnSubmit}
         mutators={{ ...arrayMutators }}
         destroyOnUnregister
         keepDirtyOnReinitialize
@@ -114,10 +139,11 @@ const ApplicationPage: i.NextPageComponent<Props> = (props) => {
             server: 'Ragnaros',
             level: 60,
           },
+          ...initValues,
         }}
       >
-        {({ values, errors }) => (
-          <QuestionsForm ref={formEl} onSubmit={formOnSubmit(values)}>
+        {({ errors, handleSubmit }) => (
+          <QuestionsForm ref={formEl} onSubmit={handleSubmit}>
             <FormStateToRedux form="application" />
 
             {questionComponents.map((component, i) => (

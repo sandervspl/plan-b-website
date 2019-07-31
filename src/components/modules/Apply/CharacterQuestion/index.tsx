@@ -43,15 +43,19 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, active, errors }) => 
               label="race"
               validate={validate.required}
               items={[{
+                id: 1,
                 name: 'Orc',
                 icon: useGetFirebaseImage('icons/races', 'Orc_Male.gif'),
               }, {
+                id: 2,
                 name: 'Tauren',
                 icon: useGetFirebaseImage('icons/races', 'Tauren_Male.gif'),
               }, {
+                id: 3,
                 name: 'Troll',
                 icon: useGetFirebaseImage('icons/races', 'Troll_Male.gif'),
               }, {
+                id: 4,
                 name: 'Undead',
                 icon: useGetFirebaseImage('icons/races', 'Undead_Male.gif'),
               }]}
@@ -62,27 +66,35 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, active, errors }) => 
               label="class"
               validate={validate.required}
               items={[{
+                id: 7,
                 name: 'Druid',
                 icon: useGetFirebaseImage('icons/classes/druid', 'class.jpg'),
               }, {
+                id: 3,
                 name: 'Hunter',
                 icon: useGetFirebaseImage('icons/classes/hunter', 'class.jpg'),
               }, {
+                id: 6,
                 name: 'Mage',
                 icon: useGetFirebaseImage('icons/classes/mage', 'class.jpg'),
               }, {
+                id: 5,
                 name: 'Priest',
                 icon: useGetFirebaseImage('icons/classes/priest', 'class.jpg'),
               }, {
+                id: 4,
                 name: 'Rogue',
                 icon: useGetFirebaseImage('icons/classes/rogue', 'class.jpg'),
               }, {
+                id: 2,
                 name: 'Shaman',
                 icon: useGetFirebaseImage('icons/classes/shaman', 'class.jpg'),
               }, {
+                id: 8,
                 name: 'Warlock',
                 icon: useGetFirebaseImage('icons/classes/warlock', 'class.jpg'),
               }, {
+                id: 1,
                 name: 'Warrior',
                 icon: useGetFirebaseImage('icons/classes/warrior', 'class.jpg'),
               }]}

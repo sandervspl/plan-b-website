@@ -7,6 +7,7 @@ import { InputContainer, StyledInput, Highlight, Bar, Label } from '../input/sty
 import { DropdownContainer, DropdownList, ListItem, DropdownIcon } from './styled';
 
 type Select = {
+  id: number;
   name: string;
   icon: string;
 };
@@ -33,8 +34,10 @@ export const DropdownInput: React.FC<DropdownInputProps> = ({ input, meta, items
   }
 
   const handleChange = (selection: Select | null) => {
-    // @ts-ignore Type is wrong
-    input.onChange(selection.name);
+    if (selection) {
+      // @ts-ignore Type is wrong
+      input.onChange(selection.id);
+    }
   };
 
   return (

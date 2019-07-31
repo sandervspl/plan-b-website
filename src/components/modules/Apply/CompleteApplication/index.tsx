@@ -2,28 +2,16 @@ import * as i from 'types';
 import React from 'react';
 import SendIcon from 'vectors/send.svg';
 import { Paragraph, Link, Button } from 'common';
-// import { getUploadsUrl } from 'services';
 import { useSelector } from 'hooks';
 import QuestionHeader from '../QuestionHeader';
-// import TiltImages from '../TiltImages';
 import { QuestionContentHeader, QuestionContent, RecruitmentContainerInner } from '../styled';
 import { SubmitButton, SubmitLabel, Name } from './styled';
 
-// const images = [
-//   `${getUploadsUrl('recruitment_imgs/outro_top-left.jpg')}`,
-//   `${getUploadsUrl('recruitment_imgs/outro_bottom-left.jpg')}`,
-//   `${getUploadsUrl('recruitment_imgs/outro_right.jpg')}`,
-// ];
-
 const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
   const form = useSelector((state) => state.form);
-  // const character = useSelector((state) => state.character.data);
-  // const name = character ? character.name : 'unknown';
 
   return (
     <RecruitmentContainerInner small>
-      {/* <TiltImages images={images} tiltStyle={tiltStyle} /> */}
-
       {form.sending.success ? (
         <>
           <QuestionHeader>

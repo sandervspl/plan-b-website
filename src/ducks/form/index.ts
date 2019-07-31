@@ -66,12 +66,48 @@ export const sendApplication: i.SendApplicationDuck = () => async (dispatch, get
 
   dispatch(actions.sendStart());
 
-  const { values } = getState().form.application!;
+  const {
+    character, professions, role, raid_experience, personal,
+  } = getState().form.application!.values;
+
+  const getProfession = (type: string, id: number) => {
+    return professions && professions[type] && professions[type][id]
+      ? professions[type][id]
+      : {};
+  };
+
+  const body = {
+    char_name: character.name,
+    char_level: character.level,
+    char_server: character.server,
+    characterrole: role,
+    class: character.class,
+    race: character.race,
+
+    char_primary_proff_1: getProfession('primary', 0).id,
+    char_primary_proff_1_level: getProfession('primary', 0).level,
+    char_primary_proff_2: getProfession('primary', 1).id,
+    char_primary_proff_2_level: getProfession('primary', 1).level,
+
+    char_secondary_proff_1: getProfession('secondary', 0).id,
+    char_secondary_proff_1_level: getProfession('secondary', 0).level,
+    char_secondary_proff_2: getProfession('secondary', 1).id,
+    char_secondary_proff_2_level: getProfession('secondary', 1).level,
+    char_secondary_proff_3: getProfession('secondary', 2).id,
+    char_secondary_proff_3_level: getProfession('secondary', 2).level,
+
+    name: personal.name,
+    age: personal.age,
+    story: personal.story,
+    reason: personal.reason,
+
+    char_raid_experience: raid_experience,
+  };
 
   return api.methods.post({
     url: api.url.cms,
-    path: 'recruitmentapplications',
-    body: values,
+    path: 'applications',
+    body,
   })
     .then(() => {
       dispatch(actions.sendSuccess());

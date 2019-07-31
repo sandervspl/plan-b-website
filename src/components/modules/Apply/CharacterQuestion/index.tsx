@@ -1,9 +1,10 @@
 import * as i from 'types';
 import React, { useEffect } from 'react';
-import { TRANSITION_TIME_MS } from 'styles/pageTransition';
 import { Field } from 'react-final-form';
-import { DropdownInput } from 'common/form/DropdownInput';
+import { validate } from 'services';
 import { useGetFirebaseImage } from 'hooks';
+import { TRANSITION_TIME_MS } from 'styles/pageTransition';
+import { DropdownInput } from 'common/form/DropdownInput';
 import { QuestionContent, NextButton } from '../styled';
 import QuestionHeader from '../QuestionHeader';
 import CharacterField from './CharacterField';
@@ -40,6 +41,7 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, active, errors }) => 
               component={DropdownInput}
               name="character.race"
               label="race"
+              validate={validate.required}
               items={[{
                 name: 'Orc',
                 icon: useGetFirebaseImage('icons/races', 'Orc_Male.gif'),
@@ -58,6 +60,7 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, active, errors }) => 
               component={DropdownInput}
               name="character.class"
               label="class"
+              validate={validate.required}
               items={[{
                 name: 'Druid',
                 icon: useGetFirebaseImage('icons/classes/druid', 'class.jpg'),

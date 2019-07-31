@@ -128,7 +128,9 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
 
               <Paragraph>Race/Class</Paragraph>
               <Paragraph as="div">
-                {character.race} {character.class.name}
+                {character.race.name}
+                <CircleImg src={getCmsUrl(character.race.icon.url)} />
+                {character.class.name}
                 <CircleImg src={getCmsUrl(character.class.icon.url)} />
               </Paragraph>
 

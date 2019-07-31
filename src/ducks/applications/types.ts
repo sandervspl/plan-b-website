@@ -25,6 +25,11 @@ export type Class = i.BaseResponseBody & {
   icon: i.Image;
 }
 
+export type Race = i.BaseResponseBody & {
+  name: string;
+  icon: i.Image;
+}
+
 export type Role = i.BaseResponseBody & {
   name: string;
   icon: i.Image;
@@ -45,7 +50,7 @@ export type CharacterProfessionTypes = keyof Professions;
 export type Character = {
   name: string;
   level: number;
-  race: string;
+  race: i.Race;
   class: i.Class;
   role: i.Role;
   professions: Professions;

@@ -186,7 +186,7 @@ export const Top = styled.div`
     }
 
     ${media.tablet`
-      transform: translateY(-50%);
+      transform: translateY(-30%);
     `}
   }
 

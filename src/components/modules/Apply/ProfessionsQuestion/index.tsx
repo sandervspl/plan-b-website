@@ -1,6 +1,7 @@
 import * as i from 'types';
-import React, { useState } from 'react';
-import { useGetFirebaseImage } from 'hooks';
+import React, { useState, useEffect } from 'react';
+import { useGetFirebaseImage, useDispatch, useSelector } from 'hooks';
+import { fetchProfessions } from 'ducks/character';
 import { Button, Heading } from 'common';
 import { QuestionContent, NextButton } from '../styled';
 import QuestionHeader from '../QuestionHeader';
@@ -8,10 +9,18 @@ import ProfessionInput from '../ProfessionInput';
 import { ProfessionsGrid } from './styled';
 
 const CharacterQuestion: React.FC<Props> = ({ onNextClick }) => {
+  const dispatch = useDispatch();
+  const professions = useSelector((state) => state.character.professions);
   const [primaries, setPrimaries] = useState<string[]>([]);
   const [secondaries, setSecondaries] = useState<string[]>([]);
   const primaryFieldName = 'professions.primary';
   const secondaryFieldName = 'professions.secondary';
+
+  useEffect(() => {
+    dispatch(fetchProfessions());
+  }, []);
+
+  console.log(professions);
 
   const icons = {
     // Primary
@@ -55,43 +64,7 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick }) => {
                 key={i}
                 name={`${primaryFieldName}[${i}]`}
                 index={i}
-                items={[{
-                  id: 0,
-                  name: 'Alchemy',
-                  icon: icons.alchemy,
-                }, {
-                  id: 1,
-                  name: 'Blacksmithing',
-                  icon: icons.blacksmithing,
-                }, {
-                  id: 2,
-                  name: 'Enchanting',
-                  icon: icons.enchanting,
-                }, {
-                  id: 3,
-                  name: 'Engineering',
-                  icon: icons.engineering,
-                }, {
-                  id: 4,
-                  name: 'Herbalism',
-                  icon: icons.herbalism,
-                }, {
-                  id: 5,
-                  name: 'Leatherworking',
-                  icon: icons.leatherworking,
-                }, {
-                  id: 6,
-                  name: 'Mining',
-                  icon: icons.mining,
-                }, {
-                  id: 7,
-                  name: 'Skinning',
-                  icon: icons.skinning,
-                }, {
-                  id: 8,
-                  name: 'Tailoring',
-                  icon: icons.tailoring,
-                }]}
+                items={professions.filter((proff) => proff.primary)}
               />
             ))}
 
@@ -108,19 +81,7 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick }) => {
                 key={i}
                 name={`${secondaryFieldName}[${i}]`}
                 index={i}
-                items={[{
-                  id: 9,
-                  name: 'Cooking',
-                  icon: icons.cooking,
-                }, {
-                  id: 10,
-                  name: 'First Aid',
-                  icon: icons.firstAid,
-                }, {
-                  id: 11,
-                  name: 'Fishing',
-                  icon: icons.fishing,
-                }]}
+                items={professions.filter((proff) => !proff.primary)}
               />
             ))}
 

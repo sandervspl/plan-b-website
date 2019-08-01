@@ -1,6 +1,6 @@
 import * as i from 'types';
 import React, { useState, useEffect } from 'react';
-import { useGetFirebaseImage, useDispatch, useSelector } from 'hooks';
+import { useDispatch, useSelector } from 'hooks';
 import { fetchProfessions } from 'ducks/character';
 import { Button, Heading } from 'common';
 import { QuestionContent, NextButton } from '../styled';
@@ -19,26 +19,6 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick }) => {
   useEffect(() => {
     dispatch(fetchProfessions());
   }, []);
-
-  console.log(professions);
-
-  const icons = {
-    // Primary
-    alchemy: useGetFirebaseImage('icons/professions', 'Trade_alchemy.png'),
-    blacksmithing: useGetFirebaseImage('icons/professions', 'Trade_blacksmithing.png'),
-    enchanting: useGetFirebaseImage('icons/professions', 'Trade_enchanting.png'),
-    engineering: useGetFirebaseImage('icons/professions', 'Trade_engineering.png'),
-    herbalism: useGetFirebaseImage('icons/professions', 'Trade_herbalism.png'),
-    leatherworking: useGetFirebaseImage('icons/professions', 'Trade_leatherworking.png'),
-    mining: useGetFirebaseImage('icons/professions', 'Trade_mining.png'),
-    skinning: useGetFirebaseImage('icons/professions', 'Trade_skinning.png'),
-    tailoring: useGetFirebaseImage('icons/professions', 'Trade_tailoring.png'),
-
-    // Secondary
-    cooking: useGetFirebaseImage('icons/professions', 'Trade_cooking.png'),
-    firstAid: useGetFirebaseImage('icons/professions', 'Trade_first-aid.png'),
-    fishing: useGetFirebaseImage('icons/professions', 'Trade_fishing.png'),
-  };
 
   const addPrimary = () => {
     setPrimaries([...primaries, '']);

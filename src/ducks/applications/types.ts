@@ -36,8 +36,10 @@ export type Role = i.BaseResponseBody & {
 }
 
 export type ApplicationProfession = {
-  name?: string;
-  level?: number;
+  id: number;
+  icon: i.Image;
+  name: string;
+  level: number;
 }
 
 type Professions = {
@@ -62,6 +64,7 @@ type Personal = {
   name: string;
   age: number;
   story: string;
+  reason: string;
 }
 
 export type Comment = i.BaseDatabaseBody & {

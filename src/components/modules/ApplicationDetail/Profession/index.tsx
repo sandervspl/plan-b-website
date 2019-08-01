@@ -1,6 +1,6 @@
 import * as i from 'types';
 import React from 'react';
-import QuestionMark from 'images/questionmark.jpg';
+import { getCmsUrl } from 'services';
 import { CircleImg, ProgressBar } from 'common';
 import { ProfessionName, ProfessionContainer } from './styled';
 
@@ -20,7 +20,7 @@ const Profession: React.FC<Props> = ({ profession }) => {
   return (
     <ProfessionContainer>
       <ProfessionName>
-        <CircleImg src={QuestionMark} />
+        <CircleImg src={getCmsUrl(profession.icon.url)} />
         {profession.name}
       </ProfessionName>
 

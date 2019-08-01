@@ -150,7 +150,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
             {hasPrimaryProfessions ? (
               <ProfessionsGrid>
                 {character.professions.primary.map((profession) => (
-                  <Profession key={profession.name} profession={profession} />
+                  <Profession key={profession.id} profession={profession} />
                 ))}
               </ProfessionsGrid>
             ) : (
@@ -188,8 +188,13 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
             </InfoGrid>
 
             <ApplicationSection secondary>
-              <Heading as="h2">Story</Heading>
+              <Heading as="h2">My story</Heading>
               <Paragraph>{personal.story}</Paragraph>
+            </ApplicationSection>
+
+            <ApplicationSection secondary>
+              <Heading as="h2">Why I want to join Plan B</Heading>
+              <Paragraph>{personal.reason}</Paragraph>
             </ApplicationSection>
           </ApplicationSection>
         </ApplicationContent>

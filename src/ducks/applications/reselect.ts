@@ -8,6 +8,6 @@ export const hasProfessions = createSelector(
   ([application, type]) => {
     if (!application) return false;
 
-    return !!application.character.professions[type].find((profession) => !!profession.name);
+    return !!application.character.professions[type].length > 0;
   }
 );

@@ -56,3 +56,62 @@ export const SubmitLabel = styled.label`
   margin-top: auto;
   width: 100%;
 `;
+
+export const SuccessContainer = styled.div`
+  a {
+    margin-top: 50px;
+    width: 100%;
+  }
+`;
+
+export const ErrorContainer = styled.div`
+  figure {
+    display: inline-block;
+    position: relative;
+    margin: 0 2px 0 5px;
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+    border-radius: 50%;
+    vertical-align: sub;
+
+    img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+`;
+
+export const OutroGrid = styled.div`
+  div:first-child {
+    button {
+      margin-top: 50px;
+    }
+  }
+  
+  > div:nth-child(2) {
+    display: none;
+  }
+
+  ${media.tablet`
+    display: grid;
+    grid-template-columns: 33% 67%;
+    height: 100%;
+
+    > div:nth-child(2) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 70%;
+        opacity: .1;
+      }
+    }
+  `}
+`;

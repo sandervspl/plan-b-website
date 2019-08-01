@@ -1,42 +1,44 @@
 import * as i from 'types';
 import React from 'react';
-// import { useGetFirebaseImages } from 'hooks';
+import { useGetFirebaseImage } from 'hooks';
 import { Paragraph } from 'common';
 import QuestionHeader from '../QuestionHeader';
 import { QuestionContentHeader, QuestionContent, NextButton, RecruitmentContainerInner,
 } from '../styled';
-// import TiltImages from '../TiltImages';
+import { IntroGrid } from './styled';
 
 const IntroductionQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick }) => {
-  // const images = useGetFirebaseImages('recruitment', [
-  //   'intro_top-left.jpg',
-  //   'intro_bottom-left.jpg',
-  //   'intro_right.jpg',
-  // ]);
+  const introImg = useGetFirebaseImage('recruitment', 'intro_fade_2.jpg');
 
   return (
-    <RecruitmentContainerInner small>
-      {/* <TiltImages images={images} tiltStyle={props.tiltStyle} /> */}
+    <RecruitmentContainerInner>
+      <IntroGrid>
+        <div>
+          <QuestionHeader>
+            Hi there!
+          </QuestionHeader>
 
-      <QuestionHeader>
-        Hi there!
-      </QuestionHeader>
+          <QuestionContent>
+            <QuestionContentHeader as="h2">
+              Thank you for your interest in Plan B.
+            </QuestionContentHeader>
 
-      <QuestionContent>
-        <QuestionContentHeader as="h2">
-          Thank you for your interest in Plan B.
-        </QuestionContentHeader>
+            <Paragraph>
+              Before we welcome you to our guild, we would like to ask you a few questions so we can get a
+              quick idea about who you are.
+              Take your time to fill in these questions and we might get back to you in-game!
+            </Paragraph>
 
-        <Paragraph>
-          Before we welcome you to our guild, we would like to ask you a few questions so we can get a
-          quick idea about who you are.
-          Take your time to fill in these questions and we might get back to you in-game!
-        </Paragraph>
+            <NextButton onClick={onNextClick}>
+              <span>Start</span>
+            </NextButton>
+          </QuestionContent>
+        </div>
 
-        <NextButton onClick={onNextClick}>
-          <span>Start</span>
-        </NextButton>
-      </QuestionContent>
+        <div>
+          <img src={introImg} alt="" />
+        </div>
+      </IntroGrid>
     </RecruitmentContainerInner>
   );
 };

@@ -1,23 +1,31 @@
 import * as i from 'types';
-import React from 'react';
+import React, { useState } from 'react';
 import SendIcon from 'vectors/send.svg';
-import { Paragraph, Link, Button } from 'common';
-import { useSelector, useGetFirebaseImage } from 'hooks';
 import config from 'config';
+import { useSelector, useGetFirebaseImage, useRouter, useTimeout } from 'hooks';
+import { Paragraph, Link, Button } from 'common';
 import QuestionHeader from '../QuestionHeader';
 import { QuestionContentHeader, QuestionContent, RecruitmentContainerInner } from '../styled';
 import { SubmitButton, Name, ErrorContainer, OutroGrid } from './styled';
 
 const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
+  const router = useRouter();
   const form = useSelector((state) => state.form);
   const applicationUuid = useSelector((state) => state.applications.applicationUuid);
   const TaurenIcon = useGetFirebaseImage('icons/races', 'Tauren_Male.gif');
   const outroImg = useGetFirebaseImage('recruitment', 'outro_fade.jpg');
+  const [enabled, setEnabled] = useState(false);
+
+  useTimeout(() => setEnabled(true), 2000);
+
+  const onHomeClick = () => {
+    router.push('/');
+  };
 
   return (
     <RecruitmentContainerInner>
       <OutroGrid>
-        {form.sending.success ? (
+        {true ? (
           <div>
             <QuestionHeader>
               Thank you!
@@ -33,18 +41,16 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
 
               <Paragraph>
                 <br />
-                You can see your application and its progress on this
+                You can view your application and its progress on
                 <Link external to={`${config.domain()}/application/${applicationUuid}`}>
-                  {' '}personal page
-                </Link>.
-                Don't forget to bookmark it!
+                  {' '}this page
+                </Link>.{' '}
+                <strong>Don't forget to bookmark it!</strong>
               </Paragraph>
 
-              <Link to="home">
-                <Button>
-                  Return to home
-                </Button>
-              </Link>
+              <Button disabled={!enabled} onClick={onHomeClick}>
+                Return to home
+              </Button>
             </QuestionContent>
           </div>
         ) : form.sending.failed ? (
@@ -85,7 +91,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
               </QuestionContentHeader>
 
               <Paragraph>
-                You can review your application before sending it. <br />
+                You can review your application by going back to the questions before sending it. <br />
                 An officer will contact you in-game if we think you are a match for Plan B.
               </Paragraph>
 

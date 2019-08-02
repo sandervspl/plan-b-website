@@ -25,7 +25,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
   return (
     <RecruitmentContainerInner>
       <OutroGrid>
-        {true ? (
+        {form.sending.success ? (
           <div>
             <QuestionHeader>
               Thank you!

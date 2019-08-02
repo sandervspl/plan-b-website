@@ -20,7 +20,14 @@ const ProfessionInput: React.FC<Props> = ({ name, index, items }) => {
           icon: useImageLoader(getCmsUrl(item.icon && item.icon.url))[0],
         }))}
       />
-      <CharacterField name={`${name}.level`} label="Level" type="number" min="0" max="300" />
+      <CharacterField
+        name={`${name}.level`}
+        label="Level"
+        type="number"
+        min="0"
+        max="300"
+        required={false}
+      />
       {/* <CloseIcon onClick={removeInput} /> */}
     </ProfessionInputContainer>
   );

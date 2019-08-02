@@ -6,7 +6,7 @@ import { useSelector, useDispatch, useRouter } from 'hooks';
 import CircleIcon from 'vectors/circle.svg';
 import CheckCircleIcon from 'vectors/check-circle.svg';
 import NotInterestedIcon from 'vectors/not-interested.svg';
-import { Heading, Loader } from 'common';
+import { Heading, Loader, EmptyStateText } from 'common';
 import Page from 'modules/Page';
 import ApplicationItem from 'modules/Applications/ApplicationItem';
 import {
@@ -101,12 +101,14 @@ const ApplicationsPage: i.NextPageComponent<Props, Query> = ({ url, status }) =>
 
         {loading ? (
           <Loader />
-        ) : (
+        ) : applications && applications.length > 0 ? (
           <ApplicationsList>
-            {applications && applications.map((application) => (
+            {applications.map((application) => (
               <ApplicationItem key={application.id} application={application} />
             ))}
           </ApplicationsList>
+        ) : (
+          <EmptyStateText>There are no {getStatusStr(curTab)} applications yet.</EmptyStateText>
         )}
 
       </ApplicationsContainer>

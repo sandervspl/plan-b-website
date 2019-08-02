@@ -112,11 +112,12 @@ export const ButtonContainer = styled.button<ButtonProps>`
     &:hover {
       border: 1px solid ${(props) => props.theme.color.secondary};
       color: ${(props) => props.theme.color.secondary};
+      background: transparent;
     }
   `}
 
   ${media.tablet`
     padding: 17px 25px;
-    font-size: 30px;
+    font-size: 20px;
   `}
 `;

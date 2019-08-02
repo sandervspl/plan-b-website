@@ -92,6 +92,7 @@ export const StyledInput = styled.input`
   width: 100%;
   font-size: 16px;
   color: ${(props) => props.theme.color.secondary};
+  border-radius: 0;
   border: none;
   border-bottom: 1px solid #333333;
   background: none;

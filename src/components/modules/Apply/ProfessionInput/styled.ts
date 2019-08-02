@@ -7,12 +7,6 @@ import { DropdownContainer, DropdownList } from 'common/form/DropdownInput/style
 export const ProfessionInputContainer = styled.div`
   margin-bottom: 40px;
 
-  ${DropdownContainer} {
-    svg {
-      display: none;
-    }
-  }
-
   ${media.tablet`
     display: grid;
     grid-template-columns: 75% 25%;

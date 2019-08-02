@@ -371,6 +371,8 @@ export const LockedStatus = styled.div`
 `;
 
 export const ApplicationContent = styled.div`
-  box-shadow: ${(props) => props.theme.shadow.innerContent};
-  z-index: 1;
+  ${media.tablet`
+    box-shadow: ${(props) => props.theme.shadow.innerContent};
+    z-index: 1;
+  `}
 `;

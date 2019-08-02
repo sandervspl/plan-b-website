@@ -35,6 +35,7 @@ const initialState: i.ApplicationsState = {
   data: undefined,
   error: false,
   loading: true,
+  sendingMessage: false,
   userVote: undefined,
   applicationUuid: undefined,
   messages: [],
@@ -87,9 +88,20 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
         detail: undefined,
         detailPublic: undefined,
       };
+    case 'applications/SEND_COMMENT':
+      return {
+        ...state,
+        sendingMessage: true,
+      };
+    case 'applications/SEND_COMMENT_FAILED':
+      return {
+        ...state,
+        sendingMessage: false,
+      };
     case 'applications/SEND_COMMENT_SUCCESS':
       return {
         ...state,
+        sendingMessage: false,
         messages: [
           action.payload,
           ...state.messages,

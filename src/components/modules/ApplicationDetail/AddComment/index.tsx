@@ -22,6 +22,7 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
   const applicationLocked = useSelector((state) => (
     state.applications.detail && state.applications.detail.locked
   ));
+  const sending = useSelector((state) => state.applications.sendingMessage);
   const isMobile = useSelector((state) => state.ui.isMobile);
   const [text, setText] = useState('');
 
@@ -57,7 +58,7 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
               onChange={handleOnChange}
               hastext={text.length > 0}
             />
-            <SendButton show={text.length > 0} onClick={handleSubmit}>
+            <SendButton show={text.length > 0} onClick={handleSubmit} disabled={sending}>
               {isMobile ? <SendIcon /> : 'Share'}
             </SendButton>
           </>

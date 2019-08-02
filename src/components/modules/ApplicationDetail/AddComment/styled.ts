@@ -109,10 +109,18 @@ export const SendButton = styled.button<SendButtonProps>`
   `}
 
   ${(props) => props.show && css`
-    opacity: 1 !important;
+    opacity: 1;
     visibility: visible;
     transition: opacity .2s ease-in-out, visibility 0s;
     cursor: pointer;
+
+    ${media.tablet`
+      opacity: 1;
+
+      &:disabled {
+        opacity: .5;
+      }
+    `}
   `}
 `;
 

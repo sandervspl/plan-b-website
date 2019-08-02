@@ -7,6 +7,7 @@ export type ApplicationsState = i.BaseState<never> & {
   userVote?: i.VOTE;
   applicationUuid?: string;
   messages: i.Comment[];
+  sendingMessage: boolean;
 };
 
 export type ApplicationStatus = 'open' | 'accepted' | 'rejected';

@@ -3,6 +3,7 @@ import React from 'react';
 import SendIcon from 'vectors/send.svg';
 import { Paragraph, Link, Button } from 'common';
 import { useSelector, useGetFirebaseImage } from 'hooks';
+import config from 'config';
 import QuestionHeader from '../QuestionHeader';
 import { QuestionContentHeader, QuestionContent, RecruitmentContainerInner } from '../styled';
 import {
@@ -11,6 +12,7 @@ import {
 
 const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
   const form = useSelector((state) => state.form);
+  const applicationUuid = useSelector((state) => state.applications.applicationUuid);
   const TaurenIcon = useGetFirebaseImage('icons/races', 'Tauren_Male.gif');
   const outroImg = useGetFirebaseImage('recruitment', 'outro_fade.jpg');
 
@@ -29,6 +31,15 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
                 <br /><br />
                 The guild officers will review and discuss your application as soon as possible.
                 When they have come to a conclusion, we will contact you in-game.
+              </Paragraph>
+
+              <Paragraph>
+                <br />
+                You can see your application and its progress on this
+                <Link external to={`${config.domain()}/application/${applicationUuid}`}>
+                  {' '}personal page
+                </Link>.
+                Don't forget to bookmark it!
               </Paragraph>
 
               <Link to="home">

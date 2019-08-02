@@ -23,6 +23,8 @@ export const actions = {
   setStatus: () => action('applications/SET_STATUS'),
   setStatusFailed: () => action('applications/SET_STATUS_FAILED'),
   setStatusSuccess: (application: i.ApplicationBase) => action('applications/SET_STATUS_SUCCESS', application),
+
+  setPersonalUuid: (uuid: string) => action('applications/SET_PERSONAL_UUID', uuid),
 };
 
 const initialState: i.ApplicationsState = {
@@ -30,6 +32,7 @@ const initialState: i.ApplicationsState = {
   error: false,
   loading: true,
   userVote: undefined,
+  applicationUuid: undefined,
 };
 
 export default (state = initialState, action: ActionType<typeof actions>): i.ApplicationsState => {
@@ -108,6 +111,11 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
           status: action.payload.status,
           locked: action.payload.locked,
         },
+      };
+    case 'applications/SET_PERSONAL_UUID':
+      return {
+        ...state,
+        applicationUuid: action.payload,
       };
     default:
       return state;

@@ -6,7 +6,7 @@ export enum API_ENDPOINT {
   AUTH = 'auth',
   AUTH_USER = 'auth/me',
   POSTS = 'cms/news',
-  APPLICATIONS = 'cms/applications',
-  APPLICATION_DETAIL = 'cms/application',
+  APPLICATIONS = 'recruitment/applications',
+  APPLICATION_DETAIL = 'recruitment/application',
   ACTIVE_STREAMS = 'twitch/active_streams'
 };

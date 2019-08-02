@@ -17,5 +17,8 @@ export type FieldNames = 'armory_link';
 
 export type GetFormState = (state: i.ReduxState, form: i.Forms) => void;
 
-export type SendApplication<T = Promise<void>> = () => T;
-export type SendApplicationDuck = SendApplication<i.ThunkAction<Promise<void>>>;
+export type SendApplicationResponse = {
+  applicationUuid: string;
+}
+
+export type SendApplication = i.BaseThunkAction<() => Promise<SendApplicationResponse | void>>;

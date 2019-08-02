@@ -4,6 +4,7 @@ export type ApplicationsState = i.BaseState<never> & {
   list?: i.ApplicationData[];
   detail?: i.ApplicationDataDuck;
   userVote?: i.VOTE;
+  applicationUuid?: string;
 };
 
 export type ApplicationStatus = 'open' | 'accepted' | 'rejected';

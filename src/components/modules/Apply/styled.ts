@@ -222,6 +222,10 @@ export const QuestionContent = styled.div<QuestionContentProps>`
   top: 80px;
   height: calc(100% - 150px);
 
+  a {
+    color: ${(props) => props.theme.color.primary.dark};
+  }
+
   ${media.tablet<QuestionContentProps>`
     top: 105px;
     height: calc(100% - 155px);

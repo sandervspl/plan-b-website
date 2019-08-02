@@ -1,6 +1,7 @@
 import * as i from 'types';
 import { ActionType, action } from 'typesafe-actions';
 import { API_ENDPOINT } from 'services';
+import { actions as applicationsActions } from 'ducks/applications';
 
 export const actions = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -14,7 +15,11 @@ export const actions = {
 };
 
 const initialState: i.ReduxFormState = {
-  sending: { loading: false, success: false, failed: false },
+  sending: {
+    loading: false,
+    success: false,
+    failed: false,
+  },
 };
 
 export default (state = initialState, action: ActionType<typeof actions>): i.ReduxFormState => {
@@ -62,18 +67,21 @@ export const getFormState: i.GetFormState = (state, form) => (
   (state && state.form && state.form[form]) || {}
 );
 
-export const sendApplication: i.SendApplicationDuck = () => async (dispatch, getState, api) => {
+export const sendApplication: i.SendApplication['thunk'] = () => async (dispatch, getState, api) => {
   if (!getState().form.application) return;
 
   dispatch(actions.sendStart());
 
-  return api.methods.post({
+  return api.methods.post<i.SendApplicationResponse>({
     url: api.url.api,
     path: API_ENDPOINT.APPLICATION_DETAIL,
     body: getState().form.application!.values,
   })
-    .then(() => {
+    .then((res) => {
       dispatch(actions.sendSuccess());
+      dispatch(applicationsActions.setPersonalUuid(res.applicationUuid));
+
+      return res;
     })
     .catch(() => {
       dispatch(actions.sendFailed());

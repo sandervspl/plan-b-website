@@ -46,7 +46,7 @@ export const Button = styled.button<ButtonProps>`
   `}
 
   ${media.tablet`
-    padding: 17px 75px;
+    padding: 17px 25px;
     font-size: 30px;
   `}
 `;

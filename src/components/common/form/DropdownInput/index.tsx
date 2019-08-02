@@ -22,7 +22,7 @@ export const DropdownInput: React.FC<DropdownInputProps> = ({ input, meta, items
       <DropdownContainer>
         <Input {...props} input={input} meta={meta} as="select">
           {items!.map((item) => (
-            <option key={item.name} value={item.name}>
+            <option key={item.id} value={item.id}>
               {item.name}
             </option>
           ))}

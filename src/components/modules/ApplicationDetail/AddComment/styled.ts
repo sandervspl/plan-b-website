@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { ParagraphStyle } from 'common';
+import { ParagraphStyle, Button } from 'common';
 import { CircleImgContainer } from 'common/CircleImg/styled';
 import { media } from 'styles';
 
@@ -73,7 +73,7 @@ export const CommentInputContainer = styled.div`
   position: relative;
 `;
 
-export const SendButton = styled.button<SendButtonProps>`
+export const SendButton = styled(Button)<SendButtonProps>`
   ${ParagraphStyle};
   display: flex;
   justify-content: center;
@@ -89,6 +89,7 @@ export const SendButton = styled.button<SendButtonProps>`
   border: 0;
   opacity: 0;
   visibility: hidden;
+  text-transform: none;
   transition: opacity .2s ease-in-out, visibility 0s .2s;
   will-change: opacity;
 

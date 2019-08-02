@@ -4,7 +4,7 @@ import SendIcon from 'vectors/send.svg';
 import LockIcon from 'vectors/lock.svg';
 import { useDispatch, useSelector } from 'hooks';
 import { sendComment } from 'ducks/applications';
-import { CircleImg } from 'common';
+import { CircleImg, ErrorText } from 'common';
 import {
   AddCommentContainer, User, CommentInput, CommentInputContainer, SendButton,
 } from './styled';
@@ -24,6 +24,7 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
   ));
   const sending = useSelector((state) => state.applications.sendingMessage);
   const isMobile = useSelector((state) => state.ui.isMobile);
+  const [error, setError] = useState('');
   const [text, setText] = useState('');
 
   const handleOnChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
@@ -33,9 +34,18 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
   const handleSubmit = async () => {
     if (!applicationId || !text) return;
 
-    await dispatch(sendComment(type, applicationId, text, userId));
+    setError('');
 
-    setText('');
+    dispatch(sendComment(type, applicationId, text, userId))
+      .then((message) => {
+        if (!message) {
+          setError('Something went wrong. Try again later.');
+
+          return;
+        }
+
+        setText('');
+      });
   };
 
   return (
@@ -58,7 +68,13 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
               onChange={handleOnChange}
               hastext={text.length > 0}
             />
-            <SendButton show={text.length > 0} onClick={handleSubmit} disabled={sending}>
+            <ErrorText>{error}</ErrorText>
+            <SendButton
+              show={text.length > 0}
+              onClick={handleSubmit}
+              disabled={sending}
+              loading={sending}
+            >
               {isMobile ? <SendIcon /> : 'Share'}
             </SendButton>
           </>

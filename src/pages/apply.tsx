@@ -127,7 +127,6 @@ const ApplicationPage: i.NextPageComponent = () => {
   };
 
   return (
-    // <RecruitmentContainer {...mouseEvents} ref={containerEl}>
     <RecruitmentContainer ref={containerEl}>
       <Form
         onSubmit={formOnSubmit}

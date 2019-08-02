@@ -129,6 +129,11 @@ export const NavItem = styled.li`
   a, span {
     ${HeaderNavLinkStyle};
   }
+
+  ${media.tablet`
+    font-size: 18px;
+    font-weight: 700;
+  `}
 `;
 
 export const SignIn = styled(NavLink)`

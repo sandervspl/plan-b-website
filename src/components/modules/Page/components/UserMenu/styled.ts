@@ -126,7 +126,13 @@ export const OptionsContainer = styled.ul`
   li, button, a {
     ${ParagraphStyle};
     color: ${(props) => props.theme.color.secondary};
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: 700;
+
+    ${media.tablet`
+      font-size: 18px;
+      font-weight: 400;
+    `}
   }
 
   li {
@@ -134,10 +140,26 @@ export const OptionsContainer = styled.ul`
 
     strong {
       font-weight: 700;
+      color: ${(props) => props.theme.color.secondary.darker};
     }
 
-    a, span {
+    a, span, button {
       ${HeaderNavLinkStyle};
+      display: block;
+      width: 100%;
+      text-align: right;
+
+      &::after {
+        display: none;
+      }
+
+      ${media.tablet`
+        text-align: left;
+
+        &::after {
+          display: block;
+        }
+      `}
     }
 
     a, button {

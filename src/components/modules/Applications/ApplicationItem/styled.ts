@@ -126,7 +126,7 @@ export const CommentsContainer = styled.div`
   display: flex;
   align-items: center;
   margin-left: auto;
-  font-size: 13px;
+  font-size: 15px;
 
   svg {
     margin-right: 5px;

@@ -5,7 +5,7 @@ export * from './typography';
 export * from './FullscreenPage';
 export * from './ClassText';
 export * from './CircleImg';
-export * from './Button';
+export { Button } from './Button';
 export * from './Tag';
 export * from './NewsItem';
 export * from './GlitchBullLogo';

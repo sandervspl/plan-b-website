@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { media } from 'styles';
-import { Heading, Button } from 'common';
+import { Heading } from 'common';
+import { ButtonContainer } from 'common/Button/styled';
 import { NextButton } from '../styled';
 
 export const ProfessionsGrid = styled.div`
@@ -30,7 +31,7 @@ export const ProfessionsGrid = styled.div`
     grid-template-columns: 45% 45%;
     column-gap: 10%;
 
-    ${Button} {
+    ${ButtonContainer} {
       padding: 8px 18px;
       font-size: 18px;
       width: auto;

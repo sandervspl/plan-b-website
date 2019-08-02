@@ -11,7 +11,7 @@ export const ApplicationsContainer = styled(PageContentContainer)`
     font-size: 18px;
 
     ${media.tablet`
-      padding: 35px 50px 12px;
+      padding: 35px 40px 12px;
     `}
   }
 

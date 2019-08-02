@@ -8,6 +8,8 @@ export const RecruitmentContainer = styled(Fullscreenpage)`
   margin: auto;
   padding: 40px 30px;
   overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 
   &:before {
     content: '';

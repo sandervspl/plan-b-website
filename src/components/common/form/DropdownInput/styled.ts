@@ -6,7 +6,7 @@ import { media } from 'styles';
 export const DropdownIcon = styled(BaseDropdownIcon)<DropdownIconProps>`
   position: absolute;
   top: 12px;
-  left: 230px;
+  right: 10px;
   width: 25px;
   height: 25px;
   fill: ${(props) => props.theme.color.secondary};

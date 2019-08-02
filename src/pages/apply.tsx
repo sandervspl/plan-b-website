@@ -1,6 +1,6 @@
 import * as i from 'types';
 import React, { useState, useEffect, useRef } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import NextRouter from 'router';
@@ -21,37 +21,37 @@ import { RecruitmentContainer, QuestionsForm } from 'modules/Apply/styled';
 
 type Question = React.ComponentType<i.QuestionComponentProps>;
 
-const initValues = {};
+let initValues = {};
 if (__DEV__) {
-  // initValues = {
-  //   character: {
-  //     server: 'Ragnaros',
-  //     level: 60,
-  //     name: 'msa',
-  //     race: 2,
-  //     'class': 1,
-  //   },
-  //   role: '1',
-  //   raid_experience: {
-  //     molten_core: true,
-  //     onyxia: true,
-  //     blackwing_lair: true,
-  //   },
-  //   personal: {
-  //     name: 'asd',
-  //     age: '12',
-  //     story: 'as',
-  //     reason: 'asd',
-  //   },
-  //   professions: {
-  //     primary: [
-  //       {
-  //         level: '123',
-  //         id: 0,
-  //       },
-  //     ],
-  //   },
-  // };
+  initValues = {
+    character: {
+      server: 'Ragnaros',
+      level: 60,
+      name: 'WEB_TEST',
+      race: 2,
+      'class': 1,
+    },
+    role: '1',
+    raid_experience: {
+      molten_core: true,
+      onyxia: true,
+      blackwing_lair: true,
+    },
+    personal: {
+      name: 'TESTER',
+      age: '12',
+      story: 'abc',
+      reason: 'def',
+    },
+    professions: {
+      primary: [
+        {
+          level: '123',
+          id: 1,
+        },
+      ],
+    },
+  };
 }
 
 const questionComponents: Question[] = [
@@ -66,7 +66,7 @@ const questionComponents: Question[] = [
   CompleteApplication,
 ];
 
-const ApplicationPage: i.NextPageComponent<Props> = (props) => {
+const ApplicationPage: i.NextPageComponent = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const containerEl = useRef<HTMLDivElement>(null);
@@ -123,7 +123,7 @@ const ApplicationPage: i.NextPageComponent<Props> = (props) => {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const formOnSubmit = () => {
-    props.sendApplication();
+    dispatch(sendApplication());
   };
 
   return (
@@ -173,8 +173,4 @@ ApplicationPage.getInitialProps = ({ req, res }) => {
   };
 };
 
-type Props = {
-  sendApplication: i.SendApplication;
-}
-
-export default connect(null, { sendApplication })(ApplicationPage);
+export default ApplicationPage;

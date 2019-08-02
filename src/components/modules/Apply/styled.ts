@@ -220,7 +220,7 @@ export const QuestionContent = styled.div<QuestionContentProps>`
   align-items: flex-start;
   position: relative;
   top: 80px;
-  height: calc(100% - 150px);
+  min-height: 100%;
 
   a {
     color: ${(props) => props.theme.color.primary.dark};
@@ -245,7 +245,7 @@ type QuestionContentProps = {
 export const NextButton = styled.button.attrs({ type: 'button' })`
   position: relative;
   z-index: 1;
-  margin: auto 0 30px;
+  margin: 30px 0 30px;
   background: none;
   border: 0;
   outline: 0;
@@ -273,6 +273,8 @@ export const NextButton = styled.button.attrs({ type: 'button' })`
   }
 
   ${media.tablet`
+    margin: 50px 0 30px;
+  
     &:not(:disabled) {
       &:hover:before {
         padding-right: 20px;

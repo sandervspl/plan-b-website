@@ -22,6 +22,11 @@ export const RaidList = styled.div`
     top: 115px;
     right: -35px;
     width: 820px;
+
+    + button {
+      position: absolute;
+      bottom: 0;
+    }
   `}
 `;
 

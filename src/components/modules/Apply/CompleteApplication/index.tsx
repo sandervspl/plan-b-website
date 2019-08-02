@@ -6,9 +6,7 @@ import { useSelector, useGetFirebaseImage } from 'hooks';
 import config from 'config';
 import QuestionHeader from '../QuestionHeader';
 import { QuestionContentHeader, QuestionContent, RecruitmentContainerInner } from '../styled';
-import {
-  SubmitButton, SubmitLabel, Name, ErrorContainer, SuccessContainer, OutroGrid,
-} from './styled';
+import { SubmitButton, Name, ErrorContainer, OutroGrid } from './styled';
 
 const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
   const form = useSelector((state) => state.form);
@@ -20,7 +18,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
     <RecruitmentContainerInner>
       <OutroGrid>
         {form.sending.success ? (
-          <SuccessContainer>
+          <div>
             <QuestionHeader>
               Thank you!
             </QuestionHeader>
@@ -48,7 +46,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
                 </Button>
               </Link>
             </QuestionContent>
-          </SuccessContainer>
+          </div>
         ) : form.sending.failed ? (
           <ErrorContainer>
             <QuestionHeader>
@@ -66,13 +64,13 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
                 <br /><br />
               </Paragraph>
 
-              <SubmitLabel htmlFor="submit_application">
+              <label htmlFor="submit_application">
                 <SubmitButton disabled={form.sending.loading}>
                   <span>Try again</span>
                   <SendIcon />
                   <input id="submit_application" type="submit" />
                 </SubmitButton>
-              </SubmitLabel>
+              </label>
             </QuestionContent>
           </ErrorContainer>
         ) : (
@@ -91,13 +89,13 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
                 An officer will contact you in-game if we think you are a match for Plan B.
               </Paragraph>
 
-              <SubmitLabel htmlFor="submit_application">
+              <label htmlFor="submit_application">
                 <SubmitButton disabled={form.sending.loading}>
                   <span>Send</span>
                   <SendIcon />
                   <input id="submit_application" type="submit" />
                 </SubmitButton>
-              </SubmitLabel>
+              </label>
             </QuestionContent>
           </div>
         )}

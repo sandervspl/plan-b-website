@@ -7,30 +7,25 @@ type ImageProps = {
 }
 
 export const RoleList = styled.div`
-  position: absolute;
-  top: 20px;
-  right: 0;
   display: grid;
   grid-template-rows: repeat(3, 85px);
   gap: 15px;
   width: 100%;
   height: 100%;
 
-  + button {
-    position: absolute;
-    bottom: -50px;
-  }
-
   ${media.tablet`
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: none;
     gap: 30px;
+    position: absolute;
     top: 95px;
+    right: 0;
     width: 70%;
     max-height: 440px;
 
     + button {
-      position: static;
+      position: absolute;
+      bottom: 0;
     }
   `}
 

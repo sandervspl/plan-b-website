@@ -24,18 +24,6 @@ export const Name = styled.span`
   color: ${(props) => props.theme.color.secondary};
 `;
 
-export const SubmitLabel = styled.label`
-  margin-top: auto;
-  width: 100%;
-`;
-
-export const SuccessContainer = styled.div`
-  a {
-    margin-top: 50px;
-    width: 100%;
-  }
-`;
-
 export const ErrorContainer = styled.div`
   figure {
     display: inline-block;

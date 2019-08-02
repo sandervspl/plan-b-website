@@ -2,7 +2,7 @@ import * as i from 'types';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'hooks';
 import { getComments } from 'ducks/applications';
-import { Heading } from 'common';
+import { Heading, EmptyStateText } from 'common';
 import Comment from 'modules/ApplicationDetail/Comment';
 import AddComment from '../AddComment';
 import { DiscussionContainer } from './styled';
@@ -26,6 +26,10 @@ const Discussion: React.FC<Props> = ({ applicationId, type }) => {
           avatar={user.avatar}
           type={type}
         />
+      )}
+
+      {messages.length === 0 && (
+        <EmptyStateText>There are no comments yet.</EmptyStateText>
       )}
 
       {messages.map((comment) => (

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'styles';
-import { Heading } from 'common';
+import { Heading, EmptyStateText } from 'common';
 import { CommentContainer } from 'modules/ApplicationDetail/Comment/styled';
 import { AddCommentContainer } from 'modules/ApplicationDetail/AddComment/styled';
 
@@ -22,6 +22,11 @@ export const DiscussionContainer = styled.div`
 
   ${AddCommentContainer} {
     margin: 20px 20px 0;
+  }
+
+  ${EmptyStateText} {
+    text-align: center;
+    margin-top: 20px;
   }
 
   ${media.tablet`

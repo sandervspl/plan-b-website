@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { media } from 'styles';
 
 export const Button = styled.button<ButtonProps>`
-  padding: 7px;
+  padding: 15px 20px;
   width: 100%;
   font-size: 16px;
   color: ${(props) => props.theme.color.secondary};

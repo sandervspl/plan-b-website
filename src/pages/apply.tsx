@@ -106,7 +106,9 @@ const ApplicationPage: i.NextPageComponent = () => {
     // Prevent double clicks
     if (!canContinue) return;
 
-    window.scrollTo(0, 0);
+    if (containerEl.current) {
+      containerEl.current.scrollTo(0, 0);
+    }
 
     NextRouter.push(
       'apply',

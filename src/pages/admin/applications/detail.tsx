@@ -7,7 +7,7 @@ import LockedIcon from 'vectors/lock.svg';
 import Page from 'modules/Page';
 import { useSelector, useDispatch } from 'hooks';
 import { getUrl, getCmsUrl } from 'services';
-import { fetchApplicationDetail, actions as applicationsActions, setStatus } from 'ducks/applications';
+import { fetchApplicationDetail, actions as applicationsActions, setStatus, fetchPublicApplicationDetail } from 'ducks/applications';
 import { hasProfessions } from 'ducks/applications/reselect';
 import { DateText, ClassText, Paragraph, CircleImg, Heading, EmptyStateText } from 'common';
 import Profession from 'modules/ApplicationDetail/Profession';
@@ -19,16 +19,27 @@ import {
   ApplicationSection, ProfessionsGrid, GuildMasterTools, StatusChangeButton, ApplicationContent,
 } from 'modules/ApplicationDetail/styled';
 
-const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, applicationId }) => {
+const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
+  url, applicationId, applicationUuid, type,
+}) => {
+  const isPublic = type === 'public';
   const dispatch = useDispatch();
-  const application = useSelector((state) => state.applications.detail);
+  const application = useSelector((state) => (
+    state.applications[isPublic ? 'detailPublic' : 'detail']
+  ));
   const hasPrimaryProfessions = useSelector((state) => hasProfessions(state, 'primary'));
   const hasSecondaryProfessions = useSelector((state) => hasProfessions(state, 'secondary'));
   const user = useSelector((state) => state.user);
 
+  const applicationPrivate = application as i.ApplicationDataDuck;
+
   useEffect(() => {
-    if (user.isSignedIn && user.isAdmin) {
-      dispatch(fetchApplicationDetail(applicationId));
+    if (isPublic) {
+      dispatch(fetchPublicApplicationDetail(applicationUuid!));
+    } else {
+      if (user.isSignedIn && user.isAdmin) {
+        dispatch(fetchApplicationDetail(applicationId!));
+      }
     }
 
     return function cleanup() {
@@ -41,11 +52,11 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
   }
 
   const updateStatus = (status: i.ApplicationStatus) => () => {
-    dispatch(setStatus(applicationId, status));
+    dispatch(setStatus(applicationId!, status));
   };
 
   const { character, personal } = application;
-  const isGuildMaster = user.data!.authLevel === i.AUTH_LEVEL.GUILD_MASTER;
+  const isGuildMaster = user.data && user.data.authLevel === i.AUTH_LEVEL.GUILD_MASTER;
   const StatusIcon = application.status === 'accepted'
     ? CheckCircleSvg
     : application.status === 'rejected'
@@ -63,7 +74,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
       <ApplicationContainer>
         <ApplicationContent>
           <ApplicationHeader withGuildMasterTools={isGuildMaster}>
-            {isGuildMaster && (
+            {!isPublic && isGuildMaster && (
               <GuildMasterTools>
                 <Heading as="h3">Guild Master Tools</Heading>
 
@@ -113,7 +124,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
               {character.role.name}
             </ApplicationRole>
 
-            <Voting />
+            {!isPublic && <Voting />}
           </ApplicationHeader>
 
           <ApplicationSection>
@@ -199,7 +210,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
           </ApplicationSection>
         </ApplicationContent>
 
-        <Discussion comments={application.discussion} />
+        {!isPublic && <Discussion comments={applicationPrivate.discussion} />}
       </ApplicationContainer>
     </Page>
   );
@@ -212,12 +223,19 @@ ApplicationDetailPage.getInitialProps = ({ req, query }) => {
   };
 };
 
+ApplicationDetailPage.defaultProps = {
+  type: 'private',
+};
+
 type Props = {
-  applicationId: number;
+  applicationId?: number;
+  applicationUuid?: string;
+  type?: 'private' | 'public';
 }
 
 type Queries = {
-  id: number;
+  id?: number;
+  uuid?: string;
 }
 
 export default ApplicationDetailPage;

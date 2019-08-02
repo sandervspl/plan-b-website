@@ -8,6 +8,7 @@ const router = (new Routes() as i.Router)
   .add({ pattern: '/about', page: 'about', name: routeNames.about })
   .add({ pattern: '/login', page: 'login', name: routeNames.login })
   .add({ pattern: '/news/:id', page: 'news/detail', name: routeNames.newsDetail })
+  .add({ pattern: '/application/:uuid', page: 'application', name: routeNames.applicationDetailUser })
 
   // Admin
   .add({ pattern: '/admin/applications', page: 'admin/applications', name: routeNames.applications })

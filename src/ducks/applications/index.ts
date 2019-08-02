@@ -9,6 +9,8 @@ export const actions = {
 
   successDetail: (application: i.ApplicationData, userVote: i.VOTE | undefined) =>
     action('applications/SUCCESS_DETAIL', { application, userVote }),
+  successDetailPublic: (application: i.ApplicationBase) =>
+    action('applications/SUCCESS_DETAIL_PUBLIC', application),
 
   resetApplication: () => action('applications/RESET_DETAIL'),
 
@@ -71,6 +73,11 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
         loading: false,
         userVote: action.payload.userVote,
       };
+    case 'applications/SUCCESS_DETAIL_PUBLIC':
+      return {
+        ...state,
+        detailPublic: action.payload,
+      };
     case 'applications/RESET_DETAIL':
       return {
         ...state,
@@ -122,23 +129,22 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
   }
 };
 
-export const fetchApplications = (status: i.ApplicationStatus): i.ThunkAction => async (
-  dispatch, getState, api
-) => {
-  dispatch(actions.load());
+export const fetchApplications = (status: i.ApplicationStatus): i.ThunkAction =>
+  async (dispatch, getState, api) => {
+    dispatch(actions.load());
 
-  return api.methods.get<i.ApplicationData[]>({
-    url: api.url.api,
-    path: `${API_ENDPOINT.APPLICATIONS}/${status}`,
-    withAuth: true,
-  })
-    .then((res) => {
-      dispatch(actions.successList(res));
+    return api.methods.get<i.ApplicationData[]>({
+      url: api.url.api,
+      path: `${API_ENDPOINT.APPLICATIONS}/${status}`,
+      withAuth: true,
     })
-    .catch(() => {
-      dispatch(actions.failed());
-    });
-};
+      .then((res) => {
+        dispatch(actions.successList(res));
+      })
+      .catch(() => {
+        dispatch(actions.failed());
+      });
+  };
 
 export const fetchApplicationDetail = (id: number): i.ThunkAction =>
   async (dispatch, getState, api) => {
@@ -159,6 +165,22 @@ export const fetchApplicationDetail = (id: number): i.ThunkAction =>
         }
 
         dispatch(actions.successDetail(res, vote));
+      })
+      .catch(() => {
+        dispatch(actions.failed());
+      });
+  };
+
+export const fetchPublicApplicationDetail = (uuid: string): i.ThunkAction =>
+  async (dispatch, getState, api) => {
+    dispatch(actions.load());
+
+    return api.methods.get<i.ApplicationBase>({
+      url: api.url.api,
+      path: `${API_ENDPOINT.APPLICATION_DETAIL_PUBLIC}/${uuid}`,
+    })
+      .then((res) => {
+        dispatch(actions.successDetailPublic(res));
       })
       .catch(() => {
         dispatch(actions.failed());

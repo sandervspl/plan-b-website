@@ -3,6 +3,7 @@ import * as i from 'types';
 export type ApplicationsState = i.BaseState<never> & {
   list?: i.ApplicationData[];
   detail?: i.ApplicationDataDuck;
+  detailPublic?: i.ApplicationBase;
   userVote?: i.VOTE;
   applicationUuid?: string;
 };

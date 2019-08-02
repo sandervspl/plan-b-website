@@ -7,4 +7,5 @@ export const routeNames = Object.freeze({
   gallery: 'gallery',
   applications: 'applications',
   applicationDetail: 'application-detail',
+  applicationDetailUser: 'application-detail-user',
 } as const);

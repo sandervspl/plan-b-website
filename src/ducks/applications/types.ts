@@ -45,7 +45,7 @@ export type ApplicationProfession = {
   id: number;
   icon: i.Image;
   name: string;
-  level: number;
+  level?: number;
 }
 
 type Professions = {

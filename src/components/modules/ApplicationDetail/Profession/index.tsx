@@ -5,6 +5,7 @@ import { CircleImg, ProgressBar } from 'common';
 import { ProfessionName, ProfessionContainer } from './styled';
 
 const Profession: React.FC<Props> = ({ profession }) => {
+  const currentLevel = profession.level || 0;
   let maxLevel = 75;
 
   if (profession.level) {
@@ -25,9 +26,9 @@ const Profession: React.FC<Props> = ({ profession }) => {
       </ProfessionName>
 
       <ProgressBar
-        current={profession.level || 0}
+        current={currentLevel}
         max={maxLevel}
-        label={`${profession.level} / ${maxLevel}`}
+        label={`${currentLevel} / ${maxLevel}`}
       />
     </ProfessionContainer>
   );

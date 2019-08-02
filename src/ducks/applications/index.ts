@@ -12,6 +12,8 @@ export const actions = {
   successDetailPublic: (application: i.ApplicationBase) =>
     action('applications/SUCCESS_DETAIL_PUBLIC', application),
 
+  successComments: (messages: i.Comment[]) => action('applications/SUCCESS_MESSAGES', messages),
+
   resetApplication: () => action('applications/RESET_DETAIL'),
 
   sendComment: () => action('applications/SEND_COMMENT'),
@@ -35,6 +37,7 @@ const initialState: i.ApplicationsState = {
   loading: true,
   userVote: undefined,
   applicationUuid: undefined,
+  messages: [],
 };
 
 export default (state = initialState, action: ActionType<typeof actions>): i.ApplicationsState => {
@@ -82,17 +85,15 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
       return {
         ...state,
         detail: undefined,
+        detailPublic: undefined,
       };
     case 'applications/SEND_COMMENT_SUCCESS':
       return {
         ...state,
-        detail: {
-          ...state.detail!,
-          discussion: [
-            action.payload,
-            ...state.detail!.discussion,
-          ],
-        },
+        messages: [
+          action.payload,
+          ...state.messages,
+        ],
       };
     case 'applications/VOTE_SUCCESS':
       return {
@@ -123,6 +124,11 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
       return {
         ...state,
         applicationUuid: action.payload,
+      };
+    case 'applications/SUCCESS_MESSAGES':
+      return {
+        ...state,
+        messages: action.payload,
       };
     default:
       return state;
@@ -187,9 +193,28 @@ export const fetchPublicApplicationDetail = (uuid: string): i.ThunkAction =>
       });
   };
 
-export const sendComment = (applicationId: number, userId: string, comment: string): i.ThunkAction<Promise<i.Comment | void>> =>
+export const getComments: i.GetComments['thunk'] = (id, type) =>
+  async (dispatch, getState, api) => {
+    dispatch(actions.load());
+
+    return api.methods.get<i.Comment[]>({
+      url: api.url.api,
+      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${id}/messages`,
+      query: { type },
+    })
+      .then((res) => {
+        dispatch(actions.successComments(res));
+      })
+      .catch(() => {
+        dispatch(actions.failed());
+      });
+  };
+
+export const sendComment: i.SendComment['thunk'] = (type, applicationId, comment, userId) =>
   async (dispatch, getState, api) => {
     dispatch(actions.sendComment());
+
+    const isPublic = type === 'public';
 
     return api.methods.post<i.Comment>({
       url: api.url.api,
@@ -197,8 +222,9 @@ export const sendComment = (applicationId: number, userId: string, comment: stri
       body: {
         userId,
         comment,
+        isPublic,
       },
-      withAuth: true,
+      withAuth: !isPublic,
     })
       .then((res) => {
         dispatch(actions.sendCommentSuccess(res));
@@ -210,7 +236,7 @@ export const sendComment = (applicationId: number, userId: string, comment: stri
       });
   };
 
-export const vote = (applicationId: number, userId: string, vote: i.VOTE): i.ThunkAction<Promise<i.Vote | void>> =>
+export const saveVote: i.SaveVote['thunk'] = (applicationId, userId, vote) =>
   async (dispatch, getState, api) => {
     dispatch(actions.vote());
 
@@ -233,7 +259,7 @@ export const vote = (applicationId: number, userId: string, vote: i.VOTE): i.Thu
       });
   };
 
-export const setStatus = (applicationId: number, status: i.ApplicationStatus): i.ThunkAction<Promise<i.ApplicationBase | void>> =>
+export const setStatus: i.SetStatus['thunk'] = (applicationId, status) =>
   async (dispatch, getState, api) => {
     dispatch(actions.setStatus());
 

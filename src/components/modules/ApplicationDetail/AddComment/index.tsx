@@ -1,3 +1,4 @@
+import * as i from 'types';
 import React, { useState } from 'react';
 import SendIcon from 'vectors/send.svg';
 import LockIcon from 'vectors/lock.svg';
@@ -8,11 +9,15 @@ import {
   AddCommentContainer, User, CommentInput, CommentInputContainer, SendButton,
 } from './styled';
 
-const AddComment: React.FC<Props> = ({ username, avatar }) => {
+const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.data && state.user.data.id);
   const applicationId = useSelector((state) => (
-    state.applications.detail && state.applications.detail.id
+    state.applications.detail
+      ? state.applications.detail.id
+      : state.applications.detailPublic
+        ? state.applications.detailPublic!.id
+        : undefined
   ));
   const applicationLocked = useSelector((state) => (
     state.applications.detail && state.applications.detail.locked
@@ -24,11 +29,12 @@ const AddComment: React.FC<Props> = ({ username, avatar }) => {
     setText(e.currentTarget.value);
   };
 
-  const handleSubmit = () => {
-    if (!userId || !applicationId || !text) return;
+  const handleSubmit = async () => {
+    if (!applicationId || !text) return;
 
-    dispatch(sendComment(applicationId, userId, text))
-      .then(() => setText(''));
+    await dispatch(sendComment(type, applicationId, text, userId));
+
+    setText('');
   };
 
   return (
@@ -64,6 +70,7 @@ const AddComment: React.FC<Props> = ({ username, avatar }) => {
 export type Props = {
   username: string;
   avatar: string;
+  type: i.MessageType;
 };
 
 export default AddComment;

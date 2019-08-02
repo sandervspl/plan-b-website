@@ -4,11 +4,10 @@ import NotInterestedIcon from 'vectors/not-interested.svg';
 import CheckCircleIcon from 'vectors/check-circle.svg';
 import CheckIcon from 'vectors/check.svg';
 import { useDispatch, useSelector } from 'hooks';
-import { vote } from 'ducks/applications';
+import { saveVote } from 'ducks/applications';
 import { ProgressBar } from 'common';
 import {
   VotingContainer, Button, ResultContainer, Results, Result, AvatarRow, Avatar, ResultText,
-  VotedText,
 } from './styled';
 
 const MAX_AMOUNT_AVATAR = 3;
@@ -25,7 +24,7 @@ const Voting: React.FC = () => {
   const handleVote = (decision: i.VOTE) => () => {
     if (!application || !user) return;
 
-    dispatch(vote(application.id, user.id, decision));
+    dispatch(saveVote(application.id, user.id, decision));
   };
 
   const getMaxAvatars = (votes: i.Vote[]) => {

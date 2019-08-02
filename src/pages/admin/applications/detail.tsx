@@ -31,8 +31,6 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
   const hasSecondaryProfessions = useSelector((state) => hasProfessions(state, 'secondary'));
   const user = useSelector((state) => state.user);
 
-  const applicationPrivate = application as i.ApplicationDataDuck;
-
   useEffect(() => {
     if (isPublic) {
       dispatch(fetchPublicApplicationDetail(applicationUuid!));
@@ -210,7 +208,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
           </ApplicationSection>
         </ApplicationContent>
 
-        {!isPublic && <Discussion comments={applicationPrivate.discussion} />}
+        <Discussion applicationId={application.id} type={type} />
       </ApplicationContainer>
     </Page>
   );
@@ -230,7 +228,7 @@ ApplicationDetailPage.defaultProps = {
 type Props = {
   applicationId?: number;
   applicationUuid?: string;
-  type?: 'private' | 'public';
+  type: i.MessageType;
 }
 
 type Queries = {

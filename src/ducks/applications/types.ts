@@ -6,9 +6,12 @@ export type ApplicationsState = i.BaseState<never> & {
   detailPublic?: i.ApplicationBase;
   userVote?: i.VOTE;
   applicationUuid?: string;
+  messages: i.Comment[];
 };
 
 export type ApplicationStatus = 'open' | 'accepted' | 'rejected';
+
+export type MessageType = 'private' | 'public';
 
 export type RaidExperience = {
   molten_core?: boolean;
@@ -91,15 +94,30 @@ export type ApplicationBase = i.BaseResponseBody & {
 }
 
 export type ApplicationData = ApplicationBase & {
-  discussion: i.Comment[];
   votes: i.Vote[];
   commentsAmount: number;
 }
 
 export type ApplicationDataDuck = ApplicationBase & {
-  discussion: i.Comment[];
   votes: {
     accepts: i.Vote[];
     rejects: i.Vote[];
   };
 }
+
+
+export type GetComments = i.BaseThunkAction<
+  (applicationId: number, type: i.MessageType | 'all') => Promise<i.Comment[] | void>
+>;
+
+export type SendComment = i.BaseThunkAction<
+  (type: i.MessageType, applicationId: number, comment: string, userId?: string) => Promise<i.Comment | void>
+>;
+
+export type SaveVote = i.BaseThunkAction<
+  (applicationId: number, userId: string, vote: i.VOTE) => Promise<i.Vote | void>
+>;
+
+export type SetStatus = i.BaseThunkAction<
+(applicationId: number, status: i.ApplicationStatus) => Promise<i.ApplicationBase | void>
+>;

@@ -35,6 +35,7 @@ export type SimpleDatabaseUserData = {
   id: string;
   username: string;
   avatar: string;
+  authLevel: i.AUTH_LEVEL;
 }
 
 export type FetchUser = i.BaseThunkAction<() => Promise<i.UserData | void>>;

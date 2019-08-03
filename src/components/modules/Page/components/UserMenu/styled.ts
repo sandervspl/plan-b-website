@@ -3,7 +3,6 @@ import { Paragraph, ParagraphStyle } from 'common';
 import { CircleImgContainer } from 'common/CircleImg/styled';
 import { media } from 'styles';
 import { DKPContainer } from 'common/DKP/styled';
-import { HeaderNavLinkStyle } from '../Navigation/styled';
 
 export const UserMenuContainer = styled.div<UserMenuContainerProps>`
   left: 0;
@@ -144,7 +143,6 @@ export const OptionsContainer = styled.ul`
     }
 
     a, span, button {
-      ${HeaderNavLinkStyle};
       display: block;
       width: 100%;
       text-align: right;

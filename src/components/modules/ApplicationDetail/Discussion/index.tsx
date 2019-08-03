@@ -33,14 +33,7 @@ const Discussion: React.FC<Props> = ({ applicationId, type }) => {
       )}
 
       {messages.map((comment) => (
-        <Comment
-          key={comment.id}
-          username={comment.user.username}
-          avatar={comment.user.avatar}
-          text={comment.text}
-          shareDate={comment.createdAt}
-          type={type}
-        />
+        <Comment key={comment.id} message={comment} type={type} />
       ))}
     </DiscussionContainer>
   );

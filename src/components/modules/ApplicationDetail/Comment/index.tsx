@@ -2,23 +2,23 @@ import * as i from 'types';
 import React, { useState } from 'react';
 import SecurityIcon from 'vectors/security.svg';
 import PublicIcon from 'vectors/public.svg';
-import { CircleImg, DateText, Tooltip } from 'common';
+import { CircleImg, DateText, Tooltip, AuthLevelText } from 'common';
 import { CommentContainer, CommentText, CommentInfo, ReadMoreButton } from './styled';
 
 const MAX_TEXT_LENGTH = 200;
 
-const Comment: React.FC<Props> = ({ username, avatar, text, shareDate, type }) => {
+const Comment: React.FC<Props> = ({ message, type }) => {
   const [showLongText, setShowLongText] = useState(false);
-  const isLongText = text.length > MAX_TEXT_LENGTH;
+  const isLongText = message.text.length > MAX_TEXT_LENGTH;
   const shortText = isLongText
-    ? `${text.substr(0, MAX_TEXT_LENGTH)}...`
-    : text;
+    ? `${message.text.substr(0, MAX_TEXT_LENGTH)}...`
+    : message.text;
 
   return (
     <CommentContainer>
-      <CircleImg src={avatar} />
+      <CircleImg src={message.user.avatar} />
       <CommentText>
-        {showLongText ? text : shortText}
+        {showLongText ? message.text : shortText}
 
         {isLongText && (
           <ReadMoreButton onClick={() => setShowLongText((val) => !val)}>
@@ -27,8 +27,12 @@ const Comment: React.FC<Props> = ({ username, avatar, text, shareDate, type }) =
         )}
 
         <CommentInfo>
-          {username}
-          <DateText date={shareDate} noIcon />
+          <AuthLevelText level={message.user.authLevel}>
+            {message.user.username}
+          </AuthLevelText>
+
+          <DateText date={message.createdAt} noIcon />
+
           {type === 'private'
             ? <SecurityIcon data-tip="This comment is only visible for officers" />
             : <PublicIcon data-tip="This comment is visible for everyone" />}
@@ -41,10 +45,7 @@ const Comment: React.FC<Props> = ({ username, avatar, text, shareDate, type }) =
 };
 
 export type Props = {
-  username: string;
-  avatar: string;
-  text: string;
-  shareDate: string | Date;
+  message: i.Comment;
   type: i.MessageType;
 };
 

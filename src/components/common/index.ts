@@ -16,3 +16,4 @@ export * from './ProgressBar';
 export * from './DKP';
 export * from './Loader';
 export * from './Tooltip';
+export { AuthLevelText } from './AuthLevelText';

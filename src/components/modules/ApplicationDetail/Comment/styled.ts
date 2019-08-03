@@ -38,6 +38,10 @@ export const CommentInfo = styled.div`
     fill: ${(props) => props.theme.color.secondary.darker};
     transform: translateY(2px);
   }
+
+  > span:first-child {
+    font-weight: 700;
+  }
 `;
 
 export const ReadMoreButton = styled.button`

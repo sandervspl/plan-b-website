@@ -8,9 +8,14 @@ import {
 } from './styled';
 
 const ApplicationItem: React.FC<Props> = ({ application }) => {
+  const to = application.public ? 'public-application-detail' : 'application-detail';
+  const params = application.public ? { uuid: application.public.uuid } : { id: application.id };
+
   return (
     <ApplicationItemContainer>
-      <Link to="application-detail" params={{ id: application.id }}>
+      {/*
+        // @ts-ignore Typescript is confused (and so am I) */}
+      <Link to={to} params={params}>
         <CircleImg src={getCmsUrl(application.character.class.icon.url)} />
 
         <CharacterInfo>

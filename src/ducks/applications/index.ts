@@ -147,14 +147,17 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
   }
 };
 
-export const fetchApplications = (status: i.ApplicationStatus): i.ThunkAction =>
+export const fetchApplications: i.FetchApplications['thunk'] = (status, type) =>
   async (dispatch, getState, api) => {
     dispatch(actions.load());
 
+    const isPrivate = type === 'private';
+    const endpoint = isPrivate ? API_ENDPOINT.APPLICATIONS : API_ENDPOINT.APPLICATIONS_PUBLIC;
+
     return api.methods.get<i.ApplicationData[]>({
       url: api.url.api,
-      path: `${API_ENDPOINT.APPLICATIONS}/${status}`,
-      withAuth: true,
+      path: `${endpoint}/${status}`,
+      withAuth: isPrivate,
     })
       .then((res) => {
         dispatch(actions.successList(res));

@@ -98,7 +98,7 @@ type BaseProps = React.AnchorHTMLAttributes<{}> & {
 
 type InternalLinkProps = {
   external?: false;
-  to: Union.Exclude<i.RouteNames, 'news-detail' | 'application-detail'>;
+  to: Union.Exclude<i.RouteNames, 'news-detail' | 'application-detail' | 'public-application-detail'>;
   params?: never;
 }
 
@@ -115,10 +115,18 @@ type IdParamsLinkProps = {
   };
 }
 
+type UuidParamsLinkProps = {
+  to: 'public-application-detail';
+  params: {
+    uuid: string;
+  };
+}
+
 export type LinkComponentProps = BaseProps & (
   | InternalLinkProps
   | ExternalLinkProps
   | IdParamsLinkProps
+  | UuidParamsLinkProps
 );
 
 Link.defaultProps = {

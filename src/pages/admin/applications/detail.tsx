@@ -228,7 +228,7 @@ ApplicationDetailPage.defaultProps = {
 type Props = {
   applicationId?: number;
   applicationUuid?: string;
-  type: i.MessageType;
+  type: i.ViewableType;
 }
 
 type Queries = {

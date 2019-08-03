@@ -26,7 +26,7 @@ export const CommentInfo = styled.div`
   font-size: 13px;
   color: ${(props) => props.theme.color.secondary.darker};
 
-  > * {
+  > *:nth-child(n+2) {
     display: inline-block;
     margin-left: 10px;
     font-size: 13px;

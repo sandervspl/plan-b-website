@@ -41,7 +41,7 @@ const Discussion: React.FC<Props> = ({ applicationId, type }) => {
 
 type Props = {
   applicationId: number;
-  type: i.MessageType;
+  type: i.ViewableType;
 }
 
 export default Discussion;

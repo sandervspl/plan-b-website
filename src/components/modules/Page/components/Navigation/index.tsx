@@ -28,7 +28,7 @@ const Navigation: React.FC = () => {
           {!user.isSignedIn && !user.loading && (
             <Link to="apply">
               <Button styleType="simple">
-                Join the guild!
+                Join the guild
               </Button>
             </Link>
           )}

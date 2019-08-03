@@ -40,6 +40,13 @@ const UserMenu: React.FC<Props> = ({ open }) => {
       </OptionsContainer>
 
       <OptionsContainer>
+        <li>
+          <NavLink to="public-applications">Applications</NavLink>
+        </li>
+        <Line />
+      </OptionsContainer>
+
+      <OptionsContainer>
         {user && user.authLevel > i.AUTH_LEVEL.USER && (
           <>
             <li>

@@ -39,6 +39,11 @@ export const UserContainer = styled.div`
       padding: 8px 12px;
       margin: 0;
       font-size: 16px;
+
+      &:hover {
+        border-color: ${(props) => props.theme.color.primary.dark};
+        color: ${(props) => props.theme.color.primary.dark};
+      }
     `}
   }
 

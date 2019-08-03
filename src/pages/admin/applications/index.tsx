@@ -19,7 +19,8 @@ const TAB: Record<i.ApplicationStatus, number> = {
   rejected: 2,
 };
 
-const ApplicationsPage: i.NextPageComponent<Props, Query> = ({ url, status }) => {
+const ApplicationsPage: i.NextPageComponent<Props, Query> = ({ url, status, type }) => {
+  const isPublic = type === 'public';
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -40,17 +41,19 @@ const ApplicationsPage: i.NextPageComponent<Props, Query> = ({ url, status }) =>
   };
 
   useEffect(() => {
-    if (user.isSignedIn && user.isAdmin) {
-      dispatch(fetchApplications(status));
+    if (!isPublic && !user.isAdmin) {
+      return;
     }
+
+    dispatch(fetchApplications(status, type));
   }, [user]);
 
   if (user.loading) {
     return null;
   }
 
-  // Not logged in or not admin
-  if (!user.data || (user.isSignedIn && !user.isAdmin)) {
+  // public, not signed in / private, not admin
+  if ((isPublic && !user.isSignedIn) || (!isPublic && !user.isAdmin)) {
     redirect();
 
     return null;
@@ -60,10 +63,11 @@ const ApplicationsPage: i.NextPageComponent<Props, Query> = ({ url, status }) =>
     setCurTab(statusId);
 
     const statusName = getStatusStr(statusId);
+    const baseUrl = isPublic ? '/applications' : '/admin/applications';
 
-    router.replace(`/admin/applications?status=${statusName}`, undefined, { shallow: true });
+    router.replace(`${baseUrl}?status=${statusName}`, undefined, { shallow: true });
 
-    dispatch(fetchApplications(statusName));
+    dispatch(fetchApplications(statusName, type));
   };
 
   return (
@@ -118,6 +122,7 @@ const ApplicationsPage: i.NextPageComponent<Props, Query> = ({ url, status }) =>
 
 ApplicationsPage.defaultProps = {
   status: 'open',
+  type: 'private',
 };
 
 ApplicationsPage.getInitialProps = async ({ req, query }) => {
@@ -129,6 +134,7 @@ ApplicationsPage.getInitialProps = async ({ req, query }) => {
 
 type Props = {
   status: i.ApplicationStatus;
+  type: i.ViewableType;
 }
 
 type Query = {

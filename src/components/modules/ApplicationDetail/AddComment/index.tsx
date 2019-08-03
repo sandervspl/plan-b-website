@@ -5,7 +5,7 @@ import LockIcon from 'vectors/lock.svg';
 import SecurityIcon from 'vectors/security.svg';
 import PublicIcon from 'vectors/public.svg';
 import { useDispatch, useSelector } from 'hooks';
-import { sendComment } from 'ducks/applications';
+import { sendComment, fetchComments } from 'ducks/applications';
 import { CircleImg, ErrorText } from 'common';
 import {
   AddCommentContainer, User, CommentInput, CommentInputContainer, SendButton, ButtonContainer,
@@ -48,6 +48,8 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
         }
 
         setText('');
+
+        dispatch(fetchComments(applicationId, type));
       });
   };
 

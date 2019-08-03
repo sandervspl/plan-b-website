@@ -115,7 +115,7 @@ export type FetchApplications = i.BaseThunkAction<
   (status: i.ApplicationStatus, type: i.ViewableType) => Promise<i.ApplicationData[] | void>
 >;
 
-export type GetComments = i.BaseThunkAction<
+export type FetchComments = i.BaseThunkAction<
   (applicationId: number, type: i.ViewableType | 'all') => Promise<i.Comment[] | void>
 >;
 

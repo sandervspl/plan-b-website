@@ -102,10 +102,10 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
       return {
         ...state,
         sendingMessage: false,
-        messages: [
-          action.payload,
-          ...state.messages,
-        ],
+        // messages: [
+        //   action.payload,
+        //   ...state.messages,
+        // ],
       };
     case 'applications/VOTE_SUCCESS':
       return {
@@ -208,7 +208,7 @@ export const fetchPublicApplicationDetail = (uuid: string): i.ThunkAction =>
       });
   };
 
-export const getComments: i.GetComments['thunk'] = (id, type) =>
+export const fetchComments: i.FetchComments['thunk'] = (id, type) =>
   async (dispatch, getState, api) => {
     dispatch(actions.load());
 

@@ -2,7 +2,7 @@ import * as i from 'types';
 import React, { useState } from 'react';
 import SecurityIcon from 'vectors/security.svg';
 import PublicIcon from 'vectors/public.svg';
-import { CircleImg, DateText, Tooltip, AuthLevelText } from 'common';
+import { CircleImg, DateText, AuthLevelText } from 'common';
 import { CommentContainer, CommentText, CommentInfo, ReadMoreButton } from './styled';
 
 const MAX_TEXT_LENGTH = 200;
@@ -37,8 +37,6 @@ const Comment: React.FC<Props> = ({ message, type }) => {
             ? <SecurityIcon data-tip="This comment is only visible for officers" />
             : <PublicIcon data-tip="This comment is visible for everyone" />}
         </CommentInfo>
-
-        <Tooltip effect="solid" delayShow={200} place="bottom" />
       </CommentText>
     </CommentContainer>
   );

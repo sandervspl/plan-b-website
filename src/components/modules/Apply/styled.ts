@@ -28,7 +28,8 @@ export const RecruitmentContainer = styled(Fullscreenpage)`
   ${media.tablet`
     padding: 30px 75px;
     max-width: 1280px;
-    max-height: 800px;
+    /* max-height: 800px; */
+    overflow: hidden;
   `}
 `;
 

@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { media } from 'styles';
 import { NavLink, UnderlineStyleAnim } from 'common';
 import { GlitchContainer } from 'common/Glitch/styled';
+import { ButtonContainer } from 'common/Button/styled';
 import { LogoNameIcon } from '../GlitchLogo/styled';
 
 export const HeaderContainer = styled.header`
@@ -26,6 +27,20 @@ export const UserContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
   min-height: 35px;
+
+  ${ButtonContainer} {
+    padding: 5px 8px;
+    margin-right: 30px;
+    font-size: 14px;
+    border-color: ${(props) => props.theme.color.primary};
+    color: ${(props) => props.theme.color.primary};
+
+    ${media.tablet`
+      padding: 8px 12px;
+      margin: 0;
+      font-size: 16px;
+    `}
+  }
 
   ${media.tablet`
     min-height: 0;

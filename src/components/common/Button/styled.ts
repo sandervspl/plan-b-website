@@ -117,7 +117,7 @@ export const ButtonContainer = styled.button<ButtonProps>`
   `}
 
   ${media.tablet`
-    padding: 17px 25px;
-    font-size: 20px;
+    padding: 12px 15px;
+    font-size: 18px;
   `}
 `;

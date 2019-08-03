@@ -14,7 +14,7 @@ export const SubmitButton = styled(Button)`
     
     ${media.tablet`
       margin-left: 10px;
-      width: 20px;
+      width: 18px;
     `}
   }
 `;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import OutsideClickHandler from 'react-outside-click-handler';
-import { Link, NavLink } from 'common';
+import { Link, NavLink, Button } from 'common';
 import { navigationMenu } from 'services';
 import { useSelector } from 'hooks';
 import GlitchLogo from '../GlitchLogo';
@@ -25,6 +25,14 @@ const Navigation: React.FC = () => {
     <HeaderContainer>
       <HeaderInner>
         <UserContainer>
+          {!user.isSignedIn && !user.loading && (
+            <Link to="apply">
+              <Button styleType="simple">
+                Join the guild!
+              </Button>
+            </Link>
+          )}
+
           <OutsideClickHandler onOutsideClick={closeMenu}>
             {user.isSignedIn ? (
               <User onClick={toggleMenuOpen} />

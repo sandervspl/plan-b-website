@@ -88,12 +88,12 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
                     <SecurityIcon />
                     Will only be visible for officers.
                   </>
-                ) : type === 'public' ? (
+                ) : (
                   <>
                     <PublicIcon />
                     Will be visible for everyone.
                   </>
-                ) : null}
+                )}
               </SharingNotice>
             </ButtonContainer>
           </>

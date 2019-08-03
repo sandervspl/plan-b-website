@@ -39,6 +39,7 @@ const Discussion: React.FC<Props> = ({ applicationId, type }) => {
           avatar={comment.user.avatar}
           text={comment.text}
           shareDate={comment.createdAt}
+          type={type}
         />
       ))}
     </DiscussionContainer>

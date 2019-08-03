@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import ReactToolTip from 'react-tooltip';
 import { sizes, media } from 'styles';
 import { RecruitmentContainerInner, QuestionContent } from '../styled';
 
@@ -156,12 +155,3 @@ export const RaidRow = styled.div<RaidRowProps>`
 type RaidRowProps = {
   row: number;
 }
-
-export const RaidTooltip = styled(ReactToolTip)`
-  && {
-    font-family: ${(props) => props.theme.font.primary};
-    font-size: 16px;
-    color: ${(props) => props.theme.color.secondary};
-    text-transform: capitalize;
-  }
-`;

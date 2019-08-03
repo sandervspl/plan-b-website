@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { ParagraphStyle } from 'common';
-import { DateContainer } from 'common/DateText/styled';
 import { CircleImgContainer } from 'common/CircleImg/styled';
 
 export const CommentContainer = styled.div`
@@ -27,11 +26,17 @@ export const CommentInfo = styled.div`
   font-size: 13px;
   color: ${(props) => props.theme.color.secondary.darker};
 
-  ${DateContainer} {
+  > * {
     display: inline-block;
     margin-left: 10px;
     font-size: 13px;
     color: ${(props) => props.theme.color.secondary.darker};
+  }
+
+  > svg {
+    height: 13px;
+    fill: ${(props) => props.theme.color.secondary.darker};
+    transform: translateY(2px);
   }
 `;
 

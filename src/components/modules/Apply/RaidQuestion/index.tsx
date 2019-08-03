@@ -3,11 +3,10 @@ import React from 'react';
 import { Field } from 'react-final-form';
 import _ from 'lodash';
 import { useSelector, useGetFirebaseImage } from 'hooks';
+import { Tooltip } from 'common';
 import QuestionHeader from '../QuestionHeader';
 import { NextButton, QuestionContent } from '../styled';
-import {
-  RaidList, RaidItem, RaidImage, RaidRow, RaidTooltip, RaidQuestionContainer,
-} from './styled';
+import { RaidList, RaidItem, RaidImage, RaidRow, RaidQuestionContainer } from './styled';
 
 const RaidQuestion: React.FC<Props> = ({ onNextClick }) => {
   const form = useSelector((state) => state.form);
@@ -57,7 +56,7 @@ const RaidQuestion: React.FC<Props> = ({ onNextClick }) => {
 
   return (
     <RaidQuestionContainer>
-      <RaidTooltip effect="solid" delayShow={500} />
+      <Tooltip effect="solid" delayShow={500} />
 
       <QuestionHeader>
         Raid experience

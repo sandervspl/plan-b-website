@@ -7,6 +7,9 @@ export type NextAppContext<Q = {}> = INextAppContext & {
   res: Response;
   req: Request;
   query: Q;
+  err?: {
+    statusCode: string | number;
+  };
 }
 
 export type NextPageComponentProps = {

@@ -44,7 +44,7 @@ export default createGlobalStyle`
   }
 
   #__next {
-    height: 100%;
+    height: 100vh;
 
     > div {
       height: 100%;

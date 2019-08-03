@@ -81,13 +81,14 @@ export const ApplyNow = styled(Link)`
 
     svg {
       transition: transform .25s ease-in-out;
+      transform: translateY(0);
     }
 
     &:hover {
       background-color: ${(props) => props.theme.color.primary.dark};
 
       svg {
-        transform: translate3d(5px, -2px, 0);
+        transform: translate3d(5px, 0, 0);
       }
     }
   `}

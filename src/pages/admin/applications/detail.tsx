@@ -27,8 +27,8 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
   const application = useSelector((state) => (
     state.applications[isPublic ? 'detailPublic' : 'detail']
   ));
-  const hasPrimaryProfessions = useSelector((state) => hasProfessions(state, 'primary'));
-  const hasSecondaryProfessions = useSelector((state) => hasProfessions(state, 'secondary'));
+  const hasPrimaryProfessions = useSelector(() => hasProfessions(application!, 'primary'));
+  const hasSecondaryProfessions = useSelector(() => hasProfessions(application!, 'secondary'));
   const user = useSelector((state) => state.user);
 
   useEffect(() => {

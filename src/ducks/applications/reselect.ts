@@ -2,8 +2,8 @@ import * as i from 'types';
 import { createSelector } from 'reselect';
 
 export const hasProfessions = createSelector(
-  (state: i.ReduxState, type: i.CharacterProfessionTypes) => (
-    [state.applications.detail, type] as const
+  (application: i.ApplicationBase, type: i.CharacterProfessionTypes) => (
+    [application, type] as const
   ),
   ([application, type]) => {
     if (!application) return false;

@@ -2,11 +2,14 @@ import * as i from 'types';
 import React, { useState } from 'react';
 import SendIcon from 'vectors/send.svg';
 import LockIcon from 'vectors/lock.svg';
+import SecurityIcon from 'vectors/security.svg';
+import PublicIcon from 'vectors/public.svg';
 import { useDispatch, useSelector } from 'hooks';
 import { sendComment } from 'ducks/applications';
 import { CircleImg, ErrorText } from 'common';
 import {
-  AddCommentContainer, User, CommentInput, CommentInputContainer, SendButton,
+  AddCommentContainer, User, CommentInput, CommentInputContainer, SendButton, ButtonContainer,
+  SharingNotice,
 } from './styled';
 
 const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
@@ -69,14 +72,30 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
               hastext={text.length > 0}
             />
             <ErrorText>{error}</ErrorText>
-            <SendButton
-              show={text.length > 0}
-              onClick={handleSubmit}
-              disabled={sending}
-              loading={sending}
-            >
-              {isMobile ? <SendIcon /> : 'Share'}
-            </SendButton>
+            <ButtonContainer>
+              <SendButton
+                show={text.length > 0}
+                onClick={handleSubmit}
+                disabled={sending}
+                loading={sending}
+              >
+                {isMobile ? <SendIcon /> : 'Share'}
+              </SendButton>
+
+              <SharingNotice>
+                {type === 'private' ? (
+                  <>
+                    <SecurityIcon />
+                    Will only be visible for officers.
+                  </>
+                ) : type === 'public' ? (
+                  <>
+                    <PublicIcon />
+                    Will be visible for everyone.
+                  </>
+                ) : null}
+              </SharingNotice>
+            </ButtonContainer>
           </>
         )}
       </CommentInputContainer>

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { ParagraphStyle, Button } from 'common';
+import { ParagraphStyle, Button, Paragraph } from 'common';
 import { CircleImgContainer } from 'common/CircleImg/styled';
 import { media } from 'styles';
 
@@ -86,12 +86,14 @@ export const SendButton = styled(Button)<SendButtonProps>`
   width: 35px;
   border-radius: 50%;
   background-color: ${(props) => props.theme.color.primary};
+  line-height: 1;
   border: 0;
   opacity: 0;
   visibility: hidden;
   text-transform: none;
   transition: opacity .2s ease-in-out, visibility 0s .2s;
   will-change: opacity;
+  transform: translateY(-17px);
 
   svg {
     height: 20px;
@@ -107,6 +109,7 @@ export const SendButton = styled(Button)<SendButtonProps>`
     border-radius: 3px;
     opacity: .5;
     visibility: visible;
+    transform: translateY(0);
   `}
 
   ${(props) => props.show && css`
@@ -128,3 +131,26 @@ export const SendButton = styled(Button)<SendButtonProps>`
 type SendButtonProps = {
   show?: boolean;
 }
+
+export const SharingNotice = styled(Paragraph)`
+  font-size: 14px;
+  line-height: 1;
+  color: ${(props) => props.theme.color.secondary.darker};
+
+  svg {
+    margin-right: 5px;
+    height: 15px;
+    transform: translateY(2px);
+    fill: ${(props) => props.theme.color.secondary.darker};
+  }
+
+  ${media.tablet`
+    margin-left: 10px;
+  `}
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;

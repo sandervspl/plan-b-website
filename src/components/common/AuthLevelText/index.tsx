@@ -2,7 +2,7 @@ import * as i from 'types';
 import React from 'react';
 import { AuthLevelTextContainer } from './styled';
 
-export const AuthLevelText: React.FC<AuthLevelTextProps> = ({ children, level }) => {
+export const AuthLevelText: React.FC<AuthLevelTextProps> = ({ children, level, id }) => {
   const tooltipLabel = level === i.AUTH_LEVEL.OFFICER
     ? 'Officer'
     : level === i.AUTH_LEVEL.GUILD_MASTER
@@ -11,11 +11,12 @@ export const AuthLevelText: React.FC<AuthLevelTextProps> = ({ children, level })
 
   return (
     <AuthLevelTextContainer level={level}>
-      <span data-tip={tooltipLabel}>{children}</span>
+      <span data-for={id} data-tip={tooltipLabel}>{children}</span>
     </AuthLevelTextContainer>
   );
 };
 
 export type AuthLevelTextProps = {
   level: i.AUTH_LEVEL;
+  id?: string;
 };

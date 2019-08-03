@@ -3,9 +3,10 @@ import { media } from 'styles';
 
 export const PageContainer = styled.div<PageContainerProps>`
   width: 100%;
-  height: 100%;
+  height: auto;
   min-height: 100vh;
   background-color: ${(props) => props.theme.color.background};
+  -webkit-overflow-scrolling: touch;
   
   ${media.tablet<PageContainerProps>`
     &:before {
@@ -32,13 +33,14 @@ type PageContainerProps = {
 }
 
 export const PageContent = styled.div`
-  margin: 65px auto 50px;
+  padding: 65px 0 50px;
   width: 100%;
   max-width: ${(props) => props.theme.width.page};
   overflow-x: hidden;
 
   ${media.tablet`
-    margin-top: 110px;
+    padding-top: 110px;
+    margin: 0 auto;
     overflow-x: visible;
   `}
 `;

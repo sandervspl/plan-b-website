@@ -47,7 +47,6 @@ export default createGlobalStyle`
     height: 100vh;
 
     > div {
-      height: 100%;
       display: flex;
     }
   }

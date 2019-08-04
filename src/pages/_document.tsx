@@ -1,8 +1,6 @@
-import * as i from 'types';
 import React from 'react';
 import Document, { Head, Main, NextScript, NextDocumentContext } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
-import * as externalScripts from 'services/external';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: NextDocumentContext) {
@@ -38,14 +36,6 @@ class MyDocument extends Document {
         <Head>
           {styles}
           <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10" />
-          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-136522405-1" />
-          {Object.values(externalScripts).map((script, i) => (
-            <script
-              key={i}
-              type="text/javascript"
-              dangerouslySetInnerHTML={{ __html: script }}
-            />
-          ))}
         </Head>
         <body>
           <Main />

@@ -3,7 +3,7 @@ import Router from 'next/router';
 import { isServer } from 'services';
 import { LoadingContainer, BullLogo } from './styled';
 
-class FullscreenLoader extends React.Component {
+export class FullscreenLoader extends React.Component {
   state = {
     loading: false,
   }
@@ -41,5 +41,3 @@ class FullscreenLoader extends React.Component {
     );
   }
 }
-
-export default FullscreenLoader;

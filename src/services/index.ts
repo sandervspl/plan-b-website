@@ -12,3 +12,4 @@ export * from './form';
 export * from './redirect';
 export * from './constants';
 export * from './timeAgo';
+export { localStorageHelper } from './localStorage';

@@ -86,6 +86,10 @@ export const SidebarContainer = styled.div`
         padding: 0 20px;
       }
 
+      ${Heading} {
+        border-top: 1px solid ${(props) => props.theme.color.border.primary};
+      }
+
       ${media.tablet`
         ${Heading} {
           border-top: 0;
@@ -108,7 +112,7 @@ export const SidebarContainer = styled.div`
     ${GradientHeadingStyle};
     padding: 15px 20px;
     font-size: 20px;
-    border-top: 0;
+    border-top: 1px solid ${(props) => props.theme.color.border.primary};
     border-bottom: 1px solid;
     border-color: ${(props) => props.theme.color.border.primary};
   }

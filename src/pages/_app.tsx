@@ -7,10 +7,10 @@ import MobileDetect from 'mobile-detect';
 import _ from 'lodash/fp';
 import { fetchUser } from 'ducks/user';
 import { actions as uiActions } from 'ducks/ui';
-import { withReduxStore, isServer } from 'services';
 import { RouterContextProvider } from 'hooks';
+import { withReduxStore, isServer } from 'services';
 import { theme, GlobalStyle } from 'styles';
-import FullscreenLoader from 'common/FullscreenLoader';
+import { CookieBar, FullscreenLoader } from 'common';
 
 class MyApp extends App<Props> {
   static getInitialProps = async ({ Component, ctx }) => {
@@ -67,6 +67,7 @@ class MyApp extends App<Props> {
           <GlobalStyle />
           <ThemeProvider theme={theme}>
             <>
+              <CookieBar />
               <FullscreenLoader />
               <Provider store={reduxStore}>
                 <Component {...pageProps} key={router.route} />

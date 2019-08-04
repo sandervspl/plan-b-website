@@ -19,7 +19,7 @@ export const OtherNewsContainer = styled.div`
   }
 
   ${NewsItemContainer} {
-    height: 125px;
+    height: 178px;
 
     &:not(:last-of-type) {
       border-bottom: 1px solid ${(props) => props.theme.color.border.primary};
@@ -36,7 +36,7 @@ export const OtherNewsContainer = styled.div`
     ${media.tablet`
       margin-bottom: 20px;
       padding: 0 20px;
-      height: 230px;
+      height: 300px;
 
       a {
         border: 1px solid ${(props) => props.theme.color.border.primary};

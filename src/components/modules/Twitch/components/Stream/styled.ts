@@ -25,7 +25,7 @@ export const StreamContainer = styled.li`
     position: relative;
     padding: 10px;
     width: 100%;
-    height: 100px;
+    height: 178px;
 
     ${Heading} {
       ${lineClamp(1)};

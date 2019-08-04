@@ -91,13 +91,12 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
               </QuestionContentHeader>
 
               <Paragraph>
-                You can review your application by going back to the questions before sending it. <br />
-                An officer will contact you in-game if we think you are a match for Plan B.
+                You can review your application by going back to the questions before sending it.
               </Paragraph>
 
               <label htmlFor="submit_application">
                 <SubmitButton disabled={form.sending.loading}>
-                  <span>Send</span>
+                  <span>Send application</span>
                   <SendIcon />
                   <input id="submit_application" type="submit" />
                 </SubmitButton>

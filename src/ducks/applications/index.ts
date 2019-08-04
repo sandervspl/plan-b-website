@@ -102,10 +102,6 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
       return {
         ...state,
         sendingMessage: false,
-        // messages: [
-        //   action.payload,
-        //   ...state.messages,
-        // ],
       };
     case 'applications/VOTE_SUCCESS':
       return {

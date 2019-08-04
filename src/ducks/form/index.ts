@@ -68,7 +68,13 @@ export const getFormState: i.GetFormState = (state, form) => (
 );
 
 export const sendApplication: i.SendApplication['thunk'] = () => async (dispatch, getState, api) => {
-  if (!getState().form.application) return;
+  if (!getState().form.application) {
+    return;
+  }
+
+  if (getState().form.sending.loading) {
+    return;
+  }
 
   dispatch(actions.sendStart());
 

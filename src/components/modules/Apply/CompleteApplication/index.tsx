@@ -48,7 +48,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
                 <strong>Don't forget to bookmark it!</strong>
               </Paragraph>
 
-              <Button disabled={!enabled} onClick={onHomeClick}>
+              <Button disabled={!enabled} onClick={onHomeClick} type="button">
                 Return to home
               </Button>
             </QuestionContent>

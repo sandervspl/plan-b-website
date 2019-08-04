@@ -7,7 +7,7 @@ import { theme } from 'styles';
 import AppleTouchIcon from 'favicon/apple-touch-icon.png';
 import Favicon32 from 'favicon/favicon-32x32.png';
 import Favicon16 from 'favicon/favicon-16x16.png';
-import SafariPinnedTab from 'favicon/safari-pinned-tab.svg';
+import SafariPinnedTab from 'favicon/safari-pinned-tab.svg?external';
 import { useGetFirebaseImage } from 'hooks';
 import Navigation from './components/Navigation';
 import { PageContainer, PageContent, PageInner } from './styled';

@@ -11,6 +11,7 @@ interface Window {
 
 // files
 declare module '*.svg';
+declare module '*.svg?external';
 declare module '*.png' {
   const value: string;
   export = value;

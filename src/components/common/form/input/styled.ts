@@ -21,7 +21,7 @@ export const InputContainer = styled.div`
     border-radius: 0;
 
     option:disabled {
-      color: #333333;
+      color: #5d5d5d;
     }
   }
   
@@ -35,7 +35,7 @@ export const Label = styled.label`
   position: absolute;
   top: 10px;
   left: 5px;
-  color: #333333;
+  color: #5d5d5d;
   font-size: 16px;
   font-weight: normal;
   pointer-events: none;
@@ -94,7 +94,7 @@ export const StyledInput = styled.input`
   color: ${(props) => props.theme.color.secondary};
   border-radius: 0;
   border: none;
-  border-bottom: 1px solid #333333;
+  border-bottom: 1px solid #5d5d5d;
   background: none;
 
   &:focus {

@@ -38,6 +38,7 @@ const initialState: i.ApplicationsState = {
   sendingMessage: false,
   userVote: undefined,
   applicationUuid: undefined,
+  locked: false,
   messages: [],
 };
 
@@ -75,12 +76,14 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
         },
         error: false,
         loading: false,
+        locked: action.payload.application.locked,
         userVote: action.payload.userVote,
       };
     case 'applications/SUCCESS_DETAIL_PUBLIC':
       return {
         ...state,
         detailPublic: action.payload,
+        locked: action.payload.locked,
       };
     case 'applications/RESET_DETAIL':
       return {

@@ -22,9 +22,7 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
         ? state.applications.detailPublic!.id
         : undefined
   ));
-  const applicationLocked = useSelector((state) => (
-    state.applications.detail && state.applications.detail.locked
-  ));
+  const applicationLocked = useSelector((state) => state.applications.locked);
   const sending = useSelector((state) => state.applications.sendingMessage);
   const isMobile = useSelector((state) => state.ui.isMobile);
   const [error, setError] = useState('');

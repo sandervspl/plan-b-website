@@ -8,6 +8,7 @@ export type ApplicationsState = i.BaseState<never> & {
   applicationUuid?: string;
   messages: i.Comment[];
   sendingMessage: boolean;
+  locked: boolean;
 };
 
 export type ApplicationStatus = 'open' | 'accepted' | 'rejected';

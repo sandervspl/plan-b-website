@@ -5,7 +5,7 @@ import { QuestionContent, NextButton, RecruitmentContainerInner } from '../style
 import CharacterField from '../CharacterQuestion/CharacterField';
 import { PersonalGrid } from './styled';
 
-const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, errors }) => {
+const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, errors, inputTabIndex }) => {
   const ageValidate = (value: string) => {
     const numVal = Number(value);
 
@@ -25,26 +25,33 @@ const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, err
       <QuestionContent>
         <PersonalGrid>
           <div>
-            <CharacterField name="personal.name" label="My name is" />
+            <CharacterField name="personal.name" label="My name is" tabIndex={inputTabIndex} />
             <CharacterField
               name="personal.age"
               label="My age is"
               type="number"
               validate={ageValidate}
+              tabIndex={inputTabIndex}
             />
           </div>
 
           <div>
-            <CharacterField name="personal.story" label="Tell us about yourself" as="textarea" />
+            <CharacterField
+              as="textarea"
+              name="personal.story"
+              label="Tell us about yourself"
+              tabIndex={inputTabIndex}
+            />
             <CharacterField
               name="personal.reason"
               label="I want to join Plan B, because"
               as="textarea"
+              tabIndex={inputTabIndex}
             />
           </div>
         </PersonalGrid>
 
-        <NextButton onClick={onNextClick} disabled={!!errors.personal}>
+        <NextButton onClick={onNextClick} tabIndex={inputTabIndex} disabled={!!errors.personal}>
           <span>Finish</span>
         </NextButton>
       </QuestionContent>

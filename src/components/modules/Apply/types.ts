@@ -5,6 +5,7 @@ export type QuestionComponentProps = {
   activeIndex: number;
   form?: i.Forms;
   active?: boolean;
+  inputTabIndex: number;
   onNextClick: () => void;
   errors: {
     professions?: {
@@ -16,6 +17,7 @@ export type QuestionComponentProps = {
       }[];
     };
     personal?: object;
+    character?: object;
   };
 }
 

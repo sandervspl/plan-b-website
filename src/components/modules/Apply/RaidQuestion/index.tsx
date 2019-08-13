@@ -8,7 +8,7 @@ import QuestionHeader from '../QuestionHeader';
 import { NextButton, QuestionContent } from '../styled';
 import { RaidList, RaidItem, RaidImage, RaidRow, RaidQuestionContainer } from './styled';
 
-const RaidQuestion: React.FC<Props> = ({ onNextClick }) => {
+const RaidQuestion: React.FC<Props> = ({ onNextClick, inputTabIndex }) => {
   const form = useSelector((state) => state.form);
   const isMobile = useSelector((state) => state.ui.isMobile);
 
@@ -74,6 +74,7 @@ const RaidQuestion: React.FC<Props> = ({ onNextClick }) => {
                   type="checkbox"
                   name={`raid_experience.${raid.value}`}
                   id={`raid_experience.${raid.value}`}
+                  tabIndex={inputTabIndex}
                 />
                 <RaidImage selected={selected}>
                   <img src={raid.img} alt={raid.name} />
@@ -93,6 +94,7 @@ const RaidQuestion: React.FC<Props> = ({ onNextClick }) => {
                         type="checkbox"
                         name={`raid_experience.${raid.value}`}
                         id={`raid_experience.${raid.value}`}
+                        tabIndex={inputTabIndex}
                       />
                       <RaidImage selected={selected}>
                         <img src={raid.img} alt={raid.name} />
@@ -104,7 +106,7 @@ const RaidQuestion: React.FC<Props> = ({ onNextClick }) => {
             )))}
         </RaidList>
 
-        <NextButton onClick={onNextClick}>
+        <NextButton onClick={onNextClick} tabIndex={inputTabIndex}>
           <span>Continue</span>
         </NextButton>
       </QuestionContent>

@@ -67,6 +67,7 @@ export const DropdownInput: React.FC<DropdownInputProps> = ({ input, meta, items
                 placeholder: 'Select ' + props.label,
               })}
               onClick={() => openMenu()}
+              onFocus={() => openMenu()}
             />
             <Highlight />
             <Bar />

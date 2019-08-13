@@ -139,7 +139,7 @@ const ApplicationPage: i.NextPageComponent = () => {
             server: 'Shazzrah',
             level: 60,
           },
-          ...initValues,
+          // ...initValues,
         }}
       >
         {({ errors, handleSubmit }) => (
@@ -156,6 +156,7 @@ const ApplicationPage: i.NextPageComponent = () => {
                 onNextClick={handleClick}
                 Component={component}
                 errors={errors}
+                inputTabIndex={activeIndex === i ? 0 : -1}
               />
             ))}
           </QuestionsForm>

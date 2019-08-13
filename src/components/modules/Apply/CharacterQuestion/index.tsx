@@ -12,7 +12,7 @@ import { CharacterGrid } from './styled';
 import dropdownRaces from './dropdownRaces';
 import dropdownClasses from './dropdownClasses';
 
-const CharacterQuestion: React.FC<Props> = ({ onNextClick, active, errors }) => {
+const CharacterQuestion: React.FC<Props> = ({ onNextClick, active, errors, inputTabIndex }) => {
   useEffect(() => {
     if (!active) return;
 
@@ -34,7 +34,7 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, active, errors }) => 
       <QuestionContent>
         <CharacterGrid>
           <div>
-            <CharacterField name="character.name" label="Character name" />
+            <CharacterField name="character.name" label="Character name" tabIndex={inputTabIndex} />
             <CharacterField
               name="character.level"
               label="Level"
@@ -43,9 +43,15 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, active, errors }) => 
               pattern="[0-9]*"
               min="1"
               max="60"
+              tabIndex={inputTabIndex}
               disabled
             />
-            <CharacterField name="character.server" label="Server" disabled />
+            <CharacterField
+              name="character.server"
+              label="Server"
+              tabIndex={inputTabIndex}
+              disabled
+            />
           </div>
           <div>
             <Field
@@ -54,6 +60,7 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, active, errors }) => 
               label="race"
               validate={validate.required}
               items={dropdownRaces(useGetFirebaseImage)}
+              tabIndex={inputTabIndex}
             />
             <Field
               component={DropdownInput}
@@ -61,12 +68,13 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, active, errors }) => 
               label="class"
               validate={validate.required}
               items={dropdownClasses(useGetFirebaseImage)}
+              tabIndex={inputTabIndex}
             />
           </div>
         </CharacterGrid>
 
-        <NextButton onClick={onNextClick} disabled={!!errors.character}>
-          <span>Continue</span>
+        <NextButton onClick={onNextClick} tabIndex={inputTabIndex} disabled={!!errors.character}>
+          <span tabIndex={-1}>Continue</span>
         </NextButton>
       </QuestionContent>
     </>

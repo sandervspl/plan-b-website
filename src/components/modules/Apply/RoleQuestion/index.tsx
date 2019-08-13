@@ -6,7 +6,7 @@ import QuestionHeader from '../QuestionHeader';
 import { NextButton, QuestionContent, RecruitmentContainerInner } from '../styled';
 import { RoleList, RoleItem, BackgroundImage, RoleIcon, RoleText } from './styled';
 
-const RoleQuestion: React.FC<Props> = ({ onNextClick }) => {
+const RoleQuestion: React.FC<Props> = ({ onNextClick, inputTabIndex }) => {
   const form = useSelector((state) => state.form);
 
   const roles = [{
@@ -47,16 +47,16 @@ const RoleQuestion: React.FC<Props> = ({ onNextClick }) => {
                 checked={roleId === activeRole}
                 unchecked={activeRole != null && roleId !== activeRole}
               >
+                <BackgroundImage>
+                  <img src={role.background} alt={role.text} />
+                </BackgroundImage>
                 <Field
                   name="role"
                   component="input"
                   type="radio"
                   value={roleId}
-                  tabIndex={-1}
+                  tabIndex={inputTabIndex}
                 />
-                <BackgroundImage>
-                  <img src={role.background} alt={role.text} />
-                </BackgroundImage>
                 <RoleIcon src={role.icon} />
                 <RoleText>{role.text}</RoleText>
               </RoleItem>
@@ -64,7 +64,7 @@ const RoleQuestion: React.FC<Props> = ({ onNextClick }) => {
           })}
         </RoleList>
 
-        <NextButton onClick={onNextClick} disabled={!activeRole}>
+        <NextButton onClick={onNextClick} tabIndex={inputTabIndex} disabled={!activeRole}>
           <span>Continue</span>
         </NextButton>
       </QuestionContent>

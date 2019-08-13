@@ -8,7 +8,7 @@ import QuestionHeader from '../QuestionHeader';
 import ProfessionInput from '../ProfessionInput';
 import { ProfessionsGrid } from './styled';
 
-const CharacterQuestion: React.FC<Props> = ({ onNextClick }) => {
+const CharacterQuestion: React.FC<Props> = ({ onNextClick, inputTabIndex }) => {
   const dispatch = useDispatch();
   const professions = useSelector((state) => state.character.professions);
   const [primaries, setPrimaries] = useState<string[]>([]);
@@ -66,12 +66,19 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick }) => {
             ))}
 
             {secondaries.length < 3 && (
-              <Button type="button" onClick={addSecondary} styleType="simple">+ Profession</Button>
+              <Button
+                type="button"
+                onClick={addSecondary}
+                styleType="simple"
+                tabIndex={inputTabIndex}
+              >
+                + Profession
+              </Button>
             )}
           </div>
         </ProfessionsGrid>
 
-        <NextButton onClick={onNextClick}>
+        <NextButton onClick={onNextClick} tabIndex={inputTabIndex}>
           <span>Continue</span>
         </NextButton>
       </QuestionContent>

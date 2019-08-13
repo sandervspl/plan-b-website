@@ -99,6 +99,14 @@ export const ButtonContainer = styled.button<ButtonProps>`
     transform: scale(.98);
   }
 
+  &:focus, > ${Content}:focus {
+    outline: 0;
+  }
+
+  &:focus > ${Content} {
+    box-shadow: 0 0 2px 3px #0099E0;
+  }
+
   &:disabled {
     cursor: not-allowed;
     background-color: ${(props) => props.theme.color.primary.dark};

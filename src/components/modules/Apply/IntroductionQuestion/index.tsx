@@ -1,7 +1,6 @@
 import * as i from 'types';
 import React from 'react';
 import { Field } from 'react-final-form';
-// import { useGetFirebaseImage } from 'hooks';
 import { Paragraph } from 'common';
 import { Toggle } from 'common/form';
 import QuestionHeader from '../QuestionHeader';
@@ -9,9 +8,7 @@ import { QuestionContentHeader, QuestionContent, NextButton, RecruitmentContaine
 } from '../styled';
 import { IntroGrid } from './styled';
 
-const IntroductionQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick }) => {
-  // const introImg = useGetFirebaseImage('recruitment', 'intro_fade_2.jpg');
-
+const IntroductionQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, inputTabIndex }) => {
   return (
     <RecruitmentContainerInner>
       <IntroGrid>
@@ -32,20 +29,17 @@ const IntroductionQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick 
             </Paragraph>
 
             <Field
-              name="social"
               component={Toggle}
+              type="checkbox"
+              name="social"
               label="I'm applying to become a social member"
             />
 
-            <NextButton onClick={onNextClick}>
-              <span>Start</span>
+            <NextButton onClick={onNextClick} tabIndex={inputTabIndex}>
+              <span tabIndex={-1}>Start</span>
             </NextButton>
           </QuestionContent>
         </div>
-
-        {/* <div>
-          <img src={introImg} alt="" />
-        </div> */}
       </IntroGrid>
     </RecruitmentContainerInner>
   );

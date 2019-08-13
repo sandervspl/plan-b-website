@@ -179,7 +179,13 @@ export const RoleItem = styled.label<RoleItemProps>`
   }
 
   input {
-    display: none;
+    &:focus, + ${RoleIcon}:focus {
+      outline: 0;
+    }
+
+    &:focus + ${RoleIcon} {
+      box-shadow: 0 0 2px 3px #0099E0;
+    }
   }
 `;
 

@@ -4,7 +4,7 @@ import { ButtonContainer, Content, LoadingProgress, LoadingProgressInner } from 
 export const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
   return (
     <ButtonContainer {...props}>
-      <Content>{children}</Content>
+      <Content tabIndex={-1}>{children}</Content>
       <LoadingProgress>
         <LoadingProgressInner loading={props.loading} />
       </LoadingProgress>

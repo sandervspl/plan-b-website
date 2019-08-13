@@ -250,14 +250,13 @@ export const NextButton = styled.button.attrs({ type: 'button' })`
   margin: 30px 0 30px;
   background: none;
   border: 0;
-  outline: 0;
   font-size: 30px;
   font-weight: bold;
   text-transform: uppercase;
   font-family: ${(props) => props.theme.font.primary};
   color: ${(props) => props.theme.color.primary.dark};
   cursor: pointer;
-  transition: color 300ms;
+  transition: color 300ms ease;
 
   &:before {
     content: '';
@@ -272,6 +271,10 @@ export const NextButton = styled.button.attrs({ type: 'button' })`
                 padding-right 400ms 400ms,
                 margin-left 400ms,
                 background-color 300ms;
+  }
+
+  > span {
+    transition: box-shadow 250ms ease;
   }
 
   ${media.tablet`
@@ -295,5 +298,13 @@ export const NextButton = styled.button.attrs({ type: 'button' })`
     &:before {
       background-color: ${(props) => props.theme.color.border.primary.light};
     }
+  }
+
+  &:focus, > span:focus {
+    outline: 0;
+  }
+
+  &:focus > span {
+    box-shadow: 0 0 2px 3px #0099E0;
   }
 `;

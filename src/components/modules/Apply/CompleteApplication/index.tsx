@@ -8,12 +8,11 @@ import QuestionHeader from '../QuestionHeader';
 import { QuestionContentHeader, QuestionContent, RecruitmentContainerInner } from '../styled';
 import { SubmitButton, Name, ErrorContainer, OutroGrid } from './styled';
 
-const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
+const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ inputTabIndex }) => {
   const router = useRouter();
   const form = useSelector((state) => state.form);
   const applicationUuid = useSelector((state) => state.applications.applicationUuid);
   const TaurenIcon = useGetFirebaseImage('icons/races', 'Tauren_Male.gif');
-  // const outroImg = useGetFirebaseImage('recruitment', 'outro_fade.jpg');
   const [enabled, setEnabled] = useState(false);
 
   useTimeout(() => setEnabled(true), 2000);
@@ -48,7 +47,12 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
                 <strong>Don't forget to bookmark it!</strong>
               </Paragraph>
 
-              <Button disabled={!enabled} onClick={onHomeClick} type="button">
+              <Button
+                onClick={onHomeClick}
+                type="button"
+                disabled={!enabled}
+                tabIndex={inputTabIndex}
+              >
                 Return to home
               </Button>
             </QuestionContent>
@@ -71,7 +75,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
               </Paragraph>
 
               <label htmlFor="submit_application">
-                <SubmitButton disabled={form.sending.loading}>
+                <SubmitButton disabled={form.sending.loading} tabIndex={inputTabIndex}>
                   <span>Try again</span>
                   <SendIcon />
                   <input id="submit_application" type="submit" />
@@ -95,7 +99,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
               </Paragraph>
 
               <label htmlFor="submit_application">
-                <SubmitButton disabled={form.sending.loading}>
+                <SubmitButton disabled={form.sending.loading} tabIndex={inputTabIndex}>
                   <span>Send application</span>
                   <SendIcon />
                   <input id="submit_application" type="submit" />
@@ -104,10 +108,6 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
             </QuestionContent>
           </div>
         )}
-
-        {/* <div>
-          <img src={outroImg} alt="" />
-        </div> */}
       </OutroGrid>
     </RecruitmentContainerInner>
   );

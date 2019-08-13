@@ -21,8 +21,10 @@ const Input: InputType = forwardRef<HTMLInputElement, InputProps>(
         <StyledInput {...input} {...props} ref={ref} id={input.name} />
         <Highlight />
         <Bar />
-        <Label htmlFor={input.name} haserror={!!props.meta.error}>{label}</Label>
-        {props.meta.error && (
+        <Label htmlFor={input.name} haserror={!!props.meta.error && props.meta.touched}>
+          {label}
+        </Label>
+        {props.meta.error && props.meta.touched && (
           <ErrorText>{props.meta.error}</ErrorText>
         )}
       </InputContainer>

@@ -1,6 +1,6 @@
 import styled, { keyframes, css } from 'styled-components';
 import { theme, media } from 'styles';
-import { ParagraphStyle } from 'common/typography';
+import { ParagraphStyle, ErrorText } from 'common/typography';
 
 const inputHighlighter = keyframes`
   from {
@@ -23,6 +23,10 @@ export const InputContainer = styled.div`
     option:disabled {
       color: #5d5d5d;
     }
+  }
+
+  ${ErrorText} {
+    margin-top: 5px;
   }
   
   ${media.tablet`

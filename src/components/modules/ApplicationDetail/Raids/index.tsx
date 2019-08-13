@@ -1,6 +1,7 @@
 import * as i from 'types';
 import React from 'react';
 import { useGetFirebaseImage } from 'hooks';
+import { Tooltip } from 'common';
 import { RaidsContainer, RaidImage } from './styled';
 
 const Raids: React.FC<Props> = ({ raids }) => {
@@ -17,10 +18,17 @@ const Raids: React.FC<Props> = ({ raids }) => {
   return (
     <RaidsContainer>
       {Object.entries(images).map(([raidKey, imageUrl]) => (
-        <RaidImage key={raidKey} isactive={raids[raidKey]}>
+        <RaidImage
+          key={raidKey}
+          isactive={raids[raidKey]}
+          data-for="raid"
+          data-tip={raidKey.replace('_', ' ')}
+        >
           <img src={imageUrl} alt={raidKey} />
         </RaidImage>
       ))}
+
+      <Tooltip id="raid" effect="solid" />
     </RaidsContainer>
   );
 };

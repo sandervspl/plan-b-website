@@ -13,7 +13,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
   const form = useSelector((state) => state.form);
   const applicationUuid = useSelector((state) => state.applications.applicationUuid);
   const TaurenIcon = useGetFirebaseImage('icons/races', 'Tauren_Male.gif');
-  const outroImg = useGetFirebaseImage('recruitment', 'outro_fade.jpg');
+  // const outroImg = useGetFirebaseImage('recruitment', 'outro_fade.jpg');
   const [enabled, setEnabled] = useState(false);
 
   useTimeout(() => setEnabled(true), 2000);
@@ -105,9 +105,9 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = () => {
           </div>
         )}
 
-        <div>
+        {/* <div>
           <img src={outroImg} alt="" />
-        </div>
+        </div> */}
       </OutroGrid>
     </RecruitmentContainerInner>
   );

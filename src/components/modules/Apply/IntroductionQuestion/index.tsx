@@ -1,6 +1,6 @@
 import * as i from 'types';
 import React from 'react';
-import { useGetFirebaseImage } from 'hooks';
+// import { useGetFirebaseImage } from 'hooks';
 import { Paragraph } from 'common';
 import QuestionHeader from '../QuestionHeader';
 import { QuestionContentHeader, QuestionContent, NextButton, RecruitmentContainerInner,
@@ -8,7 +8,7 @@ import { QuestionContentHeader, QuestionContent, NextButton, RecruitmentContaine
 import { IntroGrid } from './styled';
 
 const IntroductionQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick }) => {
-  const introImg = useGetFirebaseImage('recruitment', 'intro_fade_2.jpg');
+  // const introImg = useGetFirebaseImage('recruitment', 'intro_fade_2.jpg');
 
   return (
     <RecruitmentContainerInner>
@@ -35,9 +35,9 @@ const IntroductionQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick 
           </QuestionContent>
         </div>
 
-        <div>
+        {/* <div>
           <img src={introImg} alt="" />
-        </div>
+        </div> */}
       </IntroGrid>
     </RecruitmentContainerInner>
   );

@@ -13,6 +13,7 @@ export type QuestionComponentProps = {
         level: string;
       }[];
     };
+    personal?: object;
   };
 }
 

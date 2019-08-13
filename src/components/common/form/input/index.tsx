@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import { FieldRenderProps } from 'react-final-form';
+import { ErrorText } from 'common/typography';
 import { InputContainer, StyledInput, Highlight, Bar, Label } from './styled';
 
 const Input: InputType = forwardRef<HTMLInputElement, InputProps>(
@@ -20,7 +21,10 @@ const Input: InputType = forwardRef<HTMLInputElement, InputProps>(
         <StyledInput {...input} {...props} ref={ref} id={input.name} />
         <Highlight />
         <Bar />
-        <Label htmlFor={input.name}>{label}</Label>
+        <Label htmlFor={input.name} haserror={!!props.meta.error}>{label}</Label>
+        {props.meta.error && (
+          <ErrorText>{props.meta.error}</ErrorText>
+        )}
       </InputContainer>
     );
   }

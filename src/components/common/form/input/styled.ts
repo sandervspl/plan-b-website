@@ -30,7 +30,7 @@ export const InputContainer = styled.div`
   `}
 `;
 
-export const Label = styled.label`
+export const Label = styled.label<LabelProps>`
   ${ParagraphStyle};
   position: absolute;
   top: 10px;
@@ -44,7 +44,15 @@ export const Label = styled.label`
   ${media.tablet`
     font-size: 24px;
   `}
+
+  ${(props) => props.haserror && css`
+    color: ${(props) => props.theme.color.negative} !important;
+  `}
 `;
+
+type LabelProps = {
+  haserror?: boolean;
+}
 
 export const Bar = styled.span`
   display: block;
@@ -139,6 +147,7 @@ export const StyledInput = styled.input`
 
   &:disabled {
     color: #5a5a5a;
+    cursor: not-allowed;
   }
 
   ${media.tablet`

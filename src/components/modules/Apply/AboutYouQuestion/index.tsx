@@ -6,6 +6,16 @@ import CharacterField from '../CharacterQuestion/CharacterField';
 import { PersonalGrid } from './styled';
 
 const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, errors }) => {
+  const ageValidate = (value: string) => {
+    const numVal = Number(value);
+
+    if (isNaN(numVal) || numVal < 1 || numVal > 99) {
+      return 'Age should be between 1 and 99.';
+    }
+
+    return undefined;
+  };
+
   return (
     <RecruitmentContainerInner>
       <QuestionHeader>
@@ -16,7 +26,12 @@ const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, err
         <PersonalGrid>
           <div>
             <CharacterField name="personal.name" label="My name is" />
-            <CharacterField name="personal.age" label="My age is" type="number" min="0" max="99" />
+            <CharacterField
+              name="personal.age"
+              label="My age is"
+              type="number"
+              validate={ageValidate}
+            />
           </div>
 
           <div>

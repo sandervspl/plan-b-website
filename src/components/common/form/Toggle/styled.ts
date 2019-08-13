@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import 'react-toggle/style.css';
 import { Paragraph } from 'common/typography';
+import { media } from 'styles';
 
 export const ToggleContainer = styled.div`
   display: flex;
@@ -8,8 +9,12 @@ export const ToggleContainer = styled.div`
 
   ${Paragraph} {
     margin-left: 8px;
-    font-size: 16px;
+    font-size: 14px;
     color: ${(props) => props.theme.color.secondary.darker};
+
+    ${media.tablet`
+      font-size: 16px;
+    `}
   }
 
   .react-toggle--checked .react-toggle-thumb {

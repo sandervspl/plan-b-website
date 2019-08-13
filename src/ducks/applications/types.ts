@@ -93,6 +93,7 @@ export type ApplicationBase = i.BaseResponseBody & {
   character: i.Character;
   personal: Personal;
   locked: boolean;
+  social: boolean;
 }
 
 export type ApplicationData = ApplicationBase & {

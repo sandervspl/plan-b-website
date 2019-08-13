@@ -1,10 +1,13 @@
 import * as i from 'types';
 import React from 'react';
 import CommentIcon from 'vectors/comment.svg';
+import GroupAddIcon from 'vectors/group_add.svg';
+import BabyIcon from 'vectors/baby.svg';
 import { Link, ClassText, CircleImg } from 'common';
 import { timeAgo, getDateWithTime, getCmsUrl } from 'services';
 import {
   ApplicationItemContainer, CharacterInfo, RoleText, RoleContainer, CommentsContainer, MiscInfo,
+  SocialContainer,
 } from './styled';
 
 const ApplicationItem: React.FC<Props> = ({ application }) => {
@@ -31,8 +34,13 @@ const ApplicationItem: React.FC<Props> = ({ application }) => {
 
         <RoleContainer>
           <CircleImg src={getCmsUrl(application.character.role.icon.url)} />
-          <RoleText>{application.character.role.name}</RoleText>
+          {/* <RoleText>{application.character.role.name}</RoleText> */}
         </RoleContainer>
+
+        <SocialContainer>
+          {application.social ? <BabyIcon title="Social" /> : <GroupAddIcon title="Raider" />}
+          {/* <RoleText>{application.character.role.name}</RoleText> */}
+        </SocialContainer>
 
         <MiscInfo>
           {application.personal.name} ({application.personal.age})

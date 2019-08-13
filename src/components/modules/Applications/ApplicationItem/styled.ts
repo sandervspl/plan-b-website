@@ -40,7 +40,8 @@ export const ApplicationItemContainer = styled.li`
 
   a {
     ${ParagraphStyle};
-    display: flex;
+    display: grid;
+    grid-template-columns: 15% 50% 15% 20%;
     align-items: center;
     padding: 10px 15px;
     width: 100%;
@@ -59,6 +60,8 @@ export const ApplicationItemContainer = styled.li`
     }
 
     ${media.tablet`
+      display: flex;
+
       > ${RoleContainer} {
         display: flex;
       }
@@ -76,19 +79,23 @@ export const ApplicationItemContainer = styled.li`
         }
 
         &:nth-child(3) {
-          flex-basis: 25%;
+          flex-basis: 15%;
         }
 
         &:nth-child(4) {
-          flex-basis: 25%;
+          flex-basis: 15%;
         }
 
         &:nth-child(5) {
+          flex-basis: 25%;
+        }
+
+        &:nth-child(6) {
           flex-basis: 10%;
         }
 
         &:last-child {
-          flex-basis: calc(20% - 35px);
+          flex-basis: calc(15% - 35px);
           text-align: right;
         }
       }
@@ -138,4 +145,13 @@ export const CommentsContainer = styled.div`
   ${media.tablet`
     margin: 0;
   `}
+`;
+
+export const SocialContainer = styled.div`
+  height: 25px;
+
+  svg {
+    height: 25px;
+    fill: ${(props) => props.theme.color.secondary};
+  }
 `;

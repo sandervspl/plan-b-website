@@ -4,7 +4,16 @@ export type QuestionComponentProps = {
   form?: i.Forms;
   active?: boolean;
   onNextClick: () => void;
-  errors: Record<string, string>;
+  errors: {
+    professions?: {
+      primary?: {
+        level: string;
+      }[];
+      secondary?: {
+        level: string;
+      }[];
+    };
+  };
 }
 
 export type TiltStyle = {

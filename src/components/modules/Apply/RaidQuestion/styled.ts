@@ -19,7 +19,7 @@ export const RaidList = styled.div`
   ${media.tablet`
     position: absolute;
     top: 115px;
-    right: -35px;
+    right: 0;
     width: 820px;
 
     + button {

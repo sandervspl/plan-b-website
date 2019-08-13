@@ -152,10 +152,10 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
 
               <Paragraph>Race/Class</Paragraph>
               <Paragraph as="div">
-                {character.race.name}
                 <CircleImg src={getCmsUrl(character.race.icon.url)} />
-                {character.class.name}
+                {character.race.name}
                 <CircleImg src={getCmsUrl(character.class.icon.url)} />
+                {character.class.name}
               </Paragraph>
 
               <Paragraph>Level</Paragraph>
@@ -163,8 +163,8 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
 
               <Paragraph>Role</Paragraph>
               <Paragraph as="div">
-                {character.role.name}
                 <CircleImg src={getCmsUrl(character.role.icon.url)} />
+                {character.role.name}
               </Paragraph>
             </InfoGrid>
           </ApplicationSection>

@@ -32,13 +32,13 @@ const ApplicationItem: React.FC<Props> = ({ application }) => {
           </RoleContainer>
         </CharacterInfo>
 
-        <RoleContainer>
+        <RoleContainer title={application.character.role.name}>
           <CircleImg src={getCmsUrl(application.character.role.icon.url)} />
           {/* <RoleText>{application.character.role.name}</RoleText> */}
         </RoleContainer>
 
-        <SocialContainer>
-          {application.social ? <BabyIcon title="Social" /> : <GroupAddIcon title="Raider" />}
+        <SocialContainer title={application.social ? 'Social' : 'Raider'}>
+          {application.social ? <BabyIcon /> : <GroupAddIcon />}
           {/* <RoleText>{application.character.role.name}</RoleText> */}
         </SocialContainer>
 
@@ -46,7 +46,7 @@ const ApplicationItem: React.FC<Props> = ({ application }) => {
           {application.personal.name} ({application.personal.age})
         </MiscInfo>
 
-        <CommentsContainer>
+        <CommentsContainer title={`${application.commentsAmount} comments`}>
           <CommentIcon />
           {application.commentsAmount}
         </CommentsContainer>

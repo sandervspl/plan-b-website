@@ -257,9 +257,13 @@ export const InfoGrid = styled.div`
     }
 
     figure {
-      margin-left: 7px;
+      margin: 0 8px 0 0;
       width: 18px;
       height: 18px;
+
+      &:not(:first-child) {
+        margin-left: 8px;
+      }
 
       ${media.tablet`
         width: 20px;

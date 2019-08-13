@@ -5,7 +5,9 @@ import { QuestionContainer } from './styled';
 const Question: React.FC<Props> = ({ Component, ...props }) => {
   return (
     <QuestionContainer active={props.active} answered={props.answered}>
-      {<Component {...props} />}
+      {props.index <= props.activeIndex + 1 && (
+        <Component {...props} />
+      )}
     </QuestionContainer>
   );
 };

@@ -1,6 +1,8 @@
 import * as i from 'types';
 
 export type QuestionComponentProps = {
+  index: number;
+  activeIndex: number;
   form?: i.Forms;
   active?: boolean;
   onNextClick: () => void;

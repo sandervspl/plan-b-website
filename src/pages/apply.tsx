@@ -71,7 +71,7 @@ const ApplicationPage: i.NextPageComponent = () => {
   const dispatch = useDispatch();
   const containerEl = useRef<HTMLDivElement>(null);
   const formEl = useRef<HTMLFormElement>(null);
-  const [questionIndex, setQuestionIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(1);
   const [canContinue, setCanContinue] = useState(true); // Can't get debounce to work on handleClick :/
 
   useEffect(() => {
@@ -94,8 +94,8 @@ const ApplicationPage: i.NextPageComponent = () => {
       ? Number(router!.query!.questionId)
       : 1;
 
-    if (questionIndex !== paramQstnId) {
-      setQuestionIndex(paramQstnId);
+    if (activeIndex !== paramQstnId) {
+      setActiveIndex(paramQstnId);
     }
   }, [router!.query!.questionId]);
 
@@ -111,7 +111,7 @@ const ApplicationPage: i.NextPageComponent = () => {
 
     NextRouter.push(
       'apply',
-      { questionId: questionIndex + 1 },
+      { questionId: activeIndex + 1 },
       { shallow: true },
     );
 
@@ -149,8 +149,10 @@ const ApplicationPage: i.NextPageComponent = () => {
             {questionComponents.map((component, i) => (
               <Question
                 key={i}
-                active={questionIndex === i}
-                answered={questionIndex > i}
+                index={i}
+                activeIndex={activeIndex}
+                active={activeIndex === i}
+                answered={activeIndex > i}
                 onNextClick={handleClick}
                 Component={component}
                 errors={errors}

@@ -4,6 +4,8 @@ import CircleSvg from 'vectors/circle.svg';
 import NotInterestedSvg from 'vectors/not-interested.svg';
 import CheckCircleSvg from 'vectors/check-circle.svg';
 import LockedIcon from 'vectors/lock.svg';
+import GroupAddIcon from 'vectors/group_add.svg';
+import BabyIcon from 'vectors/baby.svg';
 import Page from 'modules/Page';
 import { useSelector, useDispatch } from 'hooks';
 import { getUrl, getCmsUrl } from 'services';
@@ -17,6 +19,7 @@ import Voting from 'modules/ApplicationDetail/Voting';
 import {
   ApplicationHeader, Status, ApplicationRole, Top, ApplicationContainer, InfoGrid, LockedStatus,
   ApplicationSection, ProfessionsGrid, GuildMasterTools, StatusChangeButton, ApplicationContent,
+  SocialContainer,
 } from 'modules/ApplicationDetail/styled';
 
 const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
@@ -121,6 +124,11 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
               <CircleImg src={getCmsUrl(character.role.icon.url)} />
               {character.role.name}
             </ApplicationRole>
+
+            <SocialContainer>
+              {application.social ? <BabyIcon /> : <GroupAddIcon />}
+              {application.social ? 'Social' : 'Raider'}
+            </SocialContainer>
 
             {!isPublic && <Voting />}
           </ApplicationHeader>

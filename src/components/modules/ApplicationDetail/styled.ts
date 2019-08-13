@@ -152,21 +152,20 @@ export const ApplicationRole = styled.div`
   text-transform: capitalize;
 
   ${CircleImgContainer} {
-    margin-right: 5px;
+    margin-right: 8px;
     width: 18px;
     height: 18px;
     border: 1px solid ${(props) => props.theme.color.secondary.darker};
 
     ${media.tablet`
-      margin-right: 10px;
-      width: 30px;
-      height: 30px;
+      width: 25px;
+      height: 25px;
     `}
   }
 
   ${media.tablet`
     margin: 5px 40px 0;
-    font-size: 25px;
+    font-size: 20px;
   `}
 `;
 
@@ -375,4 +374,18 @@ export const ApplicationContent = styled.div`
     box-shadow: ${(props) => props.theme.shadow.innerContent};
     z-index: 1;
   `}
+`;
+
+export const SocialContainer = styled(ApplicationRole)`
+  svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    fill: ${(props) => props.theme.color.secondary};
+
+    ${media.tablet`
+      width: 25px;
+      height: 25px;
+    `}
+  }
 `;

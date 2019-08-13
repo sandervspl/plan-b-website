@@ -1,7 +1,9 @@
 import * as i from 'types';
 import React from 'react';
+import { Field } from 'react-final-form';
 // import { useGetFirebaseImage } from 'hooks';
 import { Paragraph } from 'common';
+import { Toggle } from 'common/form';
 import QuestionHeader from '../QuestionHeader';
 import { QuestionContentHeader, QuestionContent, NextButton, RecruitmentContainerInner,
 } from '../styled';
@@ -28,6 +30,12 @@ const IntroductionQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick 
               quick idea about who you are.
               Take your time to fill in these questions and we might get back to you in-game!
             </Paragraph>
+
+            <Field
+              name="social"
+              component={Toggle}
+              label="I'm applying to become a social member"
+            />
 
             <NextButton onClick={onNextClick}>
               <span>Start</span>

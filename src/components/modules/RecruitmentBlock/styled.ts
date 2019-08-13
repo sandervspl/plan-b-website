@@ -93,3 +93,18 @@ export const ApplyNow = styled(Link)`
     }
   `}
 `;
+
+export const EmptyStateContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    margin-bottom: 10px;
+    width: 120px;
+  }
+
+  p {
+    text-align: center;
+  }
+`;

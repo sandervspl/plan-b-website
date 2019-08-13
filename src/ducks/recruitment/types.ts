@@ -6,6 +6,7 @@ export type RecruitmentData = i.BaseResponseBody & {
   title: string;
   classes?: (BaseClassData | ClassData)[];
   disclaimer?: string;
+  empty_state_text?: string;
 };
 
 export type BaseClassData = i.BaseResponseBody & {

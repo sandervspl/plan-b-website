@@ -7,7 +7,7 @@ export const QuestionContainer = styled.div<QuestionContainerProps>`
   top: 0;
   width: 100%;
   height: 100%;
-  transform: translate3d(-100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
   opacity: 0;
   transition: transform ${TRANSITION_TIME_QUESTION_MS}ms ${(props) => props.theme.easing.easeInOutCirc},
               opacity ${TRANSITION_TIME_QUESTION_MS_SHORT}ms ${(props) => props.theme.easing.easeInOutCirc};
@@ -20,7 +20,7 @@ export const QuestionContainer = styled.div<QuestionContainerProps>`
   `}
 
   ${(props) => props.answered && css`
-    transform: translate3d(100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
     opacity: 0;
   `}
 `;

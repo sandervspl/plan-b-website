@@ -139,7 +139,7 @@ const ApplicationPage: i.NextPageComponent = () => {
             server: 'Shazzrah',
             level: 60,
           },
-          // ...initValues,
+          ...initValues,
         }}
       >
         {({ errors, handleSubmit }) => (

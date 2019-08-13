@@ -1,17 +1,21 @@
 import styled from 'styled-components';
 // import CloseSvg from 'vectors/close.svg';
 import { media } from 'styles';
-import { InputContainer, Bar, StyledInput } from 'common/form/input/styled';
+import { InputContainer, Bar, StyledInput } from 'common/form/Input/styled';
 import { DropdownContainer, DropdownList } from 'common/form/DropdownInput/styled';
+import { InputRangeContainer } from 'common/form/InputRange/styled';
 
 export const ProfessionInputContainer = styled.div`
   margin-bottom: 40px;
 
+  ${InputRangeContainer} {
+    padding-top: 10px;
+  }
+
   ${media.tablet`
     display: grid;
-    grid-template-columns: 75% 25%;
-    /* grid-template-columns: 47.5% 47.5% 5%; */
-    column-gap: 15px;
+    grid-template-columns: 50% 40%;
+    column-gap: 10%;
 
     ${InputContainer} {
       margin-bottom: 0;
@@ -24,14 +28,18 @@ export const ProfessionInputContainer = styled.div`
     ${DropdownContainer} {
       svg {
         display: block;
-        left: 90%;
+        left: 92%;
       }
 
       ${DropdownList} {
         z-index: 3;
         width: 100%;
       }
-    }  
+    }
+
+    ${InputRangeContainer} {
+      padding-top: 20px;
+    }
   `}
 `;
 

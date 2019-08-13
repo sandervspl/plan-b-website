@@ -2,8 +2,8 @@ import React from 'react';
 import BaseDownshift, { DownshiftInterface } from 'downshift';
 import { FieldRenderProps } from 'react-final-form';
 import { useSelector } from 'hooks';
-import Input from 'common/form/input';
-import { InputContainer, StyledInput, Highlight, Bar, Label } from '../input/styled';
+import Input from 'common/form/Input';
+import { InputContainer, StyledInput, Highlight, Bar, Label } from '../Input/styled';
 import { DropdownContainer, DropdownList, ListItem, DropdownIcon } from './styled';
 
 type Select = {
@@ -115,10 +115,4 @@ type DropdownInputProps = FieldRenderProps<HTMLInputElement> & {
   label?: string;
 }
 
-// export const DropdownInputField: React.FC<DropdownInputFieldProps> = ({ input, meta, ...props }) => (
-//   <DropdownInput input={input} meta={meta} {...props} />
-// );
-
-// type DropdownInputFieldProps = FieldRenderProps<HTMLInputElement> & {
-//   items: string[];
-// };
+export default DropdownInput;

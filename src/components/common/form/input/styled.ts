@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import { theme, media } from 'styles';
 import { ParagraphStyle } from 'common/typography';
 
@@ -116,6 +116,18 @@ export const StyledInput = styled.input`
       top: -15px;
     `}
   }
+
+  ${(props) => props.value && css`
+    ~ ${Label} {
+      top: -10px;
+      font-size: 14px;
+      color: ${(props) => props.theme.color.secondary.dark};
+
+      ${media.tablet`
+        top: -15px;
+      `}
+    }
+  `}
 
   &:focus ~ ${Bar}::before {
     width: 50%;

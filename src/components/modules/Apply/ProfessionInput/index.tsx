@@ -3,11 +3,18 @@ import React from 'react';
 import { Field } from 'react-final-form';
 import { getCmsUrl } from 'services';
 import { useImageLoader } from 'hooks';
-import { DropdownInput } from 'common/form/DropdownInput';
-import CharacterField from '../CharacterQuestion/CharacterField';
+import { InputRange, DropdownInput } from 'common/form';
 import { ProfessionInputContainer } from './styled';
 
 const ProfessionInput: React.FC<Props> = ({ name, index, items }) => {
+  const formatLabel = (value: string, type: string) => {
+    if (type === 'value') {
+      return `Level ${value}`;
+    }
+
+    return value;
+  };
+
   return (
     <ProfessionInputContainer>
       <Field
@@ -20,13 +27,10 @@ const ProfessionInput: React.FC<Props> = ({ name, index, items }) => {
           icon: useImageLoader(getCmsUrl(item.icon && item.icon.url))[0],
         }))}
       />
-      <CharacterField
+      <Field
+        component={InputRange}
         name={`${name}.level`}
-        label="Level"
-        type="number"
-        min="0"
-        max="300"
-        required={false}
+        label={formatLabel}
       />
       {/* <CloseIcon onClick={removeInput} /> */}
     </ProfessionInputContainer>
@@ -37,6 +41,7 @@ export type Props = React.ButtonHTMLAttributes<{}> & {
   name: string;
   index: number;
   items: i.CmsProfession[];
+  errors?: i.QuestionComponentProps['errors'];
 };
 
 export default ProfessionInput;

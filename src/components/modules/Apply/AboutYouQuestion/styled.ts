@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'styles';
-import { Bar, Highlight } from 'common/form/input/styled';
+import { Bar, Highlight } from 'common/form/Input/styled';
 
 export const PersonalGrid = styled.div`
   margin-top: 20px;

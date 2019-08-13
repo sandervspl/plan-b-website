@@ -11,7 +11,7 @@ const apiConfig = {
         case 'production':
           return 'https://cms.planbguild.eu' as const;
         default:
-          return 'http://cms-test.planbguild.eu' as const;
+          return 'https://cms-test.planbguild.eu' as const;
       };
     })(),
 

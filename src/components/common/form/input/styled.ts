@@ -106,7 +106,8 @@ export const StyledInput = styled.input`
   }
 
   &:focus ~ ${Label},
-  &:valid ~ ${Label} {
+  &:valid ~ ${Label},
+  &:disabled ~ ${Label} {
     top: -10px;
     font-size: 14px;
     color: ${(props) => props.theme.color.secondary.dark};
@@ -122,6 +123,10 @@ export const StyledInput = styled.input`
 
   &:focus ~ ${Bar}::after {
     width: 50%;
+  }
+
+  &:disabled {
+    color: #5a5a5a;
   }
 
   ${media.tablet`

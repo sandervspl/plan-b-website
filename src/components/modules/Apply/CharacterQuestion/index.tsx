@@ -35,8 +35,17 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, active, errors }) => 
         <CharacterGrid>
           <div>
             <CharacterField name="character.name" label="Character name" />
-            <CharacterField name="character.level" label="Level" type="number" inputMode="numeric" pattern="[0-9]*" min="1" max="60" />
-            <CharacterField name="character.server" label="Server" />
+            <CharacterField
+              name="character.level"
+              label="Level"
+              type="number"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              min="1"
+              max="60"
+              disabled
+            />
+            <CharacterField name="character.server" label="Server" disabled />
           </div>
           <div>
             <Field

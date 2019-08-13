@@ -25,11 +25,11 @@ let initValues = {};
 if (__DEV__) {
   initValues = {
     character: {
-      server: 'Ragnaros',
+      server: 'Shazzrah',
       level: 60,
       name: 'WEB_TEST',
       race: 2,
-      'class': 1,
+      class: 1,
     },
     role: '1',
     raid_experience: {
@@ -72,7 +72,6 @@ const ApplicationPage: i.NextPageComponent = () => {
   const containerEl = useRef<HTMLDivElement>(null);
   const formEl = useRef<HTMLFormElement>(null);
   const [questionIndex, setQuestionIndex] = useState(1);
-  // const [questionIndex, setQuestionIndex] = useState(__DEV__ ? 7 : 1);
   const [canContinue, setCanContinue] = useState(true); // Can't get debounce to work on handleClick :/
 
   useEffect(() => {
@@ -137,7 +136,7 @@ const ApplicationPage: i.NextPageComponent = () => {
         keepDirtyOnReinitialize
         initialValues={{
           character: {
-            server: 'Ragnaros',
+            server: 'Shazzrah',
             level: 60,
           },
           ...initValues,

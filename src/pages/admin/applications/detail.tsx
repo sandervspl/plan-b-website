@@ -8,7 +8,7 @@ import GroupAddIcon from 'vectors/group_add.svg';
 import BabyIcon from 'vectors/baby.svg';
 import Page from 'modules/Page';
 import { useSelector, useDispatch } from 'hooks';
-import { getUrl, getCmsUrl } from 'services';
+import { getUrl, getCmsUrl, redirect } from 'services';
 import { fetchApplicationDetail, actions as applicationsActions, setStatus, fetchPublicApplicationDetail } from 'ducks/applications';
 import { hasProfessions } from 'ducks/applications/reselect';
 import { DateText, ClassText, Paragraph, CircleImg, Heading, EmptyStateText } from 'common';
@@ -30,6 +30,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
   const application = useSelector((state) => (
     state.applications[isPublic ? 'detailPublic' : 'detail']
   ));
+  const error = useSelector((state) => state.applications.error);
   const hasPrimaryProfessions = useSelector(() => hasProfessions(application!, 'primary'));
   const hasSecondaryProfessions = useSelector(() => hasProfessions(application!, 'secondary'));
   const user = useSelector((state) => state.user);
@@ -47,6 +48,12 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
       dispatch(applicationsActions.resetApplication());
     };
   }, [user]);
+
+  useEffect(() => {
+    if (error) {
+      redirect();
+    }
+  }, [error]);
 
   if (!application) {
     return null;

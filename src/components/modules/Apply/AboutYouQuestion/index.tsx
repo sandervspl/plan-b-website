@@ -52,7 +52,7 @@ const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, err
         </PersonalGrid>
 
         <NextButton onClick={onNextClick} tabIndex={inputTabIndex} disabled={!!errors.personal}>
-          <span>Finish</span>
+          <span tabIndex={-1}>Finish</span>
         </NextButton>
       </QuestionContent>
     </RecruitmentContainerInner>

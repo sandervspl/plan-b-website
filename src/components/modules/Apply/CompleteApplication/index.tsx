@@ -53,7 +53,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ inputTabIndex
                 disabled={!enabled}
                 tabIndex={inputTabIndex}
               >
-                Return to home
+                <span tabIndex={-1}>Return to home</span>
               </Button>
             </QuestionContent>
           </div>
@@ -76,7 +76,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ inputTabIndex
 
               <label htmlFor="submit_application">
                 <SubmitButton disabled={form.sending.loading} tabIndex={inputTabIndex}>
-                  <span>Try again</span>
+                  <span tabIndex={-1}>Try again</span>
                   <SendIcon />
                   <input id="submit_application" type="submit" />
                 </SubmitButton>
@@ -100,7 +100,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ inputTabIndex
 
               <label htmlFor="submit_application">
                 <SubmitButton disabled={form.sending.loading} tabIndex={inputTabIndex}>
-                  <span>Send application</span>
+                  <span tabIndex={-1}>Send application</span>
                   <SendIcon />
                   <input id="submit_application" type="submit" />
                 </SubmitButton>

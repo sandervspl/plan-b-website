@@ -65,7 +65,7 @@ const RoleQuestion: React.FC<Props> = ({ onNextClick, inputTabIndex }) => {
         </RoleList>
 
         <NextButton onClick={onNextClick} tabIndex={inputTabIndex} disabled={!activeRole}>
-          <span>Continue</span>
+          <span tabIndex={-1}>Continue</span>
         </NextButton>
       </QuestionContent>
     </RecruitmentContainerInner>

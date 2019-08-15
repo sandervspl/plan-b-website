@@ -3,7 +3,7 @@ import 'react-toggle/style.css';
 import { Paragraph } from 'common/typography';
 import { media } from 'styles';
 
-export const ToggleContainer = styled.div`
+export const ToggleContainer = styled.label`
   display: flex;
   align-items: center;
 

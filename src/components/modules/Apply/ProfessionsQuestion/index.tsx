@@ -79,7 +79,7 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, inputTabIndex }) => {
         </ProfessionsGrid>
 
         <NextButton onClick={onNextClick} tabIndex={inputTabIndex}>
-          <span>Continue</span>
+          <span tabIndex={-1}>Continue</span>
         </NextButton>
       </QuestionContent>
     </>

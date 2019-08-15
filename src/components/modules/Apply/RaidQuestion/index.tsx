@@ -107,7 +107,7 @@ const RaidQuestion: React.FC<Props> = ({ onNextClick, inputTabIndex }) => {
         </RaidList>
 
         <NextButton onClick={onNextClick} tabIndex={inputTabIndex}>
-          <span>Continue</span>
+          <span tabIndex={-1}>Continue</span>
         </NextButton>
       </QuestionContent>
     </RaidQuestionContainer>

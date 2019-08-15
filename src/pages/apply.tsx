@@ -5,7 +5,7 @@ import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import NextRouter from 'router';
 import { redirect, getUrl } from 'services';
-import { useRouter } from 'hooks';
+import { useRouter, useSelector } from 'hooks';
 import { sendApplication, actions as formActions } from 'ducks/form';
 import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
@@ -69,6 +69,7 @@ const questionComponents: Question[] = [
 const ApplicationPage: i.NextPageComponent = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const form = useSelector((state) => state.form);
   const containerEl = useRef<HTMLDivElement>(null);
   const formEl = useRef<HTMLFormElement>(null);
   const [activeIndex, setActiveIndex] = useState(1);
@@ -122,8 +123,11 @@ const ApplicationPage: i.NextPageComponent = () => {
     }, 500);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const formOnSubmit = () => {
+    if (form.application!.invalid) {
+      return;
+    }
+
     dispatch(sendApplication());
   };
 
@@ -139,7 +143,7 @@ const ApplicationPage: i.NextPageComponent = () => {
             server: 'Shazzrah',
             level: 60,
           },
-          // ...initValues,
+          ...initValues,
         }}
       >
         {({ errors, handleSubmit }) => (

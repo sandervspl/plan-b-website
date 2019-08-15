@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import SendIcon from 'vectors/send.svg';
 import config from 'config';
 import { useSelector, useGetFirebaseImage, useRouter, useTimeout } from 'hooks';
-import { Paragraph, Link, Button } from 'common';
+import { Paragraph, Link, Button, ErrorText } from 'common';
 import QuestionHeader from '../QuestionHeader';
 import { QuestionContentHeader, QuestionContent, RecruitmentContainerInner } from '../styled';
 import { SubmitButton, Name, ErrorContainer, OutroGrid } from './styled';
@@ -99,12 +99,19 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ inputTabIndex
               </Paragraph>
 
               <label htmlFor="submit_application">
-                <SubmitButton disabled={form.sending.loading} tabIndex={inputTabIndex}>
+                <SubmitButton
+                  disabled={form.sending.loading || form.application!.invalid}
+                  tabIndex={inputTabIndex}
+                >
                   <span tabIndex={-1}>Send application</span>
                   <SendIcon />
                   <input id="submit_application" type="submit" />
                 </SubmitButton>
               </label>
+
+              {form.application!.invalid && (
+                <ErrorText>There are errors in the form.</ErrorText>
+              )}
             </QuestionContent>
           </div>
         )}

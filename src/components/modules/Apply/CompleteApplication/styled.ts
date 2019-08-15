@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { media } from 'styles';
-import { Button } from 'common';
+import { Button, ErrorText } from 'common';
 
 export const SubmitButton = styled(Button)`
   input[type="submit"] {
@@ -58,9 +58,13 @@ export const OutroGrid = styled.div`
     display: none;
   }
 
+  ${ErrorText} {
+    margin-top: 8px;
+  }
+
   ${media.tablet`
     display: grid;
-    grid-template-columns: 33% 67%;
+    grid-template-columns: 67%;
     height: 100%;
 
     > div:nth-child(2) {

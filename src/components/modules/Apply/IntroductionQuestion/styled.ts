@@ -13,8 +13,7 @@ export const IntroGrid = styled.div`
 
   ${media.tablet`
     display: grid;
-    /* grid-template-columns: 33% 67%; */
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 67%;
     height: 100%;
 
     > div:nth-child(2) {

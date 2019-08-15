@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import { media } from 'styles';
-import { Heading, EmptyStateText } from 'common';
+import { Heading, EmptyStateText, Loader } from 'common';
 import { CommentContainer } from 'modules/ApplicationDetail/Comment/styled';
 import { AddCommentContainer } from 'modules/ApplicationDetail/AddComment/styled';
 
 export const DiscussionContainer = styled.div`
+  position: relative;
   margin-top: 40px;
   padding: 15px 0;
   width: 100%;
@@ -27,6 +28,13 @@ export const DiscussionContainer = styled.div`
   ${EmptyStateText} {
     text-align: center;
     margin-top: 20px;
+  }
+
+  ${Loader} {
+    position: absolute;
+    left: 50%;
+    margin-top: 30px;
+    transform: translateX(-50%);
   }
 
   ${media.tablet`

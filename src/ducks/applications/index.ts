@@ -12,7 +12,9 @@ export const actions = {
   successDetailPublic: (application: i.ApplicationBase) =>
     action('applications/SUCCESS_DETAIL_PUBLIC', application),
 
-  successComments: (messages: i.Comment[]) => action('applications/SUCCESS_MESSAGES', messages),
+  comments: () => action('applications/COMMENTS'),
+  commentsFailed: () => action('applications/COMMENTS_FAILED'),
+  commentsSuccess: (messages: i.Comment[]) => action('applications/COMMENTS_SUCCESS', messages),
 
   resetApplication: () => action('applications/RESET_DETAIL'),
 
@@ -34,12 +36,13 @@ export const actions = {
 const initialState: i.ApplicationsState = {
   data: undefined,
   error: false,
-  loading: true,
+  loading: false,
   sendingMessage: false,
   userVote: undefined,
   applicationUuid: undefined,
   locked: false,
   messages: [],
+  loadingMessages: false,
 };
 
 export default (state = initialState, action: ActionType<typeof actions>): i.ApplicationsState => {
@@ -82,15 +85,13 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
     case 'applications/SUCCESS_DETAIL_PUBLIC':
       return {
         ...state,
+        error: false,
+        loading: false,
         detailPublic: action.payload,
         locked: action.payload.locked,
       };
     case 'applications/RESET_DETAIL':
-      return {
-        ...state,
-        detail: undefined,
-        detailPublic: undefined,
-      };
+      return initialState;
     case 'applications/SEND_COMMENT':
       return {
         ...state,
@@ -136,9 +137,22 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
         ...state,
         applicationUuid: action.payload,
       };
-    case 'applications/SUCCESS_MESSAGES':
+    case 'applications/COMMENTS':
       return {
         ...state,
+        loadingMessages: true,
+      };
+    case 'applications/COMMENTS_FAILED':
+      return {
+        ...state,
+        loadingMessages: false,
+        error: true,
+      };
+    case 'applications/COMMENTS_SUCCESS':
+      return {
+        ...state,
+        loadingMessages: false,
+        error: false,
         messages: action.payload,
       };
     default:
@@ -209,7 +223,7 @@ export const fetchPublicApplicationDetail = (uuid: string): i.ThunkAction =>
 
 export const fetchComments: i.FetchComments['thunk'] = (id, type) =>
   async (dispatch, getState, api) => {
-    dispatch(actions.load());
+    dispatch(actions.comments());
 
     return api.methods.get<i.Comment[]>({
       url: api.url.api,
@@ -217,10 +231,10 @@ export const fetchComments: i.FetchComments['thunk'] = (id, type) =>
       query: { type },
     })
       .then((res) => {
-        dispatch(actions.successComments(res));
+        dispatch(actions.commentsSuccess(res));
       })
       .catch(() => {
-        dispatch(actions.failed());
+        dispatch(actions.commentsFailed());
       });
   };
 

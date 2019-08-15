@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from 'hooks';
 import { getUrl, getCmsUrl, redirect } from 'services';
 import { fetchApplicationDetail, actions as applicationsActions, setStatus, fetchPublicApplicationDetail } from 'ducks/applications';
 import { hasProfessions } from 'ducks/applications/reselect';
-import { DateText, ClassText, Paragraph, CircleImg, Heading, EmptyStateText } from 'common';
+import { DateText, ClassText, Paragraph, CircleImg, Heading, EmptyStateText, Loader } from 'common';
 import Profession from 'modules/ApplicationDetail/Profession';
 import Raids from 'modules/ApplicationDetail/Raids';
 import Discussion from 'modules/ApplicationDetail/Discussion';
@@ -30,18 +30,21 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
   const application = useSelector((state) => (
     state.applications[isPublic ? 'detailPublic' : 'detail']
   ));
+  const loading = useSelector((state) => state.applications.loading);
   const error = useSelector((state) => state.applications.error);
   const hasPrimaryProfessions = useSelector(() => hasProfessions(application!, 'primary'));
   const hasSecondaryProfessions = useSelector(() => hasProfessions(application!, 'secondary'));
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
+    if (!isPublic && !user.isAdmin) {
+      return;
+    }
+
     if (isPublic) {
       dispatch(fetchPublicApplicationDetail(applicationUuid!));
     } else {
-      if (user.isSignedIn && user.isAdmin) {
-        dispatch(fetchApplicationDetail(applicationId!));
-      }
+      dispatch(fetchApplicationDetail(applicationId!));
     }
 
     return function cleanup() {
@@ -55,13 +58,32 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
     }
   }, [error]);
 
-  if (!application) {
-    return null;
-  }
-
   const updateStatus = (status: i.ApplicationStatus) => () => {
     dispatch(setStatus(applicationId!, status));
   };
+
+  if (user.loading || loading) {
+    return null;
+  }
+
+  // public, not signed in / private, not admin
+  if ((isPublic && !user.isSignedIn) || (!isPublic && !user.isAdmin)) {
+    redirect();
+
+    return null;
+  }
+
+  // Error / no application found
+  if (error) {
+    redirect();
+
+    return null;
+  }
+
+  // Loading application
+  if (!application) {
+    return <Loader center />;
+  }
 
   const { character, personal } = application;
   const isGuildMaster = user.data && user.data.authLevel === i.AUTH_LEVEL.GUILD_MASTER;

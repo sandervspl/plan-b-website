@@ -12,6 +12,18 @@ import dropdownRaces from './dropdownRaces';
 import dropdownClasses from './dropdownClasses';
 
 const CharacterQuestion: React.FC<Props> = ({ onNextClick, errors, inputTabIndex }) => {
+  const validateName = (value: string) => {
+    if (!value) {
+      return 'This field is required.';
+    }
+
+    if (value.length < 2 || value.length > 12) {
+      return 'Name should be between 2 and 12 characters.';
+    }
+
+    return undefined;
+  };
+
   return (
     <>
       <QuestionHeader>
@@ -21,7 +33,13 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, errors, inputTabIndex
       <QuestionContent>
         <CharacterGrid>
           <div>
-            <CharacterField name="character.name" label="Character name" tabIndex={inputTabIndex} />
+            <CharacterField
+              name="character.name"
+              label="Character name"
+              minLength={2}
+              validate={validateName}
+              tabIndex={inputTabIndex}
+            />
             <CharacterField
               name="character.level"
               label="Level"
@@ -46,16 +64,16 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, errors, inputTabIndex
               name="character.race"
               label="Character race"
               placeholder="Select race"
-              validate={validate.required}
               items={dropdownRaces(useGetFirebaseImage)}
               tabIndex={inputTabIndex}
+              validate={validate.dropdownRequired}
             />
             <Field
               component={DropdownInput}
               name="character.class"
               label="Character class"
               placeholder="Select class"
-              validate={validate.required}
+              validate={validate.dropdownRequired}
               items={dropdownClasses(useGetFirebaseImage)}
               tabIndex={inputTabIndex}
             />

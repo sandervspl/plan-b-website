@@ -7,6 +7,13 @@ export type QuestionComponentProps = {
   active?: boolean;
   inputTabIndex: number;
   onNextClick: () => void;
+  formValues: {
+    role?: string;
+    raid_experience?: object;
+    character?: {
+      name?: string;
+    };
+  };
   errors: {
     professions?: {
       primary?: {

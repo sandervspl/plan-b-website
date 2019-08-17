@@ -30,7 +30,7 @@ ErrorPage.getInitialProps = async ({ req, res, err }) => {
 
   return {
     url: getUrl(req),
-    statusCode: Number(statusCode),
+    statusCode: statusCode ? Number(statusCode) : 500,
   };
 };
 

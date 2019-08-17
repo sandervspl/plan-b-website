@@ -1,9 +1,8 @@
 import * as i from 'types';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Field } from 'react-final-form';
 import { validate } from 'services';
 import { useGetFirebaseImage } from 'hooks';
-import { TRANSITION_TIME_MS } from 'styles/pageTransition';
 import { DropdownInput } from 'common/form/DropdownInput';
 import { QuestionContent, NextButton } from '../styled';
 import QuestionHeader from '../QuestionHeader';
@@ -12,19 +11,7 @@ import { CharacterGrid } from './styled';
 import dropdownRaces from './dropdownRaces';
 import dropdownClasses from './dropdownClasses';
 
-const CharacterQuestion: React.FC<Props> = ({ onNextClick, active, errors, inputTabIndex }) => {
-  useEffect(() => {
-    if (!active) return;
-
-    setTimeout(() => {
-      const el = document.querySelector<HTMLInputElement>('#character.name');
-
-      if (el) {
-        el.focus();
-      }
-    }, TRANSITION_TIME_MS);
-  }, [active]);
-
+const CharacterQuestion: React.FC<Props> = ({ onNextClick, errors, inputTabIndex }) => {
   return (
     <>
       <QuestionHeader>

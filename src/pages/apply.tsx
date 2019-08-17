@@ -5,9 +5,8 @@ import { Form } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import NextRouter from 'router';
 import { redirect, getUrl } from 'services';
-import { useRouter, useSelector } from 'hooks';
+import { useRouter } from 'hooks';
 import { sendApplication, actions as formActions } from 'ducks/form';
-import FormStateToRedux from 'common/form/FormStateToRedux';
 import Question from 'modules/Apply/Question';
 import IntroductionQuestion from 'modules/Apply/IntroductionQuestion';
 // import CharacterApiQuestion from 'modules/Apply/CharacterApiQuestion';
@@ -66,10 +65,9 @@ const questionComponents: Question[] = [
   CompleteApplication,
 ];
 
-const ApplicationPage: i.NextPageComponent = () => {
+const ApplicationPage: i.NextPageComponent = React.memo(() => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const form = useSelector((state) => state.form);
   const containerEl = useRef<HTMLDivElement>(null);
   const formEl = useRef<HTMLFormElement>(null);
   const [activeIndex, setActiveIndex] = useState(1);
@@ -123,12 +121,9 @@ const ApplicationPage: i.NextPageComponent = () => {
     }, 500);
   };
 
-  const formOnSubmit = () => {
-    if (form.application!.invalid) {
-      return;
-    }
-
-    dispatch(sendApplication());
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const formOnSubmit = (values: any) => {
+    dispatch(sendApplication(values));
   };
 
   return (
@@ -143,13 +138,12 @@ const ApplicationPage: i.NextPageComponent = () => {
             server: 'Shazzrah',
             level: 60,
           },
+          social: false,
           ...initValues,
         }}
       >
-        {({ errors, handleSubmit }) => (
-          <QuestionsForm ref={formEl} onSubmit={handleSubmit}>
-            <FormStateToRedux form="application" />
-
+        {({ errors, handleSubmit, valid, values }) => (
+          <QuestionsForm ref={formEl} onSubmit={valid ? handleSubmit : () => {}}>
             {questionComponents.map((component, i) => (
               <Question
                 key={i}
@@ -161,6 +155,7 @@ const ApplicationPage: i.NextPageComponent = () => {
                 Component={component}
                 errors={errors}
                 inputTabIndex={activeIndex === i ? 0 : -1}
+                formValues={values}
               />
             ))}
           </QuestionsForm>
@@ -168,7 +163,7 @@ const ApplicationPage: i.NextPageComponent = () => {
       </Form>
     </RecruitmentContainer>
   );
-};
+});
 
 ApplicationPage.getInitialProps = ({ req, res }) => {
   if (req && res && /\d/.test(req.url)) {

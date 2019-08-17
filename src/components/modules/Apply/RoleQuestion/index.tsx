@@ -1,14 +1,12 @@
 import * as i from 'types';
 import React from 'react';
 import { Field } from 'react-final-form';
-import { useSelector, useGetFirebaseImage } from 'hooks';
+import { useGetFirebaseImage } from 'hooks';
 import QuestionHeader from '../QuestionHeader';
 import { NextButton, QuestionContent, RecruitmentContainerInner } from '../styled';
 import { RoleList, RoleItem, BackgroundImage, RoleIcon, RoleText } from './styled';
 
-const RoleQuestion: React.FC<Props> = ({ onNextClick, inputTabIndex }) => {
-  const form = useSelector((state) => state.form);
-
+const RoleQuestion: React.FC<Props> = ({ onNextClick, inputTabIndex, formValues }) => {
   const roles = [{
     id: 1,
     background: useGetFirebaseImage('recruitment/roles', 'dps_low.jpg'),
@@ -26,10 +24,6 @@ const RoleQuestion: React.FC<Props> = ({ onNextClick, inputTabIndex }) => {
     text: 'Tank',
   }];
 
-  const activeRole = form.application
-    ? form.application.values && form.application.values.role
-    : null;
-
   return (
     <RecruitmentContainerInner>
       <QuestionHeader>
@@ -44,8 +38,8 @@ const RoleQuestion: React.FC<Props> = ({ onNextClick, inputTabIndex }) => {
             return (
               <RoleItem
                 key={role.id}
-                checked={roleId === activeRole}
-                unchecked={activeRole != null && roleId !== activeRole}
+                checked={roleId === formValues.role}
+                unchecked={formValues.role != null && roleId !== formValues.role}
               >
                 <BackgroundImage>
                   <img src={role.background} alt={role.text} />
@@ -64,7 +58,7 @@ const RoleQuestion: React.FC<Props> = ({ onNextClick, inputTabIndex }) => {
           })}
         </RoleList>
 
-        <NextButton onClick={onNextClick} tabIndex={inputTabIndex} disabled={!activeRole}>
+        <NextButton onClick={onNextClick} tabIndex={inputTabIndex} disabled={!formValues.role}>
           <span tabIndex={-1}>Continue</span>
         </NextButton>
       </QuestionContent>

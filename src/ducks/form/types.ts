@@ -21,4 +21,6 @@ export type SendApplicationResponse = {
   applicationUuid: string;
 }
 
-export type SendApplication = i.BaseThunkAction<() => Promise<SendApplicationResponse | void>>;
+export type SendApplication = i.BaseThunkAction<
+  (values: object) => Promise<SendApplicationResponse | void>
+>;

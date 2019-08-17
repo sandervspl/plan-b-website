@@ -5,7 +5,7 @@ import { actions as applicationsActions } from 'ducks/applications';
 
 export const actions = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  update: (payload: { form: i.Forms; data: any }) => action('form/UPDATE', payload),
+  // update: (payload: { form: i.Forms; data: any }) => action('form/UPDATE', payload),
 
   sendStart: () => action('form/SEND_START'),
   sendSuccess: () => action('form/SEND_SUCCESS'),
@@ -26,11 +26,11 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Red
   switch (action.type) {
     case 'form/RESET':
       return initialState;
-    case 'form/UPDATE':
-      return {
-        ...state,
-        [action.payload.form]: action.payload.data,
-      };
+    // case 'form/UPDATE':
+    //   return {
+    //     ...state,
+    //     [action.payload.form]: action.payload.data,
+    //   };
     case 'form/SEND_START':
       return {
         ...state,
@@ -67,11 +67,7 @@ export const getFormState: i.GetFormState = (state, form) => (
   (state && state.form && state.form[form]) || {}
 );
 
-export const sendApplication: i.SendApplication['thunk'] = () => async (dispatch, getState, api) => {
-  if (!getState().form.application) {
-    return;
-  }
-
+export const sendApplication: i.SendApplication['thunk'] = (values) => async (dispatch, getState, api) => {
   if (getState().form.sending.loading) {
     return;
   }
@@ -81,7 +77,7 @@ export const sendApplication: i.SendApplication['thunk'] = () => async (dispatch
   return api.methods.post<i.SendApplicationResponse>({
     url: api.url.api,
     path: API_ENDPOINT.APPLICATION_DETAIL,
-    body: getState().form.application!.values,
+    body: values,
   })
     .then((res) => {
       dispatch(actions.sendSuccess());

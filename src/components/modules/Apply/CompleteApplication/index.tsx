@@ -8,12 +8,16 @@ import QuestionHeader from '../QuestionHeader';
 import { QuestionContentHeader, QuestionContent, RecruitmentContainerInner } from '../styled';
 import { SubmitButton, Name, ErrorContainer, OutroGrid } from './styled';
 
-const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ inputTabIndex }) => {
+const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ inputTabIndex, errors, formValues }) => {
   const router = useRouter();
   const form = useSelector((state) => state.form);
   const applicationUuid = useSelector((state) => state.applications.applicationUuid);
   const TaurenIcon = useGetFirebaseImage('icons/races', 'Tauren_Male.gif');
   const [enabled, setEnabled] = useState(false);
+  const invalid = Object.keys(errors).length > 0;
+  const name = formValues.character && formValues.character.name
+    ? formValues.character.name
+    : 'traveler';
 
   useTimeout(() => setEnabled(true), 2000);
 
@@ -91,7 +95,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ inputTabIndex
 
             <QuestionContent>
               <QuestionContentHeader as="h2">
-                Thank you, <Name>{form.application!.values.character.name}</Name>.
+                Thank you, <Name>{name}</Name>.
               </QuestionContentHeader>
 
               <Paragraph>
@@ -100,7 +104,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ inputTabIndex
 
               <label htmlFor="submit_application">
                 <SubmitButton
-                  disabled={form.sending.loading || form.application!.invalid}
+                  disabled={form.sending.loading || invalid}
                   tabIndex={inputTabIndex}
                 >
                   <span tabIndex={-1}>Send application</span>
@@ -109,7 +113,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ inputTabIndex
                 </SubmitButton>
               </label>
 
-              {form.application!.invalid && (
+              {invalid && (
                 <ErrorText>There are errors in the form.</ErrorText>
               )}
             </QuestionContent>

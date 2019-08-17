@@ -4,6 +4,7 @@ import { Heading, Paragraph } from 'common';
 export const ErrorContainer = styled.div`
   display: grid;
   grid-template-columns: 75% 25%;
+  overflow: hidden;
 
   div:first-child {
     display: flex;

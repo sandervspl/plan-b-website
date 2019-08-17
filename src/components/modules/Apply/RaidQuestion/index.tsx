@@ -8,8 +8,7 @@ import QuestionHeader from '../QuestionHeader';
 import { NextButton, QuestionContent } from '../styled';
 import { RaidList, RaidItem, RaidImage, RaidRow, RaidQuestionContainer } from './styled';
 
-const RaidQuestion: React.FC<Props> = ({ onNextClick, inputTabIndex }) => {
-  const form = useSelector((state) => state.form);
+const RaidQuestion: React.FC<Props> = ({ onNextClick, inputTabIndex, formValues }) => {
   const isMobile = useSelector((state) => state.ui.isMobile);
 
   const raids = [
@@ -49,9 +48,7 @@ const RaidQuestion: React.FC<Props> = ({ onNextClick, inputTabIndex }) => {
     ],
   ];
 
-  const selected = form.application
-    ? form.application.values.raid_experience || {}
-    : {};
+  const selected = formValues.raid_experience || {};
   const selectedArray = Object.keys(selected).filter((raid) => selected[raid]);
 
   return (

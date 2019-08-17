@@ -163,10 +163,6 @@ export const OptionsContainer = styled.ul`
     a, button {
       cursor: pointer;
     }
-
-    button {
-      text-transform: uppercase;
-    }
   }
 
   button {

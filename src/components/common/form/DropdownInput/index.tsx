@@ -28,7 +28,7 @@ export const DropdownInput: React.FC<DropdownInputProps> = ({ input, meta, items
           ))}
         </Input>
 
-        <DropdownIcon />
+        <DropdownIcon isopen={!!meta.active && meta.active.toString()} />
       </DropdownContainer>
     );
   }
@@ -64,7 +64,7 @@ export const DropdownInput: React.FC<DropdownInputProps> = ({ input, meta, items
             <StyledInput
               {...getInputProps({
                 name: input.name,
-                placeholder: 'Select ' + props.label,
+                placeholder: props.placeholder,
               })}
               onClick={() => openMenu()}
               onFocus={() => openMenu()}
@@ -114,6 +114,7 @@ export const DropdownInput: React.FC<DropdownInputProps> = ({ input, meta, items
 type DropdownInputProps = FieldRenderProps<HTMLInputElement> & {
   items?: Select[];
   label?: string;
+  placeholder?: string;
 }
 
 export default DropdownInput;

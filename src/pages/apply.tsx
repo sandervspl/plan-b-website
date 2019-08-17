@@ -137,9 +137,11 @@ const ApplicationPage: i.NextPageComponent = React.memo(() => {
           character: {
             server: 'Shazzrah',
             level: 60,
+            race: '-1',
+            class: '-1',
           },
           social: false,
-          ...initValues,
+          // ...initValues,
         }}
       >
         {({ errors, handleSubmit, valid, values }) => (

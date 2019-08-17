@@ -44,7 +44,8 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, errors, inputTabIndex
             <Field
               component={DropdownInput}
               name="character.race"
-              label="race"
+              label="Character race"
+              placeholder="Select race"
               validate={validate.required}
               items={dropdownRaces(useGetFirebaseImage)}
               tabIndex={inputTabIndex}
@@ -52,7 +53,8 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, errors, inputTabIndex
             <Field
               component={DropdownInput}
               name="character.class"
-              label="class"
+              label="Character class"
+              placeholder="Select class"
               validate={validate.required}
               items={dropdownClasses(useGetFirebaseImage)}
               tabIndex={inputTabIndex}

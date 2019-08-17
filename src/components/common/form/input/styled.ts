@@ -61,6 +61,7 @@ type LabelProps = {
 export const Bar = styled.span`
   display: block;
   position: relative;
+  margin-top: 1px;
   width: 100%;
 
   &::before,

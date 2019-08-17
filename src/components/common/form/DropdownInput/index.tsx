@@ -104,7 +104,7 @@ export const DropdownInput: React.FC<DropdownInputProps> = ({ input, meta, items
             </DropdownList>
           )}
 
-          <DropdownIcon isopen={isOpen.toString()} />
+          <DropdownIcon isopen={isOpen} />
         </DropdownContainer>
       )}
     </Downshift>

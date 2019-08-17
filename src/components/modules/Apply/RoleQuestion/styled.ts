@@ -171,14 +171,16 @@ export const RoleItem = styled.label<RoleItemProps>`
       border-color: ${(props) => props.theme.color.secondary};
     }
 
-    ${RoleItemActiveStyle}
+    ${RoleItemActiveStyle};
   `}
 
   &:hover {
-    ${RoleItemActiveStyle}
+    ${RoleItemActiveStyle};
   }
 
   input {
+    display: none;
+
     &:focus, + ${RoleIcon}:focus {
       outline: 0;
     }

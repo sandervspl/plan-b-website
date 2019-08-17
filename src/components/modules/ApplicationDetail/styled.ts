@@ -351,24 +351,20 @@ export const LockedStatus = styled.div`
   ${ParagraphStyle};
   display: flex;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 32px;
   line-height: 1;
   font-size: 16px;
 
   svg {
-    margin-right: 10px;
-    width: 20px;
-    height: 20px;
+    margin-right: 8px;
+    width: 24px;
+    height: 24px;
     fill: ${(props) => props.theme.color.secondary};
     transform: translateY(-1px);
-
-    ${media.tablet`
-      transform: translateY(-3px);
-    `}
   }
 
   ${media.tablet`
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     font-size: 18px;
   `}
 `;

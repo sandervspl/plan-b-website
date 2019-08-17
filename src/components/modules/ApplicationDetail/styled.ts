@@ -196,7 +196,7 @@ export const Top = styled.div`
 
 export const ApplicationHeader = styled.div<ApplicationHeaderProps>`
   position: relative;
-  padding-top: 20px;
+  padding-top: 24px;
 
   ${(props) => props.withGuildMasterTools && css`
     padding-top: 0;
@@ -204,7 +204,7 @@ export const ApplicationHeader = styled.div<ApplicationHeaderProps>`
 
   ${ClassText} {
     display: block;
-    margin: 15px 20px 0;
+    margin: 16px 20px 0;
     font-size: 20px;
 
     strong {
@@ -258,16 +258,16 @@ export const InfoGrid = styled.div`
 
     figure {
       margin: 0 8px 0 0;
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
 
       &:not(:first-child) {
         margin-left: 8px;
       }
 
       ${media.tablet`
-        width: 20px;
-        height: 20px;
+        width: 24px;
+        height: 24px;
       `}
     }
   }
@@ -289,7 +289,7 @@ export const ApplicationSection = styled.section<ApplicationSectionProps>`
     `}
 
     ${(props) => props.secondary && css`
-      margin-bottom: 13px;
+      margin-bottom: 16px;
 
       ${media.tablet`
         font-size: 18px;
@@ -307,7 +307,7 @@ export const ApplicationSection = styled.section<ApplicationSectionProps>`
   }
 
   ${media.tablet`
-    margin-top: 50px;
+    margin-top: 48px;
   `}
 `;
 
@@ -318,13 +318,13 @@ type ApplicationSectionProps = {
 export const ProfessionsGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-column-gap: 20px;
-  grid-row-gap: 15px;
-  margin: 0 20px;
+  grid-column-gap: 24px;
+  grid-row-gap: 16px;
+  margin: 0 24px;
 
   ${media.tablet`
     grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: 50px;
+    grid-column-gap: 48px;
     margin: 0 40px;
   `}
 `;
@@ -333,12 +333,12 @@ export const GuildMasterTools = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   padding: 20px;
   background-color: ${(props) => props.theme.color.primary.dark};
 
   ${Heading} {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
 
   > div {
@@ -378,14 +378,14 @@ export const ApplicationContent = styled.div`
 
 export const SocialContainer = styled(ApplicationRole)`
   svg {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     margin-right: 8px;
     fill: ${(props) => props.theme.color.secondary};
 
     ${media.tablet`
-      width: 25px;
-      height: 25px;
+      width: 24px;
+      height: 24px;
     `}
   }
 `;

@@ -66,15 +66,8 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
     return null;
   }
 
-  // public, not signed in / private, not admin
-  if ((isPublic && !user.isSignedIn) || (!isPublic && !user.isAdmin)) {
-    redirect();
-
-    return null;
-  }
-
-  // Error / no application found
-  if (error) {
+  // Non-public application and not admin
+  if (!isPublic && !user.isAdmin) {
     redirect();
 
     return null;

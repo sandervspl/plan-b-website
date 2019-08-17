@@ -1,6 +1,5 @@
 import * as i from 'types';
 import React, { useState } from 'react';
-import SendIcon from 'vectors/send.svg';
 import LockIcon from 'vectors/lock.svg';
 import SecurityIcon from 'vectors/security.svg';
 import PublicIcon from 'vectors/public.svg';
@@ -24,7 +23,6 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
   ));
   const applicationLocked = useSelector((state) => state.applications.locked);
   const sending = useSelector((state) => state.applications.sendingMessage);
-  const isMobile = useSelector((state) => state.ui.isMobile);
   const [error, setError] = useState('');
   const [text, setText] = useState('');
 
@@ -69,7 +67,6 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
               placeholder="Add comment"
               value={text}
               onChange={handleOnChange}
-              hastext={text.length > 0}
             />
             <ErrorText>{error}</ErrorText>
             <ButtonContainer>
@@ -79,7 +76,7 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
                 disabled={sending}
                 loading={sending}
               >
-                {isMobile ? <SendIcon /> : 'Share'}
+                Share
               </SendButton>
 
               <SharingNotice>

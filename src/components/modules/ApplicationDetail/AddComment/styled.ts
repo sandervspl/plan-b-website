@@ -31,21 +31,11 @@ export const CommentInput = styled.textarea<CommentInputProps>`
   color: ${(props) => props.theme.color.secondary};
   border: 0;
   outline: 0;
-  transition: width .2s ease-in-out;
-  will-change: width;
   resize: none;
 
   &::placeholder {
     color: ${(props) => props.theme.color.tab.inactive};
   }
-
-  ${(props) => props.hastext && css`
-    width: calc(100% - 35px - 20px);
-
-    ${media.tablet`
-      width: 100%;
-    `}
-  `}
 
   ${(props) => props.disabled && css`
     display: flex;
@@ -65,7 +55,6 @@ export const CommentInput = styled.textarea<CommentInputProps>`
 `;
 
 type CommentInputProps = {
-  hastext?: boolean;
   disabled?: boolean;
 }
 
@@ -78,22 +67,18 @@ export const SendButton = styled(Button)<SendButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  right: 10px;
-  bottom: 5px;
-  padding: 3px;
-  height: 35px;
-  width: 35px;
-  border-radius: 50%;
+  margin-top: 8px;
+  padding: 0 16px;
+  height: 32px;
+  border-radius: 3px;
   background-color: ${(props) => props.theme.color.primary};
   line-height: 1;
   border: 0;
-  opacity: 0;
-  visibility: hidden;
+  opacity: .5;
   text-transform: none;
-  transition: opacity .2s ease-in-out, visibility 0s .2s;
+  cursor: not-allowed;
+  transition: opacity .2s ease-in-out;
   will-change: opacity;
-  transform: translateY(-17px);
 
   svg {
     height: 20px;
@@ -101,31 +86,15 @@ export const SendButton = styled(Button)<SendButtonProps>`
     transform: translate(-2px, 0);
   }
 
-  ${media.tablet`
-    position: static;
-    margin-top: 5px;
-    padding: 3px 15px;
-    width: auto;
-    border-radius: 3px;
-    opacity: .5;
-    visibility: visible;
-    transform: translateY(0);
-  `}
-
   ${(props) => props.show && css`
     opacity: 1;
-    visibility: visible;
-    transition: opacity .2s ease-in-out, visibility 0s;
+    transition: opacity .2s ease-in-out;
     cursor: pointer;
-
-    ${media.tablet`
-      opacity: 1;
-
-      &:disabled {
-        opacity: .5;
-      }
-    `}
   `}
+
+  &:disabled {
+    opacity: .5;
+  }
 `;
 
 type SendButtonProps = {
@@ -133,19 +102,20 @@ type SendButtonProps = {
 }
 
 export const SharingNotice = styled(Paragraph)`
+  margin-left: 8px;
   font-size: 14px;
   line-height: 1;
   color: ${(props) => props.theme.color.secondary.darker};
 
   svg {
-    margin-right: 5px;
-    height: 15px;
-    transform: translateY(2px);
+    margin-right: 8px;
+    height: 16px;
+    transform: translateY(3px);
     fill: ${(props) => props.theme.color.secondary.darker};
   }
 
   ${media.tablet`
-    margin-left: 10px;
+    margin-left: 16px;
   `}
 `;
 

@@ -18,6 +18,9 @@
   "author": "Sander Vispoel <contact@sandervispoel.com>",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "1.2.21",
+    "@fortawesome/pro-light-svg-icons": "5.10.1",
+    "@fortawesome/react-fontawesome": "0.1.4",
     "animejs": "3.0.1",
     "body-scroll-lock": "2.6.1",
     "downshift": "3.2.10",
@@ -52,6 +55,7 @@
     "typesafe-actions": "4.0.0"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-pro": "5.10.1",
     "@svgr/webpack": "4.3.0",
     "@types/animejs": "2.0.2",
     "@types/body-scroll-lock": "2.6.0",

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import CloseSvg from 'vectors/close.svg';
 import { ParagraphStyle } from 'common/typography';
 import { Button } from 'common';
 import { media } from 'styles';
@@ -22,8 +21,16 @@ export const CookieBarContainer = styled.div`
     align-items: center;
     margin-top: 10px;
 
+    svg {
+      
+    }
+
     ${media.tablet`
       margin: 0;
+
+      svg {
+        cursor: pointer;
+      }
     `}
   }
 
@@ -49,18 +56,18 @@ export const ConsentButton = styled(Button)`
   `}
 `;
 
-export const CloseIcon = styled(CloseSvg)`
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 17px;
-  height: 17px;
-  fill: ${(props) => props.theme.color.secondary};
+// export const CloseIcon = styled(FontAwesomeIcon).attrs({ icon: 'times' })`
+//   position: absolute;
+//   top: 15px;
+//   right: 15px;
+//   width: 17px;
+//   height: 17px;
+//   fill: ${(props) => props.theme.color.secondary};
 
-  ${media.tablet`
-    position: static;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-  `}
-`;
+//   ${media.tablet`
+//     position: static;
+//     width: 20px;
+//     height: 20px;
+//     cursor: pointer;
+//   `}
+// `;

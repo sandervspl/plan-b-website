@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { localStorageHelper } from 'services';
 import * as externalScripts from 'services/external';
-import { CookieBarContainer, ConsentButton, CloseIcon } from './styled';
+import { Icon } from 'common/Icon';
+import { CookieBarContainer, ConsentButton } from './styled';
 
 export const CookieBar: React.FC = () => {
   const [show, setShow] = useState(false);
@@ -47,7 +48,7 @@ export const CookieBar: React.FC = () => {
       <span>We use cookies to improve your experience.</span>
       <div>
         <ConsentButton onClick={handleClick(true)}>I understand</ConsentButton>
-        <CloseIcon onClick={handleClick(false)} role="button" />
+        <Icon name="times" role="button" onClick={handleClick(false)} />
       </div>
     </CookieBarContainer>
   );

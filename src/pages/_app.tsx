@@ -1,3 +1,4 @@
+import 'services/fontAwesomeInit';
 import * as i from 'types';
 import React from 'react';
 import App, { Container, DefaultAppIProps, AppProps } from 'next/app';

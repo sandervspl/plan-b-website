@@ -48,4 +48,8 @@ export const Username = styled.span`
   color: ${(props) => props.theme.color.secondary.darker};
   letter-spacing: 0;
   text-align: right;
+
+  ${media.tablet`
+    margin-top: 2px;
+  `}
 `;

@@ -29,7 +29,7 @@ const RecruitmentBlock: React.FC = () => {
           </>
         ) : (
           <EmptyStateContainer>
-            <img src={emptyStateImg} alt="" />
+            <img src={emptyStateImg} alt="" loading="lazy" />
             <EmptyStateText>{recruitment.data.empty_state_text}</EmptyStateText>
           </EmptyStateContainer>
         )}

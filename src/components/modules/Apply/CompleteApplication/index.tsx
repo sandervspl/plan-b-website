@@ -73,7 +73,7 @@ const CompleteApplication: React.FC<i.QuestionComponentProps> = ({ inputTabIndex
                 <br /><br />
                 Go back to the previous questions and fill in anything that is missing.
                 Try again in a few minutes. If that does not work, contact
-                <figure><img src={TaurenIcon} alt="" /></figure>
+                <figure><img src={TaurenIcon} alt="" loading="lazy" /></figure>
                 <strong>Msa</strong> in-game.
                 <br /><br />
               </Paragraph>

@@ -42,7 +42,7 @@ const RoleQuestion: React.FC<Props> = ({ onNextClick, inputTabIndex, formValues 
                 unchecked={formValues.role != null && roleId !== formValues.role}
               >
                 <BackgroundImage>
-                  <img src={role.background} alt={role.text} />
+                  <img src={role.background} alt={role.text} loading="lazy" />
                 </BackgroundImage>
                 <Field
                   name="role"

@@ -18,7 +18,7 @@ export const CircleImgContainer = styled.figure`
   `}
 `;
 
-export const CircleImgInner = styled.img`
+export const CircleImgInner = styled.img.attrs({ loading: 'lazy' })`
   position: absolute;
   top: 0;
   left: 0;

@@ -13,7 +13,7 @@ export const NewsItem: React.FC<Props> = ({ post, columns }) => {
         <DateText date={post.created_at} />
 
         <PostImage>
-          <img src={getCmsUrl(post.image.url)} alt="" />
+          <img src={getCmsUrl(post.image.url)} alt="" loading="lazy" />
         </PostImage>
 
         <PostContent>

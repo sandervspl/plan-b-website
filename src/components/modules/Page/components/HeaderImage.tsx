@@ -30,7 +30,7 @@ export const HeaderImageContainer = styled.figure`
 const HeaderImage: React.FC<Props> = ({ src, ...props }) => {
   return (
     <HeaderImageContainer>
-      <img alt="" {...props} src={src} />
+      <img alt="" {...props} src={src} loading="lazy" />
     </HeaderImageContainer>
   );
 };

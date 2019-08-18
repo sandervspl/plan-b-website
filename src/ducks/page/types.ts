@@ -1,29 +1,51 @@
 import * as i from 'types';
-import { PAGE_ENDPOINT } from './pages';
 
-export type PageState = {
-  data: PageData;
-  error: boolean;
-  loading: boolean;
+// Duck state
+export type PageState = Omit<i.BaseState, 'data'> & i.ApiDataPayloads & {
+  meta?: i.PageMeta;
 };
 
-export type PageData = {
-  id: number;
-  hero_title: string;
-  hero_server: string;
-  hero_video: string;
-  posts: Post[];
-  created_at: Date;
-  updated_at: Date;
-};
 
-export type FetchPageAction = (endpoint: PAGE_ENDPOINT) => i.ThunkAction;
+// Page bodies
+export type BasePageData = i.BaseResponseBody & {
+  meta?: i.PageMeta;
+}
 
-export type Post = {
-  id: number;
+export type HomePageData = BasePageData & {
+  posts: i.BasePost[];
+}
+
+export type AboutPageData = BasePageData & {
   title: string;
   content: string;
-  created_at: Date;
-  updated_at: Date;
-  status: 'draft' | 'publish';
+  header_image: i.Image;
+}
+
+export type LoginPageData = BasePageData & {
+  title: string;
+  content: string;
+  disclaimer?: string;
+}
+
+export type NewsDetailPageData = BasePageData & i.Post & {
+  relatedNews: i.Post[];
 };
+
+
+// Misc types
+export type PagesBody = i.HomePageData | i.AboutPageData | i.LoginPageData | i.NewsDetailPageData;
+
+export type ApiDataPayloads = {
+  home?: i.HomePageData;
+  about?: i.AboutPageData;
+  login?: i.LoginPageData;
+  post?: i.NewsDetailPageData;
+}
+
+export type PageKeys = keyof i.ApiDataPayloads;
+
+export type PageMeta = i.BaseResponseBody & {
+  title: string;
+  description: string;
+  image?: i.Image;
+}

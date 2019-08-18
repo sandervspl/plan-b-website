@@ -1,17 +1,33 @@
 import config from 'config';
 
-export default {
-  /**
-   * API base url
-   * @see generateOptions.js
-   */
-  apiUrl: (() => {
-    switch (config.env.toLowerCase()) {
-      case 'production':
-      default:
-        return 'http://api.planbguild.eu/';
-    };
-  })(),
+const apiConfig = {
+  url: {
+    cms: (() => {
+      switch (config.appEnv.toLowerCase()) {
+        case 'test':
+          return 'https://cms-test.planbguild.eu' as const;
+        case 'acceptation':
+          return 'https://cms-acc.planbguild.eu' as const;
+        case 'production':
+          return 'https://cms.planbguild.eu' as const;
+        default:
+          return 'https://cms-test.planbguild.eu' as const;
+      };
+    })(),
+
+    api: (() => {
+      switch (config.appEnv.toLowerCase()) {
+        case 'test':
+          return 'https://api-test.planbguild.eu' as const;
+        case 'acceptation':
+          return 'https://api-acc.planbguild.eu' as const;
+        case 'production':
+          return 'https://api.planbguild.eu' as const;
+        default:
+          return 'http://localhost:8080' as const;
+      };
+    })(),
+  },
 
   /**
    * Login path of the app
@@ -38,3 +54,5 @@ export default {
     console.error('API failed', message);
   },
 };
+
+export default apiConfig;

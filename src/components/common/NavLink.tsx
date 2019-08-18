@@ -1,29 +1,32 @@
+import * as i from 'types';
 import React from 'react';
-import { withRouter, WithRouterProps } from 'next/router';
-import { RouteParams } from 'next-routes';
+import { withRouter, SingletonRouter } from 'next/router';
 import Router from 'router';
 import _ from 'lodash';
 
 import { getPageFromRoute } from 'services';
+import { Union } from 'ts-toolbelt';
 
-class NavLink extends React.PureComponent<Props> {
+class NavLink extends React.PureComponent<NavLinkProps> {
+  static defaultProps: Partial<NavLinkProps> = {
+    className: '',
+  };
+
   state = {
     active: false,
   }
 
-  static getDerivedStateFromProps(props: Props) {
+  static getDerivedStateFromProps(props: NavLinkProps) {
     const { router, to } = props;
-
-    // @ts-ignore Get route object from next-routes
-    const routerRoute = Router.routes.find((r: string) => r.name === to);
+    const routerRoute = Router.routes.find((r) => r.name === to);
 
     // Check if pathname from current route and page from routes are equal
     if (routerRoute && router.pathname === routerRoute.page) {
       if (props.params) {
         // If current pathname and route page are the same, and we have params, then the params also have to be the same
         // We compare every params passed to NavLink and the queries from router to decide if this is the current route
-        if (props.params && Object.keys(props.params).length > 0) {
-          if (Object.keys(props.params).every((p) => router.query[p] === props.params[p])) {
+        if (router.query && Object.keys(props.params).length > 0) {
+          if (Object.keys(props.params).every((p) => router.query![p] === props.params[p])) {
             return {
               active: true,
             };
@@ -42,18 +45,39 @@ class NavLink extends React.PureComponent<Props> {
     };
   }
 
-  setActiveClassName = (className) => {
+  setActiveClassName = (className: string) => {
     if (!this.state.active) return className;
 
     return `${className} active`.trim();
   }
 
   render() {
-    const { children, to, router, ariaLabel, ...props } = this.props;
+    const {
+      // @ts-ignore Remove from props to fix react warnings (unknown dom attribute)
+      isActive, isVisible, // eslint-disable-line
+      children, to, router, ariaLabel, ...props
+    } = this.props;
+    let clsName = props.className!;
+
+    if (this.props.disabled) {
+      clsName = `${clsName} disabled`;
+    }
+
+    if (this.state.active || this.props.disabled) {
+      clsName = this.setActiveClassName(clsName);
+
+      return (
+        <span {...props} className={clsName}>
+          {children}
+        </span>
+      );
+    }
 
     const child = React.Children.only(
       // eslint-disable-next-line jsx-a11y/anchor-is-valid
-      <a aria-label={_.capitalize(ariaLabel)}>{children}</a>
+      <a aria-label={_.capitalize(ariaLabel)} className={clsName}>
+        {children}
+      </a>
     );
 
     // We route with route name, but prefetch with page name
@@ -66,8 +90,10 @@ class NavLink extends React.PureComponent<Props> {
       };
     }
 
+    const LinkProps = _.pick(props, 'params');
+
     return (
-      <Router.Link route={to} {...props}>
+      <Router.Link route={to} {...LinkProps}>
         {React.cloneElement(
           child,
           {
@@ -80,11 +106,29 @@ class NavLink extends React.PureComponent<Props> {
   }
 };
 
-type Props = WithRouterProps & {
+type BaseProps = {
   children: React.ReactNode;
-  to: string;
   ariaLabel?: string;
-  params?: RouteParams;
+  className?: string;
+  disabled?: boolean;
 }
 
-export default withRouter(NavLink);
+type InternalLinkProps = {
+  to: Union.Exclude<i.RouteNames, 'news-detail'>;
+  params?: never;
+  router: SingletonRouter;
+}
+
+type IdParamsLinkProps = {
+  to: 'news-detail';
+  params: {
+    id: number;
+  };
+  router: SingletonRouter<{
+    id: string;
+  }>;
+}
+
+export type NavLinkProps = BaseProps & (InternalLinkProps | IdParamsLinkProps);
+
+export default withRouter<NavLinkProps>(NavLink);

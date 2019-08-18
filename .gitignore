@@ -3,4 +3,7 @@ dist/
 
 .vscode
 .gitattributes
-**/**.DS_Store
+.DS_Store
+
+deploy.sh
+next.config.js

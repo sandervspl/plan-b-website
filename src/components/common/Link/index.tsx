@@ -1,25 +1,25 @@
-import { LinkProps } from './types';
+import * as i from 'types';
 import React from 'react';
 import _ from 'lodash';
+import { Union } from 'ts-toolbelt';
 import Router from 'router';
-import { withRouter, WithRouterProps } from 'next/router';
-
 import { getPageFromRoute } from 'services';
-import { RouteParams } from 'next-routes';
+import { useRouter } from 'hooks';
+import { LinkProps } from './types';
 
-const Link: React.FC<Props> = ({
-  children, className, to, params, external, ariaLabel, currentTab, type, router, ...props
+const Link: React.FC<LinkComponentProps> = ({
+  children, className, to, ariaLabel, currentTab, type, disabled, ...props
 }) => {
+  const router = useRouter();
   const formattedAriaLabel = _.capitalize(ariaLabel);
-  const as = type === 'text' ? 'span' : 'a';
+  const externalProps = props as ExternalLinkProps;
+  const paramsProps = props as IdParamsLinkProps;
 
   let linkProps: LinkProps = {
-    as,
-    className: className,
-    'aria-label': formattedAriaLabel,
+    className: className || '',
   };
 
-  if (external || type !== 'route') {
+  if (externalProps.external || type !== 'route') {
     const target = currentTab || type !== 'route'
       ? '_self'
       : '_blank';
@@ -38,11 +38,27 @@ const Link: React.FC<Props> = ({
         target,
         href,
         rel: 'noopener noreferrer',
+        'aria-label': formattedAriaLabel,
       };
     }
 
+    if (type === 'text' || disabled) {
+      linkProps = {
+        ...linkProps,
+        className: `${linkProps.className} disabled`,
+      };
+
+      return (
+        <span {...linkProps} {...props}>
+          {children}
+        </span>
+      );
+    }
+
+    const validProps = _.omit(props, 'external');
+
     return (
-      <a {...linkProps} {...props}>
+      <a {...linkProps} {...validProps}>
         {children}
       </a>
     );
@@ -58,10 +74,12 @@ const Link: React.FC<Props> = ({
     };
   }
 
+  const validProps = _.omit(props, 'params');
+
   return (
-    <Router.Link route={to} params={params}>
+    <Router.Link route={to} params={paramsProps.params}>
       {React.Children.only(
-        <a {...prefetchProps} {...linkProps} {...props}>
+        <a {...prefetchProps} {...linkProps} {...validProps}>
           {children}
         </a>
       )}
@@ -69,19 +87,50 @@ const Link: React.FC<Props> = ({
   );
 };
 
-type Props = WithRouterProps & {
+type BaseProps = React.AnchorHTMLAttributes<{}> & {
   children: React.ReactNode;
   className?: string;
-  to: string;
-  params?: RouteParams;
-  external?: boolean;
   ariaLabel?: string;
   currentTab?: boolean;
   type?: 'route' | 'text' | 'mail' | 'phone';
+  disabled?: boolean;
 }
+
+type InternalLinkProps = {
+  external?: false;
+  to: Union.Exclude<i.RouteNames, 'news-detail' | 'application-detail' | 'public-application-detail'>;
+  params?: never;
+}
+
+type ExternalLinkProps = {
+  external: true;
+  to: string;
+  params?: never;
+}
+
+type IdParamsLinkProps = {
+  to: 'news-detail' | 'application-detail';
+  params: {
+    id: number;
+  };
+}
+
+type UuidParamsLinkProps = {
+  to: 'public-application-detail';
+  params: {
+    uuid: string;
+  };
+}
+
+export type LinkComponentProps = BaseProps & (
+  | InternalLinkProps
+  | ExternalLinkProps
+  | IdParamsLinkProps
+  | UuidParamsLinkProps
+);
 
 Link.defaultProps = {
   type: 'route',
 };
 
-export default withRouter(Link);
+export default Link;

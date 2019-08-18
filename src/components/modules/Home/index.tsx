@@ -1,2 +1,2 @@
-export { default as Hero } from './Hero';
-export { default as Content } from './Content';
+export { default as LatestNews } from './LatestNews';
+export { default as OtherNews } from './OtherNews';

@@ -1,13 +1,7 @@
-import { generateOptions } from './generateOptions';
-import { request } from './request';
-import { ApiHelper, Options } from './types';
+import ApiHelper from './api';
 
-const setupRequest = (options: Options) => request(generateOptions(options));
+const apiHelper = new ApiHelper();
 
-export const api: ApiHelper = {
-  get: (args) => setupRequest({ method: 'GET', ...args }),
-  del: (args) => setupRequest({ method: 'DELETE', ...args }),
-  post: (args) => setupRequest({ method: 'POST', ...args }),
-  put: (args) => setupRequest({ method: 'PUT', ...args }),
-  patch: (args) => setupRequest({ method: 'PATCH', ...args }),
-};
+const api = apiHelper;
+
+export { api };

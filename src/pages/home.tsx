@@ -1,28 +1,50 @@
 import * as i from 'types';
-import * as React from 'react';
+import React from 'react';
+import { API_ENDPOINT, getUrl } from 'services';
+import { useSelector } from 'hooks';
 import { fetchPage } from 'ducks/page';
-import { PAGE_ENDPOINT } from 'ducks/page/pages';
-import { Hero, Content } from 'modules/Home';
+import { fetchPosts } from 'ducks/posts';
+import { fetchRecruitment } from 'ducks/recruitment';
+import { fetchActiveStreams } from 'ducks/twitch';
+import Page from 'modules/Page';
+import { LatestNews, OtherNews } from 'modules/Home';
+import RecruitmentBlock from 'modules/RecruitmentBlock';
+import Twitch from 'modules/Twitch';
+import { HomeContainer } from 'modules/Home/styled';
 
-class Home extends React.Component<Props> {
-  static async getInitialProps({ store }: { store: i.Store }) {
-    await store.dispatch(fetchPage(PAGE_ENDPOINT.HOME));
+const HomePage: i.NextPageComponent = ({ url }) => {
+  const home = useSelector((state) => state.page.home);
 
-    return {};
+  return (
+    <Page meta={home && home.meta} url={url}>
+      <HomeContainer>
+        <LatestNews />
+        <RecruitmentBlock />
+        <OtherNews />
+        <Twitch />
+      </HomeContainer>
+    </Page>
+  );
+};
+
+HomePage.getInitialProps = async ({ req, store }) => {
+  await Promise.all([
+    store.dispatch(fetchPage(API_ENDPOINT.HOME)),
+    store.dispatch(fetchRecruitment()),
+    store.dispatch(fetchActiveStreams()),
+  ]);
+
+  // Get detailed post data
+  const { home } = store.getState().page;
+
+  if (home && home!.posts) {
+    const postIds = home.posts.map((post) => post.id);
+    await store.dispatch(fetchPosts(postIds));
   }
 
-  render() {
-    return (
-      <main>
-        <Hero />
-        <Content />
-      </main>
-    );
-  }
-}
+  return {
+    url: getUrl(req),
+  };
+};
 
-type Props = {
-  page: i.PageState;
-}
-
-export default Home;
+export default HomePage;

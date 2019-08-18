@@ -3,16 +3,17 @@ import styled from 'styled-components';
 
 export const Subheader = styled.h2.attrs<Props>((props) => ({
   as: props.as,
-}))`
+}))<Props>`
   font-size: 20px;
-  color: ${(props) => props.theme.color.primary.medium};
+  color: ${(props) => props.theme.color.secondary};
   font-weight: 400;
+  font-family: ${(props) => props.theme.font.primary};
 `;
 
 type Props = {
-  as?: i.HeaderType;
+  as?: i.HeaderType | 'p';
 }
 
 Subheader.defaultProps = {
   as: 'h2',
-} as any;
+};

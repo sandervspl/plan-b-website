@@ -1,22 +1,9 @@
 /* eslint-disable no-underscore-dangle, @typescript-eslint/no-explicit-any */
 import React from 'react';
 import initializeStore from 'store';
-import {
-  NextAppContext,
-  AppComponentType as IAppComponentType,
-  AppComponentProps as IAppComponentProps,
-} from 'next/app';
+import { NextAppContext, AppComponentProps as IAppComponentProps } from 'next/app';
 import { Store } from 'redux';
 import { isServer } from './isServer';
-
-// Extend types with Redux props
-interface NextContext {
-  store: Store;
-}
-
-// type AppComponentType = IAppComponentType & {
-//   reduxStore: Store;
-// }
 
 type AppComponentProps = IAppComponentProps & {
   initialReduxState: any;
@@ -26,7 +13,7 @@ const __NEXT_REDUX_STORE__ = '__NEXT_REDUX_STORE__';
 
 function getOrCreateStore(initialState?: any): Store {
   // Always make a new store if server, otherwise state is shared between requests
-  if (isServer()) {
+  if (isServer) {
     return initializeStore(initialState);
   }
 
@@ -39,7 +26,7 @@ function getOrCreateStore(initialState?: any): Store {
 }
 
 export const withReduxStore = (App: any) => (
-  class AppWithRedux extends React.Component {
+  class AppWithRedux extends React.Component<AppComponentProps> {
     reduxStore: Store;
 
     // eslint-disable-next-line react/sort-comp
@@ -48,8 +35,8 @@ export const withReduxStore = (App: any) => (
       // This allows you to set a custom default initialState
       const reduxStore = getOrCreateStore();
 
-      // Provide the store to getInitialProps of pages
-      (appContext.ctx as unknown as NextContext).store = reduxStore;
+      // @ts-ignore Provide the store to getInitialProps of pages
+      appContext.ctx.store = reduxStore;
 
       let appProps = {};
       if (typeof App.getInitialProps === 'function') {
@@ -69,7 +56,6 @@ export const withReduxStore = (App: any) => (
     }
 
     render() {
-      // @ts-ignore does not infer AppComponentType properly
       return <App {...this.props} reduxStore={this.reduxStore} />;
     }
   }

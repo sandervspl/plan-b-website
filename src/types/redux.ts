@@ -2,7 +2,7 @@
 import * as i from 'types';
 import { Store as ReduxStore } from 'redux';
 import { ThunkAction as IThunkAction, ThunkDispatch as IThunkDispatch } from 'redux-thunk';
-import { MapStateToProps as ReduxMapStateToProps } from 'react-redux';
+import apiConfig from 'services/api/config';
 
 /*
   Store type
@@ -26,16 +26,21 @@ export type Action<P = any> = {
   Thunk action type with pre-filled generics
   ReturnType = return type of function
 */
-export type ThunkAction<ReturnType = void> = IThunkAction<ReturnType, i.ReduxState, i.ApiHelper, Action>;
+type ExtraArgument = {
+  methods: i.ApiMethods;
+  url: typeof apiConfig.url;
+};
+export type ThunkAction<ReturnType = void> = IThunkAction<ReturnType, i.ReduxState, ExtraArgument, i.Action>;
 
 /*
   Thunk Dispatch action with pre-filled generics
 */
-export type ThunkDispatch = IThunkDispatch<i.ReduxState, {}, i.Action>;
+export type ThunkDispatch = IThunkDispatch<i.ReduxState, any, i.Action>;
 
 /*
-  MapStateToProps type with pre-filled state
-  P = component props
-  T = state props
+  Generator type for thunk actions
 */
-export type MapStateToProps<P = any, T = any> = ReduxMapStateToProps<T, P, i.ReduxState>;
+export type BaseThunkAction<Fn extends (...args: any) => any> = {
+  action: (...args: Parameters<Fn>) => ReturnType<Fn>;
+  thunk: (...args: Parameters<Fn>) => i.ThunkAction<ReturnType<Fn>>;
+};

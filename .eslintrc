@@ -1,8 +1,11 @@
 {
   "parser": "@typescript-eslint/parser",
   "extends": [
-      "plugin:react/recommended",
-      "plugin:@typescript-eslint/recommended"
+      "react-app",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:import/typescript"
   ],
   "parserOptions": {
       "ecmaVersion": 2018,
@@ -15,6 +18,13 @@
     "react": {
         "version": "detect"
     }
+  },
+  "globals": {
+    "__DEV__": false,
+    "__TEST__": false,
+    "__ACC__": false,
+    "__PROD__": false,
+    "YT": false
   },
   "rules": {
     "array-bracket-spacing": ["error", "never"],
@@ -33,14 +43,12 @@
         "case": { "after": true }
       }
     }],
-    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0 }],
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }],
     "no-console": [2, { "allow": ["info", "error"]}],
     "no-trailing-spaces": ["error"],
     "object-curly-spacing": ["error", "always"],
     "prefer-const": ["error"],
     "quotes": ["error", "single"],
-    "react/no-unused-prop-types": 0,
-    "react/prop-types": 0,
     "semi": ["error", "always"],
     "space-before-blocks": "error",
     "space-before-function-paren": ["error", {
@@ -48,8 +56,35 @@
       "named": "never",
       "asyncArrow": "always"
     }],
+    "comma-spacing": ["error", {
+      "before": false,
+      "after": true
+    }],
     "space-in-parens": ["error", "never"],
     "space-infix-ops": "error",
+    "eol-last": ["error", "always"],
+    "react/self-closing-comp": ["error", {
+      "component": true,
+      "html": true
+    }],
+    "react/jsx-tag-spacing": {
+      "closingSlash": "never",
+      "beforeSelfClosing": "always",
+      "afterOpening": "never",
+      "beforeClosing": "never"
+    },
+    "import/no-unresolved": false,
+    "import/named": false,
+    "import/order": ["error", {
+      "groups": [
+        "builtin",
+        "external",
+        "internal",
+        "index",
+        "parent",
+        "sibling"
+      ]
+    }],
     "@typescript-eslint/indent": ["error", 2],
     "@typescript-eslint/explicit-function-return-type": false,
     "@typescript-eslint/no-empty-interface": false,
@@ -57,6 +92,10 @@
     "@typescript-eslint/explicit-member-accessibility": [true, "no-public"],
     "@typescript-eslint/no-use-before-define": false,
     "@typescript-eslint/no-object-literal-type-assertion": false,
-    "@typescript-eslint/no-parameter-properties": false
+    "@typescript-eslint/no-parameter-properties": false,
+    "@typescript-eslint/no-non-null-assertion": false,
+    
+    "@typescript-eslint/camelcase": false,
+    "react/jsx-pascal-case": false
   }
 }

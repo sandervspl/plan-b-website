@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as i from 'types';
+import apiConfig from './config';
 
 export type ErrorConfig = {
   hide?: boolean;
@@ -11,6 +12,7 @@ export type RequestOptions = {
   options: RequestInit;
   file: any;
   errorConfig: ErrorConfig;
+  withAuth: boolean;
 }
 
 export type Options = {
@@ -21,9 +23,11 @@ export type Options = {
   withAuth?: boolean;
   file?: any;
   error?: any;
+  url: i.ValueOf<typeof apiConfig.url>;
+  headers?: HeadersInit_;
 }
 
-export type FetchOptions = i.Omit<Options, 'method'>;
+export type FetchOptions = Omit<Options, 'method'>;
 
 export type GenerateOptions = (options: Options) => RequestOptions;
 
@@ -39,10 +43,31 @@ export type TriggerErrorMessage = (errorConfig: ErrorConfig, apiError: ApiError)
 
 export type HandleStatusCodes = (code: number) => boolean;
 
-export type ApiHelper = {
+export type ApiMethods = {
   get: FetchCall;
   del: FetchCall;
   post: FetchCall;
   put: FetchCall;
   patch: FetchCall;
 }
+
+export type ContentId = number;
+
+export type BaseResponseBody = {
+  id: number;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export type BaseDatabaseBody = {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type RunMiddleware = (options: RequestOptions, middlewares: Middleware[]) => Promise<RequestOptions>;
+
+export type SetupRequest = (middlewares: Middleware[], options: Options) => Promise<any>;
+
+export type Middleware = (next: NextMiddleware) => (options: RequestOptions, ...args: any) => void;
+export type NextMiddleware = (options: RequestOptions, ...args: any) => void;

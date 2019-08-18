@@ -1,4 +1,3 @@
-import redirectToLogin from './redirectToLogin';
 import { HandleStatusCodes } from './types';
 
 /**
@@ -10,8 +9,7 @@ export const handleStatusCodes: HandleStatusCodes = (code) => {
     case 204:
       return true;
     case 401:
-      redirectToLogin();
-      return true;
+      return false;
     default:
       return false;
   }

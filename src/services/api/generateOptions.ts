@@ -5,17 +5,24 @@ import { GenerateOptions } from './types';
 export const generateOptions: GenerateOptions = ({
   method, path, query, body, withAuth = config.defaultWithAuth, file = false, error, url,
   headers = {}, upload,
-}) => ({
-  path: `${url}/${path}${query ? `?${qs.stringify(query, { encode: false })}` : ''}`,
-  options: {
-    headers: {
-      ...!upload ? { 'Content-Type': 'application/json' } : {},
-      ...headers,
+}) => {
+  const _headers = headers;
+  let _body = body;
+
+  if (!upload) {
+    _headers['Content-Type'] = 'application/json';
+    _body = JSON.stringify(body);
+  }
+
+  return {
+    path: `${url}/${path}${query ? `?${qs.stringify(query, { encode: false })}` : ''}`,
+    options: {
+      method,
+      headers: _headers,
+      body: _body,
     },
-    method,
-    ...(body ? { body: JSON.stringify(body) } : {}),
-  },
-  file,
-  errorConfig: error,
-  withAuth,
-});
+    file,
+    errorConfig: error,
+    withAuth,
+  };
+};

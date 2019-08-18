@@ -15,4 +15,6 @@ export const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
 export type ButtonProps = React.ButtonHTMLAttributes<{}> & {
   styleType?: 'simple';
   loading?: boolean;
+  as?: any; // eslint-disable-line
+  htmlFor?: string;
 };

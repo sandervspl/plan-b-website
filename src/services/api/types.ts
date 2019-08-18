@@ -25,6 +25,7 @@ export type Options = {
   error?: any;
   url: i.ValueOf<typeof apiConfig.url>;
   headers?: HeadersInit_;
+  upload?: boolean;
 }
 
 export type FetchOptions = Omit<Options, 'method'>;

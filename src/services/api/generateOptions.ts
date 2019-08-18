@@ -3,12 +3,13 @@ import config from './config';
 import { GenerateOptions } from './types';
 
 export const generateOptions: GenerateOptions = ({
-  method, path, query, body, withAuth = config.defaultWithAuth, file = false, error, url, headers = {},
+  method, path, query, body, withAuth = config.defaultWithAuth, file = false, error, url,
+  headers = {}, upload,
 }) => ({
   path: `${url}/${path}${query ? `?${qs.stringify(query, { encode: false })}` : ''}`,
   options: {
     headers: {
-      'Content-Type': 'application/json',
+      ...!upload ? { 'Content-Type': 'application/json' } : {},
       ...headers,
     },
     method,

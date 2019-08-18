@@ -60,6 +60,9 @@ const UserMenu: React.FC<Props> = ({ open }) => {
       {user && (
         <OptionsContainer>
           <li>
+            <NavLink to="dkp">Dkp</NavLink>
+          </li>
+          <li>
             <NavLink to="public-applications">Applications</NavLink>
           </li>
           <Line />

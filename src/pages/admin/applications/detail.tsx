@@ -152,7 +152,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
               {application.social ? 'Social' : 'Raider'}
             </SocialContainer>
 
-            {!isPublic && <Voting />}
+            <Voting isPublic={isPublic} />
           </ApplicationHeader>
 
           <ApplicationSection>

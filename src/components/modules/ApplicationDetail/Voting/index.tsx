@@ -12,9 +12,11 @@ import {
 
 const MAX_AMOUNT_AVATAR = 3;
 
-const Voting: React.FC = () => {
+const Voting: React.FC<Props> = ({ isPublic }) => {
   const dispatch = useDispatch();
-  const application = useSelector((state) => state.applications.detail);
+  const application = useSelector((state) => (
+    state.applications[isPublic ? 'detailPublic' : 'detail']
+  ));
   const userVote = useSelector((state) => state.applications.userVote);
   const user = useSelector((state) => state.user.data);
 
@@ -46,7 +48,7 @@ const Voting: React.FC = () => {
 
   return (
     <VotingContainer hasVoted={votingDisabled}>
-      {votingDisabled ? (
+      {votingDisabled ? console.log(1) || (
         <ResultContainer isNegativeVoted={isNegativeVoted}>
           <Results>
             <Result>
@@ -89,7 +91,7 @@ const Voting: React.FC = () => {
             current={acceptAmount}
           />
         </ResultContainer>
-      ) : (
+      ) : console.log(2) || (
         <>
           <Button status="accepted" onClick={handleVote(i.VOTE.ACCEPT)}>
             <CheckCircleIcon />
@@ -104,5 +106,9 @@ const Voting: React.FC = () => {
     </VotingContainer>
   );
 };
+
+type Props = {
+  isPublic?: boolean;
+}
 
 export default Voting;

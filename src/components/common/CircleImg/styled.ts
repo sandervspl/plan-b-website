@@ -4,7 +4,7 @@ import { media } from 'styles';
 export const CircleImgContainer = styled.figure`
   position: relative;
   margin: 0;
-  margin-right: 10px;
+  margin-right: 8px;
   width: 16px;
   height: 16px;
   border-radius: 100%;
@@ -12,7 +12,7 @@ export const CircleImgContainer = styled.figure`
   overflow: hidden;
 
   ${media.tablet`
-    margin-right: 15px;
+    margin-right: 8px;
     width: 26px;
     height: 26px;
   `}

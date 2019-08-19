@@ -43,6 +43,7 @@ export const UserData = styled.div`
 `;
 
 export const Username = styled.span`
+  margin-top: 2px;
   font-family: ${(props) => props.theme.font.primary};
   font-size: 13px;
   color: ${(props) => props.theme.color.secondary.darker};

@@ -8,6 +8,7 @@ import { UserMenuContainer, UserInfo, Line, OptionsContainer } from './styled';
 
 const UserMenu: React.FC<Props> = ({ open }) => {
   const user = useSelector((state) => state.user.data);
+  const isMobile = useSelector((state) => state.ui.isMobile);
   const scrollLockTargetRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -15,7 +16,7 @@ const UserMenu: React.FC<Props> = ({ open }) => {
       return;
     }
 
-    if (open) {
+    if (isMobile && open) {
       disableBodyScroll(scrollLockTargetRef.current);
     } else {
       enableBodyScroll(scrollLockTargetRef.current);

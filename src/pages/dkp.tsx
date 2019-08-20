@@ -11,6 +11,7 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
   const dispatch = useDispatch();
   const { loading, file, handleFileChange } = useFileUpload();
   const sending = useSelector((state) => state.dkp.loading);
+  const isAdmin = useSelector((state) => state.user.isAdmin);
 
   useEffect(() => {
     if (file) {
@@ -30,9 +31,11 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
         <ContentHeader>
           <Heading as="h1">DKP Dashboard</Heading>
 
-          <Button as="label" htmlFor="file-upload" disabled={loading || sending}>
-            Upload DKP XML
-          </Button>
+          {isAdmin && (
+            <Button as="label" htmlFor="file-upload" disabled={loading || sending}>
+              Upload DKP Export
+            </Button>
+          )}
           <input
             id="file-upload"
             type="file"

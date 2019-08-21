@@ -90,7 +90,9 @@ export const Buttons = styled.div`
   margin-top: 40px;
 
   button {
-    margin-left: 16px;
+    &:not(:first-child) {
+      margin-left: 16px;
+    }
 
     &:first-child {
       background: none;

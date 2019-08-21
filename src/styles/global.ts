@@ -53,7 +53,12 @@ export default createGlobalStyle`
   }
 
   .modal__content {
-    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    height: 100vh;
+    width: 100vw;
     background: ${theme.color.background.light};
     box-shadow: ${theme.shadow.innerContent};
     outline: 0;
@@ -62,8 +67,10 @@ export default createGlobalStyle`
     transition: opacity .3s, transform .3s;
     
     ${media.tablet`
+      display: block;
       padding: 40px;
       width: 600px;
+      height: auto;
     `}
   }
 

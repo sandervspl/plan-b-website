@@ -7,7 +7,7 @@ export const generateOptions: GenerateOptions = ({
   headers = {}, upload,
 }) => {
   const _headers = headers;
-  let _body = body;
+  let _body: BodyInit_ = body as BodyInit_;
 
   if (!upload) {
     _headers['Content-Type'] = 'application/json';

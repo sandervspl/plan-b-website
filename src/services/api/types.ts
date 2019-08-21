@@ -19,7 +19,7 @@ export type Options = {
   method: string;
   path: string;
   query?: any;
-  body?: BodyInit_;
+  body?: object;
   withAuth?: boolean;
   file?: any;
   error?: any;

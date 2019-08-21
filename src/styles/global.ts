@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import styledNormalize from './normalize';
 import theme from './theme';
+import { media } from './utils';
 
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap');
@@ -48,6 +49,55 @@ export default createGlobalStyle`
 
     > div {
       display: flex;
+    }
+  }
+
+  .modal__content {
+    padding: 0;
+    background: ${theme.color.background.light};
+    box-shadow: ${theme.shadow.innerContent};
+    outline: 0;
+    transform: scale(0.7);
+    opacity: 0;
+    transition: opacity .3s, transform .3s;
+    
+    ${media.tablet`
+      padding: 32px;
+      width: 500px;
+    `}
+  }
+
+  .modal__overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    transition: opacity .3s;
+    background: rgba(0, 0, 0, .4);
+
+    &.ReactModal__Overlay {
+      &--after-open {
+        opacity: 1;
+
+        > .modal__content {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      &--before-close {
+        opacity: 0;
+
+        > .modal__content {
+          transform: scale(0.7);
+          opacity: 0;
+        }
+      }
     }
   }
 `;

@@ -1,30 +1,16 @@
 import * as i from 'types';
-import React, { useRef, useEffect } from 'react';
-import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import React, { useRef } from 'react';
 import apiConfig from 'services/api/config';
-import { useSelector } from 'hooks';
+import { useSelector, useBodyScrollLock } from 'hooks';
 import { Paragraph, CircleImg, DKP, NavLink, Link } from 'common';
 import { UserMenuContainer, UserInfo, Line, OptionsContainer } from './styled';
 
 const UserMenu: React.FC<Props> = ({ open }) => {
   const user = useSelector((state) => state.user.data);
+  const isMobile = useSelector((state) => state.ui.isMobile);
   const scrollLockTargetRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (!scrollLockTargetRef.current) {
-      return;
-    }
-
-    if (open) {
-      disableBodyScroll(scrollLockTargetRef.current);
-    } else {
-      enableBodyScroll(scrollLockTargetRef.current);
-    }
-
-    return function cleanup() {
-      clearAllBodyScrollLocks();
-    };
-  }, [open]);
+  useBodyScrollLock(scrollLockTargetRef, isMobile && open);
 
   const logout = () => {
     window.location.href = `${apiConfig.url.api}/auth/logout`;

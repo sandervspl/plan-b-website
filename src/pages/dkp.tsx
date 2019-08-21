@@ -1,10 +1,10 @@
 import * as i from 'types';
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Form, Field } from 'react-final-form';
 import Modal from 'react-modal';
 import { sendDkpXml } from 'ducks/dkp';
 import { getUrl, validate, api } from 'services';
-import { useFileUpload, useDispatch, useSelector } from 'hooks';
+import { useFileUpload, useDispatch, useSelector, useBodyScrollLock } from 'hooks';
 import { Heading, Button, Paragraph, Loader, ErrorText } from 'common';
 import { Input } from 'common/form';
 import Page from 'modules/Page';
@@ -21,8 +21,11 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
   const [characterLoading, setCharacterLoading] = useState(false);
   const [error, setError] = useState('');
   const [isModalOpen, setModalOpen] = useState(false);
+  const scrollLockTargetRef = useRef<HTMLDivElement>(null);
   const characterValidate = useCallback(validate.minMax({ min: 2, max: 12 }), []);
   const { loading, file, handleFileChange } = useFileUpload();
+
+  useBodyScrollLock(scrollLockTargetRef, isModalOpen);
 
   useEffect(() => {
     if (file) {
@@ -123,6 +126,7 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
                       className="modal__content"
                       overlayClassName="modal__overlay"
                       closeTimeoutMS={300}
+                      ref={scrollLockTargetRef}
                     >
                       <ModalContent>
                         <Heading as="h2">Are you sure?</Heading>

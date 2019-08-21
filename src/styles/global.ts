@@ -62,8 +62,8 @@ export default createGlobalStyle`
     transition: opacity .3s, transform .3s;
     
     ${media.tablet`
-      padding: 32px;
-      width: 500px;
+      padding: 40px;
+      width: 600px;
     `}
   }
 

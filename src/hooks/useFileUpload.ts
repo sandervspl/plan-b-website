@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 export function useFileUpload() {
-  const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [file, setFile] = useState<File>();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,17 +15,17 @@ export function useFileUpload() {
     const file = e.target.files[0];
 
     reader.onloadstart = () => {
-      setLoading(true);
+      setUploading(true);
       setFile(undefined);
     };
 
     reader.onloadend = () => {
-      setLoading(false);
+      setUploading(false);
       setFile(file);
     };
 
     reader.readAsDataURL(file);
   };
 
-  return { file, handleFileChange, loading } as const;
+  return { file, handleFileChange, uploading } as const;
 }

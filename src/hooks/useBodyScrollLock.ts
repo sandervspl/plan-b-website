@@ -2,7 +2,7 @@ import { useEffect, RefObject } from 'react';
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 export function useBodyScrollLock(
-  scrollLockTargetRef: RefObject<HTMLElement>,
+  scrollLockTargetRef: RefObject<any>,
   determine?: boolean
 ) {
   useEffect(() => {

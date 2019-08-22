@@ -1,31 +1,30 @@
 import * as i from 'types';
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Field } from 'react-final-form';
-import Modal from 'react-modal';
 import { sendDkpXml } from 'ducks/dkp';
-import { getUrl, validate, api } from 'services';
-import { useFileUpload, useDispatch, useSelector, useBodyScrollLock } from 'hooks';
+import { getUrl, validate, api, redirect } from 'services';
+import { useFileUpload, useDispatch, useSelector } from 'hooks';
 import { Heading, Button, Paragraph, Loader, ErrorText } from 'common';
 import { Input } from 'common/form';
 import Page from 'modules/Page';
 import {
   DkpDashboardContainer, ContentHeader, CharacterFormContainer, CharacterLoadingContainer,
-  ModalContent, Buttons,
 } from 'modules/dkp/styled';
+import LinkCharacterModal from 'modules/dkp/LinkCharacterModal';
+import CreateCharacterModal from 'modules/dkp/CreateCharacterModal';
 
 const DkpDashboard: i.NextPageComponent = ({ url }) => {
   const dispatch = useDispatch();
   const sending = useSelector((state) => state.dkp.loading);
   const isAdmin = useSelector((state) => state.user.isAdmin);
-  const userId = useSelector((state) => state.user.data && state.user.data.id);
-  const [characterLoading, setCharacterLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [isModalOpen, setModalOpen] = useState(false);
-  const scrollLockTargetRef = useRef<HTMLDivElement>(null);
-  const characterValidate = useCallback(validate.minMax({ min: 2, max: 12 }), []);
-  const { loading, file, handleFileChange } = useFileUpload();
+  const user = useSelector((state) => state.user);
 
-  useBodyScrollLock(scrollLockTargetRef, isModalOpen);
+  const [loading, setLoading] = useState(false);
+  const [createCharacterRequest, setCreateCharacterRequest] = useState(false);
+  const [linkCharacterRequest, setLinkCharacterRequest] = useState(false);
+  const [error, setError] = useState('');
+
+  const { uploading, file, handleFileChange } = useFileUpload();
 
   useEffect(() => {
     if (file) {
@@ -33,21 +32,58 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
     }
   }, [file]);
 
-  const onConfirm = (values: FormState) => async () => {
-    if (characterValidate(values.name) != null) {
+  const characterValidate = validate.minMax({ min: 2, max: 12 });
+
+  const onLink = (name: string) => async () => {
+    if (characterValidate(name) != null) {
       return;
     }
 
     setError('');
-    setCharacterLoading(true);
+    setLoading(true);
 
     try {
       await api.methods.patch({
         url: api.url.api,
         path: 'user/character',
         body: {
+          characterName: name,
+          userId: user.data!.id,
+        },
+      });
+
+      // @TODO Fetch DKP data
+    } catch (err) {
+      if (err.statusCode === 404) {
+        setCreateCharacterRequest(true);
+      } else {
+        setError('Something went wrong. Try again later.');
+      }
+    }
+
+    setLoading(false);
+    setLinkCharacterRequest(false);
+  };
+
+  const onCreate = (values: FormState) => async () => {
+    setCreateCharacterRequest(false);
+    setLoading(true);
+
+    try {
+      await api.methods.post({
+        url: api.url.api,
+        path: 'user/character',
+        body: {
           characterName: values.name,
-          userId: userId,
+        },
+      });
+
+      await api.methods.patch({
+        url: api.url.api,
+        path: 'user/character',
+        body: {
+          characterName: values.name,
+          userId: user.data!.id,
         },
       });
 
@@ -56,9 +92,20 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
       setError('Something went wrong. Try again later.');
     }
 
-    setCharacterLoading(false);
-    setModalOpen(false);
+    setLoading(false);
+    setLinkCharacterRequest(false);
   };
+
+  // Auth check
+  if (user.loading) {
+    return null;
+  }
+
+  if (!user.isSignedIn) {
+    redirect();
+
+    return null;
+  }
 
   return (
     <Page
@@ -73,7 +120,7 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
           <Heading as="h1">DKP Dashboard</Heading>
 
           {isAdmin && (
-            <Button as="label" htmlFor="file-upload" disabled={loading || sending}>
+            <Button as="label" htmlFor="file-upload" disabled={uploading || sending}>
               Upload DKP Export
             </Button>
           )}
@@ -86,71 +133,61 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
           />
         </ContentHeader>
 
-        {characterLoading ? (
-          <CharacterLoadingContainer>
-            <Paragraph>Linking character to account...</Paragraph>
-            <Loader />
-          </CharacterLoadingContainer>
-        ) : (
-          <CharacterFormContainer>
-            <Paragraph>
-              In order for your DKP to show, we need to connect a character to your account.
-              Make sure to spell out your character name correctly before submitting.
-            </Paragraph>
-            <Paragraph>
-              This can NOT be changed!
-            </Paragraph>
+        {/* @TODO Only show if no character is linked to user */}
+        <CharacterFormContainer>
+          <Paragraph>
+            In order for your DKP to show, we need to connect a character to your account.
+            Make sure to spell out your character name correctly before submitting.
+          </Paragraph>
+          <Paragraph>
+            This can NOT be changed!
+          </Paragraph>
 
-            <Form<FormState> onSubmit={() => setModalOpen(true)}>
-              {({ handleSubmit, invalid, values }) => (
-                <>
-                  <form onSubmit={handleSubmit}>
-                    <Field
-                      component={Input}
-                      name="name"
-                      label="Enter character name"
-                      required
-                      validate={characterValidate}
-                    />
+          <Form<FormState> onSubmit={() => setLinkCharacterRequest(true)}>
+            {({ handleSubmit, invalid, values }) => (
+              <>
+                <form onSubmit={handleSubmit}>
+                  {loading ? (
+                    <CharacterLoadingContainer>
+                      <Paragraph>Linking character to account...</Paragraph>
+                      <Loader />
+                    </CharacterLoadingContainer>
+                  ) : (
+                    <>
+                      <Field
+                        component={Input}
+                        name="name"
+                        label="Enter character name"
+                        required
+                        validate={characterValidate}
+                      />
 
-                    <Button type="submit" disabled={invalid}>
-                      Add character
-                    </Button>
+                      <Button type="submit" disabled={invalid}>
+                        Add character
+                      </Button>
 
-                    {error && <ErrorText>{error}</ErrorText>}
+                      {error && <ErrorText>{error}</ErrorText>}
+                    </>
+                  )}
 
-                    <Modal
-                      isOpen={isModalOpen}
-                      onRequestClose={() => setModalOpen(false)}
-                      contentLabel="Example Modal"
-                      className="modal__content"
-                      overlayClassName="modal__overlay"
-                      closeTimeoutMS={300}
-                      ref={scrollLockTargetRef}
-                    >
-                      <ModalContent>
-                        <Heading as="h2">Are you sure?</Heading>
-                        <Paragraph>Please make sure this is the correct name.</Paragraph>
-                        <Paragraph>
-                        This will permanently link <strong>{values.name}</strong> to your account.
-                        </Paragraph>
+                  <CreateCharacterModal
+                    name={values.name}
+                    cta={onCreate}
+                    isModalOpen={createCharacterRequest}
+                    setModalOpen={setCreateCharacterRequest}
+                  />
 
-                        <Buttons>
-                          <Button type="button" onClick={() => setModalOpen(false)}>
-                            Cancel
-                          </Button>
-                          <Button type="button" onClick={onConfirm(values)}>
-                            Link this character
-                          </Button>
-                        </Buttons>
-                      </ModalContent>
-                    </Modal>
-                  </form>
-                </>
-              )}
-            </Form>
-          </CharacterFormContainer>
-        )}
+                  <LinkCharacterModal
+                    name={values.name}
+                    cta={onLink}
+                    isModalOpen={linkCharacterRequest}
+                    setModalOpen={setLinkCharacterRequest}
+                  />
+                </form>
+              </>
+            )}
+          </Form>
+        </CharacterFormContainer>
       </DkpDashboardContainer>
     </Page>
   );

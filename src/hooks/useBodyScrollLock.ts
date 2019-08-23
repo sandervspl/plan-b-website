@@ -1,23 +1,25 @@
-import { useEffect, RefObject } from 'react';
+import { useEffect, useRef } from 'react';
 import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
-export function useBodyScrollLock(
-  scrollLockTargetRef: RefObject<any>,
-  determine?: boolean
-) {
+export function useBodyScrollLock(determine?: boolean) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const ref = useRef<any>(null);
+
   useEffect(() => {
-    if (!scrollLockTargetRef.current) {
+    if (!ref.current) {
       return;
     }
 
     if (determine) {
-      disableBodyScroll(scrollLockTargetRef.current);
+      disableBodyScroll(ref.current);
     } else {
-      enableBodyScroll(scrollLockTargetRef.current);
+      enableBodyScroll(ref.current);
     }
 
     return function cleanup() {
       clearAllBodyScrollLocks();
     };
   }, [determine]);
+
+  return ref;
 }

@@ -1,13 +1,11 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import Modal from 'react-modal';
 import { useBodyScrollLock } from 'hooks';
 import { Heading, Paragraph, Button } from 'common';
 import { ModalContent, Buttons } from './styled';
 
 const LinkCharacterModal: React.FC<Props> = ({ isModalOpen, setModalOpen, cta, name }) => {
-  const scrollLockTargetRef = useRef<ReactModal>(null);
-
-  useBodyScrollLock(scrollLockTargetRef, isModalOpen);
+  const ref = useBodyScrollLock(isModalOpen);
 
   return (
     <Modal
@@ -17,7 +15,7 @@ const LinkCharacterModal: React.FC<Props> = ({ isModalOpen, setModalOpen, cta, n
       className="modal__content"
       overlayClassName="modal__overlay"
       closeTimeoutMS={300}
-      ref={scrollLockTargetRef}
+      ref={ref}
     >
       <ModalContent>
         <Heading as="h2">Are you sure?</Heading>

@@ -1,5 +1,5 @@
 import * as i from 'types';
-import React, { useRef } from 'react';
+import React from 'react';
 import apiConfig from 'services/api/config';
 import { useSelector, useBodyScrollLock } from 'hooks';
 import { Paragraph, CircleImg, DKP, NavLink, Link } from 'common';
@@ -8,16 +8,15 @@ import { UserMenuContainer, UserInfo, Line, OptionsContainer } from './styled';
 const UserMenu: React.FC<Props> = ({ open }) => {
   const user = useSelector((state) => state.user.data);
   const isMobile = useSelector((state) => state.ui.isMobile);
-  const scrollLockTargetRef = useRef<HTMLDivElement>(null);
 
-  useBodyScrollLock(scrollLockTargetRef, isMobile && open);
+  const ref = useBodyScrollLock(isMobile && open);
 
   const logout = () => {
     window.location.href = `${apiConfig.url.api}/auth/logout`;
   };
 
   return (
-    <UserMenuContainer open={open} ref={scrollLockTargetRef}>
+    <UserMenuContainer open={open} ref={ref}>
       {user && (
         <>
           <UserInfo>

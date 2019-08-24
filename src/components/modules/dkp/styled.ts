@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import ReactModal from 'react-modal';
 import { media } from 'styles';
 import { PageContentContainer, Heading, Paragraph, ErrorText } from 'common';
 import { ButtonContainer } from 'common/Button/styled';

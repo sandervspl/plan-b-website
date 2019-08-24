@@ -19,8 +19,8 @@ const Graphs: React.FC<Props> = () => {
 
   return (
     <GraphsContainer>
-      <Graph data={dkpHistory} dataKey="yValue" title="DKP Total" />
-      <Graph data={dkpHistory} dataKey="yValue" title="Guild DKP Average" />
+      <Graph data={dkpHistory} dataKey="dkp" title="DKP Total" />
+      <Graph data={dkpHistory} dataKey="dkp" title="Guild DKP Average" />
     </GraphsContainer>
   );
 };

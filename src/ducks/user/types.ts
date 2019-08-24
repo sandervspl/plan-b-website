@@ -23,13 +23,13 @@ export type UserData = {
   dkp: number;
 }
 
-export type UserCharacterData = i.BaseResponseBody & {
+export type UserCharacterData = i.BaseDatabaseBody & {
   name: string;
   dkp: number;
   dkpHistories?: DkpHistory[];
 }
 
-export type DkpHistory = i.BaseResponseBody & {
+export type DkpHistory = i.BaseDatabaseBody & {
   net: number;
   spent: number;
   total: number;

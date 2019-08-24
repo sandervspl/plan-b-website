@@ -64,3 +64,13 @@ export const GraphContainer = styled.div`
     margin-top: 16px;
   }
 `;
+
+export const TooltipContainer = styled.div`
+  ${ParagraphStyle};
+  padding: 8px 16px;
+  background: ${(props) => props.theme.color.background.light};
+  border: 0;
+  border-radius: 3px;
+  box-shadow: ${(props) => props.theme.shadow.content};
+  font-size: 14px;
+`;

@@ -14,12 +14,12 @@ export const totalDkpForGraph = createSelector(
     }
 
     return dkpHistory
-      .sort((a, b) => new Date(a.updated_at).getTime() - new Date(b.updated_at).getTime())
+      .sort((a, b) => new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime())
       .map((entry) => ({
-        xName: entry.updated_at,
-        xValue: entry.updated_at,
+        xName: 'date',
+        xValue: entry.updatedAt,
         yName: 'dkp',
-        yValue: entry.total,
+        dkp: entry.total,
       }));
   }
 );

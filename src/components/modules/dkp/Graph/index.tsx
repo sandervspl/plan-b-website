@@ -1,6 +1,7 @@
 import React from 'react';
-import { AreaChart, Area, Tooltip } from 'recharts';
+import { AreaChart, Area, Tooltip as RechartsTooltip } from 'recharts';
 import { theme } from 'styles';
+import Tooltip from './Tooltip';
 import { GraphContainer, Title, LatestValue, DKPIcon, DiffValue, DiffArrowIcon } from './styled';
 
 const Graph: React.FC<Props> = ({ data, dataKey, title }) => {
@@ -24,7 +25,7 @@ const Graph: React.FC<Props> = ({ data, dataKey, title }) => {
       </DiffValue>
 
       <AreaChart width={370} height={90} data={data}>
-        <Tooltip />
+        <RechartsTooltip content={<Tooltip />} />
         <Area
           dataKey={dataKey}
           fill={theme.color.graph.fill.total}

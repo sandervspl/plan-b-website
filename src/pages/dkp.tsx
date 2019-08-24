@@ -41,7 +41,7 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
         <ContentHeader>
           <Heading as="h1">DKP Dashboard</Heading>
 
-          <UploadDkpButton />
+          {user.isAdmin && <UploadDkpButton />}
         </ContentHeader>
 
         {user.loadingCharacter ? (

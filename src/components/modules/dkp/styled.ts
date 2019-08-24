@@ -4,10 +4,6 @@ import { PageContentContainer, Heading, Paragraph, ErrorText } from 'common';
 import { ButtonContainer } from 'common/Button/styled';
 import { InputContainer } from 'common/form/Input/styled';
 
-export const DkpDashboardContainer = styled(PageContentContainer)`
-  padding-bottom: 24px;
-`;
-
 export const ContentHeader = styled.div`
   margin: 24px 24px 0;
   border-bottom: 1px solid ${(props) => props.theme.color.tab.inactive};
@@ -64,21 +60,16 @@ export const CharacterFormContainer = styled.div`
   }
 
   ${media.tablet`
-    padding: 32px 40px;
+    padding: 0 40px 32px;
   `}
 `;
 
 export const CharacterLoadingContainer = styled.div`
   margin-top: 16px;
-  padding: 0 24px;
 
   ${Paragraph} {
     margin-bottom: 16px;
   }
-
-  ${media.tablet`
-    padding: 0 40px;
-  `}
 `;
 
 export const ModalContent = styled.div`
@@ -111,5 +102,18 @@ export const UploadButtonContainer = styled.div`
   ${ErrorText} {
     text-align: right;
     margin: 8px 0;
+  }
+`;
+
+export const DkpDashboardContainer = styled(PageContentContainer)`
+  padding-bottom: 24px;
+
+  > ${CharacterLoadingContainer} {
+    width: 100%;
+
+    svg {
+      display: block;
+      margin: 0 auto;
+    }
   }
 `;

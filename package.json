@@ -49,8 +49,7 @@
     "slick-carousel": "1.8.1",
     "styled-components": "4.3.2",
     "tinycolor2": "1.4.1",
-    "typesafe-actions": "4.0.0",
-    "victory": "33.0.1"
+    "typesafe-actions": "4.0.0"
   },
   "devDependencies": {
     "@svgr/webpack": "4.3.0",
@@ -61,8 +60,8 @@
     "@types/lodash": "4.14.122",
     "@types/next": "8.0.5",
     "@types/node": "11.13.12",
-    "@types/react": "16.8.19",
-    "@types/react-dom": "16.8.4",
+    "@types/react": "16.9.2",
+    "@types/react-dom": "16.9.0",
     "@types/react-modal": "3.8.2",
     "@types/react-outside-click-handler": "1.2.0",
     "@types/react-redux": "7.1.0",
@@ -75,7 +74,6 @@
     "@types/reselect": "2.2.0",
     "@types/styled-components": "4.1.15",
     "@types/tinycolor": "1.1.27",
-    "@types/victory": "31.0.21",
     "@typescript-eslint/eslint-plugin": "1.6.0",
     "@typescript-eslint/parser": "1.6.0",
     "@zeit/next-css": "1.0.1",

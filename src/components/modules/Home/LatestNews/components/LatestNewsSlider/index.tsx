@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import Slider, { Settings } from 'react-slick';
 import { useSelector, useInterval } from 'hooks';
 import { getLatestTwoNews } from 'ducks/posts/selectors';
@@ -17,7 +17,7 @@ const LatestNewsSlider: React.FC = () => {
     setNextSlideTime(Date.now());
   };
 
-  const sliderSettings: Settings = {
+  const sliderSettings = useMemo<Settings>(() => ({
     dots: false,
     arrows: false,
     centerMode: true,
@@ -29,7 +29,7 @@ const LatestNewsSlider: React.FC = () => {
       setActiveSlideId(nextSlideId);
     },
     onSwipe: resetTime,
-  };
+  }), []);
 
   useInterval(() => {
     if (!slider.current) return;

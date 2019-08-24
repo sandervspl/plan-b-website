@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import DKPSvg from 'vectors/dkp.svg';
 import DiffArrowSvg from 'vectors/diff-arrow.svg';
 import { ParagraphStyle, Paragraph } from 'common';
+import { media } from 'styles';
 
 export const Title = styled.h2`
   ${ParagraphStyle};
@@ -55,8 +56,7 @@ export const GraphContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px 40px 32px;
-  width: 48%;
+  padding: 8px 8px 26px;
   border-radius: 3px;
   border: 1px solid ${(props) => props.theme.color.border.primary};
   background-color: ${(props) => props.theme.color.background};
@@ -64,6 +64,12 @@ export const GraphContainer = styled.div`
   .recharts-wrapper {
     margin-top: 16px;
   }
+
+  ${media.tablet`
+    padding: 16px 40px 32px;
+    width: 48%;
+    border-right: 1px solid ${(props) => props.theme.color.border.primary};
+  `}
 `;
 
 export const TooltipContainer = styled.div`

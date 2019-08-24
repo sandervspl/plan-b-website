@@ -5,10 +5,11 @@ import { ButtonContainer } from 'common/Button/styled';
 import { InputContainer } from 'common/form/Input/styled';
 
 export const DkpDashboardContainer = styled(PageContentContainer)`
-  padding: 24px;
+  padding-bottom: 24px;
 `;
 
 export const ContentHeader = styled.div`
+  margin: 24px 24px 0;
   border-bottom: 1px solid ${(props) => props.theme.color.tab.inactive};
 
   ${Heading} {
@@ -23,6 +24,7 @@ export const ContentHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 40px 40px 32px;
 
     ${ButtonContainer} {
       display: block;
@@ -31,7 +33,7 @@ export const ContentHeader = styled.div`
 `;
 
 export const CharacterFormContainer = styled.div`
-  padding: 32px 0;
+  padding: 32px 24px;
 
   ${Paragraph} {
     &:nth-child(2) {
@@ -60,14 +62,23 @@ export const CharacterFormContainer = styled.div`
     margin-top: 16px;
     font-size: 18px !important;
   }
+
+  ${media.tablet`
+    padding: 32px 40px;
+  `}
 `;
 
 export const CharacterLoadingContainer = styled.div`
   margin-top: 16px;
+  padding: 0 24px;
 
   ${Paragraph} {
     margin-bottom: 16px;
   }
+
+  ${media.tablet`
+    padding: 0 40px;
+  `}
 `;
 
 export const ModalContent = styled.div`

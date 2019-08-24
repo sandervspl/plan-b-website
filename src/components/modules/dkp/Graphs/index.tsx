@@ -1,10 +1,21 @@
 import React from 'react';
+import Slider, { Settings } from 'react-slick';
 import { totalDkpForGraph } from 'ducks/user/selectors';
 import { useSelector } from 'hooks';
 import { EmptyStateText } from 'common';
 import { theme } from 'styles';
 import Graph from '../Graph';
 import { GraphsContainer } from './styled';
+
+const sliderSettings: Settings = {
+  dots: false,
+  arrows: false,
+  centerMode: true,
+  swipeToSlide: true,
+  infinite: false,
+  centerPadding: '0',
+  slidesToShow: 1.2,
+};
 
 const Graphs: React.FC<Props> = () => {
   const dkpHistory = useSelector(totalDkpForGraph);
@@ -18,26 +29,45 @@ const Graphs: React.FC<Props> = () => {
     );
   }
 
-  if (isMobile) {
-    return null;
-  }
+  const DkpGraphs = [
+    <Graph
+      data={dkpHistory}
+      dataKey="dkp"
+      title="DKP Total"
+      fill={theme.color.graph.fill.total}
+      stroke={theme.color.graph.border.total}
+    />,
+    <Graph
+      data={dkpHistory}
+      dataKey="dkp"
+      title="Guild DKP Average"
+      fill={theme.color.graph.fill.average}
+      stroke={theme.color.graph.border.average}
+    />,
+  ];
 
   return (
     <GraphsContainer>
-      <Graph
-        data={dkpHistory}
-        dataKey="dkp"
-        title="DKP Total"
-        fill={theme.color.graph.fill.total}
-        stroke={theme.color.graph.border.total}
-      />
-      <Graph
-        data={dkpHistory}
-        dataKey="dkp"
-        title="Guild DKP Average"
-        fill={theme.color.graph.fill.average}
-        stroke={theme.color.graph.border.average}
-      />
+      {isMobile ? (
+        <Slider {...sliderSettings}>
+          <Graph
+            data={dkpHistory}
+            dataKey="dkp"
+            title="DKP Total"
+            fill={theme.color.graph.fill.total}
+            stroke={theme.color.graph.border.total}
+          />
+          <Graph
+            data={dkpHistory}
+            dataKey="dkp"
+            title="Guild DKP Average"
+            fill={theme.color.graph.fill.average}
+            stroke={theme.color.graph.border.average}
+          />
+        </Slider>
+      ) : (
+        DkpGraphs.map((graph) => graph)
+      )}
     </GraphsContainer>
   );
 };

@@ -30,7 +30,7 @@ const CharacterForm: React.FC<Props> = () => {
     try {
       await linkCharacter(name);
 
-      // @TODO Fetch DKP data
+      dispatch(fetchUserCharacter());
     } catch (err) {
       if (err.statusCode === 404) {
         setCreateCharacterRequest(true);

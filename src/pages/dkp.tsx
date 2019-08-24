@@ -65,7 +65,7 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
     setLoading(false);
   };
 
-  const onCreate = (values: FormState) => async () => {
+  const onCreate = (name: string) => async () => {
     setCreateCharacterRequest(false);
     setLoading(true);
 
@@ -74,7 +74,7 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
         url: api.url.api,
         path: 'user/character',
         body: {
-          characterName: values.name,
+          characterName: name,
         },
       });
 
@@ -82,7 +82,7 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
         url: api.url.api,
         path: 'user/character',
         body: {
-          characterName: values.name,
+          characterName: name,
           userId: user.data!.id,
         },
       });

@@ -9,6 +9,8 @@ export enum AUTH_LEVEL {
 export type UserState = i.BaseState<i.UserData> & {
   isSignedIn: boolean;
   isAdmin: boolean;
+  character?: i.CharacterData;
+  loadingCharacter: boolean;
 };
 
 export type UserData = {
@@ -19,6 +21,21 @@ export type UserData = {
   fetchedAt: Date;
   authLevel: i.AUTH_LEVEL;
   dkp: number;
+}
+
+export type CharacterData = i.BaseResponseBody & {
+  name: string;
+  dkp: number;
+  dkpHistories?: DkpHistory[];
+}
+
+export type DkpHistory = i.BaseResponseBody & {
+  net: number;
+  spent: number;
+  total: number;
+  hours: number;
+  exporter: string;
+  exportTime: number;
 }
 
 export type FullDatabaseUserData = {
@@ -39,3 +56,4 @@ export type SimpleDatabaseUserData = {
 }
 
 export type FetchUser = i.BaseThunkAction<() => Promise<i.UserData | void>>;
+export type FetchUserCharacter = i.BaseThunkAction<() => Promise<i.CharacterData | void>>;

@@ -64,6 +64,8 @@ export const CharacterFormContainer = styled.div`
 `;
 
 export const CharacterLoadingContainer = styled.div`
+  margin-top: 16px;
+
   ${Paragraph} {
     margin-bottom: 16px;
   }

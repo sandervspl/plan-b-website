@@ -2,6 +2,7 @@ import * as i from 'types';
 import React, { useEffect, useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import { sendDkpXml } from 'ducks/dkp';
+import { fetchUserCharacter } from 'ducks/user';
 import { getUrl, validate, api, redirect } from 'services';
 import { useFileUpload, useDispatch, useSelector } from 'hooks';
 import { Heading, Button, Paragraph, Loader, ErrorText } from 'common';
@@ -27,6 +28,10 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
   const { ref, uploading, file } = useFileUpload();
 
   useEffect(() => {
+    dispatch(fetchUserCharacter());
+  }, []);
+
+  useEffect(() => {
     if (file) {
       dispatch(sendDkpXml(file));
     }
@@ -44,14 +49,7 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
     setLinkCharacterRequest(false);
 
     try {
-      await api.patch({
-        url: api.url.api,
-        path: 'user/character',
-        withAuth: true,
-        body: {
-          characterName: name,
-        },
-      });
+      await linkCharacter(name);
 
       // @TODO Fetch DKP data
     } catch (err) {
@@ -70,30 +68,37 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
     setLoading(true);
 
     try {
-      await api.post({
-        url: api.url.api,
-        path: 'user/character',
-        body: {
-          characterName: name,
-        },
-      });
+      await createCharacter(name);
+      await linkCharacter(name);
 
-      await api.patch({
-        url: api.url.api,
-        path: 'user/character',
-        body: {
-          characterName: name,
-          userId: user.data!.id,
-        },
-      });
-
-      // @TODO Fetch DKP data
+      dispatch(fetchUserCharacter());
     } catch (err) {
       setError('Something went wrong. Try again later.');
     }
 
     setLoading(false);
     setLinkCharacterRequest(false);
+  };
+
+  const linkCharacter = async (name: string) => {
+    await api.patch({
+      url: api.url.api,
+      path: 'user/character',
+      withAuth: true,
+      body: {
+        characterName: name,
+      },
+    });
+  };
+
+  const createCharacter = async (name: string) => {
+    await api.post({
+      url: api.url.api,
+      path: 'user/character',
+      body: {
+        characterName: name,
+      },
+    });
   };
 
   // Auth check
@@ -133,61 +138,66 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
           />
         </ContentHeader>
 
-        {/* @TODO Only show if no character is linked to user */}
-        <CharacterFormContainer>
-          <Paragraph>
-            In order for your DKP to show, we need to connect a character to your account.
-            Make sure to spell out your character name correctly before submitting.
-          </Paragraph>
-          <Paragraph>
-            This can NOT be changed!
-          </Paragraph>
+        {user.loadingCharacter ? (
+          <CharacterLoadingContainer>
+            <Loader />
+          </CharacterLoadingContainer>
+        ) : !user.character ? (
+          <CharacterFormContainer>
+            <Paragraph>
+              In order for your DKP to show, we need to connect a character to your account.
+              Make sure to spell out your character name correctly before submitting.
+            </Paragraph>
+            <Paragraph>
+              This can NOT be changed!
+            </Paragraph>
 
-          <Form<FormState> onSubmit={() => setLinkCharacterRequest(true)}>
-            {({ handleSubmit, invalid, values }) => (
-              <>
-                <form onSubmit={handleSubmit}>
-                  {loading ? (
-                    <CharacterLoadingContainer>
-                      <Paragraph>Linking character to account...</Paragraph>
-                      <Loader />
-                    </CharacterLoadingContainer>
-                  ) : (
-                    <>
-                      <Field
-                        component={Input}
-                        name="name"
-                        label="Enter character name"
-                        required
-                        validate={characterValidate}
-                      />
+            <Form<FormState> onSubmit={() => setLinkCharacterRequest(true)}>
+              {({ handleSubmit, invalid, values }) => (
+                <>
+                  <form onSubmit={handleSubmit}>
+                    {loading ? (
+                      <CharacterLoadingContainer>
+                        <Paragraph>Linking character to account...</Paragraph>
+                        <Loader />
+                      </CharacterLoadingContainer>
+                    ) : (
+                      <>
+                        <Field
+                          component={Input}
+                          name="name"
+                          label="Enter character name"
+                          required
+                          validate={characterValidate}
+                        />
 
-                      <Button type="submit" disabled={invalid}>
-                        Add character
-                      </Button>
+                        <Button type="submit" disabled={invalid}>
+                          Add character
+                        </Button>
 
-                      {error && <ErrorText>{error}</ErrorText>}
-                    </>
-                  )}
+                        {error && <ErrorText>{error}</ErrorText>}
+                      </>
+                    )}
 
-                  <CreateCharacterModal
-                    name={values.name}
-                    cta={onCreate}
-                    isModalOpen={createCharacterRequest}
-                    setModalOpen={setCreateCharacterRequest}
-                  />
+                    <CreateCharacterModal
+                      name={values.name}
+                      cta={onCreate}
+                      isModalOpen={createCharacterRequest}
+                      setModalOpen={setCreateCharacterRequest}
+                    />
 
-                  <LinkCharacterModal
-                    name={values.name}
-                    cta={onLink}
-                    isModalOpen={linkCharacterRequest}
-                    setModalOpen={setLinkCharacterRequest}
-                  />
-                </form>
-              </>
-            )}
-          </Form>
-        </CharacterFormContainer>
+                    <LinkCharacterModal
+                      name={values.name}
+                      cta={onLink}
+                      isModalOpen={linkCharacterRequest}
+                      setModalOpen={setLinkCharacterRequest}
+                    />
+                  </form>
+                </>
+              )}
+            </Form>
+          </CharacterFormContainer>
+        ) : null} {/* @TODO Show DKP data */}
       </DkpDashboardContainer>
     </Page>
   );

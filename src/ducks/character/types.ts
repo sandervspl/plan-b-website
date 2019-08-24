@@ -12,6 +12,6 @@ export type CmsProfession = i.BaseResponseBody & {
   icon: i.Image;
 }
 
-export type FetchCharacter = i.BaseThunkAction<(name: string) => Promise<void>>;
+export type FetchBlizzardCharacter = i.BaseThunkAction<(name: string) => Promise<void>>;
 
 export type FetchProfessions = i.BaseThunkAction<() => Promise<void>>;

@@ -10,7 +10,7 @@ export function useFileUpload() {
       return;
     }
 
-    ref.current.onchange = (e) => handleFileChange(e);
+    ref.current.onchange = (e) => handleFileChange(e as any);
   }, [ref]);
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {

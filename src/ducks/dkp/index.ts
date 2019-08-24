@@ -8,7 +8,7 @@ export const actions = {
   // success: (streams: i.ActiveStreams) => action('dkp/SUCCESS', streams),
 
   sendXmlSuccess: () => action('dkp/SEND_XML_SUCCESS'),
-  sendXmlFailed: () => action('dkp/SEND_XML_FAILED'),
+  sendXmlFailed: (errorMsg: string) => action('dkp/SEND_XML_FAILED', errorMsg),
 };
 
 const initialState: i.TwitchState = {
@@ -24,19 +24,6 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Twi
         error: false,
         loading: true,
       };
-    // case 'dkp/FAILED':
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //     error: true,
-    //   };
-    // case 'dkp/SUCCESS':
-    //   return {
-    //     ...state,
-    //     data: action.payload,
-    //     error: false,
-    //     loading: false,
-    //   };
     case 'dkp/SEND_XML_SUCCESS':
       return {
         ...state,
@@ -46,7 +33,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Twi
     case 'dkp/SEND_XML_FAILED':
       return {
         ...state,
-        error: true,
+        error: action.payload,
         loading: false,
       };
     default:
@@ -69,7 +56,8 @@ export const sendDkpXml: i.SendDkpXml['thunk'] = (file) => async (dispatch, getS
     .then(() => {
       dispatch(actions.sendXmlSuccess());
     })
-    .catch(() => {
-      dispatch(actions.sendXmlFailed());
+    .catch((err) => {
+      const msg = err && err.message ? err.message : 'Something went wrong. Try again later.';
+      dispatch(actions.sendXmlFailed(msg));
     });
 };

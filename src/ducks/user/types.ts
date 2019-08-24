@@ -23,7 +23,7 @@ export type UserData = {
   dkp: number;
 }
 
-export type CharacterData = i.BaseResponseBody & {
+export type UserCharacterData = i.BaseResponseBody & {
   name: string;
   dkp: number;
   dkpHistories?: DkpHistory[];

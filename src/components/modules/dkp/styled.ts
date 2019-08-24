@@ -96,3 +96,10 @@ export const Buttons = styled.div`
     }
   }
 `;
+
+export const UploadButtonContainer = styled.div`
+  ${ErrorText} {
+    text-align: right;
+    margin: 8px 0;
+  }
+`;

@@ -35,6 +35,16 @@ const theme = {
     positive: '#51C163',
     negative: '#EF7C69',
     discord: '#7289DA',
+    graph: {
+      border: {
+        total: '#FBD159',
+        average: '#6758F1',
+      },
+      fill: {
+        total: '#46443C',
+        average: '#36363D',
+      },
+    },
   },
 
   font: {

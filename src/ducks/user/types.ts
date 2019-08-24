@@ -9,7 +9,7 @@ export enum AUTH_LEVEL {
 export type UserState = i.BaseState<i.UserData> & {
   isSignedIn: boolean;
   isAdmin: boolean;
-  character?: i.CharacterData;
+  character?: i.UserCharacterData;
   loadingCharacter: boolean;
 };
 
@@ -56,4 +56,4 @@ export type SimpleDatabaseUserData = {
 }
 
 export type FetchUser = i.BaseThunkAction<() => Promise<i.UserData | void>>;
-export type FetchUserCharacter = i.BaseThunkAction<() => Promise<i.CharacterData | void>>;
+export type FetchUserCharacter = i.BaseThunkAction<() => Promise<i.UserCharacterData | void>>;

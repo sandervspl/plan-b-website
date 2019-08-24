@@ -1,6 +1,5 @@
 import * as i from 'types';
 import React, { useEffect } from 'react';
-import { sendDkpXml } from 'ducks/dkp';
 import { fetchUserCharacter } from 'ducks/user';
 import { getUrl, redirect } from 'services';
 import { useDispatch, useSelector } from 'hooks';
@@ -9,6 +8,7 @@ import Page from 'modules/Page';
 import { DkpDashboardContainer, ContentHeader, CharacterLoadingContainer } from 'modules/dkp/styled';
 import CharacterForm from 'modules/dkp/CharacterForm';
 import UploadDkpButton from 'modules/dkp/UploadDkpButton';
+import DkpOverview from 'modules/dkp/DkpOverview';
 
 const DkpDashboard: i.NextPageComponent = ({ url }) => {
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
           </CharacterLoadingContainer>
         ) : !user.character ? (
           <CharacterForm />
-        ) : null} {/* @TODO Show DKP data */}
+        ) : <DkpOverview />}
       </DkpDashboardContainer>
     </Page>
   );

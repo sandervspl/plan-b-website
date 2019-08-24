@@ -8,7 +8,7 @@ export const actions = {
   success: (user: i.UserData) => action('user/SUCCESS', user),
 
   loadCharacter: () => action('user/CHARACTER_LOAD'),
-  successCharacter: (character: i.CharacterData) => action('user/CHARACTER_SUCCESS', character),
+  successCharacter: (character: i.UserCharacterData) => action('user/CHARACTER_SUCCESS', character),
 };
 
 const initialState: i.UserState = {
@@ -85,7 +85,7 @@ export const fetchUser: i.FetchUser['thunk'] = () => async (dispatch, getState, 
 export const fetchUserCharacter: i.FetchUserCharacter['thunk'] = () => async (dispatch, getState, api) => {
   dispatch(actions.loadCharacter());
 
-  return api.get<i.CharacterData>({
+  return api.get<i.UserCharacterData>({
     url: api.url.api,
     path: `${API_ENDPOINT.CHARACTER}`,
     withAuth: true,

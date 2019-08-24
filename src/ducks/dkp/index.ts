@@ -47,7 +47,7 @@ export const sendDkpXml: i.SendDkpXml['thunk'] = (file) => async (dispatch, getS
   const data = new FormData();
   data.append('file', file);
 
-  return api.post<any>({
+  return api.post({
     url: api.url.api,
     body: data,
     upload: true,

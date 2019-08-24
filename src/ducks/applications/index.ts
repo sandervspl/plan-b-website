@@ -167,7 +167,7 @@ export const fetchApplications: i.FetchApplications['thunk'] = (status, type) =>
     const isPrivate = type === 'private';
     const endpoint = isPrivate ? API_ENDPOINT.APPLICATIONS : API_ENDPOINT.APPLICATIONS_PUBLIC;
 
-    return api.methods.get<i.ApplicationData[]>({
+    return api.get<i.ApplicationData[]>({
       url: api.url.api,
       path: `${endpoint}/${status}`,
       withAuth: isPrivate,
@@ -184,7 +184,7 @@ export const fetchApplicationDetail = (id: number): i.ThunkAction =>
   async (dispatch, getState, api) => {
     dispatch(actions.load());
 
-    return api.methods.get<i.ApplicationData>({
+    return api.get<i.ApplicationData>({
       url: api.url.api,
       path: `${API_ENDPOINT.APPLICATION_DETAIL}/${id}`,
       withAuth: true,
@@ -209,7 +209,7 @@ export const fetchPublicApplicationDetail = (uuid: string): i.ThunkAction =>
   async (dispatch, getState, api) => {
     dispatch(actions.load());
 
-    return api.methods.get<i.ApplicationBase>({
+    return api.get<i.ApplicationBase>({
       url: api.url.api,
       path: `${API_ENDPOINT.APPLICATION_DETAIL_PUBLIC}/${uuid}`,
     })
@@ -225,7 +225,7 @@ export const fetchComments: i.FetchComments['thunk'] = (id, type) =>
   async (dispatch, getState, api) => {
     dispatch(actions.comments());
 
-    return api.methods.get<i.Comment[]>({
+    return api.get<i.Comment[]>({
       url: api.url.api,
       path: `${API_ENDPOINT.APPLICATION_DETAIL}/${id}/messages`,
       query: { type },
@@ -244,7 +244,7 @@ export const sendComment: i.SendComment['thunk'] = (type, applicationId, comment
 
     const isPublic = type === 'public';
 
-    return api.methods.post<i.Comment>({
+    return api.post<i.Comment>({
       url: api.url.api,
       path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationId}/comment`,
       body: {
@@ -268,7 +268,7 @@ export const saveVote: i.SaveVote['thunk'] = (applicationId, userId, vote) =>
   async (dispatch, getState, api) => {
     dispatch(actions.vote());
 
-    return api.methods.post<i.Vote>({
+    return api.post<i.Vote>({
       url: api.url.api,
       path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationId}/vote`,
       body: {
@@ -291,7 +291,7 @@ export const setStatus: i.SetStatus['thunk'] = (applicationId, status) =>
   async (dispatch, getState, api) => {
     dispatch(actions.setStatus());
 
-    return api.methods.put<i.ApplicationBase>({
+    return api.put<i.ApplicationBase>({
       url: api.url.api,
       path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationId}/status`,
       body: {

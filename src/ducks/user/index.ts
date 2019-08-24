@@ -46,7 +46,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Use
 export const fetchUser: i.FetchUser['thunk'] = () => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
-  return api.methods.get<i.UserData>({
+  return api.get<i.UserData>({
     url: api.url.api,
     path: `${API_ENDPOINT.AUTH_USER}`,
     withAuth: true,

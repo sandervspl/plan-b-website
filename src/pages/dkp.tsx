@@ -24,7 +24,7 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
   const [linkCharacterRequest, setLinkCharacterRequest] = useState(false);
   const [error, setError] = useState('');
 
-  const { uploading, file, handleFileChange } = useFileUpload();
+  const { ref, uploading, file } = useFileUpload();
 
   useEffect(() => {
     if (file) {
@@ -41,9 +41,10 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
 
     setError('');
     setLoading(true);
+    setLinkCharacterRequest(false);
 
     try {
-      await api.methods.patch({
+      await api.patch({
         url: api.url.api,
         path: 'user/character',
         body: {
@@ -62,7 +63,6 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
     }
 
     setLoading(false);
-    setLinkCharacterRequest(false);
   };
 
   const onCreate = (values: FormState) => async () => {
@@ -70,7 +70,7 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
     setLoading(true);
 
     try {
-      await api.methods.post({
+      await api.post({
         url: api.url.api,
         path: 'user/character',
         body: {
@@ -78,7 +78,7 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
         },
       });
 
-      await api.methods.patch({
+      await api.patch({
         url: api.url.api,
         path: 'user/character',
         body: {
@@ -129,7 +129,7 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
             type="file"
             accept=".xml,.txt"
             name="dkp-xml"
-            onChange={handleFileChange}
+            ref={ref}
           />
         </ContentHeader>
 

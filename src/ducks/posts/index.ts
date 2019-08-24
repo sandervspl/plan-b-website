@@ -47,7 +47,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Pos
 export const fetchAllPosts = (): i.ThunkAction => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
-  return api.methods.get<i.Post[]>({
+  return api.get<i.Post[]>({
     url: api.url.api,
     path: API_ENDPOINT.POSTS,
   })
@@ -63,7 +63,7 @@ export const fetchPosts = (ids: number[]): i.ThunkAction => async (dispatch, get
   dispatch(actions.load());
 
   const fetches = ids.map((id) => (
-    api.methods.get<i.Post>({
+    api.get<i.Post>({
       url: api.url.api,
       path: `${API_ENDPOINT.POSTS}/${id}`,
     })

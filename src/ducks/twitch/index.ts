@@ -42,7 +42,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Twi
 export const fetchActiveStreams: i.FetchActiveStreams['thunk'] = () => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
-  return api.methods.get<i.ActiveStreams>({
+  return api.get<i.ActiveStreams>({
     url: api.url.api,
     path: `${API_ENDPOINT.ACTIVE_STREAMS}`,
   })

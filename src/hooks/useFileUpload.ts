@@ -1,10 +1,19 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 export function useFileUpload() {
+  const ref = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [file, setFile] = useState<File>();
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    if (!ref.current) {
+      return;
+    }
+
+    ref.current.onchange = (e) => handleFileChange(e);
+  }, [ref]);
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
 
     if (!e.target || !e.target.files) {
@@ -27,5 +36,5 @@ export function useFileUpload() {
     reader.readAsDataURL(file);
   };
 
-  return { file, handleFileChange, uploading } as const;
+  return { ref, file, uploading } as const;
 }

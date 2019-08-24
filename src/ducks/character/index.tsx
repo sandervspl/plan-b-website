@@ -68,7 +68,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Cha
 export const fetchCharacter: i.FetchCharacter['thunk'] = (name) => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
-  return api.methods.get<i.CharacterData>({
+  return api.get<i.CharacterData>({
     url: api.url.api,
     path: `blizzard/character/${name}`,
   })
@@ -88,7 +88,7 @@ export const fetchCharacter: i.FetchCharacter['thunk'] = (name) => async (dispat
 export const fetchProfessions: i.FetchProfessions['thunk'] = () => async (dispatch, getState, api) => {
   dispatch(actions.loadProfessions());
 
-  return api.methods.get<i.CmsProfession[]>({
+  return api.get<i.CmsProfession[]>({
     url: api.url.cms,
     path: 'professions',
   })

@@ -74,7 +74,7 @@ export function fetchPage<T extends i.PagesBody = i.PagesBody>(
   return async (dispatch, getState, api) => {
     dispatch(actions.load());
 
-    return api.methods.get<T>({
+    return api.get<T>({
       url: api.url.api,
       path: param ? `${endpoint}/${param}` : endpoint,
     })

@@ -76,7 +76,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Rec
 export const fetchRecruitment = (): i.ThunkAction => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
-  return api.methods.get<i.RecruitmentData>({
+  return api.get<i.RecruitmentData>({
     url: api.url.api,
     path: API_ENDPOINT.RECRUITMENT,
   })

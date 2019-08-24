@@ -64,11 +64,6 @@ export const CharacterFormContainer = styled.div`
 `;
 
 export const CharacterLoadingContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 32px 0;
-
   ${Paragraph} {
     margin-bottom: 16px;
   }

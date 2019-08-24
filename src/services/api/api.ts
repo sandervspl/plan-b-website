@@ -1,6 +1,6 @@
 import { compose } from 'redux';
 import {
-  RequestOptions, NextMiddleware, SetupRequest, RunMiddleware, Middleware, Options, ApiMethods,
+  RequestOptions, NextMiddleware, SetupRequest, RunMiddleware, Middleware, Options, FetchCall,
 } from './types';
 import { generateOptions } from './generateOptions';
 import { request } from './request';
@@ -42,17 +42,15 @@ const setupRequest: SetupRequest = async (middlewares, options) => (
 class ApiHelper {
   private middlewares: Middleware[] = [];
 
-  public readonly methods: ApiMethods = {
-    get: (args) => this.generateRequest({ method: 'GET', ...args }),
-    del: (args) => this.generateRequest({ method: 'DELETE', ...args }),
-    post: (args) => this.generateRequest({ method: 'POST', ...args }),
-    put: (args) => this.generateRequest({ method: 'PUT', ...args }),
-    patch: (args) => this.generateRequest({ method: 'PATCH', ...args }),
-  };
+  public get: FetchCall = (args) => this.generateRequest({ method: 'GET', ...args });
+  public del: FetchCall = (args) => this.generateRequest({ method: 'DELETE', ...args });
+  public post: FetchCall = (args) => this.generateRequest({ method: 'POST', ...args });
+  public put: FetchCall = (args) => this.generateRequest({ method: 'PUT', ...args });
+  public patch: FetchCall = (args) => this.generateRequest({ method: 'PATCH', ...args });
 
   public readonly url: typeof apiConfig.url = apiConfig.url;
 
-  public applyMiddleware = (middlewareList: Middleware[] | { [key: string]: Middleware }) => {
+  public applyMiddleware = (middlewareList: Middleware[] | Record<string, Middleware>) => {
     this.middlewares = Array.isArray(middlewareList)
       ? middlewareList
       : Object.values(middlewareList);

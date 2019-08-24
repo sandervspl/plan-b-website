@@ -19,11 +19,11 @@ import { RecruitmentContainer, QuestionsForm } from 'modules/Apply/styled';
 
 type Question = React.ComponentType<i.QuestionComponentProps>;
 
-let initValues = {};
+let mockValues = {};
 if (__DEV__) {
-  initValues = {
+  mockValues = {
     character: {
-      server: 'Shazzrah',
+      server: 'Firemaw',
       level: 60,
       name: 'WEB_TEST',
       race: 2,
@@ -133,13 +133,13 @@ const ApplicationPage: i.NextPageComponent = React.memo(() => {
         keepDirtyOnReinitialize
         initialValues={{
           character: {
-            server: 'Shazzrah',
+            server: 'Firemaw',
             level: 60,
             race: '-1',
             class: '-1',
           },
           social: false,
-          // ...initValues,
+          // ...mockValues,
         }}
       >
         {({ handleSubmit, values, valid, errors }) => (

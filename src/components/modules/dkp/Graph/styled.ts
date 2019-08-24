@@ -55,7 +55,8 @@ export const GraphContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px 40px;
+  padding: 16px 40px 32px;
+  width: 48%;
   border-radius: 3px;
   border: 1px solid ${(props) => props.theme.color.border.primary};
   background-color: ${(props) => props.theme.color.background};

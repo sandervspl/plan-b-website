@@ -2,6 +2,7 @@ import React from 'react';
 import { totalDkpForGraph } from 'ducks/user/selectors';
 import { useSelector } from 'hooks';
 import { EmptyStateText } from 'common';
+import { theme } from 'styles';
 import Graph from '../Graph';
 import { GraphsContainer } from './styled';
 
@@ -19,8 +20,20 @@ const Graphs: React.FC<Props> = () => {
 
   return (
     <GraphsContainer>
-      <Graph data={dkpHistory} dataKey="dkp" title="DKP Total" />
-      <Graph data={dkpHistory} dataKey="dkp" title="Guild DKP Average" />
+      <Graph
+        data={dkpHistory}
+        dataKey="dkp"
+        title="DKP Total"
+        fill={theme.color.graph.fill.total}
+        stroke={theme.color.graph.border.total}
+      />
+      <Graph
+        data={dkpHistory}
+        dataKey="dkp"
+        title="Guild DKP Average"
+        fill={theme.color.graph.fill.average}
+        stroke={theme.color.graph.border.average}
+      />
     </GraphsContainer>
   );
 };

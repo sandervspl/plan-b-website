@@ -1,10 +1,9 @@
 import React from 'react';
-import { AreaChart, Area, Tooltip as RechartsTooltip } from 'recharts';
-import { theme } from 'styles';
+import { AreaChart, Area, Tooltip as RechartsTooltip, ResponsiveContainer } from 'recharts';
 import Tooltip from './Tooltip';
 import { GraphContainer, Title, LatestValue, DKPIcon, DiffValue, DiffArrowIcon } from './styled';
 
-const Graph: React.FC<Props> = ({ data, dataKey, title }) => {
+const Graph: React.FC<Props> = ({ data, dataKey, title, fill, stroke }) => {
   const latestValue = data[data.length - 1][dataKey] as number;
   const prevValue = data[data.length - 2][dataKey] as number;
   const diffValue = ((latestValue - prevValue) / prevValue).toFixed(1);
@@ -24,15 +23,17 @@ const Graph: React.FC<Props> = ({ data, dataKey, title }) => {
         <DiffArrowIcon positive={positiveDiff} />
       </DiffValue>
 
-      <AreaChart width={370} height={90} data={data}>
-        <RechartsTooltip content={<Tooltip />} />
-        <Area
-          dataKey={dataKey}
-          fill={theme.color.graph.fill.total}
-          stroke={theme.color.graph.border.total}
-          strokeWidth={2}
-        />
-      </AreaChart>
+      <ResponsiveContainer width="100%" height={90}>
+        <AreaChart data={data}>
+          <RechartsTooltip content={<Tooltip />} />
+          <Area
+            dataKey={dataKey}
+            fill={fill}
+            stroke={stroke}
+            strokeWidth={2}
+          />
+        </AreaChart>
+      </ResponsiveContainer>
     </GraphContainer>
   );
 };
@@ -41,6 +42,8 @@ export type Props = {
   data: Record<string, string | number | Date>[];
   dataKey: string;
   title: string;
+  fill: string;
+  stroke: string;
 };
 
 export default Graph;

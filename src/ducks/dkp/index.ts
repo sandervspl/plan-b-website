@@ -53,8 +53,10 @@ export const sendDkpXml: i.SendDkpXml['thunk'] = (file) => async (dispatch, getS
     upload: true,
     path: `${API_ENDPOINT.DKP}`,
   })
-    .then(() => {
+    .then((response) => {
       dispatch(actions.sendXmlSuccess());
+
+      return response;
     })
     .catch((err) => {
       const msg = err && err.message ? err.message : 'Something went wrong. Try again later.';

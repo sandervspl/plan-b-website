@@ -10,8 +10,12 @@ const Graphs: React.FC<Props> = () => {
   const dkpHistory = useSelector(totalDkpForGraph);
   const isMobile = useSelector((state) => state.ui.isMobile);
 
-  if (!dkpHistory) {
-    return <EmptyStateText>You have no DKP history yet.</EmptyStateText>;
+  if (!dkpHistory || dkpHistory.length === 0) {
+    return (
+      <GraphsContainer>
+        <EmptyStateText>You have no DKP history yet.</EmptyStateText>
+      </GraphsContainer>
+    );
   }
 
   if (isMobile) {

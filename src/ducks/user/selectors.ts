@@ -14,7 +14,7 @@ export const totalDkpForGraph = createSelector(
     }
 
     return dkpHistory
-      .sort((a, b) => new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime())
+      .sort((a, b) => a.exportTime - b.exportTime)
       .map((entry) => ({
         xName: 'date',
         xValue: entry.updatedAt,

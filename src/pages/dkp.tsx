@@ -47,9 +47,9 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
       await api.patch({
         url: api.url.api,
         path: 'user/character',
+        withAuth: true,
         body: {
           characterName: name,
-          userId: user.data!.id,
         },
       });
 

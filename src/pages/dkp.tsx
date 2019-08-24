@@ -3,29 +3,20 @@ import React, { useEffect } from 'react';
 import { sendDkpXml } from 'ducks/dkp';
 import { fetchUserCharacter } from 'ducks/user';
 import { getUrl, redirect } from 'services';
-import { useFileUpload, useDispatch, useSelector } from 'hooks';
-import { Heading, Button, Loader } from 'common';
+import { useDispatch, useSelector } from 'hooks';
+import { Heading, Loader } from 'common';
 import Page from 'modules/Page';
 import { DkpDashboardContainer, ContentHeader, CharacterLoadingContainer } from 'modules/dkp/styled';
 import CharacterForm from 'modules/dkp/CharacterForm';
+import UploadDkpButton from 'modules/dkp/UploadDkpButton';
 
 const DkpDashboard: i.NextPageComponent = ({ url }) => {
   const dispatch = useDispatch();
-  const sending = useSelector((state) => state.dkp.loading);
-  const isAdmin = useSelector((state) => state.user.isAdmin);
   const user = useSelector((state) => state.user);
-
-  const { ref, uploading, file } = useFileUpload();
 
   useEffect(() => {
     dispatch(fetchUserCharacter());
   }, []);
-
-  useEffect(() => {
-    if (file) {
-      dispatch(sendDkpXml(file));
-    }
-  }, [file]);
 
   // Auth check
   if (user.loading) {
@@ -50,18 +41,7 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
         <ContentHeader>
           <Heading as="h1">DKP Dashboard</Heading>
 
-          {isAdmin && (
-            <Button as="label" htmlFor="file-upload" disabled={uploading || sending}>
-              Upload DKP Export
-            </Button>
-          )}
-          <input
-            id="file-upload"
-            type="file"
-            accept=".xml,.txt"
-            name="dkp-xml"
-            ref={ref}
-          />
+          <UploadDkpButton />
         </ContentHeader>
 
         {user.loadingCharacter ? (

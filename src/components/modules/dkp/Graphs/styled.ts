@@ -5,9 +5,9 @@ import { media } from 'styles';
 export const GraphsContainer = styled.div`
   position: relative;
   margin-top: 32px;
-  width: 100%;
 
   .slick-slide {
+    display: inline-block;
     border-right: 8px solid transparent;
     transform: translateX(24px);
   }

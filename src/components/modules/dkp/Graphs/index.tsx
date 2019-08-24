@@ -22,11 +22,7 @@ const Graphs: React.FC<Props> = () => {
   const isMobile = useSelector((state) => state.ui.isMobile);
 
   if (!dkpHistory || dkpHistory.length === 0) {
-    return (
-      <GraphsContainer>
-        <EmptyStateText>You have no DKP history yet.</EmptyStateText>
-      </GraphsContainer>
-    );
+    return null;
   }
 
   const DkpGraphs = [
@@ -37,6 +33,7 @@ const Graphs: React.FC<Props> = () => {
       fill={theme.color.graph.fill.total}
       stroke={theme.color.graph.border.total}
     />,
+    // @TODO average dkp data
     <Graph
       data={dkpHistory}
       dataKey="dkp"

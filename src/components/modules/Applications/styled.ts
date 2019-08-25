@@ -6,12 +6,12 @@ export const ApplicationsContainer = styled(PageContentContainer)`
   padding-bottom: 20px;
 
   h2 {
-    padding: 15px 20px 10px;
+    padding: 16px 20px 8px;
     text-transform: capitalize;
     font-size: 18px;
 
     ${media.tablet`
-      padding: 35px 40px 12px;
+      padding: 32px 40px 16px;
     `}
   }
 
@@ -30,7 +30,7 @@ export const ApplicationsHeading = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.color.tab.inactive};
 
   ${Heading} {
-    padding: 25px 20px 20px;
+    padding: 24px 20px 20px;
   }
 
   ${media.tablet`
@@ -39,7 +39,7 @@ export const ApplicationsHeading = styled.div`
     background: none;
 
     ${Heading} {
-      padding: 45px 0 12px;
+      padding: 40px 0 16px;
       font-size: 35px;
     }
   `}

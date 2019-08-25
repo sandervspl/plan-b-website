@@ -9,3 +9,5 @@ export { useSelector } from './useSelector';
 export { useDispatch } from './useDispatch';
 export { useGetFirebaseImages } from './useGetFirebaseImages';
 export { useGetFirebaseImage } from './useGetFirebaseImage';
+export { useFileUpload } from './useFileUpload';
+export { useBodyScrollLock } from './useBodyScrollLock';

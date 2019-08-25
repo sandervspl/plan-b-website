@@ -74,7 +74,7 @@ const RaidQuestion: React.FC<Props> = ({ onNextClick, inputTabIndex, formValues 
                   tabIndex={inputTabIndex}
                 />
                 <RaidImage selected={selected}>
-                  <img src={raid.img} alt={raid.name} />
+                  <img src={raid.img} alt={raid.name} loading="lazy" />
                 </RaidImage>
               </RaidItem>
             );
@@ -94,7 +94,7 @@ const RaidQuestion: React.FC<Props> = ({ onNextClick, inputTabIndex, formValues 
                         tabIndex={inputTabIndex}
                       />
                       <RaidImage selected={selected}>
-                        <img src={raid.img} alt={raid.name} />
+                        <img src={raid.img} alt={raid.name} loading="lazy" />
                       </RaidImage>
                     </RaidItem>
                   );

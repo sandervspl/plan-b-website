@@ -8,7 +8,7 @@ export * from 'src/firebase/types';
 
 export * from 'modules/Apply/types';
 
-export { ApiMethods, ContentId, BaseResponseBody, BaseDatabaseBody } from 'services/api/types';
+export { ContentId, BaseResponseBody, BaseDatabaseBody } from 'services/api/types';
 
 export * from 'styles/types';
 

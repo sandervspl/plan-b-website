@@ -10,5 +10,8 @@ export enum API_ENDPOINT {
   APPLICATIONS_PUBLIC = 'recruitment/applications/public',
   APPLICATION_DETAIL = 'recruitment/application',
   APPLICATION_DETAIL_PUBLIC = 'recruitment/application/public',
-  ACTIVE_STREAMS = 'twitch/active_streams'
+  ACTIVE_STREAMS = 'twitch/active_streams',
+  DKP = 'dkp',
+  DKP_GUILD_AVG = 'dkp/guild_average',
+  CHARACTER = 'user/character'
 };

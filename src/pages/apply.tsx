@@ -2,7 +2,6 @@ import * as i from 'types';
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { Form } from 'react-final-form';
-import arrayMutators from 'final-form-arrays';
 import NextRouter from 'router';
 import { redirect, getUrl } from 'services';
 import { useRouter } from 'hooks';
@@ -20,11 +19,11 @@ import { RecruitmentContainer, QuestionsForm } from 'modules/Apply/styled';
 
 type Question = React.ComponentType<i.QuestionComponentProps>;
 
-let initValues = {};
+let mockValues = {};
 if (__DEV__) {
-  initValues = {
+  mockValues = {
     character: {
-      server: 'Shazzrah',
+      server: 'Firemaw',
       level: 60,
       name: 'WEB_TEST',
       race: 2,
@@ -130,22 +129,24 @@ const ApplicationPage: i.NextPageComponent = React.memo(() => {
     <RecruitmentContainer ref={containerEl}>
       <Form
         onSubmit={formOnSubmit}
-        mutators={{ ...arrayMutators }}
         destroyOnUnregister
         keepDirtyOnReinitialize
         initialValues={{
           character: {
-            server: 'Shazzrah',
+            server: 'Firemaw',
             level: 60,
             race: '-1',
             class: '-1',
           },
           social: false,
-          // ...initValues,
+          // ...mockValues,
         }}
       >
-        {({ errors, handleSubmit, valid, values }) => (
-          <QuestionsForm ref={formEl} onSubmit={valid ? handleSubmit : () => {}}>
+        {({ handleSubmit, values, valid, errors }) => (
+          <QuestionsForm
+            ref={formEl}
+            onSubmit={valid ? handleSubmit : () => {}}
+          >
             {questionComponents.map((component, i) => (
               <Question
                 key={i}

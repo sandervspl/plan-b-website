@@ -74,7 +74,7 @@ export const sendApplication: i.SendApplication['thunk'] = (values) => async (di
 
   dispatch(actions.sendStart());
 
-  return api.methods.post<i.SendApplicationResponse>({
+  return api.post<i.SendApplicationResponse>({
     url: api.url.api,
     path: API_ENDPOINT.APPLICATION_DETAIL,
     body: values,

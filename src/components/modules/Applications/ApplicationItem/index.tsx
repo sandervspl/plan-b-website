@@ -3,10 +3,10 @@ import React from 'react';
 import CommentIcon from 'vectors/comment.svg';
 import GroupAddIcon from 'vectors/group_add.svg';
 import BabyIcon from 'vectors/baby.svg';
-import { Link, ClassText, CircleImg } from 'common';
+import { Link, ClassText, CircleImg, ListItemCell } from 'common';
 import { timeAgo, getDateWithTime, getCmsUrl } from 'services';
 import {
-  ApplicationItemContainer, CharacterInfo, RoleText, RoleContainer, CommentsContainer, MiscInfo,
+  ApplicationItemContainer, CharacterInfo, RoleText, RoleContainer, CommentsContainer,
   SocialContainer,
 } from './styled';
 
@@ -42,18 +42,18 @@ const ApplicationItem: React.FC<Props> = ({ application }) => {
           {/* <RoleText>{application.character.role.name}</RoleText> */}
         </SocialContainer>
 
-        <MiscInfo>
+        <ListItemCell>
           {application.personal.name} ({application.personal.age})
-        </MiscInfo>
+        </ListItemCell>
 
         <CommentsContainer title={`${application.commentsAmount} comments`}>
           <CommentIcon />
           {application.commentsAmount}
         </CommentsContainer>
 
-        <MiscInfo title={getDateWithTime(application.created_at)}>
-          {timeAgo(new Date(application.created_at))}
-        </MiscInfo>
+        <ListItemCell title={getDateWithTime(application.updated_at)}>
+          {timeAgo(new Date(application.updated_at))}
+        </ListItemCell>
       </Link>
     </ApplicationItemContainer>
   );

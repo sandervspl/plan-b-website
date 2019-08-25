@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const AvatarContainer = styled.img`
+export const AvatarContainer = styled.img.attrs({ loading: 'lazy' })`
   width: 32px;
   height: 32px;
   border-radius: 100%;

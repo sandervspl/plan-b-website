@@ -4,44 +4,39 @@ enum FORM_VALIDATE_ERR {
   REQUIRED = 'This field is required.',
 }
 
-class Validate {
-  public required = (value: string): undefined | string => {
-    if (value) return undefined;
+type ValidateReturnType = string | undefined;
 
-    return 'This field is required.';
+class Validate {
+  public required = (value: string): ValidateReturnType => {
+    if (!value) {
+      return FORM_VALIDATE_ERR.REQUIRED;
+    }
+
+    return undefined;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, (any is fine in this case)
-  public applyFormValidate = (values: any): boolean => {
-    /* eslint-disable @typescript-eslint/camelcase, @typescript-eslint/no-explicit-any */
-    const errors: any = {};
-
-    if (!values.armory_link) {
-      errors.armory_link = FORM_VALIDATE_ERR.REQUIRED;
+  public dropdownRequired = (value: string): ValidateReturnType => {
+    if (!value || value === '-1') {
+      return FORM_VALIDATE_ERR.REQUIRED;
     }
 
-    if (!values.role) {
-      errors.role = FORM_VALIDATE_ERR.REQUIRED;
+    return undefined;
+  }
+
+  public minMax = ({ min, max }: { min?: number; max?: number }) => (value: string): ValidateReturnType => {
+    if (!value) {
+      return this.required(value);
     }
 
-    if (!values.about_applicant) {
-      errors.about = FORM_VALIDATE_ERR.REQUIRED;
-    } else {
-      if (!values.about_applicant.name) {
-        errors.name = FORM_VALIDATE_ERR.REQUIRED;
-      }
+    if (min && value.length < min) {
+      return `Value needs to be at least ${min} characters long.`;
+    };
 
-      if (!values.about_applicant.age) {
-        errors.age = FORM_VALIDATE_ERR.REQUIRED;
-      }
+    if (max && value.length > max) {
+      return `Value can not be longer than ${max} characters.`;
+    };
 
-      if (!values.about_applicant.story) {
-        errors.story = FORM_VALIDATE_ERR.REQUIRED;
-      }
-    }
-    /* eslint-enable */
-
-    return !_.isEmpty(errors);
+    return undefined;
   }
 };
 

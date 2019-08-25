@@ -25,6 +25,7 @@ export type Options = {
   error?: any;
   url: i.ValueOf<typeof apiConfig.url>;
   headers?: HeadersInit_;
+  upload?: boolean;
 }
 
 export type FetchOptions = Omit<Options, 'method'>;
@@ -42,14 +43,6 @@ export type ApiError = {
 export type TriggerErrorMessage = (errorConfig: ErrorConfig, apiError: ApiError) => void;
 
 export type HandleStatusCodes = (code: number) => boolean;
-
-export type ApiMethods = {
-  get: FetchCall;
-  del: FetchCall;
-  post: FetchCall;
-  put: FetchCall;
-  patch: FetchCall;
-}
 
 export type ContentId = number;
 

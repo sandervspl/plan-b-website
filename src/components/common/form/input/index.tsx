@@ -9,7 +9,7 @@ const Input: InputType = forwardRef<HTMLInputElement, InputProps>(
       return (
         <InputContainer>
           <StyledInput {...input} {...props} defaultValue="-1" ref={ref} id={input.name}>
-            <option value="-1" disabled>{placeholder}</option>
+            <option value="-1">{placeholder}</option>
             {children}
           </StyledInput>
           <Highlight />
@@ -34,7 +34,7 @@ const Input: InputType = forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
-export type InputProps = FieldRenderProps<HTMLInputElement> & {
+export type InputProps = FieldRenderProps<string, HTMLInputElement> & {
   label?: string;
   placeholder?: string;
   as?: 'select';

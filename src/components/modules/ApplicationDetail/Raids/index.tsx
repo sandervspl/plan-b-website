@@ -24,7 +24,7 @@ const Raids: React.FC<Props> = ({ raids }) => {
           data-for="raid"
           data-tip={raidKey.replace('_', ' ')}
         >
-          <img src={imageUrl} alt={raidKey} />
+          <img src={imageUrl} alt={raidKey} loading="lazy" />
         </RaidImage>
       ))}
 

@@ -9,6 +9,7 @@ export * from 'ducks/user/types';
 export * from 'ducks/posts/types';
 export * from 'ducks/applications/types';
 export * from 'ducks/twitch/types';
+export * from 'ducks/dkp/types';
 
 export type ReduxState = {
   page: i.PageState;
@@ -20,11 +21,12 @@ export type ReduxState = {
   posts: i.PostsState;
   applications: i.ApplicationsState;
   twitch: i.TwitchState;
+  dkp: i.DkpState;
 }
 
 export type BaseState<T = null> = {
   data?: T;
-  error: boolean;
+  error: boolean | string;
   loading: boolean;
 }
 

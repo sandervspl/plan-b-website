@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector } from 'hooks';
-import { getOtherNews } from 'ducks/posts/reselect';
+import { getOtherNews } from 'ducks/posts/selectors';
 import { Heading, NewsItem } from 'common';
 import { OtherNewsContainer } from './styled';
 
 const OtherNews: React.FC = () => {
-  const posts = useSelector((state) => getOtherNews(state));
+  const posts = useSelector(getOtherNews);
 
   return (
     <OtherNewsContainer>

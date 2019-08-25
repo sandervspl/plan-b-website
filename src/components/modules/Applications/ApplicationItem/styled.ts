@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ParagraphStyle, ClassText, Paragraph } from 'common';
+import { ParagraphStyle, ClassText, ListItem, ListItemInnerCss, ListItemCell } from 'common';
 import { CircleImgContainer } from 'common/CircleImg/styled';
 import { media } from 'styles';
 
@@ -23,28 +23,11 @@ export const RoleContainer = styled.div`
   `}
 `;
 
-export const MiscInfo = styled(Paragraph)`
-  display: none;
-  font-size: 16px;
-
-  ${media.tablet`
-    display: block;
-  `}
-`;
-
-export const ApplicationItemContainer = styled.li`
-  margin-bottom: 5px;
-  width: 100%;
-  background-color: ${(props) => props.theme.color.background};
-  border: 1px solid ${(props) => props.theme.color.border.primary};
-
+export const ApplicationItemContainer = styled(ListItem)`
   a {
-    ${ParagraphStyle};
-    display: grid;
+    ${ListItemInnerCss};
     grid-template-columns: 15% 50% 15% 20%;
     align-items: center;
-    padding: 10px 15px;
-    width: 100%;
 
     > ${CircleImgContainer} {
       width: 30px;
@@ -60,8 +43,6 @@ export const ApplicationItemContainer = styled.li`
     }
 
     ${media.tablet`
-      display: flex;
-
       > ${RoleContainer} {
         display: flex;
       }
@@ -102,9 +83,13 @@ export const ApplicationItemContainer = styled.li`
     `}
   }
 
-  ${media.tablet`
-    margin-bottom: 10px;
-  `}
+  ${ListItemCell} {
+    display: none;
+
+    ${media.tablet`
+      display: block;
+    `}
+  }
 `;
 
 export const RoleText = styled.span`

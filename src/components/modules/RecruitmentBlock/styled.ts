@@ -102,6 +102,7 @@ export const EmptyStateContainer = styled.div`
   img {
     margin-bottom: 10px;
     width: 120px;
+    height: 130px;
   }
 
   p {

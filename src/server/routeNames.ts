@@ -5,6 +5,7 @@ export const routeNames = Object.freeze({
   login: 'login',
   newsDetail: 'news-detail',
   gallery: 'gallery',
+  dkp: 'dkp',
   applications: 'applications',
   applicationDetail: 'application-detail',
   publicApplicationDetail: 'public-application-detail',

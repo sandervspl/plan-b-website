@@ -8,7 +8,7 @@ const InputRange: React.FC<InputRangeProps> = ({ label, input }) => {
   return (
     <InputRangeContainer>
       <ReactInputRange
-        value={input.value}
+        value={input.value || 0}
         onChange={input.onChange as any}
         minValue={0}
         maxValue={300}

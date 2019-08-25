@@ -12,7 +12,7 @@ export const CharacterInfoContainer = styled.div`
   `}
 `;
 
-export const Avatar = styled.img`
+export const Avatar = styled.img.attrs({ loading: 'lazy' })`
   width: 75px;
   height: 75px;
   border-radius: 100%;

@@ -4,7 +4,7 @@ export const ItemDetailContainer = styled.div`
   overflow: hidden;
 `;
 
-export const ItemIcon = styled.img`
+export const ItemIcon = styled.img.attrs({ loading: 'lazy' })`
   width: 100%;
   height: 100%;
   border-radius: 5px;

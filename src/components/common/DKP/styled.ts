@@ -10,8 +10,8 @@ export const DKPContainer = styled.div`
 
 export const DKPIcon = styled(DKPSvg)`
   position: relative;
-  top: 3px;
-  margin-right: 5px;
-  height: 19px;
+  top: 1px;
+  margin-right: 4px;
+  height: 16px;
   fill: ${(props) => props.theme.color.secondary};
 `;

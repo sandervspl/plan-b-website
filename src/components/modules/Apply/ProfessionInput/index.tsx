@@ -21,6 +21,7 @@ const ProfessionInput: React.FC<Props> = ({ name, index, items }) => {
         component={DropdownInput}
         name={`${name}.id`}
         label={`profession #${index + 1}`}
+        placeholder="Select profession"
         items={items.map((item) => ({
           id: item.id,
           name: item.name,

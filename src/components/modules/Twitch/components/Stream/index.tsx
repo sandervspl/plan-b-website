@@ -17,12 +17,12 @@ const Stream: React.FC<Props> = ({ data }) => {
     <StreamContainer>
       <Link external to={`https://www.twitch.tv/${data.user.login}`}>
         <StreamImg>
-          <img src={bgUrl} alt="" />
+          <img src={bgUrl} alt="" loading="lazy" />
         </StreamImg>
         <ViewCount>{data.stream.viewer_count}</ViewCount>
         <Content>
           <StreamImg>
-            <img src={data.user.profile_image_url} alt="" />
+            <img src={data.user.profile_image_url} alt="" loading="lazy" />
           </StreamImg>
           <Heading as="h2">{data.user.display_name}</Heading>
           <Heading as="h4">{data.stream.title}</Heading>

@@ -86,7 +86,7 @@ export const DropdownInput: React.FC<DropdownInputProps> = ({ input, meta, items
                       {...getItemProps({ key: item.name, item })}
                       isHighlighted={highlightedIndex === i}
                     >
-                      <img src={item.icon} alt="" />
+                      <img src={item.icon} alt="" loading="lazy" />
                       {item.name}
                     </ListItem>
                   ))
@@ -96,7 +96,7 @@ export const DropdownInput: React.FC<DropdownInputProps> = ({ input, meta, items
                     {...getItemProps({ key: item.name, item })}
                     isHighlighted={highlightedIndex === i}
                   >
-                    <img src={item.icon} alt="" />
+                    <img src={item.icon} alt="" loading="lazy" />
                     {item.name}
                   </ListItem>
                 ))
@@ -104,7 +104,7 @@ export const DropdownInput: React.FC<DropdownInputProps> = ({ input, meta, items
             </DropdownList>
           )}
 
-          <DropdownIcon isopen={isOpen.toString()} />
+          <DropdownIcon isopen={isOpen} />
         </DropdownContainer>
       )}
     </Downshift>

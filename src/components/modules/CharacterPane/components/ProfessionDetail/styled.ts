@@ -9,7 +9,7 @@ export const ProfessionDetailsContainer = styled.div`
   max-width: 160px;
 `;
 
-export const ProfessionIcon = styled.img`
+export const ProfessionIcon = styled.img.attrs({ loading: 'lazy' })`
   width: 36px;
   height: 36px;
   border: 1px solid ${(props) => props.theme.color.border};

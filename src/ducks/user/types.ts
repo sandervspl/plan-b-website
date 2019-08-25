@@ -36,6 +36,7 @@ export type DkpHistory = i.BaseDatabaseBody & {
   hours: number;
   exporter: string;
   exportTime: number;
+  event: string;
 }
 
 export type FullDatabaseUserData = {

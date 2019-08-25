@@ -57,11 +57,12 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Dkp
   }
 };
 
-export const sendDkpXml: i.SendDkpXml['thunk'] = (file) => async (dispatch, getState, api) => {
+export const sendDkpXml: i.SendDkpXml['thunk'] = (file, eventName) => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
   const data = new FormData();
   data.append('file', file);
+  data.append('name', eventName);
 
   return api.post({
     url: api.url.api,

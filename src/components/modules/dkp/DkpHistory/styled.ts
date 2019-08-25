@@ -40,6 +40,11 @@ export const DkpHistoryItem = styled(ListItem)`
       `};
     }
 
+    &:first-child {
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
     &:nth-child(3) {
       display: inline-block;
 
@@ -58,8 +63,6 @@ export const DkpHistoryItem = styled(ListItem)`
     }
 
     &:nth-child(5) {
-      margin-top: 8px;
-
       &::before {
         content: 'Total: ';
       }
@@ -67,6 +70,10 @@ export const DkpHistoryItem = styled(ListItem)`
       &::after {
         content: ' DKP';
       }
+    }
+
+    &:nth-child(6) {
+      margin-top: 8px;
     }
 
     ${media.tablet`
@@ -83,7 +90,7 @@ export const DkpHistoryItem = styled(ListItem)`
 
   ${media.tablet`
     display: grid;
-    grid-template-columns: 30% 20% 20% 20% 10%;
+    grid-template-columns: 30% 10% 10% 10% 20% 20%;
     padding: 8px 16px;
   `}
 `;
@@ -112,7 +119,7 @@ export const ListHeading = styled(DkpHistoryList)`
 
   ${media.tablet`
     display: grid;
-    grid-template-columns: 30% 20% 20% 20% 10%;
+    grid-template-columns: 30% 10% 10% 10% 20% 20%;
     padding: 0 16px;
   `}
 `;

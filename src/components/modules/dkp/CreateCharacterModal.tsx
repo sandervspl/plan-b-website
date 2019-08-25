@@ -2,7 +2,8 @@ import React from 'react';
 import Modal from 'react-modal';
 import { useBodyScrollLock } from 'hooks';
 import { Heading, Paragraph, Button } from 'common';
-import { ModalContent, Buttons } from './styled';
+import { ModalButtons } from 'common/Modal';
+import { ModalContent } from './styled';
 
 const CreateCharacterModal: React.FC<Props> = ({ isModalOpen, setModalOpen, cta, name }) => {
   const ref = useBodyScrollLock(isModalOpen);
@@ -11,7 +12,6 @@ const CreateCharacterModal: React.FC<Props> = ({ isModalOpen, setModalOpen, cta,
     <Modal
       isOpen={isModalOpen}
       onRequestClose={() => setModalOpen(false)}
-      contentLabel="Example Modal"
       className="modal__content"
       overlayClassName="modal__overlay"
       closeTimeoutMS={300}
@@ -26,14 +26,14 @@ const CreateCharacterModal: React.FC<Props> = ({ isModalOpen, setModalOpen, cta,
           Do you want to create <strong>{name}</strong> and link it to your account?
         </Paragraph>
 
-        <Buttons>
+        <ModalButtons>
           <Button type="button" onClick={() => setModalOpen(false)}>
             Cancel
           </Button>
           <Button type="button" onClick={cta(name)}>
             Create character
           </Button>
-        </Buttons>
+        </ModalButtons>
       </ModalContent>
     </Modal>
   );

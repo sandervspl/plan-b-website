@@ -3,6 +3,7 @@ import { media } from 'styles';
 import { PageContentContainer, Heading, Paragraph, ErrorText } from 'common';
 import { ButtonContainer } from 'common/Button/styled';
 import { InputContainer } from 'common/form/Input/styled';
+import { ModalInner } from 'common/Modal';
 
 export const ContentHeader = styled.div`
   margin: 24px 24px 0;
@@ -72,36 +73,9 @@ export const CharacterLoadingContainer = styled.div`
   }
 `;
 
-export const ModalContent = styled.div`
-  ${Heading} {
-    margin-bottom: 16px;
-  }
-
+export const ModalContent = styled(ModalInner)`
   strong {
     color: ${(props) => props.theme.color.primary.dark};
-  }
-`;
-
-export const Buttons = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 40px;
-
-  button {
-    &:not(:first-child) {
-      margin-left: 16px;
-    }
-
-    &:first-child {
-      background: none;
-    }
-  }
-`;
-
-export const UploadButtonContainer = styled.div`
-  ${ErrorText} {
-    text-align: right;
-    margin: 8px 0;
   }
 `;
 

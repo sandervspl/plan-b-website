@@ -9,5 +9,5 @@ export type GuildDkpAvgResponse = Record<string, {
   date: Date;
 }>;
 
-export type SendDkpXml = i.BaseThunkAction<(file: File) => Promise<void>>;
+export type SendDkpXml = i.BaseThunkAction<(file: File, eventName: string) => Promise<void>>;
 export type GetGuildAverageDkp = i.BaseThunkAction<() => Promise<i.GuildDkpAvgResponse | void>>;

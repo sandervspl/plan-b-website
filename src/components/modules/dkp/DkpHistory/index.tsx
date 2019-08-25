@@ -19,22 +19,19 @@ const DkpHistory: React.FC<Props> = () => {
       ) : (
         <>
           <ListHeading>
-            <ListHeadingItem>Date</ListHeadingItem>
+            <ListHeadingItem>Event</ListHeadingItem>
             <ListHeadingItem>Duration</ListHeadingItem>
             <ListHeadingItem>Gain</ListHeadingItem>
             <ListHeadingItem>Spent</ListHeadingItem>
             <ListHeadingItem>Total DKP</ListHeadingItem>
+            <ListHeadingItem>Date</ListHeadingItem>
           </ListHeading>
 
           <DkpHistoryList>
             {dkpHistory.map((entry) => (
               <DkpHistoryItem>
-                <ListItemCell title={getDateWithTime(entry.createdAt)}>
-                  <DateText
-                    noIcon={!isMobile}
-                    date={entry.createdAt}
-                    format={humanDate(entry.createdAt)}
-                  />
+                <ListItemCell>
+                  {entry.event}
                 </ListItemCell>
 
                 <ListItemCell>
@@ -51,6 +48,14 @@ const DkpHistory: React.FC<Props> = () => {
 
                 <ListItemCell>
                   {entry.total}
+                </ListItemCell>
+
+                <ListItemCell title={getDateWithTime(entry.createdAt)}>
+                  <DateText
+                    noIcon={!isMobile}
+                    date={entry.createdAt}
+                    format={humanDate(entry.createdAt)}
+                  />
                 </ListItemCell>
               </DkpHistoryItem>
             ))}

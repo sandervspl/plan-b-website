@@ -1,22 +1,11 @@
 import React from 'react';
-import Modal from 'react-modal';
-import { useBodyScrollLock } from 'hooks';
 import { Heading, Paragraph, Button } from 'common';
-import { ModalButtons } from 'common/Modal';
+import Modal, { ModalButtons } from 'common/Modal';
 import { ModalContent } from './styled';
 
 const CreateCharacterModal: React.FC<Props> = ({ isModalOpen, setModalOpen, cta, name }) => {
-  const ref = useBodyScrollLock(isModalOpen);
-
   return (
-    <Modal
-      isOpen={isModalOpen}
-      onRequestClose={() => setModalOpen(false)}
-      className="modal__content"
-      overlayClassName="modal__overlay"
-      closeTimeoutMS={300}
-      ref={ref}
-    >
+    <Modal isOpen={isModalOpen} onRequestClose={() => setModalOpen(false)}>
       <ModalContent>
         <Heading as="h2">This character does not exist yet</Heading>
         <Paragraph>

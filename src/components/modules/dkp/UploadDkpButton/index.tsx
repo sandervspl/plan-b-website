@@ -61,7 +61,7 @@ const UploadDkpButton: React.FC<Props> = () => {
         ref={ref}
       />
 
-      <Modal isModalOpen={isModalOpen} onRequestClose={() => setModalOpen(false)}>
+      <Modal isOpen={isModalOpen} onRequestClose={() => setModalOpen(false)}>
         <ModalContent>
           <Heading as="h2">Event</Heading>
           <Paragraph>What event is associated with this upload?</Paragraph>

@@ -4,12 +4,12 @@ import ReactModal from 'react-modal';
 import { useBodyScrollLock } from 'hooks';
 import { Heading } from 'common/typography';
 
-const Modal: React.FC<Props> = ({ children, isModalOpen, onRequestClose }) => {
-  const ref = useBodyScrollLock(isModalOpen);
+const Modal: React.FC<Props> = ({ children, isOpen, onRequestClose }) => {
+  const ref = useBodyScrollLock(isOpen);
 
   return (
     <ReactModal
-      isOpen={isModalOpen}
+      isOpen={isOpen}
       onRequestClose={onRequestClose}
       className="modal__content"
       overlayClassName="modal__overlay"
@@ -22,7 +22,7 @@ const Modal: React.FC<Props> = ({ children, isModalOpen, onRequestClose }) => {
 };
 
 export type Props = {
-  isModalOpen: boolean;
+  isOpen: boolean;
   onRequestClose: (event: (React.MouseEvent | React.KeyboardEvent)) => void;
 };
 

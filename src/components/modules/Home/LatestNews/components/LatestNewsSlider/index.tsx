@@ -1,14 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import Slider, { Settings } from 'react-slick';
 import { useSelector, useInterval } from 'hooks';
-import { getLatestTwoNews } from 'ducks/posts/reselect';
+import { getLatestTwoNews } from 'ducks/posts/selectors';
 import { NewsItem } from 'common';
 import Progress from '../Progress';
 import { SliderContainer } from './styled';
 
 const LatestNewsSlider: React.FC = () => {
   const slider = useRef<Slider>(null);
-  const posts = useSelector((state) => getLatestTwoNews(state));
+  const posts = useSelector(getLatestTwoNews);
   const [nextSlideTime, setNextSlideTime] = useState(Date.now());
   const [activeSlideId, setActiveSlideId] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -17,7 +17,7 @@ const LatestNewsSlider: React.FC = () => {
     setNextSlideTime(Date.now());
   };
 
-  const sliderSettings: Settings = {
+  const sliderSettings = useMemo<Settings>(() => ({
     dots: false,
     arrows: false,
     centerMode: true,
@@ -29,7 +29,7 @@ const LatestNewsSlider: React.FC = () => {
       setActiveSlideId(nextSlideId);
     },
     onSwipe: resetTime,
-  };
+  }), []);
 
   useInterval(() => {
     if (!slider.current) return;

@@ -2,7 +2,7 @@
 import * as i from 'types';
 import { Store as ReduxStore } from 'redux';
 import { ThunkAction as IThunkAction, ThunkDispatch as IThunkDispatch } from 'redux-thunk';
-import apiConfig from 'services/api/config';
+import ApiHelper from 'services/api/api';
 
 /*
   Store type
@@ -26,10 +26,7 @@ export type Action<P = any> = {
   Thunk action type with pre-filled generics
   ReturnType = return type of function
 */
-type ExtraArgument = {
-  methods: i.ApiMethods;
-  url: typeof apiConfig.url;
-};
+type ExtraArgument = ApiHelper;
 export type ThunkAction<ReturnType = void> = IThunkAction<ReturnType, i.ReduxState, ExtraArgument, i.Action>;
 
 /*

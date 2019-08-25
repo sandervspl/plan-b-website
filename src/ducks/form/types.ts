@@ -1,9 +1,6 @@
 import * as i from 'types';
-import { FormState } from 'final-form';
 
 export type ReduxFormState = {
-  [key in i.Forms]?: FormState;
-} & {
   sending: {
     loading: boolean;
     success: boolean;
@@ -11,7 +8,7 @@ export type ReduxFormState = {
   };
 }
 
-export type Forms = 'application';
+export type Forms = '';
 
 export type FieldNames = 'armory_link';
 

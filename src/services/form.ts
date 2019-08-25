@@ -22,6 +22,22 @@ class Validate {
 
     return undefined;
   }
+
+  public minMax = ({ min, max }: { min?: number; max?: number }) => (value: string): ValidateReturnType => {
+    if (!value) {
+      return this.required(value);
+    }
+
+    if (min && value.length < min) {
+      return `Value needs to be at least ${min} characters long.`;
+    };
+
+    if (max && value.length > max) {
+      return `Value can not be longer than ${max} characters.`;
+    };
+
+    return undefined;
+  }
 };
 
 const validate = new Validate();

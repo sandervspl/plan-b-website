@@ -34,7 +34,7 @@ const Input: InputType = forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
-export type InputProps = FieldRenderProps<HTMLInputElement> & {
+export type InputProps = FieldRenderProps<string, HTMLInputElement> & {
   label?: string;
   placeholder?: string;
   as?: 'select';

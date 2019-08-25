@@ -3,11 +3,11 @@ import TimeIcon from 'vectors/time.svg';
 import { timeAgo, getDateWithTime } from 'services';
 import { DateContainer } from './styled';
 
-export const DateText: React.FC<DateProps> = ({ date, noIcon }) => {
+export const DateText: React.FC<DateProps> = ({ date, noIcon, format }) => {
   return (
     <DateContainer title={getDateWithTime(date)}>
       {!noIcon && <TimeIcon />}
-      {timeAgo(new Date(date))}
+      {format || timeAgo(new Date(date))}
     </DateContainer>
   );
 };
@@ -15,4 +15,5 @@ export const DateText: React.FC<DateProps> = ({ date, noIcon }) => {
 export type DateProps = {
   date: Date | string;
   noIcon?: boolean;
+  format?: string;
 };

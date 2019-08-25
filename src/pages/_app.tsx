@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
 import MobileDetect from 'mobile-detect';
 import _ from 'lodash/fp';
+import Modal from 'react-modal';
 import { fetchUser } from 'ducks/user';
 import { actions as uiActions } from 'ducks/ui';
 import { RouterContextProvider } from 'hooks';
@@ -39,6 +40,10 @@ class MyApp extends App<Props> {
   }
 
   componentDidMount() {
+    if (!isServer) {
+      Modal.setAppElement('body');
+    }
+
     this.props.reduxStore.dispatch(fetchUser());
 
     window.addEventListener('resize', this.handleResize);

@@ -23,4 +23,4 @@ export type ActiveStream = {
 
 export type ActiveStreams = i.ActiveStream[];
 
-export type fetchActiveStreams = i.BaseThunkAction<() => Promise<i.ActiveStreams | void>>;
+export type FetchActiveStreams = i.BaseThunkAction<() => Promise<i.ActiveStreams | void>>;

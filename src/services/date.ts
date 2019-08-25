@@ -23,3 +23,12 @@ const dateWithTimeFormat: Intl.DateTimeFormatOptions = {
 };
 
 export const getDateWithTime = (date: Date | string) => getDate(date, dateWithTimeFormat);
+
+const humanDateFormat: Intl.DateTimeFormatOptions = {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+};
+
+export const humanDate = (date: Date | string) => getDate(date, humanDateFormat);

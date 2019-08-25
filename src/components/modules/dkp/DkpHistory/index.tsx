@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'hooks';
-import { getDateWithTime } from 'services';
+import { getDateWithTime, humanDate } from 'services';
 import { ListItemCell, Heading, DateText, EmptyStateText } from 'common';
 import {
   DkpHistoryContainer, DkpHistoryItem, DkpHistoryList, ListHeading, ListHeadingItem, DkpChangeText,
@@ -29,8 +29,12 @@ const DkpHistory: React.FC<Props> = () => {
           <DkpHistoryList>
             {dkpHistory.map((entry) => (
               <DkpHistoryItem>
-                <ListItemCell title={getDateWithTime(entry.updatedAt)}>
-                  <DateText noIcon={!isMobile} date={entry.updatedAt} />
+                <ListItemCell title={getDateWithTime(entry.createdAt)}>
+                  <DateText
+                    noIcon={!isMobile}
+                    date={entry.createdAt}
+                    format={humanDate(entry.createdAt)}
+                  />
                 </ListItemCell>
 
                 <ListItemCell>

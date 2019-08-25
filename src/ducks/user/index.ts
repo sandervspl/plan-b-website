@@ -82,7 +82,7 @@ export const fetchUser: i.FetchUser['thunk'] = () => async (dispatch, getState, 
     });
 };
 
-export const fetchUserCharacter: i.FetchUserCharacter['thunk'] = () => async (dispatch, getState, api) => {
+export const getUserCharacter: i.FetchUserCharacter['thunk'] = () => async (dispatch, getState, api) => {
   dispatch(actions.loadCharacter());
 
   return api.get<i.UserCharacterData>({

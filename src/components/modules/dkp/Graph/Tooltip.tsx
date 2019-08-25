@@ -10,7 +10,7 @@ const Tooltip: React.FC<TooltipProps> = ({ active, payload }) => {
     return (
       <TooltipContainer>
         <strong>{data.value}</strong> {data.name}
-        <DateText date={data.payload!.xValue} />
+        <DateText date={data.payload!.date} />
       </TooltipContainer>
     );
   }

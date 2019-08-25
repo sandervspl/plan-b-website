@@ -1,6 +1,7 @@
 import * as i from 'types';
 import React, { useEffect } from 'react';
-import { fetchUserCharacter } from 'ducks/user';
+import { getUserCharacter } from 'ducks/user';
+import { getGuildAverageDkp } from 'ducks/dkp';
 import { getUrl, redirect } from 'services';
 import { useDispatch, useSelector } from 'hooks';
 import { Heading, Loader } from 'common';
@@ -15,7 +16,8 @@ const DkpDashboard: i.NextPageComponent = ({ url }) => {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(fetchUserCharacter());
+    dispatch(getUserCharacter());
+    dispatch(getGuildAverageDkp());
   }, []);
 
   // Auth check

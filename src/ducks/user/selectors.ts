@@ -17,7 +17,7 @@ export const totalDkpForGraph = createSelector(
       .sort((a, b) => b.exportTime - a.exportTime)
       .map((entry) => ({
         xName: 'date',
-        xValue: entry.updatedAt,
+        date: entry.updatedAt,
         yName: 'dkp',
         dkp: entry.total,
       }));

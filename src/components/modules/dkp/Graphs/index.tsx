@@ -1,8 +1,8 @@
 import React from 'react';
 import Slider, { Settings } from 'react-slick';
 import { totalDkpForGraph } from 'ducks/user/selectors';
+import { averageDkpForGraph } from 'ducks/dkp/selectors';
 import { useSelector } from 'hooks';
-import { EmptyStateText } from 'common';
 import { theme } from 'styles';
 import Graph from '../Graph';
 import { GraphsContainer } from './styled';
@@ -19,6 +19,7 @@ const sliderSettings: Settings = {
 
 const Graphs: React.FC<Props> = () => {
   const dkpHistory = useSelector(totalDkpForGraph);
+  const dkpAverage = useSelector(averageDkpForGraph);
   const isMobile = useSelector((state) => state.ui.isMobile);
 
   if (!dkpHistory || dkpHistory.length === 0) {
@@ -33,9 +34,8 @@ const Graphs: React.FC<Props> = () => {
       fill={theme.color.graph.fill.total}
       stroke={theme.color.graph.border.total}
     />,
-    // @TODO average dkp data
     <Graph
-      data={dkpHistory}
+      data={dkpAverage}
       dataKey="dkp"
       title="Guild DKP Average"
       fill={theme.color.graph.fill.average}

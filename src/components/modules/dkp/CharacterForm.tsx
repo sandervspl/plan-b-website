@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
-import { fetchUserCharacter } from 'ducks/user';
+import { getUserCharacter } from 'ducks/user';
 import { validate, api } from 'services';
 import { useDispatch } from 'hooks';
 import { Paragraph, Loader, Button, ErrorText } from 'common';
@@ -30,7 +30,7 @@ const CharacterForm: React.FC<Props> = () => {
     try {
       await linkCharacter(name);
 
-      dispatch(fetchUserCharacter());
+      dispatch(getUserCharacter());
     } catch (err) {
       if (err.statusCode === 404) {
         setCreateCharacterRequest(true);
@@ -50,7 +50,7 @@ const CharacterForm: React.FC<Props> = () => {
       await createCharacter(name);
       await linkCharacter(name);
 
-      dispatch(fetchUserCharacter());
+      dispatch(getUserCharacter());
     } catch (err) {
       setError('Something went wrong. Try again later.');
     }

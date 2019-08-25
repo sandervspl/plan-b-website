@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { sendDkpXml } from 'ducks/dkp';
-import { fetchUserCharacter } from 'ducks/user';
+import { getUserCharacter } from 'ducks/user';
 import { useSelector, useFileUpload, useDispatch } from 'hooks';
 import { Button, ErrorText } from 'common';
 import { UploadButtonContainer } from './styled';
@@ -15,7 +15,7 @@ const UploadDkpButton: React.FC<Props> = () => {
   useEffect(() => {
     if (file) {
       dispatch(sendDkpXml(file)).then(() => {
-        dispatch((fetchUserCharacter()));
+        dispatch((getUserCharacter()));
       });
     }
   }, [file]);

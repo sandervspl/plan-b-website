@@ -97,7 +97,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
       <ApplicationContainer>
         <ApplicationContent>
           <ApplicationHeader withGuildMasterTools={isGuildMaster}>
-            {!isPublic && isGuildMaster && (
+            {isGuildMaster && (
               <GuildMasterTools>
                 <Heading as="h3">Guild Master Tools</Heading>
 

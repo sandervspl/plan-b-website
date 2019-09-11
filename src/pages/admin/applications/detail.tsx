@@ -79,7 +79,6 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
   }
 
   const { character, personal } = application;
-  const isGuildMaster = user.data && user.data.authLevel === i.AUTH_LEVEL.GUILD_MASTER;
   const StatusIcon = application.status === 'accepted'
     ? CheckCircleSvg
     : application.status === 'rejected'
@@ -96,10 +95,10 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
     >
       <ApplicationContainer>
         <ApplicationContent>
-          <ApplicationHeader withGuildMasterTools={isGuildMaster}>
-            {isGuildMaster && (
+          <ApplicationHeader withGuildMasterTools={user.isAdmin}>
+            {user.isAdmin && (
               <GuildMasterTools>
-                <Heading as="h3">Guild Master Tools</Heading>
+                <Heading as="h3">Update application status</Heading>
 
                 <div>
                   <StatusChangeButton status="open" onClick={updateStatus('open')}>

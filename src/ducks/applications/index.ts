@@ -117,8 +117,8 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
               ? [action.payload, ...state.detail!.votes.accepts]
               : state.detail!.votes.accepts,
             rejects: action.payload.vote === i.VOTE.REJECT
-              ? [action.payload, ...state.detail!.votes.accepts]
-              : state.detail!.votes.accepts,
+              ? [action.payload, ...state.detail!.votes.rejects]
+              : state.detail!.votes.rejects,
           },
         },
         userVote: action.payload.vote,

@@ -1,9 +1,9 @@
 import * as i from 'types';
 import { createSelector } from 'reselect';
 
-const LATEST_NEWS_MAX = 2;
+const LATEST_NEWS_MAX = 3;
 
-export const getLatestTwoNews = createSelector(
+export const getLatestNews = createSelector(
   (state: i.ReduxState) => state.posts.data,
   (posts) => {
     const tempPosts = [...posts!];

@@ -32,7 +32,7 @@ const IntroductionQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick,
               component={Toggle}
               type="checkbox"
               name="social"
-              label="Social member application"
+              label="I want to apply as a social member, and do not expect to raid"
             />
 
             <NextButton onClick={onNextClick} tabIndex={inputTabIndex}>

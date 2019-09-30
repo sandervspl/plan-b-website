@@ -25,7 +25,11 @@ const AboutYouQuestion: React.FC<i.QuestionComponentProps> = ({ onNextClick, err
       <QuestionContent>
         <PersonalGrid>
           <div>
-            <CharacterField name="personal.name" label="My name is" tabIndex={inputTabIndex} />
+            <CharacterField
+              name="personal.name"
+              label="My real name is"
+              tabIndex={inputTabIndex}
+            />
             <CharacterField
               name="personal.age"
               label="My age is"

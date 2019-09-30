@@ -43,7 +43,7 @@ const ApplicationItem: React.FC<Props> = ({ application }) => {
         </SocialContainer>
 
         <ListItemCell>
-          {application.personal.name} ({application.personal.age})
+          {application.personal.name} ({application.personal.age} YO)
         </ListItemCell>
 
         <CommentsContainer title={`${application.commentsAmount} comments`}>

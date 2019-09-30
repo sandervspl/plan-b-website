@@ -95,7 +95,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
     >
       <ApplicationContainer>
         <ApplicationContent>
-          <ApplicationHeader withGuildMasterTools={user.isAdmin}>
+          <ApplicationHeader withGuildMasterTools={!isPublic && user.isAdmin}>
             {user.isAdmin && (
               <GuildMasterTools>
                 <Heading as="h3">Update application status</Heading>

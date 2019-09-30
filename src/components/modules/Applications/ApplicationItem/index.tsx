@@ -23,7 +23,7 @@ const ApplicationItem: React.FC<Props> = ({ application }) => {
 
         <CharacterInfo>
           <ClassText classId={application.character.class.id}>
-            {application.character.name}
+            {application.character.name} ({application.character.level})
           </ClassText>
 
           <RoleContainer>

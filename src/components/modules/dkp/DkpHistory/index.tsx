@@ -42,8 +42,8 @@ const DkpHistory: React.FC<Props> = () => {
                   {entry.spent > 0 && '-'}{entry.spent}
                 </DkpChangeText>
 
-                <DkpChangeText positive={entry.net > 0}>
-                  {entry.net > 0 && '+'}{entry.net}
+                <DkpChangeText positive>
+                  {entry.net}
                 </DkpChangeText>
 
                 <ListItemCell>

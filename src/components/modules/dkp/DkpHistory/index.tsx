@@ -21,9 +21,9 @@ const DkpHistory: React.FC<Props> = () => {
           <ListHeading>
             <ListHeadingItem>Event</ListHeadingItem>
             <ListHeadingItem>Duration</ListHeadingItem>
-            <ListHeadingItem>Gain</ListHeadingItem>
             <ListHeadingItem>Spent</ListHeadingItem>
-            <ListHeadingItem>Total DKP</ListHeadingItem>
+            <ListHeadingItem>Total current</ListHeadingItem>
+            <ListHeadingItem>Total earned</ListHeadingItem>
             <ListHeadingItem>Date</ListHeadingItem>
           </ListHeading>
 
@@ -38,12 +38,12 @@ const DkpHistory: React.FC<Props> = () => {
                   {entry.hours} hour{entry.hours !== 1 && 's'}
                 </ListItemCell>
 
-                <DkpChangeText positive={entry.net > 0}>
-                  {entry.net > 0 && '+'}{entry.net}
-                </DkpChangeText>
-
                 <DkpChangeText negative={entry.spent > 0}>
                   {entry.spent > 0 && '-'}{entry.spent}
+                </DkpChangeText>
+
+                <DkpChangeText positive={entry.net > 0}>
+                  {entry.net > 0 && '+'}{entry.net}
                 </DkpChangeText>
 
                 <ListItemCell>

@@ -1,6 +1,6 @@
 {
   "name": "plan-b-website",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "Code for plan-b-website.",
   "main": "index.js",
   "scripts": {

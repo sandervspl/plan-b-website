@@ -30,14 +30,14 @@ const Graphs: React.FC<Props> = () => {
     <Graph
       data={dkpHistory}
       dataKey="dkp"
-      title="DKP Total"
+      title="Total DKP"
       fill={theme.color.graph.fill.total}
       stroke={theme.color.graph.border.total}
     />,
     <Graph
       data={dkpAverage}
       dataKey="dkp"
-      title="Guild DKP Average"
+      title="Guild DKP average"
       fill={theme.color.graph.fill.average}
       stroke={theme.color.graph.border.average}
     />,
@@ -50,14 +50,14 @@ const Graphs: React.FC<Props> = () => {
           <Graph
             data={dkpHistory}
             dataKey="dkp"
-            title="DKP Total"
+            title="Total DKP"
             fill={theme.color.graph.fill.total}
             stroke={theme.color.graph.border.total}
           />
           <Graph
-            data={dkpHistory}
+            data={dkpAverage}
             dataKey="dkp"
-            title="Guild DKP Average"
+            title="Guild DKP average"
             fill={theme.color.graph.fill.average}
             stroke={theme.color.graph.border.average}
           />

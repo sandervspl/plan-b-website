@@ -16,7 +16,7 @@ const Graph: React.FC<Props> = ({ data, dataKey, title, fill, stroke }) => {
 
       <LatestValue>
         <DKPIcon />
-        {latestValue}
+        {Math.round(latestValue)}
       </LatestValue>
 
       <DiffValue positive={positiveDiff}>

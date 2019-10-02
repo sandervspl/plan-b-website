@@ -6,6 +6,11 @@ const getHistory = createSelector(
   (dkpHistory) => dkpHistory,
 );
 
+const getAverageDkp = createSelector(
+  (state: i.ReduxState) => state.dkp.average,
+  (dkpAverage) => dkpAverage,
+);
+
 export const totalDkpForGraph = createSelector(
   getHistory,
   (dkpHistory) => {
@@ -19,18 +24,25 @@ export const totalDkpForGraph = createSelector(
         xName: 'date',
         date: entry.createdAt,
         yName: 'dkp',
-        dkp: entry.total,
+        dkp: entry.net,
       }));
   }
 );
 
 export const averageDkpForGraph = createSelector(
-  getHistory,
-  (dkpHistory) => {
-    if (!dkpHistory) {
+  getAverageDkp,
+  (dkpAverage) => {
+    if (!dkpAverage) {
       return;
     }
 
-    // @TODO This data has to be calculated on the server
+    return Object.keys(dkpAverage)
+      .sort((a, b) => Number(b) - Number(a))
+      .map((key) => ({
+        xName: 'date',
+        date: dkpAverage[key].date,
+        yName: 'dkp',
+        dkp: dkpAverage[key].value,
+      }));
   }
 );

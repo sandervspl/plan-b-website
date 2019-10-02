@@ -20,34 +20,42 @@ const DkpHistory: React.FC<Props> = () => {
         <>
           <ListHeading>
             <ListHeadingItem>Event</ListHeadingItem>
-            <ListHeadingItem>Duration</ListHeadingItem>
+            <ListHeadingItem>Time</ListHeadingItem>
+            <ListHeadingItem>Gained</ListHeadingItem>
             <ListHeadingItem>Spent</ListHeadingItem>
-            <ListHeadingItem>Total current</ListHeadingItem>
-            <ListHeadingItem>Total earned</ListHeadingItem>
+            <ListHeadingItem>Total</ListHeadingItem>
             <ListHeadingItem>Date</ListHeadingItem>
           </ListHeading>
 
           <DkpHistoryList>
-            {dkpHistory.map((entry) => (
+            {dkpHistory.map((entry, index, list) => (
               <DkpHistoryItem>
                 <ListItemCell>
                   {entry.event}
                 </ListItemCell>
 
                 <ListItemCell>
-                  {entry.hours} hour{entry.hours !== 1 && 's'}
+                  {
+                    list[index - 1]
+                      ? entry.hours - list[index - 1].hours
+                      : 0
+                  } hour{entry.hours !== 1 && 's'}
                 </ListItemCell>
 
-                <DkpChangeText negative={entry.spent > 0}>
-                  {entry.spent}
+                <DkpChangeText positive={list.length > 1 && entry.net - list[index - 1].net >= 0}>
+                  + {
+                    list.length > 1 && entry.net - list[index - 1].net >= 0
+                      ? `+ ${entry.net - list[index - 1].net}`
+                      : 0
+                  }
                 </DkpChangeText>
 
-                <DkpChangeText positive>
-                  {entry.net}
+                <DkpChangeText negative={entry.spent > 0}>
+                  - {entry.spent}
                 </DkpChangeText>
 
                 <ListItemCell>
-                  {entry.total}
+                  {entry.net}
                 </ListItemCell>
 
                 <ListItemCell title={getDateWithTime(entry.createdAt)}>

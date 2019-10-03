@@ -28,6 +28,7 @@ const Graphs: React.FC<Props> = () => {
 
   const DkpGraphs = [
     <Graph
+      key={0}
       data={dkpHistory}
       dataKey="dkp"
       title="Total DKP"
@@ -35,6 +36,7 @@ const Graphs: React.FC<Props> = () => {
       stroke={theme.color.graph.border.total}
     />,
     <Graph
+      key={1}
       data={dkpAverage}
       dataKey="dkp"
       title="Guild DKP average"

@@ -29,7 +29,7 @@ const DkpHistory: React.FC<Props> = () => {
 
           <DkpHistoryList>
             {dkpHistory.map((entry, index, list) => (
-              <DkpHistoryItem>
+              <DkpHistoryItem key={entry.id}>
                 <ListItemCell>
                   {entry.event}
                 </ListItemCell>
@@ -42,9 +42,9 @@ const DkpHistory: React.FC<Props> = () => {
                   } hour{entry.hours !== 1 && 's'}
                 </ListItemCell>
 
-                <DkpChangeText positive={list.length > 1 && entry.net - list[index - 1].net >= 0}>
+                <DkpChangeText positive={index > 0 && entry.net - list[index - 1].net >= 0}>
                   + {
-                    list.length > 1 && entry.net - list[index - 1].net >= 0
+                    index > 0 && entry.net - list[index - 1].net >= 0
                       ? `+ ${entry.net - list[index - 1].net}`
                       : 0
                   }

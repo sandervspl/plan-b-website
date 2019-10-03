@@ -28,45 +28,55 @@ const DkpHistory: React.FC<Props> = () => {
           </ListHeading>
 
           <DkpHistoryList>
-            {dkpHistory.map((entry, index, list) => (
-              <DkpHistoryItem key={entry.id}>
-                <ListItemCell>
-                  {entry.event}
-                </ListItemCell>
+            {dkpHistory.map((entry, index, list) => {
+              const nextEntry = list[index + 1];
 
-                <ListItemCell>
-                  {
-                    list[index - 1]
-                      ? entry.hours - list[index - 1].hours
-                      : 0
-                  } hour{entry.hours !== 1 && 's'}
-                </ListItemCell>
+              console.log(entry, nextEntry);
 
-                <DkpChangeText positive={index > 0 && entry.net - list[index - 1].net >= 0}>
-                  + {
-                    index > 0 && entry.net - list[index - 1].net >= 0
-                      ? `+ ${entry.net - list[index - 1].net}`
-                      : 0
-                  }
-                </DkpChangeText>
+              return (
+                <DkpHistoryItem key={entry.id}>
+                  <ListItemCell>
+                    {entry.event}
+                  </ListItemCell>
 
-                <DkpChangeText negative={entry.spent > 0}>
-                  - {entry.spent}
-                </DkpChangeText>
+                  <ListItemCell>
+                    {
+                      nextEntry
+                        ? entry.hours - nextEntry.hours
+                        : 0
+                    } hour{entry.hours !== 1 && 's'}
+                  </ListItemCell>
 
-                <ListItemCell>
-                  {entry.net}
-                </ListItemCell>
+                  <DkpChangeText positive={nextEntry && entry.net - nextEntry.net > 0}>
+                    {
+                      nextEntry && entry.net - nextEntry.net > 0
+                        ? `+ ${entry.net - nextEntry.net}`
+                        : 0
+                    }
+                  </DkpChangeText>
 
-                <ListItemCell title={getDateWithTime(entry.createdAt)}>
-                  <DateText
-                    noIcon={!isMobile}
-                    date={entry.createdAt}
-                    format={humanDate(entry.createdAt)}
-                  />
-                </ListItemCell>
-              </DkpHistoryItem>
-            ))}
+                  <DkpChangeText negative={nextEntry && entry.spent - nextEntry.spent > 0}>
+                    {
+                      nextEntry && entry.spent - nextEntry.spent > 0
+                        ? `- ${entry.spent - nextEntry.spent}`
+                        : 0
+                    }
+                  </DkpChangeText>
+
+                  <ListItemCell>
+                    <strong>{entry.net}</strong>
+                  </ListItemCell>
+
+                  <ListItemCell title={getDateWithTime(entry.createdAt)}>
+                    <DateText
+                      noIcon={!isMobile}
+                      date={entry.createdAt}
+                      format={humanDate(entry.createdAt)}
+                    />
+                  </ListItemCell>
+                </DkpHistoryItem>
+              );
+            })}
           </DkpHistoryList>
         </>
       )}

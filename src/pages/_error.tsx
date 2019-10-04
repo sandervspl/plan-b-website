@@ -15,8 +15,8 @@ const ErrorPage: i.NextPageComponent<Props> = ({ statusCode }) => {
         <Heading as="h1">{text}</Heading>
         <Heading as="h3">{statusCode}</Heading>
 
-        <Link to="home">
-          <Paragraph>Go back</Paragraph>
+        <Link to="login">
+          <Paragraph>Sign in</Paragraph>
         </Link>
       </div>
 

@@ -58,11 +58,6 @@ const UserMenu: React.FC<Props> = ({ open }) => {
         {user && user.authLevel > i.AUTH_LEVEL.USER && (
           <>
             <li>
-              <NavLink to="applications">
-                <strong>Applications</strong>
-              </NavLink>
-            </li>
-            <li>
               <Link external to={`${apiConfig.url.cms}/admin`}>
                 <strong>CMS</strong>
               </Link>

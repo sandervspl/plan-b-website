@@ -13,7 +13,6 @@ const router = (new Routes() as i.Router)
   .add({ pattern: '/dkp', page: 'dkp', name: routeNames.dkp })
 
   // Admin
-  .add({ pattern: '/admin/applications', page: 'admin/applications', name: routeNames.applications })
   .add({ pattern: '/admin/applications/:id', page: 'admin/applications/detail', name: routeNames.applicationDetail });
 
 router.push = router.Router.pushRoute;

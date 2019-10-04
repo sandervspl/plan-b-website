@@ -115,7 +115,7 @@ export type ApplicationDataDuck = ApplicationBase & {
 }
 
 export type FetchApplications = i.BaseThunkAction<
-  (status: i.ApplicationStatus, type: i.ViewableType) => Promise<i.ApplicationData[] | void>
+  (status: i.ApplicationStatus) => Promise<i.ApplicationData[] | void>
 >;
 
 export type FetchComments = i.BaseThunkAction<

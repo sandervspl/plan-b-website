@@ -6,7 +6,6 @@ export const routeNames = Object.freeze({
   newsDetail: 'news-detail',
   gallery: 'gallery',
   dkp: 'dkp',
+  applications: 'applications',
   applicationDetail: 'application-detail',
-  publicApplicationDetail: 'public-application-detail',
-  publicApplications: 'public-applications',
 } as const);

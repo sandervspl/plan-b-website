@@ -100,11 +100,7 @@ export type ApplicationBase = i.BaseResponseBody & {
 export type ApplicationData = ApplicationBase & {
   votes: i.Vote[];
   commentsAmount: number;
-  public?: {
-    id: number;
-    applicationId: number;
-    uuid: string;
-  };
+  uuid: string;
 }
 
 export type ApplicationDataDuck = ApplicationBase & {

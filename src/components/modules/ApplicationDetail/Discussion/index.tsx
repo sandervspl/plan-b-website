@@ -17,6 +17,7 @@ const Discussion: React.FC = () => {
   const loading = useSelector((state) => state.applications.loadingMessages);
   const windowWidth = useSelector((state) => state.ui.windowWidth);
   const applicationUuid = useSelector((state) => state.applications.detail!.uuid);
+  const isAdmin = useSelector((state) => state.user.isAdmin);
   const [curTab, setCurTab] = useState<TabId>(0);
   const [tabsContainerWidth, setTabsContainerWidth] = useState(0);
   const TabsContainerRef = useRef<HTMLDivElement>(null);
@@ -57,23 +58,25 @@ const Discussion: React.FC = () => {
     <DiscussionContainer>
       <Heading as="h2">Discussion</Heading>
 
-      <TabsContainer ref={TabsContainerRef}>
-        <Tabs>
-          <Tab
-            isactive={curTab === 0}
-            onClick={onTabChange(0)}
-          >
-            Public
-          </Tab>
-          <Tab
-            isactive={curTab === 1}
-            onClick={onTabChange(1)}
-          >
-            Officers
-          </Tab>
-        </Tabs>
-        <ActiveTabLine activeId={curTab} width={`${tabsContainerWidth / 2}px`} />
-      </TabsContainer>
+      {isAdmin && (
+        <TabsContainer ref={TabsContainerRef}>
+          <Tabs>
+            <Tab
+              isactive={curTab === 0}
+              onClick={onTabChange(0)}
+            >
+              Public
+            </Tab>
+            <Tab
+              isactive={curTab === 1}
+              onClick={onTabChange(1)}
+            >
+              Officers
+            </Tab>
+          </Tabs>
+          <ActiveTabLine activeId={curTab} width={`${tabsContainerWidth / 2}px`} />
+        </TabsContainer>
+      )}
 
       {user && (
         <AddComment

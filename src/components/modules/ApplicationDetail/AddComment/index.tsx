@@ -14,13 +14,7 @@ import {
 const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.data && state.user.data.id);
-  const applicationId = useSelector((state) => (
-    state.applications.detail
-      ? state.applications.detail.id
-      : state.applications.detailPublic
-        ? state.applications.detailPublic!.id
-        : undefined
-  ));
+  const applicationUuid = useSelector((state) => state.applications.detail!.uuid);
   const applicationLocked = useSelector((state) => state.applications.locked);
   const sending = useSelector((state) => state.applications.sendingMessage);
   const [error, setError] = useState('');
@@ -31,11 +25,11 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
   };
 
   const handleSubmit = async () => {
-    if (!applicationId || !text) return;
+    if (!applicationUuid || !text) return;
 
     setError('');
 
-    dispatch(sendComment(type, applicationId, text, userId))
+    dispatch(sendComment(type, applicationUuid, text, userId))
       .then((message) => {
         if (!message) {
           setError('Something went wrong. Try again later.');
@@ -45,7 +39,7 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
 
         setText('');
 
-        dispatch(fetchComments(applicationId, type));
+        dispatch(fetchComments(applicationUuid, type));
       });
   };
 

@@ -131,7 +131,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
               {application.social ? 'Social' : 'Raider'}
             </SocialContainer>
 
-            {!user.isAdmin && <Voting />}
+            {user.isAdmin && <Voting />}
           </ApplicationHeader>
 
           <ApplicationSection>
@@ -217,7 +217,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
           </ApplicationSection>
         </ApplicationContent>
 
-        <Discussion applicationUuid={applicationUuid} />
+        <Discussion />
       </ApplicationContainer>
     </Page>
   );

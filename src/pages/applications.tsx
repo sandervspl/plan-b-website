@@ -60,7 +60,7 @@ const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) 
     setCurTab(statusId);
 
     const statusName = getStatusStr(statusId);
-    router.replace(`${router.asPath}?status=${statusName}`, undefined, { shallow: true });
+    router.replace(`${router.pathname}?status=${statusName}`, undefined, { shallow: true });
 
     dispatch(fetchApplications(statusName));
   };

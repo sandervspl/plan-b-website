@@ -10,18 +10,19 @@ import { DiscussionContainer } from './styled';
 
 type TabId = 0 | 1;
 
-const Discussion: React.FC<Props> = ({ applicationUuid }) => {
+const Discussion: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.data);
   const messages = useSelector((state) => state.applications.messages);
   const loading = useSelector((state) => state.applications.loadingMessages);
   const windowWidth = useSelector((state) => state.ui.windowWidth);
+  const applicationUuid = useSelector((state) => state.applications.detail!.uuid);
   const [curTab, setCurTab] = useState<TabId>(0);
   const [tabsContainerWidth, setTabsContainerWidth] = useState(0);
   const TabsContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    dispatch(fetchComments(applicationUuid, getStatusStr(curTab)));
+    dispatch(fetchComments(applicationUuid, getTypeStr(curTab)));
   }, []);
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const Discussion: React.FC<Props> = ({ applicationUuid }) => {
     setTabsContainerWidth(TabsContainerRef.current.clientWidth);
   }, [windowWidth]);
 
-  const getStatusStr = (tabId: TabId): i.CommentType => {
+  const getTypeStr = (tabId: TabId): i.CommentType => {
     if (tabId === 0) {
       return 'public';
     }
@@ -45,7 +46,7 @@ const Discussion: React.FC<Props> = ({ applicationUuid }) => {
 
     setCurTab(tabId);
 
-    const commentsType = getStatusStr(tabId);
+    const commentsType = getTypeStr(tabId);
 
     setTimeout(() => {
       dispatch(fetchComments(applicationUuid, commentsType));
@@ -68,14 +69,18 @@ const Discussion: React.FC<Props> = ({ applicationUuid }) => {
             isactive={curTab === 1}
             onClick={onTabChange(1)}
           >
-            Private
+            Officers
           </Tab>
         </Tabs>
         <ActiveTabLine activeId={curTab} width={`${tabsContainerWidth / 2}px`} />
       </TabsContainer>
 
       {user && (
-        <AddComment username={user.username} avatar={user.avatar} />
+        <AddComment
+          username={user.username}
+          avatar={user.avatar}
+          type={getTypeStr(curTab)}
+        />
       )}
 
       {loading ? (
@@ -92,9 +97,5 @@ const Discussion: React.FC<Props> = ({ applicationUuid }) => {
     </DiscussionContainer>
   );
 };
-
-type Props = {
-  applicationUuid: string;
-}
 
 export default Discussion;

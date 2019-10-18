@@ -92,6 +92,7 @@ export type Vote = i.BaseDatabaseBody & {
 }
 
 export type ApplicationBase = Omit<i.BaseResponseBody, 'id'> & {
+  uuid: string;
   status: i.ApplicationStatus;
   character: i.Character;
   personal: Personal;

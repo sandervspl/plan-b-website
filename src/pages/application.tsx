@@ -1,5 +1,5 @@
 import * as i from 'types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CircleSvg from 'vectors/circle.svg';
 import NotInterestedSvg from 'vectors/not-interested.svg';
 import CheckCircleSvg from 'vectors/check-circle.svg';
@@ -21,6 +21,7 @@ import {
   ApplicationSection, ProfessionsGrid, GuildMasterTools, StatusChangeButton, ApplicationContent,
   SocialContainer,
 } from 'modules/ApplicationDetail/styled';
+import RejectModal from 'modules/ApplicationDetail/RejectModal';
 
 const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, applicationUuid }) => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
   const hasPrimaryProfessions = useSelector(() => hasProfessions(application!, 'primary'));
   const hasSecondaryProfessions = useSelector(() => hasProfessions(application!, 'secondary'));
   const user = useSelector((state) => state.user);
+  const [rejectModalOpen, setRejectModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchApplicationDetail(applicationUuid));
@@ -47,6 +49,10 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
 
   const updateStatus = (status: i.ApplicationStatus) => () => {
     dispatch(setStatus(applicationUuid, status));
+  };
+
+  const onReject = () => {
+    setRejectModalOpen(true);
   };
 
   if (loading) {
@@ -91,7 +97,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
                     Accept
                   </StatusChangeButton>
 
-                  <StatusChangeButton status="rejected" onClick={updateStatus('rejected')}>
+                  <StatusChangeButton status="rejected" onClick={onReject}>
                     <NotInterestedSvg />
                     Reject
                   </StatusChangeButton>
@@ -218,6 +224,12 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
         </ApplicationContent>
 
         <Discussion />
+
+        <RejectModal
+          isModalOpen={rejectModalOpen}
+          setModalOpen={setRejectModalOpen}
+          cta={setStatus('rejected')}
+        />
       </ApplicationContainer>
     </Page>
   );

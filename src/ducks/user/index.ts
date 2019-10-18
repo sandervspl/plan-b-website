@@ -73,6 +73,11 @@ export const fetchUser: i.FetchUser = () => async (dispatch, getState, api) => {
     // },
   })
     .then((user) => {
+      if (!user.id) {
+        dispatch(actions.failed());
+        return;
+      }
+
       dispatch(actions.success(user));
 
       return user;

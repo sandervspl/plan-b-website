@@ -7,7 +7,7 @@ export const actions = {
   failed: () => action('applications/FAILED'),
   successList: (applications: i.ApplicationData[]) => action('applications/SUCCESS_LIST', applications),
 
-  successDetail: (application: i.ApplicationData, userVote: i.VOTE | undefined) =>
+  successDetail: (application: i.ApplicationData, userVote?: i.VOTE) =>
     action('applications/SUCCESS_DETAIL', { application, userVote }),
   successDetailPublic: (application: i.ApplicationBase) =>
     action('applications/SUCCESS_DETAIL_PUBLIC', application),
@@ -68,15 +68,26 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
         loading: false,
       };
     case 'applications/SUCCESS_DETAIL':
+      if (action.payload.application.votes) {
+        return {
+          ...state,
+          detail: {
+            ...action.payload.application,
+            votes: {
+              accepts: action.payload.application.votes.filter((vote) => vote.vote === i.VOTE.ACCEPT),
+              rejects: action.payload.application.votes.filter((vote) => vote.vote === i.VOTE.REJECT),
+            },
+          },
+          error: false,
+          loading: false,
+          locked: action.payload.application.locked,
+          userVote: action.payload.userVote,
+        };
+      }
+
       return {
         ...state,
-        detail: {
-          ...action.payload.application,
-          votes: {
-            accepts: action.payload.application.votes.filter((vote) => vote.vote === i.VOTE.ACCEPT),
-            rejects: action.payload.application.votes.filter((vote) => vote.vote === i.VOTE.REJECT),
-          },
-        },
+        detail: action.payload.application,
         error: false,
         loading: false,
         locked: action.payload.application.locked,
@@ -114,11 +125,11 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
           ...state.detail!,
           votes: {
             accepts: action.payload.vote === i.VOTE.ACCEPT
-              ? [action.payload, ...state.detail!.votes.accepts]
-              : state.detail!.votes.accepts,
+              ? [action.payload, ...state.detail!.votes!.accepts]
+              : state.detail!.votes!.accepts,
             rejects: action.payload.vote === i.VOTE.REJECT
-              ? [action.payload, ...state.detail!.votes.rejects]
-              : state.detail!.votes.rejects,
+              ? [action.payload, ...state.detail!.votes!.rejects]
+              : state.detail!.votes!.rejects,
           },
         },
         userVote: action.payload.vote,
@@ -186,17 +197,25 @@ export const fetchApplicationDetail: i.FetchApplicationDetail = (applicationUuid
       withAuth: true,
     })
       .then((res) => {
-        const user = getState().user.data!;
-        const userVote = res.votes.find((vote) => vote.user.id === user.id);
-        let vote: i.ApplicationsState['userVote'];
+        const user = getState().user.data;
 
-        if (userVote) {
-          vote = userVote.vote;
+        if (user) {
+          const userVote = res.votes.find((vote) => vote.user.id === user.id);
+          let vote: i.ApplicationsState['userVote'];
+
+          if (userVote) {
+            vote = userVote.vote;
+          }
+
+          dispatch(actions.successDetail(res, vote));
+
+          return;
         }
 
-        dispatch(actions.successDetail(res, vote));
+        dispatch(actions.successDetail(res));
       })
-      .catch(() => {
+      .catch((err) => {
+        if (__DEV__) console.error(err);
         dispatch(actions.failed());
       });
   };

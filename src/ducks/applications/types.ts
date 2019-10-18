@@ -107,7 +107,7 @@ export type ApplicationData = ApplicationBase & {
 }
 
 export type ApplicationDataDuck = ApplicationBase & {
-  votes: {
+  votes?: {
     accepts: i.Vote[];
     rejects: i.Vote[];
   };

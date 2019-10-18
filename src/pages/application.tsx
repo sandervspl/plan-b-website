@@ -49,7 +49,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
     dispatch(setStatus(applicationUuid, status));
   };
 
-  if (user.loading || loading) {
+  if (loading) {
     return null;
   }
 

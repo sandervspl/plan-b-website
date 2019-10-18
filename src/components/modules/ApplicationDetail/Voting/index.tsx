@@ -24,7 +24,7 @@ const Voting: React.FC = () => {
   const handleVote = (decision: i.VOTE) => () => {
     if (!application || !user) return;
 
-    dispatch(saveVote(application.id, user.id, decision));
+    dispatch(saveVote(application.uuid, user.id, decision));
   };
 
   const getMaxAvatars = (votes: i.Vote[]) => {

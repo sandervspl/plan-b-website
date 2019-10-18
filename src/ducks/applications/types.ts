@@ -123,11 +123,11 @@ export type FetchApplicationDetail = i.BaseThunkAction<
 
 
 export type FetchComments = i.BaseThunkAction<
-  (applicationUuid: string, type: i.CommentType) => Promise<i.Comment[] | void>
+  (type: i.CommentType) => Promise<i.Comment[] | void>
 >;
 
 export type SendComment = i.BaseThunkAction<
-  (type: i.CommentType, applicationUuid: string, comment: string, userId?: string) => Promise<i.Comment | void>
+  (type: i.CommentType, comment: string) => Promise<i.Comment | void>
 >;
 
 export type SaveVote = i.BaseThunkAction<
@@ -135,5 +135,5 @@ export type SaveVote = i.BaseThunkAction<
 >;
 
 export type SetStatus = i.BaseThunkAction<
-(applicationUuid: string, status: i.ApplicationStatus) => Promise<i.ApplicationBase | void>
+  (status: i.ApplicationStatus) => Promise<i.ApplicationBase | void>
 >;

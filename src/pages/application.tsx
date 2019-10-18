@@ -48,7 +48,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
   }, [error]);
 
   const updateStatus = (status: i.ApplicationStatus) => () => {
-    dispatch(setStatus(applicationUuid, status));
+    dispatch(setStatus(status));
   };
 
   const onReject = () => {
@@ -225,11 +225,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
 
         <Discussion />
 
-        <RejectModal
-          isModalOpen={rejectModalOpen}
-          setModalOpen={setRejectModalOpen}
-          cta={setStatus('rejected')}
-        />
+        <RejectModal isModalOpen={rejectModalOpen} setModalOpen={setRejectModalOpen} />
       </ApplicationContainer>
     </Page>
   );

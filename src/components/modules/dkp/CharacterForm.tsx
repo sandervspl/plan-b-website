@@ -92,46 +92,44 @@ const CharacterForm: React.FC<Props> = () => {
 
       <Form<FormState> onSubmit={() => setLinkCharacterRequest(true)}>
         {({ handleSubmit, invalid, values }) => (
-          <>
-            <form onSubmit={handleSubmit}>
-              {loading ? (
-                <CharacterLoadingContainer>
-                  <Paragraph>Linking character to account...</Paragraph>
-                  <Loader />
-                </CharacterLoadingContainer>
-              ) : (
-                <>
-                  <Field
-                    component={Input}
-                    name="name"
-                    label="Enter character name"
-                    required
-                    validate={characterValidate}
-                  />
+          <form onSubmit={handleSubmit}>
+            {loading ? (
+              <CharacterLoadingContainer>
+                <Paragraph>Linking character to account...</Paragraph>
+                <Loader />
+              </CharacterLoadingContainer>
+            ) : (
+              <>
+                <Field
+                  component={Input}
+                  name="name"
+                  label="Enter character name"
+                  required
+                  validate={characterValidate}
+                />
 
-                  <Button type="submit" disabled={invalid}>
-                    Add character
-                  </Button>
+                <Button type="submit" disabled={invalid}>
+                  Add character
+                </Button>
 
-                  {error && <ErrorText>{error}</ErrorText>}
-                </>
-              )}
+                {error && <ErrorText>{error}</ErrorText>}
+              </>
+            )}
 
-              <CreateCharacterModal
-                name={values.name}
-                cta={onCreate}
-                isModalOpen={createCharacterRequest}
-                setModalOpen={setCreateCharacterRequest}
-              />
+            <CreateCharacterModal
+              name={values.name}
+              cta={onCreate}
+              isModalOpen={createCharacterRequest}
+              setModalOpen={setCreateCharacterRequest}
+            />
 
-              <LinkCharacterModal
-                name={values.name}
-                cta={onLink}
-                isModalOpen={linkCharacterRequest}
-                setModalOpen={setLinkCharacterRequest}
-              />
-            </form>
-          </>
+            <LinkCharacterModal
+              name={values.name}
+              cta={onLink}
+              isModalOpen={linkCharacterRequest}
+              setModalOpen={setLinkCharacterRequest}
+            />
+          </form>
         )}
       </Form>
     </CharacterFormContainer>

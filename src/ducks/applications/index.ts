@@ -220,13 +220,15 @@ export const fetchApplicationDetail: i.FetchApplicationDetail = (applicationUuid
       });
   };
 
-export const fetchComments: i.FetchComments = (applicationUuid, type) =>
+export const fetchComments: i.FetchComments = (type) =>
   async (dispatch, getState, api) => {
     dispatch(actions.comments());
 
+    const { uuid } = getState().applications.detail!;
+
     return api.get<i.Comment[]>({
       url: api.url.api,
-      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationUuid}/comments`,
+      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${uuid}/comments`,
       query: { type },
     })
       .then((res) => {
@@ -237,17 +239,19 @@ export const fetchComments: i.FetchComments = (applicationUuid, type) =>
       });
   };
 
-export const sendComment: i.SendComment = (type, applicationUuid, comment, userId) =>
+export const sendComment: i.SendComment = (type, comment) =>
   async (dispatch, getState, api) => {
     dispatch(actions.sendComment());
 
     const isPublic = type === 'public';
+    const { uuid } = getState().applications.detail!;
+    const { id } = getState().user.data!;
 
     return api.post<i.Comment>({
       url: api.url.api,
-      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationUuid}/comment`,
+      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${uuid}/comment`,
       body: {
-        userId,
+        userId: id,
         comment,
         isPublic,
       },
@@ -286,24 +290,25 @@ export const saveVote: i.SaveVote = (applicationUuid, userId, vote) =>
       });
   };
 
-export const setStatus: i.SetStatus = (applicationUuid, status) =>
-  async (dispatch, getState, api) => {
-    dispatch(actions.setStatus());
+export const setStatus: i.SetStatus = (status) => async (dispatch, getState, api) => {
+  dispatch(actions.setStatus());
 
-    return api.put<i.ApplicationBase>({
-      url: api.url.api,
-      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationUuid}/status`,
-      body: {
-        status,
-      },
-      withAuth: true,
+  const { uuid } = getState().applications.detail!;
+
+  return api.put<i.ApplicationBase>({
+    url: api.url.api,
+    path: `${API_ENDPOINT.APPLICATION_DETAIL}/${uuid}/status`,
+    body: {
+      status,
+    },
+    withAuth: true,
+  })
+    .then((res) => {
+      dispatch(actions.setStatusSuccess(res));
+
+      return res;
     })
-      .then((res) => {
-        dispatch(actions.setStatusSuccess(res));
-
-        return res;
-      })
-      .catch(() => {
-        dispatch(actions.setStatusFailed());
-      });
-  };
+    .catch(() => {
+      dispatch(actions.setStatusFailed());
+    });
+};

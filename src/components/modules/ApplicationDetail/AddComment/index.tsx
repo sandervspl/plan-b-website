@@ -103,7 +103,7 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
 export type Props = {
   username: string;
   avatar: string;
-  type: i.ViewableType;
+  type: i.CommentType;
 };
 
 export default AddComment;

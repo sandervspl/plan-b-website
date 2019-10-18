@@ -176,13 +176,13 @@ export const fetchApplications: i.FetchApplications = (status) =>
       });
   };
 
-export const fetchApplicationDetail: i.FetchApplicationDetail = (uuid) =>
+export const fetchApplicationDetail: i.FetchApplicationDetail = (applicationUuid) =>
   async (dispatch, getState, api) => {
     dispatch(actions.load());
 
     return api.get<i.ApplicationData>({
       url: api.url.api,
-      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${uuid}`,
+      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationUuid}`,
       withAuth: true,
     })
       .then((res) => {
@@ -201,13 +201,13 @@ export const fetchApplicationDetail: i.FetchApplicationDetail = (uuid) =>
       });
   };
 
-export const fetchComments: i.FetchComments = (id, type) =>
+export const fetchComments: i.FetchComments = (applicationUuid, type) =>
   async (dispatch, getState, api) => {
     dispatch(actions.comments());
 
     return api.get<i.Comment[]>({
       url: api.url.api,
-      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${id}/messages`,
+      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationUuid}/messages`,
       query: { type },
     })
       .then((res) => {
@@ -218,7 +218,7 @@ export const fetchComments: i.FetchComments = (id, type) =>
       });
   };
 
-export const sendComment: i.SendComment = (type, applicationId, comment, userId) =>
+export const sendComment: i.SendComment = (type, applicationUuid, comment, userId) =>
   async (dispatch, getState, api) => {
     dispatch(actions.sendComment());
 
@@ -226,7 +226,7 @@ export const sendComment: i.SendComment = (type, applicationId, comment, userId)
 
     return api.post<i.Comment>({
       url: api.url.api,
-      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationId}/comment`,
+      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationUuid}/comment`,
       body: {
         userId,
         comment,
@@ -244,13 +244,13 @@ export const sendComment: i.SendComment = (type, applicationId, comment, userId)
       });
   };
 
-export const saveVote: i.SaveVote = (applicationId, userId, vote) =>
+export const saveVote: i.SaveVote = (applicationUuid, userId, vote) =>
   async (dispatch, getState, api) => {
     dispatch(actions.vote());
 
     return api.post<i.Vote>({
       url: api.url.api,
-      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationId}/vote`,
+      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationUuid}/vote`,
       body: {
         userId,
         vote,
@@ -267,13 +267,13 @@ export const saveVote: i.SaveVote = (applicationId, userId, vote) =>
       });
   };
 
-export const setStatus: i.SetStatus = (applicationId, status) =>
+export const setStatus: i.SetStatus = (applicationUuid, status) =>
   async (dispatch, getState, api) => {
     dispatch(actions.setStatus());
 
     return api.put<i.ApplicationBase>({
       url: api.url.api,
-      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationId}/status`,
+      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationUuid}/status`,
       body: {
         status,
       },

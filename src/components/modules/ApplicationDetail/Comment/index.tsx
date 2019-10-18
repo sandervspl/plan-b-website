@@ -46,7 +46,7 @@ const Comment: React.FC<Props> = ({ message, type }) => {
 
 export type Props = {
   message: i.Comment;
-  type: i.ViewableType;
+  type: i.CommentType;
 };
 
 export default Comment;

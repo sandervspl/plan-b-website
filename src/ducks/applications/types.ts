@@ -14,7 +14,7 @@ export type ApplicationsState = i.BaseState<never> & {
 
 export type ApplicationStatus = 'open' | 'accepted' | 'rejected';
 
-export type ViewableType = 'private' | 'public';
+export type CommentType = 'private' | 'public';
 
 export type RaidExperience = {
   molten_core?: boolean;
@@ -120,17 +120,17 @@ export type FetchApplicationDetail = i.BaseThunkAction<
 
 
 export type FetchComments = i.BaseThunkAction<
-  (applicationId: number, type: i.ViewableType | 'all') => Promise<i.Comment[] | void>
+  (applicationId: number, type: i.CommentType | 'all') => Promise<i.Comment[] | void>
 >;
 
 export type SendComment = i.BaseThunkAction<
-  (type: i.ViewableType, applicationId: number, comment: string, userId?: string) => Promise<i.Comment | void>
+  (type: i.CommentType, applicationUuid: string, comment: string, userId?: string) => Promise<i.Comment | void>
 >;
 
 export type SaveVote = i.BaseThunkAction<
-  (applicationId: number, userId: string, vote: i.VOTE) => Promise<i.Vote | void>
+  (applicationUuid: string, userId: string, vote: i.VOTE) => Promise<i.Vote | void>
 >;
 
 export type SetStatus = i.BaseThunkAction<
-(applicationId: number, status: i.ApplicationStatus) => Promise<i.ApplicationBase | void>
+(applicationUuid: string, status: i.ApplicationStatus) => Promise<i.ApplicationBase | void>
 >;

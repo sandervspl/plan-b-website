@@ -231,11 +231,11 @@ ApplicationDetailPage.getInitialProps = ({ req, query }) => {
 };
 
 type Props = {
-  applicationUuid?: string;
+  applicationUuid: string;
 }
 
 type Queries = {
-  uuid?: string;
+  uuid: string;
 }
 
 export default ApplicationDetailPage;

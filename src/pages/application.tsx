@@ -217,7 +217,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
           </ApplicationSection>
         </ApplicationContent>
 
-        {/* <Discussion applicationId={application.id} /> */}
+        <Discussion applicationUuid={applicationUuid} />
       </ApplicationContainer>
     </Page>
   );

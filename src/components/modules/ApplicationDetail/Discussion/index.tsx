@@ -13,7 +13,7 @@ const Discussion: React.FC<Props> = ({ applicationUuid }) => {
   const loading = useSelector((state) => state.applications.loading);
 
   useEffect(() => {
-    // dispatch(fetchComments(applicationUuid));
+    dispatch(fetchComments(applicationUuid, 'private'));
   }, []);
 
   return (
@@ -33,7 +33,7 @@ const Discussion: React.FC<Props> = ({ applicationUuid }) => {
           )}
 
           {messages.map((comment) => (
-            <Comment key={comment.id} message={comment} />
+            <Comment key={comment.id} comment={comment} />
           ))}
          </>
       )}

@@ -79,6 +79,7 @@ export type Comment = i.BaseDatabaseBody & {
   applicationId: number;
   text: string;
   user: i.SimpleDatabaseUserData;
+  public: i.CommentType;
 }
 
 export enum VOTE { REJECT, ACCEPT }
@@ -120,7 +121,7 @@ export type FetchApplicationDetail = i.BaseThunkAction<
 
 
 export type FetchComments = i.BaseThunkAction<
-  (applicationId: number, type: i.CommentType | 'all') => Promise<i.Comment[] | void>
+  (applicationUuid: string, type: i.CommentType) => Promise<i.Comment[] | void>
 >;
 
 export type SendComment = i.BaseThunkAction<

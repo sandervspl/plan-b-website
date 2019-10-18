@@ -207,7 +207,7 @@ export const fetchComments: i.FetchComments = (applicationUuid, type) =>
 
     return api.get<i.Comment[]>({
       url: api.url.api,
-      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationUuid}/messages`,
+      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${applicationUuid}/comments`,
       query: { type },
     })
       .then((res) => {

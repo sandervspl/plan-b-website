@@ -7,18 +7,18 @@ import { CommentContainer, CommentText, CommentInfo, ReadMoreButton } from './st
 
 const MAX_TEXT_LENGTH = 200;
 
-const Comment: React.FC<Props> = ({ message, type }) => {
+const Comment: React.FC<Props> = ({ comment }) => {
   const [showLongText, setShowLongText] = useState(false);
-  const isLongText = message.text.length > MAX_TEXT_LENGTH;
+  const isLongText = comment.text.length > MAX_TEXT_LENGTH;
   const shortText = isLongText
-    ? `${message.text.substr(0, MAX_TEXT_LENGTH)}...`
-    : message.text;
+    ? `${comment.text.substr(0, MAX_TEXT_LENGTH)}...`
+    : comment.text;
 
   return (
     <CommentContainer>
-      <CircleImg src={message.user.avatar} />
+      <CircleImg src={comment.user.avatar} />
       <CommentText>
-        {showLongText ? message.text : shortText}
+        {showLongText ? comment.text : shortText}
 
         {isLongText && (
           <ReadMoreButton onClick={() => setShowLongText((val) => !val)}>
@@ -27,26 +27,25 @@ const Comment: React.FC<Props> = ({ message, type }) => {
         )}
 
         <CommentInfo>
-          <AuthLevelText level={message.user.authLevel} id={message.id.toString()}>
-            {message.user.username}
+          <AuthLevelText level={comment.user.authLevel} id={comment.id.toString()}>
+            {comment.user.username}
           </AuthLevelText>
 
-          <DateText date={message.createdAt} noIcon />
+          <DateText date={comment.createdAt} noIcon />
 
-          {type === 'private'
-            ? <SecurityIcon data-tip="This comment is only visible for officers" data-for={message.id} />
-            : <PublicIcon data-tip="This comment is visible for everyone" data-for={message.id} />}
+          {comment.public
+            ? <PublicIcon data-tip="This comment is visible for everyone" data-for={comment.id} />
+            : <SecurityIcon data-tip="This comment is only visible for officers" data-for={comment.id} />}
         </CommentInfo>
 
-        <Tooltip id={message.id.toString()} effect="solid" delayShow={200} place="bottom" />
+        <Tooltip id={comment.id.toString()} effect="solid" delayShow={200} place="bottom" />
       </CommentText>
     </CommentContainer>
   );
 };
 
 export type Props = {
-  message: i.Comment;
-  type: i.CommentType;
+  comment: i.Comment;
 };
 
 export default Comment;

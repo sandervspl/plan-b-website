@@ -234,7 +234,7 @@ type Props = {
   applicationUuid: string;
 }
 
-type Queries = {
+export type Queries = {
   uuid: string;
 }
 

@@ -3,6 +3,7 @@ import { media } from 'styles';
 import { Heading, EmptyStateText, Loader } from 'common';
 import { CommentContainer } from 'modules/ApplicationDetail/Comment/styled';
 import { AddCommentContainer } from 'modules/ApplicationDetail/AddComment/styled';
+import { TabsContainer, Tab } from 'common/Tabs';
 
 export const DiscussionContainer = styled.div`
   position: relative;
@@ -35,6 +36,14 @@ export const DiscussionContainer = styled.div`
     left: 50%;
     margin-top: 30px;
     transform: translateX(-50%);
+  }
+
+  ${TabsContainer} {
+    margin-top: 24px;
+
+    ${Tab} {
+      width: 50%;
+    }
   }
 
   ${media.tablet`

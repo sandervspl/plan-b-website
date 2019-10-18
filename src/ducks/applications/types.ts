@@ -83,6 +83,7 @@ export type Comment = i.BaseDatabaseBody & {
 }
 
 export enum VOTE { REJECT, ACCEPT }
+export enum COMMENT_TYPE { PRIVATE, PUBLIC }
 
 export type Vote = i.BaseDatabaseBody & {
   applicationId: number;

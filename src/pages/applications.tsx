@@ -7,10 +7,11 @@ import CircleIcon from 'vectors/circle.svg';
 import CheckCircleIcon from 'vectors/check-circle.svg';
 import NotInterestedIcon from 'vectors/not-interested.svg';
 import { Heading, Loader, EmptyStateText } from 'common';
+import { TabsContainer, Tabs, ActiveTabLine, Tab } from 'common/Tabs';
 import Page from 'modules/Page';
 import ApplicationItem from 'modules/Applications/ApplicationItem';
 import {
-  ApplicationsHeading, ApplicationsContainer, TabsContainer, Tabs, ActiveTabLine, Tab, ApplicationsList,
+  ApplicationsHeading, ApplicationsContainer, ApplicationsList,
 } from 'modules/Applications/styled';
 
 const TAB: Record<i.ApplicationStatus, number> = {
@@ -19,7 +20,7 @@ const TAB: Record<i.ApplicationStatus, number> = {
   rejected: 2,
 };
 
-const ApplicationsPage: i.NextPageComponent<Props, Query> = ({ url, status }) => {
+const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -59,7 +60,7 @@ const ApplicationsPage: i.NextPageComponent<Props, Query> = ({ url, status }) =>
     setCurTab(statusId);
 
     const statusName = getStatusStr(statusId);
-    router.replace(`${router.pathname}?status=${statusName}`, undefined, { shallow: true });
+    router.replace(`${router.asPath}?status=${statusName}`, undefined, { shallow: true });
 
     dispatch(fetchApplications(statusName));
   };
@@ -91,7 +92,7 @@ const ApplicationsPage: i.NextPageComponent<Props, Query> = ({ url, status }) =>
                 Rejected
               </Tab>
             </Tabs>
-            <ActiveTabLine activeId={curTab} />
+            <ActiveTabLine activeId={curTab} width="120px" />
           </TabsContainer>
         </ApplicationsHeading>
 
@@ -129,7 +130,7 @@ type Props = {
   status: i.ApplicationStatus;
 }
 
-type Query = {
+type Queries = {
   status?: i.ApplicationStatus;
 }
 

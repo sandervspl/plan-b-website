@@ -160,7 +160,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
   }
 };
 
-export const fetchApplications: i.FetchApplications['thunk'] = (status) =>
+export const fetchApplications: i.FetchApplications = (status) =>
   async (dispatch, getState, api) => {
     dispatch(actions.load());
 
@@ -176,13 +176,13 @@ export const fetchApplications: i.FetchApplications['thunk'] = (status) =>
       });
   };
 
-export const fetchApplicationDetail = (id: number): i.ThunkAction =>
+export const fetchApplicationDetail: i.FetchApplicationDetail = (uuid) =>
   async (dispatch, getState, api) => {
     dispatch(actions.load());
 
     return api.get<i.ApplicationData>({
       url: api.url.api,
-      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${id}`,
+      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${uuid}`,
       withAuth: true,
     })
       .then((res) => {
@@ -201,23 +201,7 @@ export const fetchApplicationDetail = (id: number): i.ThunkAction =>
       });
   };
 
-export const fetchPublicApplicationDetail = (uuid: string): i.ThunkAction =>
-  async (dispatch, getState, api) => {
-    dispatch(actions.load());
-
-    return api.get<i.ApplicationBase>({
-      url: api.url.api,
-      path: `${API_ENDPOINT.APPLICATION_DETAIL_PUBLIC}/${uuid}`,
-    })
-      .then((res) => {
-        dispatch(actions.successDetailPublic(res));
-      })
-      .catch(() => {
-        dispatch(actions.failed());
-      });
-  };
-
-export const fetchComments: i.FetchComments['thunk'] = (id, type) =>
+export const fetchComments: i.FetchComments = (id, type) =>
   async (dispatch, getState, api) => {
     dispatch(actions.comments());
 
@@ -234,7 +218,7 @@ export const fetchComments: i.FetchComments['thunk'] = (id, type) =>
       });
   };
 
-export const sendComment: i.SendComment['thunk'] = (type, applicationId, comment, userId) =>
+export const sendComment: i.SendComment = (type, applicationId, comment, userId) =>
   async (dispatch, getState, api) => {
     dispatch(actions.sendComment());
 
@@ -260,7 +244,7 @@ export const sendComment: i.SendComment['thunk'] = (type, applicationId, comment
       });
   };
 
-export const saveVote: i.SaveVote['thunk'] = (applicationId, userId, vote) =>
+export const saveVote: i.SaveVote = (applicationId, userId, vote) =>
   async (dispatch, getState, api) => {
     dispatch(actions.vote());
 
@@ -283,7 +267,7 @@ export const saveVote: i.SaveVote['thunk'] = (applicationId, userId, vote) =>
       });
   };
 
-export const setStatus: i.SetStatus['thunk'] = (applicationId, status) =>
+export const setStatus: i.SetStatus = (applicationId, status) =>
   async (dispatch, getState, api) => {
     dispatch(actions.setStatus());
 

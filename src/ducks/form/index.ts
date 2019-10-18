@@ -67,7 +67,7 @@ export const getFormState: i.GetFormState = (state, form) => (
   (state && state.form && state.form[form]) || {}
 );
 
-export const sendApplication: i.SendApplication['thunk'] = (values) => async (dispatch, getState, api) => {
+export const sendApplication: i.SendApplication = (values) => async (dispatch, getState, api) => {
   if (getState().form.sending.loading) {
     return;
   }

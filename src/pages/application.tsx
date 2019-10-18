@@ -9,7 +9,7 @@ import BabyIcon from 'vectors/baby.svg';
 import Page from 'modules/Page';
 import { useSelector, useDispatch } from 'hooks';
 import { getUrl, getCmsUrl, redirect } from 'services';
-import { fetchApplicationDetail, actions as applicationsActions, setStatus, fetchPublicApplicationDetail } from 'ducks/applications';
+import { fetchApplicationDetail, actions as applicationsActions, setStatus } from 'ducks/applications';
 import { hasProfessions } from 'ducks/applications/reselect';
 import { DateText, ClassText, Paragraph, CircleImg, Heading, EmptyStateText, Loader } from 'common';
 import Profession from 'modules/ApplicationDetail/Profession';
@@ -22,9 +22,7 @@ import {
   SocialContainer,
 } from 'modules/ApplicationDetail/styled';
 
-const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
-  url, applicationId, applicationUuid,
-}) => {
+const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, applicationUuid }) => {
   const dispatch = useDispatch();
   const application = useSelector((state) => state.applications.detail);
   const loading = useSelector((state) => state.applications.loading);
@@ -34,7 +32,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(fetchApplicationDetail(applicationId!));
+    dispatch(fetchApplicationDetail(applicationUuid));
 
     return function cleanup() {
       dispatch(applicationsActions.resetApplication());
@@ -48,7 +46,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
   }, [error]);
 
   const updateStatus = (status: i.ApplicationStatus) => () => {
-    dispatch(setStatus(applicationId!, status));
+    dispatch(setStatus(applicationUuid, status));
   };
 
   if (user.loading || loading) {
@@ -228,21 +226,15 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({
 ApplicationDetailPage.getInitialProps = ({ req, query }) => {
   return {
     url: getUrl(req),
-    applicationId: query.id,
+    applicationUuid: query.uuid,
   };
 };
 
-ApplicationDetailPage.defaultProps = {
-  type: 'private',
-};
-
 type Props = {
-  applicationId?: number;
   applicationUuid?: string;
 }
 
 type Queries = {
-  id?: number;
   uuid?: string;
 }
 

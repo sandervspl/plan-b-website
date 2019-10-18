@@ -65,7 +65,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Cha
   }
 };
 
-export const fetchCharacter: i.FetchBlizzardCharacter['thunk'] = (name) => async (dispatch, getState, api) => {
+export const fetchCharacter: i.FetchBlizzardCharacter = (name) => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
   return api.get<i.CharacterData>({
@@ -85,7 +85,7 @@ export const fetchCharacter: i.FetchBlizzardCharacter['thunk'] = (name) => async
     });
 };
 
-export const fetchProfessions: i.FetchProfessions['thunk'] = () => async (dispatch, getState, api) => {
+export const fetchProfessions: i.FetchProfessions = () => async (dispatch, getState, api) => {
   dispatch(actions.loadProfessions());
 
   return api.get<i.CmsProfession[]>({

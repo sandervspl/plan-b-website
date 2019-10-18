@@ -102,7 +102,7 @@ const ApplicationsPage: i.NextPageComponent<Props, Query> = ({ url, status }) =>
         ) : applications && applications.length > 0 ? (
           <ApplicationsList>
             {applications.map((application) => (
-              <ApplicationItem key={application.id} application={application} />
+              <ApplicationItem key={application.uuid} application={application} />
             ))}
           </ApplicationsList>
         ) : (

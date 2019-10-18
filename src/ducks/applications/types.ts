@@ -89,7 +89,7 @@ export type Vote = i.BaseDatabaseBody & {
   user: i.SimpleDatabaseUserData;
 }
 
-export type ApplicationBase = i.BaseResponseBody & {
+export type ApplicationBase = Omit<i.BaseResponseBody, 'id'> & {
   status: i.ApplicationStatus;
   character: i.Character;
   personal: Personal;

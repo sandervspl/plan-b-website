@@ -23,7 +23,7 @@ const Discussion: React.FC = () => {
   const TabsContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    dispatch(fetchComments(applicationUuid, getTypeStr(curTab)));
+    dispatch(fetchComments(getTypeStr(curTab)));
   }, []);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Discussion: React.FC = () => {
     const commentsType = getTypeStr(tabId);
 
     setTimeout(() => {
-      dispatch(fetchComments(applicationUuid, commentsType));
+      dispatch(fetchComments(commentsType));
     }, 500);
   };
 

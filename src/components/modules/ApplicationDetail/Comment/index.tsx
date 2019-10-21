@@ -5,6 +5,7 @@ import PublicIcon from 'vectors/public.svg';
 import { deleteComment } from 'ducks/applications';
 import { useSelector, useDispatch } from 'hooks';
 import { CircleImg, DateText, Tooltip, AuthLevelText } from 'common';
+import DeleteCommentModal from '../DeleteCommentModal';
 import { CommentContainer, CommentText, CommentInfo, ReadMoreButton, DeleteButton } from './styled';
 
 const MAX_TEXT_LENGTH = 200;
@@ -12,6 +13,7 @@ const MAX_TEXT_LENGTH = 200;
 const Comment: React.FC<Props> = ({ comment }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.data!.id);
+  const [isOpen, setOpen] = useState(false);
   const [showLongText, setShowLongText] = useState(false);
   const isLongText = comment.text.length > MAX_TEXT_LENGTH;
   const shortText = isLongText
@@ -46,11 +48,13 @@ const Comment: React.FC<Props> = ({ comment }) => {
             : <SecurityIcon data-tip="This comment is only visible for officers" data-for={comment.id} />}
 
           {comment.user.id === userId && (
-            <DeleteButton onClick={onDelete}>Delete</DeleteButton>
+            <DeleteButton onClick={() => setOpen(true)}>Delete</DeleteButton>
           )}
         </CommentInfo>
 
         <Tooltip id={comment.id.toString()} effect="solid" delayShow={200} place="bottom" />
+
+        <DeleteCommentModal isModalOpen={isOpen} setModalOpen={setOpen} cta={onDelete} />
       </CommentText>
     </CommentContainer>
   );

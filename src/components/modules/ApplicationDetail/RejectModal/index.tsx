@@ -31,8 +31,8 @@ const RejectModal: React.FC<Props> = ({ isModalOpen, setModalOpen }) => {
       <ModalContent>
         <Heading as="h2">Before you reject this application</Heading>
         <Paragraph>
-        Please state the reason for rejecting this application.&nbsp;
-        This comment will be added to the <strong>officers discussion</strong>.
+          Please state the reason for rejecting this application.&nbsp;
+          This comment will be added to the <strong>officers discussion</strong>.
         </Paragraph>
 
         <Form<FormState> onSubmit={handleSubmit}>

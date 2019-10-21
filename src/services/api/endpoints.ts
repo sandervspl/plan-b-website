@@ -7,10 +7,9 @@ export enum API_ENDPOINT {
   AUTH_USER = 'auth/me',
   POSTS = 'cms/news',
   APPLICATIONS = 'recruitment/applications',
-  APPLICATIONS_PUBLIC = 'recruitment/applications/public',
   APPLICATION_DETAIL = 'recruitment/application',
-  APPLICATION_DETAIL_PUBLIC = 'recruitment/application/public',
   ACTIVE_STREAMS = 'twitch/active_streams',
+  COMMENT_DELETE = 'recruitment/application/comment',
   DKP = 'dkp',
   DKP_GUILD_AVG = 'dkp/guild_average',
   CHARACTER = 'user/character'

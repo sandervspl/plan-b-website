@@ -22,6 +22,8 @@ export const actions = {
   sendCommentFailed: () => action('applications/SEND_COMMENT_FAILED'),
   sendCommentSuccess: (newComment: i.Comment) => action('applications/SEND_COMMENT_SUCCESS', newComment),
 
+  deleteComment: (commentId: number) => action('applications/DELETE_COMMENT', commentId),
+
   vote: () => action('applications/VOTE'),
   voteFailed: () => action('applications/VOTE_FAILED'),
   voteSuccess: (newVote: i.Vote) => action('applications/VOTE_SUCCESS', newVote),
@@ -43,6 +45,7 @@ const initialState: i.ApplicationsState = {
   locked: false,
   messages: [],
   loadingMessages: false,
+  detail: undefined,
 };
 
 export default (state = initialState, action: ActionType<typeof actions>): i.ApplicationsState => {
@@ -92,14 +95,6 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
         loading: false,
         locked: action.payload.application.locked,
         userVote: action.payload.userVote,
-      };
-    case 'applications/SUCCESS_DETAIL_PUBLIC':
-      return {
-        ...state,
-        error: false,
-        loading: false,
-        detailPublic: action.payload,
-        locked: action.payload.locked,
       };
     case 'applications/RESET_DETAIL':
       return initialState;
@@ -166,6 +161,11 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
         error: false,
         messages: action.payload,
       };
+    case 'applications/DELETE_COMMENT':
+      return {
+        ...state,
+        messages: state.messages.filter((message) => message.id !== action.payload),
+      };
     default:
       return state;
   }
@@ -220,24 +220,29 @@ export const fetchApplicationDetail: i.FetchApplicationDetail = (applicationUuid
       });
   };
 
-export const fetchComments: i.FetchComments = (type) =>
-  async (dispatch, getState, api) => {
-    dispatch(actions.comments());
+export const fetchComments: i.FetchComments = (type) => async (dispatch, getState, api) => {
+  dispatch(actions.comments());
 
-    const { uuid } = getState().applications.detail!;
+  const application = getState().applications.detail!;
 
-    return api.get<i.Comment[]>({
-      url: api.url.api,
-      path: `${API_ENDPOINT.APPLICATION_DETAIL}/${uuid}/comments`,
-      query: { type },
+  if (!application) {
+    return;
+  }
+
+  const { uuid } = application;
+
+  return api.get<i.Comment[]>({
+    url: api.url.api,
+    path: `${API_ENDPOINT.APPLICATION_DETAIL}/${uuid}/comments`,
+    query: { type },
+  })
+    .then((res) => {
+      dispatch(actions.commentsSuccess(res));
     })
-      .then((res) => {
-        dispatch(actions.commentsSuccess(res));
-      })
-      .catch(() => {
-        dispatch(actions.commentsFailed());
-      });
-  };
+    .catch(() => {
+      dispatch(actions.commentsFailed());
+    });
+};
 
 export const sendComment: i.SendComment = (type, comment) =>
   async (dispatch, getState, api) => {
@@ -266,6 +271,22 @@ export const sendComment: i.SendComment = (type, comment) =>
         dispatch(actions.sendCommentFailed());
       });
   };
+
+export const deleteComment: i.DeleteComment = (id) => async (dispatch, getState, api) => {
+  return api.del({
+    url: api.url.api,
+    path: `${API_ENDPOINT.COMMENT_DELETE}/${id}`,
+    withAuth: true,
+  })
+    .then((res) => {
+      dispatch(actions.deleteComment(id));
+
+      return res;
+    })
+    .catch(() => {
+      // dispatch(actions.sendCommentFailed());
+    });
+};
 
 export const saveVote: i.SaveVote = (applicationUuid, userId, vote) =>
   async (dispatch, getState, api) => {

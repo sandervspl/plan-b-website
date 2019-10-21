@@ -2,17 +2,25 @@ import * as i from 'types';
 import React, { useState } from 'react';
 import SecurityIcon from 'vectors/security.svg';
 import PublicIcon from 'vectors/public.svg';
+import { deleteComment } from 'ducks/applications';
+import { useSelector, useDispatch } from 'hooks';
 import { CircleImg, DateText, Tooltip, AuthLevelText } from 'common';
-import { CommentContainer, CommentText, CommentInfo, ReadMoreButton } from './styled';
+import { CommentContainer, CommentText, CommentInfo, ReadMoreButton, DeleteButton } from './styled';
 
 const MAX_TEXT_LENGTH = 200;
 
 const Comment: React.FC<Props> = ({ comment }) => {
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.user.data!.id);
   const [showLongText, setShowLongText] = useState(false);
   const isLongText = comment.text.length > MAX_TEXT_LENGTH;
   const shortText = isLongText
     ? `${comment.text.substr(0, MAX_TEXT_LENGTH)}...`
     : comment.text;
+
+  const onDelete = () => {
+    dispatch(deleteComment(comment.id));
+  };
 
   return (
     <CommentContainer>
@@ -36,6 +44,10 @@ const Comment: React.FC<Props> = ({ comment }) => {
           {comment.public
             ? <PublicIcon data-tip="This comment is visible for everyone" data-for={comment.id} />
             : <SecurityIcon data-tip="This comment is only visible for officers" data-for={comment.id} />}
+
+          {comment.user.id === userId && (
+            <DeleteButton onClick={onDelete}>Delete</DeleteButton>
+          )}
         </CommentInfo>
 
         <Tooltip id={comment.id.toString()} effect="solid" delayShow={200} place="bottom" />

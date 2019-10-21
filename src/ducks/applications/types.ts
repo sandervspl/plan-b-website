@@ -3,7 +3,6 @@ import * as i from 'types';
 export type ApplicationsState = i.BaseState<never> & {
   list?: i.ApplicationData[];
   detail?: i.ApplicationDataDuck;
-  detailPublic?: i.ApplicationBase;
   userVote?: i.VOTE;
   applicationUuid?: string;
   messages: i.Comment[];
@@ -128,6 +127,10 @@ export type FetchComments = i.BaseThunkAction<
 
 export type SendComment = i.BaseThunkAction<
   (type: i.CommentType, comment: string) => Promise<i.Comment | void>
+>;
+
+export type DeleteComment = i.BaseThunkAction<
+  (commentId: number) => Promise<void>
 >;
 
 export type SaveVote = i.BaseThunkAction<

@@ -46,8 +46,8 @@ const ApplicationItem: React.FC<Props> = ({ application }) => {
           {application.commentsAmount}
         </CommentsContainer>
 
-        <ListItemCell title={getDateWithTime(application.updated_at)}>
-          {timeAgo(new Date(application.updated_at))}
+        <ListItemCell title={getDateWithTime(application.created_at)}>
+          {timeAgo(new Date(application.created_at))}
         </ListItemCell>
       </Link>
     </ApplicationItemContainer>

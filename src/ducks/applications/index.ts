@@ -1,6 +1,7 @@
 import * as i from 'types';
 import { ActionType, action } from 'typesafe-actions';
-import { API_ENDPOINT } from 'services';
+import { API_ENDPOINT, localStorageHelper } from 'services';
+import { CommentsStorage } from 'services/localStorage/types';
 
 export const actions = {
   load: () => action('applications/LOAD'),
@@ -180,7 +181,34 @@ export const fetchApplications: i.FetchApplications = (status) =>
       path: `${API_ENDPOINT.APPLICATIONS}/${status}`,
     })
       .then((res) => {
-        dispatch(actions.successList(res));
+        // Add newComments flag if applicable
+        const data: i.ApplicationData[] = res.map((application) => {
+          const stored = localStorageHelper.comments.get();
+          let newComments = false;
+
+          if (stored) {
+            const storedApplication = stored.find((app) => app.applicationUuid === application.uuid);
+
+            if (storedApplication) {
+              newComments = application.commentsAmount > storedApplication.commentsAmount;
+            }
+          }
+
+          return {
+            ...application,
+            newComments,
+          };
+        });
+
+        // Save new state in localstorage
+        const storage: CommentsStorage[] = res.map((application) => ({
+          applicationUuid: application.uuid,
+          commentsAmount: application.commentsAmount,
+        }));
+
+        localStorageHelper.comments.set(storage);
+
+        dispatch(actions.successList(data));
       })
       .catch(() => {
         dispatch(actions.failed());

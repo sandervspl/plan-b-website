@@ -103,6 +103,7 @@ export type ApplicationData = ApplicationBase & {
   votes: i.Vote[];
   commentsAmount: number;
   uuid: string;
+  newComments: boolean;
 }
 
 export type ApplicationDataDuck = ApplicationBase & {

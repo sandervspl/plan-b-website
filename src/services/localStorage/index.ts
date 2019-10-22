@@ -1,5 +1,5 @@
 import { isServer } from 'services';
-import { LOCAL_STORAGE_KEY } from './types';
+import { LOCAL_STORAGE_KEY, CommentsStorage } from './types';
 
 class LocalStorageHelper<T> {
   private key: LOCAL_STORAGE_KEY;
@@ -27,13 +27,16 @@ class LocalStorageHelper<T> {
   }
 
   /*
+    Upsert
     Works like React setState.
     Only pass the properties that need to be updated.
   */
-  update = (data: T) => {
+  save = (data: T) => {
     const curData = this.get();
 
     if (!curData) {
+      this.set(data);
+
       return;
     }
 
@@ -58,6 +61,7 @@ class LocalStorageHelper<T> {
 
 class LocalStorage {
   public cookieConsent = new LocalStorageHelper<boolean>(LOCAL_STORAGE_KEY.COOKIE_CONSENT);
+  public comments = new LocalStorageHelper<CommentsStorage[]>(LOCAL_STORAGE_KEY.COMMENTS);
 }
 
 const ls = new LocalStorage();

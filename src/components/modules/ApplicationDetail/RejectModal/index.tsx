@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
 import { sendComment, fetchComments, setStatus } from 'ducks/applications';
 import { useDispatch } from 'hooks';
-import { Heading, Paragraph, Button } from 'common';
+import { Heading, Paragraph, Button, ErrorText } from 'common';
 import Modal, { ModalButtons } from 'common/Modal';
 import { Input } from 'common/form';
 import { validate } from 'services';
@@ -10,15 +10,18 @@ import { ModalContent } from './styled';
 
 const RejectModal: React.FC<Props> = ({ isModalOpen, setModalOpen }) => {
   const dispatch = useDispatch();
+  const [error, setError] = useState('');
 
   const handleSubmit = (values: FormState) => {
-    dispatch(sendComment('private', values.comment))
-      .then((message) => {
-        // if (!message) {
-        //   setError('Something went wrong. Try again later.');
+    setError('');
 
-        //   return;
-        // }
+    dispatch(sendComment('private', values.comment))
+      .then((comment) => {
+        if (!comment) {
+          setError('Something went wrong. Try again later.');
+
+          return;
+        }
 
         dispatch(fetchComments('private'));
         dispatch(setStatus('rejected'));
@@ -45,6 +48,7 @@ const RejectModal: React.FC<Props> = ({ isModalOpen, setModalOpen }) => {
                 required
                 validate={validate.required}
               />
+              {error && <ErrorText>{error}</ErrorText>}
               <ModalButtons>
                 <Button type="button" onClick={() => setModalOpen(false)}>
                   Cancel

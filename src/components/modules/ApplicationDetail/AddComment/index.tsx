@@ -29,8 +29,8 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
     setError('');
 
     dispatch(sendComment(type, text))
-      .then((message) => {
-        if (!message) {
+      .then((comment) => {
+        if (!comment) {
           setError('Something went wrong. Try again later.');
 
           return;

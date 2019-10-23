@@ -23,7 +23,7 @@ export const actions = {
   sendCommentFailed: () => action('applications/SEND_COMMENT_FAILED'),
   sendCommentSuccess: (newComment: i.Comment) => action('applications/SEND_COMMENT_SUCCESS', newComment),
 
-  deleteComment: (commentId: number) => action('applications/DELETE_COMMENT', commentId),
+  deleteComment: (comment: i.Comment) => action('applications/DELETE_COMMENT', comment),
 
   vote: () => action('applications/VOTE'),
   voteFailed: () => action('applications/VOTE_FAILED'),
@@ -165,7 +165,13 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
     case 'applications/DELETE_COMMENT':
       return {
         ...state,
-        messages: state.messages.filter((message) => message.id !== action.payload),
+        messages: state.messages.map((message) => {
+          if (message.id === action.payload.id) {
+            return action.payload;
+          }
+
+          return message;
+        }),
       };
     default:
       return state;
@@ -187,7 +193,9 @@ export const fetchApplications: i.FetchApplications = (status) =>
           let newComments = false;
 
           if (stored) {
-            const storedApplication = stored.find((app) => app.applicationUuid === application.uuid);
+            const storedApplication = stored.find((app) => (
+              app.applicationUuid === application.uuid)
+            );
 
             if (storedApplication) {
               newComments = application.commentsAmount > storedApplication.commentsAmount;
@@ -301,15 +309,15 @@ export const sendComment: i.SendComment = (type, comment) =>
   };
 
 export const deleteComment: i.DeleteComment = (id) => async (dispatch, getState, api) => {
-  return api.del({
+  return api.del<i.Comment>({
     url: api.url.api,
     path: `${API_ENDPOINT.COMMENT_DELETE}/${id}`,
     withAuth: true,
   })
-    .then((res) => {
-      dispatch(actions.deleteComment(id));
+    .then((comment) => {
+      dispatch(actions.deleteComment(comment));
 
-      return res;
+      return comment;
     })
     .catch(() => {
       // dispatch(actions.sendCommentFailed());

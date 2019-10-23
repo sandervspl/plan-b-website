@@ -79,6 +79,7 @@ export type Comment = i.BaseDatabaseBody & {
   text: string;
   user: i.SimpleDatabaseUserData;
   public: i.CommentType;
+  deletedAt?: Date;
 }
 
 export enum VOTE { REJECT, ACCEPT }
@@ -131,7 +132,7 @@ export type SendComment = i.BaseThunkAction<
 >;
 
 export type DeleteComment = i.BaseThunkAction<
-  (commentId: number) => Promise<void>
+  (commentId: number) => Promise<i.Comment | void>
 >;
 
 export type SaveVote = i.BaseThunkAction<

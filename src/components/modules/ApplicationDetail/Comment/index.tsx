@@ -2,8 +2,7 @@ import * as i from 'types';
 import React, { useState } from 'react';
 import SecurityIcon from 'vectors/security.svg';
 import PublicIcon from 'vectors/public.svg';
-import { deleteComment } from 'ducks/applications';
-import { useSelector, useDispatch } from 'hooks';
+import { useSelector } from 'hooks';
 import { CircleImg, DateText, Tooltip, AuthLevelText } from 'common';
 import DeleteCommentModal from '../DeleteCommentModal';
 import { CommentContainer, CommentText, CommentInfo, ReadMoreButton, DeleteButton } from './styled';
@@ -11,7 +10,6 @@ import { CommentContainer, CommentText, CommentInfo, ReadMoreButton, DeleteButto
 const MAX_TEXT_LENGTH = 200;
 
 const Comment: React.FC<Props> = ({ comment }) => {
-  const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.data!.id);
   const [isOpen, setOpen] = useState(false);
   const [showLongText, setShowLongText] = useState(false);
@@ -19,10 +17,6 @@ const Comment: React.FC<Props> = ({ comment }) => {
   const shortText = isLongText
     ? `${comment.text.substr(0, MAX_TEXT_LENGTH)}...`
     : comment.text;
-
-  const onDelete = () => {
-    dispatch(deleteComment(comment.id));
-  };
 
   return (
     <CommentContainer>
@@ -47,14 +41,14 @@ const Comment: React.FC<Props> = ({ comment }) => {
             ? <PublicIcon data-tip="This comment is visible for everyone" data-for={comment.id} />
             : <SecurityIcon data-tip="This comment is only visible for officers" data-for={comment.id} />}
 
-          {comment.user.id === userId && (
+          {comment.user.id === userId && !comment.deletedAt && (
             <DeleteButton onClick={() => setOpen(true)}>Delete</DeleteButton>
           )}
         </CommentInfo>
 
         <Tooltip id={comment.id.toString()} effect="solid" delayShow={200} place="bottom" />
 
-        <DeleteCommentModal isModalOpen={isOpen} setModalOpen={setOpen} cta={onDelete} />
+        <DeleteCommentModal isModalOpen={isOpen} setModalOpen={setOpen} comment={comment} />
       </CommentText>
     </CommentContainer>
   );

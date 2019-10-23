@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'hooks';
 import { getDateWithTime, humanDate } from 'services';
-import { ListItemCell, Heading, DateText, EmptyStateText } from 'common';
+import { ListItemCell, Heading, DateText, EmptyStateText, Tooltip } from 'common';
 import {
   DkpHistoryContainer, DkpHistoryItem, DkpHistoryList, ListHeading, ListHeadingItem, DkpChangeText,
 } from './styled';
@@ -20,18 +20,41 @@ const DkpHistory: React.FC<Props> = () => {
         <>
           <ListHeading>
             <ListHeadingItem>Event</ListHeadingItem>
-            <ListHeadingItem>Time</ListHeadingItem>
+            <ListHeadingItem
+              data-tip="Rough duration of the raid (might be incorrect)"
+              data-for="time-header"
+            >
+              Time
+            </ListHeadingItem>
             <ListHeadingItem>Gained</ListHeadingItem>
-            <ListHeadingItem>Spent</ListHeadingItem>
-            <ListHeadingItem>Total</ListHeadingItem>
-            <ListHeadingItem>Date</ListHeadingItem>
+            <ListHeadingItem
+              data-tip="This includes spending DKP and the weekly DKP decay"
+              data-for="lost-header"
+            >
+              Lost
+            </ListHeadingItem>
+            <ListHeadingItem
+              data-tip="Total lifetime earned DKP"
+              data-for="total-header"
+            >
+              Total
+            </ListHeadingItem>
+            <ListHeadingItem
+              data-tip="Date of data upload (this can differ from date of the raid)"
+              data-for="date-header"
+            >
+              Date
+            </ListHeadingItem>
           </ListHeading>
+
+          <Tooltip id="time-header" effect="solid" delayShow={200} place="top" />
+          <Tooltip id="lost-header" effect="solid" delayShow={200} place="top" />
+          <Tooltip id="total-header" effect="solid" delayShow={200} place="top" />
+          <Tooltip id="date-header" effect="solid" delayShow={200} place="top" />
 
           <DkpHistoryList>
             {dkpHistory.map((entry, index, list) => {
               const nextEntry = list[index + 1];
-
-              console.log(entry, nextEntry);
 
               return (
                 <DkpHistoryItem key={entry.id}>

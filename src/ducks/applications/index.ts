@@ -34,6 +34,8 @@ export const actions = {
   setStatusSuccess: (application: i.ApplicationBase) => action('applications/SET_STATUS_SUCCESS', application),
 
   setPersonalUuid: (uuid: string) => action('applications/SET_PERSONAL_UUID', uuid),
+
+  setCommentsType: (type: i.CommentType) => action('applications/SET_COMMENTS_TYPE', type),
 };
 
 const initialState: i.ApplicationsState = {
@@ -47,6 +49,7 @@ const initialState: i.ApplicationsState = {
   messages: [],
   loadingMessages: false,
   detail: undefined,
+  commentsType: 'public',
 };
 
 export default (state = initialState, action: ActionType<typeof actions>): i.ApplicationsState => {
@@ -172,6 +175,11 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
 
           return message;
         }),
+      };
+    case 'applications/SET_COMMENTS_TYPE':
+      return {
+        ...state,
+        commentsType: action.payload,
       };
     default:
       return state;

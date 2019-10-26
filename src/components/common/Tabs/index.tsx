@@ -2,11 +2,13 @@ import React, { useState, Children, cloneElement, useEffect, useRef } from 'reac
 import { useSelector } from 'hooks';
 import { TabsContainer, Tab, Tabs, ActiveTabLine } from './styled';
 
-const TabsMenu: React.FC<TabsProps> = ({ children, onChange }) => {
+const TabsMenu: React.FC<TabsProps> = ({ children, onChange, activeTab }) => {
   const [active, setActive] = useState(0);
   const [tabsContainerWidth, setTabsContainerWidth] = useState(0);
   const tabsContainerRef = useRef<HTMLDivElement>(null);
   const windowWidth = useSelector((state) => state.ui.windowWidth);
+
+  const activeTabId = activeTab || active;
 
   useEffect(() => {
     if (!tabsContainerRef.current) {
@@ -29,11 +31,11 @@ const TabsMenu: React.FC<TabsProps> = ({ children, onChange }) => {
       <Tabs>
         {Children.map(children, (child, i) => cloneElement(child, {
           onClick: onTabClick(i),
-          isactive: i === active,
+          isactive: i === activeTabId,
         }))}
       </Tabs>
       <ActiveTabLine
-        activeId={active}
+        activeId={activeTabId}
         width={`${tabsContainerWidth / Children.count(children)}px`}
       />
     </TabsContainer>
@@ -41,6 +43,7 @@ const TabsMenu: React.FC<TabsProps> = ({ children, onChange }) => {
 };
 
 export type TabsProps = {
+  activeTab?: number;
   onChange?: (id: number) => void;
   children: React.ReactElement[];
 };

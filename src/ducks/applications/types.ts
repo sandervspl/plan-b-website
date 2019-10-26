@@ -9,6 +9,7 @@ export type ApplicationsState = i.BaseState<never> & {
   sendingMessage: boolean;
   locked: boolean;
   loadingMessages: boolean;
+  commentsType: i.CommentType;
 };
 
 export type ApplicationStatus = 'open' | 'accepted' | 'rejected';

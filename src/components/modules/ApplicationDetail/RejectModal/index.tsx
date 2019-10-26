@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form';
-import { sendComment, setStatus } from 'ducks/applications';
+import { sendComment, setStatus, actions as applicationActions } from 'ducks/applications';
 import { useDispatch } from 'hooks';
 import { Heading, Paragraph, Button, ErrorText } from 'common';
 import Modal, { ModalButtons } from 'common/Modal';
@@ -24,6 +24,7 @@ const RejectModal: React.FC<Props> = ({ isModalOpen, setModalOpen }) => {
         }
 
         dispatch(setStatus('rejected'));
+        dispatch(applicationActions.setCommentsType('private'));
         setModalOpen(false);
       });
   };

@@ -11,8 +11,8 @@ import { DiscussionContainer } from './styled';
 const Discussion: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.data);
-  const messages = useSelector((state) => state.applications.messages);
-  const loading = useSelector((state) => state.applications.loadingMessages);
+  const comments = useSelector((state) => state.applications.comments);
+  const loading = useSelector((state) => state.applications.loadingComments);
   const isAdmin = useSelector((state) => state.user.isAdmin);
   const commentsType = useSelector((state) => state.applications.commentsType);
   const [curTab, setCurTab] = useState(0);
@@ -23,8 +23,6 @@ const Discussion: React.FC = () => {
 
   useEffect(() => {
     const tabId = commentsType === 'public' ? 0 : 1;
-
-    console.log(commentsType, tabId);
 
     setCurTab(tabId);
 
@@ -42,8 +40,6 @@ const Discussion: React.FC = () => {
   };
 
   const onTabChange = (tabId: number) => {
-    // if (tabId === curTab) return;
-
     const commentsType = getTypeStr(tabId);
     dispatch(applicationActions.setCommentsType(commentsType));
   };
@@ -54,8 +50,8 @@ const Discussion: React.FC = () => {
 
       {isAdmin && (
         <Tabs.Container onChange={onTabChange} activeTab={curTab}>
-          <Tabs.Tab>Public</Tabs.Tab>
-          <Tabs.Tab>Officers</Tabs.Tab>
+          <Tabs.Tab>Public ({comments.count.public})</Tabs.Tab>
+          <Tabs.Tab>Officers ({comments.count.private})</Tabs.Tab>
         </Tabs.Container>
       )}
 
@@ -70,10 +66,10 @@ const Discussion: React.FC = () => {
       {loading ? (
         <Loader />
       ) : (
-        messages.length === 0 ? (
+        comments.messages.length === 0 ? (
           <EmptyStateText>There are no comments yet.</EmptyStateText>
         ) : (
-          messages.map((comment) => (
+          comments.messages.map((comment) => (
             <Comment key={comment.id} comment={comment} />
           ))
         )

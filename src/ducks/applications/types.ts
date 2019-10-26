@@ -5,10 +5,10 @@ export type ApplicationsState = i.BaseState<never> & {
   detail?: i.ApplicationDataDuck;
   userVote?: i.VOTE;
   applicationUuid?: string;
-  messages: i.Comment[];
+  comments: i.FetchCommentsResponse;
   sendingMessage: boolean;
   locked: boolean;
-  loadingMessages: boolean;
+  loadingComments: boolean;
   commentsType: i.CommentType;
 };
 
@@ -112,6 +112,14 @@ export type ApplicationDataDuck = ApplicationBase & {
   votes?: {
     accepts: i.Vote[];
     rejects: i.Vote[];
+  };
+}
+
+export type FetchCommentsResponse = {
+  messages: i.Comment[];
+  count: {
+    public: number;
+    private?: number;
   };
 }
 

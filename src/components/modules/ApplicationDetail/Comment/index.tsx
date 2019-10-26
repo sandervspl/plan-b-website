@@ -10,7 +10,7 @@ import { CommentContainer, CommentText, CommentInfo, ReadMoreButton, DeleteButto
 const MAX_TEXT_LENGTH = 200;
 
 const Comment: React.FC<Props> = ({ comment }) => {
-  const userId = useSelector((state) => state.user.data!.id);
+  const userId = useSelector((state) => state.user.data && state.user.data.id);
   const [isOpen, setOpen] = useState(false);
   const [showLongText, setShowLongText] = useState(false);
   const isLongText = comment.text.length > MAX_TEXT_LENGTH;

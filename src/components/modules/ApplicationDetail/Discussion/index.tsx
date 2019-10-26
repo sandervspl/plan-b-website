@@ -16,7 +16,6 @@ const Discussion: React.FC = () => {
   const messages = useSelector((state) => state.applications.messages);
   const loading = useSelector((state) => state.applications.loadingMessages);
   const windowWidth = useSelector((state) => state.ui.windowWidth);
-  const applicationUuid = useSelector((state) => state.applications.detail!.uuid);
   const isAdmin = useSelector((state) => state.user.isAdmin);
   const [curTab, setCurTab] = useState<TabId>(0);
   const [tabsContainerWidth, setTabsContainerWidth] = useState(0);

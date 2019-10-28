@@ -3,7 +3,7 @@ import { media } from 'styles';
 import { Heading, EmptyStateText, Loader } from 'common';
 import { CommentContainer } from 'modules/ApplicationDetail/Comment/styled';
 import { AddCommentContainer } from 'modules/ApplicationDetail/AddComment/styled';
-import { TabsContainer, Tab } from 'common/Tabs';
+import { TabsContainer, Tab } from 'common/Tabs/styled';
 
 export const DiscussionContainer = styled.div`
   position: relative;

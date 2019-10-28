@@ -6,10 +6,10 @@ import { useSelector, useDispatch, useRouter } from 'hooks';
 import CircleIcon from 'vectors/circle.svg';
 import CheckCircleIcon from 'vectors/check-circle.svg';
 import NotInterestedIcon from 'vectors/not-interested.svg';
-import { Heading, Loader, EmptyStateText } from 'common';
-import { TabsContainer, Tabs, ActiveTabLine, Tab } from 'common/Tabs';
 import Page from 'modules/Page';
 import ApplicationItem from 'modules/Applications/ApplicationItem';
+import { Heading, Loader, EmptyStateText } from 'common';
+import Tabs from 'common/Tabs';
 import {
   ApplicationsHeading, ApplicationsContainer, ApplicationsList,
 } from 'modules/Applications/styled';
@@ -54,9 +54,7 @@ const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) 
     return null;
   }
 
-  const onTabChange = (statusId: number) => () => {
-    if (statusId === curTab) return;
-
+  const onTabChange = (statusId: number) => {
     setCurTab(statusId);
 
     const statusName = getStatusStr(statusId);
@@ -77,23 +75,20 @@ const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) 
         <ApplicationsHeading>
           <Heading as="h1">Applications</Heading>
 
-          <TabsContainer>
-            <Tabs>
-              <Tab isactive={curTab === TAB.open} onClick={onTabChange(TAB.open)}>
-                <CircleIcon />
-                Open
-              </Tab>
-              <Tab isactive={curTab === TAB.accepted} onClick={onTabChange(TAB.accepted)}>
-                <CheckCircleIcon />
-                Accepted
-              </Tab>
-              <Tab isactive={curTab === TAB.rejected} onClick={onTabChange(TAB.rejected)}>
-                <NotInterestedIcon />
-                Rejected
-              </Tab>
-            </Tabs>
-            <ActiveTabLine activeId={curTab} width="120px" />
-          </TabsContainer>
+          <Tabs.Container onChange={onTabChange}>
+            <Tabs.Tab>
+              <CircleIcon />
+              Open
+            </Tabs.Tab>
+            <Tabs.Tab>
+              <CheckCircleIcon />
+              Accepted
+            </Tabs.Tab>
+            <Tabs.Tab>
+              <NotInterestedIcon />
+              Rejected
+            </Tabs.Tab>
+          </Tabs.Container>
         </ApplicationsHeading>
 
         <Heading as="h2">{getStatusStr(curTab)} applications</Heading>

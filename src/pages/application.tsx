@@ -55,12 +55,8 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
     setRejectModalOpen(true);
   };
 
-  if (loading) {
-    return null;
-  }
-
   // Loading application
-  if (!application) {
+  if (loading || !application) {
     return <Loader center />;
   }
 

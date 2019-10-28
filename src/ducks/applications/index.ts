@@ -15,7 +15,7 @@ export const actions = {
 
   comments: () => action('applications/COMMENTS'),
   commentsFailed: () => action('applications/COMMENTS_FAILED'),
-  commentsSuccess: (messages: i.Comment[]) => action('applications/COMMENTS_SUCCESS', messages),
+  commentsSuccess: (res: i.FetchCommentsResponse) => action('applications/COMMENTS_SUCCESS', res),
 
   resetApplication: () => action('applications/RESET_DETAIL'),
 
@@ -34,6 +34,8 @@ export const actions = {
   setStatusSuccess: (application: i.ApplicationBase) => action('applications/SET_STATUS_SUCCESS', application),
 
   setPersonalUuid: (uuid: string) => action('applications/SET_PERSONAL_UUID', uuid),
+
+  setCommentsType: (type: i.CommentType) => action('applications/SET_COMMENTS_TYPE', type),
 };
 
 const initialState: i.ApplicationsState = {
@@ -44,9 +46,15 @@ const initialState: i.ApplicationsState = {
   userVote: undefined,
   applicationUuid: undefined,
   locked: false,
-  messages: [],
-  loadingMessages: false,
+  comments: {
+    messages: [],
+    count: {
+      public: 0,
+    },
+  },
+  loadingComments: false,
   detail: undefined,
+  commentsType: 'public',
 };
 
 export default (state = initialState, action: ActionType<typeof actions>): i.ApplicationsState => {
@@ -147,31 +155,39 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
     case 'applications/COMMENTS':
       return {
         ...state,
-        loadingMessages: true,
+        loadingComments: true,
       };
     case 'applications/COMMENTS_FAILED':
       return {
         ...state,
-        loadingMessages: false,
+        loadingComments: false,
         error: true,
       };
     case 'applications/COMMENTS_SUCCESS':
       return {
         ...state,
-        loadingMessages: false,
+        loadingComments: false,
         error: false,
-        messages: action.payload,
+        comments: action.payload,
       };
     case 'applications/DELETE_COMMENT':
       return {
         ...state,
-        messages: state.messages.map((message) => {
-          if (message.id === action.payload.id) {
-            return action.payload;
-          }
+        comments: {
+          ...state.comments,
+          messages: state.comments!.messages.map((message) => {
+            if (message.id === action.payload.id) {
+              return action.payload;
+            }
 
-          return message;
-        }),
+            return message;
+          }),
+        },
+      };
+    case 'applications/SET_COMMENTS_TYPE':
+      return {
+        ...state,
+        commentsType: action.payload,
       };
     default:
       return state;
@@ -267,7 +283,7 @@ export const fetchComments: i.FetchComments = (type) => async (dispatch, getStat
 
   const { uuid } = application;
 
-  return api.get<i.Comment[]>({
+  return api.get<i.FetchCommentsResponse>({
     url: api.url.api,
     path: `${API_ENDPOINT.APPLICATION_DETAIL}/${uuid}/comments`,
     query: { type },

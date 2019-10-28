@@ -61,16 +61,16 @@ export const Tabs = styled.ul`
 
 export const ActiveTabLine = styled.span<ActiveTabLineProps>`
   position: absolute;
-  width: 33vw;
+  /* width: 33vw; */
+  width: ${(props) => props.width};
   height: 1px;
   z-index: 1;
   background: white;
-  transform: translate3d(calc(100vw / 3 * ${(props) => props.activeId}), 0, 0);
+  /* transform: translate3d(calc(100vw / 3 * ${(props) => props.activeId}), 0, 0); */
+  transform: translate3d(calc(${(props) => props.width} * ${(props) => props.activeId}), 0, 0);
   transition: transform .2s ease-out;
 
   ${media.tablet<ActiveTabLineProps>`
-    width: ${(props) => props.width};
-    transform: translate3d(calc(${(props) => props.width} * ${(props) => props.activeId}), 0, 0);
   `}
 `;
 

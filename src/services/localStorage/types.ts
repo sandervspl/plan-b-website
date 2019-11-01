@@ -1,9 +1,12 @@
 export enum LOCAL_STORAGE_KEY {
   COOKIE_CONSENT = 'has-consent-cookies',
-  COMMENTS = 'comments',
+  APPLICATIONS = 'applications',
 }
 
-export type CommentsStorage = {
+export type ApplicationsStorage = {
   applicationUuid: string;
-  commentsAmount: number;
+  commentsCount: {
+    public: number;
+    private?: number;
+  };
 }

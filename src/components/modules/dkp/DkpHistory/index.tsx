@@ -34,7 +34,7 @@ const DkpHistory: React.FC<Props> = () => {
               Lost
             </ListHeadingItem>
             <ListHeadingItem
-              data-tip="Total lifetime earned DKP"
+              data-tip="Total current DKP"
               data-for="total-header"
             >
               Total

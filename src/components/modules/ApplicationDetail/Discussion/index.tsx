@@ -18,10 +18,6 @@ const Discussion: React.FC = () => {
   const [curTab, setCurTab] = useState(0);
 
   useEffect(() => {
-    dispatch(fetchComments(getTypeStr(curTab)));
-  }, []);
-
-  useEffect(() => {
     const tabId = commentsType === 'public' ? 0 : 1;
 
     setCurTab(tabId);

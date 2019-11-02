@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { isServer } from 'services';
 import { LOCAL_STORAGE_KEY } from './types';
 
@@ -32,7 +31,7 @@ class LocalStorageHelper<T> {
     Works like React setState.
     Only pass the properties that need to be updated.
   */
-  save = (data: T, seperator?: string) => {
+  save = (data: T extends Array<any> ? T | T[0] : T, identifier?: string) => {
     const curData = this.get();
 
     if (!curData) {
@@ -44,7 +43,17 @@ class LocalStorageHelper<T> {
     // Arrays
     if (Array.isArray(curData)) {
       // @ts-ignore
-      const newData = _.unionBy(curData, data, seperator);
+      const newData: T = [...curData]
+        .filter((val) => {
+          if (typeof val === 'object' && identifier) {
+            if (val[identifier] === data[identifier]) {
+              return false;
+            }
+          }
+
+          return true;
+        })
+        .concat(data);
 
       this.set(newData);
 

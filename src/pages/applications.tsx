@@ -83,7 +83,7 @@ const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) 
         <ApplicationsHeading>
           <Heading as="h1">Applications</Heading>
 
-          <Tabs.Container onChange={onTabChange}>
+          <Tabs.Container onChange={onTabChange} activeTab={curTab}>
             <Tabs.Tab>
               <CircleIcon />
               Open

@@ -12,10 +12,12 @@ export const TabsContainer = styled.div`
 `;
 
 export const TabContainer = styled.li<TabProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: calc(100vw / 3);
   color: ${(props) => props.theme.color.tab.inactive};
   font-family: ${(props) => props.theme.font.primary};
-  text-align: center;
   padding-bottom: 10px;
   cursor: pointer;
 
@@ -29,9 +31,6 @@ export const TabContainer = styled.li<TabProps>`
   }
 
   ${media.tablet`
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding-bottom: 20px;
     width: 120px;
     font-size: 16px;

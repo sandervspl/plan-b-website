@@ -139,7 +139,7 @@ export type FetchApplicationDetail = i.BaseThunkAction<
 
 
 export type FetchComments = i.BaseThunkAction<
-(type: i.CommentType) => Promise<i.Comment[] | void>
+(type: i.CommentType) => Promise<i.FetchCommentsResponse | void>
 >;
 
 export type SendComment = i.BaseThunkAction<

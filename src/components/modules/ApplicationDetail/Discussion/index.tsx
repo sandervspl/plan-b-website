@@ -27,12 +27,17 @@ const Discussion: React.FC = () => {
 
     setTimeout(() => {
       dispatch(fetchComments(commentsType))
-        .then(() => {
+        .then((comments) => {
           // Set comments as "seen"
           const storage = localStorageHelper.applicationsOverview.get(applicationUuid);
 
           if (storage) {
             storage.newComments = false;
+
+            if (comments) {
+              storage.comments = comments.messages.length;
+            }
+
             localStorageHelper.applicationsOverview.save(storage);
           }
         });

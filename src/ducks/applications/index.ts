@@ -347,6 +347,8 @@ export const fetchComments: i.FetchComments = (type) => async (dispatch, getStat
       });
 
       dispatch(actions.commentsSuccess(res, newComments));
+
+      return res;
     })
     .catch(() => {
       dispatch(actions.commentsFailed());

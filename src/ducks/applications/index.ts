@@ -1,4 +1,5 @@
 import * as i from 'types';
+import _ from 'lodash';
 import { ActionType, action } from 'typesafe-actions';
 import { API_ENDPOINT, localStorageHelper } from 'services';
 
@@ -212,6 +213,34 @@ export const fetchApplications: i.FetchApplications = (status) =>
       path: `${API_ENDPOINT.APPLICATIONS}/${status}`,
     })
       .then((res) => {
+        // Notifications
+        if (status === 'open') {
+          const storage = localStorageHelper.applicationsOverview.get();
+          let result: i.ApplicationsOverviewStorage[] = [];
+
+          if (storage) {
+            result = _
+              .differenceBy(
+                res.map((app) => ({ applicationUuid: app.uuid })),
+                storage,
+                'applicationUuid'
+              )
+              .map((app) => ({
+                applicationUuid: app.applicationUuid,
+                seen: false,
+                newComments: true,
+              }));
+          } else {
+            result = res.map((app) => ({
+              applicationUuid: app.uuid,
+              seen: false,
+              newComments: true,
+            }));
+          }
+
+          localStorageHelper.applicationsOverview.save(result);
+        }
+
         dispatch(actions.successList(res));
       })
       .catch(() => {
@@ -292,7 +321,7 @@ export const fetchComments: i.FetchComments = (type) => async (dispatch, getStat
           public: res.count.public,
           private: res.count.private || 0,
         },
-      }, 'applicationUuid');
+      });
 
       dispatch(actions.commentsSuccess(res, newComments));
     })

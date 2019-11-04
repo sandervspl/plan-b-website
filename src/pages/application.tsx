@@ -8,7 +8,7 @@ import GroupAddIcon from 'vectors/group_add.svg';
 import BabyIcon from 'vectors/baby.svg';
 import Page from 'modules/Page';
 import { useSelector, useDispatch } from 'hooks';
-import { getUrl, getCmsUrl, redirect } from 'services';
+import { getUrl, getCmsUrl, redirect, localStorageHelper } from 'services';
 import { fetchApplicationDetail, actions as applicationsActions, setStatus } from 'ducks/applications';
 import { hasProfessions } from 'ducks/applications/reselect';
 import { DateText, ClassText, Paragraph, CircleImg, Heading, EmptyStateText, Loader } from 'common';
@@ -35,6 +35,13 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
 
   useEffect(() => {
     dispatch(fetchApplicationDetail(applicationUuid));
+
+    const storage = localStorageHelper.applicationsOverview.get(applicationUuid);
+
+    if (storage) {
+      storage.seen = true;
+      localStorageHelper.applicationsOverview.save(storage);
+    }
 
     return function cleanup() {
       dispatch(applicationsActions.resetApplication());

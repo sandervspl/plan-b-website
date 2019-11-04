@@ -9,6 +9,7 @@ export * from 'src/firebase/types';
 export * from 'modules/Apply/types';
 
 export { ContentId, BaseResponseBody, BaseDatabaseBody } from 'services/api/types';
+export * from 'services/localStorage/types';
 
 export * from 'styles/types';
 

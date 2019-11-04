@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ParagraphStyle, ClassText, ListItem, ListItemInnerCss, ListItemCell } from 'common';
 import { CircleImgContainer } from 'common/CircleImg/styled';
 import { media } from 'styles';
@@ -48,19 +48,21 @@ export const ApplicationItemContainer = styled(ListItem)`
       }
 
       > * {
-        &:first-child {
+        &:nth-child(1) {
+          width: 7px;
+          margin-right: 16px;
+          height: 7px;
+        }
+
+        &:nth-child(2) {
           flex-basis: 25px;
           margin-right: 10px;
           width: 25px;
           height: 25px;
         }
 
-        &:nth-child(2) {
-          flex-basis: 20%;
-        }
-
         &:nth-child(3) {
-          flex-basis: 15%;
+          flex-basis: 20%;
         }
 
         &:nth-child(4) {
@@ -68,14 +70,18 @@ export const ApplicationItemContainer = styled(ListItem)`
         }
 
         &:nth-child(5) {
-          flex-basis: 25%;
+          flex-basis: 15%;
         }
 
         &:nth-child(6) {
+          flex-basis: 25%;
+        }
+
+        &:nth-child(7) {
           flex-basis: 10%;
         }
 
-        &:last-child {
+        &:nth-child(8) {
           flex-basis: calc(15% - 35px);
           text-align: right;
         }
@@ -140,3 +146,18 @@ export const SocialContainer = styled.div`
     fill: ${(props) => props.theme.color.secondary};
   }
 `;
+
+export const Notification = styled.div<NotificationProps>`
+  width: 5px;
+  height: 5px;
+  border-radius: 100%;
+  background-color: transparent;
+
+  ${(props) => props.active && css`
+    background-color: ${(props) => props.theme.color.primary};
+  `}
+`;
+
+export type NotificationProps = {
+  active?: boolean;
+}

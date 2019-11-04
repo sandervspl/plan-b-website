@@ -5,15 +5,20 @@ import GroupAddIcon from 'vectors/group_add.svg';
 import BabyIcon from 'vectors/baby.svg';
 import { Link, ClassText, CircleImg, ListItemCell } from 'common';
 import { timeAgo, getDateWithTime, getCmsUrl } from 'services';
+import { useSelector } from 'hooks';
 import {
   ApplicationItemContainer, CharacterInfo, RoleText, RoleContainer, CommentsContainer,
-  SocialContainer,
+  SocialContainer, Notification,
 } from './styled';
 
-const ApplicationItem: React.FC<Props> = ({ application }) => {
+const ApplicationItem: React.FC<Props> = ({ application, notification }) => {
+  const isMobile = useSelector((state) => state.ui.isMobile);
+
   return (
     <ApplicationItemContainer>
       <Link to="application-detail" params={{ uuid: application.uuid }}>
+        {!isMobile && <Notification active={notification} />}
+
         <CircleImg src={getCmsUrl(application.character.class.icon.url)} />
 
         <CharacterInfo>
@@ -56,6 +61,7 @@ const ApplicationItem: React.FC<Props> = ({ application }) => {
 
 export type Props = {
   application: i.ApplicationData;
+  notification?: boolean;
 };
 
 export default ApplicationItem;

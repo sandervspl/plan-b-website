@@ -36,6 +36,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
   useEffect(() => {
     dispatch(fetchApplicationDetail(applicationUuid));
 
+    // Set application as "seen"
     const storage = localStorageHelper.applicationsOverview.get(applicationUuid);
 
     if (storage) {
@@ -46,7 +47,7 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
     return function cleanup() {
       dispatch(applicationsActions.resetApplication());
     };
-  }, [user.isSignedIn]);
+  }, []);
 
   useEffect(() => {
     if (error) {

@@ -1,6 +1,6 @@
 import * as i from 'types';
-import React, { useState, useEffect } from 'react';
-import { getUrl, redirect } from 'services';
+import React, { useState, useEffect, useMemo } from 'react';
+import { getUrl, redirect, localStorageHelper } from 'services';
 import { fetchApplications } from 'ducks/applications';
 import { useSelector, useDispatch, useRouter } from 'hooks';
 import CircleIcon from 'vectors/circle.svg';
@@ -27,6 +27,27 @@ const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) 
   const applications = useSelector((state) => state.applications.list);
   const loading = useSelector((state) => state.applications.loading);
   const [curTab, setCurTab] = useState(status ? TAB[status] : TAB.open);
+
+  const storage = useMemo(() => localStorageHelper.applicationsOverview.get(), []);
+
+  const localApplications = useMemo(() => {
+    if (applications && storage) {
+      // Map array indices
+      const indices = storage.reduce((prev, app, index) => ({
+        ...prev,
+        [app.applicationUuid]: index,
+      }), {} as Record<string, number>);
+
+      // Add "seen" property to application data
+      return applications.map((app) => ({
+        ...app,
+        seen: storage[indices[app.uuid]].seen,
+      }));
+    }
+
+    return null;
+  }, [applications, storage]);
+
 
   const getStatusStr = (statusId: number): i.ApplicationStatus => {
     let status: i.ApplicationStatus = 'open';
@@ -103,10 +124,10 @@ const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) 
 
         {loading ? (
           <Loader />
-        ) : applications && applications.length > 0 ? (
+        ) : localApplications && localApplications.length > 0 ? (
           <ApplicationsList>
-            {applications.map((application) => (
-              <ApplicationItem key={application.uuid} application={application} />
+            {localApplications.map((app) => (
+              <ApplicationItem key={app.uuid} application={app} notification={!app.seen} />
             ))}
           </ApplicationsList>
         ) : (

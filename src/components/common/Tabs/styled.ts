@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { media } from 'styles';
+import { TabProps } from '.';
 
 export const TabsContainer = styled.div`
   position: relative;
@@ -10,7 +11,7 @@ export const TabsContainer = styled.div`
   `}
 `;
 
-export const Tab = styled.li<TabProps>`
+export const TabContainer = styled.li<TabProps>`
   width: calc(100vw / 3);
   color: ${(props) => props.theme.color.tab.inactive};
   font-family: ${(props) => props.theme.font.primary};
@@ -20,6 +21,11 @@ export const Tab = styled.li<TabProps>`
 
   svg {
     display: none;
+  }
+
+  span {
+    display: flex;
+    position: relative;
   }
 
   ${media.tablet`
@@ -46,11 +52,19 @@ export const Tab = styled.li<TabProps>`
       fill: ${(props) => props.theme.color.secondary};
     }
   `}
-`;
 
-type TabProps = {
-  isactive?: boolean;
-}
+  ${(props) => props.notification && css`
+    > span:after {
+      display: block;
+      content: '';
+      margin-left: 4px;
+      width: 5px;
+      height: 5px;
+      border-radius: 100%;
+      background-color: ${(props) => props.theme.color.primary};
+    }
+  `}
+`;
 
 export const Tabs = styled.ul`
   display: flex;

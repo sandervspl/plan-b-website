@@ -10,6 +10,7 @@ export type ApplicationsState = i.BaseState<never> & {
   locked: boolean;
   loadingComments: boolean;
   commentsType: i.CommentType;
+  newComments: i.NewComments;
 };
 
 export type ApplicationStatus = 'open' | 'accepted' | 'rejected';
@@ -105,7 +106,6 @@ export type ApplicationData = ApplicationBase & {
   votes: i.Vote[];
   commentsAmount: number;
   uuid: string;
-  newComments: boolean;
 }
 
 export type ApplicationDataDuck = ApplicationBase & {
@@ -123,31 +123,37 @@ export type FetchCommentsResponse = {
   };
 }
 
+export type NewComments = {
+  public: boolean;
+  private: boolean;
+}
+
+
 export type FetchApplications = i.BaseThunkAction<
-  (status: i.ApplicationStatus) => Promise<i.ApplicationData[] | void>
+(status: i.ApplicationStatus) => Promise<i.ApplicationData[] | void>
 >;
 
 export type FetchApplicationDetail = i.BaseThunkAction<
-  (uuid: string) => Promise<void>
+(uuid: string) => Promise<void>
 >;
 
 
 export type FetchComments = i.BaseThunkAction<
-  (type: i.CommentType) => Promise<i.Comment[] | void>
+(type: i.CommentType) => Promise<i.Comment[] | void>
 >;
 
 export type SendComment = i.BaseThunkAction<
-  (type: i.CommentType, comment: string) => Promise<i.Comment | void>
+(type: i.CommentType, comment: string) => Promise<i.Comment | void>
 >;
 
 export type DeleteComment = i.BaseThunkAction<
-  (commentId: number) => Promise<i.Comment | void>
+(commentId: number) => Promise<i.Comment | void>
 >;
 
 export type SaveVote = i.BaseThunkAction<
-  (applicationUuid: string, userId: string, vote: i.VOTE) => Promise<i.Vote | void>
+(applicationUuid: string, userId: string, vote: i.VOTE) => Promise<i.Vote | void>
 >;
 
 export type SetStatus = i.BaseThunkAction<
-  (status: i.ApplicationStatus) => Promise<i.ApplicationBase | void>
+(status: i.ApplicationStatus) => Promise<i.ApplicationBase | void>
 >;

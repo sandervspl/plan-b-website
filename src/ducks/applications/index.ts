@@ -1,12 +1,12 @@
 import * as i from 'types';
 import { ActionType, action } from 'typesafe-actions';
 import { API_ENDPOINT, localStorageHelper } from 'services';
-import { CommentsStorage } from 'services/localStorage/types';
 
 export const actions = {
   load: () => action('applications/LOAD'),
   failed: () => action('applications/FAILED'),
-  successList: (applications: i.ApplicationData[]) => action('applications/SUCCESS_LIST', applications),
+  successList: (applications: i.ApplicationData[]) =>
+    action('applications/SUCCESS_LIST', applications),
 
   successDetail: (application: i.ApplicationData, userVote?: i.VOTE) =>
     action('applications/SUCCESS_DETAIL', { application, userVote }),
@@ -15,13 +15,15 @@ export const actions = {
 
   comments: () => action('applications/COMMENTS'),
   commentsFailed: () => action('applications/COMMENTS_FAILED'),
-  commentsSuccess: (res: i.FetchCommentsResponse) => action('applications/COMMENTS_SUCCESS', res),
+  commentsSuccess: (data: i.FetchCommentsResponse, newComments: i.NewComments) =>
+    action('applications/COMMENTS_SUCCESS', { data, newComments }),
 
   resetApplication: () => action('applications/RESET_DETAIL'),
 
   sendComment: () => action('applications/SEND_COMMENT'),
   sendCommentFailed: () => action('applications/SEND_COMMENT_FAILED'),
-  sendCommentSuccess: (newComment: i.Comment) => action('applications/SEND_COMMENT_SUCCESS', newComment),
+  sendCommentSuccess: (newComment: i.Comment) =>
+    action('applications/SEND_COMMENT_SUCCESS', newComment),
 
   deleteComment: (comment: i.Comment) => action('applications/DELETE_COMMENT', comment),
 
@@ -31,7 +33,8 @@ export const actions = {
 
   setStatus: () => action('applications/SET_STATUS'),
   setStatusFailed: () => action('applications/SET_STATUS_FAILED'),
-  setStatusSuccess: (application: i.ApplicationBase) => action('applications/SET_STATUS_SUCCESS', application),
+  setStatusSuccess: (application: i.ApplicationBase) =>
+    action('applications/SET_STATUS_SUCCESS', application),
 
   setPersonalUuid: (uuid: string) => action('applications/SET_PERSONAL_UUID', uuid),
 
@@ -50,11 +53,16 @@ const initialState: i.ApplicationsState = {
     messages: [],
     count: {
       public: 0,
+      private: 0,
     },
   },
   loadingComments: false,
   detail: undefined,
   commentsType: 'public',
+  newComments: {
+    public: false,
+    private: false,
+  },
 };
 
 export default (state = initialState, action: ActionType<typeof actions>): i.ApplicationsState => {
@@ -168,7 +176,8 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
         ...state,
         loadingComments: false,
         error: false,
-        comments: action.payload,
+        comments: action.payload.data,
+        newComments: action.payload.newComments,
       };
     case 'applications/DELETE_COMMENT':
       return {
@@ -203,36 +212,7 @@ export const fetchApplications: i.FetchApplications = (status) =>
       path: `${API_ENDPOINT.APPLICATIONS}/${status}`,
     })
       .then((res) => {
-        // Add newComments flag if applicable
-        const data: i.ApplicationData[] = res.map((application) => {
-          const stored = localStorageHelper.comments.get();
-          let newComments = false;
-
-          if (stored) {
-            const storedApplication = stored.find((app) => (
-              app.applicationUuid === application.uuid)
-            );
-
-            if (storedApplication) {
-              newComments = application.commentsAmount > storedApplication.commentsAmount;
-            }
-          }
-
-          return {
-            ...application,
-            newComments,
-          };
-        });
-
-        // Save new state in localstorage
-        const storage: CommentsStorage[] = res.map((application) => ({
-          applicationUuid: application.uuid,
-          commentsAmount: application.commentsAmount,
-        }));
-
-        localStorageHelper.comments.set(storage);
-
-        dispatch(actions.successList(data));
+        dispatch(actions.successList(res));
       })
       .catch(() => {
         dispatch(actions.failed());
@@ -289,7 +269,32 @@ export const fetchComments: i.FetchComments = (type) => async (dispatch, getStat
     query: { type },
   })
     .then((res) => {
-      dispatch(actions.commentsSuccess(res));
+      const stored = localStorageHelper.applications.get();
+      const storedApp = stored && stored.find((app) => app.applicationUuid === uuid);
+
+      const newComments = {
+        public: false,
+        private: false,
+      };
+
+      if (storedApp) {
+        newComments.public = res.count.public > storedApp.commentsCount.public;
+
+        if (res.count.private && storedApp.commentsCount.private) {
+          newComments.private = res.count.private > storedApp.commentsCount.private;
+        }
+      }
+
+      // Save current state in localstorage
+      localStorageHelper.applications.save({
+        applicationUuid: uuid,
+        commentsCount: {
+          public: res.count.public,
+          private: res.count.private || 0,
+        },
+      }, 'applicationUuid');
+
+      dispatch(actions.commentsSuccess(res, newComments));
     })
     .catch(() => {
       dispatch(actions.commentsFailed());

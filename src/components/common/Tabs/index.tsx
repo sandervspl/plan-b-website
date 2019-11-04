@@ -1,6 +1,6 @@
 import React, { useState, Children, cloneElement, useEffect, useRef } from 'react';
 import { useSelector } from 'hooks';
-import { TabsContainer, Tab, Tabs, ActiveTabLine } from './styled';
+import { TabsContainer, TabContainer, Tabs, ActiveTabLine } from './styled';
 
 const TabsMenu: React.FC<TabsProps> = ({ children, onChange, activeTab }) => {
   const [active, setActive] = useState(0);
@@ -47,6 +47,20 @@ export type TabsProps = {
   onChange?: (id: number) => void;
   children: React.ReactElement[];
 };
+
+
+export const Tab: React.FC<TabProps> = ({ children, ...props }) => {
+  return (
+    <TabContainer {...props}>
+      <span>{children}</span>
+    </TabContainer>
+  );
+};
+
+export type TabProps = {
+  isactive?: boolean;
+  notification?: boolean;
+}
 
 export default {
   Container: TabsMenu,

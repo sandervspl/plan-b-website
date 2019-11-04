@@ -13,8 +13,9 @@ const Discussion: React.FC = () => {
   const user = useSelector((state) => state.user.data);
   const comments = useSelector((state) => state.applications.comments);
   const loading = useSelector((state) => state.applications.loadingComments);
-  const isAdmin = useSelector((state) => state.user.isAdmin);
   const commentsType = useSelector((state) => state.applications.commentsType);
+  const newComments = useSelector((state) => state.applications.newComments);
+  const isAdmin = useSelector((state) => state.user.isAdmin);
   const [curTab, setCurTab] = useState(0);
 
   useEffect(() => {
@@ -46,8 +47,12 @@ const Discussion: React.FC = () => {
 
       {isAdmin && (
         <Tabs.Container onChange={onTabChange} activeTab={curTab}>
-          <Tabs.Tab>Public ({comments.count.public})</Tabs.Tab>
-          <Tabs.Tab>Officers ({comments.count.private})</Tabs.Tab>
+          <Tabs.Tab notification={newComments.public}>
+            Public ({comments.count.public})
+          </Tabs.Tab>
+          <Tabs.Tab notification={newComments.private}>
+            Officers ({comments.count.private})
+          </Tabs.Tab>
         </Tabs.Container>
       )}
 

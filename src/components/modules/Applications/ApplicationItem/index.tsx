@@ -11,13 +11,13 @@ import {
   SocialContainer, Notification,
 } from './styled';
 
-const ApplicationItem: React.FC<Props> = ({ application, notification }) => {
+const ApplicationItem: React.FC<Props> = ({ application, unseen, newComments }) => {
   const isMobile = useSelector((state) => state.ui.isMobile);
 
   return (
     <ApplicationItemContainer>
       <Link to="application-detail" params={{ uuid: application.uuid }}>
-        {!isMobile && <Notification active={notification} />}
+        {!isMobile && <Notification active={unseen} />}
 
         <CircleImg src={getCmsUrl(application.character.class.icon.url)} />
 
@@ -49,6 +49,7 @@ const ApplicationItem: React.FC<Props> = ({ application, notification }) => {
         <CommentsContainer title={`${application.commentsAmount} comments`}>
           <CommentIcon />
           {application.commentsAmount}
+          <Notification active={newComments} />
         </CommentsContainer>
 
         <ListItemCell title={getDateWithTime(application.created_at)}>
@@ -61,7 +62,8 @@ const ApplicationItem: React.FC<Props> = ({ application, notification }) => {
 
 export type Props = {
   application: i.ApplicationData;
-  notification?: boolean;
+  unseen?: boolean;
+  newComments?: boolean;
 };
 
 export default ApplicationItem;

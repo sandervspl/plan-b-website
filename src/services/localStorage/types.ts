@@ -16,6 +16,7 @@ export type ApplicationsOverviewStorage = {
   applicationUuid: string;
   seen: boolean;
   newComments: boolean;
+  comments: number;
 }
 
 

@@ -28,7 +28,7 @@ const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) 
   const loading = useSelector((state) => state.applications.loading);
   const [curTab, setCurTab] = useState(status ? TAB[status] : TAB.open);
 
-  const storage = useMemo(() => localStorageHelper.applicationsOverview.get(), []);
+  const storage = localStorageHelper.applicationsOverview.get();
 
   const localApplications = useMemo(() => {
     if (applications && storage) {
@@ -42,12 +42,12 @@ const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) 
       return applications.map((app) => ({
         ...app,
         seen: storage[indices[app.uuid]].seen,
+        newComments: storage[indices[app.uuid]].newComments,
       }));
     }
 
     return null;
   }, [applications, storage]);
-
 
   const getStatusStr = (statusId: number): i.ApplicationStatus => {
     let status: i.ApplicationStatus = 'open';
@@ -62,7 +62,9 @@ const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) 
   };
 
   useEffect(() => {
-    dispatch(fetchApplications(status));
+    if (user && user.isAdmin) {
+      dispatch(fetchApplications(status));
+    }
   }, [user]);
 
   if (user.loading) {
@@ -127,7 +129,12 @@ const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) 
         ) : localApplications && localApplications.length > 0 ? (
           <ApplicationsList>
             {localApplications.map((app) => (
-              <ApplicationItem key={app.uuid} application={app} notification={!app.seen} />
+              <ApplicationItem
+                key={app.uuid}
+                application={app}
+                unseen={!app.seen}
+                newComments={app.newComments}
+              />
             ))}
           </ApplicationsList>
         ) : (

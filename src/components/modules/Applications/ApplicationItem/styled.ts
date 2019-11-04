@@ -3,6 +3,21 @@ import { ParagraphStyle, ClassText, ListItem, ListItemInnerCss, ListItemCell } f
 import { CircleImgContainer } from 'common/CircleImg/styled';
 import { media } from 'styles';
 
+export const Notification = styled.div<NotificationProps>`
+  width: 5px;
+  height: 5px;
+  border-radius: 100%;
+  background-color: transparent;
+
+  ${(props) => props.active && css`
+    background-color: ${(props) => props.theme.color.primary};
+  `}
+`;
+
+export type NotificationProps = {
+  active?: boolean;
+}
+
 export const RoleContainer = styled.div`
   display: flex;
   align-items: center;
@@ -136,6 +151,10 @@ export const CommentsContainer = styled.div`
   ${media.tablet`
     margin: 0;
   `}
+
+  ${Notification} {
+    margin-left: 5px;
+  }
 `;
 
 export const SocialContainer = styled.div`
@@ -146,18 +165,3 @@ export const SocialContainer = styled.div`
     fill: ${(props) => props.theme.color.secondary};
   }
 `;
-
-export const Notification = styled.div<NotificationProps>`
-  width: 5px;
-  height: 5px;
-  border-radius: 100%;
-  background-color: transparent;
-
-  ${(props) => props.active && css`
-    background-color: ${(props) => props.theme.color.primary};
-  `}
-`;
-
-export type NotificationProps = {
-  active?: boolean;
-}

@@ -219,26 +219,49 @@ export const fetchApplications: i.FetchApplications = (status) =>
           let result: i.ApplicationsOverviewStorage[] = [];
 
           if (storage) {
-            result = _
-              .differenceBy(
-                res.map((app) => ({ applicationUuid: app.uuid })),
-                storage,
-                'applicationUuid'
-              )
+            const appMap = res.map((app) => ({
+              applicationUuid: app.uuid,
+              comments: app.commentsAmount,
+            }));
+
+            // Update existing applications
+            const intersect = _.intersectionBy(appMap, storage, 'applicationUuid');
+
+            const updatedApps = storage.map((app) => {
+              const newApp = intersect.find((int) => int.applicationUuid === app.applicationUuid);
+
+              if (newApp) {
+                return {
+                  ...app,
+                  comments: newApp.comments,
+                  newComments: app.newComments || newApp.comments > app.comments,
+                };
+              }
+
+              return app;
+            });
+
+            // Add new applications
+            const newApps = _
+              .differenceBy(appMap, updatedApps, 'applicationUuid')
               .map((app) => ({
                 applicationUuid: app.applicationUuid,
                 seen: false,
                 newComments: true,
+                comments: app.comments,
               }));
+
+            result = _.unionBy(updatedApps, newApps, 'applicationUuid');
           } else {
             result = res.map((app) => ({
               applicationUuid: app.uuid,
               seen: false,
-              newComments: true,
+              newComments: app.commentsAmount > 0,
+              comments: app.commentsAmount,
             }));
           }
 
-          localStorageHelper.applicationsOverview.save(result);
+          localStorageHelper.applicationsOverview.set(result);
         }
 
         dispatch(actions.successList(res));

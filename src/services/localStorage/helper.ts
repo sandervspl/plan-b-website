@@ -2,15 +2,15 @@ import { isServer } from 'services';
 import { LOCAL_STORAGE_KEY } from './types';
 
 class LocalStorageHelper<T> {
-  private key: LOCAL_STORAGE_KEY;
+  // eslint-disable-next-line no-useless-constructor
+  constructor(
+    private key: LOCAL_STORAGE_KEY,
+    private uniqueIdentifier?: string,
+  ) {}
 
-  constructor(key: LOCAL_STORAGE_KEY) {
-    this.key = key;
-  }
-
-  get = (): T | void => {
+  get = (): T | null => {
     if (isServer) {
-      return;
+      return null;
     }
 
     return localStorage.getItem(this.key)
@@ -18,12 +18,15 @@ class LocalStorageHelper<T> {
       : null;
   }
 
-  set = (data: T) => {
+  set = (data: T): T | null => {
     if (isServer) {
-      return;
+      return null;
     }
 
-    localStorage.setItem(this.key, JSON.stringify(data));
+    const strData = JSON.stringify(data);
+    localStorage.setItem(this.key, strData);
+
+    return this.get();
   }
 
   /*
@@ -31,7 +34,7 @@ class LocalStorageHelper<T> {
     Works like React setState.
     Only pass the properties that need to be updated.
   */
-  save = (data: T extends Array<any> ? T | T[0] : T, identifier?: string) => {
+  save = (data: T extends Array<any> ? T | T[0] : T) => {
     const curData = this.get();
 
     if (!curData) {
@@ -45,8 +48,8 @@ class LocalStorageHelper<T> {
       // @ts-ignore
       const newData: T = [...curData]
         .filter((val) => {
-          if (typeof val === 'object' && identifier) {
-            if (val[identifier] === data[identifier]) {
+          if (typeof val === 'object' && this.uniqueIdentifier) {
+            if (val[this.uniqueIdentifier] === data[this.uniqueIdentifier]) {
               return false;
             }
           }

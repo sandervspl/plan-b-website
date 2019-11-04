@@ -1,5 +1,5 @@
 import { isServer } from 'services';
-import { LOCAL_STORAGE_KEY } from './types';
+import { LOCAL_STORAGE_KEY, ILocalStorageHelper } from './types';
 
 class LocalStorageHelper<T> {
   // eslint-disable-next-line no-useless-constructor
@@ -8,9 +8,29 @@ class LocalStorageHelper<T> {
     private uniqueIdentifier?: string,
   ) {}
 
-  get = (): T | null => {
+  get: ILocalStorageHelper<T>['get'] = (identifier) => {
     if (isServer) {
       return null;
+    }
+
+    if (identifier) {
+      if (!this.uniqueIdentifier) {
+        throw new Error('"get" requires a unique identifier to be passed on initialization when using an identifier.');
+      }
+
+      const item = localStorage.getItem(this.key);
+
+      if (!item) {
+        return null;
+      }
+
+      const data: T = JSON.parse(item);
+
+      if (Array.isArray(data)) {
+        return data.find((_data) => _data[this.uniqueIdentifier!] === identifier);
+      }
+
+      throw new Error('"get" identifiers can only be used with Arrays');
     }
 
     return localStorage.getItem(this.key)
@@ -34,13 +54,13 @@ class LocalStorageHelper<T> {
     Works like React setState.
     Only pass the properties that need to be updated.
   */
-  save = (data: T extends Array<any> ? T | T[0] : T) => {
+  save: ILocalStorageHelper<T>['save'] = (data) => {
     const curData = this.get();
 
     if (!curData) {
       this.set(data);
 
-      return;
+      return this.get();
     }
 
     // Arrays
@@ -60,7 +80,7 @@ class LocalStorageHelper<T> {
 
       this.set(newData);
 
-      return;
+      return this.get();
     }
 
     // Objects
@@ -70,11 +90,13 @@ class LocalStorageHelper<T> {
         ...data,
       });
 
-      return;
+      return this.get();
     }
 
     // Other data types
     this.set(data);
+
+    return this.get();
   }
 
   clear = () => {

@@ -7,7 +7,6 @@ export type ApplicationsState = i.BaseState<never> & {
   applicationUuid?: string;
   comments: i.FetchCommentsResponse;
   sendingMessage: boolean;
-  locked: boolean;
   loadingComments: boolean;
   commentsType: i.CommentType;
   newComments: i.NewComments;

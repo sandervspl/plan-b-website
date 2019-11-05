@@ -14,7 +14,7 @@ import {
 const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
   const dispatch = useDispatch();
   const applicationUuid = useSelector((state) => state.applications.detail!.uuid);
-  const applicationLocked = useSelector((state) => state.applications.locked);
+  const applicationLocked = useSelector((state) => state.applications.detail!.locked);
   const sending = useSelector((state) => state.applications.sendingMessage);
   const [error, setError] = useState('');
   const [text, setText] = useState('');

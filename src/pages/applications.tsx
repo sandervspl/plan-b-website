@@ -8,7 +8,7 @@ import CheckCircleIcon from 'vectors/check-circle.svg';
 import NotInterestedIcon from 'vectors/not-interested.svg';
 import Page from 'modules/Page';
 import ApplicationItem from 'modules/Applications/ApplicationItem';
-import { Heading, Loader, EmptyStateText } from 'common';
+import { Heading, Loader, EmptyStateText, Button } from 'common';
 import Tabs from 'common/Tabs';
 import {
   ApplicationsHeading, ApplicationsContainer, ApplicationsList,
@@ -27,11 +27,12 @@ const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) 
   const applications = useSelector((state) => state.applications.list);
   const loading = useSelector((state) => state.applications.loading);
   const [curTab, setCurTab] = useState(status ? TAB[status] : TAB.open);
+  const [page, setPage] = useState(0);
 
   const storage = localStorageHelper.applicationsOverview.get();
 
   const localApplications = useMemo(() => {
-    if (applications && storage) {
+    if (applications.length > 0 && storage) {
       // Map array indices
       const indices = storage.reduce((prev, app, index) => ({
         ...prev,
@@ -46,7 +47,7 @@ const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) 
       }));
     }
 
-    return null;
+    return [];
   }, [applications, storage]);
 
   const getStatusStr = (statusId: number): i.ApplicationStatus => {
@@ -62,20 +63,16 @@ const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) 
   };
 
   useEffect(() => {
-    if (user && user.isAdmin) {
+    if (user.isSignedIn) {
       dispatch(fetchApplications(status));
     }
-  }, [user]);
+  }, [user.isSignedIn]);
 
-  if (user.loading) {
-    return null;
-  }
-
-  if (!user.isSignedIn) {
-    redirect();
-
-    return null;
-  }
+  useEffect(() => {
+    if (user.isSignedIn && page > 0) {
+      dispatch(fetchApplications(status, page));
+    }
+  }, [page]);
 
   const onTabChange = (statusId: number) => {
     setCurTab(statusId);
@@ -93,6 +90,20 @@ const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) 
 
     dispatch(fetchApplications(statusName));
   };
+
+  const onLoadMore = () => {
+    setPage((page) => page + 1);
+  };
+
+  if (user.loading) {
+    return null;
+  }
+
+  if (!user.isSignedIn) {
+    redirect();
+
+    return null;
+  }
 
   return (
     <Page
@@ -124,23 +135,30 @@ const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) 
 
         <Heading as="h2">{getStatusStr(curTab)} applications</Heading>
 
-        {loading ? (
-          <Loader />
-        ) : localApplications && localApplications.length > 0 ? (
-          <ApplicationsList>
-            {localApplications.map((app) => (
-              <ApplicationItem
-                key={app.uuid}
-                application={app}
-                unseen={!app.seen}
-                newComments={app.newComments}
-              />
-            ))}
-          </ApplicationsList>
-        ) : (
-          <EmptyStateText>There are no {getStatusStr(curTab)} applications yet.</EmptyStateText>
-        )}
+        <ApplicationsList>
+          {localApplications.map((app) => (
+            <ApplicationItem
+              key={app.uuid}
+              application={app}
+              unseen={!app.seen}
+              newComments={app.newComments}
+            />
+          ))}
 
+          {loading && <Loader />}
+
+          {localApplications.length > 0 && (
+            <Button onClick={onLoadMore} disabled={loading}>
+              Load more
+            </Button>
+          )}
+        </ApplicationsList>
+
+        {!loading && localApplications.length === 0 && (
+          <EmptyStateText>
+            There are no {getStatusStr(curTab)} applications yet.
+          </EmptyStateText>
+        )}
       </ApplicationsContainer>
     </Page>
   );

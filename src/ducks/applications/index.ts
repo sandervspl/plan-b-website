@@ -1,4 +1,5 @@
 import * as i from 'types';
+import qs from 'qs';
 import _ from 'lodash';
 import { ActionType, action } from 'typesafe-actions';
 import { API_ENDPOINT, localStorageHelper } from 'services';
@@ -8,6 +9,8 @@ export const actions = {
   failed: () => action('applications/FAILED'),
   successList: (applications: i.ApplicationData[]) =>
     action('applications/SUCCESS_LIST', applications),
+  successPaginationList: (applications: i.ApplicationData[]) =>
+    action('applications/SUCCESS_PAGINATION_LIST', applications),
 
   successDetail: (application: i.ApplicationData, userVote?: i.VOTE) =>
     action('applications/SUCCESS_DETAIL', { application, userVote }),
@@ -58,6 +61,7 @@ const initialState: i.ApplicationsState = {
     },
   },
   loadingComments: false,
+  list: [],
   detail: undefined,
   commentsType: 'public',
   newComments: {
@@ -85,6 +89,13 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
       return {
         ...state,
         list: action.payload,
+        error: false,
+        loading: false,
+      };
+    case 'applications/SUCCESS_PAGINATION_LIST':
+      return {
+        ...state,
+        list: [...state.list, ...action.payload],
         error: false,
         loading: false,
       };
@@ -204,13 +215,19 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
   }
 };
 
-export const fetchApplications: i.FetchApplications = (status) =>
+export const fetchApplications: i.FetchApplications = (status, page = 0) =>
   async (dispatch, getState, api) => {
     dispatch(actions.load());
 
+    const limit = 10;
+    const queries = qs.stringify({
+      limit,
+      start: limit * page,
+    });
+
     return api.get<i.ApplicationData[]>({
       url: api.url.api,
-      path: `${API_ENDPOINT.APPLICATIONS}/${status}`,
+      path: `${API_ENDPOINT.APPLICATIONS}/${status}?${queries}`,
     })
       .then((res) => {
         // Notifications
@@ -264,7 +281,11 @@ export const fetchApplications: i.FetchApplications = (status) =>
           localStorageHelper.applicationsOverview.set(result);
         }
 
-        dispatch(actions.successList(res));
+        if (page === 0) {
+          dispatch(actions.successList(res));
+        } else {
+          dispatch(actions.successPaginationList(res));
+        }
       })
       .catch(() => {
         dispatch(actions.failed());

@@ -1,7 +1,7 @@
 import * as i from 'types';
 
 export type ApplicationsState = i.BaseState<never> & {
-  list?: i.ApplicationData[];
+  list: i.ApplicationData[];
   detail?: i.ApplicationDataDuck;
   userVote?: i.VOTE;
   applicationUuid?: string;
@@ -133,7 +133,7 @@ export type NewComments = {
 
 
 export type FetchApplications = i.BaseThunkAction<
-(status: i.ApplicationStatus) => Promise<i.ApplicationData[] | void>
+(status: i.ApplicationStatus, page?: number) => Promise<i.ApplicationData[] | void>
 >;
 
 export type FetchApplicationDetail = i.BaseThunkAction<

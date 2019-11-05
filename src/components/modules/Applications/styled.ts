@@ -1,6 +1,7 @@
-import styled, { css } from 'styled-components';
-import { Heading, PageContentContainer, Loader } from 'common';
+import styled from 'styled-components';
 import { media } from 'styles';
+import { Heading, PageContentContainer, Loader } from 'common';
+import { ButtonContainer } from 'common/Button/styled';
 
 export const ApplicationsContainer = styled(PageContentContainer)`
   padding-bottom: 20px;
@@ -46,9 +47,16 @@ export const ApplicationsHeading = styled.div`
 `;
 
 export const ApplicationsList = styled.ul`
+  display: flex;
+  flex-direction: column;
   margin: 0;
   padding: 0 20px;
   list-style: none;
+
+  ${ButtonContainer} {
+    align-self: center;
+    margin-top: 16px;
+  }
 
   ${media.tablet`
     padding: 0 40px;

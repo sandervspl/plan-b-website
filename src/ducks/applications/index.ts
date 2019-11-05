@@ -52,7 +52,6 @@ const initialState: i.ApplicationsState = {
   sendingMessage: false,
   userVote: undefined,
   applicationUuid: undefined,
-  locked: false,
   comments: {
     messages: [],
     count: {
@@ -112,7 +111,6 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
           },
           error: false,
           loading: false,
-          locked: action.payload.application.locked,
           userVote: action.payload.userVote,
         };
       }
@@ -122,8 +120,6 @@ export default (state = initialState, action: ActionType<typeof actions>): i.App
         detail: action.payload.application,
         error: false,
         loading: false,
-        locked: action.payload.application.locked,
-        userVote: action.payload.userVote,
       };
     case 'applications/RESET_DETAIL':
       return initialState;

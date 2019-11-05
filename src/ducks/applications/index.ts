@@ -221,7 +221,7 @@ export const fetchApplications: i.FetchApplications = (status) =>
           if (storage) {
             const appMap = res.map((app) => ({
               applicationUuid: app.uuid,
-              comments: app.commentsAmount,
+              comments: app.comments.public + app.comments.private,
             }));
 
             // Update existing applications
@@ -256,8 +256,8 @@ export const fetchApplications: i.FetchApplications = (status) =>
             result = res.map((app) => ({
               applicationUuid: app.uuid,
               seen: false,
-              newComments: app.commentsAmount > 0,
-              comments: app.commentsAmount,
+              newComments: app.comments.public + app.comments.private > 0,
+              comments: app.comments.public + app.comments.private,
             }));
           }
 

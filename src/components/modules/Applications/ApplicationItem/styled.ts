@@ -77,7 +77,7 @@ export const ApplicationItemContainer = styled(ListItem)`
         }
 
         &:nth-child(3) {
-          flex-basis: 20%;
+          flex-basis: 30%;
         }
 
         &:nth-child(4) {
@@ -93,10 +93,6 @@ export const ApplicationItemContainer = styled(ListItem)`
         }
 
         &:nth-child(7) {
-          flex-basis: 10%;
-        }
-
-        &:nth-child(8) {
           flex-basis: calc(15% - 35px);
           text-align: right;
         }
@@ -141,20 +137,31 @@ export const CommentsContainer = styled.div`
   margin-left: auto;
   font-size: 15px;
 
-  svg {
-    margin-right: 5px;
-    width: 20px;
-    height: 20px;
-    fill: ${(props) => props.theme.color.secondary};
+  span {
+    svg {
+      margin-right: 5px;
+      width: 20px;
+      height: 20px;
+      fill: ${(props) => props.theme.color.secondary};
+    }
+
+    ${media.tablet`
+      display: flex;
+      align-items: center;
+
+      &:first-child {
+        width: 50px;
+      }
+    `}
+  }
+
+  ${Notification} {
+    margin-left: 8px;
   }
 
   ${media.tablet`
     margin: 0;
   `}
-
-  ${Notification} {
-    margin-left: 5px;
-  }
 `;
 
 export const SocialContainer = styled.div`

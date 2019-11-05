@@ -1,6 +1,7 @@
 import * as i from 'types';
 import React from 'react';
 import CommentIcon from 'vectors/comment.svg';
+import SecurityIcon from 'vectors/security.svg';
 import GroupAddIcon from 'vectors/group_add.svg';
 import BabyIcon from 'vectors/baby.svg';
 import { Link, ClassText, CircleImg, ListItemCell } from 'common';
@@ -13,6 +14,7 @@ import {
 
 const ApplicationItem: React.FC<Props> = ({ application, unseen, newComments }) => {
   const isMobile = useSelector((state) => state.ui.isMobile);
+  const isAdmin = useSelector((state) => state.user.isAdmin);
 
   return (
     <ApplicationItemContainer>
@@ -42,13 +44,19 @@ const ApplicationItem: React.FC<Props> = ({ application, unseen, newComments }) 
           {/* <RoleText>{application.character.role.name}</RoleText> */}
         </SocialContainer>
 
-        <ListItemCell>
-          {application.personal.name} ({application.personal.age} YO)
-        </ListItemCell>
+        <CommentsContainer>
+          <span>
+            <CommentIcon />
+            {application.comments.public}
+          </span>
 
-        <CommentsContainer title={`${application.commentsAmount} comments`}>
-          <CommentIcon />
-          {application.commentsAmount}
+          {isAdmin && (
+            <span>
+              <SecurityIcon />
+              {application.comments.private}
+            </span>
+          )}
+
           <Notification active={newComments} />
         </CommentsContainer>
 

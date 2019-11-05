@@ -104,7 +104,10 @@ export type ApplicationBase = Omit<i.BaseResponseBody, 'id'> & {
 
 export type ApplicationData = ApplicationBase & {
   votes: i.Vote[];
-  commentsAmount: number;
+  comments: {
+    public: number;
+    private: number;
+  };
   uuid: string;
 }
 

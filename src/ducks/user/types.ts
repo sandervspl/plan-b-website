@@ -34,9 +34,13 @@ export type DkpHistory = i.BaseDatabaseBody & {
   spent: number;
   total: number;
   hours: number;
+  event: i.DkpEvent;
+}
+
+export type DkpEvent = i.BaseDatabaseBody & {
   exporter: string;
-  exportTime: number;
-  event: string;
+  name: string;
+  time: number;
 }
 
 export type FullDatabaseUserData = {

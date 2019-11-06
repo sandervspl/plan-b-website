@@ -54,12 +54,13 @@ const DkpHistory: React.FC<Props> = () => {
 
           <DkpHistoryList>
             {dkpHistory.map((entry, index, list) => {
+              // Next entry is the "previous" raid
               const nextEntry = list[index + 1];
 
               return (
                 <DkpHistoryItem key={entry.id}>
                   <ListItemCell>
-                    {entry.event}
+                    {entry.event.name}
                   </ListItemCell>
 
                   <ListItemCell>
@@ -70,19 +71,24 @@ const DkpHistory: React.FC<Props> = () => {
                     } hour{entry.hours !== 1 && 's'}
                   </ListItemCell>
 
-                  <DkpChangeText positive={nextEntry && entry.net - nextEntry.net > 0}>
+                  {/* Positive if: has next entry & net bigger than "previous" raid OR no next entry & net bigger than 0 */}
+                  <DkpChangeText positive={nextEntry ? entry.net - nextEntry.net > 0 : entry.net > 0}>
                     {
-                      nextEntry && entry.net - nextEntry.net > 0
-                        ? `+ ${entry.net - nextEntry.net}`
-                        : 0
+                      nextEntry
+                        ? entry.net - nextEntry.net > 0
+                          ? `+ ${entry.net - nextEntry.net}`
+                          : 0
+                        : `+ ${entry.net}`
                     }
                   </DkpChangeText>
 
-                  <DkpChangeText negative={nextEntry && entry.spent - nextEntry.spent > 0}>
+                  <DkpChangeText negative={nextEntry ? entry.spent - nextEntry.spent > 0 : entry.spent > 0}>
                     {
-                      nextEntry && entry.spent - nextEntry.spent > 0
-                        ? `- ${entry.spent - nextEntry.spent}`
-                        : 0
+                      nextEntry
+                        ? entry.spent - nextEntry.spent > 0
+                          ? `- ${entry.spent - nextEntry.spent}`
+                          : 0
+                        : `- ${entry.spent}`
                     }
                   </DkpChangeText>
 

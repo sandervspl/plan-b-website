@@ -40,11 +40,15 @@ const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) 
       }), {} as Record<string, number>);
 
       // Add "seen" property to application data
-      return applications.map((app) => ({
-        ...app,
-        seen: storage[indices[app.uuid]].seen,
-        newComments: storage[indices[app.uuid]].newComments,
-      }));
+      return applications.map((app) => {
+        const stored = storage[indices[app.uuid]];
+
+        return {
+          ...app,
+          seen: stored ? stored.seen : false,
+          newComments: stored ? stored.newComments : false,
+        };
+      });
     }
 
     return [];

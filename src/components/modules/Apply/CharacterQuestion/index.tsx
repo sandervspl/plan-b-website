@@ -49,7 +49,6 @@ const CharacterQuestion: React.FC<Props> = ({ onNextClick, errors, inputTabIndex
               min="1"
               max="60"
               tabIndex={inputTabIndex}
-              disabled
             />
             <CharacterField
               name="character.server"

@@ -335,7 +335,7 @@ export const GuildMasterTools = styled.div`
   align-items: center;
   margin-bottom: 24px;
   padding: 20px;
-  background-color: ${(props) => props.theme.color.primary.dark};
+  background-color: #2b2b2b;
 
   ${Heading} {
     margin-bottom: 8px;

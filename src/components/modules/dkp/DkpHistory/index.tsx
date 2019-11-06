@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'hooks';
 import { getDateWithTime, humanDate } from 'services';
-import { ListItemCell, Heading, DateText, EmptyStateText } from 'common';
+import { ListItemCell, Heading, DateText, EmptyStateText, Tooltip } from 'common';
 import {
   DkpHistoryContainer, DkpHistoryItem, DkpHistoryList, ListHeading, ListHeadingItem, DkpChangeText,
 } from './styled';
@@ -20,45 +20,92 @@ const DkpHistory: React.FC<Props> = () => {
         <>
           <ListHeading>
             <ListHeadingItem>Event</ListHeadingItem>
-            <ListHeadingItem>Duration</ListHeadingItem>
-            <ListHeadingItem>Gain</ListHeadingItem>
-            <ListHeadingItem>Spent</ListHeadingItem>
-            <ListHeadingItem>Total DKP</ListHeadingItem>
-            <ListHeadingItem>Date</ListHeadingItem>
+            <ListHeadingItem
+              data-tip="Rough duration of the raid (might be incorrect)"
+              data-for="time-header"
+            >
+              Time
+            </ListHeadingItem>
+            <ListHeadingItem>Gained</ListHeadingItem>
+            <ListHeadingItem
+              data-tip="This includes spending DKP and the weekly DKP decay"
+              data-for="lost-header"
+            >
+              Lost
+            </ListHeadingItem>
+            <ListHeadingItem
+              data-tip="Total current DKP"
+              data-for="total-header"
+            >
+              Total
+            </ListHeadingItem>
+            <ListHeadingItem
+              data-tip="Date of data upload (this can differ from date of the raid)"
+              data-for="date-header"
+            >
+              Date
+            </ListHeadingItem>
           </ListHeading>
 
+          <Tooltip id="time-header" effect="solid" delayShow={200} place="top" />
+          <Tooltip id="lost-header" effect="solid" delayShow={200} place="top" />
+          <Tooltip id="total-header" effect="solid" delayShow={200} place="top" />
+          <Tooltip id="date-header" effect="solid" delayShow={200} place="top" />
+
           <DkpHistoryList>
-            {dkpHistory.map((entry) => (
-              <DkpHistoryItem>
-                <ListItemCell>
-                  {entry.event}
-                </ListItemCell>
+            {dkpHistory.map((entry, index, list) => {
+              // Next entry is the "previous" raid
+              const nextEntry = list[index + 1];
 
-                <ListItemCell>
-                  {entry.hours} hour{entry.hours !== 1 && 's'}
-                </ListItemCell>
+              return (
+                <DkpHistoryItem key={entry.id}>
+                  <ListItemCell>
+                    {entry.event.name}
+                  </ListItemCell>
 
-                <DkpChangeText positive={entry.net > 0}>
-                  {entry.net > 0 && '+'}{entry.net}
-                </DkpChangeText>
+                  <ListItemCell>
+                    {
+                      nextEntry
+                        ? entry.hours - nextEntry.hours
+                        : 0
+                    } hour{entry.hours !== 1 && 's'}
+                  </ListItemCell>
 
-                <DkpChangeText negative={entry.spent > 0}>
-                  {entry.spent > 0 && '-'}{entry.spent}
-                </DkpChangeText>
+                  {/* Positive if: has next entry & net bigger than "previous" raid OR no next entry & net bigger than 0 */}
+                  <DkpChangeText positive={nextEntry ? entry.net - nextEntry.net > 0 : entry.net > 0}>
+                    {
+                      nextEntry
+                        ? entry.net - nextEntry.net > 0
+                          ? `+ ${entry.net - nextEntry.net}`
+                          : 0
+                        : `+ ${entry.net}`
+                    }
+                  </DkpChangeText>
 
-                <ListItemCell>
-                  {entry.total}
-                </ListItemCell>
+                  <DkpChangeText negative={nextEntry ? entry.spent - nextEntry.spent > 0 : entry.spent > 0}>
+                    {
+                      nextEntry
+                        ? entry.spent - nextEntry.spent > 0
+                          ? `- ${entry.spent - nextEntry.spent}`
+                          : 0
+                        : `- ${entry.spent}`
+                    }
+                  </DkpChangeText>
 
-                <ListItemCell title={getDateWithTime(entry.createdAt)}>
-                  <DateText
-                    noIcon={!isMobile}
-                    date={entry.createdAt}
-                    format={humanDate(entry.createdAt)}
-                  />
-                </ListItemCell>
-              </DkpHistoryItem>
-            ))}
+                  <ListItemCell>
+                    <strong>{entry.net}</strong>
+                  </ListItemCell>
+
+                  <ListItemCell title={getDateWithTime(entry.event.createdAt)}>
+                    <DateText
+                      noIcon={!isMobile}
+                      date={entry.event.createdAt}
+                      format={humanDate(entry.event.createdAt)}
+                    />
+                  </ListItemCell>
+                </DkpHistoryItem>
+              );
+            })}
           </DkpHistoryList>
         </>
       )}

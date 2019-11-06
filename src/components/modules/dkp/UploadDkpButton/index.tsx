@@ -16,7 +16,7 @@ const UploadDkpButton: React.FC<Props> = () => {
   const isAdmin = useSelector((state) => state.user.isAdmin);
   const [isModalOpen, setModalOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { ref, uploading, file } = useFileUpload();
+  const { inputRef: ref, uploading, file, removeFile } = useFileUpload();
 
   useEffect(() => {
     if (file) {
@@ -34,11 +34,13 @@ const UploadDkpButton: React.FC<Props> = () => {
       return;
     }
 
-    dispatch(sendDkpXml(file, values.name)).then(() => {
-      dispatch(getUserCharacter());
-      dispatch(getGuildAverageDkp());
-      setModalOpen(false);
-    });
+    dispatch(sendDkpXml(file, values.name))
+      .then(() => {
+        dispatch(getUserCharacter());
+        dispatch(getGuildAverageDkp());
+        setModalOpen(false);
+        removeFile();
+      });
   };
 
   if (!isAdmin) {
@@ -48,7 +50,7 @@ const UploadDkpButton: React.FC<Props> = () => {
   return (
     <UploadButtonContainer>
       <Button as="label" htmlFor="file-upload" disabled={uploading || sending}>
-        Upload DKP Export
+        Upload QDKP XML
       </Button>
       {typeof error === 'string' && (
         <ErrorText>{error}</ErrorText>

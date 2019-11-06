@@ -57,7 +57,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Dkp
   }
 };
 
-export const sendDkpXml: i.SendDkpXml['thunk'] = (file, eventName) => async (dispatch, getState, api) => {
+export const sendDkpXml: i.SendDkpXml = (file, eventName) => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
   const data = new FormData();
@@ -81,7 +81,7 @@ export const sendDkpXml: i.SendDkpXml['thunk'] = (file, eventName) => async (dis
     });
 };
 
-export const getGuildAverageDkp: i.GetGuildAverageDkp['thunk'] = () => async (dispatch, getState, api) => {
+export const getGuildAverageDkp: i.GetGuildAverageDkp = () => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
   return api.get<i.GuildDkpAvgResponse>({

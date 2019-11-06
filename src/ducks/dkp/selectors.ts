@@ -10,7 +10,7 @@ export const averageDkpForGraph = createSelector(
         xName: 'date',
         date: dkpAverages[entry].date,
         yName: 'dkp',
-        dkp: dkpAverages[entry].value,
+        dkp: Math.round(dkpAverages[entry].value),
       }));
   }
 );

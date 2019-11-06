@@ -28,7 +28,6 @@ export const DkpHistoryItem = styled(ListItem)`
   ${ListItemCell} {
     ${DateContainer} {
       margin-bottom: 8px;
-      font-weight: bold;
       font-size: 16px;
 
       svg {
@@ -90,7 +89,7 @@ export const DkpHistoryItem = styled(ListItem)`
 
   ${media.tablet`
     display: grid;
-    grid-template-columns: 30% 10% 10% 10% 20% 20%;
+    grid-template-columns: 20% 20% 10% 10% 20% 20%;
     padding: 8px 16px;
   `}
 `;
@@ -119,7 +118,7 @@ export const ListHeading = styled(DkpHistoryList)`
 
   ${media.tablet`
     display: grid;
-    grid-template-columns: 30% 10% 10% 10% 20% 20%;
+    grid-template-columns: 20% 20% 10% 10% 20% 20%;
     padding: 0 16px;
   `}
 `;

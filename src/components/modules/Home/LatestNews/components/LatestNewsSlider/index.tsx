@@ -1,14 +1,14 @@
 import React, { useRef, useState, useMemo } from 'react';
 import Slider, { Settings } from 'react-slick';
 import { useSelector, useInterval } from 'hooks';
-import { getLatestTwoNews } from 'ducks/posts/selectors';
+import { getLatestNews } from 'ducks/posts/selectors';
 import { NewsItem } from 'common';
 import Progress from '../Progress';
 import { SliderContainer } from './styled';
 
 const LatestNewsSlider: React.FC = () => {
   const slider = useRef<Slider>(null);
-  const posts = useSelector(getLatestTwoNews);
+  const posts = useSelector(getLatestNews);
   const [nextSlideTime, setNextSlideTime] = useState(Date.now());
   const [activeSlideId, setActiveSlideId] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -36,14 +36,14 @@ const LatestNewsSlider: React.FC = () => {
 
     const now = Date.now();
     const time = 5000;
-    const diff = now - nextSlideTime;
+    const dt = now - nextSlideTime;
 
-    if (diff > time) {
+    if (dt > time) {
       slider.current.slickNext();
       setNextSlideTime(now);
     }
 
-    setProgress(diff / time);
+    setProgress(dt / time);
   }, 1000 / 27); // 27 fps
 
   const toSlide = (id: number) => {
@@ -61,7 +61,12 @@ const LatestNewsSlider: React.FC = () => {
           <NewsItem key={post.id} post={post} />
         ))}
       </Slider>
-      <Progress slides={posts.length} activeId={activeSlideId} progress={progress} toSlide={toSlide} />
+      <Progress
+        slides={posts.length}
+        activeId={activeSlideId}
+        progress={progress}
+        toSlide={toSlide}
+      />
     </SliderContainer>
   );
 };

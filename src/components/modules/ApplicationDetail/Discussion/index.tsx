@@ -1,55 +1,82 @@
 import * as i from 'types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'hooks';
-import { fetchComments } from 'ducks/applications';
+import { actions as applicationActions, fetchComments } from 'ducks/applications';
 import { Heading, EmptyStateText, Loader } from 'common';
+import Tabs from 'common/Tabs';
 import Comment from 'modules/ApplicationDetail/Comment';
 import AddComment from '../AddComment';
 import { DiscussionContainer } from './styled';
 
-const Discussion: React.FC<Props> = ({ applicationId, type }) => {
+const Discussion: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.data);
-  const messages = useSelector((state) => state.applications.messages);
-  const loading = useSelector((state) => state.applications.loading);
+  const comments = useSelector((state) => state.applications.comments);
+  const loading = useSelector((state) => state.applications.loadingComments);
+  const commentsType = useSelector((state) => state.applications.commentsType);
+  const newComments = useSelector((state) => state.applications.newComments);
+  const isAdmin = useSelector((state) => state.user.isAdmin);
+  const [curTab, setCurTab] = useState(0);
 
   useEffect(() => {
-    dispatch(fetchComments(applicationId, type));
-  }, []);
+    const tabId = commentsType === 'public' ? 0 : 1;
+
+    setCurTab(tabId);
+
+    setTimeout(() => {
+      dispatch(fetchComments(commentsType));
+    }, 500);
+  }, [commentsType]);
+
+  const getTypeStr = (tabId: number): i.CommentType => {
+    if (tabId === 0) {
+      return 'public';
+    }
+
+    return 'private';
+  };
+
+  const onTabChange = (tabId: number) => {
+    const commentsType = getTypeStr(tabId);
+    dispatch(applicationActions.setCommentsType(commentsType));
+  };
 
   return (
     <DiscussionContainer>
       <Heading as="h2">Discussion</Heading>
 
+      {isAdmin && (
+        <Tabs.Container onChange={onTabChange} activeTab={curTab}>
+          <Tabs.Tab notification={newComments.public}>
+            Public ({comments.count.public})
+          </Tabs.Tab>
+          <Tabs.Tab notification={newComments.private}>
+            Officers ({comments.count.private})
+          </Tabs.Tab>
+        </Tabs.Container>
+      )}
+
+      {user && (
+        <AddComment
+          username={user.username}
+          avatar={user.avatar}
+          type={getTypeStr(curTab)}
+        />
+      )}
+
       {loading ? (
         <Loader />
       ) : (
-         <>
-          {user && (
-            <AddComment
-              username={user.username}
-              avatar={user.avatar}
-              type={type}
-            />
-          )}
-    
-          {messages.length === 0 && (
-            <EmptyStateText>There are no comments yet.</EmptyStateText>
-          )}
-    
-          {messages.map((comment) => (
-            <Comment key={comment.id} message={comment} type={type} />
-          ))}
-         </>
+        comments.messages.length === 0 ? (
+          <EmptyStateText>There are no comments yet.</EmptyStateText>
+        ) : (
+          comments.messages.map((comment) => (
+            <Comment key={comment.id} comment={comment} />
+          ))
+        )
       )}
-
     </DiscussionContainer>
   );
 };
-
-type Props = {
-  applicationId: number;
-  type: i.ViewableType;
-}
 
 export default Discussion;

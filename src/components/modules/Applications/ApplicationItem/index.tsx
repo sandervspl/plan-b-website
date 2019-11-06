@@ -1,29 +1,31 @@
 import * as i from 'types';
 import React from 'react';
 import CommentIcon from 'vectors/comment.svg';
+import SecurityIcon from 'vectors/security.svg';
 import GroupAddIcon from 'vectors/group_add.svg';
 import BabyIcon from 'vectors/baby.svg';
 import { Link, ClassText, CircleImg, ListItemCell } from 'common';
 import { timeAgo, getDateWithTime, getCmsUrl } from 'services';
+import { useSelector } from 'hooks';
 import {
   ApplicationItemContainer, CharacterInfo, RoleText, RoleContainer, CommentsContainer,
-  SocialContainer,
+  SocialContainer, Notification,
 } from './styled';
 
-const ApplicationItem: React.FC<Props> = ({ application }) => {
-  const to = application.public ? 'public-application-detail' : 'application-detail';
-  const params = application.public ? { uuid: application.public.uuid } : { id: application.id };
+const ApplicationItem: React.FC<Props> = ({ application, unseen, newComments }) => {
+  const isMobile = useSelector((state) => state.ui.isMobile);
+  const isAdmin = useSelector((state) => state.user.isAdmin);
 
   return (
     <ApplicationItemContainer>
-      {/*
-        // @ts-ignore Typescript is confused (and so am I) */}
-      <Link to={to} params={params}>
+      <Link to="application-detail" params={{ uuid: application.uuid }}>
+        {!isMobile && <Notification active={unseen} />}
+
         <CircleImg src={getCmsUrl(application.character.class.icon.url)} />
 
         <CharacterInfo>
           <ClassText classId={application.character.class.id}>
-            {application.character.name}
+            {application.character.name} ({application.character.level})
           </ClassText>
 
           <RoleContainer>
@@ -42,17 +44,24 @@ const ApplicationItem: React.FC<Props> = ({ application }) => {
           {/* <RoleText>{application.character.role.name}</RoleText> */}
         </SocialContainer>
 
-        <ListItemCell>
-          {application.personal.name} ({application.personal.age})
-        </ListItemCell>
+        <CommentsContainer>
+          <span>
+            <CommentIcon />
+            {application.comments.public}
+          </span>
 
-        <CommentsContainer title={`${application.commentsAmount} comments`}>
-          <CommentIcon />
-          {application.commentsAmount}
+          {isAdmin && (
+            <span>
+              <SecurityIcon />
+              {application.comments.private}
+            </span>
+          )}
+
+          <Notification active={newComments} />
         </CommentsContainer>
 
-        <ListItemCell title={getDateWithTime(application.updated_at)}>
-          {timeAgo(new Date(application.updated_at))}
+        <ListItemCell title={getDateWithTime(application.created_at)}>
+          {timeAgo(new Date(application.created_at))}
         </ListItemCell>
       </Link>
     </ApplicationItemContainer>
@@ -61,6 +70,8 @@ const ApplicationItem: React.FC<Props> = ({ application }) => {
 
 export type Props = {
   application: i.ApplicationData;
+  unseen?: boolean;
+  newComments?: boolean;
 };
 
 export default ApplicationItem;

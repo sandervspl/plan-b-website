@@ -1,6 +1,7 @@
 import path from 'path';
 import next from 'next';
 import express from 'express';
+import compression from 'compression';
 import config from '../../config/index';
 import router from './router';
 
@@ -14,6 +15,9 @@ const handle = router.getRequestHandler(app);
 
 app.prepare().then(() => {
   const server = express();
+
+  // Serve as GZIP
+  server.use(compression());
 
   server
     .use((req, res) => {

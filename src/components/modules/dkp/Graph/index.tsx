@@ -6,7 +6,7 @@ import { GraphContainer, Title, LatestValue, DKPIcon, DiffValue, DiffArrowIcon }
 const Graph: React.FC<Props> = ({ data, dataKey, title, fill, stroke }) => {
   const latestValue = data[0] ? data[0][dataKey] as number : 0;
   const prevValue = data.length >= 2 && data[1][dataKey] as number;
-  const diffValue = prevValue ? ((latestValue - prevValue) / prevValue).toFixed(1) : 0;
+  const diffValue = prevValue ? (((latestValue - prevValue) / prevValue) * 100).toFixed(1) : 0;
   const positiveDiff = Number(diffValue) >= 0;
   const graphData = [...data].reverse();
 

@@ -20,7 +20,7 @@ const InputRange: React.FC<InputRangeProps> = ({ label, input }) => {
 };
 /* eslint-enable */
 
-export type InputRangeProps = FieldRenderProps<HTMLInputElement> & {
+export type InputRangeProps = FieldRenderProps<number, HTMLInputElement> & {
   label?: (value: number, type: string) => string;
   children?: any; // eslint-disable-line
 };

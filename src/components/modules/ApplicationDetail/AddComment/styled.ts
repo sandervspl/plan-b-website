@@ -33,6 +33,10 @@ export const CommentInput = styled.textarea<CommentInputProps>`
   outline: 0;
   resize: none;
 
+  > svg {
+    width: 20px;
+  }
+
   &::placeholder {
     color: ${(props) => props.theme.color.tab.inactive};
   }

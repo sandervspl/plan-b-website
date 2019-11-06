@@ -61,7 +61,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Use
   }
 };
 
-export const fetchUser: i.FetchUser['thunk'] = () => async (dispatch, getState, api) => {
+export const fetchUser: i.FetchUser = () => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
   return api.get<i.UserData>({
@@ -73,6 +73,11 @@ export const fetchUser: i.FetchUser['thunk'] = () => async (dispatch, getState, 
     // },
   })
     .then((user) => {
+      if (!user || !user.id) {
+        dispatch(actions.failed());
+        return;
+      }
+
       dispatch(actions.success(user));
 
       return user;
@@ -82,7 +87,7 @@ export const fetchUser: i.FetchUser['thunk'] = () => async (dispatch, getState, 
     });
 };
 
-export const getUserCharacter: i.FetchUserCharacter['thunk'] = () => async (dispatch, getState, api) => {
+export const getUserCharacter: i.FetchUserCharacter = () => async (dispatch, getState, api) => {
   dispatch(actions.loadCharacter());
 
   return api.get<i.UserCharacterData>({

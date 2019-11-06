@@ -30,6 +30,9 @@ export const CommentInfo = styled.div`
     display: inline-block;
     margin-left: 10px;
     font-size: 13px;
+  }
+
+  > *:nth-child(2) {
     color: ${(props) => props.theme.color.secondary.darker};
   }
 
@@ -55,5 +58,15 @@ export const ReadMoreButton = styled.button`
   font-size: 15px;
   color: ${(props) => props.theme.color.tab.inactive};
   text-align: left;
+  cursor: pointer;
+`;
+
+export const DeleteButton = styled.button`
+  ${ParagraphStyle};
+  appearance: none;
+  border: 0;
+  background: none;
+  box-shadow: 0;
+  color: ${(props) => props.theme.color.negative};
   cursor: pointer;
 `;

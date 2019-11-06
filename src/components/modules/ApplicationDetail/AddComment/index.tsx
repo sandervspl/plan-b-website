@@ -13,15 +13,8 @@ import {
 
 const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.user.data && state.user.data.id);
-  const applicationId = useSelector((state) => (
-    state.applications.detail
-      ? state.applications.detail.id
-      : state.applications.detailPublic
-        ? state.applications.detailPublic!.id
-        : undefined
-  ));
-  const applicationLocked = useSelector((state) => state.applications.locked);
+  const applicationUuid = useSelector((state) => state.applications.detail!.uuid);
+  const applicationLocked = useSelector((state) => state.applications.detail!.locked);
   const sending = useSelector((state) => state.applications.sendingMessage);
   const [error, setError] = useState('');
   const [text, setText] = useState('');
@@ -31,13 +24,13 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
   };
 
   const handleSubmit = async () => {
-    if (!applicationId || !text) return;
+    if (!applicationUuid || !text) return;
 
     setError('');
 
-    dispatch(sendComment(type, applicationId, text, userId))
-      .then((message) => {
-        if (!message) {
+    dispatch(sendComment(type, text))
+      .then((comment) => {
+        if (!comment) {
           setError('Something went wrong. Try again later.');
 
           return;
@@ -45,7 +38,7 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
 
         setText('');
 
-        dispatch(fetchComments(applicationId, type));
+        dispatch(fetchComments(type));
       });
   };
 
@@ -103,7 +96,7 @@ const AddComment: React.FC<Props> = ({ username, avatar, type }) => {
 export type Props = {
   username: string;
   avatar: string;
-  type: i.ViewableType;
+  type: i.CommentType;
 };
 
 export default AddComment;

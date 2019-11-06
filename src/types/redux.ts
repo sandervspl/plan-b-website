@@ -37,7 +37,5 @@ export type ThunkDispatch = IThunkDispatch<i.ReduxState, any, i.Action>;
 /*
   Generator type for thunk actions
 */
-export type BaseThunkAction<Fn extends (...args: any) => any> = {
-  action: (...args: Parameters<Fn>) => ReturnType<Fn>;
-  thunk: (...args: Parameters<Fn>) => i.ThunkAction<ReturnType<Fn>>;
-};
+export type BaseThunkAction<Fn extends (...args: any) => any> =
+  (...args: Parameters<Fn>) => i.ThunkAction<ReturnType<Fn>>;

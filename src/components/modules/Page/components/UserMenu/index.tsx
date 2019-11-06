@@ -48,7 +48,7 @@ const UserMenu: React.FC<Props> = ({ open }) => {
             <NavLink to="dkp">Dkp</NavLink>
           </li>
           <li>
-            <NavLink to="public-applications">Applications</NavLink>
+            <NavLink to="applications">Applications</NavLink>
           </li>
           <Line />
         </OptionsContainer>
@@ -57,11 +57,6 @@ const UserMenu: React.FC<Props> = ({ open }) => {
       <OptionsContainer>
         {user && user.authLevel > i.AUTH_LEVEL.USER && (
           <>
-            <li>
-              <NavLink to="applications">
-                <strong>Applications</strong>
-              </NavLink>
-            </li>
             <li>
               <Link external to={`${apiConfig.url.cms}/admin`}>
                 <strong>CMS</strong>

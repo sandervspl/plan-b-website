@@ -39,7 +39,7 @@ export default (state = initialState, action: ActionType<typeof actions>): i.Twi
   }
 };
 
-export const fetchActiveStreams: i.FetchActiveStreams['thunk'] = () => async (dispatch, getState, api) => {
+export const fetchActiveStreams: i.FetchActiveStreams = () => async (dispatch, getState, api) => {
   dispatch(actions.load());
 
   return api.get<i.ActiveStreams>({

@@ -19,4 +19,5 @@ export * from './Loader';
 export * from './Tooltip';
 export * from './CookieBar';
 export * from './ListItem';
+export * from './Tabs';
 export { AuthLevelText } from './AuthLevelText';

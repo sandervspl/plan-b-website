@@ -8,6 +8,4 @@ export const routeNames = Object.freeze({
   dkp: 'dkp',
   applications: 'applications',
   applicationDetail: 'application-detail',
-  publicApplicationDetail: 'public-application-detail',
-  publicApplications: 'public-applications',
 } as const);

@@ -1,20 +1,20 @@
 import * as i from 'types';
 
 export type ApplicationsState = i.BaseState<never> & {
-  list?: i.ApplicationData[];
+  list: i.ApplicationData[];
   detail?: i.ApplicationDataDuck;
-  detailPublic?: i.ApplicationBase;
   userVote?: i.VOTE;
   applicationUuid?: string;
-  messages: i.Comment[];
+  comments: i.FetchCommentsResponse;
   sendingMessage: boolean;
-  locked: boolean;
-  loadingMessages: boolean;
+  loadingComments: boolean;
+  commentsType: i.CommentType;
+  newComments: i.NewComments;
 };
 
 export type ApplicationStatus = 'open' | 'accepted' | 'rejected';
 
-export type ViewableType = 'private' | 'public';
+export type CommentType = 'private' | 'public';
 
 export type RaidExperience = {
   molten_core?: boolean;
@@ -79,9 +79,12 @@ export type Comment = i.BaseDatabaseBody & {
   applicationId: number;
   text: string;
   user: i.SimpleDatabaseUserData;
+  public: i.CommentType;
+  deletedAt?: Date;
 }
 
 export enum VOTE { REJECT, ACCEPT }
+export enum COMMENT_TYPE { PRIVATE, PUBLIC }
 
 export type Vote = i.BaseDatabaseBody & {
   applicationId: number;
@@ -89,7 +92,8 @@ export type Vote = i.BaseDatabaseBody & {
   user: i.SimpleDatabaseUserData;
 }
 
-export type ApplicationBase = i.BaseResponseBody & {
+export type ApplicationBase = Omit<i.BaseResponseBody, 'id'> & {
+  uuid: string;
   status: i.ApplicationStatus;
   character: i.Character;
   personal: Personal;
@@ -99,37 +103,59 @@ export type ApplicationBase = i.BaseResponseBody & {
 
 export type ApplicationData = ApplicationBase & {
   votes: i.Vote[];
-  commentsAmount: number;
-  public?: {
-    id: number;
-    applicationId: number;
-    uuid: string;
+  comments: {
+    public: number;
+    private: number;
   };
+  uuid: string;
 }
 
 export type ApplicationDataDuck = ApplicationBase & {
-  votes: {
+  votes?: {
     accepts: i.Vote[];
     rejects: i.Vote[];
   };
 }
 
+export type FetchCommentsResponse = {
+  messages: i.Comment[];
+  count: {
+    public: number;
+    private?: number;
+  };
+}
+
+export type NewComments = {
+  public: boolean;
+  private: boolean;
+}
+
+
 export type FetchApplications = i.BaseThunkAction<
-  (status: i.ApplicationStatus, type: i.ViewableType) => Promise<i.ApplicationData[] | void>
+(status: i.ApplicationStatus, page?: number) => Promise<i.ApplicationData[] | void>
 >;
 
+export type FetchApplicationDetail = i.BaseThunkAction<
+(uuid: string) => Promise<void>
+>;
+
+
 export type FetchComments = i.BaseThunkAction<
-  (applicationId: number, type: i.ViewableType | 'all') => Promise<i.Comment[] | void>
+(type: i.CommentType) => Promise<i.FetchCommentsResponse | void>
 >;
 
 export type SendComment = i.BaseThunkAction<
-  (type: i.ViewableType, applicationId: number, comment: string, userId?: string) => Promise<i.Comment | void>
+(type: i.CommentType, comment: string) => Promise<i.Comment | void>
+>;
+
+export type DeleteComment = i.BaseThunkAction<
+(commentId: number) => Promise<i.Comment | void>
 >;
 
 export type SaveVote = i.BaseThunkAction<
-  (applicationId: number, userId: string, vote: i.VOTE) => Promise<i.Vote | void>
+(applicationUuid: string, userId: string, vote: i.VOTE) => Promise<i.Vote | void>
 >;
 
 export type SetStatus = i.BaseThunkAction<
-(applicationId: number, status: i.ApplicationStatus) => Promise<i.ApplicationBase | void>
+(status: i.ApplicationStatus) => Promise<i.ApplicationBase | void>
 >;

@@ -96,11 +96,11 @@ const DkpHistory: React.FC<Props> = () => {
                     <strong>{entry.net}</strong>
                   </ListItemCell>
 
-                  <ListItemCell title={getDateWithTime(entry.createdAt)}>
+                  <ListItemCell title={getDateWithTime(entry.event.createdAt)}>
                     <DateText
                       noIcon={!isMobile}
-                      date={entry.createdAt}
-                      format={humanDate(entry.createdAt)}
+                      date={entry.event.createdAt}
+                      format={humanDate(entry.event.createdAt)}
                     />
                   </ListItemCell>
                 </DkpHistoryItem>

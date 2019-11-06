@@ -72,11 +72,17 @@ const ApplicationsPage: i.NextPageComponent<Props, Queries> = ({ url, status }) 
     }
   }, [user.isSignedIn]);
 
+  // Fetch new applications when new pagination is requested
   useEffect(() => {
     if (user.isSignedIn && page > 0) {
-      dispatch(fetchApplications(status, page));
+      dispatch(fetchApplications(getStatusStr(curTab), page));
     }
   }, [page]);
+
+  // Reset page to 0 when changing status tab
+  useEffect(() => {
+    setPage(0);
+  }, [curTab]);
 
   const onTabChange = (statusId: number) => {
     setCurTab(statusId);

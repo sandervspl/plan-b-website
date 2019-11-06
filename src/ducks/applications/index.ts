@@ -337,7 +337,8 @@ export const fetchComments: i.FetchComments = (type) => async (dispatch, getStat
     path: `${API_ENDPOINT.APPLICATION_DETAIL}/${uuid}/comments`,
     query: { type },
   })
-    .then((res) => {
+    .then((comments) => {
+      // Save new data in localstorage
       const stored = localStorageHelper.applications.get();
       const storedApp = stored && stored.find((app) => app.applicationUuid === uuid);
 
@@ -347,25 +348,38 @@ export const fetchComments: i.FetchComments = (type) => async (dispatch, getStat
       };
 
       if (storedApp) {
-        newComments.public = res.count.public > storedApp.commentsCount.public;
+        newComments.public = comments.count.public > storedApp.commentsCount.public;
 
-        if (res.count.private && storedApp.commentsCount.private) {
-          newComments.private = res.count.private > storedApp.commentsCount.private;
+        if (comments.count.private && storedApp.commentsCount.private) {
+          newComments.private = comments.count.private > storedApp.commentsCount.private;
         }
       }
 
-      // Save current state in localstorage
       localStorageHelper.applications.save({
         applicationUuid: uuid,
         commentsCount: {
-          public: res.count.public,
-          private: res.count.private || 0,
+          public: comments.count.public,
+          private: comments.count.private || 0,
         },
       });
 
-      dispatch(actions.commentsSuccess(res, newComments));
 
-      return res;
+      // Set comments in overview as "seen"
+      const storage = localStorageHelper.applicationsOverview.get(application.uuid);
+
+      if (storage) {
+        storage.newComments = false;
+
+        if (comments) {
+          storage.comments = comments.count.public + (comments.count.private || 0);
+        }
+
+        localStorageHelper.applicationsOverview.save(storage);
+      }
+
+      dispatch(actions.commentsSuccess(comments, newComments));
+
+      return comments;
     })
     .catch(() => {
       dispatch(actions.commentsFailed());

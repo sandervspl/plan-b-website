@@ -1,7 +1,6 @@
 import * as i from 'types';
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'hooks';
-import { localStorageHelper } from 'services';
 import { actions as applicationActions, fetchComments } from 'ducks/applications';
 import { Heading, EmptyStateText, Loader } from 'common';
 import Tabs from 'common/Tabs';
@@ -17,7 +16,6 @@ const Discussion: React.FC = () => {
   const commentsType = useSelector((state) => state.applications.commentsType);
   const newComments = useSelector((state) => state.applications.newComments);
   const isAdmin = useSelector((state) => state.user.isAdmin);
-  const applicationUuid = useSelector((state) => state.applications.detail!.uuid);
   const [curTab, setCurTab] = useState(0);
 
   useEffect(() => {
@@ -26,21 +24,7 @@ const Discussion: React.FC = () => {
     setCurTab(tabId);
 
     setTimeout(() => {
-      dispatch(fetchComments(commentsType))
-        .then((comments) => {
-          // Set comments as "seen"
-          const storage = localStorageHelper.applicationsOverview.get(applicationUuid);
-
-          if (storage) {
-            storage.newComments = false;
-
-            if (comments) {
-              storage.comments = comments.messages.length;
-            }
-
-            localStorageHelper.applicationsOverview.save(storage);
-          }
-        });
+      dispatch(fetchComments(commentsType));
     }, 500);
   }, [commentsType]);
 

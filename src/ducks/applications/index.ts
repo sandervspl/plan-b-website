@@ -313,6 +313,14 @@ export const fetchApplicationDetail: i.FetchApplicationDetail = (applicationUuid
           return;
         }
 
+        // Set application as "seen"
+        const storage = localStorageHelper.applicationsOverview.get(applicationUuid);
+
+        if (storage) {
+          storage.seen = true;
+          localStorageHelper.applicationsOverview.save(storage);
+        }
+
         dispatch(actions.successDetail(res));
       })
       .catch((err) => {
@@ -355,13 +363,13 @@ export const fetchComments: i.FetchComments = (type) => async (dispatch, getStat
         }
       }
 
-      localStorageHelper.applications.save({
+      localStorageHelper.applications.save([{
         applicationUuid: uuid,
         commentsCount: {
           public: comments.count.public,
           private: comments.count.private || 0,
         },
-      });
+      }]);
 
 
       // Set comments in overview as "seen"
@@ -381,7 +389,7 @@ export const fetchComments: i.FetchComments = (type) => async (dispatch, getStat
 
       return comments;
     })
-    .catch(() => {
+    .catch((err) => {
       dispatch(actions.commentsFailed());
     });
 };

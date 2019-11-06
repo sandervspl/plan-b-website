@@ -36,14 +36,6 @@ const ApplicationDetailPage: i.NextPageComponent<Props, Queries> = ({ url, appli
   useEffect(() => {
     dispatch(fetchApplicationDetail(applicationUuid));
 
-    // Set application as "seen"
-    const storage = localStorageHelper.applicationsOverview.get(applicationUuid);
-
-    if (storage) {
-      storage.seen = true;
-      localStorageHelper.applicationsOverview.save(storage);
-    }
-
     return function cleanup() {
       dispatch(applicationsActions.resetApplication());
     };

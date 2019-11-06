@@ -300,6 +300,14 @@ export const fetchApplicationDetail: i.FetchApplicationDetail = (applicationUuid
       .then((res) => {
         const user = getState().user.data;
 
+        // Set application as "seen"
+        const storage = localStorageHelper.applicationsOverview.get(applicationUuid);
+
+        if (storage) {
+          storage.seen = true;
+          localStorageHelper.applicationsOverview.save(storage);
+        }
+
         if (user) {
           const userVote = res.votes.find((vote) => vote.user.id === user.id);
           let vote: i.ApplicationsState['userVote'];
@@ -311,14 +319,6 @@ export const fetchApplicationDetail: i.FetchApplicationDetail = (applicationUuid
           dispatch(actions.successDetail(res, vote));
 
           return;
-        }
-
-        // Set application as "seen"
-        const storage = localStorageHelper.applicationsOverview.get(applicationUuid);
-
-        if (storage) {
-          storage.seen = true;
-          localStorageHelper.applicationsOverview.save(storage);
         }
 
         dispatch(actions.successDetail(res));
